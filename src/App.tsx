@@ -33,7 +33,7 @@ function App() {
     if (!email) return;
 
     setIsLoading(true);
-    
+
     // Simulate email submission
     setTimeout(() => {
       setIsSubmitted(true);
@@ -60,19 +60,19 @@ function App() {
         background: 'linear-gradient(135deg, #2D5A27 0%, #1a3d1a 50%, #0f2f0f 100%)',
       }}>
         <div className="absolute inset-0 bg-black/20"></div>
-        
+
         {/* Phone Mockup */}
         <div className="absolute right-8 md:right-16 lg:right-24 top-1/2 transform -translate-y-1/2 z-20 hidden md:block">
           <div className="relative">
-            <img 
-              src="/phone-mockup.png" 
-              alt="BAWO App Preview" 
+            <img
+              src="/phone-mockup.png"
+              alt="BAWO App Preview"
               className="w-64 lg:w-80 xl:w-96 h-auto drop-shadow-2xl transform hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent rounded-[2.5rem] pointer-events-none"></div>
           </div>
         </div>
-        
+
         <div className="relative z-10 text-center md:text-left text-white px-6 max-w-4xl md:max-w-2xl lg:max-w-3xl md:ml-8 lg:ml-16">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
             🇳🇬 BAWO
@@ -99,12 +99,12 @@ function App() {
           <div className="mt-12 text-sm opacity-75">
             <p>2,847+ members • Lagos: 1,203 • London: 894 • NYC: 750</p>
           </div>
-          
+
           {/* Mobile Phone Preview */}
           <div className="md:hidden mt-12 flex justify-center">
-            <img 
-              src="/phone-mockup.png" 
-              alt="BAWO App Preview" 
+            <img
+              src="/phone-mockup.png"
+              alt="BAWO App Preview"
               className="w-48 h-auto drop-shadow-2xl transform hover:scale-105 transition-transform duration-500"
             />
           </div>
@@ -221,9 +221,9 @@ function App() {
       </section>
 
       {/* Final CTA Section */}
-      <section 
+      <section
         id="email-section"
-        className="relative h-screen flex items-center justify-center" 
+        className="relative h-screen flex items-center justify-center"
         style={{
           background: 'linear-gradient(135deg, #FFD700 0%, #2D5A27 100%)',
         }}
@@ -237,7 +237,7 @@ function App() {
             <p className="text-xl mb-8 text-gray-700">
               Join the exclusive waitlist or secure your founding member spot now
             </p>
-            
+
             {!isSubmitted ? (
               <form onSubmit={handleEmailSubmit} className="mb-8">
                 <div className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
@@ -248,8 +248,8 @@ function App() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email address"
                     className={`flex-1 px-6 py-4 rounded-full border-2 text-lg focus:outline-none transition-all ${
-                      isEmailFocused 
-                        ? 'border-green-500 ring-4 ring-green-200' 
+                      isEmailFocused
+                        ? 'border-green-500 ring-4 ring-green-200'
                         : 'border-gray-300 focus:border-green-500'
                     }`}
                     required
