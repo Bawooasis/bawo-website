@@ -842,46 +842,34 @@ function App() {
             </div>
 
             {/* Email Form */}
-            {!isSubmitted ? (
-              <form onSubmit={handleEmailSubmit} className="max-w-2xl mx-auto">
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <input
-                    id="email-input"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter email for launch notification"
-                    className={`flex-1 px-6 py-4 rounded-lg border-2 text-lg focus:outline-none transition-all bg-white/10 backdrop-blur-sm text-white placeholder-white/70 font-museo-medium ${
-                      isEmailFocused
-                        ? 'border-[#ff7f39] ring-4 ring-[#ff7f39]/20'
-                        : 'border-white/20 focus:border-[#ff7f39]'
-                    }`}
-                    required
-                  />
-                  <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white px-10 py-4 rounded-lg font-bold text-base flex items-center justify-center gap-2 transform hover:scale-105 transition-all duration-300 disabled:opacity-50 font-museo-bold"
-                  >
-                    {isLoading ? (
-                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
-                    ) : (
-                      <>
-                        Get Launch Update <ArrowRight className="w-5 h-5" />
-                      </>
-                    )}
-                  </button>
+            <form 
+              action="https://joinbawo.us10.list-manage.com/subscribe/post?u=7c2523b0334a02fe77eebddb3&id=842ac1ad64&f_id=00bb32e3f0" 
+              method="post" 
+              target="_self"
+              className="max-w-2xl mx-auto"
+            >
+              <div className="flex flex-col sm:flex-row gap-4">
+                <input
+                  type="email" 
+                  name="EMAIL" 
+                  placeholder="Enter email for launch updates" 
+                  required
+                  className="flex-1 px-6 py-4 rounded-lg border-2 text-lg focus:outline-none transition-all bg-white/10 backdrop-blur-sm text-white placeholder-white/70 font-museo-medium border-white/20 focus:border-[#ff7f39]"
+                />
+                
+                {/* Anti-spam field (required by Mailchimp) - DO NOT REMOVE */}
+                <div style={{ position: 'absolute', left: '-5000px' }}>
+                  <input type="text" name="b_7c2523b0334a02fe77eebddb3_842ac1ad64" tabIndex={-1} value="" />
                 </div>
-              </form>
-            ) : (
-              <div className="max-w-lg mx-auto p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
-                <div className="flex items-center justify-center gap-3 text-white">
-                  <CheckCircle className="w-8 h-8 text-[#ff7f39]" />
-                  <span className="text-xl font-bold font-museo-bold">You're on the list! 🎉</span>
-                </div>
-                <p className="text-white/80 mt-2 font-museo-medium">We'll notify you when BAWO launches</p>
+                
+                <button
+                  type="submit"
+                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white px-10 py-4 rounded-lg font-bold text-base flex items-center justify-center gap-2 transform hover:scale-105 transition-all duration-300 font-museo-bold"
+                >
+                  Get Launch Updates <ArrowRight className="w-5 h-5" />
+                </button>
               </div>
-            )}
+            </form>
 
             {/* Main CTA */}
             <div className="space-y-4">
