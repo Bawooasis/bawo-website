@@ -261,7 +261,7 @@ function App() {
             <img
               src={bawoLogo}
               alt="BAWO Logo"
-              className="relative z-10 h-40 md:h-56 lg:h-64 w-auto drop-shadow-lg"
+              className="relative z-10 h-56 md:h-72 lg:h-80 w-auto drop-shadow-lg"
             />
           </div>
         </div>
