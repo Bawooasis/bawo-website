@@ -14,6 +14,9 @@ export default {
         'museo-extrabold': ['MuseoModerno', 'sans-serif'],
         'museo-black': ['MuseoModerno', 'sans-serif'],
       },
+      animation: {
+        'spin-slow': 'spin 15s linear infinite reverse',
+      },
     },
   },
   plugins: [],

@@ -146,3 +146,77 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom Animation Classes */
+@layer utilities {
+  /* Breathing animation for phone mockup */
+  .animate-breathing {
+    animation: breathing 4s ease-in-out infinite;
+  }
+  
+  @keyframes breathing {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+  }
+  
+  /* Gentle lift animation for buttons */
+  .animate-lift {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .animate-lift:hover {
+    transform: translateY(-2px);
+  }
+  
+  /* Smooth fade-in for scroll animations */
+  .animate-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  
+  .animate-fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Pulse animation for urgency indicators */
+  .animate-pulse-gentle {
+    animation: pulse-gentle 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-gentle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+  
+  /* Staggered entrance for cards */
+  .stagger-animation > * {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  
+  .stagger-animation > *:nth-child(1) { transition-delay: 0.1s; }
+  .stagger-animation > *:nth-child(2) { transition-delay: 0.2s; }
+  .stagger-animation > *:nth-child(3) { transition-delay: 0.3s; }
+  .stagger-animation > *:nth-child(4) { transition-delay: 0.4s; }
+  .stagger-animation > *:nth-child(5) { transition-delay: 0.5s; }
+  .stagger-animation > *:nth-child(6) { transition-delay: 0.6s; }
+  
+  .stagger-animation.visible > * {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
