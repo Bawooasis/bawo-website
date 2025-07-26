@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import appMockup from './assets/images/app-mockup.png';
 import bawoLogo from './assets/images/bawo-logo.png';
-import globeImage from './assets/images/globe.png';
+import globeImage from './assets/images/GLOBE.png';
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
