@@ -14,9 +14,10 @@ import {
   Users,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import appMockup from "./assets/images/app-mockup.png";
-import globeImage from "./assets/images/GLOBE.png";
 import Logo from "./components/Logo";
+import { CONTENT } from "./constants/content";
+import { TAILWIND_COLORS } from "./constants/colors";
+import { IMAGES } from "./constants/images";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -28,12 +29,7 @@ function App() {
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
   const [activePreviewIndex, setActivePreviewIndex] = useState(0);
 
-  const previewImages = [
-    appMockup,
-    "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=768&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=768&q=80&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=768&q=80&auto=format&fit=crop",
-  ];
+  const previewImages = IMAGES.previews.gallery;
   const previewImgRef = useRef<HTMLImageElement | null>(null);
 
   // Animation refs
@@ -275,7 +271,7 @@ function App() {
       </div> */}
 
       <div
-        className="relative bg-gradient-to-br from-[#1E2D24] via-[#1A2821] to-[#111814]"
+        className={`relative ${TAILWIND_COLORS.gradients.heroBackground} hero-gradient-animate hero-shimmer`}
       >
         {/* Hero Section */}
         <section
@@ -294,7 +290,7 @@ function App() {
             <div className="relative flex items-center justify-center">
               <div className="absolute inset-0 animate-spin-slow flex items-center justify-center">
                 <img
-                  src={globeImage}
+                  src={IMAGES.assets.globe}
                   alt="Rotating Globe"
                   className="w-24 h-24 md:w-32 md:h-32 object-contain opacity-20"
                 />
@@ -349,15 +345,13 @@ function App() {
                     ref={headlineRef}
                     className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.2] font-museo-bold text-white"
                   >
-                    Be Part of the Network Connecting Nigerians Worldwide
+                    {CONTENT.hero.title}
                   </h1>
                   <p
                     ref={subheadlineRef}
                     className="text-base md:text-lg opacity-90 font-museo-regular text-white leading-[1.8]"
                   >
-                    We’re uniting Nigerians in over 50 cities to connect,
-                    collaborate, and celebrate our heritage — for generations to
-                    come.
+                    {CONTENT.hero.subtitle}
                   </p>
                 </div>
 
@@ -369,57 +363,57 @@ function App() {
                   <div className="relative">
                     <button
                       onClick={handleFoundingMember}
-                      className="bg-gradient-to-r from-[#FF4500] to-[#ff7f39] hover:from-[#ff7f39] hover:to-[#FF4500] text-white px-10 py-5 rounded-[50px] min-h-[48px] font-bold text-base md:text-lg transform hover:scale-105 transition-all duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:shadow-xl font-museo-bold w-full sm:w-auto max-w-[300px] animate-lift"
+                      className={`${TAILWIND_COLORS.gradients.primary} ${TAILWIND_COLORS.gradients.primaryHover} text-white px-10 py-5 rounded-[50px] min-h-[48px] font-bold text-base md:text-lg transform hover:scale-105 transition-all duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:shadow-xl font-museo-bold w-full sm:w-auto max-w-[300px] animate-lift`}
                     >
-                      Join BAWO — Founding Member
+                      {CONTENT.hero.ctaPrimary}
                     </button>
                     {/* Urgency Indicator */}
                     <div className="absolute -top-2 -right-2 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
                   </div>
                   <button
                     onClick={handleEarlyAccess}
-                    className="bg-transparent border-2 border-[#ff7f39] text-white hover:bg-[#ff7f39] hover:text-white px-10 py-5 rounded-[50px] min-h-[48px] font-bold text-base md:text-lg transform hover:scale-105 transition-all duration-300 font-museo-bold w-full sm:w-auto max-w-[300px] animate-lift"
+                    className={`bg-transparent border-2 ${TAILWIND_COLORS.primary.border} text-white ${TAILWIND_COLORS.primary.hover.bg} hover:text-white px-10 py-5 rounded-[50px] min-h-[48px] font-bold text-base md:text-lg transform hover:scale-105 transition-all duration-300 font-museo-bold w-full sm:w-auto max-w-[300px] animate-lift`}
                   >
-                    Learn More
+                    {CONTENT.hero.ctaSecondary}
                   </button>
                 </div>
 
                 {/* Compact Trust Line */}
                 <div className="flex items-center justify-center lg:justify-start gap-4 text-xs text-white/80 font-museo-medium">
-                  <span>🔒 256-bit SSL</span>
+                  <span>{CONTENT.hero.trustIndicators.ssl}</span>
                   <span>•</span>
-                  <span>💳 Stripe</span>
+                  <span>{CONTENT.hero.trustIndicators.stripe}</span>
                   <span>•</span>
-                  <span>🛡️ PCI compliant</span>
+                  <span>{CONTENT.hero.trustIndicators.pci}</span>
                 </div>
 
                 {/* Stats */}
                 <div ref={statsRef} className="pt-8">
                   <div className="text-center lg:text-left mb-8">
                     <h3 className="text-lg md:text-xl font-bold text-white font-museo-bold mb-2">
-                      Last chance to become a BAWO Founding Member
+                      {CONTENT.stats.title}
                     </h3>
                     <p className="text-sm text-white/80 font-museo-regular">
-                      New members join daily in 50+ cities worldwide
+                      {CONTENT.stats.subtitle}
                     </p>
                   </div>
                   <div className="grid grid-cols-3 gap-4 text-center">
                     <div className="city-stat">
-                      <p className="text-4xl font-bold text-[#ff7f39]">7.2K+</p>
+                      <p className={`text-4xl font-bold ${TAILWIND_COLORS.primary.text}`}>{CONTENT.stats.metrics.members.value}</p>
                       <p className="text-xs text-white/80 font-museo-medium">
-                        NIGERIANS CONNECTED
+                        {CONTENT.stats.metrics.members.label}
                       </p>
                     </div>
                     <div className="city-stat">
-                      <p className="text-4xl font-bold text-[#ff7f39]">50+</p>
+                      <p className={`text-4xl font-bold ${TAILWIND_COLORS.primary.text}`}>{CONTENT.stats.metrics.cities.value}</p>
                       <p className="text-xs text-white/80 font-museo-medium">
-                        CITIES WORLDWIDE
+                        {CONTENT.stats.metrics.cities.label}
                       </p>
                     </div>
                     <div className="city-stat">
-                      <p className="text-4xl font-bold text-[#ff7f39]">98%</p>
+                      <p className={`text-4xl font-bold ${TAILWIND_COLORS.primary.text}`}>{CONTENT.stats.metrics.satisfaction.value}</p>
                       <p className="text-xs text-white/80 font-museo-medium">
-                        SATISFACTION RATE
+                        {CONTENT.stats.metrics.satisfaction.label}
                       </p>
                     </div>
                   </div>
@@ -430,22 +424,18 @@ function App() {
         </section>
 
         {/* Origin Story Section */}
-        <section className="relative min-h-screen flex items-center justify-center">
+        <section className={`relative min-h-screen flex items-center justify-center ${TAILWIND_COLORS.gradients.earlySectionBackground}`}>
   
           <div className="relative z-10 container mx-auto px-6 grid lg:grid-cols-2 gap-10 items-center">
-            <div className="text-white space-y-6">
-              <h2 className="text-4xl md:text-5xl font-museo-bold">
-                Why We Built BAWO
+            <div className="text-white space-y-8">
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-museo-bold leading-tight">
+                {CONTENT.origin.title}
               </h2>
-              <p className="text-white/80 font-museo-medium text-lg">
-                Too many Nigerians abroad feel disconnected. We built BAWO to
-                bring us together — wherever we are — through real connections,
-                opportunities, and culture.
+              <p className="text-white/90 font-museo-medium text-xl md:text-2xl leading-relaxed">
+                {CONTENT.origin.mainText}
               </p>
-              <p className="text-white/80 font-museo-regular">
-                Our vision is a trusted network of Nigerians worldwide: a place
-                to find your tribe, grow your career, and celebrate our heritage
-                for generations to come.
+              <p className="text-white/80 font-museo-regular text-lg md:text-xl leading-relaxed">
+                {CONTENT.origin.visionText}
               </p>
             </div>
             <div>{/* Placeholder for potential image or graphic */}</div>
@@ -456,7 +446,7 @@ function App() {
       {/* Founding Member Section */}
       <section
         ref={foundingMemberRef}
-        className="relative min-h-screen flex items-center justify-center"
+        className={`relative min-h-screen flex items-center justify-center ${TAILWIND_COLORS.gradients.earlySectionBackground}`}
 
       >
 
@@ -466,33 +456,32 @@ function App() {
             <div className="text-white space-y-8">
               <div className="space-y-4">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-museo-bold">
-                  Join the First 100 Nigerians
+                  {CONTENT.foundingMember.title}
                   <br />
-                  <span className="text-[#ff7f39]">Building Our Community</span>
-                  <span className="ml-3 text-6xl">🇳🇬</span>
+                  <span className={TAILWIND_COLORS.primary.text}>{CONTENT.foundingMember.titleHighlight}</span>
+                  <span className="ml-3 text-6xl">{CONTENT.foundingMember.titleEmoji}</span>
                 </h2>
                 <p className="text-base md:text-lg font-museo-regular text-white/80">
-                  Limited to first 100 members - 73 spots remaining
+                  {CONTENT.foundingMember.subtitle}
                 </p>
                 <p className="text-sm font-museo-regular text-white/80">
-                  Be part of BAWO's founding story. Get lifetime premium access
-                  worth $1,188.
+                  {CONTENT.foundingMember.description}
                 </p>
               </div>
 
               <div className="space-y-6">
                 <h3 className="text-xl md:text-2xl font-museo-bold text-white">
-                  FOUNDING MEMBERS GET:
+                  {CONTENT.foundingMember.benefitsTitle}
                 </h3>
                 <div className="space-y-5">
                   <div className="flex items-start gap-4">
-                    <BadgeCheck className="w-5 h-5 text-[#ff7f39] flex-shrink-0 mt-0.5" />
+                    <BadgeCheck className={`w-5 h-5 ${TAILWIND_COLORS.primary.text} flex-shrink-0 mt-0.5`} />
                     <div>
                       <span className="font-museo-medium text-base">
-                        Lifetime Premium Access
+                        {CONTENT.foundingMember.benefits[0].title}
                       </span>
                       <div className="text-sm text-white/80 mt-1">
-                        Enjoy members-only features forever.
+                        {CONTENT.foundingMember.benefits[0].description}
                       </div>
                     </div>
                   </div>
@@ -582,7 +571,7 @@ function App() {
                   <div className="text-white text-center">
                     <div className="animate-spin-slow mb-3">
                       <img
-                        src={globeImage}
+                        src={IMAGES.assets.globe}
                         alt="Global Network"
                         className="w-48 h-48 md:w-56 md:h-56 object-cover"
                       />
@@ -634,43 +623,40 @@ function App() {
       {/* Features Section */}
       <section
         ref={featuresRef}
-        className="relative min-h-screen flex items-center justify-center"
+        className={`relative min-h-screen flex items-center justify-center ${TAILWIND_COLORS.gradients.earlySectionBackground}`}
 
       >
         
         <div className="relative z-10 text-white px-6 max-w-6xl py-20">
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-16 text-[#ff7f39] font-museo-bold">
-            Your Tribe Awaits
+          <h2 className={`text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-16 ${TAILWIND_COLORS.primary.text} font-museo-bold`}>
+            {CONTENT.features.title}
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="feature-card text-center p-8 bg-white/10 rounded-xl backdrop-blur-sm hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-1 shadow-[0_4px_12px_rgba(0,0,0,0.15)]">
-              <Users className="w-12 h-12 text-[#ff7f39] mx-auto mb-6" />
+              <Users className={`w-12 h-12 ${TAILWIND_COLORS.primary.text} mx-auto mb-6`} />
               <h3 className="text-xl md:text-2xl font-bold mb-4 font-museo-bold">
-                Connect Locally & Globally
+                {CONTENT.features.items[0].title}
               </h3>
               <p className="text-base md:text-lg opacity-90 font-museo-medium leading-[1.5]">
-                Business partnerships, career opportunities, and authentic
-                connections with Nigerians worldwide
+                {CONTENT.features.items[0].description}
               </p>
             </div>
             <div className="feature-card text-center p-8 bg-white/10 rounded-xl backdrop-blur-sm hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-1 shadow-[0_4px_12px_rgba(0,0,0,0.15)]">
-              <Globe className="w-12 h-12 text-[#ff7f39] mx-auto mb-6" />
+              <Globe className={`w-12 h-12 ${TAILWIND_COLORS.primary.text} mx-auto mb-6`} />
               <h3 className="text-xl md:text-2xl font-bold mb-4 font-museo-bold">
-                Access Exclusive Opportunities
+                {CONTENT.features.items[1].title}
               </h3>
               <p className="text-base md:text-lg opacity-90 font-museo-medium leading-[1.5]">
-                Job referrals, investment opportunities, and exclusive events
-                across continents
+                {CONTENT.features.items[1].description}
               </p>
             </div>
             <div className="feature-card text-center p-8 bg-white/10 rounded-xl backdrop-blur-sm hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-1 shadow-[0_4px_12px_rgba(0,0,0,0.15)]">
-              <Heart className="w-12 h-12 text-[#ff7f39] mx-auto mb-6" />
+              <Heart className={`w-12 h-12 ${TAILWIND_COLORS.primary.text} mx-auto mb-6`} />
               <h3 className="text-xl md:text-2xl font-bold mb-4 font-museo-bold">
-                Celebrate Nigerian Heritage
+                {CONTENT.features.items[2].title}
               </h3>
               <p className="text-base md:text-lg opacity-90 font-museo-medium leading-[1.5]">
-                Cultural events, language exchange, and preserving our rich
-                traditions together
+                {CONTENT.features.items[2].description}
               </p>
             </div>
           </div>
@@ -680,7 +666,7 @@ function App() {
       {/* Testimonials Section */}
       <section
         ref={testimonialsRef}
-        className="relative py-20"
+        className={`relative py-20 ${TAILWIND_COLORS.gradients.midSectionBackground}`}
 
       >
 
@@ -700,7 +686,7 @@ function App() {
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 rounded-full overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=96&q=80&auto=format&fit=crop"
+                    src={IMAGES.testimonials.adaora}
                     alt="Adaora"
                     className="w-full h-full object-cover"
                   />
@@ -723,7 +709,7 @@ function App() {
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 rounded-full overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1544005311-94ddf0286df2?w=96&q=80&auto=format&fit=crop"
+                    src={IMAGES.testimonials.emeka}
                     alt="Emeka"
                     className="w-full h-full object-cover"
                   />
@@ -746,7 +732,7 @@ function App() {
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 rounded-full overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=96&q=80&auto=format&fit=crop"
+                    src={IMAGES.testimonials.fatima}
                     alt="Fatima"
                     className="w-full h-full object-cover"
                   />
@@ -769,7 +755,7 @@ function App() {
 
       {/* In-App Preview Section */}
       <section
-        className="relative py-24"
+        className={`relative py-24 ${TAILWIND_COLORS.gradients.midSectionBackground}`}
 
       >
 
@@ -780,7 +766,7 @@ function App() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             <div className="bg-white/10 rounded-2xl p-4 border border-white/10">
               <img
-                src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=800&q=80&auto=format&fit=crop"
+                src={IMAGES.inApp.features[0]}
                 alt="Profiles"
                 className="rounded-xl h-44 w-full object-cover"
               />
@@ -791,7 +777,7 @@ function App() {
             </div>
             <div className="bg-white/10 rounded-2xl p-4 border border-white/10">
               <img
-                src="https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=800&q=80&auto=format&fit=crop"
+                src={IMAGES.inApp.features[1]}
                 alt="Groups"
                 className="rounded-xl h-44 w-full object-cover"
               />
@@ -801,7 +787,7 @@ function App() {
             </div>
             <div className="bg-white/10 rounded-2xl p-4 border border-white/10">
               <img
-                src="https://images.unsplash.com/photo-1551836022-4c4c79ecde51?w=800&q=80&auto=format&fit=crop"
+                src={IMAGES.inApp.features[2]}
                 alt="Events"
                 className="rounded-xl h-44 w-full object-cover"
               />
@@ -811,7 +797,7 @@ function App() {
             </div>
             <div className="bg-white/10 rounded-2xl p-4 border border-white/10">
               <img
-                src="https://images.unsplash.com/photo-1520975938310-59e6f1a53f50?w=800&q=80&auto=format&fit=crop"
+                src={IMAGES.inApp.features[3]}
                 alt="Culture"
                 className="rounded-xl h-44 w-full object-cover"
               />
@@ -825,7 +811,7 @@ function App() {
 
       {/* Event Highlights Section */}
       <section
-        className="relative py-24"
+        className={`relative py-24 ${TAILWIND_COLORS.gradients.midSectionBackground}`}
 
       >
 
@@ -877,7 +863,7 @@ function App() {
       {/* Diaspora Statistics Section */}
       <section
         ref={globalReachRef}
-        className="relative min-h-screen flex items-center justify-center"
+        className={`relative min-h-screen flex items-center justify-center ${TAILWIND_COLORS.gradients.midSectionBackground}`}
 
       >
 
@@ -903,7 +889,7 @@ function App() {
               <div className="city-stat text-center space-y-4">
                 <div className="w-20 h-20 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=112&h=112&fit=crop&crop=center"
+                    src={IMAGES.globalReach.cities[0]}
                     alt="New York"
                     className="w-full h-full object-cover"
                   />
@@ -922,7 +908,7 @@ function App() {
               <div className="city-stat text-center space-y-4">
                 <div className="w-20 h-20 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=112&h=112&fit=crop&crop=center"
+                    src={IMAGES.globalReach.cities[1]}
                     alt="London"
                     className="w-full h-full object-cover"
                   />
@@ -941,7 +927,7 @@ function App() {
               <div className="city-stat text-center space-y-4">
                 <div className="w-20 h-20 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=112&h=112&fit=crop&crop=center"
+                    src={IMAGES.globalReach.cities[2]}
                     alt="Atlanta"
                     className="w-full h-full object-cover"
                   />
@@ -960,7 +946,7 @@ function App() {
               <div className="city-stat text-center space-y-4">
                 <div className="w-20 h-20 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=112&h=112&fit=crop&crop=center"
+                    src={IMAGES.globalReach.cities[3]}
                     alt="Los Angeles"
                     className="w-full h-full object-cover"
                   />
@@ -979,7 +965,7 @@ function App() {
               <div className="city-stat text-center space-y-4">
                 <div className="w-20 h-20 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1464983953574-0892a716854b?w=112&h=112&fit=crop&crop=center"
+                    src={IMAGES.globalReach.cities[4]}
                     alt="Canada"
                     className="w-full h-full object-cover"
                   />
@@ -998,7 +984,7 @@ function App() {
               <div className="city-stat text-center space-y-4">
                 <div className="w-20 h-20 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?w=112&h=112&fit=crop&crop=center"
+                    src={IMAGES.globalReach.cities[5]}
                     alt="Houston"
                     className="w-full h-full object-cover"
                   />
@@ -1020,7 +1006,7 @@ function App() {
       {/* Trust Indicators Section */}
       <section
         ref={trustRef}
-        className="relative py-16"
+        className={`relative py-16 ${TAILWIND_COLORS.gradients.midSectionBackground}`}
 
       >
 
@@ -1090,7 +1076,7 @@ function App() {
       <section
         ref={finalCtaRef}
         id="email-section"
-        className="relative min-h-screen flex items-center justify-center"
+        className={`relative min-h-screen flex items-center justify-center ${TAILWIND_COLORS.gradients.finalCtaBackground} hero-gradient-animate`}
 
       >
         
@@ -1162,7 +1148,7 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black/50 py-12">
+      <footer className={`py-12 ${TAILWIND_COLORS.gradients.footerBackground}`}>
         {/* Mobile Sticky CTA */}
         <div className="md:hidden mobile-sticky-cta bg-black/60 border-t border-white/10">
           <div className="px-4 py-3 flex items-center justify-between">
