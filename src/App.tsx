@@ -262,7 +262,7 @@ function App() {
       {/* <div className="fixed top-0 w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 py-3 px-4 text-center font-bold z-50 shadow-lg font-museo-bold">
         <div className="flex items-center justify-center gap-3">
           <img
-            src={bawoLogo}
+            src={IMAGES.assets.logo}
             alt="BAWO"
             className="h-10 w-auto"
           />
@@ -285,14 +285,14 @@ function App() {
           {/* BAWO Logo - Floating Top Left with Rotating Globe */}
           <div
             ref={logoRef}
-            className="absolute top-4 left-4 md:top-8 md:left-8 z-20"
+            className="absolute -top-4 -left-2 sm:-top-3 sm:-left-1 md:-top-2 md:left-0 lg:-top-1 lg:left-2 xl:top-0 xl:left-4 2xl:top-2 2xl:left-6 z-20"
           >
             <div className="relative flex items-center justify-center">
               <div className="absolute inset-0 animate-spin-slow flex items-center justify-center">
                 <img
                   src={IMAGES.assets.globe}
                   alt="Rotating Globe"
-                  className="w-24 h-24 md:w-32 md:h-32 object-contain opacity-20"
+                  className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-80 lg:h-80 xl:w-96 xl:h-96 2xl:w-[28rem] 2xl:h-[28rem] object-contain opacity-20 filter brightness-0 invert"
                 />
               </div>
               <div className="relative z-10">
@@ -302,7 +302,7 @@ function App() {
           </div>
 
           {/* Main Content Container */}
-          <div className="relative z-10 container mx-auto px-6 py-20 md:py-32">
+          <div className="relative z-10 container mx-auto px-6 py-24 md:py-36 lg:py-40">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               {/* Left Content - App Preview Carousel */}
               <div

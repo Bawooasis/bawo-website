@@ -15,7 +15,7 @@ export default {
         'museo-black': ['MuseoModerno', 'sans-serif'],
       },
       animation: {
-        'spin-slow': 'spin 15s linear infinite reverse',
+        'spin-slow': 'spin 30s linear infinite',
       },
     },
   },

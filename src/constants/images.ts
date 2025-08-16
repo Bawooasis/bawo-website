@@ -3,6 +3,7 @@
 // Local asset imports
 import appMockup from "../assets/images/app-mockup.png";
 import globeImage from "../assets/images/GLOBE.png";
+import bawoLogo from "../assets/images/bawo-logo.png";
 import adoraImage from "../assets/images/ADORA.jpg";
 import emekaImage from "../assets/images/Emeka.jpg";
 import fatimaImage from "../assets/images/Fatima.jpg";
@@ -18,6 +19,7 @@ export const IMAGES = {
   assets: {
     appMockup,
     globe: globeImage,
+    logo: bawoLogo,
     // Add more local images here as needed
   },
 
