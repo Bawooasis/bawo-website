@@ -117,13 +117,13 @@ export const CONTENT = {
         {
           name: "Emeka O.",
           role: "Entrepreneur, London",
-          quote: "The networking is unmatched — and it truly feels like home away from home.",
+          quote: "The networking opportunities are incredible — and it truly understands our culture.",
           avatar: IMAGES.testimonials.emeka
         },
         {
           name: "Fatima K.",
           role: "Doctor, New York",
-          quote: "This is more than an app. It's a movement to keep our culture alive wherever we are.",
+          quote: "The verification process gives me confidence these are real, quality connections.",
           avatar: IMAGES.testimonials.fatima
         }
       ]
@@ -131,15 +131,16 @@ export const CONTENT = {
   
     // Global Reach Section
     globalReach: {
-      title: "Naija to the World",
-      subtitle: "Find your people in 50+ cities",
+      title: "7,200+ Nigerians Connected Worldwide",
+      subtitle: "Belonging • Growth • Cultural pride",
+      description: "New members join daily in 50+ cities",
       cities: [
-        { name: "London", count: "2.1K", country: "🇬🇧" },
-        { name: "Toronto", count: "1.8K", country: "🇨🇦" },
-        { name: "New York", count: "1.5K", country: "🇺🇸" },
-        { name: "Houston", count: "892", country: "🇺🇸" },
-        { name: "Atlanta", count: "743", country: "🇺🇸" },
-        { name: "Dubai", count: "421", country: "🇦🇪" }
+        { name: "New York", count: "1,247", country: "🇺🇸" },
+        { name: "London", count: "1,092", country: "🇬🇧" },
+        { name: "Atlanta", count: "1,684", country: "🇺🇸" },
+        { name: "Los Angeles", count: "1,503", country: "🇺🇸" },
+        { name: "Canada", count: "1,174", country: "🇨🇦" },
+        { name: "Houston", count: "892", country: "🇺🇸" }
       ]
     },
   

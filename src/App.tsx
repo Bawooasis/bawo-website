@@ -884,10 +884,10 @@ function App() {
             </div>
 
             {/* City Statistics Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10 mt-16">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mt-16">
               {/* New York */}
               <div className="city-stat text-center space-y-4">
-                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
+                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
                   <img
                     src={IMAGES.globalReach.cities[0]}
                     alt="New York"
@@ -906,7 +906,7 @@ function App() {
 
               {/* London */}
               <div className="city-stat text-center space-y-4">
-                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
+                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
                   <img
                     src={IMAGES.globalReach.cities[1]}
                     alt="London"
@@ -925,7 +925,7 @@ function App() {
 
               {/* Atlanta */}
               <div className="city-stat text-center space-y-4">
-                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
+                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
                   <img
                     src={IMAGES.globalReach.cities[2]}
                     alt="Atlanta"
@@ -944,7 +944,7 @@ function App() {
 
               {/* LA */}
               <div className="city-stat text-center space-y-4">
-                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
+                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
                   <img
                     src={IMAGES.globalReach.cities[3]}
                     alt="Los Angeles"
@@ -963,7 +963,7 @@ function App() {
 
               {/* Canada */}
               <div className="city-stat text-center space-y-4">
-                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
+                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
                   <img
                     src={IMAGES.globalReach.cities[4]}
                     alt="Canada"
@@ -982,7 +982,7 @@ function App() {
 
               {/* Houston */}
               <div className="city-stat text-center space-y-4">
-                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
+                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
                   <img
                     src={IMAGES.globalReach.cities[5]}
                     alt="Houston"
@@ -994,7 +994,7 @@ function App() {
                     HOUSTON
                   </h3>
                   <p className="font-museo-medium text-white/80 text-sm">
-                    1,223 MEMBERS
+                    892 MEMBERS
                   </p>
                 </div>
               </div>

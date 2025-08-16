@@ -3,6 +3,15 @@
 // Local asset imports
 import appMockup from "../assets/images/app-mockup.png";
 import globeImage from "../assets/images/GLOBE.png";
+import adoraImage from "../assets/images/ADORA.jpg";
+import emekaImage from "../assets/images/Emeka.jpg";
+import fatimaImage from "../assets/images/Fatima.jpg";
+import nyImage from "../assets/images/NY.jpg";
+import londonImage from "../assets/images/LONDON.jpg";
+import texasImage from "../assets/images/TEXAS.jpg";
+import laImage from "../assets/images/LA.jpg";
+import canadaImage from "../assets/images/canada.jpg";
+import houstonImage from "../assets/images/hOUSTON.jpg";
 
 export const IMAGES = {
   // Local Assets
@@ -25,9 +34,9 @@ export const IMAGES = {
 
   // Testimonial Avatar Images
   testimonials: {
-    adaora: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=96&q=80&auto=format&fit=crop",
-    emeka: "https://images.unsplash.com/photo-1544005311-94ddf0286df2?w=96&q=80&auto=format&fit=crop",
-    fatima: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=96&q=80&auto=format&fit=crop"
+    adaora: adoraImage,
+    emeka: emekaImage,
+    fatima: fatimaImage
   },
 
   // In-App Feature Screenshots
@@ -53,20 +62,20 @@ export const IMAGES = {
   // Global Reach/City Images
   globalReach: {
     cities: [
-      "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=112&h=112&fit=crop&crop=center", // London
-      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=112&h=112&fit=crop&crop=center", // Toronto
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=112&h=112&fit=crop&crop=center", // New York
-      "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=112&h=112&fit=crop&crop=center", // Houston
-      "https://images.unsplash.com/photo-1464983953574-0892a716854b?w=112&h=112&fit=crop&crop=center", // Atlanta
-      "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?w=112&h=112&fit=crop&crop=center"  // Dubai
+      nyImage, // New York
+      londonImage, // London
+      texasImage, // Atlanta (using Texas image)
+      laImage, // Los Angeles
+      canadaImage, // Canada
+      houstonImage // Houston
     ],
     cityMeta: [
-      { name: "London", image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=112&h=112&fit=crop&crop=center" },
-      { name: "Toronto", image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=112&h=112&fit=crop&crop=center" },
-      { name: "New York", image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=112&h=112&fit=crop&crop=center" },
-      { name: "Houston", image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=112&h=112&fit=crop&crop=center" },
-      { name: "Atlanta", image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?w=112&h=112&fit=crop&crop=center" },
-      { name: "Dubai", image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?w=112&h=112&fit=crop&crop=center" }
+      { name: "New York", image: nyImage },
+      { name: "London", image: londonImage },
+      { name: "Atlanta", image: texasImage },
+      { name: "Los Angeles", image: laImage },
+      { name: "Canada", image: canadaImage },
+      { name: "Houston", image: houstonImage }
     ]
   },
 
