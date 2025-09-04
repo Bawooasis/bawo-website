@@ -282,22 +282,62 @@ function App() {
 
 
 
-          {/* BAWO Logo - Floating Top Left with Rotating Globe */}
+          {/* BAWO Logo - Higher Position with Social Icons */}
           <div
             ref={logoRef}
-            className="absolute -top-4 -left-2 sm:-top-3 sm:-left-1 md:-top-2 md:left-0 lg:-top-1 lg:left-2 xl:top-0 xl:left-4 2xl:top-2 2xl:left-6 z-20"
+            className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-8 lg:top-10 lg:left-10 xl:top-12 xl:left-12 2xl:top-16 2xl:left-16 z-20"
           >
-            <div className="relative flex items-center justify-center">
-              <div className="absolute inset-0 animate-spin-slow flex items-center justify-center">
-                <img
-                  src={IMAGES.assets.globe}
-                  alt="Rotating Globe"
-                  className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-80 lg:h-80 xl:w-96 xl:h-96 2xl:w-[28rem] 2xl:h-[28rem] object-contain opacity-20 filter brightness-0 invert"
-                />
-              </div>
-              <div className="relative z-10">
-                <Logo />
-              </div>
+            <div className="relative z-10">
+              <Logo />
+            </div>
+      </div>
+
+          {/* Social Media Icons - Bottom Right */}
+          <div className="absolute bottom-20 right-6 z-20">
+            <div className="flex items-center gap-3">
+              <a 
+                href="https://instagram.com/bawoapp" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-white/80 hover:text-white transition-colors duration-300"
+              >
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+              
+              <a 
+                href="https://twitter.com/bawoapp" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-white/80 hover:text-white transition-colors duration-300"
+              >
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+              </a>
+              
+              <a 
+                href="https://linkedin.com/company/bawoapp" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-white/80 hover:text-white transition-colors duration-300"
+              >
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+              
+              <a 
+                href="https://tiktok.com/@bawoapp" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-white/80 hover:text-white transition-colors duration-300"
+              >
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                </svg>
+              </a>
             </div>
           </div>
 
@@ -310,12 +350,12 @@ function App() {
                 className="flex justify-center lg:justify-center order-2 md:order-1"
               >
                 <div className="relative">
-                  <div className="relative">
-                    <img
+          <div className="relative">
+            <img
                       ref={previewImgRef}
                       src={previewImages[activePreviewIndex]}
-                      alt="BAWO App Preview"
-                      className="w-64 md:w-80 lg:w-96 h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] transform-gpu transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-[2rem] border-4 border-gray-800 animate-breathing object-cover will-change-transform will-change-opacity"
+              alt="BAWO App Preview"
+                      className="w-64 md:w-80 lg:w-96 h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] transform-gpu transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-[2rem] animate-breathing object-cover will-change-transform will-change-opacity"
                       style={{ opacity: 1 }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#ff7f39]/10 via-transparent to-transparent rounded-[2rem] pointer-events-none"></div>
@@ -334,8 +374,8 @@ function App() {
                       />
                     ))}
                   </div>
-                </div>
-              </div>
+          </div>
+        </div>
 
               {/* Right Content */}
               <div className="text-center space-y-10 order-1 lg:order-2">
@@ -346,7 +386,7 @@ function App() {
                     className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.2] font-museo-bold text-white"
                   >
                     {CONTENT.hero.title}
-                  </h1>
+          </h1>
                   <p
                     ref={subheadlineRef}
                     className="text-base md:text-lg opacity-90 font-museo-regular text-white leading-[1.8]"
@@ -361,22 +401,22 @@ function App() {
                   className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
                 >
                   <div className="relative">
-                    <button
-                      onClick={handleFoundingMember}
+            <button
+              onClick={handleFoundingMember}
                       className={`${TAILWIND_COLORS.gradients.primary} ${TAILWIND_COLORS.gradients.primaryHover} text-white px-10 py-5 rounded-[50px] min-h-[48px] font-bold text-base md:text-lg transform hover:scale-105 transition-all duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:shadow-xl font-museo-bold w-full sm:w-auto max-w-[300px] animate-lift`}
-                    >
+            >
                       {CONTENT.hero.ctaPrimary}
-                    </button>
+            </button>
                     {/* Urgency Indicator */}
                     <div className="absolute -top-2 -right-2 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
                   </div>
-                  <button
-                    onClick={handleEarlyAccess}
+            <button
+              onClick={handleEarlyAccess}
                     className={`bg-transparent border-2 ${TAILWIND_COLORS.primary.border} text-white ${TAILWIND_COLORS.primary.hover.bg} hover:text-white px-10 py-5 rounded-[50px] min-h-[48px] font-bold text-base md:text-lg transform hover:scale-105 transition-all duration-300 font-museo-bold w-full sm:w-auto max-w-[300px] animate-lift`}
-                  >
+            >
                     {CONTENT.hero.ctaSecondary}
-                  </button>
-                </div>
+            </button>
+          </div>
 
                 {/* Compact Trust Line */}
                 <div className="flex items-center justify-center lg:justify-start gap-4 text-xs text-white/80 font-museo-medium">
@@ -385,7 +425,7 @@ function App() {
                   <span>{CONTENT.hero.trustIndicators.stripe}</span>
                   <span>•</span>
                   <span>{CONTENT.hero.trustIndicators.pci}</span>
-                </div>
+          </div>
 
                 {/* Stats */}
                 <div ref={statsRef} className="pt-8">
@@ -396,14 +436,14 @@ function App() {
                     <p className="text-sm text-white/80 font-museo-regular">
                       {CONTENT.stats.subtitle}
                     </p>
-                  </div>
+          </div>
                   <div className="grid grid-cols-3 gap-4 text-center">
                     <div className="city-stat">
                       <p className={`text-4xl font-bold ${TAILWIND_COLORS.primary.text}`}>{CONTENT.stats.metrics.members.value}</p>
                       <p className="text-xs text-white/80 font-museo-medium">
                         {CONTENT.stats.metrics.members.label}
                       </p>
-                    </div>
+        </div>
                     <div className="city-stat">
                       <p className={`text-4xl font-bold ${TAILWIND_COLORS.primary.text}`}>{CONTENT.stats.metrics.cities.value}</p>
                       <p className="text-xs text-white/80 font-museo-medium">
@@ -420,8 +460,8 @@ function App() {
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+        </div>
+      </section>
 
         {/* Origin Story Section */}
         <section className={`relative min-h-screen flex items-center justify-center ${TAILWIND_COLORS.gradients.earlySectionBackground}`}>
@@ -460,14 +500,14 @@ function App() {
                   <br />
                   <span className={TAILWIND_COLORS.primary.text}>{CONTENT.foundingMember.titleHighlight}</span>
                   <span className="ml-3 text-6xl">{CONTENT.foundingMember.titleEmoji}</span>
-                </h2>
+            </h2>
                 <p className="text-base md:text-lg font-museo-regular text-white/80">
                   {CONTENT.foundingMember.subtitle}
                 </p>
                 <p className="text-sm font-museo-regular text-white/80">
                   {CONTENT.foundingMember.description}
                 </p>
-              </div>
+            </div>
 
               <div className="space-y-6">
                 <h3 className="text-xl md:text-2xl font-museo-bold text-white">
@@ -482,9 +522,9 @@ function App() {
                       </span>
                       <div className="text-sm text-white/80 mt-1">
                         {CONTENT.foundingMember.benefits[0].description}
-                      </div>
-                    </div>
-                  </div>
+              </div>
+              </div>
+              </div>
                   <div className="flex items-start gap-4">
                     <Shield className="w-5 h-5 text-[#ff7f39] flex-shrink-0 mt-0.5" />
                     <div>
@@ -493,8 +533,8 @@ function App() {
                       </span>
                       <div className="text-sm text-white/80 mt-1">
                         Fast resolutions and white-glove service.
-                      </div>
-                    </div>
+              </div>
+            </div>
                   </div>
                   <div className="flex items-start gap-4">
                     <Calendar className="w-5 h-5 text-[#ff7f39] flex-shrink-0 mt-0.5" />
@@ -589,31 +629,16 @@ function App() {
               </div>
 
               <div className="text-center space-y-4">
-                <button
-                  onClick={handleFoundingMember}
+            <button
+              onClick={handleFoundingMember}
                   className="bg-gradient-to-r from-[#ff7f39] to-[#ff6b35] hover:from-[#ff6b35] hover:to-[#ff5a2e] text-white px-12 py-6 rounded-[50px] min-h-[48px] font-bold text-xl transform hover:scale-105 transition-all duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:shadow-xl font-museo-bold"
-                >
+            >
                   Secure Your Spot — $49
-                </button>
+            </button>
                 <p className="text-white font-museo-medium">
                   Only 73 founding member spots remaining
                 </p>
 
-                {/* Security Badges */}
-                <div className="flex items-center justify-center gap-6 pt-4">
-                  <div className="flex items-center gap-2 text-xs text-white/80">
-                    <span>🔒</span>
-                    <span>SSL Secured</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-white/80">
-                    <span>💳</span>
-                    <span>Stripe Powered</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-white/80">
-                    <span>🛡️</span>
-                    <span>PCI Compliant</span>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -674,7 +699,7 @@ function App() {
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-white font-museo-bold mb-4">
               What Our Community Says
-            </h2>
+          </h2>
             <p className="text-lg text-white/80 font-museo-medium">
               Join thousands of Nigerians who've found their tribe
             </p>
@@ -1085,7 +1110,7 @@ function App() {
             <div className="space-y-4">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white font-museo-bold">
                 Secure Your Founding Member Status 🇳🇬
-              </h2>
+            </h2>
               <p className="text-lg md:text-xl font-museo-medium text-white/80">
                 Last chance to become a BAWO Founding Member
               </p>
@@ -1099,11 +1124,11 @@ function App() {
               className="max-w-2xl mx-auto"
             >
               <div className="flex flex-col sm:flex-row gap-4">
-                <input
-                  type="email"
+                  <input
+                    type="email"
                   name="EMAIL"
                   placeholder="Enter email for launch updates"
-                  required
+                    required
                   className="flex-1 px-6 py-4 rounded-[12px] border-2 text-lg focus:outline-none transition-all bg-white/10 backdrop-blur-sm text-white placeholder-white/70 font-museo-medium border-white/20 focus:border-[#ff7f39]"
                 />
 
@@ -1122,14 +1147,14 @@ function App() {
                   />
                 </div>
 
-                <button
-                  type="submit"
+                  <button
+                    type="submit"
                   className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white px-10 py-4 rounded-[50px] min-h-[48px] font-bold text-base flex items-center justify-center gap-2 transform hover:scale-105 transition-all duration-300 font-museo-bold"
                 >
                   Get Launch Updates <ArrowRight className="w-5 h-5" />
-                </button>
-              </div>
-            </form>
+                  </button>
+                </div>
+              </form>
 
             {/* Main CTA */}
             <div className="space-y-4">
@@ -1142,7 +1167,7 @@ function App() {
               <p className="text-white font-museo-medium">
                 30-day money-back guarantee • Save $1,139+ • Only 73 left
               </p>
-            </div>
+                </div>
           </div>
         </div>
       </section>
@@ -1608,8 +1633,8 @@ function App() {
               </div>
             </div>
           </div>
-        </div>
-      )}
+              </div>
+            )}
 
       {/* Cookie Policy Modal */}
       {showCookiePolicy && (
@@ -2152,17 +2177,17 @@ function App() {
                 <h2 className="text-2xl font-bold text-gray-900 font-museo-bold">
                   BAWO Terms of Service
                 </h2>
-                <button
+              <button
                   onClick={() => setShowTermsOfService(false)}
                   className="text-gray-500 hover:text-gray-700 text-2xl font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
-                >
+              >
                   ×
-                </button>
-              </div>
+              </button>
+            </div>
               <p className="text-gray-600 font-museo-medium mt-2">
                 Last Updated: July 2025
               </p>
-            </div>
+          </div>
 
             <div className="p-6 space-y-6 text-gray-800">
               <p className="font-museo-medium">
@@ -2198,7 +2223,7 @@ function App() {
                     benefits and lifetime access to premium features. Founding
                     membership is limited to the first 100 members.
                   </p>
-                </div>
+        </div>
               </div>
 
               <div>
