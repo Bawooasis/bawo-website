@@ -5,7 +5,7 @@ export const CONTENT = {
     hero: {
       title: "The Home for Nigerians. Wherever We Are",
       subtitle: "From Lagos to London, New York to Canada BAWO brings Nigerians and friends of Nigeria together to connect, vibe, and celebrate our culture for generations to come.",
-      ctaPrimary: "Join BAWO — Founding Member",
+      ctaPrimary: "Join BAWO Founding Member",
       ctaSecondary: "Discover the Movement",
       trustIndicators: {
       }

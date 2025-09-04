@@ -286,6 +286,7 @@ function App() {
           <div
             ref={logoRef}
             className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-8 lg:top-10 lg:left-10 xl:top-12 xl:left-12 2xl:top-16 2xl:left-16 z-20"
+            
           >
             <div className="relative z-10">
               <Logo />
