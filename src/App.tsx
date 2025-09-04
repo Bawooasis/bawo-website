@@ -768,7 +768,7 @@ function App() {
               <img
                 src={IMAGES.inApp.features[0]}
                 alt="Profiles"
-                className="rounded-xl h-44 w-full object-cover mx-auto"
+                className="rounded-xl h-80 w-full object-contain mx-auto"
               />
               <p className="text-white mt-3 font-museo-medium">
                 Find Your Tribe — discover people who share your vibe &
@@ -779,7 +779,7 @@ function App() {
               <img
                 src={IMAGES.inApp.features[1]}
                 alt="Groups"
-                className="rounded-xl h-44 w-full object-cover mx-auto"
+                className="rounded-xl h-80 w-full object-contain mx-auto"
               />
               <p className="text-white mt-3 font-museo-medium">
                 Join Exclusive Groups — connect with like-minded Nigerians.
@@ -789,7 +789,7 @@ function App() {
               <img
                 src={IMAGES.inApp.features[2]}
                 alt="Events"
-                className="rounded-xl h-44 w-full object-cover mx-auto"
+                className="rounded-xl h-80 w-full object-contain mx-auto"
               />
               <p className="text-white mt-3 font-museo-medium">
                 Attend Events — virtual and in-person meetups worldwide.
@@ -799,7 +799,7 @@ function App() {
               <img
                 src={IMAGES.inApp.features[3]}
                 alt="Culture"
-                className="rounded-xl h-44 w-full object-cover mx-auto"
+                className="rounded-xl h-80 w-full object-contain mx-auto"
               />
               <p className="text-white mt-3 font-museo-medium">
                 Celebrate Culture — language, food, music, and heritage.
