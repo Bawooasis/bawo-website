@@ -4,13 +4,10 @@ export const CONTENT = {
     // Hero Section
     hero: {
       title: "The Home for Nigerians. Wherever We Are",
-      subtitle: "From Lagos to London, New York to Nairobi — BAWO brings Nigerians and friends of Nigeria together to connect, vibe, and celebrate our culture for generations to come.",
+      subtitle: "From Lagos to London, New York to Canada BAWO brings Nigerians and friends of Nigeria together to connect, vibe, and celebrate our culture for generations to come.",
       ctaPrimary: "Join BAWO — Founding Member",
       ctaSecondary: "Discover the Movement",
       trustIndicators: {
-        ssl: "🔒 256-bit SSL Secured",
-        stripe: "💳 Powered by Stripe",
-        pci: "🛡️ PCI Compliant"
       }
     },
   
@@ -78,9 +75,6 @@ export const CONTENT = {
       cta: "Secure Your Spot — $49",
       spotsRemaining: "Only 73 founding member spots remaining",
       securityBadges: {
-        ssl: "🔒 SSL Secured",
-        stripe: "💳 Stripe Powered",
-        pci: "🛡️ PCI Compliant"
       }
     },
   
