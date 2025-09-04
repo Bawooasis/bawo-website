@@ -14,6 +14,12 @@ import laImage from "../assets/images/LA.jpg";
 import canadaImage from "../assets/images/canada.jpg";
 import houstonImage from "../assets/images/hOUSTON.jpg";
 
+// Inside the App Images
+import exploreScreen from "../assets/images/InsideTheAppImages/ExploreScreen.png";
+import matchesScreenshot from "../assets/images/InsideTheAppImages/matchesscreenshot.png";
+import notificationsShot from "../assets/images/InsideTheAppImages/Notificationsshot.png";
+import pledgeSection from "../assets/images/InsideTheAppImages/PledgeSection.png";
+
 export const IMAGES = {
   // Local Assets
   assets: {
@@ -27,10 +33,10 @@ export const IMAGES = {
   previews: {
     main: appMockup,
     gallery: [
-      appMockup,
-      "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=768&q=80&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=768&q=80&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=768&q=80&auto=format&fit=crop"
+      exploreScreen,
+      matchesScreenshot,
+      notificationsShot,
+      pledgeSection
     ]
   },
 
