@@ -764,42 +764,42 @@ function App() {
             Inside the BAWO App
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            <div className="bg-white/10 rounded-2xl p-4 border border-white/10">
+            <div className="text-center">
               <img
                 src={IMAGES.inApp.features[0]}
                 alt="Profiles"
-                className="rounded-xl h-44 w-full object-cover"
+                className="rounded-xl h-44 w-full object-cover mx-auto"
               />
               <p className="text-white mt-3 font-museo-medium">
                 Find Your Tribe — discover people who share your vibe &
                 interests.
               </p>
             </div>
-            <div className="bg-white/10 rounded-2xl p-4 border border-white/10">
+            <div className="text-center">
               <img
                 src={IMAGES.inApp.features[1]}
                 alt="Groups"
-                className="rounded-xl h-44 w-full object-cover"
+                className="rounded-xl h-44 w-full object-cover mx-auto"
               />
               <p className="text-white mt-3 font-museo-medium">
                 Join Exclusive Groups — connect with like-minded Nigerians.
               </p>
             </div>
-            <div className="bg-white/10 rounded-2xl p-4 border border-white/10">
+            <div className="text-center">
               <img
                 src={IMAGES.inApp.features[2]}
                 alt="Events"
-                className="rounded-xl h-44 w-full object-cover"
+                className="rounded-xl h-44 w-full object-cover mx-auto"
               />
               <p className="text-white mt-3 font-museo-medium">
                 Attend Events — virtual and in-person meetups worldwide.
               </p>
             </div>
-            <div className="bg-white/10 rounded-2xl p-4 border border-white/10">
+            <div className="text-center">
               <img
                 src={IMAGES.inApp.features[3]}
                 alt="Culture"
-                className="rounded-xl h-44 w-full object-cover"
+                className="rounded-xl h-44 w-full object-cover mx-auto"
               />
               <p className="text-white mt-3 font-museo-medium">
                 Celebrate Culture — language, food, music, and heritage.
