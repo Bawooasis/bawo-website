@@ -50,10 +50,10 @@ export const IMAGES = {
   // In-App Feature Screenshots
   inApp: {
     features: [
-      "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=800&q=80&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=800&q=80&auto=format&fit=crop", 
-      "https://images.unsplash.com/photo-1551836022-4c4c79ecde51?w=800&q=80&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1520975938310-59e6f1a53f50?w=800&q=80&auto=format&fit=crop"
+      exploreScreen,
+      matchesScreenshot,
+      notificationsShot,
+      pledgeSection
     ]
   },
 
