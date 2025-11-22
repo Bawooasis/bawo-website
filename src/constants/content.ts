@@ -3,121 +3,134 @@ import { IMAGES } from './images';
 export const CONTENT = {
     // Hero Section
     hero: {
-      title: "The Home for Nigerians. Wherever We Are",
-      subtitle: "From Lagos to London, New York to Canada BAWO brings Nigerians and friends of Nigeria together to connect, vibe, and celebrate our culture for generations to come.",
-      ctaPrimary: "Join BAWO Founding Member",
-      ctaSecondary: "Discover the Movement",
+      title: "The Home for Nigerians Wherever We Are.",
+      subtitle: "Connect with your tribe. Bawosocial launches December 1st.",
+      ctaPrimary: "Become a Founding Member $50",
+      ctaSecondary: "Join the Free Waitlist",
       trustIndicators: {
       }
     },
   
     // Stats Section
     stats: {
-      title: "Last Chance to Join as a Founding Member",
-      subtitle: "New brothers and sisters join daily in 50+ cities worldwide",
+      title: "Founding Membership Closes December 1st — Don't Miss Your Spot.",
+      subtitle: "7,200 Nigerians already on the waitlist, across 50 cities.",
       metrics: {
         members: {
           value: "7.2K+",
-          label: "NIGERIANS & ALLIES CONNECTED"
+          label: "ON WAITLIST"
         },
         cities: {
           value: "50+",
           label: "CITIES WORLDWIDE"
         },
         satisfaction: {
-          value: "98%",
-          label: "COMMUNITY HAPPINESS"
+          value: "100",
+          label: "FOUNDING SPOTS"
         }
       }
     },
   
     // Origin Story Section
     origin: {
-      title: "Why We Built BAWO",
-      mainText: "Too many Nigerians in the diaspora feel isolated. BAWO was born to bridge that gap, Creating real bonds, fresh opportunities, and a place where our culture stays alive no matter the postcode.",
-      visionText: "Our vision is a trusted, global family of Nigerians: a space to find your tribe, grow together, and keep our Naija spirit thriving, today and for the next generation."
+      title: "Why Bawosocial Exists",
+      mainText: "Most Nigerians in the diaspora feel isolated. We miss our culture and our people. Bawosocial was created to fix that — a place to connect with Nigerians nearby, attend cultural events, build friendships, and keep our heritage alive no matter where we live.",
+      visionText: ""
     },
   
     // Founding Member Section
     foundingMember: {
-      title: "Join the First 100 Nigerians",
-      titleHighlight: "Shaping Our Global Family",
-      titleEmoji: "🇳🇬",
-      subtitle: "Limited to first 100 members — 73 spots left",
-      description: "Be part of BAWO’s story from the very start. Enjoy lifetime premium access and leave your mark on a movement.",
-      benefitsTitle: "FOUNDING MEMBERS ENJOY:",
+      title: "Founding Member Benefits",
+      titleHighlight: "(One-Time $50)",
+      titleEmoji: "",
+      subtitle: "Limited to 100 people worldwide. Permanent badge included.",
+      description: "",
+      benefitsTitle: "",
       benefits: [
         {
-          title: "Lifetime Premium Access",
-          description: "Full access to every member-only feature — forever."
+          title: "1. Lifetime Premium Access",
+          description: "Never pay monthly fees again. Saves $1,139+ in lifetime value."
         },
         {
-          title: "Founding Member Badge",
-          description: "Special recognition that marks you as one of the first."
+          title: "2. Priority Access",
+          description: "You skip the line for new features, events, and support."
         },
         {
-          title: "Free BAWO Merch Kit",
-          description: "Exclusive welcome package shipped to you."
+          title: "3. Founding Member Badge",
+          description: "A permanent badge shown on your profile forever."
         },
         {
-          title: "First Look at New Features",
-          description: "Test and shape what we build before the rest."
+          title: "4. Exclusive Events & VIP Invites",
+          description: "Private dinners, mixers, and linkups only for founding members."
         },
         {
-          title: "50% Off All Events",
-          description: "From mixers to festivals — lifetime savings."
+          title: "5. Create & Lead Communities",
+          description: "Founders can start groups and build their own tribe."
         },
         {
-          title: "Priority Support",
-          description: "Direct line to the BAWO team anytime."
+          title: "6. Influence Bawosocial's Future",
+          description: "Direct input on features, direction, and partnerships."
+        },
+        {
+          title: "7. Founders Wall Recognition",
+          description: "Your name is permanently listed as one of the first 100."
         }
       ],
-      cta: "Secure Your Spot — $49",
-      spotsRemaining: "Only 73 founding member spots remaining",
+      cta: "Secure My Founding Spot $50",
+      spotsRemaining: "",
       securityBadges: {
-      }
+      },
+      missionText: "Your $50 directly supports Bawosocial's community events, partnerships, and cultural programs. This keeps Bawosocial independent and community-led."
     },
   
     // Features Section
     features: {
-      title: "Find Your Tribe, Live Your Culture",
+      title: "What People Get From Bawosocial",
       items: [
         {
-          title: "Connect Locally & Globally",
-          description: "From Lagos to LA — build friendships, partnerships, and real community with Nigerians everywhere."
+          title: "Meet Nigerians Near You",
+          description: "Find your tribe in your city, connect with real people nearby."
         },
         {
-          title: "Exclusive Opportunities",
-          description: "Access job referrals, investment leads, and VIP invites to Naija-centric events worldwide."
+          title: "Attend Nigerian Events",
+          description: "Cultural celebrations, mixers, and gatherings that keep our heritage alive."
         },
         {
-          title: "Celebrate Our Heritage",
-          description: "Cultural linkups, language exchanges, and moments that keep our traditions strong."
+          title: "Join Cultural Groups",
+          description: "Language exchanges, food meetups, and communities that matter to you."
+        },
+        {
+          title: "Make Real Friendships",
+          description: "Build lasting connections with people who understand your culture."
+        },
+        {
+          title: "Build Community",
+          description: "Create and lead groups that bring Nigerians together."
         }
       ]
     },
   
     // Testimonials Section
     testimonials: {
-      title: "Voices of the BAWO Family",
+      title: "Voices of the Bawosocial Family",
       subtitle: "Hear from Nigerians already building connections",
       reviews: [
         {
-          name: "Adaora K.",
-          role: "Software Engineer, Toronto",
-          quote: "BAWO helped me meet amazing Nigerian professionals in Toronto. I found my tribe in weeks!",
+          name: "T.",
+          role: "New York",
+          quote: "I didn't realize how much I needed Nigerian friends until Bawosocial helped me find them.",
           avatar: IMAGES.testimonials.adaora
         },
         {
-          name: "Emeka O.",
-          role: "Entrepreneur, London",
-          quote: "The networking opportunities are incredible — and it truly understands our culture.",
+          name: "A.",
+          role: "Atlanta",
+          quote: "My city is full of Africans, but I never found the Nigerians until Bawosocial showed me.",
           avatar: IMAGES.testimonials.emeka
         },
         {
-          name: "Fatima K.",
-          role: "Doctor, New York",
-          quote: "The verification process gives me confidence these are real, quality connections.",
+          name: "D.",
+          role: "London",
+          quote: "It feels like home without being home.",
           avatar: IMAGES.testimonials.fatima
         }
       ]
@@ -125,9 +138,9 @@ export const CONTENT = {
   
     // Global Reach Section
     globalReach: {
-      title: "7,200+ Nigerians Connected Worldwide",
-      subtitle: "Belonging • Growth • Cultural pride",
-      description: "New members join daily in 50+ cities",
+      title: "7,200 Nigerians already on the waitlist, across 50 cities.",
+      subtitle: "Growing daily in 50+ cities.",
+      description: "Join the waitlist before December 1st launch",
       cities: [
         { name: "New York", count: "1,247", country: "🇺🇸" },
         { name: "London", count: "1,092", country: "🇬🇧" },
@@ -167,14 +180,15 @@ export const CONTENT = {
   
     // Final CTA Section
     finalCta: {
-      title: "Ready to Find Your People?",
-      subtitle: "Join 7,200+ Nigerians making the diaspora feel like home",
-      cta: "Join BAWO Today — $49"
+      title: "Launching December 1st — Last Chance to Become a Founding Member.",
+      subtitle: "Founding Membership closes on launch day. Only 73 spots left.",
+      cta: "Become a Founding Member $50",
+      ctaSecondary: "Join the Free Waitlist"
     },
   
     // Footer
     footer: {
-      brand: "BAWO",
+      brand: "Bawosocial",
       tagline: "Where Nigerians Connect",
       sections: {
         quickLinks: {
@@ -196,13 +210,13 @@ export const CONTENT = {
           ]
         }
       },
-      copyright: "© 2024 BAWO. All rights reserved."
+      copyright: "2025 Bawosocial. Launching December 1st. Made with ❤️ for the Nigerian diaspora."
     },
   
     // Email Signup
     emailSignup: {
       title: "Be First to Know",
-      subtitle: "Get early access when BAWO lands in your city",
+      subtitle: "Get early access when Bawosocial lands in your city",
       placeholder: "Enter your email address",
       cta: "Join the Waitlist",
       success: "Thanks! You’re on the list.",

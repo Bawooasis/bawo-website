@@ -2,7 +2,7 @@
 
 // Local asset imports
 import appMockup from "../assets/images/app-mockup.png";
-import globeImage from "../assets/images/GLOBE.png";
+// import globeImage from "../assets/images/GLOBE.png"; // File removed
 import bawoLogo from "../assets/images/bawo-logo.png";
 import adoraImage from "../assets/images/ADORA.jpg";
 import emekaImage from "../assets/images/Emeka.jpg";
@@ -24,7 +24,7 @@ export const IMAGES = {
   // Local Assets
   assets: {
     appMockup,
-    globe: globeImage,
+    globe: "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=400&q=80&auto=format&fit=crop", // Placeholder globe image
     logo: bawoLogo,
     // Add more local images here as needed
   },

@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Logo from "./components/Logo";
+import CountdownTimer from "./components/CountdownTimer";
 import { CONTENT } from "./constants/content";
 import { TAILWIND_COLORS } from "./constants/colors";
 import { IMAGES } from "./constants/images";
@@ -263,7 +264,7 @@ function App() {
         <div className="flex items-center justify-center gap-3">
           <img
             src={IMAGES.assets.logo}
-            alt="BAWO"
+              alt="Bawosocial"
             className="h-10 w-auto"
           />
           <span>🚨 ONLY 73 FOUNDING MEMBER SPOTS REMAINING - SECURE YOURS NOW! 🇳🇬</span>
@@ -273,16 +274,24 @@ function App() {
       <div
         className={`relative ${TAILWIND_COLORS.gradients.heroBackground} hero-gradient-animate hero-shimmer`}
       >
+        {/* Launch Banner */}
+        <div className="fixed top-0 w-full bg-gradient-to-r from-[#ff7f39] to-[#FF4500] text-white py-3 px-4 text-center font-bold z-50 shadow-lg font-museo-bold">
+          <div className="flex items-center justify-center gap-2">
+            <span>🚀</span>
+            <span>Bawosocial launches December 1st — Founding Membership closes soon.</span>
+          </div>
+        </div>
+
         {/* Hero Section */}
         <section
           ref={heroRef}
-          className="relative min-h-screen flex items-center justify-center overflow-hidden"
+          className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16"
         >
           {/* Background Pattern */}
 
 
 
-          {/* BAWO Logo - Higher Position with Social Icons */}
+          {/* Bawosocial Logo - Higher Position with Social Icons */}
           <div
             ref={logoRef}
             className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-8 lg:top-10 lg:left-10 xl:top-12 xl:left-12 2xl:top-16 2xl:left-16 z-20"
@@ -297,7 +306,7 @@ function App() {
           <div className="absolute bottom-20 right-6 z-20">
             <div className="flex items-center gap-3">
               <a 
-                href="https://instagram.com/bawoapp" 
+                href="https://www.instagram.com/bawo.social/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-white/80 hover:text-white transition-colors duration-300"
@@ -330,7 +339,7 @@ function App() {
               </a>
               
               <a 
-                href="https://tiktok.com/@bawoapp" 
+                href="https://www.tiktok.com/@bawosocial" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-white/80 hover:text-white transition-colors duration-300"
@@ -348,14 +357,14 @@ function App() {
               {/* Left Content - App Preview Carousel */}
               <div
                 ref={phoneRef}
-                className="flex justify-center lg:justify-center order-2 md:order-1"
+                className="flex justify-center lg:justify-center order-2 md:order-1 -mt-6 md:-mt-10"
               >
                 <div className="relative">
           <div className="relative">
             <img
                       ref={previewImgRef}
                       src={previewImages[activePreviewIndex]}
-              alt="BAWO App Preview"
+              alt="Bawosocial App Preview"
                       className="w-64 md:w-80 lg:w-96 h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] transform-gpu transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-[2rem] animate-breathing object-cover will-change-transform will-change-opacity"
                       style={{ opacity: 1 }}
                     />
@@ -396,6 +405,11 @@ function App() {
                   </p>
                 </div>
 
+                {/* Countdown Timer */}
+                <div className="py-4">
+                  <CountdownTimer />
+                </div>
+
                 {/* Call to Action Buttons */}
                 <div
                   ref={ctaRef}
@@ -404,7 +418,7 @@ function App() {
                   <div className="relative">
             <button
               onClick={handleFoundingMember}
-                      className={`${TAILWIND_COLORS.gradients.primary} ${TAILWIND_COLORS.gradients.primaryHover} text-white px-10 py-5 rounded-[50px] min-h-[48px] font-bold text-base md:text-lg transform hover:scale-105 transition-all duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:shadow-xl font-museo-bold w-full sm:w-auto max-w-[300px] animate-lift`}
+                      className={`${TAILWIND_COLORS.gradients.primary} ${TAILWIND_COLORS.gradients.primaryHover} text-white px-8 sm:px-10 py-4 rounded-full min-h-[44px] font-bold text-base md:text-lg leading-tight transform hover:translate-y-[-1px] transition-all duration-300 shadow-[0_12px_30px_rgba(255,111,62,0.32)] hover:shadow-[0_16px_36px_rgba(255,111,62,0.38)] font-museo-bold w-full sm:w-auto max-w-[350px] animate-lift`}
             >
                       {CONTENT.hero.ctaPrimary}
             </button>
@@ -413,7 +427,7 @@ function App() {
                   </div>
             <button
               onClick={handleEarlyAccess}
-                    className={`bg-transparent border-2 ${TAILWIND_COLORS.primary.border} text-white ${TAILWIND_COLORS.primary.hover.bg} hover:text-white px-10 py-5 rounded-[50px] min-h-[48px] font-bold text-base md:text-lg transform hover:scale-105 transition-all duration-300 font-museo-bold w-full sm:w-auto max-w-[300px] animate-lift`}
+                    className={`bg-white/10 border ${TAILWIND_COLORS.primary.border} text-white ${TAILWIND_COLORS.primary.hover.bg} hover:text-white px-8 sm:px-10 py-4 rounded-full min-h-[44px] font-bold text-base md:text-lg leading-tight transform hover:translate-y-[-1px] transition-all duration-300 font-museo-bold w-full sm:w-auto max-w-[350px] animate-lift backdrop-blur-[2px]`}
             >
                     {CONTENT.hero.ctaSecondary}
             </button>
@@ -421,11 +435,11 @@ function App() {
 
                 {/* Compact Trust Line */}
                 <div className="flex items-center justify-center lg:justify-start gap-4 text-xs text-white/80 font-museo-medium">
-                  <span>{CONTENT.hero.trustIndicators.ssl}</span>
+                  <span>🔒 Secure Payments</span>
                   <span>•</span>
-                  <span>{CONTENT.hero.trustIndicators.stripe}</span>
+                  <span>✓ Verified Members</span>
                   <span>•</span>
-                  <span>{CONTENT.hero.trustIndicators.pci}</span>
+                  <span>🛡️ Privacy Protected</span>
           </div>
 
                 {/* Stats */}
@@ -464,6 +478,24 @@ function App() {
         </div>
       </section>
 
+      {/* Urgency Section with Countdown */}
+      <section className={`relative py-12 ${TAILWIND_COLORS.gradients.earlySectionBackground}`}>
+        <div className="relative z-10 container mx-auto px-6">
+          <div className="text-center space-y-6">
+            <h2 className="text-3xl md:text-4xl font-museo-bold text-white mb-4">
+              Launching December 1st
+            </h2>
+            <div className="mb-4 flex items-center justify-center gap-2">
+              <span className="text-lg md:text-xl font-museo-medium text-white/90">Launch in:</span>
+              <CountdownTimer />
+            </div>
+            <p className="text-lg md:text-xl font-museo-bold text-white">
+              Founding Membership closes on launch day. Only 73 spots left.
+            </p>
+          </div>
+        </div>
+      </section>
+
         {/* Origin Story Section */}
         <section className={`relative min-h-screen flex items-center justify-center ${TAILWIND_COLORS.gradients.earlySectionBackground}`}>
   
@@ -475,9 +507,11 @@ function App() {
               <p className="text-white/90 font-museo-medium text-xl md:text-2xl leading-relaxed">
                 {CONTENT.origin.mainText}
               </p>
-              <p className="text-white/80 font-museo-regular text-lg md:text-xl leading-relaxed">
-                {CONTENT.origin.visionText}
-              </p>
+              {CONTENT.origin.visionText && (
+                <p className="text-white/80 font-museo-regular text-lg md:text-xl leading-relaxed">
+                  {CONTENT.origin.visionText}
+                </p>
+              )}
             </div>
             <div>{/* Placeholder for potential image or graphic */}</div>
           </div>
@@ -500,87 +534,27 @@ function App() {
                   {CONTENT.foundingMember.title}
                   <br />
                   <span className={TAILWIND_COLORS.primary.text}>{CONTENT.foundingMember.titleHighlight}</span>
-                  <span className="ml-3 text-6xl">{CONTENT.foundingMember.titleEmoji}</span>
             </h2>
                 <p className="text-base md:text-lg font-museo-regular text-white/80">
                   {CONTENT.foundingMember.subtitle}
                 </p>
-                <p className="text-sm font-museo-regular text-white/80">
-                  {CONTENT.foundingMember.description}
-                </p>
             </div>
 
               <div className="space-y-6">
-                <h3 className="text-xl md:text-2xl font-museo-bold text-white">
-                  {CONTENT.foundingMember.benefitsTitle}
-                </h3>
-                <div className="space-y-5">
-                  <div className="flex items-start gap-4">
-                    <BadgeCheck className={`w-5 h-5 ${TAILWIND_COLORS.primary.text} flex-shrink-0 mt-0.5`} />
-                    <div>
-                      <span className="font-museo-medium text-base">
-                        {CONTENT.foundingMember.benefits[0].title}
-                      </span>
-                      <div className="text-sm text-white/80 mt-1">
-                        {CONTENT.foundingMember.benefits[0].description}
-              </div>
-              </div>
-              </div>
-                  <div className="flex items-start gap-4">
-                    <Shield className="w-5 h-5 text-[#ff7f39] flex-shrink-0 mt-0.5" />
-                    <div>
-                      <span className="font-museo-medium text-base">
-                        Priority Support
-                      </span>
-                      <div className="text-sm text-white/80 mt-1">
-                        Fast resolutions and white-glove service.
-              </div>
-            </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <Calendar className="w-5 h-5 text-[#ff7f39] flex-shrink-0 mt-0.5" />
-                    <div>
-                      <span className="font-museo-medium text-base">
-                        Exclusive Events
-                      </span>
-                      <div className="text-sm text-white/80 mt-1">
-                        Private meetups, workshops, and celebrations.
+                <div className="space-y-4">
+                  {CONTENT.foundingMember.benefits.map((benefit, index) => (
+                    <div key={index} className="flex items-start gap-4">
+                      <BadgeCheck className={`w-5 h-5 ${TAILWIND_COLORS.primary.text} flex-shrink-0 mt-0.5`} />
+                      <div>
+                        <span className="font-museo-bold text-base text-white">
+                          {benefit.title}
+                        </span>
+                        <div className="text-sm text-white/80 mt-1 font-museo-regular">
+                          {benefit.description}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <Crown className="w-5 h-5 text-[#ff7f39] flex-shrink-0 mt-0.5" />
-                    <div>
-                      <span className="font-museo-medium text-base">
-                        Founding Member Recognition
-                      </span>
-                      <div className="text-sm text-white/80 mt-1">
-                        Badge and spotlights across the platform.
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <Users className="w-5 h-5 text-[#ff7f39] flex-shrink-0 mt-0.5" />
-                    <div>
-                      <span className="font-museo-medium text-base">
-                        Create and Lead Communities
-                      </span>
-                      <div className="text-sm text-white/80 mt-1">
-                        Launch groups that matter to you.
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <Lightbulb className="w-5 h-5 text-[#ff7f39] flex-shrink-0 mt-0.5" />
-                    <div>
-                      <span className="font-museo-medium text-base">
-                        Shape BAWO’s Future
-                      </span>
-                      <div className="text-sm text-white/80 mt-1">
-                        Direct input on features and roadmap.
-                      </div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
 
@@ -592,15 +566,22 @@ function App() {
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-2xl md:text-3xl font-museo-bold text-[#ff7f39]">
-                    FOUNDING MEMBER: $49 one-time
+                    FOUNDING MEMBER: $50 one-time
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-[#ff7f39]">💰</span>
                   <span className="font-museo-medium text-white/80">
-                    Save $1,139 in lifetime value
+                    Save $1,139+ automatically
                   </span>
                 </div>
+              </div>
+
+              {/* Mission Section */}
+              <div className="pt-6 border-t border-white/20">
+                <p className="text-sm md:text-base text-white/90 font-museo-regular leading-relaxed">
+                  {CONTENT.foundingMember.missionText}
+                </p>
               </div>
             </div>
 
@@ -634,11 +615,8 @@ function App() {
               onClick={handleFoundingMember}
                   className="bg-gradient-to-r from-[#ff7f39] to-[#ff6b35] hover:from-[#ff6b35] hover:to-[#ff5a2e] text-white px-12 py-6 rounded-[50px] min-h-[48px] font-bold text-xl transform hover:scale-105 transition-all duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:shadow-xl font-museo-bold"
             >
-                  Secure Your Spot — $49
+                  {CONTENT.foundingMember.cta}
             </button>
-                <p className="text-white font-museo-medium">
-                  Only 73 founding member spots remaining
-                </p>
 
               </div>
             </div>
@@ -657,34 +635,22 @@ function App() {
           <h2 className={`text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-16 ${TAILWIND_COLORS.primary.text} font-museo-bold`}>
             {CONTENT.features.title}
           </h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="feature-card text-center p-8 bg-white/10 rounded-xl backdrop-blur-sm hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-1 shadow-[0_4px_12px_rgba(0,0,0,0.15)]">
-              <Users className={`w-12 h-12 ${TAILWIND_COLORS.primary.text} mx-auto mb-6`} />
-              <h3 className="text-xl md:text-2xl font-bold mb-4 font-museo-bold">
-                {CONTENT.features.items[0].title}
-              </h3>
-              <p className="text-base md:text-lg opacity-90 font-museo-medium leading-[1.5]">
-                {CONTENT.features.items[0].description}
-              </p>
-            </div>
-            <div className="feature-card text-center p-8 bg-white/10 rounded-xl backdrop-blur-sm hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-1 shadow-[0_4px_12px_rgba(0,0,0,0.15)]">
-              <Globe className={`w-12 h-12 ${TAILWIND_COLORS.primary.text} mx-auto mb-6`} />
-              <h3 className="text-xl md:text-2xl font-bold mb-4 font-museo-bold">
-                {CONTENT.features.items[1].title}
-              </h3>
-              <p className="text-base md:text-lg opacity-90 font-museo-medium leading-[1.5]">
-                {CONTENT.features.items[1].description}
-              </p>
-            </div>
-            <div className="feature-card text-center p-8 bg-white/10 rounded-xl backdrop-blur-sm hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-1 shadow-[0_4px_12px_rgba(0,0,0,0.15)]">
-              <Heart className={`w-12 h-12 ${TAILWIND_COLORS.primary.text} mx-auto mb-6`} />
-              <h3 className="text-xl md:text-2xl font-bold mb-4 font-museo-bold">
-                {CONTENT.features.items[2].title}
-              </h3>
-              <p className="text-base md:text-lg opacity-90 font-museo-medium leading-[1.5]">
-                {CONTENT.features.items[2].description}
-              </p>
-            </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {CONTENT.features.items.map((item, index) => {
+              const icons = [Users, Calendar, Users, Heart, Globe];
+              const Icon = icons[index] || Users;
+              return (
+                <div key={index} className="feature-card text-center p-8 bg-white/10 rounded-xl backdrop-blur-sm hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-1 shadow-[0_4px_12px_rgba(0,0,0,0.15)]">
+                  <Icon className={`w-12 h-12 ${TAILWIND_COLORS.primary.text} mx-auto mb-6`} />
+                  <h3 className="text-xl md:text-2xl font-bold mb-4 font-museo-bold">
+                    {item.title}
+                  </h3>
+                  <p className="text-base md:text-lg opacity-90 font-museo-medium leading-[1.5]">
+                    {item.description}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -713,20 +679,19 @@ function App() {
                 <div className="w-12 h-12 rounded-full overflow-hidden">
                   <img
                     src={IMAGES.testimonials.adaora}
-                    alt="Adaora"
+                    alt={CONTENT.testimonials.reviews[0].name}
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="ml-3">
-                  <h4 className="font-museo-bold text-white">Adaora K.</h4>
+                  <h4 className="font-museo-bold text-white">{CONTENT.testimonials.reviews[0].name}</h4>
                   <p className="text-sm text-white/80 font-museo-medium">
-                    Software Engineer, Toronto
+                    {CONTENT.testimonials.reviews[0].role}
                   </p>
                 </div>
               </div>
               <p className="text-white/80 font-museo-medium leading-relaxed">
-                "BAWO helped me <strong>connect</strong> with Nigerian
-                professionals in Toronto. Found my tribe in weeks!"
+                "{CONTENT.testimonials.reviews[0].quote}"
               </p>
             </div>
 
@@ -736,20 +701,19 @@ function App() {
                 <div className="w-12 h-12 rounded-full overflow-hidden">
                   <img
                     src={IMAGES.testimonials.emeka}
-                    alt="Emeka"
+                    alt={CONTENT.testimonials.reviews[1].name}
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="ml-3">
-                  <h4 className="font-museo-bold text-white">Emeka O.</h4>
+                  <h4 className="font-museo-bold text-white">{CONTENT.testimonials.reviews[1].name}</h4>
                   <p className="text-sm text-white/80 font-museo-medium">
-                    Entrepreneur, London
+                    {CONTENT.testimonials.reviews[1].role}
                   </p>
                 </div>
               </div>
               <p className="text-white/80 font-museo-medium leading-relaxed">
-                "The <strong>networking opportunities</strong> are incredible —
-                and it truly understands our culture."
+                "{CONTENT.testimonials.reviews[1].quote}"
               </p>
             </div>
 
@@ -759,20 +723,19 @@ function App() {
                 <div className="w-12 h-12 rounded-full overflow-hidden">
                   <img
                     src={IMAGES.testimonials.fatima}
-                    alt="Fatima"
+                    alt={CONTENT.testimonials.reviews[2].name}
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="ml-3">
-                  <h4 className="font-museo-bold text-white">Fatima K.</h4>
+                  <h4 className="font-museo-bold text-white">{CONTENT.testimonials.reviews[2].name}</h4>
                   <p className="text-sm text-white/80 font-museo-medium">
-                    Doctor, New York
+                    {CONTENT.testimonials.reviews[2].role}
                   </p>
                 </div>
               </div>
               <p className="text-white/80 font-museo-medium leading-relaxed">
-                "The verification process gives me confidence these are real,{" "}
-                <strong>quality connections</strong>."
+                "{CONTENT.testimonials.reviews[2].quote}"
               </p>
             </div>
           </div>
@@ -787,7 +750,7 @@ function App() {
 
         <div className="relative z-10 container mx-auto px-6">
           <h2 className="text-center text-4xl md:text-5xl font-museo-bold text-white mb-12">
-            Inside the BAWO App
+            Get a first look at the Bawosocial app — launching December 1st.
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             <div className="text-center">
@@ -853,7 +816,7 @@ function App() {
                   Diaspora Networking Night – London
                 </span>
               </div>
-              <p className="text-white/80">
+              <p className="text-white/80 font-museo-medium">
                 Connect with professionals across industries and build lasting
                 relationships.
               </p>
@@ -865,7 +828,7 @@ function App() {
                   Virtual Language Exchange – Igbo, Yoruba, Hausa
                 </span>
               </div>
-              <p className="text-white/80">
+              <p className="text-white/80 font-museo-medium">
                 Practice, learn, and preserve our languages together — no
                 pressure, just fun.
               </p>
@@ -877,7 +840,7 @@ function App() {
                   Nigerian Independence Celebration – NYC
                 </span>
               </div>
-              <p className="text-white/80">
+              <p className="text-white/80 font-museo-medium">
                 A night of culture, music, and pride with the NYC Nigerian
                 community.
               </p>
@@ -899,13 +862,13 @@ function App() {
           <div className="text-center space-y-12">
             <div className="space-y-4">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white font-museo-bold">
-                7,200+ Nigerians Connected Worldwide
+                {CONTENT.globalReach.title}
               </h2>
               <p className="text-lg md:text-xl font-museo-medium text-white/80">
-                Belonging • Growth • Cultural pride
+                {CONTENT.globalReach.subtitle}
               </p>
               <p className="text-base font-museo-regular text-[#ff7f39]">
-                New members join daily in 50+ cities
+                {CONTENT.globalReach.description}
               </p>
             </div>
 
@@ -1110,10 +1073,10 @@ function App() {
           <div className="text-center space-y-8">
             <div className="space-y-4">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white font-museo-bold">
-                Secure Your Founding Member Status 🇳🇬
+                {CONTENT.finalCta.title}
             </h2>
               <p className="text-lg md:text-xl font-museo-medium text-white/80">
-                Last chance to become a BAWO Founding Member
+                {CONTENT.finalCta.subtitle}
               </p>
             </div>
 
@@ -1148,12 +1111,12 @@ function App() {
                   />
                 </div>
 
-                  <button
-                    type="submit"
+                <button
+                  type="submit"
                   className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white px-10 py-4 rounded-[50px] min-h-[48px] font-bold text-base flex items-center justify-center gap-2 transform hover:scale-105 transition-all duration-300 font-museo-bold"
                 >
-                  Get Launch Updates <ArrowRight className="w-5 h-5" />
-                  </button>
+                  Join the Free Waitlist <ArrowRight className="w-5 h-5" />
+                </button>
                 </div>
               </form>
 
@@ -1161,9 +1124,15 @@ function App() {
             <div className="space-y-4">
               <button
                 onClick={handleFoundingMember}
-                className="bg-gradient-to-r from-[#ff7f39] to-[#ff6b35] hover:from-[#ff6b35] hover:to-[#ff5a2e] text-white px-12 py-6 rounded-[50px] min-h-[48px] font-bold text-lg md:text-xl transform hover:scale-105 transition-all duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:shadow-xl font-museo-bold"
+                className="bg-gradient-to-r from-[#ff7f39] to-[#ff6b35] hover:from-[#ff6b35] hover:to-[#ff5a2e] text-white px-10 sm:px-12 py-4 rounded-full min-h-[46px] font-bold text-lg md:text-xl leading-tight transform hover:translate-y-[-1px] transition-all duration-300 shadow-[0_12px_30px_rgba(255,111,62,0.32)] hover:shadow-[0_16px_36px_rgba(255,111,62,0.38)] font-museo-bold"
               >
-                Claim Your Spot Now - $49
+                {CONTENT.finalCta.cta}
+              </button>
+              <button
+                onClick={handleEarlyAccess}
+                className="bg-white/10 border border-white/30 text-white hover:bg-white/20 px-10 py-4 rounded-full min-h-[46px] font-bold text-base md:text-lg leading-tight transform hover:translate-y-[-1px] transition-all duration-300 font-museo-bold backdrop-blur-[2px]"
+              >
+                {CONTENT.finalCta.ctaSecondary}
               </button>
               <p className="text-white font-museo-medium">
                 30-day money-back guarantee • Save $1,139+ • Only 73 left
@@ -1178,14 +1147,14 @@ function App() {
         {/* Mobile Sticky CTA */}
         <div className="md:hidden mobile-sticky-cta bg-black/60 border-t border-white/10">
           <div className="px-4 py-3 flex items-center justify-between">
-            <span className="text-white font-museo-medium">
-              Join the BAWO Network
+            <span className="text-white font-museo-medium text-sm">
+              Founding Member $50
             </span>
             <button
               onClick={handleFoundingMember}
-              className="bg-gradient-to-r from-[#ff7f39] to-[#ff6b35] text-white px-5 py-2.5 rounded-[50px] min-h-[44px] font-museo-bold"
+              className="bg-gradient-to-r from-[#ff7f39] to-[#ff6b35] text-white px-5 py-2.5 rounded-[50px] min-h-[44px] font-museo-bold text-sm"
             >
-              Join Now
+              Secure Spot
             </button>
           </div>
         </div>
@@ -1193,14 +1162,14 @@ function App() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
             {/* Company Info */}
             <div className="text-center md:text-left">
-              <h3 className="text-white font-museo-bold mb-4">BAWO</h3>
+              <h3 className="text-white font-museo-bold mb-4">Bawosocial</h3>
               <p className="text-white/80 text-sm font-museo-medium mb-4">
                 Connecting the Nigerian diaspora worldwide through authentic
                 relationships and cultural pride.
               </p>
               <div className="flex justify-center md:justify-start gap-4">
                 <a
-                  href="https://www.instagram.com/bawo.app/"
+                  href="https://www.instagram.com/bawo.social/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white/60 hover:text-white"
@@ -1307,8 +1276,7 @@ function App() {
           {/* Bottom Bar */}
           <div className="border-t border-white/20 pt-8 text-center">
             <p className="text-white/60 text-sm font-museo-regular">
-              2025 BAWO. Made with ❤️ for the Nigerian diaspora. Payments
-              secured by Stripe • SSL encrypted • PCI compliant
+              {CONTENT.footer.copyright}
             </p>
           </div>
         </div>
@@ -1327,7 +1295,7 @@ function App() {
             <div className="sticky top-0 bg-white border-b border-gray-200 p-6 rounded-t-2xl">
               <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-bold text-gray-900 font-museo-bold">
-                  BAWO Refund Policy
+                  Bawosocial Refund Policy
                 </h2>
                 <button
                   onClick={() => setShowRefundPolicy(false)}
@@ -1343,7 +1311,7 @@ function App() {
 
             <div className="p-6 space-y-6 text-gray-800">
               <p className="font-museo-medium">
-                At BAWO, we want you to be completely satisfied with your
+                At Bawosocial, we want you to be completely satisfied with your
                 founding membership. This Refund Policy explains our commitment
                 to your satisfaction and the terms for refunds.
               </p>
@@ -1364,7 +1332,7 @@ function App() {
                   <ul className="list-disc list-inside space-y-1 text-sm">
                     <li>
                       <strong>
-                        Founding Member purchases ($49 one-time payment)
+                        Founding Member purchases ($50 one-time payment)
                       </strong>
                     </li>
                     <li>
@@ -1620,7 +1588,7 @@ function App() {
                   </h4>
                   <p className="text-sm">
                     We're committed to your satisfaction and building a trusted
-                    community. If you're not completely happy with BAWO, we want
+                    community. If you're not completely happy with Bawosocial, we want
                     to make it right.
                   </p>
                 </div>
@@ -1650,7 +1618,7 @@ function App() {
             <div className="sticky top-0 bg-white border-b border-gray-200 p-6 rounded-t-2xl">
               <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-bold text-gray-900 font-museo-bold">
-                  BAWO Cookie Policy
+                  Bawosocial Cookie Policy
                 </h2>
                 <button
                   onClick={() => setShowCookiePolicy(false)}
@@ -1666,7 +1634,7 @@ function App() {
 
             <div className="p-6 space-y-6 text-gray-800">
               <p className="font-museo-medium">
-                This Cookie Policy explains how BAWO ("we", "our", or "us") uses
+                This Cookie Policy explains how Bawosocial ("we", "our", or "us") uses
                 cookies and similar technologies when you visit our website at
                 bawoapp.com or use our services.
               </p>
@@ -1779,7 +1747,7 @@ function App() {
                   <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
                     First-Party Cookies
                   </h4>
-                  <p className="text-sm mb-2">Set directly by BAWO:</p>
+                  <p className="text-sm mb-2">Set directly by Bawosocial:</p>
                   <ul className="list-disc list-inside space-y-1 text-sm">
                     <li>
                       <strong>User preferences</strong>: Language, theme
@@ -1959,7 +1927,7 @@ function App() {
                     </li>
                     <li>
                       <strong>App settings</strong>: Manage preferences within
-                      BAWO app
+                      Bawosocial app
                     </li>
                   </ul>
                 </div>
@@ -2176,7 +2144,7 @@ function App() {
             <div className="sticky top-0 bg-white border-b border-gray-200 p-6 rounded-t-2xl">
               <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-bold text-gray-900 font-museo-bold">
-                  BAWO Terms of Service
+                  Bawosocial Terms of Service
                 </h2>
               <button
                   onClick={() => setShowTermsOfService(false)}
@@ -2192,16 +2160,16 @@ function App() {
 
             <div className="p-6 space-y-6 text-gray-800">
               <p className="font-museo-medium">
-                Welcome to BAWO! These Terms of Service ("Terms") govern your
+                Welcome to Bawosocial! These Terms of Service ("Terms") govern your
                 access to and use of our website (bawoapp.com), mobile
                 application, and any related services (collectively, the
-                "Service"). By using BAWO, you agree to these Terms. If you
+                "Service"). By using Bawosocial, you agree to these Terms. If you
                 don&apos;t agree, please don&apos;t use our services.
               </p>
 
               <div>
                 <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  1. About BAWO
+                  1. About Bawosocial
                 </h3>
 
                 <div className="bg-gray-50 p-4 rounded-lg">
@@ -2209,7 +2177,7 @@ function App() {
                     Our Service
                   </h4>
                   <p className="text-sm mb-3">
-                    BAWO is a community platform designed to connect Nigerians
+                    Bawosocial is a community platform designed to connect Nigerians
                     worldwide for authentic relationships, friendships,
                     professional networking, and cultural celebration. We
                     provide both a website and mobile application to facilitate
@@ -2239,7 +2207,7 @@ function App() {
                   <ul className="list-disc list-inside space-y-1 text-sm">
                     <li>
                       <strong>18+ only</strong>: You must be 18 years or older
-                      to use BAWO
+                      to use Bawosocial
                     </li>
                     <li>
                       <strong>Age verification</strong>: By creating an account,
@@ -2320,7 +2288,7 @@ function App() {
                   </h4>
                   <ul className="list-disc list-inside space-y-1 text-sm">
                     <li>
-                      <strong>One-time fee</strong>: $49 for lifetime founding
+                      <strong>One-time fee</strong>: $50 for lifetime founding
                       membership
                     </li>
                     <li>
@@ -2352,7 +2320,7 @@ function App() {
                   <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
                     Acceptable Use
                   </h4>
-                  <p className="text-sm mb-2">You agree to use BAWO for:</p>
+                  <p className="text-sm mb-2">You agree to use Bawosocial for:</p>
                   <ul className="list-disc list-inside space-y-1 text-sm">
                     <li>
                       <strong>Building authentic connections</strong> with other
@@ -2432,14 +2400,14 @@ function App() {
                       content you create (photos, messages, posts)
                     </li>
                     <li>
-                      <strong>License to BAWO</strong>: You grant us a
+                      <strong>License to Bawosocial</strong>: You grant us a
                       non-exclusive, worldwide, royalty-free license to use,
                       display, and distribute your content as needed for
                       platform operation
                     </li>
                     <li>
                       <strong>Purpose limitation</strong>: We only use your
-                      content to provide BAWO services
+                      content to provide Bawosocial services
                     </li>
                     <li>
                       <strong>No selling</strong>: We will never sell your
@@ -2494,7 +2462,7 @@ function App() {
                       securely by Stripe
                     </li>
                     <li>
-                      <strong>Pricing</strong>: $49 one-time payment for
+                      <strong>Pricing</strong>: $50 one-time payment for
                       founding membership
                     </li>
                     <li>
@@ -2591,7 +2559,7 @@ function App() {
                       users or the community
                     </li>
                     <li>
-                      <strong>Illegal activity</strong>: Using BAWO for illegal
+                      <strong>Illegal activity</strong>: Using Bawosocial for illegal
                       purposes
                     </li>
                     <li>
@@ -2613,7 +2581,7 @@ function App() {
                   </h4>
                   <ul className="list-disc list-inside space-y-1 text-sm">
                     <li>
-                      <strong>&quot;As is&quot; basis</strong>: BAWO provided
+                      <strong>&quot;As is&quot; basis</strong>: Bawosocial provided
                       without warranties of any kind
                     </li>
                     <li>
@@ -2673,7 +2641,7 @@ function App() {
                   </h4>
                   <ul className="list-disc list-inside space-y-1 text-sm">
                     <li>
-                      <strong>Worldwide service</strong>: BAWO serves Nigerian
+                      <strong>Worldwide service</strong>: Bawosocial serves Nigerian
                       diaspora globally
                     </li>
                     <li>
@@ -2711,7 +2679,7 @@ function App() {
                       days after notification
                     </li>
                     <li>
-                      <strong>Continued use</strong>: Using BAWO after changes
+                      <strong>Continued use</strong>: Using Bawosocial after changes
                       means you accept updated Terms
                     </li>
                     <li>
@@ -2734,7 +2702,7 @@ function App() {
                   <p className="text-sm">
                     These Terms, together with our Privacy Policy and other
                     referenced policies, constitute the entire agreement between
-                    you and BAWO.
+                    you and Bawosocial.
                   </p>
                 </div>
               </div>
@@ -2802,7 +2770,7 @@ function App() {
             <div className="sticky top-0 bg-white border-b border-gray-200 p-6 rounded-t-2xl">
               <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-bold text-gray-900 font-museo-bold">
-                  BAWO Privacy Policy
+                  Bawosocial Privacy Policy
                 </h2>
                 <button
                   onClick={() => setShowPrivacyPolicy(false)}
@@ -2818,10 +2786,10 @@ function App() {
 
             <div className="p-6 space-y-6 text-gray-800">
               <p className="font-museo-medium">
-                Welcome to BAWO ("we", "our", or "us"). Your privacy is
+                Welcome to Bawosocial ("we", "our", or "us"). Your privacy is
                 important to us. This Privacy Policy explains how we collect,
                 use, store, and share your information when you visit our
-                website at bawoapp.com and use the BAWO mobile application and
+                website at bawoapp.com and use the Bawosocial mobile application and
                 services.
               </p>
 
@@ -2866,7 +2834,7 @@ function App() {
                     Mobile App Users
                   </h4>
                   <p className="text-sm mb-2">
-                    When you use the BAWO app, we collect:
+                    When you use the Bawosocial app, we collect:
                   </p>
                   <ul className="list-disc list-inside space-y-1 text-sm">
                     <li>
@@ -2919,7 +2887,7 @@ function App() {
                       founding member signups
                     </li>
                     <li>
-                      <strong>Send updates</strong> about BAWO launch and
+                      <strong>Send updates</strong> about Bawosocial launch and
                       community news
                     </li>
                     <li>
@@ -3079,7 +3047,7 @@ function App() {
 
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <p className="text-sm mb-2">
-                    <strong>BAWO is only for users 18 years or older.</strong>
+                    <strong>Bawosocial is only for users 18 years or older.</strong>
                   </p>
                   <ul className="list-disc list-inside space-y-1 text-sm">
                     <li>
@@ -3240,7 +3208,7 @@ function App() {
                       current policy on our website
                     </li>
                     <li>
-                      <strong>Continued use</strong>: Using BAWO after changes
+                      <strong>Continued use</strong>: Using Bawosocial after changes
                       means you accept the updated policy
                     </li>
                   </ul>
