@@ -340,6 +340,46 @@ function App() {
           </div>
         </section>
 
+        {/* Stats Section */}
+        {CONTENT.stats && (
+          <section ref={statsRef} className="relative py-16 md:py-20 bg-[#FAF9F6]">
+            <div className="container mx-auto px-6 md:px-12 max-w-4xl text-center">
+              <h2 className="text-3xl md:text-4xl font-museo-bold text-[#1A1A1A] mb-4">
+                {CONTENT.stats.title}
+              </h2>
+              <p className="text-lg text-[#4A4A4A] font-museo-regular mb-8">
+                {CONTENT.stats.subtitle}
+              </p>
+              <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto">
+                <div>
+                  <p className="text-4xl font-museo-bold text-[#D4AF37] mb-2">
+                    {CONTENT.stats.metrics.members.value}
+                  </p>
+                  <p className="text-sm text-[#6A6A6A] font-museo-medium">
+                    {CONTENT.stats.metrics.members.label}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-4xl font-museo-bold text-[#D4AF37] mb-2">
+                    {CONTENT.stats.metrics.cities.value}
+                  </p>
+                  <p className="text-sm text-[#6A6A6A] font-museo-medium">
+                    {CONTENT.stats.metrics.cities.label}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-4xl font-museo-bold text-[#D4AF37] mb-2">
+                    {CONTENT.stats.metrics.satisfaction.value}
+                  </p>
+                  <p className="text-sm text-[#6A6A6A] font-museo-medium">
+                    {CONTENT.stats.metrics.satisfaction.label}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* What BawoSocial Is Section */}
         <section className="relative py-24 md:py-32 bg-[#1A1A1A]">
           <div className="container mx-auto px-6 md:px-12 max-w-4xl">
@@ -412,12 +452,17 @@ function App() {
               </div>
 
               {/* Trust Indicators - Consolidated */}
-              <div className="flex flex-wrap justify-center gap-4 mb-8 text-sm">
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 {CONTENT.trust.indicators.map((indicator, index) => (
-                  <span key={index} className="text-[#E8E6E0] font-museo-medium">
-                    <span className="mr-1">{indicator.icon}</span>
-                    {indicator.text}
-                  </span>
+                  <div key={index} className="text-center">
+                    <div className="text-2xl mb-2">{indicator.icon}</div>
+                    <h4 className="text-[#FAF9F6] font-museo-bold text-sm mb-1">
+                      {indicator.title}
+                    </h4>
+                    <p className="text-[#E8E6E0] font-museo-regular text-xs">
+                      {indicator.description}
+                    </p>
+                  </div>
                 ))}
               </div>
 
@@ -573,64 +618,33 @@ function App() {
 
       {/* In-App Preview Section */}
       <section
-        className={`relative py-24 ${TAILWIND_COLORS.gradients.midSectionBackground}`}
-
+        className="relative py-24 bg-[#1A1A1A]"
       >
 
         <div className="relative z-10 container mx-auto px-6">
           <h2 className="text-center text-4xl md:text-5xl font-museo-bold text-white mb-12">
-            Get a first look at the BawoSocial app — launching soon.
+            {CONTENT.inAppPreview.title}
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            <div className="text-center">
-              <img
-                src={IMAGES.inApp.features[0]}
-                alt="Profiles"
-                className="rounded-xl h-80 w-full object-contain mx-auto"
-              />
-              <p className="text-white mt-3 font-museo-medium">
-                Find Your Tribe — discover people who share your vibe &
-                interests.
-              </p>
-            </div>
-            <div className="text-center">
-              <img
-                src={IMAGES.inApp.features[1]}
-                alt="Groups"
-                className="rounded-xl h-80 w-full object-contain mx-auto"
-              />
-              <p className="text-white mt-3 font-museo-medium">
-                Join Exclusive Groups — connect with like-minded Nigerians.
-              </p>
-            </div>
-            <div className="text-center">
-              <img
-                src={IMAGES.inApp.features[2]}
-                alt="Events"
-                className="rounded-xl h-80 w-full object-contain mx-auto"
-              />
-              <p className="text-white mt-3 font-museo-medium">
-                Attend Events — virtual and in-person meetups worldwide.
-              </p>
-            </div>
-            <div className="text-center">
-              <img
-                src={IMAGES.inApp.features[3]}
-                alt="Culture"
-                className="rounded-xl h-80 w-full object-contain mx-auto"
-              />
-              <p className="text-white mt-3 font-museo-medium">
-                Celebrate Culture — language, food, music, and heritage.
-              </p>
-            </div>
+            {CONTENT.inAppPreview.items.map((item, index) => (
+              <div key={index} className="text-center">
+                <img
+                  src={IMAGES.inApp.features[index]}
+                  alt={item.title}
+                  className="rounded-xl h-80 w-full object-contain mx-auto"
+                />
+                <p className="text-white mt-3 font-museo-medium">
+                  {item.title}: {item.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Event Highlights Section */}
       <section
-        className={`relative py-24 ${TAILWIND_COLORS.gradients.midSectionBackground}`}
-
+        className="relative py-24 bg-[#1A1A1A]"
       >
 
         <div className="relative z-10 container mx-auto px-6">
@@ -658,7 +672,7 @@ function App() {
                 </span>
               </div>
               <p className="text-white/80 font-museo-medium">
-                Practice, learn, and preserve our languages together — no
+                Practice, learn, and preserve our languages together. No
                 pressure, just fun.
               </p>
             </div>
@@ -681,8 +695,7 @@ function App() {
       {/* Diaspora Statistics Section */}
       <section
         ref={globalReachRef}
-        className={`relative min-h-screen flex items-center justify-center ${TAILWIND_COLORS.gradients.midSectionBackground}`}
-
+        className="relative min-h-screen flex items-center justify-center bg-[#1A1A1A]"
       >
 
 
@@ -696,126 +709,32 @@ function App() {
               <p className="text-lg md:text-xl font-museo-medium text-white/80">
                 {CONTENT.globalReach.subtitle}
               </p>
-              <p className="text-base font-museo-regular text-[#ff7f39]">
+              <p className="text-base font-museo-regular text-[#D4AF37]">
                 {CONTENT.globalReach.description}
               </p>
             </div>
 
             {/* City Statistics Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mt-16">
-              {/* New York */}
-              <div className="city-stat text-center space-y-4">
-                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
-                  <img
-                    src={IMAGES.globalReach.cities[0]}
-                    alt="New York"
-                    className="w-full h-full object-cover"
-                  />
+              {CONTENT.globalReach.cities.map((city, index) => (
+                <div key={index} className="city-stat text-center space-y-4">
+                  <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
+                    <img
+                      src={IMAGES.globalReach.cities[index]}
+                      alt={city.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-museo-bold text-white text-lg md:text-xl">
+                      {city.name.toUpperCase()}
+                    </h3>
+                    <p className="font-museo-medium text-white/80 text-sm">
+                      {city.count} MEMBERS
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-museo-bold text-white text-lg md:text-xl">
-                    NEW YORK
-                  </h3>
-                  <p className="font-museo-medium text-white/80 text-sm">
-                    1,247 MEMBERS
-                  </p>
-                </div>
-              </div>
-
-              {/* London */}
-              <div className="city-stat text-center space-y-4">
-                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
-                  <img
-                    src={IMAGES.globalReach.cities[1]}
-                    alt="London"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-museo-bold text-white text-lg md:text-xl">
-                    LONDON
-                  </h3>
-                  <p className="font-museo-medium text-white/80 text-sm">
-                    1,092 MEMBERS
-                  </p>
-                </div>
-              </div>
-
-              {/* Atlanta */}
-              <div className="city-stat text-center space-y-4">
-                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
-                  <img
-                    src={IMAGES.globalReach.cities[2]}
-                    alt="Atlanta"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-museo-bold text-white text-lg md:text-xl">
-                    ATLANTA
-                  </h3>
-                  <p className="font-museo-medium text-white/80 text-sm">
-                    1,684 MEMBERS
-                  </p>
-                </div>
-              </div>
-
-              {/* LA */}
-              <div className="city-stat text-center space-y-4">
-                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
-                  <img
-                    src={IMAGES.globalReach.cities[3]}
-                    alt="Los Angeles"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-museo-bold text-white text-lg md:text-xl">
-                    LA
-                  </h3>
-                  <p className="font-museo-medium text-white/80 text-sm">
-                    1,503 MEMBERS
-                  </p>
-                </div>
-              </div>
-
-              {/* Canada */}
-              <div className="city-stat text-center space-y-4">
-                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
-                  <img
-                    src={IMAGES.globalReach.cities[4]}
-                    alt="Canada"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-museo-bold text-white text-lg md:text-xl">
-                    CANADA
-                  </h3>
-                  <p className="font-museo-medium text-white/80 text-sm">
-                    1,174 MEMBERS
-                  </p>
-                </div>
-              </div>
-
-              {/* Houston */}
-              <div className="city-stat text-center space-y-4">
-                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
-                  <img
-                    src={IMAGES.globalReach.cities[5]}
-                    alt="Houston"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-museo-bold text-white text-lg md:text-xl">
-                    HOUSTON
-                  </h3>
-                  <p className="font-museo-medium text-white/80 text-sm">
-                    892 MEMBERS
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -824,8 +743,7 @@ function App() {
       {/* Trust Indicators Section */}
       <section
         ref={trustRef}
-        className={`relative py-16 ${TAILWIND_COLORS.gradients.midSectionBackground}`}
-
+        className="relative py-16 bg-[#1A1A1A]"
       >
 
         <div className="relative z-10 container mx-auto px-6">
@@ -840,7 +758,7 @@ function App() {
 
           <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
             <div className="trust-indicator text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#ff7f39] to-[#ff6b35] rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-[#D4AF37] to-[#F4A460] rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-white text-2xl">🔒</span>
               </div>
               <h3 className="text-white font-museo-bold mb-2">
@@ -852,19 +770,19 @@ function App() {
             </div>
 
             <div className="trust-indicator text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#ff7f39] to-[#ff6b35] rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-[#D4AF37] to-[#F4A460] rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-white text-2xl">✓</span>
               </div>
               <h3 className="text-white font-museo-bold mb-2">
                 Money-Back Guarantee
               </h3>
               <p className="text-white/80 text-sm font-museo-medium">
-                30-day full refund — no questions asked.
+                30-day full refund. No questions asked.
               </p>
             </div>
 
             <div className="trust-indicator text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#ff7f39] to-[#ff6b35] rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-[#D4AF37] to-[#F4A460] rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-white text-2xl">🛡️</span>
               </div>
               <h3 className="text-white font-museo-bold mb-2">
@@ -876,14 +794,14 @@ function App() {
             </div>
 
             <div className="trust-indicator text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#ff7f39] to-[#ff6b35] rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-[#D4AF37] to-[#F4A460] rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-white text-2xl">🔐</span>
               </div>
               <h3 className="text-white font-museo-bold mb-2">
                 Privacy Protected
               </h3>
               <p className="text-white/80 text-sm font-museo-medium">
-                Your data stays private — we never sell personal info.
+                Your data stays private. We never sell personal info.
               </p>
             </div>
           </div>
@@ -897,15 +815,20 @@ function App() {
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-museo-bold text-[#FAF9F6] mb-6">
               {CONTENT.finalCta.title}
             </h2>
-            <p className="text-lg md:text-xl text-[#E8E6E0] font-museo-regular mb-12 leading-relaxed">
+            <p className="text-lg md:text-xl text-[#E8E6E0] font-museo-regular mb-8 leading-relaxed">
               {CONTENT.finalCta.subtitle}
             </p>
             <button
               onClick={handleFoundingMember}
-              className="bg-[#D4AF37] hover:bg-[#E5C158] text-[#1A1A1A] px-12 py-5 rounded-full font-museo-bold text-lg md:text-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              className="bg-[#D4AF37] hover:bg-[#E5C158] text-[#1A1A1A] px-12 py-5 rounded-full font-museo-bold text-lg md:text-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 mb-4"
             >
               {CONTENT.finalCta.cta}
             </button>
+            {CONTENT.finalCta.additionalText && (
+              <p className="text-sm text-[#E8E6E0] font-museo-regular">
+                {CONTENT.finalCta.additionalText}
+              </p>
+            )}
           </div>
         </section>
 
@@ -919,7 +842,7 @@ function App() {
             </span>
             <button
               onClick={handleFoundingMember}
-              className="bg-gradient-to-r from-[#ff7f39] to-[#ff6b35] text-white px-5 py-2.5 rounded-[50px] min-h-[44px] font-museo-bold text-sm"
+              className="bg-gradient-to-r from-[#D4AF37] to-[#F4A460] text-[#1A1A1A] px-5 py-2.5 rounded-[50px] min-h-[44px] font-museo-bold text-sm"
             >
               Secure Spot
             </button>

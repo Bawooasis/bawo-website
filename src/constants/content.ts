@@ -5,27 +5,50 @@ export const IS_OPEN_BETA = false;
 export const CONTENT = {
     // Hero Section
     hero: {
-      title: "Find your real people. Everywhere.",
-      // Mode A (Coming Soon): "BawoSocial is launching soon."
-      // Mode B (Open Beta): "Open Beta is live for our early community."
+      title: "The Home for Nigerians Wherever We Are.",
+      // Option A (Beta rolling out now): "Connect with your tribe. BawoSocial Open Beta is rolling out now."
+      // Option B (Beta launching soon): "Connect with your tribe. BawoSocial Open Beta is launching soon."
       subtitle: IS_OPEN_BETA 
-        ? "Open Beta is live for our early community."
-        : "BawoSocial is launching soon.",
+        ? "Connect with your tribe. BawoSocial Open Beta is rolling out now."
+        : "Connect with your tribe. BawoSocial Open Beta is launching soon.",
       description: "BawoSocial is the premium social club for the Nigerian diaspora – curated group chats, events, and connections with people who actually get your culture.",
-      // Mode A: "Become a Founding Member" / "Get early access updates"
-      // Mode B: "Join the Open Beta" / "Become a Founding Member (Lifetime Premium)"
-      ctaPrimary: IS_OPEN_BETA ? "Join the Open Beta" : "Become a Founding Member",
-      ctaSecondary: IS_OPEN_BETA ? "Become a Founding Member (Lifetime Premium)" : "Get early access updates",
+      launchBanner: IS_OPEN_BETA
+        ? "BawoSocial Open Beta is rolling out. Founding Membership is open for a limited time."
+        : "BawoSocial Open Beta is rolling out. Founding Membership is open for a limited time.",
+      // Primary CTA: "Become a Founding Member $50"
+      ctaPrimary: "Become a Founding Member $50",
+      // Secondary CTA: Option A (invite-only): "Join the Free Waitlist" | Option B (lean into Beta): "Join the Beta Waitlist"
+      ctaSecondary: IS_OPEN_BETA ? "Join the Beta Waitlist" : "Join the Free Waitlist",
       trustText: IS_OPEN_BETA 
         ? "Founding Members and waitlisters are getting early access while we refine the experience."
         : "BawoSocial is launching soon. Founding Members get first access.",
       supportingLine: "Limited Founding Member spots. One-time payment, lifetime access."
     },
   
+    // Stats Section
+    stats: {
+      title: "Founding Membership is Limited. Don't Miss Your Spot.",
+      subtitle: "7,200 Nigerians already on the waitlist, across 50 cities.",
+      metrics: {
+        members: {
+          value: "7.2K+",
+          label: "ON WAITLIST"
+        },
+        cities: {
+          value: "50+",
+          label: "CITIES WORLDWIDE"
+        },
+        satisfaction: {
+          value: "100",
+          label: "FOUNDING SPOTS"
+        }
+      }
+    },
+  
     // What BawoSocial Is Section
     whatIs: {
       title: "The home for Nigerians, wherever we are.",
-      description: "No more explaining your jokes, your music, or your slang. BawoSocial is a members-only space built around Nigerian culture — from Lagos to London to Toronto to New York. Join group chats, link up at curated events, and find people who actually feel like home."
+      description: "No more explaining your jokes, your music, or your slang. BawoSocial is a members-only space built around Nigerian culture, from Lagos to London to Toronto to New York. Join group chats, link up at curated events, and find people who actually feel like home."
     },
   
     // Why BawoSocial Differentiators
@@ -57,11 +80,11 @@ export const CONTENT = {
       items: [
         {
           title: "Curated Group Chats",
-          description: "Join \"Always Outside\", \"Afrobeats Army\", \"Lit & Literate\" and more — real people, shared culture, zero nonsense."
+          description: "Join \"Always Outside\", \"Afrobeats Army\", \"Lit & Literate\" and more. Real people, shared culture, zero nonsense."
         },
         {
           title: "City-Based Communities",
-          description: "Connect with Nigerians in your city and abroad — NYC, Toronto, London, Lagos and more."
+          description: "Connect with Nigerians in your city and abroad: NYC, Toronto, London, Lagos and more."
         },
         {
           title: "Events & Linkups",
@@ -80,20 +103,24 @@ export const CONTENT = {
   
     // Founding Member Section
     foundingMember: {
-      title: "Founding Members: One-Time Payment. Lifetime Access.",
-      intro: "Founding Membership has been extended while we prepare for launch. Limited founding spots available. Once they're gone, they're gone.",
-      price: "₦ / $ Founding Member – One-time payment",
+      title: "Founding Member Benefits (One-Time $50)",
+      intro: "Limited to 100 people worldwide. Permanent badge included.",
+      price: "$ Founding Member – One-time payment",
       priceSubtext: "Pay once. Keep your benefits for life.",
       spotsRemaining: 73, // Easy to update
       urgencyText: "Only 73 Founding Member spots left.",
       benefits: [
         {
           title: "Lifetime Premium Access",
-          description: "Unlock all current and future premium features — no monthly subscription."
+          description: "Unlock all current and future premium features. No monthly subscription."
+        },
+        {
+          title: "Priority Access",
+          description: "You skip the line for Open Beta access, new features, events, and support."
         },
         {
           title: "Founding Member Badge",
-          description: "Special in-app badge that permanently marks you as an early supporter."
+          description: "A permanent badge shown on your profile forever."
         },
         {
           title: "Early Feature Access",
@@ -104,22 +131,70 @@ export const CONTENT = {
           description: "Faster support and direct feedback channel to the team."
         },
         {
-          title: "Invites & Priority for Events",
-          description: "Early access and priority spots for select BawoSocial events and linkups."
+          title: "Exclusive Events & VIP Invites",
+          description: "Private dinners, mixers, and linkups only for founding members."
         },
         {
-          title: "Founders-Only Channel",
-          description: "Access to a private Founding Members group chat for networking and early info."
+          title: "Create & Lead Communities",
+          description: "Founders can start groups and build their own tribe."
+        },
+        {
+          title: "Influence BawoSocial's Future",
+          description: "Direct input on features, direction, and partnerships."
+        },
+        {
+          title: "Founders Wall Recognition",
+          description: "Your name is permanently listed as one of the first 100."
         }
       ],
-      cta: "Secure My Founding Member Spot",
-      ctaSubtext: "Founding Membership will close at launch. Limited availability."
+      cta: "Secure My Founding Spot $50",
+      ctaSubtext: "Limited availability. Once it's closed, it's closed."
+    },
+  
+    // In-App Preview Section
+    inAppPreview: {
+      title: IS_OPEN_BETA 
+        ? "Get a first look at the BawoSocial app. Now in Open Beta."
+        : "Get a first look at the BawoSocial app. Launching soon.",
+      items: [
+        {
+          title: "Find Your Tribe",
+          description: "Discover people who share your vibe & interests."
+        },
+        {
+          title: "Join Exclusive Groups",
+          description: "Connect with like-minded Nigerians."
+        },
+        {
+          title: "Attend Events",
+          description: "Virtual and in-person meetups worldwide."
+        },
+        {
+          title: "Celebrate Culture",
+          description: "Language, food, music, and heritage."
+        }
+      ]
+    },
+  
+    // Global Reach Section
+    globalReach: {
+      title: "7,200 Nigerians already on the waitlist, across 50 cities.",
+      subtitle: "Growing daily in 50+ cities.",
+      description: "Join the waitlist to get early access during Open Beta.",
+      cities: [
+        { name: "New York", count: "1,247", country: "🇺🇸" },
+        { name: "London", count: "1,092", country: "🇬🇧" },
+        { name: "Atlanta", count: "1,684", country: "🇺🇸" },
+        { name: "Los Angeles", count: "1,503", country: "🇺🇸" },
+        { name: "Canada", count: "1,174", country: "🇨🇦" },
+        { name: "Houston", count: "892", country: "🇺🇸" }
+      ]
     },
   
     // Social Proof / Trust Section (Origin Story with Founder Voice)
     socialProof: {
       title: "Why BawoSocial exists",
-      description: "I built BawoSocial after feeling that isolation myself in New York. I wanted a place where Nigerians could land in a new city and instantly feel at home. BawoSocial starts from Nigerian culture — the slang, the music, the jokes, the chaos — and builds from there. This is for people who want real connection, not just more followers.",
+      description: "I built BawoSocial after feeling that isolation myself in New York. I wanted a place where Nigerians could land in a new city and instantly feel at home. BawoSocial starts from Nigerian culture: the slang, the music, the jokes, the chaos, and builds from there. This is for people who want real connection, not just more followers. BawoSocial is currently in Open Beta, starting with Nigerians across major diaspora cities.",
       tagline: "Built by Nigerians, for Nigerians",
       cities: ["New York", "Lagos", "London", "Toronto", "Atlanta", "Houston", "Los Angeles"],
       stats: {
@@ -129,14 +204,29 @@ export const CONTENT = {
       }
     },
   
-    // Trust Indicators (Consolidated)
+    // Trust Indicators (Consolidated - Single Set)
     trust: {
       indicators: [
-        { icon: "🔒", text: "Secure Stripe Payments" },
-        { icon: "✓", text: "Verified Members" },
-        { icon: "🛡️", text: "Privacy-first" },
-        { icon: "💳", text: "256-bit SSL Encryption" },
-        { icon: "✓", text: "30-Day Guarantee" }
+        { 
+          icon: "🔒", 
+          title: "Secure Payments",
+          description: "256-bit SSL with Stripe. Your transactions stay protected."
+        },
+        { 
+          icon: "✓", 
+          title: "Verified Profiles",
+          description: "We verify members to ensure real, quality connections."
+        },
+        { 
+          icon: "🛡️", 
+          title: "Privacy Protected",
+          description: "Your data stays private. We never sell personal info."
+        },
+        { 
+          icon: "✓", 
+          title: "Money-Back Guarantee",
+          description: "30-day full refund. No questions asked."
+        }
       ]
     },
   
@@ -146,7 +236,7 @@ export const CONTENT = {
       items: [
         {
           question: "What is BawoSocial exactly?",
-          answer: "A members-only social app for Nigerians at home and abroad — built around curated group chats, events, and real connections."
+          answer: "A members-only social app for Nigerians at home and abroad, built around curated group chats, events, and real connections."
         },
         {
           question: "What do I get as a Founding Member?",
@@ -195,23 +285,26 @@ export const CONTENT = {
   
     // Final CTA Section
     finalCta: {
-      title: "If you've ever wanted a real Nigerian community online, this is it.",
-      subtitle: "Join as a Founding Member and help build the kind of space we've all been looking for.",
-      cta: "Become a Founding Member"
+      title: IS_OPEN_BETA 
+        ? "Open Beta Rolling Out. Last Chance to Become a Founding Member."
+        : "Launching Soon. Last Chance to Become a Founding Member.",
+      subtitle: "Founding Membership closes soon. Only 73 spots left.",
+      cta: "Become a Founding Member",
+      additionalText: "30-day money-back guarantee • Save $1,139+ • Only 73 left"
     },
   
     // Urgency Section (replaces countdown)
     urgency: {
-      title: "Founding Membership is limited — secure your spot before launch.",
-      subtitle: "Founding Members get first access when we launch.",
+      title: IS_OPEN_BETA ? "Open Beta Rolling Out" : "Open Beta Launching Soon",
+      subtitle: "Founding Membership will close soon. Only 73 spots left.",
       cta: "Become a Founding Member",
       ctaSecondary: "Get early access updates"
     },
   
     // Footer
-    footer: {
+      footer: {
       brand: "BawoSocial",
-      tagline: "The home for Nigerians, wherever we are.",
+      tagline: "Where Nigerians Connect",
       sections: {
         quickLinks: {
           title: "Quick Links",
@@ -232,13 +325,15 @@ export const CONTENT = {
           ]
         }
       },
-      copyright: "2025 BawoSocial. Launching 2025. Made with ❤️ for the Nigerian diaspora."
+      copyright: IS_OPEN_BETA 
+        ? "2025 BawoSocial. Now in Open Beta. Made with ❤️ for the Nigerian diaspora."
+        : "2025 BawoSocial. Made with ❤️ for the Nigerian diaspora."
     },
   
     // Email Signup
     emailSignup: {
       title: "Be First to Know",
-      subtitle: "Get early access when BawoSocial launches in your city",
+      subtitle: "Get early access when BawoSocial Open Beta lands in your city",
       placeholder: "Enter your email address",
       cta: "Join the Waitlist",
       success: "Thanks! You’re on the list.",
