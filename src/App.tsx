@@ -15,8 +15,8 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Logo from "./components/Logo";
-import CountdownTimer from "./components/CountdownTimer";
-import { CONTENT } from "./constants/content";
+// CountdownTimer removed - using urgency section instead
+import { CONTENT, IS_OPEN_BETA } from "./constants/content";
 import { TAILWIND_COLORS } from "./constants/colors";
 import { IMAGES } from "./constants/images";
 
@@ -258,489 +258,318 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen">
-      {/* Sticky Banner - Hidden on first page */}
-      {/* <div className="fixed top-0 w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 py-3 px-4 text-center font-bold z-50 shadow-lg font-museo-bold">
-        <div className="flex items-center justify-center gap-3">
-          <img
-            src={IMAGES.assets.logo}
-              alt="Bawosocial"
-            className="h-10 w-auto"
-          />
-          <span>🚨 ONLY 73 FOUNDING MEMBER SPOTS REMAINING - SECURE YOURS NOW! 🇳🇬</span>
-      </div>
-      </div> */}
-
-      <div
-        className={`relative ${TAILWIND_COLORS.gradients.heroBackground} hero-gradient-animate hero-shimmer`}
+    <div className="min-h-screen bg-[#FAF9F6]">
+      {/* Hero Section - Premium Clean Design */}
+      <section
+        ref={heroRef}
+        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#FAF9F6]"
       >
-        {/* Launch Banner */}
-        <div className="fixed top-0 w-full bg-gradient-to-r from-[#ff7f39] to-[#FF4500] text-white py-3 px-4 text-center font-bold z-50 shadow-lg font-museo-bold">
-          <div className="flex items-center justify-center gap-2">
-            <span>🚀</span>
-            <span>Bawosocial launches December 1st — Founding Membership closes soon.</span>
-          </div>
-        </div>
-
-        {/* Hero Section */}
-        <section
-          ref={heroRef}
-          className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16"
-        >
           {/* Background Pattern */}
 
 
 
-          {/* Bawosocial Logo - Higher Position with Social Icons */}
+          {/* Logo - Top Left */}
           <div
             ref={logoRef}
-            className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-8 lg:top-10 lg:left-10 xl:top-12 xl:left-12 2xl:top-16 2xl:left-16 z-20"
-            
+            className="absolute top-8 left-8 md:top-12 md:left-12 z-20"
           >
-            <div className="relative z-10">
-              <Logo />
-            </div>
-      </div>
-
-          {/* Social Media Icons - Bottom Right */}
-          <div className="absolute bottom-20 right-6 z-20">
-            <div className="flex items-center gap-3">
-              <a 
-                href="https://www.instagram.com/bawo.social/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-white/80 hover:text-white transition-colors duration-300"
-              >
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
-              </a>
-              
-              <a 
-                href="https://twitter.com/bawoapp" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-white/80 hover:text-white transition-colors duration-300"
-              >
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                </svg>
-              </a>
-              
-              <a 
-                href="https://linkedin.com/company/bawoapp" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-white/80 hover:text-white transition-colors duration-300"
-              >
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-              </a>
-              
-              <a 
-                href="https://www.tiktok.com/@bawosocial" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-white/80 hover:text-white transition-colors duration-300"
-              >
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
-                </svg>
-              </a>
-            </div>
+            <Logo />
           </div>
 
-          {/* Main Content Container */}
-          <div className="relative z-10 container mx-auto px-6 py-24 md:py-36 lg:py-40">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              {/* Left Content - App Preview Carousel */}
-              <div
-                ref={phoneRef}
-                className="flex justify-center lg:justify-center order-2 md:order-1 -mt-6 md:-mt-10"
-              >
-                <div className="relative">
-          <div className="relative">
-            <img
-                      ref={previewImgRef}
-                      src={previewImages[activePreviewIndex]}
-              alt="Bawosocial App Preview"
-                      className="w-64 md:w-80 lg:w-96 h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] transform-gpu transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-[2rem] animate-breathing object-cover will-change-transform will-change-opacity"
-                      style={{ opacity: 1 }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#ff7f39]/10 via-transparent to-transparent rounded-[2rem] pointer-events-none"></div>
-                    <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-white/5 to-transparent rounded-t-[2rem] pointer-events-none"></div>
-                  </div>
-                  {/* Dots */}
-                  <div className="flex items-center justify-center gap-2 absolute -bottom-6 left-1/2 -translate-x-1/2">
-                    {previewImages.map((_, idx) => (
-                      <span
-                        key={idx}
-                        className={`w-2.5 h-2.5 rounded-full ${
-                          idx === activePreviewIndex
-                            ? "bg-[#ff7f39]"
-                            : "bg-white/30"
-                        }`}
-                      />
-                    ))}
-                  </div>
-          </div>
-        </div>
-
-              {/* Right Content */}
-              <div className="text-center space-y-10 order-1 lg:order-2">
-                {/* Main Heading */}
-                <div className="space-y-6">
-                  <h1
-                    ref={headlineRef}
-                    className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.2] font-museo-bold text-white"
-                  >
-                    {CONTENT.hero.title}
-          </h1>
-                  <p
-                    ref={subheadlineRef}
-                    className="text-base md:text-lg opacity-90 font-museo-regular text-white leading-[1.8]"
-                  >
-                    {CONTENT.hero.subtitle}
-                  </p>
-                </div>
-
-                {/* Countdown Timer */}
-                <div className="py-4">
-                  <CountdownTimer />
-                </div>
-
-                {/* Call to Action Buttons */}
-                <div
-                  ref={ctaRef}
-                  className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+          {/* Main Content Container - Premium Layout */}
+          <div className="relative z-10 container mx-auto px-6 md:px-12 py-32 md:py-40">
+            <div className="grid lg:grid-cols-2 gap-20 items-center max-w-7xl mx-auto">
+              {/* Left Content - Text */}
+              <div className="space-y-8">
+                <h1
+                  ref={headlineRef}
+                  className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] font-museo-bold text-[#1A1A1A] tracking-tight"
                 >
-                  <div className="relative">
-            <button
-              onClick={handleFoundingMember}
-                      className={`${TAILWIND_COLORS.gradients.primary} ${TAILWIND_COLORS.gradients.primaryHover} text-white px-8 sm:px-10 py-4 rounded-full min-h-[44px] font-bold text-base md:text-lg leading-tight transform hover:translate-y-[-1px] transition-all duration-300 shadow-[0_12px_30px_rgba(255,111,62,0.32)] hover:shadow-[0_16px_36px_rgba(255,111,62,0.38)] font-museo-bold w-full sm:w-auto max-w-[350px] animate-lift`}
-            >
-                      {CONTENT.hero.ctaPrimary}
-            </button>
-                    {/* Urgency Indicator */}
-                    <div className="absolute -top-2 -right-2 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
-                  </div>
-            <button
-              onClick={handleEarlyAccess}
-                    className={`bg-white/10 border ${TAILWIND_COLORS.primary.border} text-white ${TAILWIND_COLORS.primary.hover.bg} hover:text-white px-8 sm:px-10 py-4 rounded-full min-h-[44px] font-bold text-base md:text-lg leading-tight transform hover:translate-y-[-1px] transition-all duration-300 font-museo-bold w-full sm:w-auto max-w-[350px] animate-lift backdrop-blur-[2px]`}
-            >
+                  {CONTENT.hero.title}
+                </h1>
+                <p
+                  ref={subheadlineRef}
+                  className="text-lg md:text-xl text-[#4A4A4A] font-museo-regular leading-relaxed max-w-xl"
+                >
+                  {CONTENT.hero.subtitle}
+                </p>
+                <p className="text-base text-[#6A6A6A] font-museo-regular leading-relaxed max-w-xl mt-2">
+                  {CONTENT.hero.description}
+                </p>
+                
+                {/* CTAs */}
+                <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 pt-4">
+                  <button
+                    onClick={handleFoundingMember}
+                    className="bg-[#D4AF37] hover:bg-[#E5C158] text-[#1A1A1A] px-8 py-4 rounded-full font-museo-bold text-base md:text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                  >
+                    {CONTENT.hero.ctaPrimary}
+                  </button>
+                  <button
+                    onClick={handleEarlyAccess}
+                    className="border-2 border-[#1A1A1A] text-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-[#FAF9F6] px-8 py-4 rounded-full font-museo-medium text-base md:text-lg transition-all duration-300"
+                  >
                     {CONTENT.hero.ctaSecondary}
-            </button>
-          </div>
+                  </button>
+                </div>
+                
+                {/* Supporting Line */}
+                <p className="text-sm text-[#6A6A6A] font-museo-regular pt-2">
+                  {CONTENT.hero.supportingLine}
+                </p>
+                {CONTENT.hero.trustText && (
+                  <p className="text-xs text-[#8A8A8A] font-museo-regular pt-1 italic">
+                    {CONTENT.hero.trustText}
+                  </p>
+                )}
+              </div>
 
-                {/* Compact Trust Line */}
-                <div className="flex items-center justify-center lg:justify-start gap-4 text-xs text-white/80 font-museo-medium">
-                  <span>🔒 Secure Payments</span>
-                  <span>•</span>
-                  <span>✓ Verified Members</span>
-                  <span>•</span>
-                  <span>🛡️ Privacy Protected</span>
-          </div>
-
-                {/* Stats */}
-                <div ref={statsRef} className="pt-8">
-                  <div className="text-center lg:text-left mb-8">
-                    <h3 className="text-lg md:text-xl font-bold text-white font-museo-bold mb-2">
-                      {CONTENT.stats.title}
-                    </h3>
-                    <p className="text-sm text-white/80 font-museo-regular">
-                      {CONTENT.stats.subtitle}
-                    </p>
-          </div>
-                  <div className="grid grid-cols-3 gap-4 text-center">
-                    <div className="city-stat">
-                      <p className={`text-4xl font-bold ${TAILWIND_COLORS.primary.text}`}>{CONTENT.stats.metrics.members.value}</p>
-                      <p className="text-xs text-white/80 font-museo-medium">
-                        {CONTENT.stats.metrics.members.label}
-                      </p>
-        </div>
-                    <div className="city-stat">
-                      <p className={`text-4xl font-bold ${TAILWIND_COLORS.primary.text}`}>{CONTENT.stats.metrics.cities.value}</p>
-                      <p className="text-xs text-white/80 font-museo-medium">
-                        {CONTENT.stats.metrics.cities.label}
-                      </p>
-                    </div>
-                    <div className="city-stat">
-                      <p className={`text-4xl font-bold ${TAILWIND_COLORS.primary.text}`}>{CONTENT.stats.metrics.satisfaction.value}</p>
-                      <p className="text-xs text-white/80 font-museo-medium">
-                        {CONTENT.stats.metrics.satisfaction.label}
-                      </p>
-                    </div>
-                  </div>
+              {/* Right Content - Phone Mockup */}
+              <div ref={phoneRef} className="flex justify-center lg:justify-end">
+                <div className="relative">
+                  <img
+                    ref={previewImgRef}
+                    src={previewImages[activePreviewIndex]}
+                    alt="BawoSocial App Preview"
+                    className="w-64 md:w-80 lg:w-96 h-auto drop-shadow-2xl rounded-3xl object-cover"
+                    style={{ opacity: 1 }}
+                  />
                 </div>
               </div>
             </div>
-        </div>
-      </section>
-
-      {/* Urgency Section with Countdown */}
-      <section className={`relative py-12 ${TAILWIND_COLORS.gradients.earlySectionBackground}`}>
-        <div className="relative z-10 container mx-auto px-6">
-          <div className="text-center space-y-6">
-            <h2 className="text-3xl md:text-4xl font-museo-bold text-white mb-4">
-              Launching December 1st
-            </h2>
-            <div className="mb-4 flex items-center justify-center gap-2">
-              <span className="text-lg md:text-xl font-museo-medium text-white/90">Launch in:</span>
-              <CountdownTimer />
-            </div>
-            <p className="text-lg md:text-xl font-museo-bold text-white">
-              Founding Membership closes on launch day. Only 73 spots left.
-            </p>
-          </div>
-        </div>
-      </section>
-
-        {/* Origin Story Section */}
-        <section className={`relative min-h-screen flex items-center justify-center ${TAILWIND_COLORS.gradients.earlySectionBackground}`}>
-  
-          <div className="relative z-10 container mx-auto px-6 grid lg:grid-cols-2 gap-10 items-center">
-            <div className="text-white space-y-8">
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-museo-bold leading-tight">
-                {CONTENT.origin.title}
-              </h2>
-              <p className="text-white/90 font-museo-medium text-xl md:text-2xl leading-relaxed">
-                {CONTENT.origin.mainText}
-              </p>
-              {CONTENT.origin.visionText && (
-                <p className="text-white/80 font-museo-regular text-lg md:text-xl leading-relaxed">
-                  {CONTENT.origin.visionText}
-                </p>
-              )}
-            </div>
-            <div>{/* Placeholder for potential image or graphic */}</div>
           </div>
         </section>
-      </div>
 
-      {/* Founding Member Section */}
-      <section
-        ref={foundingMemberRef}
-        className={`relative min-h-screen flex items-center justify-center ${TAILWIND_COLORS.gradients.earlySectionBackground}`}
-
-      >
-
-        <div className="relative z-10 container mx-auto px-6 py-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content - Benefits */}
-            <div className="text-white space-y-8">
-              <div className="space-y-4">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-museo-bold">
-                  {CONTENT.foundingMember.title}
-                  <br />
-                  <span className={TAILWIND_COLORS.primary.text}>{CONTENT.foundingMember.titleHighlight}</span>
+        {/* What BawoSocial Is Section */}
+        <section className="relative py-24 md:py-32 bg-[#1A1A1A]">
+          <div className="container mx-auto px-6 md:px-12 max-w-4xl">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-museo-bold text-[#FAF9F6] mb-8 text-center">
+              {CONTENT.whatIs.title}
             </h2>
-                <p className="text-base md:text-lg font-museo-regular text-white/80">
-                  {CONTENT.foundingMember.subtitle}
-                </p>
-            </div>
-
-              <div className="space-y-6">
-                <div className="space-y-4">
-                  {CONTENT.foundingMember.benefits.map((benefit, index) => (
-                    <div key={index} className="flex items-start gap-4">
-                      <BadgeCheck className={`w-5 h-5 ${TAILWIND_COLORS.primary.text} flex-shrink-0 mt-0.5`} />
-                      <div>
-                        <span className="font-museo-bold text-base text-white">
-                          {benefit.title}
-                        </span>
-                        <div className="text-sm text-white/80 mt-1 font-museo-regular">
-                          {benefit.description}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="space-y-4 pt-6">
-                <div className="flex items-center justify-between">
-                  <span className="font-museo-medium text-white/80 text-sm">
-                    REGULAR PRICE: $9.99/month ($120/year)
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl md:text-3xl font-museo-bold text-[#ff7f39]">
-                    FOUNDING MEMBER: $50 one-time
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-[#ff7f39]">💰</span>
-                  <span className="font-museo-medium text-white/80">
-                    Save $1,139+ automatically
-                  </span>
-                </div>
-              </div>
-
-              {/* Mission Section */}
-              <div className="pt-6 border-t border-white/20">
-                <p className="text-sm md:text-base text-white/90 font-museo-regular leading-relaxed">
-                  {CONTENT.foundingMember.missionText}
-                </p>
-              </div>
-            </div>
-
-            {/* Right Content - Nigerian Map & CTA */}
-            <div className="flex flex-col items-center space-y-8">
-              <div className="relative">
-                {/* Globe Graphic */}
-                <div className="flex items-center justify-center shadow-[0_8px_32px_rgba(0,0,0,0.3)] transform hover:scale-105 transition-transform duration-500">
-                  <div className="text-white text-center">
-                    <div className="animate-spin-slow mb-3">
-                      <img
-                        src={IMAGES.assets.globe}
-                        alt="Global Network"
-                        className="w-48 h-48 md:w-56 md:h-56 object-cover"
-                      />
-                    </div>
-                    <div className="font-museo-bold text-xl">
-                      Global Network
-                    </div>
-                    <div className="text-base opacity-80 font-museo-medium">
-                      Worldwide Connections
-                    </div>
-                  </div>
-                </div>
-                {/* Network Pattern Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 to-transparent rounded-full"></div>
-              </div>
-
-              <div className="text-center space-y-4">
-            <button
-              onClick={handleFoundingMember}
-                  className="bg-gradient-to-r from-[#ff7f39] to-[#ff6b35] hover:from-[#ff6b35] hover:to-[#ff5a2e] text-white px-12 py-6 rounded-[50px] min-h-[48px] font-bold text-xl transform hover:scale-105 transition-all duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:shadow-xl font-museo-bold"
-            >
-                  {CONTENT.foundingMember.cta}
-            </button>
-
-              </div>
-            </div>
+            <p className="text-lg md:text-xl text-[#E8E6E0] font-museo-regular leading-relaxed text-center max-w-3xl mx-auto">
+              {CONTENT.whatIs.description}
+            </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Features Section */}
-      <section
-        ref={featuresRef}
-        className={`relative min-h-screen flex items-center justify-center ${TAILWIND_COLORS.gradients.earlySectionBackground}`}
-
-      >
-        
-        <div className="relative z-10 text-white px-6 max-w-6xl py-20">
-          <h2 className={`text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-16 ${TAILWIND_COLORS.primary.text} font-museo-bold`}>
-            {CONTENT.features.title}
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {CONTENT.features.items.map((item, index) => {
-              const icons = [Users, Calendar, Users, Heart, Globe];
-              const Icon = icons[index] || Users;
-              return (
-                <div key={index} className="feature-card text-center p-8 bg-white/10 rounded-xl backdrop-blur-sm hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-1 shadow-[0_4px_12px_rgba(0,0,0,0.15)]">
-                  <Icon className={`w-12 h-12 ${TAILWIND_COLORS.primary.text} mx-auto mb-6`} />
-                  <h3 className="text-xl md:text-2xl font-bold mb-4 font-museo-bold">
+        {/* Why BawoSocial Differentiators Section */}
+        <section className="relative py-24 md:py-32 bg-[#FAF9F6]">
+          <div className="container mx-auto px-6 md:px-12 max-w-7xl">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-museo-bold text-[#1A1A1A] mb-16 text-center">
+              {CONTENT.whyBawoSocial.title}
+            </h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              {CONTENT.whyBawoSocial.differentiators.map((item, index) => (
+                <div key={index} className="p-8 bg-white rounded-lg border border-[#E8E6E0] hover:border-[#D4AF37] transition-all duration-300">
+                  <h3 className="text-2xl font-museo-bold text-[#1A1A1A] mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-base md:text-lg opacity-90 font-museo-medium leading-[1.5]">
+                  <p className="text-base text-[#4A4A4A] font-museo-regular leading-relaxed">
                     {item.description}
                   </p>
                 </div>
-              );
-            })}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Testimonials Section */}
-      <section
-        ref={testimonialsRef}
-        className={`relative py-20 ${TAILWIND_COLORS.gradients.midSectionBackground}`}
+        {/* Founding Member Offer Section - Premium Card Design */}
+        <section ref={foundingMemberRef} className="relative py-24 md:py-32 bg-[#0F0F0F]">
+          <div className="container mx-auto px-6 md:px-12 max-w-5xl">
+            <div className="bg-[#1A1A1A] border-2 border-[#D4AF37]/30 rounded-2xl p-8 md:p-12 shadow-2xl">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-museo-bold text-[#FAF9F6] mb-6 text-center">
+                {CONTENT.foundingMember.title}
+              </h2>
+              <p className="text-lg text-[#E8E6E0] font-museo-regular mb-8 text-center max-w-2xl mx-auto">
+                {CONTENT.foundingMember.intro}
+              </p>
+              
+              {/* Price Block */}
+              <div className="text-center mb-12 py-8 border-y border-[#D4AF37]/20">
+                <div className="text-4xl md:text-5xl font-museo-bold text-[#D4AF37] mb-2">
+                  {CONTENT.foundingMember.price}
+                </div>
+                <p className="text-base text-[#E8E6E0] font-museo-regular">
+                  {CONTENT.foundingMember.priceSubtext}
+                </p>
+              </div>
 
-      >
+              {/* Benefits */}
+              <div className="space-y-6 mb-12">
+                {CONTENT.foundingMember.benefits.map((benefit, index) => (
+                  <div key={index} className="flex items-start gap-4">
+                    <BadgeCheck className="w-6 h-6 text-[#D4AF37] flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h3 className="font-museo-bold text-lg text-[#FAF9F6] mb-1">
+                        {benefit.title}
+                      </h3>
+                      <p className="text-base text-[#E8E6E0] font-museo-regular">
+                        {benefit.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
 
-        <div className="relative z-10 container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-white font-museo-bold mb-4">
-              What Our Community Says
-          </h2>
-            <p className="text-lg text-white/80 font-museo-medium">
-              Join thousands of Nigerians who've found their tribe
+              {/* Trust Indicators - Consolidated */}
+              <div className="flex flex-wrap justify-center gap-4 mb-8 text-sm">
+                {CONTENT.trust.indicators.map((indicator, index) => (
+                  <span key={index} className="text-[#E8E6E0] font-museo-medium">
+                    <span className="mr-1">{indicator.icon}</span>
+                    {indicator.text}
+                  </span>
+                ))}
+              </div>
+
+              {/* CTA */}
+              <div className="text-center">
+                <button
+                  onClick={handleFoundingMember}
+                  className="bg-[#D4AF37] hover:bg-[#E5C158] text-[#1A1A1A] px-12 py-5 rounded-full font-museo-bold text-lg md:text-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 mb-4"
+                >
+                  {CONTENT.foundingMember.cta}
+                </button>
+                <p className="text-sm text-[#8A8A8A] font-museo-regular mb-2">
+                  {CONTENT.foundingMember.ctaSubtext}
+                </p>
+                {CONTENT.foundingMember.spotsRemaining > 0 && (
+                  <p className="text-sm text-[#D4AF37] font-museo-bold">
+                    {CONTENT.foundingMember.urgencyText}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Core Features Section */}
+        <section ref={featuresRef} className="relative py-24 md:py-32 bg-[#FAF9F6]">
+          <div className="container mx-auto px-6 md:px-12 max-w-7xl">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-museo-bold text-[#1A1A1A] mb-16 text-center">
+              {CONTENT.features.title}
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {CONTENT.features.items.map((item, index) => {
+                const icons = [Users, Globe, Calendar, Star, Shield];
+                const Icon = icons[index] || Users;
+                return (
+                  <div key={index} className="feature-card p-8 bg-white rounded-lg border border-[#E8E6E0] hover:border-[#D4AF37] transition-all duration-300 hover:shadow-xl">
+                    <Icon className="w-10 h-10 text-[#D4AF37] mb-4" />
+                    <h3 className="text-xl font-museo-bold text-[#1A1A1A] mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="text-base text-[#4A4A4A] font-museo-regular leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Social Proof / Trust Section */}
+        <section className="relative py-24 md:py-32 bg-[#FAF9F6]">
+          <div className="container mx-auto px-6 md:px-12 max-w-4xl">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-museo-bold text-[#1A1A1A] mb-8 text-center">
+              {CONTENT.socialProof.title}
+            </h2>
+            <p className="text-lg md:text-xl text-[#4A4A4A] font-museo-regular leading-relaxed mb-8 text-center">
+              {CONTENT.socialProof.description}
+            </p>
+            {CONTENT.socialProof.stats && (
+              <div className="text-center mb-8">
+                <p className="text-2xl md:text-3xl font-museo-bold text-[#1A1A1A] mb-2">
+                  {CONTENT.socialProof.stats.waitlistMembers} Nigerians on the waitlist
+                </p>
+                <p className="text-lg text-[#4A4A4A] font-museo-regular">
+                  Across {CONTENT.socialProof.stats.cities} cities worldwide
+                </p>
+              </div>
+            )}
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
+              {CONTENT.socialProof.cities.map((city, index) => (
+                <span key={index} className="px-4 py-2 bg-[#1A1A1A] text-[#FAF9F6] rounded-full font-museo-medium text-sm">
+                  {city}
+                </span>
+              ))}
+            </div>
+            <p className="text-center text-[#6A6A6A] font-museo-regular italic">
+              {CONTENT.socialProof.tagline}
             </p>
           </div>
+        </section>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Testimonial 1 */}
-            <div className="testimonial-card bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 rounded-full overflow-hidden">
-                  <img
-                    src={IMAGES.testimonials.adaora}
-                    alt={CONTENT.testimonials.reviews[0].name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="ml-3">
-                  <h4 className="font-museo-bold text-white">{CONTENT.testimonials.reviews[0].name}</h4>
-                  <p className="text-sm text-white/80 font-museo-medium">
-                    {CONTENT.testimonials.reviews[0].role}
-                  </p>
-                </div>
+        {/* Testimonials Section */}
+        {CONTENT.testimonials && (
+          <section className="relative py-24 md:py-32 bg-[#1A1A1A]">
+            <div className="container mx-auto px-6 md:px-12 max-w-6xl">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-museo-bold text-[#FAF9F6] mb-4 text-center">
+                {CONTENT.testimonials.title}
+              </h2>
+              <div className="grid md:grid-cols-3 gap-8 mt-12">
+                {CONTENT.testimonials.items.map((testimonial, index) => (
+                  <div key={index} className="bg-[#0F0F0F] border border-[#D4AF37]/20 rounded-lg p-8">
+                    <p className="text-lg text-[#E8E6E0] font-museo-regular leading-relaxed mb-6 italic">
+                      "{testimonial.quote}"
+                    </p>
+                    <div className="border-t border-[#D4AF37]/20 pt-4">
+                      <p className="font-museo-bold text-[#FAF9F6]">{testimonial.name}</p>
+                      <p className="text-sm text-[#8A8A8A] font-museo-regular">{testimonial.location}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <p className="text-white/80 font-museo-medium leading-relaxed">
-                "{CONTENT.testimonials.reviews[0].quote}"
-              </p>
             </div>
+          </section>
+        )}
 
-            {/* Testimonial 2 */}
-            <div className="testimonial-card bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 rounded-full overflow-hidden">
-                  <img
-                    src={IMAGES.testimonials.emeka}
-                    alt={CONTENT.testimonials.reviews[1].name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="ml-3">
-                  <h4 className="font-museo-bold text-white">{CONTENT.testimonials.reviews[1].name}</h4>
-                  <p className="text-sm text-white/80 font-museo-medium">
-                    {CONTENT.testimonials.reviews[1].role}
-                  </p>
-                </div>
-              </div>
-              <p className="text-white/80 font-museo-medium leading-relaxed">
-                "{CONTENT.testimonials.reviews[1].quote}"
-              </p>
-            </div>
-
-            {/* Testimonial 3 */}
-            <div className="testimonial-card bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 rounded-full overflow-hidden">
-                  <img
-                    src={IMAGES.testimonials.fatima}
-                    alt={CONTENT.testimonials.reviews[2].name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="ml-3">
-                  <h4 className="font-museo-bold text-white">{CONTENT.testimonials.reviews[2].name}</h4>
-                  <p className="text-sm text-white/80 font-museo-medium">
-                    {CONTENT.testimonials.reviews[2].role}
-                  </p>
-                </div>
-              </div>
-              <p className="text-white/80 font-museo-medium leading-relaxed">
-                "{CONTENT.testimonials.reviews[2].quote}"
-              </p>
+        {/* Urgency Section (replaces countdown) */}
+        <section className="relative py-16 md:py-20 bg-[#0F0F0F]">
+          <div className="container mx-auto px-6 md:px-12 max-w-4xl text-center">
+            <h2 className="text-3xl md:text-4xl font-museo-bold text-[#FAF9F6] mb-4">
+              {CONTENT.urgency.title}
+            </h2>
+            <p className="text-lg text-[#E8E6E0] font-museo-regular mb-8">
+              {CONTENT.urgency.subtitle}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                onClick={handleFoundingMember}
+                className="bg-[#D4AF37] hover:bg-[#E5C158] text-[#1A1A1A] px-8 py-4 rounded-full font-museo-bold text-base md:text-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                {CONTENT.urgency.cta}
+              </button>
+              <button
+                onClick={handleEarlyAccess}
+                className="border-2 border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#1A1A1A] px-8 py-4 rounded-full font-museo-medium text-base md:text-lg transition-all duration-300"
+              >
+                {CONTENT.urgency.ctaSecondary}
+              </button>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="relative py-24 md:py-32 bg-[#1A1A1A]">
+          <div className="container mx-auto px-6 md:px-12 max-w-4xl">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-museo-bold text-[#FAF9F6] mb-16 text-center">
+              {CONTENT.faq.title}
+            </h2>
+            <div className="space-y-6">
+              {CONTENT.faq.items.map((item, index) => (
+                <div key={index} className="bg-[#0F0F0F] border border-[#D4AF37]/20 rounded-lg p-6 md:p-8">
+                  <h3 className="text-xl md:text-2xl font-museo-bold text-[#FAF9F6] mb-3">
+                    {item.question}
+                  </h3>
+                  <p className="text-base md:text-lg text-[#E8E6E0] font-museo-regular leading-relaxed">
+                    {item.answer}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
       {/* In-App Preview Section */}
       <section
@@ -750,7 +579,7 @@ function App() {
 
         <div className="relative z-10 container mx-auto px-6">
           <h2 className="text-center text-4xl md:text-5xl font-museo-bold text-white mb-12">
-            Get a first look at the Bawosocial app — launching December 1st.
+            Get a first look at the BawoSocial app — launching soon.
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             <div className="text-center">
@@ -1062,88 +891,26 @@ function App() {
       </section>
 
       {/* Final CTA Section */}
-      <section
-        ref={finalCtaRef}
-        id="email-section"
-        className={`relative min-h-screen flex items-center justify-center ${TAILWIND_COLORS.gradients.finalCtaBackground} hero-gradient-animate`}
-
-      >
-        
-        <div className="relative z-10 container mx-auto px-6 py-20">
-          <div className="text-center space-y-8">
-            <div className="space-y-4">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white font-museo-bold">
-                {CONTENT.finalCta.title}
+        {/* Final CTA Section */}
+        <section ref={finalCtaRef} className="relative py-24 md:py-32 bg-[#0F0F0F]">
+          <div className="container mx-auto px-6 md:px-12 max-w-4xl text-center">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-museo-bold text-[#FAF9F6] mb-6">
+              {CONTENT.finalCta.title}
             </h2>
-              <p className="text-lg md:text-xl font-museo-medium text-white/80">
-                {CONTENT.finalCta.subtitle}
-              </p>
-            </div>
-
-            {/* Email Form */}
-            <form
-              action="https://joinbawo.us10.list-manage.com/subscribe/post?u=7c2523b0334a02fe77eebddb3&id=842ac1ad64&f_id=00bb32e3f0"
-              method="post"
-              target="_self"
-              className="max-w-2xl mx-auto"
+            <p className="text-lg md:text-xl text-[#E8E6E0] font-museo-regular mb-12 leading-relaxed">
+              {CONTENT.finalCta.subtitle}
+            </p>
+            <button
+              onClick={handleFoundingMember}
+              className="bg-[#D4AF37] hover:bg-[#E5C158] text-[#1A1A1A] px-12 py-5 rounded-full font-museo-bold text-lg md:text-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
             >
-              <div className="flex flex-col sm:flex-row gap-4">
-                  <input
-                    type="email"
-                  name="EMAIL"
-                  placeholder="Enter email for launch updates"
-                    required
-                  className="flex-1 px-6 py-4 rounded-[12px] border-2 text-lg focus:outline-none transition-all bg-white/10 backdrop-blur-sm text-white placeholder-white/70 font-museo-medium border-white/20 focus:border-[#ff7f39]"
-                />
-
-                {/* Anti-spam field (required by Mailchimp) - DO NOT REMOVE */}
-                <div
-                  style={{ position: "absolute", left: "-5000px" }}
-                  aria-hidden="true"
-                >
-                  <input
-                    type="text"
-                    name="b_7c2523b0334a02fe77eebddb3_842ac1ad64"
-                    tabIndex={-1}
-                    defaultValue=""
-                    aria-label="Do not fill this field"
-                    title="Do not fill this field"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white px-10 py-4 rounded-[50px] min-h-[48px] font-bold text-base flex items-center justify-center gap-2 transform hover:scale-105 transition-all duration-300 font-museo-bold"
-                >
-                  Join the Free Waitlist <ArrowRight className="w-5 h-5" />
-                </button>
-                </div>
-              </form>
-
-            {/* Main CTA */}
-            <div className="space-y-4">
-              <button
-                onClick={handleFoundingMember}
-                className="bg-gradient-to-r from-[#ff7f39] to-[#ff6b35] hover:from-[#ff6b35] hover:to-[#ff5a2e] text-white px-10 sm:px-12 py-4 rounded-full min-h-[46px] font-bold text-lg md:text-xl leading-tight transform hover:translate-y-[-1px] transition-all duration-300 shadow-[0_12px_30px_rgba(255,111,62,0.32)] hover:shadow-[0_16px_36px_rgba(255,111,62,0.38)] font-museo-bold"
-              >
-                {CONTENT.finalCta.cta}
-              </button>
-              <button
-                onClick={handleEarlyAccess}
-                className="bg-white/10 border border-white/30 text-white hover:bg-white/20 px-10 py-4 rounded-full min-h-[46px] font-bold text-base md:text-lg leading-tight transform hover:translate-y-[-1px] transition-all duration-300 font-museo-bold backdrop-blur-[2px]"
-              >
-                {CONTENT.finalCta.ctaSecondary}
-              </button>
-              <p className="text-white font-museo-medium">
-                30-day money-back guarantee • Save $1,139+ • Only 73 left
-              </p>
-                </div>
+              {CONTENT.finalCta.cta}
+            </button>
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* Footer */}
-      <footer className={`py-12 ${TAILWIND_COLORS.gradients.footerBackground}`}>
+      <footer className="py-12 bg-[#050505]">
         {/* Mobile Sticky CTA */}
         <div className="md:hidden mobile-sticky-cta bg-black/60 border-t border-white/10">
           <div className="px-4 py-3 flex items-center justify-between">
@@ -1162,10 +929,9 @@ function App() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
             {/* Company Info */}
             <div className="text-center md:text-left">
-              <h3 className="text-white font-museo-bold mb-4">Bawosocial</h3>
+              <h3 className="text-white font-museo-bold mb-4">{CONTENT.footer.brand}</h3>
               <p className="text-white/80 text-sm font-museo-medium mb-4">
-                Connecting the Nigerian diaspora worldwide through authentic
-                relationships and cultural pride.
+                {CONTENT.footer.tagline}
               </p>
               <div className="flex justify-center md:justify-start gap-4">
                 <a

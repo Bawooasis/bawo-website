@@ -1,0 +1,840 @@
+================================================================================
+BAWOSOCIAL WEBSITE - ALL TEXT CONTENT
+================================================================================
+Extracted from the codebase on: 2025
+This file contains all user-facing text content from the website.
+
+================================================================================
+INDEX.HTML - META CONTENT
+================================================================================
+
+Title: Bawosocial - Find Your Tribe | Nigerian Diaspora Community
+
+Meta Description: Join BAWO, the exclusive community connecting Nigerian diaspora worldwide. Find your tribe, network with leaders, and celebrate our heritage together.
+
+================================================================================
+LOGO COMPONENT
+================================================================================
+
+Brand Name: Bawosocial
+
+================================================================================
+COUNTDOWN TIMER COMPONENT
+================================================================================
+
+Labels:
+- Days
+- Hours
+- Minutes
+
+================================================================================
+HERO SECTION
+================================================================================
+
+Title: The Home for Nigerians Wherever We Are.
+
+Subtitle: Connect with your tribe. Bawosocial launches December 1st.
+
+Primary CTA: Become a Founding Member $50
+
+Secondary CTA: Join the Free Waitlist
+
+Trust Indicators:
+- 🔒 Secure Payments
+- ✓ Verified Members
+- 🛡️ Privacy Protected
+
+Launch Banner: Bawosocial launches December 1st — Founding Membership closes soon.
+
+================================================================================
+STATS SECTION
+================================================================================
+
+Title: Founding Membership Closes December 1st — Don't Miss Your Spot.
+
+Subtitle: 7,200 Nigerians already on the waitlist, across 50 cities.
+
+Metrics:
+- 7.2K+ ON WAITLIST
+- 50+ CITIES WORLDWIDE
+- 100 FOUNDING SPOTS
+
+================================================================================
+URGENCY SECTION
+================================================================================
+
+Title: Launching December 1st
+
+Launch in: [Countdown Timer]
+
+Description: Founding Membership closes on launch day. Only 73 spots left.
+
+================================================================================
+ORIGIN STORY SECTION
+================================================================================
+
+Title: Why Bawosocial Exists
+
+Main Text: Most Nigerians in the diaspora feel isolated. We miss our culture and our people. Bawosocial was created to fix that — a place to connect with Nigerians nearby, attend cultural events, build friendships, and keep our heritage alive no matter where we live.
+
+================================================================================
+FOUNDING MEMBER SECTION
+================================================================================
+
+Title: Founding Member Benefits
+Title Highlight: (One-Time $50)
+
+Subtitle: Limited to 100 people worldwide. Permanent badge included.
+
+Benefits:
+1. Lifetime Premium Access
+   Description: Never pay monthly fees again. Saves $1,139+ in lifetime value.
+
+2. Priority Access
+   Description: You skip the line for new features, events, and support.
+
+3. Founding Member Badge
+   Description: A permanent badge shown on your profile forever.
+
+4. Exclusive Events & VIP Invites
+   Description: Private dinners, mixers, and linkups only for founding members.
+
+5. Create & Lead Communities
+   Description: Founders can start groups and build their own tribe.
+
+6. Influence Bawosocial's Future
+   Description: Direct input on features, direction, and partnerships.
+
+7. Founders Wall Recognition
+   Description: Your name is permanently listed as one of the first 100.
+
+CTA: Secure My Founding Spot $50
+
+Mission Text: Your $50 directly supports Bawosocial's community events, partnerships, and cultural programs. This keeps Bawosocial independent and community-led.
+
+Pricing Information:
+- REGULAR PRICE: $9.99/month ($120/year)
+- FOUNDING MEMBER: $50 one-time
+- Save $1,139+ automatically
+
+Global Network Section:
+- Global Network
+- Worldwide Connections
+
+================================================================================
+FEATURES SECTION
+================================================================================
+
+Title: What People Get From Bawosocial
+
+Features:
+1. Meet Nigerians Near You
+   Description: Find your tribe in your city, connect with real people nearby.
+
+2. Attend Nigerian Events
+   Description: Cultural celebrations, mixers, and gatherings that keep our heritage alive.
+
+3. Join Cultural Groups
+   Description: Language exchanges, food meetups, and communities that matter to you.
+
+4. Make Real Friendships
+   Description: Build lasting connections with people who understand your culture.
+
+5. Build Community
+   Description: Create and lead groups that bring Nigerians together.
+
+================================================================================
+TESTIMONIALS SECTION
+================================================================================
+
+Title: Voices of the Bawosocial Family
+
+Subtitle: Hear from Nigerians already building connections
+
+Alternative Title (in App.tsx): What Our Community Says
+Alternative Subtitle: Join thousands of Nigerians who've found their tribe
+
+Testimonials:
+1. Name: T.
+   Location: New York
+   Quote: "I didn't realize how much I needed Nigerian friends until Bawosocial helped me find them."
+
+2. Name: A.
+   Location: Atlanta
+   Quote: "My city is full of Africans, but I never found the Nigerians until Bawosocial showed me."
+
+3. Name: D.
+   Location: London
+   Quote: "It feels like home without being home."
+
+================================================================================
+IN-APP PREVIEW SECTION
+================================================================================
+
+Title: Get a first look at the Bawosocial app — launching December 1st.
+
+Preview Descriptions:
+1. Find Your Tribe — discover people who share your vibe & interests.
+2. Join Exclusive Groups — connect with like-minded Nigerians.
+3. Attend Events — virtual and in-person meetups worldwide.
+4. Celebrate Culture — language, food, music, and heritage.
+
+================================================================================
+EVENT HIGHLIGHTS SECTION
+================================================================================
+
+Title: Featured Events
+
+Events:
+1. Diaspora Networking Night – London
+   Description: Connect with professionals across industries and build lasting relationships.
+
+2. Virtual Language Exchange – Igbo, Yoruba, Hausa
+   Description: Practice, learn, and preserve our languages together — no pressure, just fun.
+
+3. Nigerian Independence Celebration – NYC
+   Description: A night of culture, music, and pride with the NYC Nigerian community.
+
+================================================================================
+GLOBAL REACH SECTION
+================================================================================
+
+Title: 7,200 Nigerians already on the waitlist, across 50 cities.
+
+Subtitle: Growing daily in 50+ cities.
+
+Description: Join the waitlist before December 1st launch
+
+Cities:
+1. NEW YORK - 1,247 MEMBERS 🇺🇸
+2. LONDON - 1,092 MEMBERS 🇬🇧
+3. ATLANTA - 1,684 MEMBERS 🇺🇸
+4. LA (Los Angeles) - 1,503 MEMBERS 🇺🇸
+5. CANADA - 1,174 MEMBERS 🇨🇦
+6. HOUSTON - 892 MEMBERS 🇺🇸
+
+================================================================================
+TRUST INDICATORS SECTION
+================================================================================
+
+Title: Your Privacy & Safety Matter
+
+Subtitle: PCI compliant • 256-bit SSL • Verified members only
+
+Trust Indicators (from content.ts):
+1. 🔒 Bank-Grade Security
+   Description: Your data stays safe with 256-bit SSL encryption.
+
+2. ✓ Verified Members
+   Description: Every member passes our authenticity checks.
+
+3. 🛡️ Privacy Protected
+   Description: Your personal info stays private, always.
+
+4. 🔐 Secure Payments
+   Description: PCI-compliant payment processing.
+
+Trust Indicators (from App.tsx):
+1. 🔒 Secure Payments
+   Description: 256-bit SSL with Stripe. Your transactions stay protected.
+
+2. ✓ Money-Back Guarantee
+   Description: 30-day full refund — no questions asked.
+
+3. 🛡️ Verified Profiles
+   Description: We verify members to ensure real, quality connections.
+
+4. 🔐 Privacy Protected
+   Description: Your data stays private — we never sell personal info.
+
+================================================================================
+FINAL CTA SECTION
+================================================================================
+
+Title: Launching December 1st — Last Chance to Become a Founding Member.
+
+Subtitle: Founding Membership closes on launch day. Only 73 spots left.
+
+Primary CTA: Become a Founding Member $50
+
+Secondary CTA: Join the Free Waitlist
+
+Additional Text: 30-day money-back guarantee • Save $1,139+ • Only 73 left
+
+Email Form:
+- Placeholder: Enter email for launch updates
+- Button: Join the Free Waitlist
+
+Email Signup Section (from content.ts):
+- Title: Be First to Know
+- Subtitle: Get early access when Bawosocial lands in your city
+- Placeholder: Enter your email address
+- CTA: Join the Waitlist
+- Success: Thanks! You're on the list.
+- Error: Please enter a valid email address.
+
+================================================================================
+FOOTER
+================================================================================
+
+Brand: Bawosocial
+
+Tagline: Where Nigerians Connect
+
+Company Description: Connecting the Nigerian diaspora worldwide through authentic relationships and cultural pride.
+
+Quick Links:
+- About Us
+- How It Works
+- Founding Members
+- Contact
+
+Legal Links:
+- Privacy Policy
+- Terms of Service
+- Cookie Policy
+- Refund Policy
+
+Security & Trust:
+- 🔒 256-bit SSL encryption
+- 💳 Powered by Stripe
+- 🛡️ PCI DSS compliant
+- ✓ 30-day money-back guarantee
+
+Social Media:
+- Instagram
+- TikTok
+- LinkedIn
+
+Copyright: 2025 Bawosocial. Launching December 1st. Made with ❤️ for the Nigerian diaspora.
+
+Mobile Sticky CTA:
+- Text: Founding Member $50
+- Button: Secure Spot
+
+================================================================================
+REFUND POLICY MODAL
+================================================================================
+
+Title: Bawosocial Refund Policy
+Last Updated: July 2025
+
+Introduction:
+At Bawosocial, we want you to be completely satisfied with your founding membership. This Refund Policy explains our commitment to your satisfaction and the terms for refunds.
+
+30-Day Money-Back Guarantee:
+We offer a full 30-day money-back guarantee for all founding memberships and premium subscriptions.
+
+What's Covered:
+- Founding Member purchases ($50 one-time payment)
+- Premium subscription fees
+- Any additional paid features or services
+
+How It Works:
+- Full refund available within 30 days of purchase
+- No questions asked - we respect your decision
+- Refunds processed within 3-5 business days via Stripe to your original payment method
+- Email confirmation sent once refund is processed
+
+How to Request a Refund:
+1. Email us: support@bawoapp.com
+2. Include: Your registered email address and reason (optional)
+3. Response time: We'll confirm your refund within 24 hours
+4. Processing: Refund appears in your account within 3-5 business days
+
+Alternative Methods:
+- In-app: Go to Settings > Account > Request Refund
+- Contact form: Visit bawoapp.com/contact
+
+What Happens After Refund:
+Founding Members:
+- Premium access continues until refund is processed
+- Founding member status is removed
+- Account remains active with basic features
+- Re-joining: You can purchase founding membership again if available
+
+Subscription Refunds:
+- Current billing period is refunded
+- Access continues until period ends
+- Auto-renewal is automatically cancelled
+
+Special Circumstances:
+Beyond 30 Days:
+- Technical issues that prevented app usage
+- Billing errors or unauthorized charges
+- Exceptional circumstances - contact us to discuss
+
+What's Not Refundable:
+- App Store/Google Play purchases (subject to their refund policies)
+- Gift memberships after recipient has activated
+- Partial month usage for annual subscriptions (unless within 30 days)
+
+Payment Processing:
+Secure Refunds:
+- Processed by Stripe - our secure payment partner
+- Original payment method receives the refund
+- Bank processing time may vary (typically 3-5 business days)
+- International payments may take 5-10 business days
+
+Refund Confirmation:
+- Email notification sent when refund is initiated
+- Transaction ID provided for your records
+- Customer support available for any questions
+
+Contact Us:
+Questions About Refunds?
+- Email: support@bawoapp.com
+- Response time: Within 24 hours
+- Phone: Available for founding members
+- Live chat: Coming soon
+
+Our Commitment:
+We're committed to your satisfaction and building a trusted community. If you're not completely happy with Bawosocial, we want to make it right.
+
+Questions? Contact our support team at support@bawoapp.com - we're here to help!
+
+================================================================================
+COOKIE POLICY MODAL
+================================================================================
+
+Title: Bawosocial Cookie Policy
+Last Updated: July 2025
+
+Introduction:
+This Cookie Policy explains how Bawosocial ("we", "our", or "us") uses cookies and similar technologies when you visit our website at bawoapp.com or use our services.
+
+What Are Cookies?
+Cookies are small text files that are stored on your device when you visit a website. They help us provide you with a better experience by remembering your preferences and improving our services.
+
+How We Use Cookies:
+
+Essential Cookies:
+Purpose: Make our website work properly
+- Session management: Keep you logged in
+- Security: Protect against fraud and abuse
+- Basic functionality: Remember your language preferences
+- Cannot be disabled: These are necessary for the website to function
+
+Analytics Cookies:
+Purpose: Help us understand how you use our website
+- Google Analytics: Track website usage and performance
+- Firebase Analytics: Understand user behavior patterns
+- Performance monitoring: Identify and fix technical issues
+- Can be disabled: Through your browser settings
+
+Marketing Cookies:
+Purpose: Show you relevant content and measure campaign effectiveness
+- Social media pixels: Track engagement from social platforms
+- Advertising partners: Measure effectiveness of our ads
+- Retargeting: Show relevant ads on other websites
+- Can be disabled: Through your browser settings or our cookie preferences
+
+Types of Cookies We Use:
+
+First-Party Cookies:
+Set directly by Bawosocial:
+- User preferences: Language, theme settings
+- Authentication: Login status and security
+- Form data: Remember information you've entered
+
+Third-Party Cookies:
+Set by our partners:
+- Google Analytics: Website usage statistics
+- Firebase: App performance and user analytics
+- Stripe: Secure payment processing
+- Social media: Sharing and engagement tracking
+
+Your Cookie Choices:
+
+Browser Controls:
+Chrome, Firefox, Safari, Edge:
+- Block all cookies: In privacy/security settings
+- Delete existing cookies: Clear browsing data
+- Block third-party cookies: In advanced settings
+- Incognito/Private mode: Browsing without saving cookies
+
+Cookie Preference Center:
+On our website:
+- Manage preferences: Click the cookie banner or footer link
+- Choose categories: Accept only essential, analytics, or marketing
+- Update anytime: Change your preferences whenever you want
+
+Opt-Out Links:
+Direct opt-out options:
+- Google Analytics: tools.google.com/dlpage/gaoptout
+- Facebook Pixel: In your Facebook ad preferences
+- General advertising: optout.aboutads.info
+
+Mobile App Data:
+Not Traditional Cookies:
+Our mobile app doesn't use browser cookies, but similar technologies:
+- Local storage: App preferences and settings
+- Analytics SDKs: Firebase for usage analytics
+- Advertising IDs: For relevant ad experiences
+- Crash reporting: To improve app stability
+
+Mobile Controls:
+- iOS: Settings > Privacy & Security > Tracking
+- Android: Settings > Privacy > Ads
+- App settings: Manage preferences within Bawosocial app
+
+Data We Collect Through Cookies:
+
+Website Visitors:
+- Pages visited: Which sections interest you most
+- Time spent: How long you engage with our content
+- Device information: Browser type, screen size, operating system
+- Referral source: How you found our website
+- Geographic location: General region (not precise location)
+
+Conversion Tracking:
+- Sign-up process: Where visitors drop off or complete registration
+- Purchase behavior: What leads to founding member conversions
+- Campaign effectiveness: Which marketing efforts work best
+
+How Long Cookies Last:
+
+Session Cookies:
+- Duration: Deleted when you close your browser
+- Purpose: Temporary functionality like login status
+
+Persistent Cookies:
+- Essential cookies: Up to 1 year
+- Analytics cookies: Up to 2 years
+- Marketing cookies: Up to 1 year
+- Preference cookies: Until you change them
+
+Cookie Security:
+Protection Measures:
+- Secure transmission: HTTPS encryption for all cookies
+- Limited access: Only authorized systems can read our cookies
+- Regular audits: We review and update cookie practices
+- No sensitive data: Personal information is not stored in cookies
+
+Changes to This Policy:
+Updates:
+- Notification: We'll update the "Last Updated" date
+- Significant changes: We'll notify you via email or website banner
+- Your consent: Continued use means acceptance of updates
+
+Contact Us:
+Questions About Cookies?
+- Email: privacy@bawoapp.com
+- Subject line: "Cookie Policy Question"
+- Response time: Within 48 hours
+
+Privacy Team:
+We're committed to transparency about how we use cookies and protecting your privacy while providing the best possible experience.
+
+Need help managing your cookie preferences? Contact us at privacy@bawoapp.com
+
+================================================================================
+TERMS OF SERVICE MODAL
+================================================================================
+
+Title: Bawosocial Terms of Service
+Last Updated: July 2025
+
+Introduction:
+Welcome to Bawosocial! These Terms of Service ("Terms") govern your access to and use of our website (bawoapp.com), mobile application, and any related services (collectively, the "Service"). By using Bawosocial, you agree to these Terms. If you don't agree, please don't use our services.
+
+1. About Bawosocial
+
+Our Service:
+Bawosocial is a community platform designed to connect Nigerians worldwide for authentic relationships, friendships, professional networking, and cultural celebration. We provide both a website and mobile application to facilitate these connections.
+
+Founding Member Program:
+We offer a limited founding member program with exclusive benefits and lifetime access to premium features. Founding membership is limited to the first 100 members.
+
+2. Eligibility and Account Registration
+
+Age Requirement:
+- 18+ only: You must be 18 years or older to use Bawosocial
+- Age verification: By creating an account, you confirm you meet this requirement
+- Enforcement: We may request verification and will remove accounts of users under 18
+
+Account Responsibility:
+- Accurate information: Provide truthful and up-to-date information
+- Security: Keep your login credentials secure and confidential
+- Single account: Maintain only one account per person
+- Verification: We may verify your identity and Nigerian heritage
+
+3. Founding Member Terms
+
+Founding Membership Benefits:
+- Lifetime premium access: No monthly fees ever (normally $9.99/month)
+- Founding member badge: Special recognition in the community
+- Unlimited group creation: Create and manage unlimited interest groups
+- Premium spotlights: Enhanced profile visibility
+- Direct input: Influence on new features and platform direction
+- Exclusive community: Access to founding member-only events and discussions
+
+Payment Terms:
+- One-time fee: $50 for lifetime founding membership
+- Payment processing: Securely handled by Stripe
+- Refund policy: 30-day money-back guarantee
+- Limited availability: Only 100 founding member spots available
+- No recurring charges: Founding membership is a one-time payment
+
+4. User Conduct and Community Guidelines
+
+Acceptable Use:
+You agree to use Bawosocial for:
+- Building authentic connections with other Nigerians
+- Professional networking and career opportunities
+- Cultural celebration and community building
+- Friendship and social engagement
+- Dating and romantic relationships (app users)
+
+Prohibited Conduct:
+You agree NOT to:
+- Harass, threaten, or harm other users
+- Post false, misleading, or impersonating content
+- Spam or solicit for external products or services
+- Share inappropriate content (explicit, violent, or offensive material)
+- Violate laws or regulations in your jurisdiction
+- Attempt to hack or compromise platform security
+- Create fake profiles or misrepresent your identity
+- Discriminate based on tribe, religion, gender, or other characteristics
+
+5. Your Content and Intellectual Property
+
+Your Content Rights:
+- Ownership: You retain ownership of content you create (photos, messages, posts)
+- License to Bawosocial: You grant us a non-exclusive, worldwide, royalty-free license to use, display, and distribute your content as needed for platform operation
+- Purpose limitation: We only use your content to provide Bawosocial services
+- No selling: We will never sell your content to third parties
+
+6. Privacy and Data Protection
+
+Privacy Commitment:
+- Privacy-first approach: We prioritize protecting your personal information
+- No data selling: We never sell personal data to third parties
+- Secure processing: All data handled with industry-standard security
+- Transparency: Clear information about data collection and use
+
+7. Payment Terms and Billing
+
+Founding Member Payments:
+- Payment processor: All payments handled securely by Stripe
+- Pricing: $50 one-time payment for founding membership
+- Payment methods: Credit cards, debit cards, and other Stripe-supported methods
+- Currency: USD (other currencies may be supported in the future)
+
+8. Refunds and Cancellations
+
+30-Day Guarantee:
+- Full refund: Available within 30 days of founding member purchase
+- No questions asked: We respect your decision
+- Process: Email support@bawoapp.com for instant refund processing
+- Timeline: Refunds processed within 3-5 business days
+
+9. Platform Availability and Support
+
+Service Availability:
+- Best effort: We strive for 99.9% uptime but cannot guarantee uninterrupted service
+- Maintenance: Scheduled maintenance will be announced in advance
+- Updates: Regular app and website updates to improve functionality
+- Support: Customer support available via email and in-app chat
+
+10. Termination and Account Suspension
+
+Our Right to Terminate:
+We may suspend or terminate accounts for:
+- Terms violations: Breaking any part of these Terms
+- Community harm: Behavior that harms other users or the community
+- Illegal activity: Using Bawosocial for illegal purposes
+- Abuse: Repeated violations despite warnings
+
+11. Disclaimers and Limitations
+
+Service Disclaimers:
+- "As is" basis: Bawosocial provided without warranties of any kind
+- No guarantees: We don't guarantee specific outcomes, matches, or connections
+- User responsibility: You're responsible for your interactions with other users
+- Third-party content: We're not responsible for content created by users
+
+12. Dispute Resolution
+
+Informal Resolution:
+- First step: Contact support@bawoapp.com to resolve issues
+- Good faith: We'll work in good faith to address your concerns
+- Response time: Initial response within 48 hours
+- Escalation: Unresolved issues may be escalated to management
+
+13. International Users
+
+Global Community:
+- Worldwide service: Bawosocial serves Nigerian diaspora globally
+- Local laws: You must comply with laws in your jurisdiction
+- Data transfers: Your data may be processed in different countries
+- Currency: Payments processed in USD but may display in local currency
+
+14. Changes to Terms
+
+Updates:
+- Notification: We'll notify you of significant changes via email or app notification
+- Effective date: Changes take effect 30 days after notification
+- Continued use: Using Bawosocial after changes means you accept updated Terms
+- Disagreement: If you disagree with changes, you may delete your account
+
+15. Miscellaneous
+
+Entire Agreement:
+These Terms, together with our Privacy Policy and other referenced policies, constitute the entire agreement between you and Bawosocial.
+
+16. Contact Information
+
+General Support:
+- Email: support@bawoapp.com
+- Response time: Within 24 hours
+- Website: bawoapp.com/contact
+
+Legal Inquiries:
+- Email: legal@bawoapp.com
+- Subject: Include "Terms of Service" in subject line
+
+Questions about these Terms? Contact us at support@bawoapp.com - we're here to help build an amazing community together!
+
+================================================================================
+PRIVACY POLICY MODAL
+================================================================================
+
+Title: Bawosocial Privacy Policy
+Last Updated: July 2025
+
+Introduction:
+Welcome to Bawosocial ("we", "our", or "us"). Your privacy is important to us. This Privacy Policy explains how we collect, use, store, and share your information when you visit our website at bawoapp.com and use the Bawosocial mobile application and services.
+
+1. Information We Collect
+
+Website Visitors:
+When you visit our website, we collect:
+- Browsing data: Pages viewed, time spent, device type, browser information
+- Contact information: Email address when you sign up for updates or founding membership
+- Analytics data: How you interact with our site (via Google Analytics and similar tools)
+- Cookies: See our Cookie Policy for detailed information
+- Payment information: Processed securely by Stripe when you become a founding member
+
+Mobile App Users:
+When you use the Bawosocial app, we collect:
+- Account Information: Name, email, phone number, date of birth (to verify you are 18+)
+- Profile Data: Photos, bios, preferences, answers to onboarding questions and daily prompts
+- Location Information: Approximate location (if shared), to help with matches and local events
+- Device Information: Device type, operating system, crash data, and usage analytics (via Firebase)
+- Payment Information: If you make purchases, payment details are handled securely by Stripe. We do not store full credit card data ourselves
+- User Content: Messages, reactions, posts, and answers you submit in-app
+- Usage Analytics: How you use app features to improve your experience
+
+2. How We Use Your Information
+
+Website Operations:
+- Provide our website services and process founding member signups
+- Send updates about Bawosocial launch and community news
+- Improve website performance and user experience
+- Process payments securely through Stripe
+- Respond to inquiries and provide customer support
+
+Mobile App Operations:
+- Create and personalize your profile and matching experience
+- Connect you with potential matches, friends, and community members
+- Facilitate group chats and local events
+- Improve app performance and protect against abuse
+- Process payments and offer subscriptions or premium features
+- Send notifications about matches, messages, and community updates
+
+3. Sharing of Information
+
+We do not sell your personal data. We may share limited information with:
+
+Service Providers:
+- Stripe: For secure payment processing
+- Firebase/Google: For authentication, database, analytics, and push notifications
+- Email providers: For sending updates and notifications
+- Customer support tools: To provide better support
+- Analytics services: To understand how our website and app are used
+
+4. Your Rights and Choices
+
+Access and Control:
+Depending on your location (US, EU, Nigeria, etc.), you may have rights to:
+- Access your personal information
+- Update or correct your data
+- Delete your account and data
+- Download a copy of your information
+- Withdraw consent for data processing
+- Object to certain uses of your data
+
+5. Data Storage and Security
+
+Security Measures:
+- Encryption: All data transmitted using SSL/TLS encryption
+- Secure servers: Data stored on protected servers with access controls
+- Regular audits: We regularly review our security practices
+- Employee training: Staff trained on privacy and security best practices
+
+6. Age Restrictions
+
+Bawosocial is only for users 18 years or older.
+- Age verification: We require users to confirm they are 18+
+- Under 18: If we learn someone under 18 has created an account, we will remove it immediately
+- Parental concerns: Contact us at support@bawoapp.com
+
+7. Cookies and Tracking
+
+Website Cookies:
+We use cookies to:
+- Remember your preferences and login status
+- Analyze website usage to improve our services
+- Provide security and prevent fraud
+- Personalize content and advertisements
+
+8. Third-Party Services
+
+Payment Processing:
+- Stripe: Handles all payment processing securely
+- PCI compliance: We follow industry standards for payment security
+
+9. California Privacy Rights (CCPA)
+
+California Residents:
+If you're a California resident, you have additional rights:
+- Right to know: What personal information we collect and how it's used
+- Right to delete: Request deletion of your personal information
+- Right to opt-out: Of the sale of personal information (we don't sell data)
+- Right to non-discrimination: We won't discriminate for exercising your rights
+
+10. European Privacy Rights (GDPR)
+
+EU/UK Residents:
+If you're in the EU or UK, you have additional rights under GDPR:
+- Lawful basis: We process data based on consent, contract, or legitimate interests
+- Data portability: Get a copy of your data in a portable format
+- Right to object: Object to processing based on legitimate interests
+- Automated decision-making: Right to human review of automated decisions
+
+11. Changes to This Policy
+
+Updates:
+- Notification: We'll update the "Last Updated" date when changes are made
+- Significant changes: We'll notify you via email or app notification
+- Your options: You can always review the current policy on our website
+- Continued use: Using Bawosocial after changes means you accept the updated policy
+
+12. Contact Us
+
+Privacy Questions:
+- Email: privacy@bawoapp.com
+- Subject: Include "Privacy Policy" in the subject line
+- Response time: We'll respond within 48 hours
+
+General Support:
+- Email: support@bawoapp.com
+- Website: bawoapp.com/contact
+- Response time: Within 24 hours
+
+Questions about your privacy? We're here to help. Contact us at privacy@bawoapp.com
+
+================================================================================
+END OF TEXT CONTENT
+================================================================================
