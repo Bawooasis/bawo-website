@@ -1,51 +1,47 @@
-// Website Colors Constants - Premium Luxury Palette
+// Website Colors Constants - Dark Theme Palette
 
 export const COLORS = {
-  // Primary Brand Colors - Premium Gold/Amber
+  // Primary Brand Colors
   primary: {
+    pumpkin: "#F37021",
+    pumpkinLight: "#FF8A42",
+    pumpkinDark: "#D85A0F",
     gold: "#D4AF37",
     goldLight: "#E5C158",
-    goldDark: "#B8941F",
-    amber: "#F4A460",
-    amberLight: "#F5B887",
-    amberDark: "#D68910"
+    goldDark: "#B8941F"
   },
 
-  // Background Colors - Deep Charcoal & Cream
+  // Background Colors - Dark Theme
   background: {
+    deepest: "#0B0B0D",
+    main: "#101114",
+    surface: "#14151A",
+    card: "#161820",
     dark: {
-      primary: "#1A1A1A",
-      secondary: "#0F0F0F", 
-      tertiary: "#050505"
-    },
-    light: {
-      primary: "#FAF9F6",
-      secondary: "#F5F5F0",
-      cream: "#FEFCF8"
+      primary: "#0B0B0D",
+      secondary: "#101114", 
+      tertiary: "#14151A"
     },
     overlay: {
       light: "rgba(255, 255, 255, 0.1)",
-      medium: "rgba(255, 255, 255, 0.2)",
+      medium: "rgba(255, 255, 255, 0.14)",
       subtle: "rgba(255, 255, 255, 0.05)"
     }
   },
 
   // Text Colors
   text: {
-    white: "#FFFFFF",
-    charcoal: "#1A1A1A",
-    charcoalLight: "#2A2A2A",
-    charcoalMuted: "#4A4A4A",
-    cream: "#FAF9F6",
-    creamMuted: "#E8E6E0"
+    primary: "#FAF9F6",
+    secondary: "rgba(250, 249, 246, 0.82)",
+    white: "#FAF9F6",
+    muted: "rgba(250, 249, 246, 0.6)"
   },
 
   // Border Colors
   border: {
-    white: "rgba(255, 255, 255, 0.2)",
-    gold: "#D4AF37",
-    charcoal: "rgba(26, 26, 26, 0.1)",
-    cream: "rgba(250, 249, 246, 0.2)"
+    default: "rgba(255, 255, 255, 0.14)",
+    light: "rgba(255, 255, 255, 0.1)",
+    pumpkin: "#F37021"
   },
 
   // Status Colors
@@ -58,64 +54,15 @@ export const COLORS = {
 
   // Gradient Combinations
   gradients: {
-    primary: {
-      from: "#FF4500",
-      to: "#ff7f39"
-    },
-    primaryHover: {
-      from: "#ff7f39", 
-      to: "#FF4500"
-    },
-    secondary: {
-      from: "#ff7f39",
-      to: "#ff6b35"
-    },
-    secondaryHover: {
-      from: "#ff6b35",
-      to: "#ff5a2e"
-    },
     background: {
-      from: "#1E2D24",
-      via: "#1A2821",
-      to: "#111814"
+      from: "#0B0B0D",
+      via: "#101114",
+      to: "#14151A",
+      end: "#161820"
     },
-    // Hero gradient with full power
-    heroBackground: {
-      from: "#0C5B3B",
-      stop1: "#0C5B3B", 
-      via1: "#2D8A5A",
-      via2: "#4A9B6B", 
-      via3: "#C8B46D",
-      to: "#F37021"
-    },
-    // Early sections - Dark green base with gradient fade
-    earlySection: {
-      from: "#0A3D28",
-      to: "#0A3D28"
-    },
-    // Middle sections - Same dark tone
-    midSection: {
-      base: "#0A3D28"
-    },
-    // Final CTA - Warmer gradient bookend
-    finalCtaBackground: {
-      from: "#0C5B3B",
-      via1: "#2D8A5A",
-      via2: "#C8B46D", 
-      via3: "#F37021",
-      to: "#FF8C42" // More gold/orange
-    },
-    // Footer - Ultra dark
-    footerBackground: {
-      base: "#052418"
-    },
-    brandAccent: {
-      from: "#ff7f39",
-      to: "#ff6b35"
-    },
-    overlay: {
-      from: "#ff7f39/10",
-      to: "transparent"
+    subtle: {
+      from: "#0B0B0D",
+      to: "#101114"
     }
   },
 
@@ -135,62 +82,52 @@ export const COLORS = {
   }
 } as const;
 
-// Tailwind CSS Custom Color Classes - Premium
+// Tailwind CSS Custom Color Classes - Dark Theme
 export const TAILWIND_COLORS = {
-  // Primary colors for Tailwind classes - Gold/Amber
+  // Primary colors for Tailwind classes
   primary: {
-    text: "text-[#D4AF37]",
-    bg: "bg-[#D4AF37]", 
-    border: "border-[#D4AF37]",
+    text: "text-[#F37021]",
+    bg: "bg-[#F37021]", 
+    border: "border-[#F37021]",
     hover: {
-      bg: "hover:bg-[#E5C158]",
-      text: "hover:text-[#E5C158]",
-      border: "hover:border-[#E5C158]"
+      bg: "hover:bg-[#FF8A42]",
+      text: "hover:text-[#FF8A42]",
+      border: "hover:border-[#FF8A42]"
     },
     focus: {
-      border: "focus:border-[#D4AF37]"
+      border: "focus:border-[#F37021]"
     }
   },
 
-  // Gradient classes - Premium
+  // Gradient classes
   gradients: {
-    primary: "bg-gradient-to-r from-[#D4AF37] to-[#F4A460]",
-    primaryHover: "hover:from-[#E5C158] hover:to-[#F5B887]",
-    secondary: "bg-gradient-to-r from-[#F4A460] to-[#D4AF37]", 
-    secondaryHover: "hover:from-[#F5B887] hover:to-[#E5C158]",
-    // Premium backgrounds
-    background: "bg-[#FAF9F6]",
-    backgroundDark: "bg-[#1A1A1A]",
-    backgroundCharcoal: "bg-[#0F0F0F]",
-    // Hero - clean white/cream
-    heroBackground: "bg-[#FAF9F6]",
-    // Sections - alternating light/dark
-    sectionLight: "bg-[#FAF9F6]",
-    sectionDark: "bg-[#1A1A1A]",
-    // Final CTA - dark with gold accent
-    finalCtaBackground: "bg-[#0F0F0F]",
-    // Footer - deep charcoal
-    footerBackground: "bg-[#050505]",
-    brandAccent: "bg-gradient-to-br from-[#D4AF37] to-[#F4A460]",
-    overlay: "bg-gradient-to-t from-[#D4AF37]/10 via-transparent to-transparent"
+    background: "bg-gradient-to-b from-[#0B0B0D] via-[#101114] to-[#14151A]",
+    subtle: "bg-gradient-to-b from-[#0B0B0D] to-[#101114]"
   },
 
-  // Text opacity classes
+  // Text classes
   text: {
-    primary: "text-[#1A1A1A]",
-    primaryLight: "text-white",
-    secondary: "text-[#4A4A4A]", 
-    muted: "text-[#6A6A6A]",
-    subtle: "text-[#8A8A8A]",
-    cream: "text-[#FAF9F6]"
+    primary: "text-[#FAF9F6]",
+    secondary: "text-[rgba(250,249,246,0.82)]",
+    muted: "text-[rgba(250,249,246,0.6)]"
   },
 
-  // Background opacity classes
+  // Background classes
   bg: {
+    deepest: "bg-[#0B0B0D]",
+    main: "bg-[#101114]",
+    surface: "bg-[#14151A]",
+    card: "bg-[#161820]",
     overlay: {
       light: "bg-white/10",
-      medium: "bg-white/20",
+      medium: "bg-white/14",
       subtle: "bg-white/5"
     }
+  },
+
+  // Border classes
+  border: {
+    default: "border-[rgba(255,255,255,0.14)]",
+    light: "border-[rgba(255,255,255,0.1)]"
   }
 } as const;
