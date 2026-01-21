@@ -207,7 +207,7 @@ function App() {
       });
     }, 3500);
     return () => clearInterval(intervalId);
-  }, [previewImages.length]);
+  }, [previewImages]);
 
 
   const handleEarlyAccess = () => {
@@ -854,7 +854,7 @@ function App() {
               action="https://joinbawo.us10.list-manage.com/subscribe/post?u=7c2523b0334a02fe77eebddb3&id=842ac1ad64&f_id=00bb32e3f0"
               method="post"
               target="_self"
-              className="max-w-2xl mx-auto"
+              className="max-w-2xl mx-auto mb-8"
             >
               <div className="flex flex-col sm:flex-row gap-4">
                   <input
@@ -890,7 +890,7 @@ function App() {
               </form>
 
             {/* Main CTA */}
-            <div className="space-y-4">
+            <div className="mt-8">
               <button
                 onClick={handleFoundingMember}
                 className="bg-gradient-to-r from-[#ff7f39] to-[#ff6b35] hover:from-[#ff6b35] hover:to-[#ff5a2e] text-white px-10 sm:px-12 py-4 rounded-full min-h-[46px] font-bold text-lg md:text-xl leading-tight transform hover:translate-y-[-1px] transition-all duration-300 shadow-[0_12px_30px_rgba(255,111,62,0.32)] hover:shadow-[0_16px_36px_rgba(255,111,62,0.38)] font-museo-bold"
