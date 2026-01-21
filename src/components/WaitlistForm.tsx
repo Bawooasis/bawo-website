@@ -182,7 +182,7 @@ export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
 
         <div>
           <label htmlFor="city" className="sr-only">
-            {CONTENT.waitlist.fields.city}
+            City
           </label>
           <select
             id="city"
@@ -192,7 +192,7 @@ export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
             className="w-full px-4 py-3 bg-[#0B0B0C] border border-[rgba(255,255,255,0.14)] rounded-lg text-[#FAF9F6] focus:outline-none focus:ring-2 focus:ring-[#F37021] focus:border-transparent transition-all appearance-none cursor-pointer"
             disabled={isSubmitting}
           >
-            <option value="">{CONTENT.waitlist.fields.city}</option>
+            <option value="">Select your city</option>
             {cities.map((cityOption) => (
               <option key={cityOption} value={cityOption} className="bg-[#0B0B0C]">
                 {cityOption}

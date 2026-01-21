@@ -7,6 +7,7 @@ export const CONTENT = {
       subtitle: "Stop swiping. Start belonging. The exclusive community for the Nigerian diaspora to connect, network, and thrive.",
       ctaPrimary: "Become a Founding Member $50",
       ctaSecondary: "Join Waitlist",
+      testflightLink: "https://testflight.apple.com/join/YOUR_TESTFLIGHT_CODE", // Update with your TestFlight public link
       trustIndicators: {
       }
     },
@@ -160,7 +161,7 @@ export const CONTENT = {
           ]
         }
       },
-      copyright: "2025 BawoSocial. Launching December 1st. Made with ❤️ for the Nigerian diaspora."
+      copyright: "2026 BawoSocial. Launching December 1st. Made with ❤️ for the Nigerian diaspora."
     },
   
     // Email Signup
