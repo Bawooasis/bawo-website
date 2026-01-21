@@ -147,6 +147,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    font-family: 'MuseoModerno', sans-serif;
+  }
+  
+  body {
+    font-family: 'MuseoModerno', sans-serif;
+  }
+}
+
 /* Custom Animation Classes */
 @layer utilities {
   /* Sticky mobile CTA */

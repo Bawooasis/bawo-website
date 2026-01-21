@@ -158,7 +158,7 @@ export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
             onChange={(e) => setName(e.target.value)}
             placeholder={CONTENT.waitlist.fields.name}
             required
-            className="w-full px-4 py-3 bg-[#161820] border border-[rgba(255,255,255,0.14)] rounded-lg text-[#FAF9F6] placeholder:text-[rgba(250,249,246,0.5)] focus:outline-none focus:ring-2 focus:ring-[#F37021] focus:border-transparent transition-all"
+            className="w-full px-4 py-3 bg-[#0B0B0C] border border-[rgba(255,255,255,0.14)] rounded-lg text-[#FAF9F6] placeholder:text-[rgba(250,249,246,0.5)] focus:outline-none focus:ring-2 focus:ring-[#F37021] focus:border-transparent transition-all"
             disabled={isSubmitting}
           />
         </div>
@@ -175,7 +175,7 @@ export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
             onChange={(e) => setEmail(e.target.value)}
             placeholder={CONTENT.waitlist.fields.email}
             required
-            className="w-full px-4 py-3 bg-[#161820] border border-[rgba(255,255,255,0.14)] rounded-lg text-[#FAF9F6] placeholder:text-[rgba(250,249,246,0.5)] focus:outline-none focus:ring-2 focus:ring-[#F37021] focus:border-transparent transition-all"
+            className="w-full px-4 py-3 bg-[#0B0B0C] border border-[rgba(255,255,255,0.14)] rounded-lg text-[#FAF9F6] placeholder:text-[rgba(250,249,246,0.5)] focus:outline-none focus:ring-2 focus:ring-[#F37021] focus:border-transparent transition-all"
             disabled={isSubmitting}
           />
         </div>
@@ -189,12 +189,12 @@ export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
             name="city"
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            className="w-full px-4 py-3 bg-[#161820] border border-[rgba(255,255,255,0.14)] rounded-lg text-[#FAF9F6] focus:outline-none focus:ring-2 focus:ring-[#F37021] focus:border-transparent transition-all appearance-none cursor-pointer"
+            className="w-full px-4 py-3 bg-[#0B0B0C] border border-[rgba(255,255,255,0.14)] rounded-lg text-[#FAF9F6] focus:outline-none focus:ring-2 focus:ring-[#F37021] focus:border-transparent transition-all appearance-none cursor-pointer"
             disabled={isSubmitting}
           >
             <option value="">{CONTENT.waitlist.fields.city}</option>
             {cities.map((cityOption) => (
-              <option key={cityOption} value={cityOption} className="bg-[#161820]">
+              <option key={cityOption} value={cityOption} className="bg-[#0B0B0C]">
                 {cityOption}
               </option>
             ))}
@@ -211,7 +211,7 @@ export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-[#F37021] hover:bg-[#FF8A42] text-[#FAF9F6] px-6 py-3 rounded-[100px] font-museo-semibold text-base transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#F37021] focus:ring-offset-2 focus:ring-offset-[#101114]"
+        className="w-full bg-[#F37021] hover:bg-[#FF8A42] text-[#FAF9F6] px-6 py-3 rounded-[100px] font-museo-semibold text-base transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#F37021] focus:ring-offset-2 focus:ring-offset-[#0B0B0C]"
       >
         {isSubmitting ? "Submitting..." : CONTENT.waitlist.button}
       </button>
