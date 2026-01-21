@@ -101,6 +101,8 @@ export const TAILWIND_COLORS = {
 
   // Gradient classes
   gradients: {
+    primary: "bg-gradient-to-r from-[#F37021] to-[#ff6b35]",
+    primaryHover: "hover:from-[#ff6b35] hover:to-[#ff5a2e]",
     background: "bg-gradient-to-b from-[#0B0B0C] via-[#0B0B0C] to-[#0B0B0C]",
     subtle: "bg-gradient-to-b from-[#0B0B0C] to-[#0B0B0C]"
   },

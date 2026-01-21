@@ -44,13 +44,13 @@ Trust Indicators:
 - ✓ Verified Members
 - 🛡️ Privacy Protected
 
-Launch Banner: Bawosocial launches December 1st — Founding Membership closes soon.
+Launch Banner: Bawosocial launches December 1st - Founding Membership closes soon.
 
 ================================================================================
 STATS SECTION
 ================================================================================
 
-Title: Founding Membership Closes December 1st — Don't Miss Your Spot.
+Title: Founding Membership Closes December 1st - Don't Miss Your Spot.
 
 Subtitle: 7,200 Nigerians already on the waitlist, across 50 cities.
 
@@ -75,7 +75,7 @@ ORIGIN STORY SECTION
 
 Title: Why Bawosocial Exists
 
-Main Text: Most Nigerians in the diaspora feel isolated. We miss our culture and our people. Bawosocial was created to fix that — a place to connect with Nigerians nearby, attend cultural events, build friendships, and keep our heritage alive no matter where we live.
+Main Text: Most Nigerians in the diaspora feel isolated. We miss our culture and our people. Bawosocial was created to fix that - a place to connect with Nigerians nearby, attend cultural events, build friendships, and keep our heritage alive no matter where we live.
 
 ================================================================================
 FOUNDING MEMBER SECTION
@@ -171,13 +171,13 @@ Testimonials:
 IN-APP PREVIEW SECTION
 ================================================================================
 
-Title: Get a first look at the Bawosocial app — launching December 1st.
+Title: Get a first look at the Bawosocial app - launching December 1st.
 
 Preview Descriptions:
-1. Find Your Tribe — discover people who share your vibe & interests.
-2. Join Exclusive Groups — connect with like-minded Nigerians.
-3. Attend Events — virtual and in-person meetups worldwide.
-4. Celebrate Culture — language, food, music, and heritage.
+1. Find Your Tribe - discover people who share your vibe & interests.
+2. Join Exclusive Groups - connect with like-minded Nigerians.
+3. Attend Events - virtual and in-person meetups worldwide.
+4. Celebrate Culture - language, food, music, and heritage.
 
 ================================================================================
 EVENT HIGHLIGHTS SECTION
@@ -190,7 +190,7 @@ Events:
    Description: Connect with professionals across industries and build lasting relationships.
 
 2. Virtual Language Exchange – Igbo, Yoruba, Hausa
-   Description: Practice, learn, and preserve our languages together — no pressure, just fun.
+   Description: Practice, learn, and preserve our languages together - no pressure, just fun.
 
 3. Nigerian Independence Celebration – NYC
    Description: A night of culture, music, and pride with the NYC Nigerian community.
@@ -239,19 +239,19 @@ Trust Indicators (from App.tsx):
    Description: 256-bit SSL with Stripe. Your transactions stay protected.
 
 2. ✓ Money-Back Guarantee
-   Description: 30-day full refund — no questions asked.
+   Description: 30-day full refund - no questions asked.
 
 3. 🛡️ Verified Profiles
    Description: We verify members to ensure real, quality connections.
 
 4. 🔐 Privacy Protected
-   Description: Your data stays private — we never sell personal info.
+   Description: Your data stays private - we never sell personal info.
 
 ================================================================================
 FINAL CTA SECTION
 ================================================================================
 
-Title: Launching December 1st — Last Chance to Become a Founding Member.
+Title: Launching December 1st - Last Chance to Become a Founding Member.
 
 Subtitle: Founding Membership closes on launch day. Only 73 spots left.
 

@@ -5,7 +5,7 @@ export const CONTENT = {
   hero: {
       title: "The Home for Nigerians Wherever We Are.",
       subtitle: "Stop swiping. Start belonging. The exclusive community for the Nigerian diaspora to connect, network, and thrive.",
-      ctaPrimary: "Become a Founding Member — $50",
+      ctaPrimary: "Become a Founding Member $50",
       ctaSecondary: "Join Waitlist",
       trustIndicators: {
       }
@@ -13,7 +13,7 @@ export const CONTENT = {
   
     // Stats Section
     stats: {
-      title: "Founding Membership Closes December 1st — Don't Miss Your Spot.",
+      title: "Founding Membership Closes December 1st. Don't Miss Your Spot.",
       subtitle: "7,200 Nigerians already on the waitlist, across 50 cities.",
       metrics: {
         members: {
@@ -34,7 +34,7 @@ export const CONTENT = {
     // Origin Story Section
     origin: {
       title: "Why BawoSocial Exists",
-      mainText: "Most Nigerians in the diaspora feel isolated. We miss our culture and our people. BawoSocial was created to fix that — a place to connect with Nigerians nearby, attend cultural events, build friendships, and keep our heritage alive no matter where we live.",
+      mainText: "Most Nigerians in the diaspora feel isolated. We miss our culture and our people. BawoSocial was created to fix that. A place to connect with Nigerians nearby, attend cultural events, build friendships, and keep our heritage alive no matter where we live.",
       visionText: ""
     },
   
@@ -64,7 +64,7 @@ export const CONTENT = {
           description: "Private dinners, mixers, and linkups only for founding members."
         }
       ],
-      cta: "Become a Founding Member — $50",
+      cta: "Become a Founding Member $50",
       spotsRemaining: "",
       securityBadges: {
       },
@@ -131,33 +131,6 @@ export const CONTENT = {
       ]
     },
   
-    // Trust Section
-    trust: {
-      title: "Trusted by the Naija Diaspora",
-      indicators: [
-        {
-          icon: "🔒",
-          title: "Bank-Grade Security",
-          description: "Your data stays safe with 256-bit SSL encryption."
-        },
-        {
-          icon: "✓",
-          title: "Verified Members",
-          description: "Every member passes our authenticity checks."
-        },
-        {
-          icon: "🛡️",
-          title: "Privacy Protected",
-          description: "Your personal info stays private, always."
-        },
-        {
-          icon: "🔐",
-          title: "Secure Payments",
-          description: "PCI-compliant payment processing."
-        }
-      ]
-    },
-  
     // Final CTA Section
     finalCta: {
       title: "Join the First 500. Shape the Platform.",
@@ -183,10 +156,7 @@ export const CONTENT = {
         legal: {
           title: "Legal",
     links: [
-            { label: "Privacy Policy", action: "privacy" },
-            { label: "Terms of Service", action: "terms" },
-            { label: "Cookie Policy", action: "cookies" },
-            { label: "Refund Policy", action: "refund" }
+            { label: "Privacy Policy", action: "privacy" }
           ]
         }
       },

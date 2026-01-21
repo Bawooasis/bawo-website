@@ -1,20 +1,14 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
-  ArrowRight,
   BadgeCheck,
   Calendar,
-  Crown,
-  Globe,
   Headphones,
-  Heart,
-  Lightbulb,
-  Shield,
   Star,
-  Users,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Logo from "./components/Logo";
+import SparkleBackground from "./components/SparkleBackground";
 import { CONTENT } from "./constants/content";
 import { TAILWIND_COLORS } from "./constants/colors";
 import { IMAGES } from "./constants/images";
@@ -23,9 +17,6 @@ import { IMAGES } from "./constants/images";
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
-  const [showRefundPolicy, setShowRefundPolicy] = useState(false);
-  const [showCookiePolicy, setShowCookiePolicy] = useState(false);
-  const [showTermsOfService, setShowTermsOfService] = useState(false);
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
   const [activePreviewIndex, setActivePreviewIndex] = useState(0);
 
@@ -44,7 +35,6 @@ function App() {
   const foundingMemberRef = useRef(null);
   const featuresRef = useRef(null);
   const globalReachRef = useRef(null);
-  const trustRef = useRef(null);
   const finalCtaRef = useRef(null);
 
   // Animation setup
@@ -185,25 +175,6 @@ function App() {
       }
     );
 
-    // Trust indicators animation
-    gsap.fromTo(
-      ".trust-indicator",
-      { y: 14, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1.0,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: trustRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-
     // Cleanup function
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -257,7 +228,8 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative bg-black overflow-hidden">
+      <SparkleBackground />
       {/* Sticky Banner - Hidden on first page */}
       {/* <div className="fixed top-0 w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 py-3 px-4 text-center font-bold z-50 shadow-lg font-museo-bold">
         <div className="flex items-center justify-center gap-3">
@@ -271,12 +243,12 @@ function App() {
       </div> */}
 
       <div
-        className="relative bg-[#0B0B0C]"
+        className="relative z-10 bg-transparent"
       >
         {/* Hero Section */}
         <section
           ref={heroRef}
-          className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 bg-[#0B0B0C]"
+          className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 bg-transparent"
         >
           {/* Background Pattern */}
 
@@ -300,6 +272,8 @@ function App() {
                 href="https://www.instagram.com/bawo.social/" 
                 target="_blank" 
                 rel="noopener noreferrer"
+                aria-label="Instagram"
+                title="Instagram"
                 className="text-white/80 hover:text-white transition-colors duration-300"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -311,6 +285,8 @@ function App() {
                 href="https://twitter.com/bawoapp" 
                 target="_blank" 
                 rel="noopener noreferrer"
+                aria-label="X (Twitter)"
+                title="X (Twitter)"
                 className="text-white/80 hover:text-white transition-colors duration-300"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -322,6 +298,8 @@ function App() {
                 href="https://linkedin.com/company/bawoapp" 
                 target="_blank" 
                 rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                title="LinkedIn"
                 className="text-white/80 hover:text-white transition-colors duration-300"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -333,6 +311,8 @@ function App() {
                 href="https://www.tiktok.com/@bawosocial" 
                 target="_blank" 
                 rel="noopener noreferrer"
+                aria-label="TikTok"
+                title="TikTok"
                 className="text-white/80 hover:text-white transition-colors duration-300"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -371,7 +351,7 @@ function App() {
                   <div className="relative">
             <button
               onClick={handleFoundingMember}
-                      className={`${TAILWIND_COLORS.gradients.primary} ${TAILWIND_COLORS.gradients.primaryHover} text-white px-8 sm:px-10 py-4 rounded-full min-h-[44px] font-bold text-base md:text-lg leading-tight transform hover:translate-y-[-1px] transition-all duration-300 shadow-[0_12px_30px_rgba(255,111,62,0.32)] hover:shadow-[0_16px_36px_rgba(255,111,62,0.38)] font-museo-bold w-full sm:w-auto max-w-[350px] animate-lift`}
+              className={`bg-white/10 border ${TAILWIND_COLORS.primary.border} text-white hover:bg-white/15 px-8 sm:px-10 py-4 rounded-full min-h-[44px] font-bold text-base md:text-lg leading-tight transform hover:translate-y-[-1px] transition-all duration-300 font-museo-bold w-full sm:w-auto max-w-[350px] animate-lift backdrop-blur-sm`}
             >
                       {CONTENT.hero.ctaPrimary}
             </button>
@@ -390,7 +370,7 @@ function App() {
               {/* Right Content - iPhone Mockup */}
               <div
                 ref={phoneRef}
-                className="flex justify-center lg:justify-end order-1 lg:order-2 -mt-6 md:-mt-10"
+                className="flex justify-center lg:justify-end lg:pr-10 xl:pr-16 order-1 lg:order-2 -mt-10 md:-mt-14"
               >
                 <div className="relative">
                   <div className="relative">
@@ -425,7 +405,7 @@ function App() {
 
 
         {/* Origin Story Section */}
-        <section className="relative min-h-screen flex items-center justify-center bg-[#0B0B0C]">
+        <section className="relative min-h-screen flex items-center justify-center bg-transparent">
           <div className="relative z-10 container mx-auto px-6 py-20 max-w-4xl">
             <div className="text-white space-y-8 text-center">
               <h2 className="text-5xl md:text-6xl lg:text-7xl font-museo-bold leading-tight">
@@ -446,12 +426,12 @@ function App() {
       {/* Founding Member Section */}
       <section
         ref={foundingMemberRef}
-        className="relative min-h-screen flex items-center justify-center bg-[#0B0B0C]"
+        className="relative min-h-screen bg-transparent"
 
       >
 
-        <div className="relative z-10 container mx-auto px-6 py-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="relative z-10 container mx-auto px-6 py-20 min-h-[calc(100vh-10rem)]">
+          <div className="grid lg:grid-cols-2 gap-12 h-full items-stretch">
             {/* Left Content - Benefits */}
             <div className="text-white space-y-8">
               <div className="space-y-4">
@@ -492,34 +472,11 @@ function App() {
             </div>
 
             {/* Right Content - Nigerian Map & CTA */}
-            <div className="flex flex-col items-center space-y-8">
-              <div className="relative">
-                {/* Globe Graphic */}
-                <div className="flex items-center justify-center shadow-[0_8px_32px_rgba(0,0,0,0.3)] transform hover:scale-105 transition-transform duration-500">
-                  <div className="text-white text-center">
-                    <div className="animate-spin-slow mb-3">
-                      <img
-                        src={IMAGES.assets.globe}
-                        alt="Global Network"
-                        className="w-48 h-48 md:w-56 md:h-56 object-cover"
-                      />
-                    </div>
-                    <div className="font-museo-bold text-xl">
-                      Global Network
-                    </div>
-                    <div className="text-base opacity-80 font-museo-medium">
-                      Worldwide Connections
-                    </div>
-                  </div>
-                </div>
-                {/* Network Pattern Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 to-transparent rounded-full"></div>
-              </div>
-
-              <div className="text-center space-y-4">
+            <div className="flex flex-col h-full w-full items-center lg:items-end justify-end space-y-8 mt-10 lg:mt-0">
+              <div className="text-center lg:text-right space-y-4">
             <button
               onClick={handleFoundingMember}
-                  className="bg-gradient-to-r from-[#F37021] to-[#ff6b35] hover:from-[#ff6b35] hover:to-[#ff5a2e] text-white px-12 py-6 rounded-[50px] min-h-[48px] font-bold text-xl transform hover:scale-105 transition-all duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:shadow-xl font-museo-bold"
+              className="bg-white/10 border border-[#F37021] text-white hover:bg-white/15 px-12 py-6 rounded-[50px] min-h-[48px] font-bold text-xl transform hover:scale-105 transition-all duration-300 font-museo-bold backdrop-blur-sm"
             >
               {CONTENT.foundingMember.cta}
             </button>
@@ -533,7 +490,7 @@ function App() {
       {/* Features Section */}
       <section
         ref={featuresRef}
-        className="relative min-h-screen flex items-center justify-center bg-[#0B0B0C]"
+        className="relative min-h-screen flex items-center justify-center bg-transparent"
 
       >
         
@@ -561,7 +518,7 @@ function App() {
       {/* Testimonials Section */}
       <section
         ref={testimonialsRef}
-        className="relative py-20 bg-[#0B0B0C]"
+        className="relative py-20 bg-transparent"
 
       >
 
@@ -571,7 +528,7 @@ function App() {
               What Our Community Says
           </h2>
             <p className="text-lg text-white/80 font-museo-medium">
-              Join thousands of Nigerians who've found their tribe
+              Hear from Nigerians excited to connect on BawoSocial
             </p>
           </div>
 
@@ -647,7 +604,7 @@ function App() {
 
       {/* In-App Preview Section */}
       <section
-        className="relative py-24 bg-[#0B0B0C]"
+        className="relative py-24 bg-transparent"
 
       >
 
@@ -663,7 +620,7 @@ function App() {
                 className="rounded-xl h-80 w-full object-contain mx-auto"
               />
               <p className="text-white mt-3 font-museo-medium">
-                Find Your Tribe — discover people who share your vibe &
+                Find Your Tribe - discover people who share your vibe &
                 interests.
               </p>
             </div>
@@ -674,7 +631,7 @@ function App() {
                 className="rounded-xl h-80 w-full object-contain mx-auto"
               />
               <p className="text-white mt-3 font-museo-medium">
-                Join Exclusive Groups — connect with like-minded Nigerians.
+                Join Exclusive Groups - connect with like-minded Nigerians.
               </p>
           </div>
             <div className="text-center">
@@ -684,7 +641,7 @@ function App() {
                 className="rounded-xl h-80 w-full object-contain mx-auto"
               />
               <p className="text-white mt-3 font-museo-medium">
-                Attend Events — virtual and in-person meetups worldwide.
+                Attend Events - virtual and in-person meetups worldwide.
               </p>
             </div>
             <div className="text-center">
@@ -694,7 +651,7 @@ function App() {
                 className="rounded-xl h-80 w-full object-contain mx-auto"
               />
               <p className="text-white mt-3 font-museo-medium">
-                Celebrate Culture — language, food, music, and heritage.
+                Celebrate Culture - language, food, music, and heritage.
               </p>
             </div>
           </div>
@@ -703,7 +660,7 @@ function App() {
 
       {/* Event Highlights Section */}
       <section
-        className="relative py-24 bg-[#0B0B0C]"
+        className="relative py-24 bg-transparent"
 
       >
 
@@ -732,7 +689,7 @@ function App() {
                 </span>
               </div>
               <p className="text-white/80 font-museo-medium">
-                Practice, learn, and preserve our languages together — no
+                Practice, learn, and preserve our languages together - no
                 pressure, just fun.
               </p>
             </div>
@@ -755,7 +712,7 @@ function App() {
       {/* Diaspora Statistics Section */}
       <section
         ref={globalReachRef}
-        className="relative min-h-screen flex items-center justify-center bg-[#0B0B0C]"
+        className="relative min-h-screen flex items-center justify-center bg-transparent"
 
       >
 
@@ -895,80 +852,11 @@ function App() {
         </div>
       </section>
 
-      {/* Trust Indicators Section */}
-      <section
-        ref={trustRef}
-        className="relative py-16 bg-[#0B0B0C]"
-
-      >
-
-        <div className="relative z-10 container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-white font-museo-bold mb-4">
-              Your Privacy & Safety Matter
-          </h2>
-            <p className="text-lg text-white/80 font-museo-medium">
-              PCI compliant • 256-bit SSL • Verified members only
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            <div className="trust-indicator text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#ff7f39] to-[#ff6b35] rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-2xl">🔒</span>
-              </div>
-              <h3 className="text-white font-museo-bold mb-2">
-                Secure Payments
-              </h3>
-              <p className="text-white/80 text-sm font-museo-medium">
-                256-bit SSL with Stripe. Your transactions stay protected.
-              </p>
-            </div>
-
-            <div className="trust-indicator text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#ff7f39] to-[#ff6b35] rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-2xl">✓</span>
-              </div>
-              <h3 className="text-white font-museo-bold mb-2">
-                Money-Back Guarantee
-              </h3>
-              <p className="text-white/80 text-sm font-museo-medium">
-                30-day full refund — no questions asked.
-              </p>
-            </div>
-
-            <div className="trust-indicator text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#ff7f39] to-[#ff6b35] rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-2xl">🛡️</span>
-              </div>
-              <h3 className="text-white font-museo-bold mb-2">
-                Verified Profiles
-              </h3>
-              <p className="text-white/80 text-sm font-museo-medium">
-                We verify members to ensure real, quality connections.
-              </p>
-            </div>
-
-            <div className="trust-indicator text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#ff7f39] to-[#ff6b35] rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-2xl">🔐</span>
-              </div>
-              <h3 className="text-white font-museo-bold mb-2">
-                Privacy Protected
-              </h3>
-              <p className="text-white/80 text-sm font-museo-medium">
-                Your data stays private — we never sell personal info.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Final CTA Section */}
       <section
         ref={finalCtaRef}
         id="email-section"
-        className="relative min-h-screen flex items-center justify-center bg-[#0B0B0C]"
+        className="relative min-h-screen flex items-center justify-center bg-transparent"
 
       >
         
@@ -1016,9 +904,9 @@ function App() {
 
                 <button
                   type="submit"
-                  className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white px-10 py-4 rounded-[50px] min-h-[48px] font-bold text-base flex items-center justify-center gap-2 transform hover:scale-105 transition-all duration-300 font-museo-bold"
+                  className="bg-transparent border border-white/25 hover:bg-white/10 text-white px-10 py-4 rounded-[50px] min-h-[48px] font-bold text-base flex items-center justify-center transform hover:scale-105 transition-all duration-300 font-museo-bold backdrop-blur-sm"
                 >
-                  Join the Free Waitlist <ArrowRight className="w-5 h-5" />
+                  Join Waitlist
                 </button>
                 </div>
               </form>
@@ -1037,16 +925,13 @@ function App() {
               >
                 {CONTENT.finalCta.ctaSecondary}
               </button>
-              <p className="text-white/80 font-museo-medium text-sm">
-                30-day money-back guarantee
-                    </p>
                   </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 bg-[#0B0B0C]">
+      <footer className="py-12 bg-transparent">
         {/* Mobile Sticky CTA */}
         <div className="md:hidden mobile-sticky-cta bg-black/60 border-t border-white/10">
           <div className="px-4 py-3 flex items-center justify-between">
@@ -1129,51 +1014,9 @@ function App() {
                 >
                   Privacy Policy
                 </button>
-                <button
-                  onClick={() => setShowTermsOfService(true)}
-                  className="block text-white/80 hover:text-white text-sm font-museo-medium text-left w-full"
-                >
-                  Terms of Service
-                </button>
-                <a
-                  href="#"
-                  className="block text-white/80 hover:text-white text-sm font-museo-medium"
-                >
-                  Refund Policy
-                </a>
-                <button
-                  onClick={() => setShowCookiePolicy(true)}
-                  className="block text-white/80 hover:text-white text-sm font-museo-medium text-left w-full"
-                >
-                  Cookie Policy
-                </button>
               </div>
             </div>
 
-            {/* Security & Trust */}
-            <div className="text-center md:text-left">
-              <h3 className="text-white font-museo-bold mb-4">
-                Security & Trust
-              </h3>
-              <div className="space-y-2">
-                <div className="flex items-center gap-2 text-white/40 text-xs">
-                  <span>🔒</span>
-                  <span>256-bit SSL encryption</span>
-                </div>
-                <div className="flex items-center gap-2 text-white/40 text-xs">
-                  <span>💳</span>
-                  <span>Powered by Stripe</span>
-                </div>
-                <div className="flex items-center gap-2 text-white/40 text-xs">
-                  <span>🛡️</span>
-                  <span>PCI DSS compliant</span>
-                </div>
-                <div className="flex items-center gap-2 text-white/40 text-xs">
-                  <span>✓</span>
-                  <span>30-day money-back guarantee</span>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Bottom Bar */}
@@ -1184,1481 +1027,6 @@ function App() {
           </div>
         </div>
       </footer>
-
-      {/* Refund Policy Modal */}
-      {showRefundPolicy && (
-        <div
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-          onClick={() => setShowRefundPolicy(false)}
-        >
-          <div
-            className="bg-white rounded-2xl max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="sticky top-0 bg-white border-b border-gray-200 p-6 rounded-t-2xl">
-              <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-gray-900 font-museo-bold">
-                  BawoSocial Refund Policy
-                </h2>
-                <button
-                  onClick={() => setShowRefundPolicy(false)}
-                  className="text-gray-500 hover:text-gray-700 text-2xl font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
-                >
-                  ×
-                </button>
-              </div>
-              <p className="text-gray-600 font-museo-medium mt-2">
-                Last Updated: July 2025
-              </p>
-            </div>
-
-            <div className="p-6 space-y-6 text-gray-800">
-              <p className="font-museo-medium">
-                At BawoSocial, we want you to be completely satisfied with your
-                founding membership. This Refund Policy explains our commitment
-                to your satisfaction and the terms for refunds.
-              </p>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  30-Day Money-Back Guarantee
-                </h3>
-                <p className="font-museo-medium mb-4">
-                  We offer a <strong>full 30-day money-back guarantee</strong>{" "}
-                  for all founding memberships and premium subscriptions.
-                </p>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    What's Covered
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>
-                        Founding Member purchases ($50 one-time payment)
-                      </strong>
-                    </li>
-                    <li>
-                      <strong>Premium subscription fees</strong>
-                    </li>
-                    <li>
-                      <strong>Any additional paid features or services</strong>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    How It Works
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Full refund available</strong> within 30 days of
-                      purchase
-                    </li>
-                    <li>
-                      <strong>No questions asked</strong> - we respect your
-                      decision
-                    </li>
-                    <li>
-                      <strong>
-                        Refunds processed within 3-5 business days
-                      </strong>{" "}
-                      via Stripe to your original payment method
-                    </li>
-                    <li>
-                      <strong>Email confirmation</strong> sent once refund is
-                      processed
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  How to Request a Refund
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Easy Process
-                  </h4>
-                  <ol className="list-decimal list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Email us</strong>: support@bawoapp.com
-                    </li>
-                    <li>
-                      <strong>Include</strong>: Your registered email address
-                      and reason (optional)
-                    </li>
-                    <li>
-                      <strong>Response time</strong>: We'll confirm your refund
-                      within 24 hours
-                    </li>
-                    <li>
-                      <strong>Processing</strong>: Refund appears in your
-                      account within 3-5 business days
-                    </li>
-                  </ol>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Alternative Methods
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>In-app</strong>: Go to Settings &gt; Account &gt;
-                      Request Refund
-                    </li>
-                    <li>
-                      <strong>Contact form</strong>: Visit bawoapp.com/contact
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  What Happens After Refund
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Founding Members
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Premium access</strong> continues until refund is
-                      processed
-                    </li>
-                    <li>
-                      <strong>Founding member status</strong> is removed
-                    </li>
-                    <li>
-                      <strong>Account remains active</strong> with basic
-                      features
-                    </li>
-                    <li>
-                      <strong>Re-joining</strong>: You can purchase founding
-                      membership again if available
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Subscription Refunds
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Current billing period</strong> is refunded
-                    </li>
-                    <li>
-                      <strong>Access continues</strong> until period ends
-                    </li>
-                    <li>
-                      <strong>Auto-renewal</strong> is automatically cancelled
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  Special Circumstances
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Beyond 30 Days
-                  </h4>
-                  <p className="text-sm mb-2">
-                    While our standard guarantee is 30 days, we consider:
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Technical issues</strong> that prevented app usage
-                    </li>
-                    <li>
-                      <strong>Billing errors</strong> or unauthorized charges
-                    </li>
-                    <li>
-                      <strong>Exceptional circumstances</strong> - contact us to
-                      discuss
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    What's Not Refundable
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>App Store/Google Play</strong> purchases (subject
-                      to their refund policies)
-                    </li>
-                    <li>
-                      <strong>Gift memberships</strong> after recipient has
-                      activated
-                    </li>
-                    <li>
-                      <strong>Partial month usage</strong> for annual
-                      subscriptions (unless within 30 days)
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  Payment Processing
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Secure Refunds
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Processed by Stripe</strong> - our secure payment
-                      partner
-                    </li>
-                    <li>
-                      <strong>Original payment method</strong> receives the
-                      refund
-                    </li>
-                    <li>
-                      <strong>Bank processing time</strong> may vary (typically
-                      3-5 business days)
-                    </li>
-                    <li>
-                      <strong>International payments</strong> may take 5-10
-                      business days
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Refund Confirmation
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Email notification</strong> sent when refund is
-                      initiated
-                    </li>
-                    <li>
-                      <strong>Transaction ID</strong> provided for your records
-                    </li>
-                    <li>
-                      <strong>Customer support</strong> available for any
-                      questions
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  Contact Us
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Questions About Refunds?
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Email</strong>: support@bawoapp.com
-                    </li>
-                    <li>
-                      <strong>Response time</strong>: Within 24 hours
-                    </li>
-                    <li>
-                      <strong>Phone</strong>: Available for founding members
-                    </li>
-                    <li>
-                      <strong>Live chat</strong>: Coming soon
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Our Commitment
-                  </h4>
-                  <p className="text-sm">
-                    We're committed to your satisfaction and building a trusted
-                    community. If you're not completely happy with BawoSocial, we want
-                    to make it right.
-                  </p>
-                </div>
-              </div>
-
-              <div className="border-t border-gray-200 pt-6 text-center">
-                <p className="text-gray-600 font-museo-medium">
-                  <strong>Questions?</strong> Contact our support team at
-                  support@bawoapp.com - we're here to help!
-                </p>
-              </div>
-            </div>
-          </div>
-              </div>
-            )}
-
-      {/* Cookie Policy Modal */}
-      {showCookiePolicy && (
-        <div
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-          onClick={() => setShowCookiePolicy(false)}
-        >
-          <div
-            className="bg-white rounded-2xl max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="sticky top-0 bg-white border-b border-gray-200 p-6 rounded-t-2xl">
-              <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-gray-900 font-museo-bold">
-                  BawoSocial Cookie Policy
-                </h2>
-                <button
-                  onClick={() => setShowCookiePolicy(false)}
-                  className="text-gray-500 hover:text-gray-700 text-2xl font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
-                >
-                  ×
-                </button>
-              </div>
-              <p className="text-gray-600 font-museo-medium mt-2">
-                Last Updated: July 2025
-              </p>
-            </div>
-
-            <div className="p-6 space-y-6 text-gray-800">
-              <p className="font-museo-medium">
-                This Cookie Policy explains how BawoSocial ("we", "our", or "us") uses
-                cookies and similar technologies when you visit our website at
-                bawoapp.com or use our services.
-              </p>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  What Are Cookies?
-                </h3>
-                <p className="font-museo-medium">
-                  Cookies are small text files that are stored on your device
-                  when you visit a website. They help us provide you with a
-                  better experience by remembering your preferences and
-                  improving our services.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  How We Use Cookies
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Essential Cookies
-                  </h4>
-                  <p className="text-sm mb-2">
-                    <strong>Purpose</strong>: Make our website work properly
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Session management</strong>: Keep you logged in
-                    </li>
-                    <li>
-                      <strong>Security</strong>: Protect against fraud and abuse
-                    </li>
-                    <li>
-                      <strong>Basic functionality</strong>: Remember your
-                      language preferences
-                    </li>
-                    <li>
-                      <strong>Cannot be disabled</strong>: These are necessary
-                      for the website to function
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Analytics Cookies
-                  </h4>
-                  <p className="text-sm mb-2">
-                    <strong>Purpose</strong>: Help us understand how you use our
-                    website
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Google Analytics</strong>: Track website usage and
-                      performance
-                    </li>
-                    <li>
-                      <strong>Firebase Analytics</strong>: Understand user
-                      behavior patterns
-                    </li>
-                    <li>
-                      <strong>Performance monitoring</strong>: Identify and fix
-                      technical issues
-                    </li>
-                    <li>
-                      <strong>Can be disabled</strong>: Through your browser
-                      settings
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Marketing Cookies
-                  </h4>
-                  <p className="text-sm mb-2">
-                    <strong>Purpose</strong>: Show you relevant content and
-                    measure campaign effectiveness
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Social media pixels</strong>: Track engagement
-                      from social platforms
-                    </li>
-                    <li>
-                      <strong>Advertising partners</strong>: Measure
-                      effectiveness of our ads
-                    </li>
-                    <li>
-                      <strong>Retargeting</strong>: Show relevant ads on other
-                      websites
-                    </li>
-                    <li>
-                      <strong>Can be disabled</strong>: Through your browser
-                      settings or our cookie preferences
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  Types of Cookies We Use
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    First-Party Cookies
-                  </h4>
-                  <p className="text-sm mb-2">Set directly by BawoSocial:</p>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>User preferences</strong>: Language, theme
-                      settings
-                    </li>
-                    <li>
-                      <strong>Authentication</strong>: Login status and security
-                    </li>
-                    <li>
-                      <strong>Form data</strong>: Remember information
-                      you&apos;ve entered
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Third-Party Cookies
-                  </h4>
-                  <p className="text-sm mb-2">Set by our partners:</p>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Google Analytics</strong>: Website usage
-                      statistics
-                    </li>
-                    <li>
-                      <strong>Firebase</strong>: App performance and user
-                      analytics
-                    </li>
-                    <li>
-                      <strong>Stripe</strong>: Secure payment processing
-                    </li>
-                    <li>
-                      <strong>Social media</strong>: Sharing and engagement
-                      tracking
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  Your Cookie Choices
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Browser Controls
-                  </h4>
-                  <p className="text-sm mb-2">
-                    <strong>Chrome, Firefox, Safari, Edge</strong>:
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Block all cookies</strong>: In privacy/security
-                      settings
-                    </li>
-                    <li>
-                      <strong>Delete existing cookies</strong>: Clear browsing
-                      data
-                    </li>
-                    <li>
-                      <strong>Block third-party cookies</strong>: In advanced
-                      settings
-                    </li>
-                    <li>
-                      <strong>Incognito/Private mode</strong>: Browsing without
-                      saving cookies
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Cookie Preference Center
-                  </h4>
-                  <p className="text-sm mb-2">
-                    <strong>On our website</strong>:
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Manage preferences</strong>: Click the cookie
-                      banner or footer link
-                    </li>
-                    <li>
-                      <strong>Choose categories</strong>: Accept only essential,
-                      analytics, or marketing
-                    </li>
-                    <li>
-                      <strong>Update anytime</strong>: Change your preferences
-                      whenever you want
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Opt-Out Links
-                  </h4>
-                  <p className="text-sm mb-2">
-                    <strong>Direct opt-out options</strong>:
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Google Analytics</strong>:{" "}
-                      <a
-                        href="https://tools.google.com/dlpage/gaoptout"
-                        className="text-blue-600 hover:underline"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        tools.google.com/dlpage/gaoptout
-                      </a>
-                    </li>
-                    <li>
-                      <strong>Facebook Pixel</strong>: In your Facebook ad
-                      preferences
-                    </li>
-                    <li>
-                      <strong>General advertising</strong>:{" "}
-                      <a
-                        href="http://optout.aboutads.info"
-                        className="text-blue-600 hover:underline"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        optout.aboutads.info
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  Mobile App Data
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Not Traditional Cookies
-                  </h4>
-                  <p className="text-sm mb-2">
-                    Our mobile app doesn&apos;t use browser cookies, but similar
-                    technologies:
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Local storage</strong>: App preferences and
-                      settings
-                    </li>
-                    <li>
-                      <strong>Analytics SDKs</strong>: Firebase for usage
-                      analytics
-                    </li>
-                    <li>
-                      <strong>Advertising IDs</strong>: For relevant ad
-                      experiences
-                    </li>
-                    <li>
-                      <strong>Crash reporting</strong>: To improve app stability
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Mobile Controls
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>iOS</strong>: Settings &gt; Privacy &amp; Security
-                      &gt; Tracking
-                    </li>
-                    <li>
-                      <strong>Android</strong>: Settings &gt; Privacy &gt; Ads
-                    </li>
-                    <li>
-                      <strong>App settings</strong>: Manage preferences within
-                      BawoSocial app
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  Data We Collect Through Cookies
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Website Visitors
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Pages visited</strong>: Which sections interest
-                      you most
-                    </li>
-                    <li>
-                      <strong>Time spent</strong>: How long you engage with our
-                      content
-                    </li>
-                    <li>
-                      <strong>Device information</strong>: Browser type, screen
-                      size, operating system
-                    </li>
-                    <li>
-                      <strong>Referral source</strong>: How you found our
-                      website
-                    </li>
-                    <li>
-                      <strong>Geographic location</strong>: General region (not
-                      precise location)
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Conversion Tracking
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Sign-up process</strong>: Where visitors drop off
-                      or complete registration
-                    </li>
-                    <li>
-                      <strong>Purchase behavior</strong>: What leads to founding
-                      member conversions
-                    </li>
-                    <li>
-                      <strong>Campaign effectiveness</strong>: Which marketing
-                      efforts work best
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  How Long Cookies Last
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Session Cookies
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Duration</strong>: Deleted when you close your
-                      browser
-                    </li>
-                    <li>
-                      <strong>Purpose</strong>: Temporary functionality like
-                      login status
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Persistent Cookies
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Essential cookies</strong>: Up to 1 year
-                    </li>
-                    <li>
-                      <strong>Analytics cookies</strong>: Up to 2 years
-                    </li>
-                    <li>
-                      <strong>Marketing cookies</strong>: Up to 1 year
-                    </li>
-                    <li>
-                      <strong>Preference cookies</strong>: Until you change them
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  Cookie Security
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Protection Measures
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Secure transmission</strong>: HTTPS encryption for
-                      all cookies
-                    </li>
-                    <li>
-                      <strong>Limited access</strong>: Only authorized systems
-                      can read our cookies
-                    </li>
-                    <li>
-                      <strong>Regular audits</strong>: We review and update
-                      cookie practices
-                    </li>
-                    <li>
-                      <strong>No sensitive data</strong>: Personal information
-                      is not stored in cookies
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  Changes to This Policy
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Updates
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Notification</strong>: We&apos;ll update the
-                      &quot;Last Updated&quot; date
-                    </li>
-                    <li>
-                      <strong>Significant changes</strong>: We&apos;ll notify
-                      you via email or website banner
-                    </li>
-                    <li>
-                      <strong>Your consent</strong>: Continued use means
-                      acceptance of updates
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  Contact Us
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Questions About Cookies?
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Email</strong>: privacy@bawoapp.com
-                    </li>
-                    <li>
-                      <strong>Subject line</strong>: &quot;Cookie Policy
-                      Question&quot;
-                    </li>
-                    <li>
-                      <strong>Response time</strong>: Within 48 hours
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Privacy Team
-                  </h4>
-                  <p className="text-sm">
-                    We&apos;re committed to transparency about how we use
-                    cookies and protecting your privacy while providing the best
-                    possible experience.
-                  </p>
-                </div>
-              </div>
-
-              <div className="border-t border-gray-200 pt-6 text-center">
-                <p className="text-gray-600 font-museo-medium">
-                  <strong>Need help managing your cookie preferences?</strong>{" "}
-                  Contact us at privacy@bawoapp.com
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Terms of Service Modal */}
-      {showTermsOfService && (
-        <div
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-          onClick={() => setShowTermsOfService(false)}
-        >
-          <div
-            className="bg-white rounded-2xl max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="sticky top-0 bg-white border-b border-gray-200 p-6 rounded-t-2xl">
-              <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-gray-900 font-museo-bold">
-                  BawoSocial Terms of Service
-                </h2>
-              <button
-                  onClick={() => setShowTermsOfService(false)}
-                  className="text-gray-500 hover:text-gray-700 text-2xl font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
-              >
-                  ×
-              </button>
-            </div>
-              <p className="text-gray-600 font-museo-medium mt-2">
-                Last Updated: July 2025
-              </p>
-          </div>
-
-            <div className="p-6 space-y-6 text-gray-800">
-              <p className="font-museo-medium">
-                Welcome to BawoSocial! These Terms of Service ("Terms") govern your
-                access to and use of our website (bawoapp.com), mobile
-                application, and any related services (collectively, the
-                "Service"). By using BawoSocial, you agree to these Terms. If you
-                don&apos;t agree, please don&apos;t use our services.
-              </p>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  1. About BawoSocial
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Our Service
-                  </h4>
-                  <p className="text-sm mb-3">
-                    BawoSocial is a community platform designed to connect Nigerians
-                    worldwide for authentic relationships, friendships,
-                    professional networking, and cultural celebration. We
-                    provide both a website and mobile application to facilitate
-                    these connections.
-                  </p>
-
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Founding Member Program
-                  </h4>
-                  <p className="text-sm">
-                    We offer a limited founding member program with exclusive
-                    benefits and lifetime access to premium features. Founding
-                    membership is limited to the first 100 members.
-                  </p>
-        </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  2. Eligibility and Account Registration
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Age Requirement
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>18+ only</strong>: You must be 18 years or older
-                      to use BawoSocial
-                    </li>
-                    <li>
-                      <strong>Age verification</strong>: By creating an account,
-                      you confirm you meet this requirement
-                    </li>
-                    <li>
-                      <strong>Enforcement</strong>: We may request verification
-                      and will remove accounts of users under 18
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Account Responsibility
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Accurate information</strong>: Provide truthful
-                      and up-to-date information
-                    </li>
-                    <li>
-                      <strong>Security</strong>: Keep your login credentials
-                      secure and confidential
-                    </li>
-                    <li>
-                      <strong>Single account</strong>: Maintain only one account
-                      per person
-                    </li>
-                    <li>
-                      <strong>Verification</strong>: We may verify your identity
-                      and Nigerian heritage
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  3. Founding Member Terms
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Founding Membership Benefits
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Lifetime premium access</strong>: No monthly fees
-                      ever (normally $9.99/month)
-                    </li>
-                    <li>
-                      <strong>Founding member badge</strong>: Special
-                      recognition in the community
-                    </li>
-                    <li>
-                      <strong>Unlimited group creation</strong>: Create and
-                      manage unlimited interest groups
-                    </li>
-                    <li>
-                      <strong>Premium spotlights</strong>: Enhanced profile
-                      visibility
-                    </li>
-                    <li>
-                      <strong>Direct input</strong>: Influence on new features
-                      and platform direction
-                    </li>
-                    <li>
-                      <strong>Exclusive community</strong>: Access to founding
-                      member-only events and discussions
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Payment Terms
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>One-time fee</strong>: $50 for lifetime founding
-                      membership
-                    </li>
-                    <li>
-                      <strong>Payment processing</strong>: Securely handled by
-                      Stripe
-                    </li>
-                    <li>
-                      <strong>Refund policy</strong>: 30-day money-back
-                      guarantee
-                    </li>
-                    <li>
-                      <strong>Limited availability</strong>: Only 100 founding
-                      member spots available
-                    </li>
-                    <li>
-                      <strong>No recurring charges</strong>: Founding membership
-                      is a one-time payment
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  4. User Conduct and Community Guidelines
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Acceptable Use
-                  </h4>
-                  <p className="text-sm mb-2">You agree to use BawoSocial for:</p>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Building authentic connections</strong> with other
-                      Nigerians
-                    </li>
-                    <li>
-                      <strong>Professional networking</strong> and career
-                      opportunities
-                    </li>
-                    <li>
-                      <strong>Cultural celebration</strong> and community
-                      building
-                    </li>
-                    <li>
-                      <strong>Friendship and social engagement</strong>
-                    </li>
-                    <li>
-                      <strong>Dating and romantic relationships</strong> (app
-                      users)
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Prohibited Conduct
-                  </h4>
-                  <p className="text-sm mb-2">You agree NOT to:</p>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Harass, threaten, or harm</strong> other users
-                    </li>
-                    <li>
-                      <strong>Post false, misleading, or impersonating</strong>{" "}
-                      content
-                    </li>
-                    <li>
-                      <strong>Spam or solicit</strong> for external products or
-                      services
-                    </li>
-                    <li>
-                      <strong>Share inappropriate content</strong> (explicit,
-                      violent, or offensive material)
-                    </li>
-                    <li>
-                      <strong>Violate laws</strong> or regulations in your
-                      jurisdiction
-                    </li>
-                    <li>
-                      <strong>Attempt to hack</strong> or compromise platform
-                      security
-                    </li>
-                    <li>
-                      <strong>Create fake profiles</strong> or misrepresent your
-                      identity
-                    </li>
-                    <li>
-                      <strong>Discriminate</strong> based on tribe, religion,
-                      gender, or other characteristics
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  5. Your Content and Intellectual Property
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Your Content Rights
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Ownership</strong>: You retain ownership of
-                      content you create (photos, messages, posts)
-                    </li>
-                    <li>
-                      <strong>License to BawoSocial</strong>: You grant us a
-                      non-exclusive, worldwide, royalty-free license to use,
-                      display, and distribute your content as needed for
-                      platform operation
-                    </li>
-                    <li>
-                      <strong>Purpose limitation</strong>: We only use your
-                      content to provide BawoSocial services
-                    </li>
-                    <li>
-                      <strong>No selling</strong>: We will never sell your
-                      content to third parties
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  6. Privacy and Data Protection
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Privacy Commitment
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Privacy-first approach</strong>: We prioritize
-                      protecting your personal information
-                    </li>
-                    <li>
-                      <strong>No data selling</strong>: We never sell personal
-                      data to third parties
-                    </li>
-                    <li>
-                      <strong>Secure processing</strong>: All data handled with
-                      industry-standard security
-                    </li>
-                    <li>
-                      <strong>Transparency</strong>: Clear information about
-                      data collection and use
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  7. Payment Terms and Billing
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Founding Member Payments
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Payment processor</strong>: All payments handled
-                      securely by Stripe
-                    </li>
-                    <li>
-                      <strong>Pricing</strong>: $50 one-time payment for
-                      founding membership
-                    </li>
-                    <li>
-                      <strong>Payment methods</strong>: Credit cards, debit
-                      cards, and other Stripe-supported methods
-                    </li>
-                    <li>
-                      <strong>Currency</strong>: USD (other currencies may be
-                      supported in the future)
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  8. Refunds and Cancellations
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    30-Day Guarantee
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Full refund</strong>: Available within 30 days of
-                      founding member purchase
-                    </li>
-                    <li>
-                      <strong>No questions asked</strong>: We respect your
-                      decision
-                    </li>
-                    <li>
-                      <strong>Process</strong>: Email support@bawoapp.com for
-                      instant refund processing
-                    </li>
-                    <li>
-                      <strong>Timeline</strong>: Refunds processed within 3-5
-                      business days
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  9. Platform Availability and Support
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Service Availability
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Best effort</strong>: We strive for 99.9% uptime
-                      but cannot guarantee uninterrupted service
-                    </li>
-                    <li>
-                      <strong>Maintenance</strong>: Scheduled maintenance will
-                      be announced in advance
-                    </li>
-                    <li>
-                      <strong>Updates</strong>: Regular app and website updates
-                      to improve functionality
-                    </li>
-                    <li>
-                      <strong>Support</strong>: Customer support available via
-                      email and in-app chat
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  10. Termination and Account Suspension
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Our Right to Terminate
-                  </h4>
-                  <p className="text-sm mb-2">
-                    We may suspend or terminate accounts for:
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Terms violations</strong>: Breaking any part of
-                      these Terms
-                    </li>
-                    <li>
-                      <strong>Community harm</strong>: Behavior that harms other
-                      users or the community
-                    </li>
-                    <li>
-                      <strong>Illegal activity</strong>: Using BawoSocial for illegal
-                      purposes
-                    </li>
-                    <li>
-                      <strong>Abuse</strong>: Repeated violations despite
-                      warnings
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  11. Disclaimers and Limitations
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Service Disclaimers
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>&quot;As is&quot; basis</strong>: BawoSocial provided
-                      without warranties of any kind
-                    </li>
-                    <li>
-                      <strong>No guarantees</strong>: We don&apos;t guarantee
-                      specific outcomes, matches, or connections
-                    </li>
-                    <li>
-                      <strong>User responsibility</strong>: You&apos;re
-                      responsible for your interactions with other users
-                    </li>
-                    <li>
-                      <strong>Third-party content</strong>: We&apos;re not
-                      responsible for content created by users
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  12. Dispute Resolution
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Informal Resolution
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>First step</strong>: Contact support@bawoapp.com
-                      to resolve issues
-                    </li>
-                    <li>
-                      <strong>Good faith</strong>: We&apos;ll work in good faith
-                      to address your concerns
-                    </li>
-                    <li>
-                      <strong>Response time</strong>: Initial response within 48
-                      hours
-                    </li>
-                    <li>
-                      <strong>Escalation</strong>: Unresolved issues may be
-                      escalated to management
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  13. International Users
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Global Community
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Worldwide service</strong>: BawoSocial serves Nigerian
-                      diaspora globally
-                    </li>
-                    <li>
-                      <strong>Local laws</strong>: You must comply with laws in
-                      your jurisdiction
-                    </li>
-                    <li>
-                      <strong>Data transfers</strong>: Your data may be
-                      processed in different countries
-                    </li>
-                    <li>
-                      <strong>Currency</strong>: Payments processed in USD but
-                      may display in local currency
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  14. Changes to Terms
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Updates
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Notification</strong>: We&apos;ll notify you of
-                      significant changes via email or app notification
-                    </li>
-                    <li>
-                      <strong>Effective date</strong>: Changes take effect 30
-                      days after notification
-                    </li>
-                    <li>
-                      <strong>Continued use</strong>: Using BawoSocial after changes
-                      means you accept updated Terms
-                    </li>
-                    <li>
-                      <strong>Disagreement</strong>: If you disagree with
-                      changes, you may delete your account
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  15. Miscellaneous
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Entire Agreement
-                  </h4>
-                  <p className="text-sm">
-                    These Terms, together with our Privacy Policy and other
-                    referenced policies, constitute the entire agreement between
-                    you and BawoSocial.
-                  </p>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                  16. Contact Information
-                </h3>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    General Support
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Email</strong>: support@bawoapp.com
-                    </li>
-                    <li>
-                      <strong>Response time</strong>: Within 24 hours
-                    </li>
-                    <li>
-                      <strong>Website</strong>: bawoapp.com/contact
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                  <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                    Legal Inquiries
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>
-                      <strong>Email</strong>: legal@bawoapp.com
-                    </li>
-                    <li>
-                      <strong>Subject</strong>: Include &quot;Terms of
-                      Service&quot; in subject line
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="border-t border-gray-200 pt-6 text-center">
-                <p className="text-gray-600 font-museo-medium">
-                  <strong>Questions about these Terms?</strong> Contact us at
-                  support@bawoapp.com - we&apos;re here to help build an amazing
-                  community together!
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Privacy Policy Modal */}
       {showPrivacyPolicy && (
@@ -2722,8 +1090,9 @@ function App() {
                       site (via Google Analytics and similar tools)
                     </li>
                     <li>
-                      <strong>Cookies</strong>: See our Cookie Policy for
-                      detailed information
+                      <strong>Cookies</strong>: Used for basic site functionality
+                      and analytics (you can control cookies in your browser
+                      settings)
                     </li>
                     <li>
                       <strong>Payment information</strong>: Processed securely
