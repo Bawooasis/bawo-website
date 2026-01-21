@@ -375,11 +375,14 @@ function App() {
           <div className="mt-4">
             <a
               href={CONTENT.hero.testflightLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block border border-white/30 text-white hover:bg-white/5 px-8 sm:px-10 py-4 rounded-full min-h-[44px] font-bold text-base md:text-lg leading-tight transform hover:translate-y-[-1px] transition-all duration-300 font-museo-bold w-full sm:w-auto max-w-[350px] text-center backdrop-blur-[2px]"
+              onClick={(e) => {
+                e.preventDefault();
+                return false;
+              }}
+              className="inline-block border border-white/30 text-white/60 hover:text-white/60 hover:bg-white/5 px-8 sm:px-10 py-4 rounded-full min-h-[44px] font-bold text-base md:text-lg leading-tight transition-all duration-300 font-museo-bold w-full sm:w-auto max-w-[350px] text-center backdrop-blur-[2px] cursor-not-allowed opacity-70"
+              title="Coming Soon"
             >
-              Join the Beta (TestFlight)
+              Join the Beta (TestFlight) - Coming Soon
             </a>
           </div>
           </div>
