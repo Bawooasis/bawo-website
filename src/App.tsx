@@ -72,6 +72,7 @@ function App() {
       "-=0.6"
     );
 
+
     // Phone mockup animation
     heroTimeline.fromTo(
       phoneRef.current,
@@ -183,6 +184,8 @@ function App() {
 
   // Simple auto-rotating preview in hero
   useEffect(() => {
+    if (!previewImages || previewImages.length === 0) return;
+    
     const intervalId = setInterval(() => {
       // crossfade
       if (previewImgRef.current) {
@@ -205,6 +208,7 @@ function App() {
     }, 3500);
     return () => clearInterval(intervalId);
   }, [previewImages.length]);
+
 
   const handleEarlyAccess = () => {
     const emailSection = document.getElementById("email-section");
@@ -368,37 +372,39 @@ function App() {
           </div>
           
               {/* Right Content - iPhone Mockup */}
-              <div
-                ref={phoneRef}
-                className="flex justify-center lg:justify-end lg:pr-10 xl:pr-16 order-1 lg:order-2 -mt-10 md:-mt-14"
-              >
-                <div className="relative">
+              {previewImages.length > 0 && (
+                <div
+                  ref={phoneRef}
+                  className="flex justify-center lg:justify-end lg:pr-10 xl:pr-16 order-1 lg:order-2 -mt-10 md:-mt-14"
+                >
                   <div className="relative">
-                    <img
-                      ref={previewImgRef}
-                      src={previewImages[activePreviewIndex]}
-                      alt="BawoSocial App Preview - BawoSocial group chat"
-                      className="w-64 md:w-80 lg:w-96 h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] transform-gpu transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-[2rem] animate-breathing object-cover will-change-transform will-change-opacity"
-                      style={{ opacity: 1 }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#ff7f39]/10 via-transparent to-transparent rounded-[2rem] pointer-events-none"></div>
-                    <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-white/5 to-transparent rounded-t-[2rem] pointer-events-none"></div>
-                  </div>
-                  {/* Dots */}
-                  <div className="flex items-center justify-center gap-2 absolute -bottom-6 left-1/2 -translate-x-1/2">
-                    {previewImages.map((_, idx) => (
-                      <span
-                        key={idx}
-                        className={`w-2.5 h-2.5 rounded-full ${
-                          idx === activePreviewIndex
-                            ? "bg-[#ff7f39]"
-                            : "bg-white/30"
-                        }`}
+                    <div className="relative">
+                      <img
+                        ref={previewImgRef}
+                        src={previewImages[activePreviewIndex]}
+                        alt="BawoSocial App Preview"
+                        className="w-64 md:w-80 lg:w-96 h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] transform-gpu transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-[2rem] animate-breathing object-cover will-change-transform will-change-opacity"
+                        style={{ opacity: 1 }}
                       />
-                    ))}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#ff7f39]/10 via-transparent to-transparent rounded-[2rem] pointer-events-none"></div>
+                      <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-white/5 to-transparent rounded-t-[2rem] pointer-events-none"></div>
+                    </div>
+                    {/* Dots */}
+                    <div className="flex items-center justify-center gap-2 absolute -bottom-6 left-1/2 -translate-x-1/2">
+                      {previewImages.map((_, idx) => (
+                        <span
+                          key={idx}
+                          className={`w-2.5 h-2.5 rounded-full ${
+                            idx === activePreviewIndex
+                              ? "bg-[#ff7f39]"
+                              : "bg-white/30"
+                          }`}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
         </div>
       </section>
@@ -605,55 +611,27 @@ function App() {
       {/* In-App Preview Section */}
       <section
         className="relative py-24 bg-transparent"
-
       >
-
         <div className="relative z-10 container mx-auto px-6">
           <h2 className="text-center text-4xl md:text-5xl font-museo-bold text-white mb-12">
             This Is What Belonging Looks Like
-            </h2>
+          </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            <div className="text-center">
-              <img
-                src={IMAGES.inApp.features[0]}
-                alt="Profiles"
-                className="rounded-xl h-80 w-full object-contain mx-auto"
-              />
-              <p className="text-white mt-3 font-museo-medium">
-                Find Your Tribe - discover people who share your vibe &
-                interests.
-              </p>
-            </div>
-            <div className="text-center">
-              <img
-                src={IMAGES.inApp.features[1]}
-                alt="Groups"
-                className="rounded-xl h-80 w-full object-contain mx-auto"
-              />
-              <p className="text-white mt-3 font-museo-medium">
-                Join Exclusive Groups - connect with like-minded Nigerians.
-              </p>
-          </div>
-            <div className="text-center">
-              <img
-                src={IMAGES.inApp.features[2]}
-                alt="Events"
-                className="rounded-xl h-80 w-full object-contain mx-auto"
-              />
-              <p className="text-white mt-3 font-museo-medium">
-                Attend Events - virtual and in-person meetups worldwide.
-              </p>
-            </div>
-            <div className="text-center">
-              <img
-                src={IMAGES.inApp.features[3]}
-                alt="Culture"
-                className="rounded-xl h-80 w-full object-contain mx-auto"
-              />
-              <p className="text-white mt-3 font-museo-medium">
-                Celebrate Culture - language, food, music, and heritage.
-              </p>
-            </div>
+            {IMAGES.inApp.features.map((image, index) => (
+              <div key={index} className="text-center">
+                <img
+                  src={image}
+                  alt={`BawoSocial Feature ${index + 1}`}
+                  className="rounded-xl h-80 w-full object-contain mx-auto"
+                />
+                <p className="text-white mt-3 font-museo-medium">
+                  {index === 0 && "Find Your Tribe - discover people who share your vibe & interests."}
+                  {index === 1 && "Join Exclusive Groups - connect with like-minded Nigerians."}
+                  {index === 2 && "Attend Events - virtual and in-person meetups worldwide."}
+                  {index === 3 && "Celebrate Culture - language, food, music, and heritage."}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -919,12 +897,6 @@ function App() {
               >
                 {CONTENT.finalCta.cta}
                 </button>
-              <button
-                onClick={handleEarlyAccess}
-                className="bg-white/10 border border-white/30 text-white hover:bg-white/20 px-10 py-4 rounded-full min-h-[46px] font-bold text-base md:text-lg leading-tight transform hover:translate-y-[-1px] transition-all duration-300 font-museo-bold backdrop-blur-[2px]"
-              >
-                {CONTENT.finalCta.ctaSecondary}
-              </button>
                   </div>
           </div>
         </div>

@@ -1,7 +1,6 @@
 // Website Images Constants - Organized by Usage
 
 // Local asset imports
-import appMockup from "../assets/images/app-mockup.png";
 // import globeImage from "../assets/images/GLOBE.png"; // File removed
 import bawoLogo from "../assets/images/bawo-logo.png";
 import adoraImage from "../assets/images/ADORA.jpg";
@@ -14,16 +13,15 @@ import laImage from "../assets/images/LA.jpg";
 import canadaImage from "../assets/images/canada.jpg";
 import houstonImage from "../assets/images/hOUSTON.jpg";
 
-// Inside the App Images
-import exploreScreen from "../assets/images/InsideTheAppImages/ExploreScreen.png";
-import matchesScreenshot from "../assets/images/InsideTheAppImages/matchesscreenshot.png";
-import notificationsShot from "../assets/images/InsideTheAppImages/Notificationsshot.png";
-import pledgeSection from "../assets/images/InsideTheAppImages/PledgeSection.png";
+// Inside the App Images - New screenshots
+import screenshot1 from "../assets/images/InsideTheAppImages/1.png";
+import screenshot2 from "../assets/images/InsideTheAppImages/2.png";
+import screenshot3 from "../assets/images/InsideTheAppImages/3.png";
+import screenshot4 from "../assets/images/InsideTheAppImages/4.png";
 
 export const IMAGES = {
   // Local Assets
   assets: {
-    appMockup,
     globe: "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=400&q=80&auto=format&fit=crop", // Placeholder globe image
     logo: bawoLogo,
     // Add more local images here as needed
@@ -31,12 +29,12 @@ export const IMAGES = {
 
   // App Preview/Demo Images
   previews: {
-    main: appMockup,
+    main: screenshot1,
     gallery: [
-      exploreScreen,
-      matchesScreenshot,
-      notificationsShot,
-      pledgeSection
+      screenshot1,
+      screenshot2,
+      screenshot3,
+      screenshot4
     ]
   },
 
@@ -50,10 +48,10 @@ export const IMAGES = {
   // In-App Feature Screenshots
   inApp: {
     features: [
-      exploreScreen,
-      matchesScreenshot,
-      notificationsShot,
-      pledgeSection
+      screenshot1,
+      screenshot2,
+      screenshot3,
+      screenshot4
     ]
   },
 
@@ -113,7 +111,7 @@ export const getCityImage = (index: number) => {
 };
 
 export const getPreviewImage = (index: number) => {
-  return IMAGES.previews.gallery[index] || IMAGES.assets.appMockup;
+  return IMAGES.previews.gallery[index] || IMAGES.previews.main;
 };
 
 export const getEventImage = (index: number) => {
