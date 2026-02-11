@@ -150,10 +150,21 @@
 @layer base {
   html {
     font-family: 'MuseoModerno', sans-serif;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  
+
   body {
     font-family: 'MuseoModerno', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Promote main scroll to GPU for smoother 60fps-style scrolling on desktop */
+  #root {
+    min-height: 100vh;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 }
 

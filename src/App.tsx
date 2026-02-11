@@ -2,8 +2,11 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   BadgeCheck,
+  BookOpen,
   Calendar,
   Headphones,
+  Home,
+  Sparkles,
   Star,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -260,16 +263,27 @@ function App() {
 
 
 
-          {/* BawoSocial Logo - Higher Position with Social Icons */}
+          {/* BawoSocial Logo - Top Left */}
           <div
             ref={logoRef}
             className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-8 lg:top-10 lg:left-10 xl:top-12 xl:left-12 2xl:top-16 2xl:left-16 z-20"
-            
           >
             <div className="relative z-10">
-          <Logo />
+              <Logo />
             </div>
-      </div>
+          </div>
+
+          {/* Top Right: Login / Beta (tertiary – dev link) */}
+          <div className="absolute top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 z-20">
+            <a
+              href={CONTENT.hero.testflightLink}
+              onClick={(e) => e.preventDefault()}
+              className="text-white/60 hover:text-white/80 text-sm font-museo-medium transition-colors cursor-not-allowed"
+              title="Coming Soon"
+            >
+              Login / Beta
+            </a>
+          </div>
 
           {/* Social Media Icons - Bottom Right */}
           <div className="absolute bottom-20 right-6 z-20">
@@ -349,43 +363,39 @@ function App() {
           </p>
                 </div>
 
-                {/* Call to Action Buttons */}
+                {/* Call to Action Buttons – clear hierarchy */}
                 <div
                   ref={ctaRef}
-                  className="flex flex-col sm:flex-row gap-4 justify-start"
+                  className="flex flex-col sm:flex-row gap-4 justify-start items-stretch sm:items-center"
                 >
                   <div className="relative">
-            <button
-              onClick={handleFoundingMember}
-              className={`bg-white/10 border ${TAILWIND_COLORS.primary.border} text-white hover:bg-white/15 px-8 sm:px-10 py-4 rounded-full min-h-[44px] font-bold text-base md:text-lg leading-tight transform hover:translate-y-[-1px] transition-all duration-300 font-museo-bold w-full sm:w-auto max-w-[350px] animate-lift backdrop-blur-sm`}
-            >
+                    <button
+                      onClick={handleFoundingMember}
+                      className="bg-gradient-to-r from-[#F37021] to-[#ff6b35] hover:from-[#ff6b35] hover:to-[#ff5a2e] text-white px-8 sm:px-10 py-4 rounded-full min-h-[44px] font-bold text-base md:text-lg leading-tight transform hover:translate-y-[-1px] transition-all duration-300 font-museo-bold w-full sm:w-auto max-w-[350px] animate-lift shadow-[0_8px_24px_rgba(243,112,33,0.35)]"
+                    >
                       {CONTENT.hero.ctaPrimary}
-            </button>
-                    {/* Urgency Indicator */}
-                    <div className="absolute -top-2 -right-2 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                    </button>
+                    <div className="absolute -top-2 -right-2 w-3 h-3 bg-red-500 rounded-full animate-pulse" aria-hidden />
                   </div>
-            <button
-              onClick={handleEarlyAccess}
-                    className={`bg-white/10 border ${TAILWIND_COLORS.primary.border} text-white ${TAILWIND_COLORS.primary.hover.bg} hover:text-white px-8 sm:px-10 py-4 rounded-full min-h-[44px] font-bold text-base md:text-lg leading-tight transform hover:translate-y-[-1px] transition-all duration-300 font-museo-bold w-full sm:w-auto max-w-[350px] animate-lift backdrop-blur-[2px]`}
-            >
-              {CONTENT.hero.ctaSecondary}
-            </button>
-          </div>
-          {/* TestFlight Button */}
-          <div className="mt-4">
-            <a
-              href={CONTENT.hero.testflightLink}
-              onClick={(e) => {
-                e.preventDefault();
-                return false;
-              }}
-              className="inline-block border border-white/30 text-white/60 hover:text-white/60 hover:bg-white/5 px-8 sm:px-10 py-4 rounded-full min-h-[44px] font-bold text-base md:text-lg leading-tight transition-all duration-300 font-museo-bold w-full sm:w-auto max-w-[350px] text-center backdrop-blur-[2px] cursor-not-allowed opacity-70"
-              title="Coming Soon"
-            >
-              Join the Beta (TestFlight) - Coming Soon
-            </a>
-          </div>
-          </div>
+                  <button
+                    onClick={handleEarlyAccess}
+                    className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 sm:px-10 py-4 rounded-full min-h-[44px] font-bold text-base md:text-lg leading-tight transition-all duration-300 font-museo-bold w-full sm:w-auto max-w-[350px]"
+                  >
+                    {CONTENT.hero.ctaSecondary}
+                  </button>
+                </div>
+                <p className="text-gray-400 text-sm font-museo-regular mt-4">
+                  Already a member?{" "}
+                  <a
+                    href={CONTENT.hero.testflightLink}
+                    onClick={(e) => e.preventDefault()}
+                    className="text-gray-400 hover:text-white transition-colors cursor-not-allowed"
+                    title="Coming Soon"
+                  >
+                    Download Beta
+                  </a>
+                </p>
+              </div>
           
               {/* Right Content - iPhone Mockup */}
               {previewImages.length > 0 && (
@@ -425,19 +435,75 @@ function App() {
         </div>
       </section>
 
+      {/* Stats Section – Batch 1 scarcity + progress bar */}
+      <section
+        ref={statsRef}
+        className="relative py-20 md:py-24 bg-transparent"
+      >
+        <div className="relative z-10 container mx-auto px-6">
+          <div className="text-center space-y-6">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white font-museo-bold tracking-tight">
+              {CONTENT.stats.title}
+            </h2>
+            <p className="text-lg text-white/80 font-museo-medium max-w-2xl mx-auto">
+              {CONTENT.stats.subtitle}
+            </p>
+            <div className="flex flex-wrap justify-center gap-8 md:gap-12 pt-6">
+              <div className="text-center">
+                <p className={`text-2xl md:text-3xl font-bold ${TAILWIND_COLORS.primary.text} font-museo-bold`}>
+                  {CONTENT.stats.metrics.batch1.value}
+                </p>
+                <p className="text-sm md:text-base text-white/80 font-museo-medium uppercase tracking-wide">
+                  {CONTENT.stats.metrics.batch1.label}
+                </p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl md:text-3xl font-bold text-white font-museo-bold">
+                  {CONTENT.stats.metrics.status.value}
+                </p>
+                <p className="text-sm md:text-base text-white/80 font-museo-medium uppercase tracking-wide">
+                  {CONTENT.stats.metrics.status.label}
+                </p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl md:text-3xl font-bold text-white font-museo-bold">
+                  {CONTENT.stats.metrics.access.value}
+                </p>
+                <p className="text-sm md:text-base text-white/80 font-museo-medium uppercase tracking-wide">
+                  {CONTENT.stats.metrics.access.label}
+                </p>
+              </div>
+            </div>
+            {/* Progress bar – FOMO visual */}
+            <div className="max-w-xl mx-auto pt-8 space-y-2">
+              <p className="text-base md:text-lg font-bold font-museo-bold text-white/90">
+                050 / 500 Spots Taken
+              </p>
+              <div className="h-2.5 w-full rounded-full bg-white/10 overflow-hidden">
+                <div
+                  className="h-full w-[10%] rounded-full bg-gradient-to-r from-[#F37021] to-[#ff6b35] transition-all duration-500"
+                  aria-label="50 of 500 spots taken"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        {/* Origin Story Section */}
-        <section className="relative min-h-screen flex items-center justify-center bg-transparent">
-          <div className="relative z-10 container mx-auto px-6 py-20 max-w-4xl">
-            <div className="text-white space-y-8 text-center">
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-museo-bold leading-tight">
+        {/* Origin Story Section – constrained width, left-aligned, key phrases bold */}
+        <section className="relative min-h-screen flex items-center justify-center bg-transparent py-24">
+          <div className="relative z-10 container mx-auto px-6 flex flex-col items-center">
+            <div className="text-white space-y-8 w-full max-w-2xl mx-auto">
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold font-museo-bold leading-tight text-center tracking-tight">
                 {CONTENT.origin.title}
               </h2>
-              <p className="text-white/90 font-museo-medium text-xl md:text-2xl leading-relaxed">
-                {CONTENT.origin.mainText}
+              <p className="text-white/95 font-museo-semibold text-xl md:text-2xl leading-relaxed text-left">
+                Most Nigerians in the diaspora feel isolated and{" "}
+                <strong className="font-museo-bold text-white">disconnected from opportunity</strong>. We miss our culture, our people, and our network. BawoSocial was created to fix that. We are a{" "}
+                <strong className="font-museo-bold text-white">utility-first platform</strong> to find your tribe, access The Black Book of resources, and build meaningful wealth and relationships—powered by smart technology that understands who we are.
               </p>
               {CONTENT.origin.visionText && (
-                <p className="text-white/80 font-museo-regular text-lg md:text-xl leading-relaxed">
+                <p className="text-white/80 font-museo-regular text-lg md:text-xl leading-relaxed text-left">
                   {CONTENT.origin.visionText}
                 </p>
               )}
@@ -448,10 +514,8 @@ function App() {
       {/* Founding Member Section */}
       <section
         ref={foundingMemberRef}
-        className="relative min-h-screen bg-transparent"
-
+        className="relative min-h-screen bg-transparent py-24"
       >
-
         <div className="relative z-10 container mx-auto px-6 py-20 min-h-[calc(100vh-10rem)]">
           <div className="grid lg:grid-cols-2 gap-12 h-full items-stretch">
             {/* Left Content - Benefits */}
@@ -509,25 +573,30 @@ function App() {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Features Section – 3-column cards with icons */}
       <section
         ref={featuresRef}
-        className="relative min-h-screen flex items-center justify-center bg-transparent"
-
+        className="relative min-h-screen flex items-center justify-center bg-transparent py-24"
       >
-        
-        <div className="relative z-10 text-white px-6 max-w-4xl py-20 mx-auto">
+        <div className="relative z-10 text-white px-6 max-w-6xl py-20 mx-auto w-full">
           <h2 className={`text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-16 ${TAILWIND_COLORS.primary.text} font-museo-bold`}>
             {CONTENT.features.title}
           </h2>
-          <div className="space-y-12">
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {CONTENT.features.items.map((item, index) => {
+              const Icon = index === 0 ? Home : index === 1 ? BookOpen : Sparkles;
               return (
-                <div key={index} className="feature-card text-center space-y-4">
-                  <h3 className="text-2xl md:text-3xl font-bold font-museo-bold text-white">
+                <div
+                  key={index}
+                  className="feature-card bg-white/[0.06] border border-white/10 rounded-2xl p-8 text-left hover:bg-white/[0.08] hover:border-white/15 transition-all duration-300"
+                >
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${TAILWIND_COLORS.primary.text} bg-[#F37021]/20`}>
+                    <Icon className="w-6 h-6" strokeWidth={2} />
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-bold font-museo-bold text-white mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-lg md:text-xl opacity-90 font-museo-regular leading-relaxed text-white/90 max-w-2xl mx-auto">
+                  <p className="text-base md:text-lg font-museo-regular leading-relaxed text-white/85">
                     {item.description}
                   </p>
                 </div>
@@ -540,8 +609,7 @@ function App() {
       {/* Testimonials Section */}
       <section
         ref={testimonialsRef}
-        className="relative py-20 bg-transparent"
-
+        className="relative py-24 bg-transparent"
       >
 
         <div className="relative z-10 container mx-auto px-6">
@@ -629,7 +697,7 @@ function App() {
         className="relative py-24 bg-transparent"
       >
         <div className="relative z-10 container mx-auto px-6">
-          <h2 className="text-center text-4xl md:text-5xl font-museo-bold text-white mb-12">
+          <h2 className="text-center text-4xl md:text-5xl font-bold font-museo-bold text-white mb-12">
             This Is What Belonging Looks Like
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
@@ -641,10 +709,10 @@ function App() {
                   className="rounded-xl h-80 w-full object-contain mx-auto"
                 />
                 <p className="text-white mt-3 font-museo-medium">
-                  {index === 0 && "Find Your Tribe - discover people who share your vibe & interests."}
-                  {index === 1 && "Join Exclusive Groups - connect with like-minded Nigerians."}
-                  {index === 2 && "Attend Events - virtual and in-person meetups worldwide."}
-                  {index === 3 && "Celebrate Culture - language, food, music, and heritage."}
+                  {index === 0 && "Join Your Groups - local communities, no noise."}
+                  {index === 1 && "Access The Black Book - vetted resources & contacts."}
+                  {index === 2 && "Smart Matching - connect based on intent."}
+                  {index === 3 && "Attend Events - real-world meetups."}
                 </p>
               </div>
             ))}
@@ -659,7 +727,7 @@ function App() {
       >
 
         <div className="relative z-10 container mx-auto px-6">
-          <h2 className="text-center text-4xl md:text-5xl font-museo-bold text-white mb-12">
+          <h2 className="text-center text-4xl md:text-5xl font-bold font-museo-bold text-white mb-12">
             Featured Events
           </h2>
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
@@ -679,12 +747,11 @@ function App() {
               <div className="flex items-center gap-3 mb-3">
                 <Headphones className="w-5 h-5 text-amber-300" />
                 <span className="font-museo-bold">
-                  Virtual Language Exchange – Igbo, Yoruba, Hausa
+                  The Black Book: Live Q&A
                 </span>
               </div>
               <p className="text-white/80 font-museo-medium">
-                Practice, learn, and preserve our languages together - no
-                pressure, just fun.
+                Immigration & Housing experts answering member questions live.
               </p>
             </div>
             <div className="bg-white/10 rounded-2xl p-6 border border-white/10 text-white">
@@ -703,15 +770,11 @@ function App() {
         </div>
       </section>
 
-      {/* Diaspora Statistics Section */}
+      {/* Diaspora Statistics Section – Building the Network */}
       <section
         ref={globalReachRef}
-        className="relative min-h-screen flex items-center justify-center bg-transparent"
-
+        className="relative min-h-screen flex items-center justify-center bg-transparent py-24"
       >
-
-
-
         <div className="relative z-10 container mx-auto px-6 py-20">
           <div className="text-center space-y-12">
           <div className="space-y-4">
@@ -726,121 +789,24 @@ function App() {
               </p>
               </div>
 
-            {/* City Statistics Grid */}
+            {/* City Statistics Grid – city names only, hover on circles */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mt-16">
-              {/* New York */}
-              <div className="city-stat text-center space-y-4">
-                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
-                  <img
-                    src={IMAGES.globalReach.cities[0]}
-                    alt="New York"
-                    className="w-full h-full object-cover"
-                  />
+              {CONTENT.globalReach.cities.map((city, index) => (
+                <div key={city.name} className="city-stat text-center space-y-4">
+                  <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden hover:scale-105 transition-transform duration-300">
+                    <img
+                      src={IMAGES.globalReach.cities[index]}
+                      alt={city.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="mt-4">
+                    <h3 className="font-museo-bold text-white text-lg md:text-xl">
+                      {city.name.toUpperCase()}
+                    </h3>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-museo-bold text-white text-lg md:text-xl">
-                    NEW YORK
-                  </h3>
-                  <p className="font-museo-medium text-white/80 text-sm">
-                    1,247 MEMBERS
-                  </p>
-                </div>
-              </div>
-
-              {/* London */}
-              <div className="city-stat text-center space-y-4">
-                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
-                  <img
-                    src={IMAGES.globalReach.cities[1]}
-                    alt="London"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-museo-bold text-white text-lg md:text-xl">
-                    LONDON
-                  </h3>
-                  <p className="font-museo-medium text-white/80 text-sm">
-                    1,092 MEMBERS
-                  </p>
-                </div>
-              </div>
-
-              {/* Atlanta */}
-              <div className="city-stat text-center space-y-4">
-                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
-                  <img
-                    src={IMAGES.globalReach.cities[2]}
-                    alt="Atlanta"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-museo-bold text-white text-lg md:text-xl">
-                    ATLANTA
-                  </h3>
-                  <p className="font-museo-medium text-white/80 text-sm">
-                    1,684 MEMBERS
-                  </p>
-                </div>
-              </div>
-
-              {/* LA */}
-              <div className="city-stat text-center space-y-4">
-                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
-                  <img
-                    src={IMAGES.globalReach.cities[3]}
-                    alt="Los Angeles"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-museo-bold text-white text-lg md:text-xl">
-                    LA
-                  </h3>
-                  <p className="font-museo-medium text-white/80 text-sm">
-                    1,503 MEMBERS
-                  </p>
-                </div>
-              </div>
-
-              {/* Canada */}
-              <div className="city-stat text-center space-y-4">
-                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
-                  <img
-                    src={IMAGES.globalReach.cities[4]}
-                    alt="Canada"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-museo-bold text-white text-lg md:text-xl">
-                    CANADA
-                  </h3>
-                  <p className="font-museo-medium text-white/80 text-sm">
-                    1,174 MEMBERS
-                  </p>
-                </div>
-              </div>
-
-              {/* Houston */}
-              <div className="city-stat text-center space-y-4">
-                <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden">
-                  <img
-                    src={IMAGES.globalReach.cities[5]}
-                    alt="Houston"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-museo-bold text-white text-lg md:text-xl">
-                    HOUSTON
-                  </h3>
-                  <p className="font-museo-medium text-white/80 text-sm">
-                    892 MEMBERS
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -854,33 +820,49 @@ function App() {
 
       >
         
-        <div className="relative z-10 container mx-auto px-6 py-20">
-          <div className="text-center space-y-8">
-          <div className="space-y-4">
+        <div className="relative z-10 container mx-auto px-6 py-24">
+          <div className="text-center space-y-10 max-w-2xl mx-auto">
+            <div className="space-y-4">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white font-museo-bold">
                 {CONTENT.finalCta.title}
-            </h2>
+              </h2>
               <p className="text-lg md:text-xl font-museo-medium text-white/80">
                 {CONTENT.finalCta.subtitle}
               </p>
             </div>
 
-            {/* Email Form */}
+            {/* Primary: Founding Member CTA (buy) */}
+            <div>
+              <button
+                onClick={handleFoundingMember}
+                className="bg-gradient-to-r from-[#F37021] to-[#ff6b35] hover:from-[#ff6b35] hover:to-[#ff5a2e] text-white px-10 sm:px-12 py-4 rounded-full min-h-[46px] font-bold text-lg md:text-xl leading-tight transform hover:translate-y-[-1px] transition-all duration-300 shadow-[0_12px_30px_rgba(255,111,62,0.32)] font-museo-bold"
+              >
+                {CONTENT.finalCta.cta}
+              </button>
+            </div>
+
+            {/* Divider: OR */}
+            <div className="flex items-center gap-4">
+              <span className="flex-1 h-px bg-white/20" aria-hidden />
+              <span className="text-white/60 font-museo-medium text-sm uppercase tracking-wider">Or</span>
+              <span className="flex-1 h-px bg-white/20" aria-hidden />
+            </div>
+
+            {/* Secondary: Join Waitlist form */}
             <form
               action="https://joinbawo.us10.list-manage.com/subscribe/post?u=7c2523b0334a02fe77eebddb3&id=842ac1ad64&f_id=00bb32e3f0"
               method="post"
               target="_self"
-              className="max-w-2xl mx-auto mb-8"
+              className="space-y-4"
             >
               <div className="flex flex-col sm:flex-row gap-4">
-                  <input
-                    type="email"
+                <input
+                  type="email"
                   name="EMAIL"
                   placeholder="Enter email for launch updates"
-                    required
+                  required
                   className="flex-1 px-6 py-4 rounded-[12px] border-2 text-lg focus:outline-none transition-all bg-white/10 backdrop-blur-sm text-white placeholder-white/70 font-museo-medium border-white/20 focus:border-[#ff7f39]"
                 />
-
                 {/* Anti-spam field (required by Mailchimp) - DO NOT REMOVE */}
                 <div
                   style={{ position: "absolute", left: "-5000px" }}
@@ -895,25 +877,14 @@ function App() {
                     title="Do not fill this field"
                   />
                 </div>
-
                 <button
                   type="submit"
-                  className="bg-transparent border border-white/25 hover:bg-white/10 text-white px-10 py-4 rounded-[50px] min-h-[48px] font-bold text-base flex items-center justify-center transform hover:scale-105 transition-all duration-300 font-museo-bold backdrop-blur-sm"
+                  className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-10 py-4 rounded-full min-h-[48px] font-bold text-base flex items-center justify-center transition-all duration-300 font-museo-bold shrink-0"
                 >
                   Join Waitlist
                 </button>
-                </div>
-              </form>
-
-            {/* Main CTA */}
-            <div className="mt-8">
-              <button
-                onClick={handleFoundingMember}
-                className="bg-gradient-to-r from-[#ff7f39] to-[#ff6b35] hover:from-[#ff6b35] hover:to-[#ff5a2e] text-white px-10 sm:px-12 py-4 rounded-full min-h-[46px] font-bold text-lg md:text-xl leading-tight transform hover:translate-y-[-1px] transition-all duration-300 shadow-[0_12px_30px_rgba(255,111,62,0.32)] hover:shadow-[0_16px_36px_rgba(255,111,62,0.38)] font-museo-bold"
-              >
-                {CONTENT.finalCta.cta}
-                </button>
-                  </div>
+              </div>
+            </form>
           </div>
         </div>
       </section>
@@ -941,7 +912,7 @@ function App() {
               <h3 className="text-white font-museo-bold mb-4">BawoSocial</h3>
               <p className="text-white/80 text-sm font-museo-medium mb-4">
                 Connecting the Nigerian diaspora worldwide through authentic
-                relationships and cultural pride.
+                relationships, resources, and cultural pride.
               </p>
               <div className="flex justify-center md:justify-start gap-4">
                 <a
