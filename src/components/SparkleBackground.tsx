@@ -10,14 +10,6 @@ type Star = {
   kind: "dot" | "glow";
 };
 
-type Pop = {
-  x: number;
-  y: number;
-  bornMs: number;
-  lifeMs: number;
-  size: number;
-};
-
 function clamp(n: number, min: number, max: number) {
   return Math.min(max, Math.max(min, n));
 }
@@ -34,9 +26,7 @@ function makeSprite(size: number, draw: (ctx: CanvasRenderingContext2D) => void)
 
 export default function SparkleBackground() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const rafRef = useRef<number | null>(null);
   const starsRef = useRef<Star[]>([]);
-  const popsRef = useRef<Pop[]>([]);
   const dprRef = useRef(1);
 
   useEffect(() => {
@@ -96,9 +86,6 @@ export default function SparkleBackground() {
     });
 
     let vignetteGradient: CanvasGradient | null = null;
-    let noiseCanvas: HTMLCanvasElement | null = null;
-    let lastFrameMs = performance.now();
-    let emaFrame = 16; // exponential moving average in ms
 
     const setSize = () => {
       // Apple-like crispness but avoid runaway GPU costs on ultra-high DPR.
@@ -128,27 +115,6 @@ export default function SparkleBackground() {
       vignetteGradient.addColorStop(0, "rgba(0,0,0,0)");
       vignetteGradient.addColorStop(0.65, "rgba(0,0,0,0.22)");
       vignetteGradient.addColorStop(1, "rgba(0,0,0,0.55)");
-
-      // High-quality smooth noise tile (static, no visible pattern)
-      // Larger tile reduces repetition artifacts.
-      const nSize = saveData ? 192 : 256;
-      const n = document.createElement("canvas");
-      n.width = nSize;
-      n.height = nSize;
-      const nctx = n.getContext("2d");
-      if (nctx) {
-        const img = nctx.createImageData(nSize, nSize);
-        // Blue-noise-ish approximation: random luminance with low alpha.
-        for (let i = 0; i < img.data.length; i += 4) {
-          const v = 160 + Math.floor(Math.random() * 90);
-          img.data[i] = v;
-          img.data[i + 1] = v;
-          img.data[i + 2] = v;
-          img.data[i + 3] = Math.floor(8 + Math.random() * 14); // subtle
-        }
-        nctx.putImageData(img, 0, 0);
-      }
-      noiseCanvas = n;
     };
 
     const makeStars = (scale = 1) => {
@@ -160,98 +126,44 @@ export default function SparkleBackground() {
 
       const stars: Star[] = [];
       for (let i = 0; i < count; i++) {
-        const kind = Math.random() < 0.12 ? "glow" : "dot";
-        const s = kind === "glow" ? 22 + Math.random() * 18 : 10 + Math.random() * 18;
+        // Dots only (no large glows) – reads as starfield, not rain or streaks
+        const s = 8 + Math.random() * 16;
         stars.push({
           x: Math.random() * w,
           y: Math.random() * h,
-          baseA: 0.12 + Math.random() * 0.35,
+          baseA: 0.15 + Math.random() * 0.4,
           tw: 0.6 + Math.random() * 1.6,
           ph: Math.random() * Math.PI * 2,
           s,
-          kind,
+          kind: "dot",
         });
       }
       starsRef.current = stars;
     };
 
-    const draw = (tMs: number) => {
-      const t = tMs / 1000;
+    const draw = () => {
       const w = window.innerWidth;
       const h = window.innerHeight;
 
-      // Adaptive quality: if frames get heavy, reduce star count.
-      const dt = tMs - lastFrameMs;
-      lastFrameMs = tMs;
-      emaFrame = emaFrame * 0.9 + dt * 0.1;
-      if (!saveData && emaFrame > 22 && starsRef.current.length > 90) {
-        makeStars(0.8);
-        emaFrame = 16;
-      }
-
-      // Clear
       ctx.clearRect(0, 0, w, h);
-
-      // Pitch-black base (stars provide all the life)
       ctx.fillStyle = "rgba(0,0,0,1)";
       ctx.fillRect(0, 0, w, h);
 
-      // Stars
       ctx.save();
       ctx.globalCompositeOperation = "lighter";
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = "high";
 
       for (const s of starsRef.current) {
-        const a =
-          s.baseA +
-          0.22 * Math.sin(t * s.tw + s.ph) +
-          0.08 * Math.sin(t * (s.tw * 2.1) + s.ph * 1.7);
-
-        const alpha = clamp(a, 0.03, 0.9);
-        ctx.globalAlpha = alpha;
-
+        ctx.globalAlpha = clamp(s.baseA, 0.1, 0.8);
         const size = s.s;
-        const sprite =
-          s.kind === "glow" ? glowBright : size < 20 ? dotSmall : dotLarge;
+        const sprite = size < 14 ? dotSmall : dotLarge;
         ctx.drawImage(sprite, s.x - size / 2, s.y - size / 2, size, size);
-      }
-
-      // Scheduled pops (avoid random heavy ops per-frame)
-      const pops = popsRef.current;
-      for (let i = pops.length - 1; i >= 0; i--) {
-        const p = pops[i];
-        const u = (tMs - p.bornMs) / p.lifeMs;
-        if (u >= 1) {
-          pops.splice(i, 1);
-          continue;
-        }
-        const a = Math.sin(u * Math.PI); // ease in/out
-        ctx.globalAlpha = 0.65 * a;
-        ctx.drawImage(
-          glowBright,
-          p.x - p.size / 2,
-          p.y - p.size / 2,
-          p.size,
-          p.size
-        );
       }
 
       ctx.restore();
       ctx.globalAlpha = 1;
 
-      // Smooth micro-noise (no grid). Gentle drift to avoid perceivable tiling.
-      if (noiseCanvas && !saveData) {
-        const driftX = (Math.sin(t * 0.07) + 1) * 0.5 * 30;
-        const driftY = (Math.cos(t * 0.05) + 1) * 0.5 * 30;
-        ctx.save();
-        ctx.globalCompositeOperation = "soft-light";
-        ctx.globalAlpha = 0.05;
-        ctx.drawImage(noiseCanvas, -driftX, -driftY, w + driftX, h + driftY);
-        ctx.restore();
-      }
-
-      // Vignette on top for depth
       if (vignetteGradient) {
         ctx.save();
         ctx.globalCompositeOperation = "multiply";
@@ -259,62 +171,22 @@ export default function SparkleBackground() {
         ctx.fillRect(0, 0, w, h);
         ctx.restore();
       }
-
-      // Spawn pops at a gentle cadence (1–2 per second)
-      if (!saveData && popsRef.current.length < 3 && Math.random() < 0.03) {
-        popsRef.current.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          bornMs: tMs,
-          lifeMs: 900 + Math.random() * 600,
-          size: 22 + Math.random() * 26,
-        });
-      }
-
-      rafRef.current = window.requestAnimationFrame(draw);
     };
 
     setSize();
     makeStars();
+    draw();
 
     const onResize = () => {
       setSize();
       makeStars();
+      draw();
     };
 
     window.addEventListener("resize", onResize, { passive: true });
 
-    const stop = () => {
-      if (rafRef.current) window.cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
-    };
-
-    const start = () => {
-      if (rafRef.current) return;
-      lastFrameMs = performance.now();
-      emaFrame = 16;
-      rafRef.current = window.requestAnimationFrame(draw);
-    };
-
-    const onVisibility = () => {
-      if (document.visibilityState === "hidden") stop();
-      else if (!prefersReducedMotion) start();
-    };
-
-    document.addEventListener("visibilitychange", onVisibility, { passive: true });
-
-    if (!prefersReducedMotion) {
-      start();
-    } else {
-      // Draw a single still frame
-      draw(performance.now());
-      stop();
-    }
-
     return () => {
       window.removeEventListener("resize", onResize);
-      document.removeEventListener("visibilitychange", onVisibility);
-      stop();
     };
   }, []);
 
