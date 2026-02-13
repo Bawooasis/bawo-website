@@ -237,7 +237,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen relative bg-black overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden">
       <SparkleBackground />
       {/* Sticky Banner - Hidden on first page */}
       {/* <div className="fixed top-0 w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 py-3 px-4 text-center font-bold z-50 shadow-lg font-museo-bold">
@@ -251,9 +251,7 @@ function App() {
       </div>
       </div> */}
 
-      <div
-        className="relative z-10 bg-transparent"
-      >
+      <div className="relative z-10 bg-transparent min-h-screen scroll-content-gpu">
         {/* Hero Section */}
         <section
           ref={heroRef}
@@ -966,7 +964,7 @@ function App() {
       {/* Privacy Policy Modal */}
       {showPrivacyPolicy && (
         <div
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/50 backdrop-blur-[2px] z-50 flex items-center justify-center p-4"
           onClick={() => setShowPrivacyPolicy(false)}
         >
           <div

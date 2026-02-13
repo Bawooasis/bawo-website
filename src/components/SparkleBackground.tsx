@@ -6,197 +6,221 @@ type Star = {
   baseA: number;
   tw: number;
   ph: number;
-  s: number; // sprite size in css px
+  s: number;
   kind: "dot" | "glow";
+  /** Random glow: some dots occasionally get a soft glow (phase for slow sine) */
+  glowPh: number;
+  /** 0 = never glow, 1 = can randomly glow */
+  glowChance: number;
+};
+
+type Pop = {
+  x: number;
+  y: number;
+  bornMs: number;
+  lifeMs: number;
+  size: number;
 };
 
 function clamp(n: number, min: number, max: number) {
   return Math.min(max, Math.max(min, n));
 }
 
-function makeSprite(size: number, draw: (ctx: CanvasRenderingContext2D) => void) {
-  const c = document.createElement("canvas");
-  c.width = size;
-  c.height = size;
-  const ctx = c.getContext("2d");
-  if (!ctx) return c;
-  draw(ctx);
-  return c;
-}
-
 export default function SparkleBackground() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const rafRef = useRef<number | null>(null);
   const starsRef = useRef<Star[]>([]);
-  const dprRef = useRef(1);
+  const popsRef = useRef<Pop[]>([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext("2d", { alpha: true });
+    const ctx = canvas.getContext("2d", { alpha: false });
     if (!ctx) return;
 
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    const saveData =
-      typeof navigator !== "undefined" &&
-      "connection" in navigator &&
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (navigator as any).connection?.saveData === true;
-
-    // Pre-rendered sprites (much faster than per-star blur/shadow each frame)
-    const dotSmall = makeSprite(32, (c) => {
-      const r = 6;
-      const g = c.createRadialGradient(16, 16, 0, 16, 16, r);
-      g.addColorStop(0, "rgba(134,239,172,1)");
-      g.addColorStop(0.5, "rgba(34,197,94,0.55)");
-      g.addColorStop(1, "rgba(34,197,94,0)");
-      c.fillStyle = g;
-      c.beginPath();
-      c.arc(16, 16, r, 0, Math.PI * 2);
-      c.fill();
-    });
-
-    const dotLarge = makeSprite(48, (c) => {
-      const r = 10;
-      const g = c.createRadialGradient(24, 24, 0, 24, 24, r);
-      g.addColorStop(0, "rgba(187,247,208,1)");
-      g.addColorStop(0.5, "rgba(34,197,94,0.55)");
-      g.addColorStop(1, "rgba(34,197,94,0)");
-      c.fillStyle = g;
-      c.beginPath();
-      c.arc(24, 24, r, 0, Math.PI * 2);
-      c.fill();
-    });
-
-    // Brighter glow dot (no star spikes)
-    const glowBright = makeSprite(64, (c) => {
-      const r = 14;
-      const g = c.createRadialGradient(32, 32, 0, 32, 32, r);
-      g.addColorStop(0, "rgba(220,252,231,1)"); // very light green center
-      g.addColorStop(0.25, "rgba(134,239,172,0.75)");
-      g.addColorStop(0.55, "rgba(34,197,94,0.45)");
-      g.addColorStop(1, "rgba(34,197,94,0)");
-      c.fillStyle = g;
-      c.beginPath();
-      c.arc(32, 32, r, 0, Math.PI * 2);
-      c.fill();
-    });
-
+    // --- 1. SETUP & RESIZE ---
+    let width = 0;
+    let height = 0;
     let vignetteGradient: CanvasGradient | null = null;
 
+    let dpr = 1;
+
     const setSize = () => {
-      // Apple-like crispness but avoid runaway GPU costs on ultra-high DPR.
-      const rawDpr = window.devicePixelRatio || 1;
-      const dpr = Math.max(1, Math.min(saveData ? 1.25 : 1.75, rawDpr));
-      dprRef.current = dpr;
-      const w = Math.floor(window.innerWidth * dpr);
-      const h = Math.floor(window.innerHeight * dpr);
-      canvas.width = w;
-      canvas.height = h;
-      canvas.style.width = "100%";
-      canvas.style.height = "100%";
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
 
-      const cssW = window.innerWidth;
-      const cssH = window.innerHeight;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      // Explicit px size so canvas display aspect ratio matches buffer (no CSS stretch → no vertical streaks)
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
 
-      // Soft vignette to feel like a real sky (no grid texture)
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+
       vignetteGradient = ctx.createRadialGradient(
-        cssW * 0.5,
-        cssH * 0.45,
-        Math.min(cssW, cssH) * 0.15,
-        cssW * 0.5,
-        cssH * 0.45,
-        Math.max(cssW, cssH) * 0.85
+        width * 0.5,
+        height * 0.5,
+        Math.min(width, height) * 0.3,
+        width * 0.5,
+        height * 0.5,
+        Math.max(width, height) * 0.9
       );
-      vignetteGradient.addColorStop(0, "rgba(0,0,0,0)");
-      vignetteGradient.addColorStop(0.65, "rgba(0,0,0,0.22)");
-      vignetteGradient.addColorStop(1, "rgba(0,0,0,0.55)");
+      vignetteGradient.addColorStop(0, "rgba(2, 4, 10, 0)");
+      vignetteGradient.addColorStop(1, "rgba(0, 0, 0, 0.85)");
     };
 
-    const makeStars = (scale = 1) => {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      const area = w * h;
-      const base = Math.floor(area / (saveData ? 24000 : 17000));
-      const count = clamp(Math.floor(base * scale), 60, saveData ? 120 : 180);
+    const makeStars = () => {
+      const area = width * height;
+      const count = clamp(Math.floor(area / 15000), 50, 300);
 
       const stars: Star[] = [];
       for (let i = 0; i < count; i++) {
-        // Dots only (no large glows) – reads as starfield, not rain or streaks
-        const s = 8 + Math.random() * 16;
+        const kind = Math.random() < 0.18 ? "glow" : "dot";
+        const s = kind === "glow" ? 30 + Math.random() * 20 : 10 + Math.random() * 15;
         stars.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          baseA: 0.15 + Math.random() * 0.4,
-          tw: 0.6 + Math.random() * 1.6,
+          x: Math.random() * width,
+          y: Math.random() * height,
+          baseA: 0.3 + Math.random() * 0.5,
+          tw: 0.2 + Math.random() * 0.8,
           ph: Math.random() * Math.PI * 2,
           s,
-          kind: "dot",
+          kind,
+          glowPh: Math.random() * Math.PI * 2,
+          glowChance: Math.random(),
         });
       }
       starsRef.current = stars;
     };
 
-    const draw = () => {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
+    setSize();
+    makeStars();
 
-      ctx.clearRect(0, 0, w, h);
-      ctx.fillStyle = "rgba(0,0,0,1)";
-      ctx.fillRect(0, 0, w, h);
+    // --- 2. ANIMATION LOOP: circles only via arc(), no drawImage. Reset transform each frame to avoid drift. ---
+    const draw = (time: number) => {
+      const t = time / 1000;
+
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+
+      ctx.fillStyle = "#02040a";
+      ctx.fillRect(0, 0, width, height);
 
       ctx.save();
       ctx.globalCompositeOperation = "lighter";
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = "high";
+
+      // Slow global phase so "random" glows drift over time (same for all stars, but each has own glowPh)
+      const glowPhase = t * 0.25;
 
       for (const s of starsRef.current) {
-        ctx.globalAlpha = clamp(s.baseA, 0.1, 0.8);
-        const size = s.s;
-        const sprite = size < 14 ? dotSmall : dotLarge;
-        ctx.drawImage(sprite, s.x - size / 2, s.y - size / 2, size, size);
-      }
+        const a = clamp(s.baseA + 0.15 * Math.sin(t * s.tw + s.ph), 0.1, 1);
+        const cx = Math.floor(s.x) + 0.5;
+        const cy = Math.floor(s.y) + 0.5;
 
+        if (s.kind === "glow") {
+          const r = s.s / 2;
+          const glowA = a * (0.7 + 0.4 * Math.sin(glowPhase * 0.7 + s.glowPh));
+          ctx.globalAlpha = clamp(glowA, 0.2, 1);
+          const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+          g.addColorStop(0, `rgba(134, 239, 172, ${glowA * 0.9})`);
+          g.addColorStop(0.5, `rgba(34, 197, 94, ${glowA * 0.3})`);
+          g.addColorStop(1, "rgba(0, 0, 0, 0)");
+          ctx.fillStyle = g;
+          ctx.beginPath();
+          ctx.arc(cx, cy, r, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          const radius = s.s < 18 ? 1.2 : 2.2;
+          const randomGlow = Math.sin(glowPhase + s.glowPh);
+          const isGlowing = s.glowChance > 0.5 && randomGlow > 0.4;
+          if (isGlowing) {
+            const glowR = 8 + 4 * (randomGlow - 0.4) / 0.6;
+            const glowA = 0.15 * a * (randomGlow - 0.4) / 0.6;
+            ctx.globalAlpha = clamp(glowA, 0.03, 0.2);
+            const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, glowR);
+            g.addColorStop(0, `rgba(134, 239, 172, ${glowA})`);
+            g.addColorStop(0.6, `rgba(34, 197, 94, ${glowA * 0.3})`);
+            g.addColorStop(1, "rgba(0, 0, 0, 0)");
+            ctx.fillStyle = g;
+            ctx.beginPath();
+            ctx.arc(cx, cy, glowR, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.globalAlpha = a;
+          ctx.fillStyle = "#4ade80";
+          ctx.beginPath();
+          ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
       ctx.restore();
-      ctx.globalAlpha = 1;
 
       if (vignetteGradient) {
         ctx.save();
-        ctx.globalCompositeOperation = "multiply";
         ctx.fillStyle = vignetteGradient;
-        ctx.fillRect(0, 0, w, h);
+        ctx.globalCompositeOperation = "source-over";
+        ctx.fillRect(0, 0, width, height);
         ctx.restore();
       }
+
+      if (popsRef.current.length < 3 && Math.random() < 0.005) {
+        popsRef.current.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          bornMs: time,
+          lifeMs: 1000 + Math.random() * 500,
+          size: 40 + Math.random() * 20,
+        });
+      }
+
+      const pops = popsRef.current;
+      for (let i = pops.length - 1; i >= 0; i--) {
+        const p = pops[i];
+        const u = (time - p.bornMs) / p.lifeMs;
+        if (u >= 1) {
+          pops.splice(i, 1);
+          continue;
+        }
+        const alpha = Math.sin(u * Math.PI);
+        const r = p.size / 2;
+        const px = Math.floor(p.x) + 0.5;
+        const py = Math.floor(p.y) + 0.5;
+        const g = ctx.createRadialGradient(px, py, 0, px, py, r);
+        g.addColorStop(0, `rgba(134, 239, 172, ${alpha * 0.8})`);
+        g.addColorStop(0.5, `rgba(34, 197, 94, ${alpha * 0.2})`);
+        g.addColorStop(1, "rgba(0, 0, 0, 0)");
+        ctx.save();
+        ctx.globalCompositeOperation = "lighter";
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(px, py, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      rafRef.current = requestAnimationFrame(draw);
     };
 
-    setSize();
-    makeStars();
-    draw();
+    rafRef.current = requestAnimationFrame(draw);
 
     const onResize = () => {
       setSize();
       makeStars();
-      draw();
     };
 
-    window.addEventListener("resize", onResize, { passive: true });
+    window.addEventListener("resize", onResize);
 
     return () => {
       window.removeEventListener("resize", onResize);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, []);
 
   return (
-    <div
-      className="pointer-events-none fixed inset-0 z-0"
-      aria-hidden="true"
-    >
-      <canvas ref={canvasRef} className="h-full w-full" />
+    <div className="pointer-events-none fixed inset-0 z-0 bg-[#02040a] overflow-hidden">
+      <canvas ref={canvasRef} className="absolute left-0 top-0 block" />
     </div>
   );
 }
-

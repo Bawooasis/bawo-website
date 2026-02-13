@@ -158,14 +158,20 @@
   body {
     font-family: 'MuseoModerno', sans-serif;
     overflow-x: hidden;
+    background-color: #02040a;
   }
 
-  /* Promote main scroll to GPU for smoother 60fps-style scrolling on desktop */
+  /* Don't use transform on #root: it would make fixed elements (e.g. starfield) stick to #root
+     and scroll away. Starfield must stay viewport-fixed so it shows on all screens. */
   #root {
     min-height: 100vh;
-    transform: translateZ(0);
-    backface-visibility: hidden;
   }
+}
+
+/* GPU layer for main scroll content only (not on #root, so fixed starfield stays viewport-fixed) */
+.scroll-content-gpu {
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* Custom Animation Classes */
