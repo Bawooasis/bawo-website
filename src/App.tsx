@@ -385,7 +385,7 @@ function App() {
                         ref={previewImgRef}
                         src={previewImages[activePreviewIndex]}
                         alt="BawoSocial App Preview"
-                        className="w-64 md:w-80 lg:w-96 h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] transform-gpu transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-[2rem] animate-breathing object-cover will-change-transform will-change-opacity"
+                        className="w-64 md:w-80 lg:w-96 h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] transform-gpu transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-[2rem] animate-breathing object-cover will-change-transform"
                         style={{ opacity: 1 }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#ff7f39]/10 via-transparent to-transparent rounded-[2rem] pointer-events-none"></div>
@@ -703,7 +703,6 @@ function App() {
       {/* Event Highlights Section */}
       <section
         className="relative py-24 bg-transparent"
-
       >
 
         <div className="relative z-10 container mx-auto px-6">
@@ -797,7 +796,6 @@ function App() {
         ref={finalCtaRef}
         id="email-section"
         className="relative min-h-screen flex items-center justify-center bg-transparent"
-
       >
         
         <div className="relative z-10 container mx-auto px-6 py-24">

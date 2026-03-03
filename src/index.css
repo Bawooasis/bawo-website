@@ -153,12 +153,15 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    scroll-padding-top: 1rem;
   }
 
   body {
     font-family: 'MuseoModerno', sans-serif;
     overflow-x: hidden;
     background-color: #0A0A0C;
+    touch-action: manipulation; /* Snappier taps, less delay */
   }
 
   /* Don't use transform on #root: it would make fixed elements stick to #root and scroll away. */
@@ -167,10 +170,11 @@
   }
 }
 
-/* GPU layer for main scroll content only (not on #root, so fixed starfield stays viewport-fixed) */
+/* GPU layer for main scroll content – smooth 60fps scroll */
 .scroll-content-gpu {
   transform: translateZ(0);
   backface-visibility: hidden;
+  contain: layout; /* Limit layout recalc during scroll */
 }
 
 /* Glassmorphism card – matches mobile app design */
@@ -203,12 +207,11 @@
     50% { transform: scale(1.02); }
   }
   
-  /* Gentle lift animation for buttons */
+  /* Gentle lift animation for buttons – transform only for 60fps */
   .animate-lift {
     transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: transform;
   }
-  
   .animate-lift:hover {
     transform: translateY(-2px);
   }
