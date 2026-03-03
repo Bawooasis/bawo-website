@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Logo from "./components/Logo";
-import SparkleBackground from "./components/SparkleBackground";
 import { CONTENT } from "./constants/content";
 import { TAILWIND_COLORS } from "./constants/colors";
 import { IMAGES } from "./constants/images";
@@ -238,7 +237,7 @@ function App() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <SparkleBackground />
+      <div className="fixed inset-0 z-0 bg-[#0A0A0C]" aria-hidden />
       {/* Sticky Banner - Hidden on first page */}
       {/* <div className="fixed top-0 w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 py-3 px-4 text-center font-bold z-50 shadow-lg font-museo-bold">
         <div className="flex items-center justify-center gap-3">
@@ -257,7 +256,14 @@ function App() {
           ref={heroRef}
           className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 bg-transparent"
         >
-          {/* Background Pattern */}
+          {/* Hero glow – cinematic orange behind content */}
+          <div
+            className="absolute inset-0 z-0 blur-[80px] pointer-events-none"
+            style={{
+              background: "radial-gradient(ellipse 80% 80% at 70% 50%, rgba(243,112,33,0.12) 0%, rgba(243,112,33,0.04) 40%, transparent 70%)",
+            }}
+            aria-hidden
+          />
 
 
 
@@ -352,7 +358,7 @@ function App() {
                   <div className="relative">
                     <button
                       onClick={handleFoundingMember}
-                      className="bg-gradient-to-r from-[#F37021] to-[#ff6b35] hover:from-[#ff6b35] hover:to-[#ff5a2e] text-white px-8 sm:px-10 py-4 rounded-full min-h-[44px] font-bold text-base md:text-lg leading-tight transform hover:translate-y-[-1px] transition-all duration-300 font-museo-bold w-full sm:w-auto max-w-[350px] animate-lift shadow-[0_8px_24px_rgba(243,112,33,0.35)]"
+                      className="bg-gradient-to-r from-[#F37021] to-[#ff6b35] hover:from-[#ff6b35] hover:to-[#ff5a2e] text-white px-8 sm:px-10 py-4 rounded-full min-h-[44px] font-bold text-base md:text-lg leading-tight transform hover:translate-y-[-1px] transition-all duration-300 font-museo-bold w-full sm:w-auto max-w-[350px] animate-lift shadow-[0_0_20px_rgba(243,112,33,0.5)] hover:shadow-[0_0_24px_rgba(243,112,33,0.6)]"
                     >
                       {CONTENT.hero.ctaPrimary}
                     </button>
@@ -493,7 +499,7 @@ function App() {
         <div className="relative z-10 container mx-auto px-6 py-20 min-h-[calc(100vh-10rem)]">
           <div className="grid lg:grid-cols-2 gap-12 h-full items-stretch">
             {/* Left Content - Benefits */}
-            <div className="text-white space-y-8">
+            <div className="glass-card rounded-2xl p-8 md:p-10 text-white space-y-8">
               <div className="space-y-4">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-museo-bold">
               {CONTENT.foundingMember.title}
@@ -536,7 +542,7 @@ function App() {
               <div className="text-center lg:text-right space-y-4">
             <button
               onClick={handleFoundingMember}
-              className="bg-white/10 border border-[#F37021] text-white hover:bg-white/15 px-12 py-6 rounded-[50px] min-h-[48px] font-bold text-xl transform hover:scale-105 transition-all duration-300 font-museo-bold backdrop-blur-sm"
+              className="bg-gradient-to-r from-[#F37021] to-[#ff6b35] hover:from-[#ff6b35] hover:to-[#ff5a2e] text-white px-12 py-6 rounded-full min-h-[48px] font-bold text-xl transform hover:scale-105 transition-all duration-300 font-museo-bold shadow-[0_0_20px_rgba(243,112,33,0.5)] hover:shadow-[0_0_24px_rgba(243,112,33,0.6)]"
             >
               {CONTENT.foundingMember.cta}
             </button>
@@ -562,7 +568,7 @@ function App() {
               return (
                 <div
                   key={index}
-                  className="feature-card bg-white/[0.06] border border-white/10 rounded-2xl p-8 text-left hover:bg-white/[0.08] hover:border-white/15 transition-all duration-300"
+                  className="feature-card glass-card rounded-2xl p-8 text-left hover:border-[#F37021]/40 transition-all duration-300"
                 >
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${TAILWIND_COLORS.primary.text} bg-[#F37021]/20`}>
                     <Icon className="w-6 h-6" strokeWidth={2} />
@@ -809,7 +815,7 @@ function App() {
             <div>
               <button
                 onClick={handleFoundingMember}
-                className="bg-gradient-to-r from-[#F37021] to-[#ff6b35] hover:from-[#ff6b35] hover:to-[#ff5a2e] text-white px-10 sm:px-12 py-4 rounded-full min-h-[46px] font-bold text-lg md:text-xl leading-tight transform hover:translate-y-[-1px] transition-all duration-300 shadow-[0_12px_30px_rgba(255,111,62,0.32)] font-museo-bold"
+                className="bg-gradient-to-r from-[#F37021] to-[#ff6b35] hover:from-[#ff6b35] hover:to-[#ff5a2e] text-white px-10 sm:px-12 py-4 rounded-full min-h-[46px] font-bold text-lg md:text-xl leading-tight transform hover:translate-y-[-1px] transition-all duration-300 shadow-[0_0_20px_rgba(243,112,33,0.5)] hover:shadow-[0_0_24px_rgba(243,112,33,0.6)] font-museo-bold"
               >
                 {CONTENT.finalCta.cta}
               </button>
@@ -873,7 +879,7 @@ function App() {
             </span>
             <button
               onClick={handleFoundingMember}
-              className="bg-gradient-to-r from-[#ff7f39] to-[#ff6b35] text-white px-5 py-2.5 rounded-[50px] min-h-[44px] font-museo-bold text-sm"
+              className="bg-gradient-to-r from-[#ff7f39] to-[#ff6b35] text-white px-5 py-2.5 rounded-full min-h-[44px] font-museo-bold text-sm shadow-[0_0_20px_rgba(243,112,33,0.5)] hover:shadow-[0_0_24px_rgba(243,112,33,0.6)] transition-shadow duration-300"
             >
               Secure Spot
             </button>

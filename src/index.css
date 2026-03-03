@@ -158,11 +158,10 @@
   body {
     font-family: 'MuseoModerno', sans-serif;
     overflow-x: hidden;
-    background-color: #02040a;
+    background-color: #0A0A0C;
   }
 
-  /* Don't use transform on #root: it would make fixed elements (e.g. starfield) stick to #root
-     and scroll away. Starfield must stay viewport-fixed so it shows on all screens. */
+  /* Don't use transform on #root: it would make fixed elements stick to #root and scroll away. */
   #root {
     min-height: 100vh;
   }
@@ -172,6 +171,14 @@
 .scroll-content-gpu {
   transform: translateZ(0);
   backface-visibility: hidden;
+}
+
+/* Glassmorphism card – matches mobile app design */
+.glass-card {
+  background: rgba(22, 23, 28, 0.8);
+  border: 1px solid rgba(243, 112, 33, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 /* Custom Animation Classes */

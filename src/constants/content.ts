@@ -3,9 +3,9 @@ import { IMAGES } from './images';
 export const CONTENT = {
   // Hero Section
   hero: {
-    title: "The Digital Home for the Nigerian Diaspora.",
-    subtitle: "Stop swiping. Start building. A utility-first network to connect, find vetted resources, and thrive together.",
-    ctaPrimary: "Become a Founding Member $50",
+    title: "The Private Network for the Nigerian Diaspora.",
+    subtitle: "Stop asking 'Who knows a guy?'. Find your people, access The Black Book of vetted resources, and build actual wealth.",
+    ctaPrimary: "Claim 1 of 500 Founding Spots",
     ctaSecondary: "Join Waitlist",
     testflightLink: "#", // Coming soon - TestFlight link will be added once issues are resolved
     trustIndicators: {},
