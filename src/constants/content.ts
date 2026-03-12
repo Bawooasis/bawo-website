@@ -102,13 +102,13 @@ export const CONTENT = {
       },
       {
         name: "A.",
-        role: "Atlanta",
-        quote: "My city is full of Africans, but I never found the Nigerians until BawoSocial connected me.",
+        role: "Queens, NY",
+        quote: "My borough is full of Africans, but I never found the Nigerians until BawoSocial connected me.",
         avatar: IMAGES.testimonials.emeka,
       },
       {
         name: "D.",
-        role: "London",
+        role: "The Bronx, NY",
         quote: "It feels like a professional network and a family reunion in one app.",
         avatar: IMAGES.testimonials.fatima,
       },
@@ -118,15 +118,14 @@ export const CONTENT = {
   // Global Reach Section (no member counts – honest)
   globalReach: {
     title: "Building the Network.",
-    subtitle: "Connecting the diaspora, city by city.",
+    subtitle: "Connecting the diaspora, borough by borough.",
     description: "Join the First 500 Founding Members to shape the culture of your city's hub.",
     cities: [
-      { name: "New York", country: "🇺🇸" },
-      { name: "London", country: "🇬🇧" },
-      { name: "Atlanta", country: "🇺🇸" },
-      { name: "Los Angeles", country: "🇺🇸" },
-      { name: "Canada", country: "🇨🇦" },
-      { name: "Houston", country: "🇺🇸" },
+      { name: "Brooklyn", country: "🇺🇸" },
+      { name: "Manhattan", country: "🇺🇸" },
+      { name: "Queens", country: "🇺🇸" },
+      { name: "The Bronx", country: "🇺🇸" },
+      { name: "Staten Island", country: "🇺🇸" },
     ],
   },
 

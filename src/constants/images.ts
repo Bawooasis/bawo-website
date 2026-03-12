@@ -68,20 +68,18 @@ export const IMAGES = {
   // Global Reach/City Images
   globalReach: {
     cities: [
-      nyImage, // New York
-      londonImage, // London
-      texasImage, // Atlanta (using Texas image)
-      laImage, // Los Angeles
-      canadaImage, // Canada
-      houstonImage // Houston
+      nyImage,
+      nyImage,
+      nyImage,
+      nyImage,
+      nyImage
     ],
     cityMeta: [
-      { name: "New York", image: nyImage },
-      { name: "London", image: londonImage },
-      { name: "Atlanta", image: texasImage },
-      { name: "Los Angeles", image: laImage },
-      { name: "Canada", image: canadaImage },
-      { name: "Houston", image: houstonImage }
+      { name: "Brooklyn", image: nyImage },
+      { name: "Manhattan", image: nyImage },
+      { name: "Queens", image: nyImage },
+      { name: "The Bronx", image: nyImage },
+      { name: "Staten Island", image: nyImage }
     ]
   },
 

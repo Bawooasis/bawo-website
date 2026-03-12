@@ -13,14 +13,14 @@ export const COLORS = {
 
   // Background Colors - Dark Theme
   background: {
-    deepest: "#0B0B0C",
-    main: "#0B0B0C",
-    surface: "#0B0B0C",
-    card: "#0B0B0C",
+    deepest: "#050505",
+    main: "#050505",
+    surface: "#050505",
+    card: "#050505",
     dark: {
-      primary: "#0B0B0C",
-      secondary: "#0B0B0C", 
-      tertiary: "#0B0B0C"
+      primary: "#050505",
+      secondary: "#050505", 
+      tertiary: "#050505"
     },
     overlay: {
       light: "rgba(255, 255, 255, 0.1)",
@@ -55,14 +55,14 @@ export const COLORS = {
   // Gradient Combinations
   gradients: {
     background: {
-      from: "#0B0B0C",
-      via: "#0B0B0C",
-      to: "#0B0B0C",
-      end: "#0B0B0C"
+      from: "#050505",
+      via: "#050505",
+      to: "#050505",
+      end: "#050505"
     },
     subtle: {
-      from: "#0B0B0C",
-      to: "#0B0B0C"
+      from: "#050505",
+      to: "#050505"
     }
   },
 
@@ -101,10 +101,10 @@ export const TAILWIND_COLORS = {
 
   // Gradient classes
   gradients: {
-    primary: "bg-gradient-to-r from-[#F37021] to-[#ff6b35]",
+    primary: "bg-gradient-to-r from-[#B87333] to-[#D98C58]",
     primaryHover: "hover:from-[#ff6b35] hover:to-[#ff5a2e]",
-    background: "bg-gradient-to-b from-[#0B0B0C] via-[#0B0B0C] to-[#0B0B0C]",
-    subtle: "bg-gradient-to-b from-[#0B0B0C] to-[#0B0B0C]"
+    background: "bg-gradient-to-b from-[#050505] via-[#050505] to-[#050505]",
+    subtle: "bg-gradient-to-b from-[#050505] to-[#050505]"
   },
 
   // Text classes
@@ -116,10 +116,10 @@ export const TAILWIND_COLORS = {
 
   // Background classes
   bg: {
-    deepest: "bg-[#0B0B0C]",
-    main: "bg-[#0B0B0C]",
-    surface: "bg-[#0B0B0C]",
-    card: "bg-[#0B0B0C]",
+    deepest: "bg-[#050505]",
+    main: "bg-[#050505]",
+    surface: "bg-[#050505]",
+    card: "bg-[#050505]",
     overlay: {
       light: "bg-white/10",
       medium: "bg-white/14",

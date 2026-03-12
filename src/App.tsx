@@ -237,7 +237,7 @@ function App() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <div className="fixed inset-0 z-0 bg-[#0A0A0C]" aria-hidden />
+      <div className="fixed inset-0 z-0 bg-[#050505]" aria-hidden />
       {/* Sticky Banner - Hidden on first page */}
       {/* <div className="fixed top-0 w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 py-3 px-4 text-center font-bold z-50 shadow-lg font-museo-bold">
         <div className="flex items-center justify-center gap-3">
@@ -256,11 +256,12 @@ function App() {
           ref={heroRef}
           className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 bg-transparent"
         >
-          {/* Hero glow – cinematic orange behind content */}
+          {/* Hero glow – cinematic copper behind content */}
           <div
             className="absolute inset-0 z-0 blur-[80px] pointer-events-none"
             style={{
-              background: "radial-gradient(ellipse 80% 80% at 70% 50%, rgba(243,112,33,0.12) 0%, rgba(243,112,33,0.04) 40%, transparent 70%)",
+              background:
+                "radial-gradient(ellipse 80% 80% at 70% 50%, rgba(184,115,51,0.18) 0%, rgba(184,115,51,0.06) 40%, transparent 70%)",
             }}
             aria-hidden
           />
@@ -469,16 +470,16 @@ function App() {
         {/* Origin Story Section – structured block with clear hierarchy */}
         <section className="relative min-h-screen flex items-center justify-center bg-transparent py-24">
           <div className="relative z-10 container mx-auto px-6 flex flex-col items-center">
-            <div className="text-white space-y-14 w-full max-w-4xl mx-auto">
+            <div className="text-white space-y-14 w-full max-w-5xl mx-auto">
               <h2 className="text-6xl md:text-7xl lg:text-8xl font-extrabold font-museo-bold leading-tight text-center tracking-tight">
                 {CONTENT.origin.title}
               </h2>
-              <div className="border-l-4 border-[#F37021] bg-white/[0.04] rounded-r-2xl pl-8 pr-8 py-10 space-y-8">
-                <p className="text-white/95 font-museo-medium text-xl md:text-2xl leading-loose text-left">
+              <div className="border-l-4 border-[#F37021] bg-white/[0.04] rounded-r-2xl pl-10 pr-10 py-12 space-y-8">
+                <p className="text-white/95 font-museo-medium text-xl md:text-2xl leading-relaxed md:leading-[2] text-left">
                   Most Nigerians in the diaspora feel isolated and{" "}
                   <strong className="font-museo-bold text-white">disconnected from opportunity</strong>. We miss our culture, our people, and our network. BawoSocial was created to fix that.
                 </p>
-                <p className="text-white/95 font-museo-medium text-xl md:text-2xl leading-loose text-left">
+                <p className="text-white/95 font-museo-medium text-xl md:text-2xl leading-relaxed md:leading-[2] text-left">
                   We are a <strong className="font-museo-bold text-white">utility-first platform</strong> to find your tribe, access The Black Book of resources, and build meaningful wealth and relationships—powered by smart technology that understands who we are.
                 </p>
               </div>
@@ -537,17 +538,24 @@ function App() {
               </div>
             </div>
 
-            {/* Right Content - Nigerian Map & CTA */}
-            <div className="flex flex-col h-full w-full items-center lg:items-end justify-end space-y-8 mt-10 lg:mt-0">
-              <div className="text-center lg:text-right space-y-4">
-            <button
-              onClick={handleFoundingMember}
-              className="bg-gradient-to-r from-[#F37021] to-[#ff6b35] hover:from-[#ff6b35] hover:to-[#ff5a2e] text-white px-12 py-6 rounded-full min-h-[48px] font-bold text-xl transform hover:scale-105 transition-all duration-300 font-museo-bold shadow-[0_0_20px_rgba(243,112,33,0.5)] hover:shadow-[0_0_24px_rgba(243,112,33,0.6)]"
-            >
-              {CONTENT.foundingMember.cta}
-            </button>
+            {/* Right Content - CTA on right, vertically centered */}
+            <div className="hidden lg:flex h-full w-full items-center justify-end mt-10 lg:mt-0">
+              <button
+                onClick={handleFoundingMember}
+                className="bg-gradient-to-r from-[#F37021] to-[#ff6b35] hover:from-[#ff6b35] hover:to-[#ff5a2e] text-white px-14 py-5 rounded-full min-h-[52px] font-bold text-xl md:text-2xl leading-tight transform hover:scale-[1.03] transition-all duration-300 font-museo-bold shadow-[0_0_20px_rgba(243,112,33,0.5)] hover:shadow-[0_0_26px_rgba(243,112,33,0.7)] cta-glow"
+              >
+                {CONTENT.foundingMember.cta}
+              </button>
+            </div>
 
-              </div>
+            {/* Mobile / tablet CTA centered below card */}
+            <div className="flex lg:hidden justify-center mt-10">
+              <button
+                onClick={handleFoundingMember}
+                className="bg-gradient-to-r from-[#F37021] to-[#ff6b35] hover:from-[#ff6b35] hover:to-[#ff5a2e] text-white px-10 py-4 rounded-full min-h-[48px] font-bold text-lg leading-tight transform hover:scale-[1.03] transition-all duration-300 font-museo-bold shadow-[0_0_20px_rgba(243,112,33,0.5)] hover:shadow-[0_0_26px_rgba(243,112,33,0.7)] cta-glow"
+              >
+                {CONTENT.foundingMember.cta}
+              </button>
             </div>
           </div>
         </div>
@@ -558,17 +566,17 @@ function App() {
         ref={featuresRef}
         className="relative min-h-screen flex items-center justify-center bg-transparent py-24"
       >
-        <div className="relative z-10 text-white px-6 max-w-6xl py-20 mx-auto w-full">
+        <div className="relative z-10 text-white px-6 md:px-10 max-w-7xl py-20 mx-auto w-full">
           <h2 className={`text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-16 ${TAILWIND_COLORS.primary.text} font-museo-bold`}>
             {CONTENT.features.title}
           </h2>
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
             {CONTENT.features.items.map((item, index) => {
               const Icon = index === 0 ? Home : index === 1 ? BookOpen : Sparkles;
               return (
                 <div
                   key={index}
-                  className="feature-card glass-card rounded-2xl p-8 text-left hover:border-[#F37021]/40 transition-all duration-300"
+                  className="feature-card glass-card rounded-2xl p-8 text-left border border-[#F37021] hover:border-[#FF8A42] transition-all duration-300"
                 >
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${TAILWIND_COLORS.primary.text} bg-[#F37021]/20`}>
                     <Icon className="w-6 h-6" strokeWidth={2} />
@@ -592,21 +600,21 @@ function App() {
         className="relative py-24 bg-transparent"
       >
 
-        <div className="relative z-10 container mx-auto px-6">
-          <div className="text-center mb-12">
+        <div className="relative z-10 container mx-auto px-6 md:px-10">
+          <div className="text-center mb-14">
             <h2 className="text-4xl md:text-5xl font-bold text-white font-museo-bold mb-4">
               What Our Community Says
           </h2>
-            <p className="text-lg text-white/80 font-museo-medium">
+            <p className="text-lg md:text-xl text-white/80 font-museo-medium">
               Hear from Nigerians excited to connect on BawoSocial
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-10 max-w-6xl mx-auto">
             {/* Testimonial 1 */}
-            <div className="testimonial-card bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+            <div className="testimonial-card bg-white/[0.06] backdrop-blur-md rounded-2xl p-7 md:p-8 border border-white/15 hover:border-[#F37021]/40 shadow-[0_18px_50px_rgba(0,0,0,0.55)] transition-all duration-300">
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 rounded-full overflow-hidden">
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden ring-2 ring-white/40">
                   <img
                     src={IMAGES.testimonials.adaora}
                     alt={CONTENT.testimonials.reviews[0].name}
@@ -614,21 +622,23 @@ function App() {
                   />
                 </div>
                 <div className="ml-3">
-                  <h4 className="font-museo-bold text-white">{CONTENT.testimonials.reviews[0].name}</h4>
-                  <p className="text-sm text-white/80 font-museo-medium">
+                  <h4 className="font-museo-bold text-white text-sm md:text-base">
+                    {CONTENT.testimonials.reviews[0].name}
+                  </h4>
+                  <p className="text-xs md:text-sm text-white/80 font-museo-medium">
                     {CONTENT.testimonials.reviews[0].role}
                   </p>
                 </div>
               </div>
-              <p className="text-white/80 font-museo-medium leading-relaxed">
+              <p className="text-white/85 font-museo-medium leading-relaxed text-sm md:text-base">
                 "{CONTENT.testimonials.reviews[0].quote}"
               </p>
             </div>
 
             {/* Testimonial 2 */}
-            <div className="testimonial-card bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+            <div className="testimonial-card bg-white/[0.06] backdrop-blur-md rounded-2xl p-7 md:p-8 border border-white/15 hover:border-[#F37021]/40 shadow-[0_18px_50px_rgba(0,0,0,0.55)] transition-all duration-300">
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 rounded-full overflow-hidden">
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden ring-2 ring-white/40">
                   <img
                     src={IMAGES.testimonials.emeka}
                     alt={CONTENT.testimonials.reviews[1].name}
@@ -636,21 +646,23 @@ function App() {
                   />
                 </div>
                 <div className="ml-3">
-                  <h4 className="font-museo-bold text-white">{CONTENT.testimonials.reviews[1].name}</h4>
-                  <p className="text-sm text-white/80 font-museo-medium">
+                  <h4 className="font-museo-bold text-white text-sm md:text-base">
+                    {CONTENT.testimonials.reviews[1].name}
+                  </h4>
+                  <p className="text-xs md:text-sm text-white/80 font-museo-medium">
                     {CONTENT.testimonials.reviews[1].role}
                   </p>
                 </div>
               </div>
-              <p className="text-white/80 font-museo-medium leading-relaxed">
+              <p className="text-white/85 font-museo-medium leading-relaxed text-sm md:text-base">
                 "{CONTENT.testimonials.reviews[1].quote}"
               </p>
             </div>
 
             {/* Testimonial 3 */}
-            <div className="testimonial-card bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+            <div className="testimonial-card bg-white/[0.06] backdrop-blur-md rounded-2xl p-7 md:p-8 border border-white/15 hover:border-[#F37021]/40 shadow-[0_18px_50px_rgba(0,0,0,0.55)] transition-all duration-300">
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 rounded-full overflow-hidden">
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden ring-2 ring-white/40">
                   <img
                     src={IMAGES.testimonials.fatima}
                     alt={CONTENT.testimonials.reviews[2].name}
@@ -658,13 +670,15 @@ function App() {
                   />
                 </div>
                 <div className="ml-3">
-                  <h4 className="font-museo-bold text-white">{CONTENT.testimonials.reviews[2].name}</h4>
-                  <p className="text-sm text-white/80 font-museo-medium">
+                  <h4 className="font-museo-bold text-white text-sm md:text-base">
+                    {CONTENT.testimonials.reviews[2].name}
+                  </h4>
+                  <p className="text-xs md:text-sm text-white/80 font-museo-medium">
                     {CONTENT.testimonials.reviews[2].role}
                   </p>
                 </div>
               </div>
-              <p className="text-white/80 font-museo-medium leading-relaxed">
+              <p className="text-white/85 font-museo-medium leading-relaxed text-sm md:text-base">
                 "{CONTENT.testimonials.reviews[2].quote}"
               </p>
             </div>
@@ -682,13 +696,18 @@ function App() {
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {IMAGES.inApp.features.map((image, index) => (
-              <div key={index} className="text-center">
-                <img
-                  src={image}
-                  alt={`BawoSocial Feature ${index + 1}`}
-                  className="rounded-xl h-80 w-full object-contain mx-auto"
-                />
-                <p className="text-white mt-3 font-museo-medium">
+              <div
+                key={index}
+                className="text-center bg-black/40 rounded-2xl border border-[#F37021] hover:border-[#FF8A42] shadow-[0_0_18px_rgba(0,0,0,0.5)] p-4 transition-all duration-300"
+              >
+                <div className="rounded-xl overflow-hidden mb-3">
+                  <img
+                    src={image}
+                    alt={`BawoSocial Feature ${index + 1}`}
+                    className="h-80 w-full object-contain mx-auto bg-black/40"
+                  />
+                </div>
+                <p className="text-white mt-1 font-museo-medium">
                   {index === 0 && "Join Your Groups - local communities, no noise."}
                   {index === 1 && "Access The Black Book - vetted resources & contacts."}
                   {index === 2 && "Smart Matching - connect based on intent."}
@@ -714,7 +733,7 @@ function App() {
               <div className="flex items-center gap-3 mb-3">
                 <Calendar className="w-5 h-5 text-amber-300" />
                 <span className="font-museo-bold">
-                  Diaspora Networking Night – London
+                  Diaspora Networking Night – Downtown Brooklyn
                 </span>
               </div>
               <p className="text-white/80 font-museo-medium">
@@ -737,7 +756,7 @@ function App() {
               <div className="flex items-center gap-3 mb-3">
                 <Star className="w-5 h-5 text-amber-300" />
                 <span className="font-museo-bold">
-                  Nigerian Independence Celebration – NYC
+                  Nigerian Independence Celebration – Manhattan, NYC
                 </span>
               </div>
               <p className="text-white/80 font-museo-medium">
@@ -749,43 +768,48 @@ function App() {
         </div>
       </section>
 
-      {/* Diaspora Statistics Section – Building the Network */}
       <section
         ref={globalReachRef}
-        className="relative min-h-screen flex items-center justify-center bg-transparent py-24"
+        className="relative min-h-screen flex items-center justify-center bg-transparent py-28"
       >
-        <div className="relative z-10 container mx-auto px-6 py-20">
-          <div className="text-center space-y-12">
-          <div className="space-y-4">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white font-museo-bold">
+        <div className="relative z-10 container mx-auto px-6 py-10">
+          <div className="text-center space-y-16 max-w-7xl mx-auto">
+            <div className="space-y-4">
+              <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white font-museo-bold">
                 {CONTENT.globalReach.title}
               </h2>
-              <p className="text-lg md:text-xl font-museo-medium text-white/80">
+              <p className="text-lg md:text-2xl font-museo-medium text-white/80">
                 {CONTENT.globalReach.subtitle}
               </p>
-              <p className="text-base font-museo-regular text-[#ff7f39]">
+              <p className="text-base md:text-lg font-museo-regular text-[#ff7f39]">
                 {CONTENT.globalReach.description}
               </p>
-              </div>
+            </div>
 
-            {/* City Statistics Grid – city names only, hover on circles */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mt-16">
-              {CONTENT.globalReach.cities.map((city, index) => (
-                <div key={city.name} className="city-stat text-center space-y-4">
-                  <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] overflow-hidden hover:scale-105 transition-transform duration-300">
-                    <img
-                      src={IMAGES.globalReach.cities[index]}
-                      alt={city.name}
-                      className="w-full h-full object-cover"
-                    />
+            {/* City Statistics Grid – city names only, connected by a subtle line */}
+            <div className="relative mt-8 md:mt-12">
+              <div
+                className="pointer-events-none absolute inset-x-4 md:inset-x-12 top-1/2 h-px bg-gradient-to-r from-transparent via-[#F37021]/70 to-transparent opacity-70 blur-[1px]"
+                aria-hidden
+              />
+              <div className="flex flex-wrap justify-center gap-12 md:gap-16">
+                {CONTENT.globalReach.cities.map((city, index) => (
+                  <div key={city.name} className="city-stat text-center space-y-5">
+                    <div className="w-44 h-44 md:w-64 md:h-64 lg:w-72 lg:h-72 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_22px_60px_rgba(0,0,0,0.65)] overflow-hidden hover:scale-110 transition-transform duration-300">
+                      <img
+                        src={IMAGES.globalReach.cities[index]}
+                        alt={city.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="mt-2">
+                      <h3 className="font-museo-bold text-white text-lg md:text-3xl tracking-[0.12em]">
+                        {city.name.toUpperCase()}
+                      </h3>
+                    </div>
                   </div>
-                  <div className="mt-4">
-                    <h3 className="font-museo-bold text-white text-lg md:text-xl">
-                      {city.name.toUpperCase()}
-                    </h3>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -877,7 +901,7 @@ function App() {
             </span>
             <button
               onClick={handleFoundingMember}
-              className="bg-gradient-to-r from-[#ff7f39] to-[#ff6b35] text-white px-5 py-2.5 rounded-full min-h-[44px] font-museo-bold text-sm shadow-[0_0_20px_rgba(243,112,33,0.5)] hover:shadow-[0_0_24px_rgba(243,112,33,0.6)] transition-shadow duration-300"
+              className="bg-gradient-to-r from-[#F37021] to-[#ff6b35] text-white px-5 py-2.5 rounded-full min-h-[44px] font-museo-bold text-sm shadow-[0_0_20px_rgba(243,112,33,0.5)] hover:shadow-[0_0_24px_rgba(243,112,33,0.6)] transition-shadow duration-300"
             >
               Secure Spot
             </button>
