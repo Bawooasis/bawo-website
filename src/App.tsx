@@ -365,12 +365,14 @@ function App() {
                     </button>
                     <div className="absolute -top-2 -right-2 w-3 h-3 bg-red-500 rounded-full animate-pulse" aria-hidden />
                   </div>
-                  <button
-                    onClick={handleEarlyAccess}
-                    className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 sm:px-10 py-4 rounded-full min-h-[44px] font-bold text-base md:text-lg leading-tight transition-all duration-300 font-museo-bold w-full sm:w-auto max-w-[350px]"
+                  <a
+                    href={CONTENT.hero.testflightLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 sm:px-10 py-4 rounded-full min-h-[44px] font-bold text-base md:text-lg leading-tight transition-all duration-300 font-museo-bold w-full sm:w-auto max-w-[350px] inline-flex items-center justify-center text-center"
                   >
-                    {CONTENT.hero.ctaSecondary}
-                  </button>
+                    {CONTENT.hero.ctaTestFlight}
+                  </a>
                 </div>
               </div>
           
@@ -834,13 +836,21 @@ function App() {
             </div>
 
             {/* Primary: Founding Member CTA (buy) */}
-            <div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <button
                 onClick={handleFoundingMember}
                 className="bg-gradient-to-r from-[#F37021] to-[#ff6b35] hover:from-[#ff6b35] hover:to-[#ff5a2e] text-white px-10 sm:px-12 py-4 rounded-full min-h-[46px] font-bold text-lg md:text-xl leading-tight transform hover:translate-y-[-1px] transition-all duration-300 shadow-[0_0_20px_rgba(243,112,33,0.5)] hover:shadow-[0_0_24px_rgba(243,112,33,0.6)] font-museo-bold"
               >
                 {CONTENT.finalCta.cta}
               </button>
+              <a
+                href={CONTENT.hero.testflightLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-10 sm:px-12 py-4 rounded-full min-h-[46px] font-bold text-lg md:text-xl leading-tight transform hover:translate-y-[-1px] transition-all duration-300 font-museo-bold inline-flex items-center justify-center"
+              >
+                {CONTENT.hero.ctaTestFlight}
+              </a>
             </div>
 
             {/* Divider: OR */}
@@ -895,17 +905,19 @@ function App() {
       <footer className="py-12 bg-transparent">
         {/* Mobile Sticky CTA */}
         <div className="md:hidden mobile-sticky-cta bg-black/60 border-t border-white/10">
-          <div className="px-4 py-3 flex items-center justify-between">
-            <span className="text-white font-museo-medium text-sm">
-              Founding Member $50
+          <div className="px-4 py-3 flex items-center justify-between gap-3">
+            <span className="text-white font-museo-medium text-sm shrink-0">
+              Get Early Access
             </span>
-            <button
-              onClick={handleFoundingMember}
-              className="bg-gradient-to-r from-[#F37021] to-[#ff6b35] text-white px-5 py-2.5 rounded-full min-h-[44px] font-museo-bold text-sm shadow-[0_0_20px_rgba(243,112,33,0.5)] hover:shadow-[0_0_24px_rgba(243,112,33,0.6)] transition-shadow duration-300"
+            <a
+              href={CONTENT.hero.testflightLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gradient-to-r from-[#F37021] to-[#ff6b35] text-white px-5 py-2.5 rounded-full min-h-[44px] font-museo-bold text-sm shadow-[0_0_20px_rgba(243,112,33,0.5)] hover:shadow-[0_0_24px_rgba(243,112,33,0.6)] transition-shadow duration-300 inline-flex items-center justify-center"
             >
-              Secure Spot
-            </button>
-              </div>
+              Download via TestFlight
+            </a>
+          </div>
         </div>
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">

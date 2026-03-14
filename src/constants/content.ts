@@ -7,7 +7,8 @@ export const CONTENT = {
     subtitle: "Stop asking 'Who knows a guy?'. Find your people, access The Black Book of vetted resources, and build actual wealth.",
     ctaPrimary: "Claim 1 of 500 Founding Spots",
     ctaSecondary: "Join Waitlist",
-    testflightLink: "#", // Coming soon - TestFlight link will be added once issues are resolved
+    testflightLink: "https://testflight.apple.com/join/xAp29Euh",
+    ctaTestFlight: "Download via TestFlight",
     trustIndicators: {},
   },
 
