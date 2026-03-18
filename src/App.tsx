@@ -214,15 +214,6 @@ function App() {
   }, [previewImages]);
 
 
-  const handleEarlyAccess = () => {
-    const emailSection = document.getElementById("email-section");
-    emailSection?.scrollIntoView({ behavior: "smooth" });
-    setTimeout(() => {
-      const emailInput = document.getElementById("email-input");
-      (emailInput as HTMLInputElement | null)?.focus();
-    }, 1000);
-  };
-
   const handleFoundingMember = () => {
     window.open("https://buy.stripe.com/fZu7sMgBBfgmeK2caf3Nm00", "_blank");
     // Track click for analytics
@@ -256,18 +247,7 @@ function App() {
           ref={heroRef}
           className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 bg-transparent"
         >
-          {/* Hero glow – cinematic copper behind content */}
-          <div
-            className="absolute inset-0 z-0 blur-[80px] pointer-events-none"
-            style={{
-              background:
-                "radial-gradient(ellipse 80% 80% at 70% 50%, rgba(184,115,51,0.18) 0%, rgba(184,115,51,0.06) 40%, transparent 70%)",
-            }}
-            aria-hidden
-          />
-
-
-
+          {/* (Removed) extra background glow behind hero mockup */}
           {/* BawoSocial Logo - Top Left */}
           <div
             ref={logoRef}

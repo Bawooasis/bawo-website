@@ -7,17 +7,11 @@ import adoraImage from "../assets/images/ADORA.jpg";
 import emekaImage from "../assets/images/Emeka.jpg";
 import fatimaImage from "../assets/images/Fatima.jpg";
 import nyImage from "../assets/images/NY.jpg";
-import londonImage from "../assets/images/LONDON.jpg";
-import texasImage from "../assets/images/TEXAS.jpg";
-import laImage from "../assets/images/LA.jpg";
-import canadaImage from "../assets/images/canada.jpg";
-import houstonImage from "../assets/images/hOUSTON.jpg";
+// (unused city images removed)
 
-// Inside the App Images - New screenshots
-import screenshot1 from "../assets/images/InsideTheAppImages/1.png";
-import screenshot2 from "../assets/images/InsideTheAppImages/2.png";
-import screenshot3 from "../assets/images/InsideTheAppImages/3.png";
-import screenshot4 from "../assets/images/InsideTheAppImages/4.png";
+// Inside the App Images - screenshots
+import appScreenshot1 from "../assets/images/InsideTheAppImages/1.png";
+import appScreenshot2 from "../assets/images/HomeMock2.png";
 
 export const IMAGES = {
   // Local Assets
@@ -29,12 +23,10 @@ export const IMAGES = {
 
   // App Preview/Demo Images
   previews: {
-    main: screenshot1,
+    main: appScreenshot1,
     gallery: [
-      screenshot1,
-      screenshot2,
-      screenshot3,
-      screenshot4
+      appScreenshot1,
+      appScreenshot2
     ]
   },
 
@@ -48,10 +40,8 @@ export const IMAGES = {
   // In-App Feature Screenshots
   inApp: {
     features: [
-      screenshot1,
-      screenshot2,
-      screenshot3,
-      screenshot4
+      appScreenshot1,
+      appScreenshot2
     ]
   },
 
