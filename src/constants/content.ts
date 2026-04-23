@@ -5,31 +5,45 @@ export const CONTENT = {
   hero: {
     title: "The Private Network for the Nigerian Diaspora.",
     subtitle: "Stop asking 'Who knows a guy?'. Find your people, access The Black Book of vetted resources, and build actual wealth.",
-    ctaPrimary: "Claim 1 of 500 Founding Spots",
+    ctaPrimary: "Become a Founding Member - $50",
+    ctaMicrocopy: "Instant TestFlight Beta access included. Only 500 spots available.",
     ctaSecondary: "Join Waitlist",
     testflightLink: "https://testflight.apple.com/join/xAp29Euh",
     ctaTestFlight: "Download via TestFlight",
-    trustIndicators: {},
+    trustIndicators: {
+      stripe: "Secured by Stripe",
+      oneTime: "One-time payment",
+      cancel: "Cancel anytime before public launch"
+    },
   },
 
   // Stats Section (Scarcity metrics – Batch 1)
   stats: {
     title: "Founding Member Batch 1 is Open.",
-    subtitle: "We are prioritizing quality over quantity. Secure your lifetime status.",
+    subtitle: "Lock in lifetime access for $50. After Batch 1 closes, membership costs $19.99/month.",
+    tagline: "Do the math: Save $239.88/year. Forever.",
     metrics: {
       batch1: {
         value: "500",
         label: "BATCH 1 SPOTS",
+        subtext: "Only 450 remaining"
       },
-      status: {
-        value: "OPEN",
-        label: "STATUS",
+      savings: {
+        value: "$240/yr",
+        label: "LIFETIME SAVINGS",
+        subtext: "vs. monthly members"
       },
       access: {
-        value: "LIFETIME",
-        label: "ACCESS",
+        value: "FOREVER",
+        label: "NO MONTHLY FEES",
+        subtext: "One $50 payment"
       },
     },
+    urgency: {
+      price: "After 500 members: $19.99/month ($240/year)",
+      deadline: "Batch 1 closes when full or May 15, 2026",
+      guarantee: "30-day money-back guarantee. No questions asked."
+    }
   },
 
   // Origin Story Section
@@ -157,7 +171,7 @@ export const CONTENT = {
         links: [{ label: "Privacy Policy", action: "privacy" }],
       },
     },
-    copyright: "2026 BawoSocial. Launching December 1st. Made with ❤️ for the Nigerian diaspora.",
+    copyright: "2026 BawoSocial. Public Launch: Summer 2026.",
   },
 
   // Email Signup

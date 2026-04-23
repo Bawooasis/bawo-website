@@ -155,34 +155,58 @@
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     scroll-padding-top: 1rem;
+    /* Hardware acceleration for smooth scrolling */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
   }
 
   body {
     font-family: 'MuseoModerno', sans-serif;
     overflow-x: hidden;
-    background-color: #050505;
-    touch-action: manipulation; /* Snappier taps, less delay */
+    background-color: #000000;
+    touch-action: manipulation;
+    /* Optimize for scroll performance */
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
   }
 
   /* Don't use transform on #root: it would make fixed elements stick to #root and scroll away. */
   #root {
     min-height: 100vh;
+    /* Enable GPU acceleration */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+  /* Performance optimizations for all elements */
+  * {
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
 /* GPU layer for main scroll content – smooth 60fps scroll */
 .scroll-content-gpu {
-  transform: translateZ(0);
+  transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
-  contain: layout; /* Limit layout recalc during scroll */
+  will-change: transform;
+  contain: layout style paint;
+  /* Force GPU acceleration */
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
 }
 
-/* Glassmorphism card – matches mobile app design */
+/* Glassmorphism card – Obsidian & Copper theme (Pure Black) */
 .glass-card {
-  background: rgba(22, 23, 28, 0.8);
-  border: 1px solid rgba(184, 115, 51, 0.4);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(11, 12, 16, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  /* Performance optimization */
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 /* Custom Animation Classes */
@@ -200,20 +224,39 @@
   /* Breathing animation for phone mockup */
   .animate-breathing {
     animation: breathing 5s ease-in-out infinite;
+    will-change: transform;
+    transform: translateZ(0);
   }
   
   @keyframes breathing {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.02); }
+    0%, 100% { transform: scale(1) translateZ(0); }
+    50% { transform: scale(1.02) translateZ(0); }
+  }
+
+  /* Premium airport-style scrolling banner animation */
+  .animate-scroll-left {
+    animation: scrollLeft 40s linear infinite;
+    will-change: transform;
+  }
+  
+  @keyframes scrollLeft {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
   
   /* Gentle lift animation for buttons – transform only for 60fps */
   .animate-lift {
     transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
   .animate-lift:hover {
-    transform: translateY(-2px);
+    transform: translateY(-2px) translateZ(0);
+    will-change: transform;
   }
 
   .cta-glow {
@@ -223,28 +266,29 @@
   @keyframes ctaGlow {
     0%, 100% {
       box-shadow:
-        0 0 0 rgba(243, 112, 33, 0.0),
-        0 0 22px rgba(243, 112, 33, 0.6);
-      transform: translateY(0);
+        0 0 0 rgba(196, 123, 68, 0.0),
+        0 0 22px rgba(196, 123, 68, 0.6);
+      transform: translateY(0) translateZ(0);
     }
     50% {
       box-shadow:
-        0 0 0 rgba(243, 112, 33, 0.0),
-        0 0 32px rgba(255, 138, 66, 0.85);
-      transform: translateY(-1px);
+        0 0 0 rgba(196, 123, 68, 0.0),
+        0 0 32px rgba(224, 146, 85, 0.85);
+      transform: translateY(-1px) translateZ(0);
     }
   }
   
   /* Smooth fade-in for scroll animations */
   .animate-fade-in {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translate3d(0, 20px, 0);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: transform, opacity;
   }
   
   .animate-fade-in.visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
   
   /* Pulse animation for urgency indicators */
@@ -260,8 +304,9 @@
   /* Staggered entrance for cards */
   .stagger-animation > * {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translate3d(0, 20px, 0);
     transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, opacity;
   }
   
   .stagger-animation > *:nth-child(1) { transition-delay: 0.1s; }
@@ -273,7 +318,7 @@
   
   .stagger-animation.visible > * {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 
   /* Hero gradient shimmer animation */
@@ -302,6 +347,69 @@
   @keyframes shimmer {
     0% { transform: translateX(-100%); }
     100% { transform: translateX(200%); }
+  }
+
+  /* Slide down animation for notifications */
+  .animate-slide-down {
+    animation: slideDown 0.4s ease-out;
+  }
+  
+  @keyframes slideDown {
+    from {
+      transform: translate3d(-50%, -100%, 0);
+      opacity: 0;
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+      opacity: 1;
+    }
+  }
+
+  /* Fade in from left animation for activity items */
+  .animate-fade-in {
+    animation: fadeInLeft 0.5s ease-out;
+    will-change: transform, opacity;
+  }
+  
+  @keyframes fadeInLeft {
+    from {
+      transform: translate3d(-20px, 0, 0);
+      opacity: 0;
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+
+  /* Optimize all animated elements */
+  .animate-on-scroll,
+  .feature-card,
+  .testimonial-card,
+  .city-stat {
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  /* Image performance optimizations */
+  img {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+  /* Button and interactive element optimizations */
+  button,
+  a,
+  .interactive {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  /* Reduce repaints on scroll */
+  section {
+    contain: layout style;
   }
 
   /* Slow gradient movement for hero background */

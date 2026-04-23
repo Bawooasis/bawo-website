@@ -6,8 +6,13 @@ import bawoLogo from "../assets/images/bawo-logo.png";
 import adoraImage from "../assets/images/ADORA.jpg";
 import emekaImage from "../assets/images/Emeka.jpg";
 import fatimaImage from "../assets/images/Fatima.jpg";
-import nyImage from "../assets/images/NY.jpg";
-// (unused city images removed)
+
+// Borough images - NYC specific
+import brooklynImage from "../assets/images/brooklyn.jpg";
+import manhattanImage from "../assets/images/manhattan.jpg";
+import queensImage from "../assets/images/queens.jpg";
+import bronxImage from "../assets/images/bronx.jpg";
+import statenIslandImage from "../assets/images/staten-island.jpg";
 
 // Inside the App Images - screenshots
 import appScreenshot1 from "../assets/images/InsideTheAppImages/1.png";
@@ -55,21 +60,21 @@ export const IMAGES = {
     ]
   },
 
-  // Global Reach/City Images
+  // Global Reach/City Images - NYC Boroughs
   globalReach: {
     cities: [
-      nyImage,
-      nyImage,
-      nyImage,
-      nyImage,
-      nyImage
+      brooklynImage,
+      manhattanImage,
+      queensImage,
+      bronxImage,
+      statenIslandImage
     ],
     cityMeta: [
-      { name: "Brooklyn", image: nyImage },
-      { name: "Manhattan", image: nyImage },
-      { name: "Queens", image: nyImage },
-      { name: "The Bronx", image: nyImage },
-      { name: "Staten Island", image: nyImage }
+      { name: "Brooklyn", image: brooklynImage },
+      { name: "Manhattan", image: manhattanImage },
+      { name: "Queens", image: queensImage },
+      { name: "The Bronx", image: bronxImage },
+      { name: "Staten Island", image: statenIslandImage }
     ]
   },
 
