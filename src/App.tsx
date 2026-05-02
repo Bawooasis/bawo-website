@@ -4,12 +4,20 @@ import {
   BadgeCheck,
   BookOpen,
   Calendar,
+  Clock,
+  Crown,
+  Download,
+  Flame,
+  Gem,
   Headphones,
   Home,
+  Lock,
   Sparkles,
   Star,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import BawoPillButton from "./components/BawoPillButton";
+import MailchimpSignupRow from "./components/MailchimpSignupRow";
 import Logo from "./components/Logo";
 import { CONTENT } from "./constants/content";
 import { TAILWIND_COLORS } from "./constants/colors";
@@ -315,7 +323,10 @@ function App() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <div className="fixed inset-0 z-0 bg-gradient-to-b from-[#000000] via-[#0B0C10] to-[#000000]" aria-hidden />
+      <div
+        className="fixed inset-0 z-0 bg-gradient-to-b from-[var(--bawo-canvas)] via-[var(--bawo-elevated)] to-[var(--bawo-canvas)]"
+        aria-hidden
+      />
       
       {/* Live Signup Notification Toast */}
       {showNotification && (
@@ -326,82 +337,71 @@ function App() {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10b981]"></span>
             </div>
             <p className="text-white text-xs md:text-sm font-museo-medium">
-              <span className="font-museo-bold text-[#C47B44]">{notificationData.name}</span> from {notificationData.location} just joined
+              <span className="font-museo-bold text-[var(--bawo-brand-cta-orange)]">{notificationData.name}</span> from {notificationData.location} just joined
             </p>
           </div>
         </div>
       )}
       
-      {/* Premium Scrolling Countdown Banner - Airport Billboard Style */}
-      <div className="fixed top-0 left-0 right-0 z-40 bg-gradient-to-r from-[#C47B44] via-[#E09255] to-[#DAA520] py-2 md:py-2.5 shadow-[0_4px_20px_rgba(196,123,68,0.4)] overflow-hidden">
-        {/* Fade overlay on edges for premium look */}
-        <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-[#C47B44] to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-[#DAA520] to-transparent z-10 pointer-events-none"></div>
-        
-        <div className="relative flex">
-          {/* Scrolling content - duplicated for seamless loop */}
-          <div className="flex animate-scroll-left whitespace-nowrap">
-            {/* First set */}
-            <div className="flex items-center gap-6 md:gap-8 px-8">
-              <span className="text-white font-museo-bold text-xs md:text-sm flex items-center gap-2">
-                <span className="text-lg">⏰</span> Closes:
+      {/* Promo strip — full-bleed glass, pumpkin copy, ribbon animation (see `index.css`) */}
+      <div className="bawo-promo-strip fixed top-0 left-0 right-0 z-40 py-2.5 md:py-3">
+        <div
+          className="bawo-promo-ribbon flex w-full flex-wrap items-center justify-center gap-x-3 gap-y-2 px-4 text-xs md:gap-x-5 md:text-sm"
+          style={{
+            color: "var(--bawo-brand-cta-orange, #ff6b00)",
+            textShadow:
+              "0 0 20px rgba(255, 107, 0, 0.45), 0 0 42px rgba(255, 107, 0, 0.18)",
+          }}
+        >
+          <span className="flex items-center justify-center gap-2 font-museo-medium">
+            <Gem className="h-[18px] w-[18px] shrink-0 md:h-5 md:w-5" strokeWidth={2} aria-hidden />
+            Lifetime Access — One Payment
+          </span>
+          <span className="opacity-45" aria-hidden>
+            ·
+          </span>
+          <span className="flex items-center justify-center gap-2">
+            <Crown className="h-[18px] w-[18px] shrink-0 md:h-5 md:w-5" strokeWidth={2} aria-hidden />
+            <span className="font-museo-bold font-display tracking-wide">Founding Member Badge</span>
+          </span>
+          <span className="opacity-45" aria-hidden>
+            ·
+          </span>
+          <span className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
+            <Clock className="h-[18px] w-[18px] shrink-0 md:h-5 md:w-5" strokeWidth={2} aria-hidden />
+            <span className="font-museo-medium opacity-90">Closes:</span>
+            <span className="font-museo-bold tabular-nums">
+              {timeLeft.days}
+              <span className="ml-0.5 text-[10px] font-museo-medium opacity-75 md:text-xs">
+                D
               </span>
-              <div className="flex items-center gap-2">
-                <div className="text-center bg-black/20 backdrop-blur-sm rounded-lg px-3 py-1.5 border border-white/10">
-                  <span className="text-white font-museo-bold text-sm md:text-base">{timeLeft.days}</span>
-                  <span className="text-white/80 text-[10px] md:text-xs font-museo-medium ml-0.5">D</span>
-                </div>
-                <div className="text-center bg-black/20 backdrop-blur-sm rounded-lg px-3 py-1.5 border border-white/10">
-                  <span className="text-white font-museo-bold text-sm md:text-base">{String(timeLeft.hours).padStart(2, '0')}</span>
-                  <span className="text-white/80 text-[10px] md:text-xs font-museo-medium ml-0.5">H</span>
-                </div>
-                <div className="text-center bg-black/20 backdrop-blur-sm rounded-lg px-3 py-1.5 border border-white/10">
-                  <span className="text-white font-museo-bold text-sm md:text-base">{String(timeLeft.minutes).padStart(2, '0')}</span>
-                  <span className="text-white/80 text-[10px] md:text-xs font-museo-medium ml-0.5">M</span>
-                </div>
-                <div className="text-center bg-black/20 backdrop-blur-sm rounded-lg px-3 py-1.5 border border-white/10">
-                  <span className="text-white font-museo-bold text-sm md:text-base">{String(timeLeft.seconds).padStart(2, '0')}</span>
-                  <span className="text-white/80 text-[10px] md:text-xs font-museo-medium ml-0.5">S</span>
-                </div>
-              </div>
-              <span className="text-white/90 font-museo-medium text-xs md:text-sm">•</span>
-              <span className="text-white font-museo-bold text-xs md:text-sm">🔥 Only 450 Spots Left</span>
-              <span className="text-white/90 font-museo-medium text-xs md:text-sm">•</span>
-              <span className="text-white font-museo-medium text-xs md:text-sm">💎 Lifetime Access - One Payment</span>
-              <span className="text-white/90 font-museo-medium text-xs md:text-sm">•</span>
-              <span className="text-white font-museo-bold text-xs md:text-sm">👑 Founding Member Badge</span>
-            </div>
-            {/* Second set - duplicate for seamless loop */}
-            <div className="flex items-center gap-6 md:gap-8 px-8">
-              <span className="text-white font-museo-bold text-xs md:text-sm flex items-center gap-2">
-                <span className="text-lg">⏰</span> Closes:
+            </span>
+            <span className="font-museo-bold tabular-nums">
+              {String(timeLeft.hours).padStart(2, "0")}
+              <span className="ml-0.5 text-[10px] font-museo-medium opacity-75 md:text-xs">
+                H
               </span>
-              <div className="flex items-center gap-2">
-                <div className="text-center bg-black/20 backdrop-blur-sm rounded-lg px-3 py-1.5 border border-white/10">
-                  <span className="text-white font-museo-bold text-sm md:text-base">{timeLeft.days}</span>
-                  <span className="text-white/80 text-[10px] md:text-xs font-museo-medium ml-0.5">D</span>
-                </div>
-                <div className="text-center bg-black/20 backdrop-blur-sm rounded-lg px-3 py-1.5 border border-white/10">
-                  <span className="text-white font-museo-bold text-sm md:text-base">{String(timeLeft.hours).padStart(2, '0')}</span>
-                  <span className="text-white/80 text-[10px] md:text-xs font-museo-medium ml-0.5">H</span>
-                </div>
-                <div className="text-center bg-black/20 backdrop-blur-sm rounded-lg px-3 py-1.5 border border-white/10">
-                  <span className="text-white font-museo-bold text-sm md:text-base">{String(timeLeft.minutes).padStart(2, '0')}</span>
-                  <span className="text-white/80 text-[10px] md:text-xs font-museo-medium ml-0.5">M</span>
-                </div>
-                <div className="text-center bg-black/20 backdrop-blur-sm rounded-lg px-3 py-1.5 border border-white/10">
-                  <span className="text-white font-museo-bold text-sm md:text-base">{String(timeLeft.seconds).padStart(2, '0')}</span>
-                  <span className="text-white/80 text-[10px] md:text-xs font-museo-medium ml-0.5">S</span>
-                </div>
-              </div>
-              <span className="text-white/90 font-museo-medium text-xs md:text-sm">•</span>
-              <span className="text-white font-museo-bold text-xs md:text-sm">🔥 Only 450 Spots Left</span>
-              <span className="text-white/90 font-museo-medium text-xs md:text-sm">•</span>
-              <span className="text-white font-museo-medium text-xs md:text-sm">💎 Lifetime Access - One Payment</span>
-              <span className="text-white/90 font-museo-medium text-xs md:text-sm">•</span>
-              <span className="text-white font-museo-bold text-xs md:text-sm">👑 Founding Member Badge</span>
-            </div>
-          </div>
+            </span>
+            <span className="font-museo-bold tabular-nums">
+              {String(timeLeft.minutes).padStart(2, "0")}
+              <span className="ml-0.5 text-[10px] font-museo-medium opacity-75 md:text-xs">
+                M
+              </span>
+            </span>
+            <span className="font-museo-bold tabular-nums">
+              {String(timeLeft.seconds).padStart(2, "0")}
+              <span className="ml-0.5 text-[10px] font-museo-medium opacity-75 md:text-xs">
+                S
+              </span>
+            </span>
+          </span>
+          <span className="opacity-45" aria-hidden>
+            ·
+          </span>
+          <span className="flex items-center justify-center gap-2 font-museo-bold">
+            <Flame className="h-[18px] w-[18px] shrink-0 md:h-5 md:w-5" strokeWidth={2} aria-hidden />
+            Only 450 Spots Left
+          </span>
         </div>
       </div>
       
@@ -444,13 +444,13 @@ function App() {
                 <div className="space-y-6">
                   <h1
                     ref={headlineRef}
-                    className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.2] font-museo-bold text-white"
+                    className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.2] font-display text-white"
                   >
             {CONTENT.hero.title}
           </h1>
                   <p
                     ref={subheadlineRef}
-                    className="text-base md:text-lg opacity-90 font-museo-regular text-white leading-[1.8]"
+                    className="text-base md:text-lg opacity-90 font-medium text-white leading-[1.8]"
                   >
             {CONTENT.hero.subtitle}
           </p>
@@ -459,49 +459,37 @@ function App() {
                 {/* Call to Action Buttons – Primary: $50 with trust anchors */}
                 <div
                   ref={ctaRef}
-                  className="flex flex-col gap-4 justify-start items-start"
+                  className="flex flex-col gap-4 justify-start items-start w-full"
                 >
-                  {/* Primary CTA with glow */}
-                  <div className="relative w-full max-w-md">
-                    <button
+                  <div className="relative w-full max-w-2xl">
+                    <BawoPillButton
+                      label={CONTENT.hero.ctaPrimary}
+                      icon={Lock}
+                      variant="primary"
+                      size="md"
+                      fullWidth
                       onClick={handleFoundingMember}
-                      className="w-full bg-gradient-to-r from-[#C47B44] to-[#FF6B00] hover:from-[#E09255] hover:to-[#FF6B00] text-white px-8 sm:px-10 py-4 rounded-full min-h-[56px] font-bold text-base md:text-lg leading-tight transform hover:translate-y-[-2px] transition-all duration-300 font-museo-bold shadow-[0_0_30px_rgba(196,123,68,0.6)] hover:shadow-[0_0_40px_rgba(196,123,68,0.8)]"
-                    >
-                      {CONTENT.hero.ctaPrimary}
-                    </button>
-                    {/* Pulsing indicator */}
+                    />
                     <div className="absolute -top-2 -right-2 w-3 h-3 bg-red-500 rounded-full animate-pulse" aria-hidden />
                   </div>
 
-                  {/* Microcopy - TestFlight benefit */}
-                  <p className="text-white/80 text-sm md:text-base font-museo-medium leading-relaxed">
-                    {CONTENT.hero.ctaMicrocopy}
-                  </p>
+                  <div className="mt-8 md:mt-11 flex flex-col gap-3 w-full max-w-2xl">
+                    <p className="text-white/80 text-sm md:text-base font-medium leading-relaxed">
+                      {CONTENT.hero.ctaMicrocopy}
+                    </p>
 
-                  {/* Trust Anchors */}
-                  <div className="flex flex-wrap items-center gap-3 text-xs md:text-sm text-white/70 font-museo-regular">
-                    <span className="flex items-center gap-1.5">
-                      <svg className="w-4 h-4 text-[#635bff]" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z"/>
-                      </svg>
-                      {CONTENT.hero.trustIndicators.stripe}
-                    </span>
-                    <span className="text-white/50">|</span>
-                    <span>{CONTENT.hero.trustIndicators.oneTime}</span>
-                    <span className="text-white/50">|</span>
-                    <span>{CONTENT.hero.trustIndicators.cancel}</span>
-                  </div>
-
-                  {/* Secondary option - TestFlight direct link */}
-                  <div className="pt-2">
-                    <a
-                      href={CONTENT.hero.testflightLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#C47B44] hover:text-[#E09255] underline text-sm md:text-base font-museo-medium transition-colors duration-300"
-                    >
-                      Or download via TestFlight (free beta)
-                    </a>
+                    <div className="bawo-trust-row flex flex-wrap items-center gap-3 text-xs md:text-sm font-normal">
+                      <span className="flex items-center gap-1.5">
+                        <svg className="w-4 h-4 text-[#635bff]" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z"/>
+                        </svg>
+                        {CONTENT.hero.trustIndicators.stripe}
+                      </span>
+                      <span className="bawo-trust-row__sep">|</span>
+                      <span>{CONTENT.hero.trustIndicators.oneTime}</span>
+                      <span className="bawo-trust-row__sep">|</span>
+                      <span>{CONTENT.hero.trustIndicators.cancel}</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -510,9 +498,9 @@ function App() {
               {previewImages.length > 0 && (
                 <div
                   ref={phoneRef}
-                  className="flex justify-center lg:justify-end lg:pr-10 xl:pr-16 order-1 lg:order-2 -mt-10 md:-mt-14"
+                  className="flex flex-col items-center lg:items-end lg:pr-10 xl:pr-16 order-1 lg:order-2 -mt-10 md:-mt-14 gap-6"
                 >
-                  <div className="relative">
+                  <div className="relative pb-8">
                     <div className="relative">
                       <img
                         ref={previewImgRef}
@@ -523,23 +511,40 @@ function App() {
                         className="w-64 md:w-80 lg:w-96 h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] transform-gpu transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-[2rem] animate-breathing object-cover will-change-transform"
                         style={{ opacity: 1 }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#C47B44]/10 via-transparent to-transparent rounded-[2rem] pointer-events-none"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-[rgba(255,107,0,0.14)] via-transparent to-transparent rounded-[2rem] pointer-events-none"></div>
                       <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-white/5 to-transparent rounded-t-[2rem] pointer-events-none"></div>
                     </div>
                     {/* Dots */}
-                    <div className="flex items-center justify-center gap-2 absolute -bottom-6 left-1/2 -translate-x-1/2">
+                    <div className="flex items-center justify-center gap-2 absolute -bottom-2 left-1/2 -translate-x-1/2">
                       {previewImages.map((_, idx) => (
                         <span
                           key={idx}
                           className={`w-2.5 h-2.5 rounded-full ${
                             idx === activePreviewIndex
-                              ? "bg-[#C47B44]"
+                              ? "bg-[var(--bawo-brand-cta-orange)]"
                               : "bg-white/30"
                           }`}
                         />
                       ))}
                     </div>
                   </div>
+
+                  <a
+                    href={CONTENT.hero.testflightLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="pill-warm-auth bawo-pill-cta-surface w-64 md:w-80 lg:w-96 shrink-0"
+                  >
+                    <span className="pill-warm-auth__icon" aria-hidden>
+                      <Download className="h-5 w-5" strokeWidth={2.25} />
+                    </span>
+                    <span className="pill-warm-auth__label">
+                      <span className="block">Or download via TestFlight</span>
+                      <span className="pill-warm-auth__label-sub block">
+                        (free beta)
+                      </span>
+                    </span>
+                  </a>
                 </div>
               )}
             </div>
@@ -554,77 +559,15 @@ function App() {
                 title="Instagram"
                 className="transform hover:scale-110 transition-transform duration-300"
               >
-                <svg className="w-8 h-8" viewBox="0 0 24 24" fill="url(#instagram-gradient-hero)">
-                  {/* Social Media Icons - Fixed Bottom Right */} 
-                  {/* Move this block OUTSIDE of the hero/section content, right before the final closing </div> or </body> tag, so it's absolutely/fixed positioned at all times */}
-                  {/* Example at the bottom of App.tsx or just above </body> (outside main sections): */}
-                  <div 
-                    className="fixed z-50 bottom-6 right-6 flex flex-col gap-4 items-end"
-                    style={{ pointerEvents: "all" }}
-                  >
-                    <a
-                      href="https://www.instagram.com/bawo.social/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Instagram"
-                      title="Instagram"
-                      className="transform hover:scale-110 transition-transform duration-300"
-                    >
-                      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="url(#instagram-gradient-hero)">
-                        <defs>
-                          <linearGradient id="instagram-gradient-hero" x1="0%" y1="100%" x2="100%" y2="0%">
-                            <stop offset="0%" style={{ stopColor: '#FD5949', stopOpacity: 1 }} />
-                            <stop offset="50%" style={{ stopColor: '#D6249F', stopOpacity: 1 }} />
-                            <stop offset="100%" style={{ stopColor: '#285AEB', stopOpacity: 1 }} />
-                          </linearGradient>
-                        </defs>
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                      </svg>
-                    </a>
-                    <a
-                      href="https://twitter.com/bawoapp"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="X (Twitter)"
-                      title="X (Twitter)"
-                      className="transform hover:scale-110 transition-transform duration-300"
-                    >
-                      <svg className="w-8 h-8" fill="#1DA1F2" viewBox="0 0 24 24">
-                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                      </svg>
-                    </a>
-                    <a
-                      href="https://linkedin.com/company/bawoapp"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="LinkedIn"
-                      title="LinkedIn"
-                      className="transform hover:scale-110 transition-transform duration-300"
-                    >
-                      <svg className="w-8 h-8" fill="#0A66C2" viewBox="0 0 24 24">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                      </svg>
-                    </a>
-                    <a
-                      href="https://www.tiktok.com/@bawosocial"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="TikTok"
-                      title="TikTok"
-                      className="transform hover:scale-110 transition-transform duration-300"
-                    >
-                      <svg className="w-8 h-8" viewBox="0 0 24 24">
-                        <defs>
-                          <linearGradient id="tiktok-gradient-hero" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style={{ stopColor: '#00F2EA', stopOpacity: 1 }} />
-                            <stop offset="100%" style={{ stopColor: '#FF0050', stopOpacity: 1 }} />
-                          </linearGradient>
-                        </defs>
-                        <path fill="url(#tiktok-gradient-hero)" d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
-                      </svg>
-                    </a>
-                  </div>
-             
+                <svg className="w-8 h-8" viewBox="0 0 24 24" fill="url(#instagram-gradient-row)">
+                  <defs>
+                    <linearGradient id="instagram-gradient-row" x1="0%" y1="100%" x2="100%" y2="0%">
+                      <stop offset="0%" style={{ stopColor: "#FD5949", stopOpacity: 1 }} />
+                      <stop offset="50%" style={{ stopColor: "#D6249F", stopOpacity: 1 }} />
+                      <stop offset="100%" style={{ stopColor: "#285AEB", stopOpacity: 1 }} />
+                    </linearGradient>
+                  </defs>
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                 </svg>
               </a>
               <a
@@ -636,7 +579,7 @@ function App() {
                 className="transform hover:scale-110 transition-transform duration-300"
               >
                 <svg className="w-8 h-8" fill="#1DA1F2" viewBox="0 0 24 24">
-                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
                 </svg>
               </a>
               <a
@@ -648,7 +591,7 @@ function App() {
                 className="transform hover:scale-110 transition-transform duration-300"
               >
                 <svg className="w-8 h-8" fill="#0A66C2" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                 </svg>
               </a>
               <a
@@ -661,17 +604,20 @@ function App() {
               >
                 <svg className="w-8 h-8" viewBox="0 0 24 24">
                   <defs>
-                    <linearGradient id="tiktok-gradient-hero" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" style={{ stopColor: '#00F2EA', stopOpacity: 1 }} />
-                      <stop offset="100%" style={{ stopColor: '#FF0050', stopOpacity: 1 }} />
+                    <linearGradient id="tiktok-gradient-row" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style={{ stopColor: "#00F2EA", stopOpacity: 1 }} />
+                      <stop offset="100%" style={{ stopColor: "#FF0050", stopOpacity: 1 }} />
                     </linearGradient>
                   </defs>
-                  <path fill="url(#tiktok-gradient-hero)" d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                  <path
+                    fill="url(#tiktok-gradient-row)"
+                    d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"
+                  />
                 </svg>
               </a>
             </div>
-        </div>
-      </section>
+          </div>
+        </section>
 
       {/* Stats Section – Batch 1 scarcity + progress bar */}
       <section
@@ -698,7 +644,7 @@ function App() {
             <p className="text-lg text-white/80 font-museo-medium max-w-2xl mx-auto">
               {CONTENT.stats.subtitle}
             </p>
-            <p className="text-xl md:text-2xl font-bold text-[#C47B44] font-museo-bold">
+            <p className="text-xl md:text-2xl font-bold bawo-text-cta-gradient font-museo-bold">
               {CONTENT.stats.tagline}
             </p>
             
@@ -718,7 +664,7 @@ function App() {
               
               {/* Lifetime Savings */}
               <div className="text-center">
-                <p className="text-4xl md:text-5xl font-bold text-[#DAA520] font-museo-bold">
+                <p className="text-4xl md:text-5xl font-bold bawo-text-cta-gradient font-museo-bold">
                   {CONTENT.stats.metrics.savings.value}
                 </p>
                 <p className="text-sm md:text-base text-white/80 font-museo-medium uppercase tracking-wide mt-1">
@@ -746,7 +692,7 @@ function App() {
             {/* Value Prop Cards */}
             <div className="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto pt-8">
               {/* Card 1 - Price Lock */}
-              <div className="bg-white/[0.06] backdrop-blur-md rounded-xl border border-[rgba(255,255,255,0.08)] p-5 text-center hover:border-[#C47B44]/40 transition-all duration-300">
+              <div className="bg-white/[0.06] backdrop-blur-md rounded-xl border border-[rgba(255,255,255,0.08)] p-5 text-center hover:border-[rgba(255,107,0,0.45)] transition-all duration-300">
                 <div className="text-3xl mb-2">🔒</div>
                 <p className="text-white/90 font-museo-bold text-lg mb-1">Price Locked Forever</p>
                 <p className="text-white/60 text-sm font-museo-regular">Never pay $19.99/month</p>
@@ -760,7 +706,7 @@ function App() {
               </div>
               
               {/* Card 3 - Exclusive Access */}
-              <div className="bg-white/[0.06] backdrop-blur-md rounded-xl border border-[rgba(255,255,255,0.08)] p-5 text-center hover:border-[#DAA520]/40 transition-all duration-300">
+              <div className="bg-white/[0.06] backdrop-blur-md rounded-xl border border-[rgba(255,255,255,0.08)] p-5 text-center hover:border-[var(--bawo-section-title-accent)]/40 transition-all duration-300">
                 <div className="text-3xl mb-2">⭐</div>
                 <p className="text-white/90 font-museo-bold text-lg mb-1">Founding Member Badge</p>
                 <p className="text-white/60 text-sm font-museo-regular">Permanent "Day One" status</p>
@@ -780,12 +726,13 @@ function App() {
               </div>
 
               <p className="text-base md:text-lg font-bold font-museo-bold text-white/95 text-center">
-                <span className="text-[#C47B44] text-2xl md:text-3xl">050</span> / <span className="text-[#DAA520]">500</span> Founding Spots Taken
+                <span className="bawo-text-cta-gradient text-2xl md:text-3xl">050</span>{" "}
+                / <span className="bawo-text-cta-gradient">500</span> Founding Spots Taken
               </p>
               
               <div className="h-3 w-full rounded-full bg-white/[0.08] overflow-hidden backdrop-blur-sm border border-[rgba(255,255,255,0.08)] shadow-inner relative">
                 <div
-                  className="h-full w-[10%] rounded-full bg-gradient-to-r from-[#C47B44] via-[#E09255] to-[#DAA520] transition-all duration-500 shadow-[0_0_12px_rgba(196,123,68,0.6)] animate-pulse"
+                  className="h-full w-[10%] rounded-full bg-[#ff6b00] transition-all duration-500 shadow-[0_0_14px_rgba(255,107,0,0.55)] animate-pulse"
                   aria-label="50 of 500 spots taken"
                 />
               </div>
@@ -801,11 +748,11 @@ function App() {
                 {/* Activity Item 1 */}
                 <div className="flex items-center justify-between text-sm animate-fade-in">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#C47B44] to-[#DAA520] flex items-center justify-center text-white text-xs font-bold">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#ff6b00] to-[#5a260c] flex items-center justify-center text-white text-xs font-bold">
                       A
                     </div>
                     <div>
-                      <p className="text-white/90 font-museo-medium">Adanna from <span className="text-[#C47B44]">Brooklyn</span></p>
+                      <p className="text-white/90 font-museo-medium">Adanna from <span className="text-[var(--bawo-brand-cta-orange)]">Brooklyn</span></p>
                       <p className="text-white/50 text-xs font-museo-regular">joined as Founding Member</p>
                     </div>
                   </div>
@@ -819,7 +766,7 @@ function App() {
                       T
                     </div>
                     <div>
-                      <p className="text-white/90 font-museo-medium">Tunde from <span className="text-[#C47B44]">Manhattan</span></p>
+                      <p className="text-white/90 font-museo-medium">Tunde from <span className="text-[var(--bawo-brand-cta-orange)]">Manhattan</span></p>
                       <p className="text-white/50 text-xs font-museo-regular">joined as Founding Member</p>
                     </div>
                   </div>
@@ -833,7 +780,7 @@ function App() {
                       C
                     </div>
                     <div>
-                      <p className="text-white/90 font-museo-medium">Chiamaka from <span className="text-[#C47B44]">Queens</span></p>
+                      <p className="text-white/90 font-museo-medium">Chiamaka from <span className="text-[var(--bawo-brand-cta-orange)]">Queens</span></p>
                       <p className="text-white/50 text-xs font-museo-regular">joined as Founding Member</p>
                     </div>
                   </div>
@@ -847,7 +794,7 @@ function App() {
                       O
                     </div>
                     <div>
-                      <p className="text-white/90 font-museo-medium">Obinna from <span className="text-[#C47B44]">The Bronx</span></p>
+                      <p className="text-white/90 font-museo-medium">Obinna from <span className="text-[var(--bawo-brand-cta-orange)]">The Bronx</span></p>
                       <p className="text-white/50 text-xs font-museo-regular">joined as Founding Member</p>
                     </div>
                   </div>
@@ -861,7 +808,7 @@ function App() {
                       N
                     </div>
                     <div>
-                      <p className="text-white/90 font-museo-medium">Ngozi from <span className="text-[#C47B44]">Brooklyn</span></p>
+                      <p className="text-white/90 font-museo-medium">Ngozi from <span className="text-[var(--bawo-brand-cta-orange)]">Brooklyn</span></p>
                       <p className="text-white/50 text-xs font-museo-regular">joined as Founding Member</p>
                     </div>
                   </div>
@@ -878,7 +825,7 @@ function App() {
                   <div className="space-y-3">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="text-2xl">👑</span>
-                      <h5 className="text-[#C47B44] font-museo-bold text-lg">Founding Member</h5>
+                      <h5 className="text-[var(--bawo-brand-cta-orange)] font-museo-bold text-lg">Founding Member</h5>
                     </div>
                     <div className="space-y-2 text-white/80 text-sm font-museo-medium">
                       <div className="flex justify-between">
@@ -944,7 +891,7 @@ function App() {
                 </div>
 
                 <div className="mt-6 pt-6 border-t border-white/10 text-center">
-                  <p className="text-[#DAA520] font-museo-bold text-xl">
+                  <p className="bawo-text-cta-gradient font-museo-bold text-xl">
                     Save $190 in Year 1 alone. $2,350+ over 5 years.
                   </p>
                   <p className="text-white/60 text-sm font-museo-regular mt-2">
@@ -954,22 +901,22 @@ function App() {
               </div>
 
               {/* Urgency Warning Box */}
-              <div className="mt-8 bg-gradient-to-r from-[#C47B44]/10 to-[#DAA520]/10 backdrop-blur-sm rounded-xl border border-[#C47B44]/30 p-6 max-w-2xl mx-auto">
+              <div className="mt-8 bg-gradient-to-r from-[rgba(255,107,0,0.14)] to-[rgba(255,107,0,0.06)] backdrop-blur-sm rounded-xl border border-[rgba(255,107,0,0.35)] p-6 max-w-2xl mx-auto">
                 <div className="flex items-start gap-4">
                   <div className="text-3xl">⚠️</div>
                   <div className="flex-1 space-y-3">
                     <h4 className="text-white font-museo-bold text-lg">After Batch 1 Closes...</h4>
                     <ul className="space-y-2 text-white/80 text-sm font-museo-medium">
                       <li className="flex items-start gap-2">
-                        <span className="text-[#C47B44] mt-0.5">→</span>
+                        <span className="text-[var(--bawo-brand-cta-orange)] mt-0.5">→</span>
                         <span>Price increases to <strong className="text-white">$19.99/month</strong> ($240/year)</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-[#C47B44] mt-0.5">→</span>
+                        <span className="text-[var(--bawo-brand-cta-orange)] mt-0.5">→</span>
                         <span>No more lifetime access option</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-[#C47B44] mt-0.5">→</span>
+                        <span className="text-[var(--bawo-brand-cta-orange)] mt-0.5">→</span>
                         <span>Founding Member badge becomes exclusive</span>
                       </li>
                     </ul>
@@ -1005,7 +952,7 @@ function App() {
               <h2 className="text-6xl md:text-7xl lg:text-8xl font-extrabold font-museo-bold leading-tight text-center tracking-tight">
                 {CONTENT.origin.title}
               </h2>
-              <div className="border-l-4 border-[#C47B44] bg-white/[0.06] backdrop-blur-md rounded-r-2xl pl-10 pr-10 py-12 space-y-8 shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
+              <div className="glass-card rounded-2xl px-6 md:px-10 py-12 space-y-8">
                 <p className="text-white/95 font-museo-medium text-xl md:text-2xl leading-relaxed md:leading-[2] text-left">
                   Most Nigerians in the diaspora feel isolated and{" "}
                   <strong className="font-museo-bold text-white">disconnected from opportunity</strong>. We miss our culture, our people, and our network. BawoSocial was created to fix that.
@@ -1036,7 +983,7 @@ function App() {
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-museo-bold">
               {CONTENT.foundingMember.title}
                   <br />
-                  <span className={TAILWIND_COLORS.primary.text}>{CONTENT.foundingMember.titleHighlight}</span>
+                  <span className="bawo-text-cta-gradient">{CONTENT.foundingMember.titleHighlight}</span>
           </h2>
                 <p className="text-base md:text-lg font-museo-regular text-white/80">
                   {CONTENT.foundingMember.subtitle}
@@ -1047,7 +994,7 @@ function App() {
                 <div className="space-y-4">
               {CONTENT.foundingMember.benefits.map((benefit, index) => (
                     <div key={index} className="flex items-start gap-4">
-                      <BadgeCheck className={`w-5 h-5 ${TAILWIND_COLORS.primary.text} flex-shrink-0 mt-0.5`} />
+                      <BadgeCheck className="w-5 h-5 text-white flex-shrink-0 mt-0.5" />
                       <div>
                         <span className="font-museo-bold text-base text-white">
                           {benefit.title}
@@ -1071,22 +1018,26 @@ function App() {
 
             {/* Right Content - CTA on right, vertically centered */}
             <div className="hidden lg:flex h-full w-full items-center justify-end mt-10 lg:mt-0">
-              <button
+              <BawoPillButton
+                label={CONTENT.foundingMember.cta}
+                icon={Lock}
+                variant="primary"
+                size="lg"
                 onClick={handleFoundingMember}
-                className="bg-gradient-to-r from-[#C47B44] to-[#FF6B00] hover:from-[#E09255] hover:to-[#FF6B00] text-white px-14 py-5 rounded-full min-h-[52px] font-bold text-xl md:text-2xl leading-tight transform hover:scale-[1.03] transition-all duration-300 font-museo-bold shadow-[0_0_20px_rgba(196,123,68,0.5)] hover:shadow-[0_0_26px_rgba(196,123,68,0.7)] cta-glow"
-              >
-                {CONTENT.foundingMember.cta}
-              </button>
+              />
             </div>
 
             {/* Mobile / tablet CTA centered below card */}
-            <div className="flex lg:hidden justify-center mt-10">
-              <button
+            <div className="flex lg:hidden justify-center mt-10 w-full">
+              <BawoPillButton
+                label={CONTENT.foundingMember.cta}
+                icon={Lock}
+                variant="primary"
+                size="md"
+                fullWidth
+                className="max-w-md"
                 onClick={handleFoundingMember}
-                className="bg-gradient-to-r from-[#C47B44] to-[#FF6B00] hover:from-[#E09255] hover:to-[#FF6B00] text-white px-10 py-4 rounded-full min-h-[48px] font-bold text-lg leading-tight transform hover:scale-[1.03] transition-all duration-300 font-museo-bold shadow-[0_0_20px_rgba(196,123,68,0.5)] hover:shadow-[0_0_26px_rgba(196,123,68,0.7)] cta-glow"
-              >
-                {CONTENT.foundingMember.cta}
-              </button>
+              />
             </div>
           </div>
         </div>
@@ -1107,15 +1058,17 @@ function App() {
               return (
                 <div
                   key={index}
-                  className="feature-card glass-card rounded-2xl p-8 text-left border-[rgba(255,255,255,0.08)] hover:border-[#C47B44]/60 transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.37)]"
+                  className="feature-card glass-card rounded-2xl p-8 text-center flex flex-col items-center border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,107,0,0.55)] transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.37)]"
                 >
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${TAILWIND_COLORS.primary.text} bg-gradient-to-br from-[#C47B44]/20 to-[#DAA520]/20 backdrop-blur-sm border border-[rgba(255,255,255,0.08)]`}>
-                    <Icon className="w-6 h-6" strokeWidth={2} />
-                  </div>
+                  <Icon
+                    className="w-8 h-8 md:w-9 md:h-9 text-white shrink-0 mb-6"
+                    strokeWidth={2}
+                    aria-hidden
+                  />
                   <h3 className="text-xl md:text-2xl font-bold font-museo-bold text-white mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-base md:text-lg font-museo-regular leading-relaxed text-white/85">
+                  <p className="text-base md:text-lg font-museo-regular leading-relaxed text-white/85 max-w-prose">
                     {item.description}
                   </p>
                 </div>
@@ -1143,7 +1096,7 @@ function App() {
 
           <div className="grid md:grid-cols-3 gap-8 lg:gap-10 max-w-6xl mx-auto">
             {/* Testimonial 1 */}
-            <div className="testimonial-card bg-white/[0.06] backdrop-blur-md rounded-2xl p-7 md:p-8 border border-[rgba(255,255,255,0.08)] hover:border-[#C47B44]/40 shadow-[0_8px_32px_rgba(0,0,0,0.37)] transition-all duration-300">
+            <div className="testimonial-card bg-white/[0.06] backdrop-blur-md rounded-2xl p-7 md:p-8 border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,107,0,0.45)] shadow-[0_8px_32px_rgba(0,0,0,0.37)] transition-all duration-300">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden ring-2 ring-white/40">
                   <img
@@ -1167,7 +1120,7 @@ function App() {
             </div>
 
             {/* Testimonial 2 */}
-            <div className="testimonial-card bg-white/[0.06] backdrop-blur-md rounded-2xl p-7 md:p-8 border border-[rgba(255,255,255,0.08)] hover:border-[#C47B44]/40 shadow-[0_8px_32px_rgba(0,0,0,0.37)] transition-all duration-300">
+            <div className="testimonial-card bg-white/[0.06] backdrop-blur-md rounded-2xl p-7 md:p-8 border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,107,0,0.45)] shadow-[0_8px_32px_rgba(0,0,0,0.37)] transition-all duration-300">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden ring-2 ring-white/40">
                   <img
@@ -1191,7 +1144,7 @@ function App() {
             </div>
 
             {/* Testimonial 3 */}
-            <div className="testimonial-card bg-white/[0.06] backdrop-blur-md rounded-2xl p-7 md:p-8 border border-[rgba(255,255,255,0.08)] hover:border-[#C47B44]/40 shadow-[0_8px_32px_rgba(0,0,0,0.37)] transition-all duration-300">
+            <div className="testimonial-card bg-white/[0.06] backdrop-blur-md rounded-2xl p-7 md:p-8 border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,107,0,0.45)] shadow-[0_8px_32px_rgba(0,0,0,0.37)] transition-all duration-300">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden ring-2 ring-white/40">
                   <img
@@ -1229,7 +1182,7 @@ function App() {
             {IMAGES.inApp.features.map((image, index) => (
               <div
                 key={index}
-                className="text-center bg-black/40 backdrop-blur-md rounded-2xl border border-[rgba(255,255,255,0.08)] hover:border-[#C47B44]/60 shadow-[0_8px_32px_rgba(0,0,0,0.37)] p-4 transition-all duration-300"
+                className="text-center bg-black/40 backdrop-blur-md rounded-2xl border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,107,0,0.55)] shadow-[0_8px_32px_rgba(0,0,0,0.37)] p-4 transition-all duration-300"
               >
                 <div className="rounded-xl overflow-hidden mb-3">
                   <img
@@ -1260,9 +1213,9 @@ function App() {
             Featured Events
           </h2>
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-[rgba(255,255,255,0.08)] hover:border-[#C47B44]/40 text-white transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,107,0,0.45)] text-white transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
               <div className="flex items-center gap-3 mb-3">
-                <Calendar className="w-5 h-5 text-[#DAA520]" />
+                <Calendar className="w-5 h-5 text-white" />
                 <span className="font-museo-bold">
                   Diaspora Networking Night – Downtown Brooklyn
                 </span>
@@ -1272,9 +1225,9 @@ function App() {
                 relationships.
               </p>
             </div>
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-[rgba(255,255,255,0.08)] hover:border-[#C47B44]/40 text-white transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,107,0,0.45)] text-white transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
               <div className="flex items-center gap-3 mb-3">
-                <Headphones className="w-5 h-5 text-[#DAA520]" />
+                <Headphones className="w-5 h-5 text-white" />
                 <span className="font-museo-bold">
                   The Black Book: Live Q&A
                 </span>
@@ -1283,9 +1236,9 @@ function App() {
                 Immigration & Housing experts answering member questions live.
               </p>
             </div>
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-[rgba(255,255,255,0.08)] hover:border-[#C47B44]/40 text-white transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,107,0,0.45)] text-white transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
               <div className="flex items-center gap-3 mb-3">
-                <Star className="w-5 h-5 text-[#DAA520]" />
+                <Star className="w-5 h-5 text-white" />
                 <span className="font-museo-bold">
                   Nigerian Independence Celebration – Manhattan, NYC
                 </span>
@@ -1312,7 +1265,7 @@ function App() {
               <p className="text-lg md:text-2xl font-museo-medium text-white/80">
                 {CONTENT.globalReach.subtitle}
               </p>
-              <p className="text-base md:text-lg font-museo-regular text-[#C47B44]">
+              <p className="text-base md:text-lg font-museo-regular bawo-text-cta-gradient">
                 {CONTENT.globalReach.description}
               </p>
             </div>
@@ -1320,7 +1273,7 @@ function App() {
             {/* City Statistics Grid – city names only, connected by a subtle line */}
             <div className="relative mt-8 md:mt-12">
               <div
-                className="pointer-events-none absolute inset-x-4 md:inset-x-12 top-1/2 h-px bg-gradient-to-r from-transparent via-[#C47B44]/70 to-transparent opacity-70 blur-[1px]"
+                className="pointer-events-none absolute inset-x-4 md:inset-x-12 top-1/2 h-px bg-gradient-to-r from-transparent via-[rgba(255,107,0,0.65)] to-transparent opacity-70 blur-[1px]"
                 aria-hidden
               />
               <div className="flex flex-wrap justify-center gap-12 md:gap-16">
@@ -1367,7 +1320,7 @@ function App() {
                 {CONTENT.globalReach.cities.map((city) => (
                   <span
                     key={city.name}
-                    className="px-4 py-2 rounded-full bg-white/[0.06] backdrop-blur-md border border-[rgba(255,255,255,0.08)] text-white/90 text-sm font-museo-medium hover:border-[#C47B44]/60 hover:bg-white/[0.08] transition-all duration-300"
+                    className="px-4 py-2 rounded-full bg-white/[0.06] backdrop-blur-md border border-[rgba(255,255,255,0.08)] text-white/90 text-sm font-museo-medium hover:border-[rgba(255,107,0,0.55)] hover:bg-white/[0.08] transition-all duration-300"
                   >
                     {city.name}
                   </span>
@@ -1375,88 +1328,63 @@ function App() {
               </div>
             </div>
 
-            {/* Primary: Founding Member CTA with trust anchors */}
-            <div className="flex flex-col gap-5 justify-center items-center">
-              <div className="w-full max-w-md">
-                <button
-                  onClick={handleFoundingMember}
-                  className="w-full bg-gradient-to-r from-[#C47B44] to-[#FF6B00] hover:from-[#E09255] hover:to-[#FF6B00] text-white px-10 sm:px-12 py-5 rounded-full min-h-[56px] font-bold text-lg md:text-xl leading-tight transform hover:translate-y-[-2px] transition-all duration-300 shadow-[0_0_30px_rgba(196,123,68,0.6)] hover:shadow-[0_0_40px_rgba(196,123,68,0.8)] font-museo-bold"
-                >
-                  {CONTENT.finalCta.cta}
-                </button>
+            <MailchimpSignupRow
+              className="relative w-full max-w-2xl mx-auto"
+              buttonLabel="Get updates"
+            />
+
+            {/* Divider: OR — waitlist first, then founding / TestFlight */}
+            <div className="flex items-center gap-4 max-w-2xl mx-auto w-full">
+              <span className="flex-1 h-px bg-white/20" aria-hidden />
+              <span className="text-white/60 font-museo-medium text-sm uppercase tracking-wider">Or</span>
+              <span className="flex-1 h-px bg-white/20" aria-hidden />
+            </div>
+
+            <div className="flex flex-col gap-5 justify-center items-center w-full max-w-2xl mx-auto">
+              <div className="flex flex-col sm:flex-row gap-4 w-full items-stretch">
+                <div className="flex-1 min-w-0">
+                  <BawoPillButton
+                    label={CONTENT.finalCta.cta}
+                    icon={Lock}
+                    variant="primary"
+                    size="md"
+                    fullWidth
+                    onClick={handleFoundingMember}
+                  />
+                </div>
+                <div className="flex-1 min-w-0 flex">
+                  <a
+                    href={CONTENT.hero.testflightLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="pill-warm-auth bawo-pill-cta-surface"
+                  >
+                    <span className="pill-warm-auth__icon" aria-hidden>
+                      <Download className="h-5 w-5" strokeWidth={2.25} />
+                    </span>
+                    <span className="pill-warm-auth__label">
+                      <span className="block">Or download via TestFlight</span>
+                      <span className="pill-warm-auth__label-sub block">
+                        (free beta)
+                      </span>
+                    </span>
+                  </a>
+                </div>
               </div>
 
-              {/* Trust Anchors */}
-              <div className="flex flex-wrap items-center justify-center gap-3 text-xs md:text-sm text-white/70 font-museo-regular">
+              <div className="bawo-trust-row flex flex-wrap items-center justify-center gap-3 text-xs md:text-sm font-normal">
                 <span className="flex items-center gap-1.5">
                   <svg className="w-4 h-4 text-[#635bff]" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z"/>
                   </svg>
                   {CONTENT.hero.trustIndicators.stripe}
                 </span>
-                <span className="text-white/50">|</span>
+                <span className="bawo-trust-row__sep">|</span>
                 <span>{CONTENT.hero.trustIndicators.oneTime}</span>
-                <span className="text-white/50">|</span>
+                <span className="bawo-trust-row__sep">|</span>
                 <span>{CONTENT.hero.trustIndicators.cancel}</span>
               </div>
-
-              {/* Secondary option - TestFlight */}
-              <div className="pt-2">
-                <a
-                  href={CONTENT.hero.testflightLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#C47B44] hover:text-[#E09255] underline text-sm md:text-base font-museo-medium transition-colors duration-300"
-                >
-                  Or download via TestFlight (free beta)
-                </a>
-              </div>
             </div>
-
-            {/* Divider: OR */}
-            <div className="flex items-center gap-4">
-              <span className="flex-1 h-px bg-white/20" aria-hidden />
-              <span className="text-white/60 font-museo-medium text-sm uppercase tracking-wider">Or</span>
-              <span className="flex-1 h-px bg-white/20" aria-hidden />
-            </div>
-
-            {/* Secondary: Join Waitlist form */}
-            <form
-              action="https://joinbawo.us10.list-manage.com/subscribe/post?u=7c2523b0334a02fe77eebddb3&id=842ac1ad64&f_id=00bb32e3f0"
-              method="post"
-              target="_self"
-              className="space-y-4"
-            >
-              <div className="flex flex-col sm:flex-row gap-4">
-                <input
-                  type="email"
-                  name="EMAIL"
-                  placeholder="Enter email for launch updates"
-                  required
-                  className="flex-1 px-6 py-4 rounded-[12px] border-2 text-lg focus:outline-none transition-all bg-white/10 backdrop-blur-sm text-white placeholder-white/70 font-museo-medium border-white/20 focus:border-[#C47B44]"
-                />
-                {/* Anti-spam field (required by Mailchimp) - DO NOT REMOVE */}
-                <div
-                  style={{ position: "absolute", left: "-5000px" }}
-                  aria-hidden="true"
-                >
-                  <input
-                    type="text"
-                    name="b_7c2523b0334a02fe77eebddb3_842ac1ad64"
-                    tabIndex={-1}
-                    defaultValue=""
-                    aria-label="Do not fill this field"
-                    title="Do not fill this field"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-10 py-4 rounded-full min-h-[48px] font-bold text-base flex items-center justify-center transition-all duration-300 font-museo-bold shrink-0"
-                >
-                  Join Waitlist
-                </button>
-              </div>
-            </form>
           </div>
         </div>
       </section>
@@ -1469,12 +1397,13 @@ function App() {
             <span className="text-white font-museo-medium text-sm shrink-0">
               Only 450 Spots Left
             </span>
-            <button
+            <BawoPillButton
+              label="Join for $50"
+              variant="primary"
+              size="sm"
+              className="shrink-0"
               onClick={handleFoundingMember}
-              className="bg-gradient-to-r from-[#C47B44] to-[#FF6B00] text-white px-5 py-2.5 rounded-full min-h-[44px] font-museo-bold text-sm shadow-[0_0_20px_rgba(196,123,68,0.5)] hover:shadow-[0_0_24px_rgba(196,123,68,0.6)] transition-shadow duration-300 inline-flex items-center justify-center"
-            >
-              Join for $50
-            </button>
+            />
           </div>
         </div>
         <div className="container mx-auto px-6">
@@ -2070,6 +1999,77 @@ function App() {
           </div>
         </div>
       )}
+
+      <div
+        className="fixed z-50 bottom-6 right-6 flex flex-col gap-4 items-end pointer-events-auto"
+        aria-label="BawoSocial on social media"
+      >
+        <a
+          href="https://www.instagram.com/bawo.social/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+          title="Instagram"
+          className="transform hover:scale-110 transition-transform duration-300"
+        >
+          <svg className="w-8 h-8" viewBox="0 0 24 24" fill="url(#instagram-gradient-float)">
+            <defs>
+              <linearGradient id="instagram-gradient-float" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" style={{ stopColor: "#FD5949", stopOpacity: 1 }} />
+                <stop offset="50%" style={{ stopColor: "#D6249F", stopOpacity: 1 }} />
+                <stop offset="100%" style={{ stopColor: "#285AEB", stopOpacity: 1 }} />
+              </linearGradient>
+            </defs>
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+          </svg>
+        </a>
+        <a
+          href="https://twitter.com/bawoapp"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="X (Twitter)"
+          title="X (Twitter)"
+          className="transform hover:scale-110 transition-transform duration-300"
+        >
+          <svg className="w-8 h-8" fill="#1DA1F2" viewBox="0 0 24 24">
+            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+          </svg>
+        </a>
+        <a
+          href="https://linkedin.com/company/bawoapp"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+          title="LinkedIn"
+          className="transform hover:scale-110 transition-transform duration-300"
+        >
+          <svg className="w-8 h-8" fill="#0A66C2" viewBox="0 0 24 24">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+          </svg>
+        </a>
+        <a
+          href="https://www.tiktok.com/@bawosocial"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="TikTok"
+          title="TikTok"
+          className="transform hover:scale-110 transition-transform duration-300"
+        >
+          <svg className="w-8 h-8" viewBox="0 0 24 24">
+            <defs>
+              <linearGradient id="tiktok-gradient-float" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style={{ stopColor: "#00F2EA", stopOpacity: 1 }} />
+                <stop offset="100%" style={{ stopColor: "#FF0050", stopOpacity: 1 }} />
+              </linearGradient>
+            </defs>
+            <path
+              fill="url(#tiktok-gradient-float)"
+              d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"
+            />
+          </svg>
+        </a>
+      </div>
+
       </div>
     </div>
   );

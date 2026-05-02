@@ -1,153 +1,135 @@
-// Website Colors Constants - Obsidian & Copper Theme
+import { palette } from "../assets/colors.js";
+import { semanticTokens } from "../assets/theme.js";
 
+const d = semanticTokens.dark;
+const c = palette.copper;
+const g = d.accent.heritageGold;
+
+/** @deprecated Prefer CSS variables (`--bawo-*`) or import `palette` / `semanticTokens` from assets. */
 export const COLORS = {
-  // Primary Brand Colors - Copper/Pumpkin Orange & Gold (Matched to Mobile)
   primary: {
-    copper: "#C47B44",        // Main Copper (matches mobile primary)
-    copperLight: "#E09255",   // Bright Copper (matches mobile primaryGlow)
-    copperDark: "#4A3222",    // Deep Copper (matches mobile primaryMuted)
-    pumpkin: "#FF6B00",       // Primary CTA orange
-    gold: "#DAA520",
-    goldLight: "#E5C158",
-    goldDark: "#B8941F"
+    copper: c.base,
+    copperLight: c.bright,
+    copperDark: c.deep,
+    pumpkinDeprecated: "#FF6B00",
+    gold: g,
+    goldLight: "#E4C76A",
+    goldDark: "#B8922E",
   },
-
-  // Background Colors - Obsidian Black (Pure Black for Web)
   background: {
-    obsidian: "#000000",
-    obsidianLight: "#0B0C10",
-    deepest: "#000000",
-    main: "#000000",
-    surface: "#0B0C10",
-    card: "rgba(11, 12, 16, 0.8)",
+    obsidian: palette.obsidian.canvas,
+    obsidianLight: palette.obsidian.elevated,
+    deepest: palette.obsidian.canvas,
+    main: palette.obsidian.canvas,
+    surface: palette.obsidian.elevated,
+    card: palette.glass.fill,
     dark: {
-      primary: "#000000",
-      secondary: "#0B0C10", 
-      tertiary: "#14151C"
+      primary: palette.obsidian.canvas,
+      secondary: palette.obsidian.elevated,
+      tertiary: palette.obsidian.depth,
     },
     overlay: {
       light: "rgba(255, 255, 255, 0.08)",
       medium: "rgba(255, 255, 255, 0.12)",
-      subtle: "rgba(255, 255, 255, 0.04)"
-    }
+      subtle: "rgba(255, 255, 255, 0.04)",
+    },
   },
-
-  // Text Colors
   text: {
-    primary: "#FFFFFF",
-    secondary: "rgba(255, 255, 255, 0.9)",
-    white: "#FFFFFF",
-    muted: "rgba(255, 255, 255, 0.6)"
+    primary: d.text.primary,
+    secondary: d.text.secondary,
+    white: d.text.primary,
+    muted: d.text.muted,
   },
-
-  // Border Colors - Subtle Glass Borders
   border: {
-    default: "rgba(255, 255, 255, 0.08)",
+    default: d.border.subtle,
     light: "rgba(255, 255, 255, 0.06)",
-    copper: "#C47B44",
-    copperLight: "#E09255"
+    copper: c.base,
+    copperLight: c.bright,
   },
-
-  // Status Colors
   status: {
     success: "#10b981",
     error: "#ef4444",
     warning: "#f59e0b",
-    info: "#3b82f6"
+    info: "#3b82f6",
   },
-
-  // Gradient Combinations - Obsidian gradients (Pure Black)
   gradients: {
     background: {
-      from: "#000000",
-      via: "#0B0C10",
-      to: "#000000",
-      end: "#000000"
+      from: palette.obsidian.canvas,
+      via: palette.obsidian.elevated,
+      to: palette.obsidian.canvas,
+      end: palette.obsidian.canvas,
     },
     subtle: {
-      from: "#000000",
-      to: "#0B0C10"
+      from: palette.obsidian.canvas,
+      to: palette.obsidian.elevated,
     },
     copper: {
-      from: "#C47B44",
-      to: "#E09255"
-    }
+      from: c.base,
+      to: c.bright,
+    },
   },
-
-  // Shadow Colors - Enhanced for depth
   shadows: {
     default: "rgba(0, 0, 0, 0.3)",
     hover: "rgba(0, 0, 0, 0.4)",
     subtle: "rgba(0, 0, 0, 0.2)",
-    glow: "rgba(196, 123, 68, 0.5)"
+    glow: "rgba(255, 107, 0, 0.5)",
   },
-
-  // Utility Colors  
   utility: {
     transparent: "transparent",
     backdrop: "rgba(0, 0, 0, 0.6)",
     red: "#ef4444",
-    redPulse: "#ef4444"
-  }
+    redPulse: "#ef4444",
+  },
 } as const;
 
-// Tailwind CSS Custom Color Classes - Obsidian & Copper Theme (Matched to Mobile)
+/** Literal Tailwind arbitrary values — must stay in sync with `src/assets/colors.js`. */
 export const TAILWIND_COLORS = {
-  // Primary colors for Tailwind classes - Copper/Orange
   primary: {
-    text: "text-[#C47B44]",
-    bg: "bg-[#C47B44]", 
-    border: "border-[#C47B44]",
+    /** Gradient fill — matches `.bawo-pill-cta-surface` / founding CTA ramp. */
+    text: "bawo-text-cta-gradient",
+    bg: "bg-[var(--bawo-brand-cta-orange)]",
+    border: "border-[rgba(255,107,0,0.45)]",
     hover: {
-      bg: "hover:bg-[#E09255]",
-      text: "hover:text-[#E09255]",
-      border: "hover:border-[#E09255]"
+      bg: "hover:bg-[#ff6b00]",
+      text: "hover:text-[#ff8f42]",
+      border: "hover:border-[#ff8f42]",
     },
     focus: {
-      border: "focus:border-[#C47B44]"
-    }
+      border: "focus:border-[var(--bawo-brand-cta-orange)]",
+    },
   },
-
-  // Gold accent
   gold: {
-    text: "text-[#DAA520]",
-    bg: "bg-[#DAA520]",
-    border: "border-[#DAA520]"
+    text: "text-[#D4AF37]",
+    bg: "bg-[#D4AF37]",
+    border: "border-[#D4AF37]",
   },
-
-  // Gradient classes
   gradients: {
-    primary: "bg-gradient-to-r from-[#C47B44] to-[#E09255]",
-    primaryHover: "hover:from-[#E09255] hover:to-[#C47B44]",
-    background: "bg-gradient-to-b from-[#000000] via-[#0B0C10] to-[#000000]",
-    subtle: "bg-gradient-to-b from-[#000000] to-[#0B0C10]"
+    primary: "bg-gradient-to-r from-[#8b3310] via-[#e05818] to-[#ff6b00]",
+    primaryHover: "hover:from-[#ff6b00] hover:to-[#ff9f52]",
+    background:
+      "bg-gradient-to-b from-[#06030C] via-[#0E0A14] to-[#06030C]",
+    subtle: "bg-gradient-to-b from-[#06030C] to-[#0E0A14]",
   },
-
-  // Text classes
   text: {
     primary: "text-white",
     secondary: "text-white/90",
-    muted: "text-white/60"
+    muted: "text-white/60",
   },
-
-  // Background classes - Obsidian (Pure Black)
   bg: {
-    obsidian: "bg-[#000000]",
-    deepest: "bg-[#000000]",
-    main: "bg-[#000000]",
-    surface: "bg-[#0B0C10]",
-    card: "bg-[rgba(11,12,16,0.8)]",
+    obsidian: "bg-[#06030C]",
+    deepest: "bg-[#06030C]",
+    main: "bg-[#06030C]",
+    surface: "bg-[#0E0A14]",
+    card: "bg-[var(--bawo-surface-glass)]",
     overlay: {
       light: "bg-white/8",
       medium: "bg-white/12",
-      subtle: "bg-white/4"
-    }
+      subtle: "bg-white/4",
+    },
   },
-
-  // Border classes - Subtle glass borders
   border: {
     default: "border-white/8",
     light: "border-white/6",
-    glass: "border-[rgba(255,255,255,0.08)]"
-  }
+    glass: "border-[rgba(255,255,255,0.08)]",
+  },
 } as const;
