@@ -343,33 +343,47 @@ function App() {
         </div>
       )}
       
-      {/* Promo strip — full-bleed glass, pumpkin copy, ribbon animation (see `index.css`) */}
+      {/* Promo strip — full-bleed glass, yellow copy + white icons, ribbon animation (see `index.css`) */}
       <div className="bawo-promo-strip fixed top-0 left-0 right-0 z-40 py-2.5 md:py-3">
         <div
-          className="bawo-promo-ribbon flex w-full flex-wrap items-center justify-center gap-x-3 gap-y-2 px-4 text-xs md:gap-x-5 md:text-sm"
+          className="bawo-promo-ribbon flex w-full flex-wrap items-center justify-center gap-x-3 gap-y-2 px-4 text-xs md:gap-x-5 md:text-sm text-yellow-300"
           style={{
-            color: "var(--bawo-brand-cta-orange, #ff6b00)",
             textShadow:
-              "0 0 20px rgba(255, 107, 0, 0.45), 0 0 42px rgba(255, 107, 0, 0.18)",
+              "0 0 16px rgba(250, 204, 21, 0.5), 0 0 34px rgba(234, 179, 8, 0.22)",
           }}
         >
           <span className="flex items-center justify-center gap-2 font-museo-medium">
-            <Gem className="h-[18px] w-[18px] shrink-0 md:h-5 md:w-5" strokeWidth={2} aria-hidden />
-            Lifetime Access — One Payment
+            <Gem className="h-[18px] w-[18px] shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-5 md:w-5" strokeWidth={2} aria-hidden />
+            <span>
+              <span aria-hidden className="mr-1 inline-block">
+                ✨
+              </span>
+              Lifetime Access — One Payment
+            </span>
           </span>
-          <span className="opacity-45" aria-hidden>
+          <span className="text-white/40" aria-hidden>
             ·
           </span>
           <span className="flex items-center justify-center gap-2">
-            <Crown className="h-[18px] w-[18px] shrink-0 md:h-5 md:w-5" strokeWidth={2} aria-hidden />
-            <span className="font-museo-bold font-display tracking-wide">Founding Member Badge</span>
+            <Crown className="h-[18px] w-[18px] shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-5 md:w-5" strokeWidth={2} aria-hidden />
+            <span className="font-museo-bold font-display tracking-wide">
+              <span aria-hidden className="mr-1 inline-block">
+                🎖️
+              </span>
+              Founding Member Badge
+            </span>
           </span>
-          <span className="opacity-45" aria-hidden>
+          <span className="text-white/40" aria-hidden>
             ·
           </span>
           <span className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
-            <Clock className="h-[18px] w-[18px] shrink-0 md:h-5 md:w-5" strokeWidth={2} aria-hidden />
-            <span className="font-museo-medium opacity-90">Closes:</span>
+            <Clock className="h-[18px] w-[18px] shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-5 md:w-5" strokeWidth={2} aria-hidden />
+            <span className="font-museo-medium text-yellow-300/90">
+              <span aria-hidden className="mr-1 inline-block">
+                ⏰
+              </span>
+              Closes:
+            </span>
             <span className="font-museo-bold tabular-nums">
               {timeLeft.days}
               <span className="ml-0.5 text-[10px] font-museo-medium opacity-75 md:text-xs">
@@ -395,12 +409,17 @@ function App() {
               </span>
             </span>
           </span>
-          <span className="opacity-45" aria-hidden>
+          <span className="text-white/40" aria-hidden>
             ·
           </span>
           <span className="flex items-center justify-center gap-2 font-museo-bold">
-            <Flame className="h-[18px] w-[18px] shrink-0 md:h-5 md:w-5" strokeWidth={2} aria-hidden />
-            Only 450 Spots Left
+            <Flame className="h-[18px] w-[18px] shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-5 md:w-5" strokeWidth={2} aria-hidden />
+            <span>
+              <span aria-hidden className="mr-1 inline-block">
+                🔥
+              </span>
+              Only 450 Spots Left
+            </span>
           </span>
         </div>
       </div>
@@ -461,16 +480,15 @@ function App() {
                   ref={ctaRef}
                   className="flex flex-col gap-4 justify-start items-start w-full"
                 >
-                  <div className="relative w-full max-w-2xl">
+                  <div className="relative w-fit max-w-full">
                     <BawoPillButton
                       label={CONTENT.hero.ctaPrimary}
                       icon={Lock}
                       variant="primary"
                       size="md"
-                      fullWidth
                       onClick={handleFoundingMember}
                     />
-                    <div className="absolute -top-2 -right-2 w-3 h-3 bg-red-500 rounded-full animate-pulse" aria-hidden />
+                    <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full ring-2 ring-[var(--bawo-canvas,#06030C)] animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.65)]" aria-hidden />
                   </div>
 
                   <div className="mt-8 md:mt-11 flex flex-col gap-3 w-full max-w-2xl">
@@ -1028,14 +1046,12 @@ function App() {
             </div>
 
             {/* Mobile / tablet CTA centered below card */}
-            <div className="flex lg:hidden justify-center mt-10 w-full">
+            <div className="flex lg:hidden justify-center mt-10 w-full px-2">
               <BawoPillButton
                 label={CONTENT.foundingMember.cta}
                 icon={Lock}
                 variant="primary"
                 size="md"
-                fullWidth
-                className="max-w-md"
                 onClick={handleFoundingMember}
               />
             </div>
@@ -1341,18 +1357,17 @@ function App() {
             </div>
 
             <div className="flex flex-col gap-5 justify-center items-center w-full max-w-2xl mx-auto">
-              <div className="flex flex-col sm:flex-row gap-4 w-full items-stretch">
-                <div className="flex-1 min-w-0">
+              <div className="flex flex-col sm:flex-row gap-4 w-full items-center justify-center sm:items-stretch">
+                <div className="flex w-full sm:w-auto justify-center shrink-0">
                   <BawoPillButton
                     label={CONTENT.finalCta.cta}
                     icon={Lock}
                     variant="primary"
                     size="md"
-                    fullWidth
                     onClick={handleFoundingMember}
                   />
                 </div>
-                <div className="flex-1 min-w-0 flex">
+                <div className="w-full sm:flex-1 sm:min-w-0 flex">
                   <a
                     href={CONTENT.hero.testflightLink}
                     target="_blank"

@@ -162,10 +162,10 @@
     0 2px 10px rgba(255, 107, 0, 0.14),
     0 12px 34px rgba(0, 0, 0, 0.42);
   --bawo-pill-shadow-hover:
-    inset 0 1px 0 rgba(255, 255, 255, 0.28),
-    0 2px 4px rgba(0, 0, 0, 0.28),
-    0 4px 14px rgba(255, 107, 0, 0.2),
-    0 14px 42px rgba(0, 0, 0, 0.46);
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    0 2px 6px rgba(0, 0, 0, 0.22),
+    0 6px 22px rgba(255, 107, 0, 0.28),
+    0 18px 48px rgba(0, 0, 0, 0.5);
 }
 
 .bawo-pill-cta-surface {
@@ -183,7 +183,7 @@
 
 .bawo-pill-cta-surface:hover {
   box-shadow: var(--bawo-pill-shadow-hover);
-  filter: brightness(1.045);
+  filter: brightness(1.06) saturate(1.04);
 }
 
 button.bawo-pill-cta-surface:disabled {
@@ -379,7 +379,7 @@ button.bawo-pill-cta-surface:disabled:hover {
   padding-inline: 2.75rem;
 }
 
-/* Top promo — no orange slab; pumpkin copy + ethereal in/out cycle */
+/* Top promo — glass bar; yellow promo copy + ribbon wipe animation */
 .bawo-promo-strip {
   background: linear-gradient(
     180deg,
