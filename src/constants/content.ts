@@ -1,12 +1,46 @@
-import { IMAGES } from './images';
+import { IMAGES } from "./images";
+
+const STRIPE_FOUNDING_DEFAULT =
+  "https://buy.stripe.com/fZu7sMgBBfgmeK2caf3Nm00";
 
 export const CONTENT = {
+  revenue: {
+    /** Replace with your $25 Stripe Payment Link; override via `VITE_STRIPE_FOUNDING_CHECKOUT_URL`. */
+    foundingStripeCheckoutUrl:
+      import.meta.env.VITE_STRIPE_FOUNDING_CHECKOUT_URL || STRIPE_FOUNDING_DEFAULT,
+  },
+
+  foundingMemberCheckout: {
+    kicker: "Day-1 revenue · BawoSocial",
+    title: "Founding Member Lifetime Pass",
+    description:
+      "Lock in early. One payment, permanent status in our NYC Naija private network.",
+    price: "$25",
+    benefits: [
+      'Lifetime access to the "Secure the Bag" premium tier',
+      "Verified profile badge on launch",
+      "Day-1 beta access before public rollout",
+    ],
+    ctaLabel: "Secure My Spot",
+  },
+
+  partnerWithUs: {
+    headline: "Own the NYC Diaspora Market.",
+    body: "We are onboarding thousands of highly-educated NYC professionals. Secure an exclusive Founding Sponsor placement in our Resource Directory.",
+    ctaLabel: "Inquire About Sponsorships",
+    inquiryEmail:
+      import.meta.env.VITE_B2B_CONTACT_EMAIL || "support@bawoapp.com",
+    emailSubject: "BawoSocial B2B Sponsorship",
+  },
+
   // Hero Section
   hero: {
-    title: "The Private Network for the Nigerian Diaspora.",
-    subtitle: "Stop asking 'Who knows a guy?'. Find your people, access The Black Book of vetted resources, and build actual wealth.",
-    ctaPrimary: "Become a Founding Member - $50",
-    ctaMicrocopy: "Instant TestFlight Beta access included. Only 500 spots available.",
+    title: "Culture. Connection. Community.",
+    subtitle:
+      "The algorithmic platforms failed us. We are building the premier private ecosystem for the NYC Naija Diaspora. No noise, just vetted plugs, digitized Ajo, and real connection.",
+    ctaPrimary: "Secure My Spot — $25",
+    ctaMicrocopy:
+      "Founding Lifetime Pass · TestFlight beta included · Limited spots.",
     ctaSecondary: "Join Waitlist",
     testflightLink: "https://testflight.apple.com/join/xAp29Euh",
     ctaTestFlight: "Download via TestFlight",
@@ -20,8 +54,9 @@ export const CONTENT = {
   // Stats Section (Scarcity metrics – Batch 1)
   stats: {
     title: "Founding Member Batch 1 is Open.",
-    subtitle: "Lock in lifetime access for $50. After Batch 1 closes, membership costs $19.99/month.",
-    tagline: "Do the math: Save $239.88/year. Forever.",
+    subtitle:
+      "Lock in lifetime access for $25. After Batch 1 closes, membership costs $19.99/month.",
+    tagline: "Do the math: $25 once — vs. $240/year if you wait.",
     metrics: {
       batch1: {
         value: "500",
@@ -36,7 +71,7 @@ export const CONTENT = {
       access: {
         value: "FOREVER",
         label: "NO MONTHLY FEES",
-        subtext: "One $50 payment"
+        subtext: "One $25 payment",
       },
     },
     urgency: {
@@ -56,7 +91,7 @@ export const CONTENT = {
   // Founding Member Section
   foundingMember: {
     title: "Founding Member Benefits",
-    titleHighlight: "(One-Time $50)",
+    titleHighlight: "(One-Time $25)",
     titleEmoji: "",
     subtitle: "Batch 1: Limited to 500 Spots.",
     description: "",
@@ -79,10 +114,11 @@ export const CONTENT = {
         description: "First access to smart introductions.",
       },
     ],
-    cta: "Become a Founding Member $50",
+    cta: "Become a Founding Member — $25",
     spotsRemaining: "",
     securityBadges: {},
-    missionText: "We are building this independently. Your $50 funds a platform that respects our culture.",
+    missionText:
+      "We are building this independently. Your $25 funds a platform that respects our culture.",
   },
 
   // Features Section
@@ -148,7 +184,7 @@ export const CONTENT = {
   finalCta: {
     title: "Join the First 500. Shape the Platform.",
     subtitle: "Founding Membership is limited. Once Batch 1 closes, the price increases.",
-    cta: "Become a Founding Member $50",
+    cta: "Become a Founding Member — $25",
     ctaSecondary: "Join Waitlist",
   },
 

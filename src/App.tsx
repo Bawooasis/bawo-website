@@ -17,8 +17,10 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import BawoPillButton from "./components/BawoPillButton";
+import FoundingMemberCheckoutCard from "./components/FoundingMemberCheckoutCard";
 import MailchimpSignupRow from "./components/MailchimpSignupRow";
 import Logo from "./components/Logo";
+import PartnerWithUsSection from "./components/PartnerWithUsSection";
 import { CONTENT } from "./constants/content";
 import { TAILWIND_COLORS } from "./constants/colors";
 import { IMAGES } from "./constants/images";
@@ -310,7 +312,7 @@ function App() {
 
 
   const handleFoundingMember = () => {
-    window.open("https://buy.stripe.com/fZu7sMgBBfgmeK2caf3Nm00", "_blank");
+    window.open(CONTENT.revenue.foundingStripeCheckoutUrl, "_blank");
     // Track click for analytics
     const win = window as unknown as { gtag?: (...args: unknown[]) => void };
     if (typeof win.gtag !== "undefined") {
@@ -475,7 +477,7 @@ function App() {
           </p>
                 </div>
 
-                {/* Call to Action Buttons – Primary: $50 with trust anchors */}
+                {/* Call to Action Buttons – founding pass */}
                 <div
                   ref={ctaRef}
                   className="flex flex-col gap-4 justify-start items-start w-full"
@@ -636,6 +638,13 @@ function App() {
             </div>
           </div>
         </section>
+
+        <div className="relative bg-transparent space-y-14 md:space-y-20 pb-4 md:pb-8">
+          <div className="container mx-auto px-6 max-w-5xl">
+            <FoundingMemberCheckoutCard />
+          </div>
+          <PartnerWithUsSection />
+        </div>
 
       {/* Stats Section – Batch 1 scarcity + progress bar */}
       <section
@@ -848,27 +857,27 @@ function App() {
                     <div className="space-y-2 text-white/80 text-sm font-museo-medium">
                       <div className="flex justify-between">
                         <span>Today:</span>
-                        <span className="font-museo-bold text-white">$50</span>
+                        <span className="font-museo-bold text-white">$25</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Year 1:</span>
-                        <span className="font-museo-bold text-white">$50</span>
+                        <span className="font-museo-bold text-white">$25</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Year 2:</span>
-                        <span className="font-museo-bold text-white">$50</span>
+                        <span className="font-museo-bold text-white">$25</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Year 3:</span>
-                        <span className="font-museo-bold text-white">$50</span>
+                        <span className="font-museo-bold text-white">$25</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Year 5:</span>
-                        <span className="font-museo-bold text-white">$50</span>
+                        <span className="font-museo-bold text-white">$25</span>
                       </div>
                       <div className="border-t border-white/10 pt-2 flex justify-between text-[#10b981] font-museo-bold">
                         <span>Forever:</span>
-                        <span>$50 total</span>
+                        <span>$25 total</span>
                       </div>
                     </div>
                   </div>
@@ -910,10 +919,10 @@ function App() {
 
                 <div className="mt-6 pt-6 border-t border-white/10 text-center">
                   <p className="bawo-text-cta-gradient font-museo-bold text-xl">
-                    Save $190 in Year 1 alone. $2,350+ over 5 years.
+                    Save $215 in Year 1 alone. $1,175+ over 5 years.
                   </p>
                   <p className="text-white/60 text-sm font-museo-regular mt-2">
-                    Your $50 pays for itself in 2.5 months.
+                    Your $25 pays for itself in under 2 months.
                   </p>
                 </div>
               </div>
@@ -953,7 +962,7 @@ function App() {
               <div className="text-4xl mb-3">💯</div>
               <h4 className="text-white font-museo-bold text-xl mb-2">Zero-Risk 30-Day Guarantee</h4>
               <p className="text-white/80 font-museo-medium text-base mb-4">
-                Try BawoSocial for 30 days. If you're not connecting, networking, and winning — we'll refund your $50. No questions asked.
+                Try BawoSocial for 30 days. If you're not connecting, networking, and winning — we'll refund your $25. No questions asked.
               </p>
               <p className="text-[#10b981] font-museo-bold text-sm">
                 {CONTENT.stats.urgency.guarantee}
@@ -1413,7 +1422,7 @@ function App() {
               Only 450 Spots Left
             </span>
             <BawoPillButton
-              label="Join for $50"
+              label="Join for $25"
               variant="primary"
               size="sm"
               className="shrink-0"
