@@ -80,15 +80,9 @@ export default function FoundingMemberCheckoutCard() {
           <button
             type="button"
             onClick={openCheckout}
-            className="group relative w-full rounded-[var(--bawo-radius-pill)] min-h-[3.25rem] px-6 font-museo-bold text-[15px] sm:text-base tracking-wide text-white shadow-[0_12px_36px_rgba(243,112,33,0.35)] transition-[transform,box-shadow,filter] duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_16px_44px_rgba(243,112,33,0.45)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F37021] active:translate-y-0"
-            style={{
-              background:
-                "linear-gradient(180deg, #ff8a4a 0%, #F37021 48%, #d45a15 100%)",
-              border: "1px solid rgba(255, 232, 214, 0.35)",
-            }}
+            className="bawo-cta-glass-primary group relative z-0 w-full rounded-[var(--bawo-radius-pill)] min-h-[3.25rem] px-6 font-museo-bold text-[15px] sm:text-base tracking-wide text-white transition-[transform,box-shadow,filter] duration-200 ease-out hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D4AF37] active:translate-y-0"
           >
-            <span className="absolute inset-x-0 top-0 h-px bg-white/25 rounded-t-[inherit] opacity-80 group-hover:opacity-100 pointer-events-none" />
-            {CONTENT.foundingMemberCheckout.ctaLabel}
+            <span className="relative z-[1]">{CONTENT.foundingMemberCheckout.ctaLabel}</span>
           </button>
         </div>
       </div>

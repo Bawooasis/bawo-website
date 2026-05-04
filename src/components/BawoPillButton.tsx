@@ -56,7 +56,7 @@ export default function BawoPillButton({
     "focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bawo-canvas,#06030C)]";
 
   const primary =
-    "text-white bawo-pill-cta-surface hover:-translate-y-0.5 disabled:hover:translate-y-0";
+    "text-white bawo-cta-glass-primary hover:-translate-y-0.5 disabled:hover:translate-y-0";
 
   const secondary =
     "bg-white/[0.08] border border-white/[0.12] text-white/[0.92] " +
@@ -78,14 +78,16 @@ export default function BawoPillButton({
     >
       {Icon ? (
         <Icon
-          className="shrink-0 text-white"
+          className={`relative z-[1] shrink-0 ${
+            variant === "primary" ? "text-[#D4AF37] drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]" : "text-white"
+          }`}
           size={m.icon}
           strokeWidth={2}
           aria-hidden
         />
       ) : null}
       <span
-        className={`min-w-0 leading-snug text-white [text-wrap:balance] ${
+        className={`relative z-[1] min-w-0 leading-snug text-white [text-wrap:balance] ${
           fullWidth ? "flex-1 text-center" : "shrink-0 text-center px-0.5"
         }`}
       >

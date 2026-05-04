@@ -196,6 +196,126 @@ button.bawo-pill-cta-surface:disabled:hover {
   box-shadow: var(--bawo-pill-shadow);
 }
 
+/**
+ * Premium hero CTAs — obsidian glass + heritage gold / copper trim.
+ * Prefer over flat orange gradients for primary conversion controls.
+ */
+.bawo-cta-glass-primary {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(
+    152deg,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.05) 38%,
+    rgba(12, 8, 20, 0.55) 100%
+  );
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(212, 175, 55, 0.48);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 2px 6px rgba(0, 0, 0, 0.45),
+    0 14px 36px rgba(0, 0, 0, 0.52),
+    0 0 40px rgba(212, 175, 55, 0.06);
+  transition:
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.22s ease,
+    border-color 0.22s ease,
+    filter 0.22s ease;
+}
+
+.bawo-cta-glass-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    transparent 42%
+  );
+  opacity: 0.85;
+}
+
+.bawo-cta-glass-primary:hover:not(:disabled) {
+  border-color: rgba(212, 175, 55, 0.72);
+  filter: brightness(1.05);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 4px 10px rgba(0, 0, 0, 0.35),
+    0 18px 44px rgba(0, 0, 0, 0.48),
+    0 0 48px rgba(212, 175, 55, 0.14);
+}
+
+.bawo-cta-glass-secondary {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(
+    168deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(255, 255, 255, 0.03) 45%,
+    rgba(6, 3, 12, 0.25) 100%
+  );
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(196, 123, 68, 0.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 248, 240, 0.14),
+    0 6px 22px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(212, 175, 55, 0.04);
+  transition:
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease;
+}
+
+.bawo-cta-glass-secondary::before {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(243, 112, 33, 0.55),
+    rgba(212, 175, 55, 0.45),
+    transparent
+  );
+  opacity: 0.85;
+}
+
+.bawo-cta-glass-secondary .pill-warm-auth__icon {
+  color: rgba(248, 232, 200, 0.95);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+}
+
+.bawo-cta-glass-secondary:hover {
+  border-color: rgba(243, 112, 33, 0.55);
+  background: linear-gradient(
+    168deg,
+    rgba(243, 112, 33, 0.1) 0%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(6, 3, 12, 0.2) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 252, 248, 0.16),
+    0 8px 26px rgba(0, 0, 0, 0.45),
+    0 0 32px rgba(243, 112, 33, 0.08);
+}
+
+.bawo-cta-glass-primary:focus-visible,
+.bawo-cta-glass-secondary:focus-visible {
+  outline: 2px solid rgba(212, 175, 55, 0.75);
+  outline-offset: 3px;
+}
+
 /* Stripe stays brand blue; copy matches CTA orange. */
 .bawo-trust-row {
   color: rgba(255, 170, 112, 0.95);
@@ -504,7 +624,7 @@ button.bawo-pill-cta-surface:disabled:hover {
 }
 
 /*
- * TestFlight pill — layout + type; fill/shadow match founding CTA via `.bawo-pill-cta-surface`.
+ * TestFlight pill — layout + type; pair with `.bawo-cta-glass-secondary` for fill.
  */
 .pill-warm-auth {
   position: relative;
@@ -534,7 +654,6 @@ button.bawo-pill-cta-surface:disabled:hover {
 }
 
 .pill-warm-auth:hover {
-  border-color: rgba(255, 248, 240, 0.34);
   transform: translateY(-1px);
 }
 
@@ -573,6 +692,88 @@ button.bawo-pill-cta-surface:disabled:hover {
 }
 
 /* Custom Animation Classes */
+/* Borough network mesh — Building the Network section */
+.bawo-net-path--mesh {
+  stroke-dasharray: 0.9 1.4;
+  animation: bawo-net-flow 22s linear infinite;
+}
+
+.bawo-net-spokes path {
+  stroke-dasharray: 1.2 1.8;
+  animation: bawo-net-flow 18s linear infinite;
+}
+
+.bawo-net-path--cross {
+  stroke-dasharray: 1.5 2.2;
+  animation: bawo-net-flow 28s linear infinite reverse;
+  opacity: 0.9;
+}
+
+.bawo-net-ring {
+  stroke-dasharray: 2.5 3;
+  animation: bawo-net-flow 40s linear infinite;
+  opacity: 0.65;
+}
+
+.bawo-net-ring--delay {
+  animation-duration: 52s;
+  animation-direction: reverse;
+}
+
+.bawo-net-hub-aura {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bawo-net-hub-breathe 4.5s ease-in-out infinite;
+}
+
+.bawo-net-hub-core {
+  animation: bawo-net-hub-core 3.2s ease-in-out infinite;
+}
+
+@keyframes bawo-net-flow {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+@keyframes bawo-net-hub-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes bawo-net-hub-core {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.88;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bawo-net-path--mesh,
+  .bawo-net-spokes path,
+  .bawo-net-path--cross,
+  .bawo-net-ring,
+  .bawo-net-ring--delay {
+    animation: none;
+    stroke-dasharray: none;
+  }
+
+  .bawo-net-hub-aura,
+  .bawo-net-hub-core {
+    animation: none;
+  }
+}
+
 @layer utilities {
   /* Sticky mobile CTA */
   .mobile-sticky-cta {

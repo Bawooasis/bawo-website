@@ -16,6 +16,7 @@ import {
   Star,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import BoroughNetworkGraphic from "./components/BoroughNetworkGraphic";
 import BoroughSquareCarousel from "./components/BoroughSquareCarousel";
 import BawoPillButton from "./components/BawoPillButton";
 import FoundingMemberCheckoutCard from "./components/FoundingMemberCheckoutCard";
@@ -443,7 +444,7 @@ function App() {
         {/* Hero Section */}
         <section
           ref={heroRef}
-          className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 md:pt-28 bg-transparent"
+          className="relative min-h-0 md:min-h-screen flex items-start md:items-center justify-center overflow-hidden pt-20 sm:pt-24 md:pt-28 pb-8 md:pb-0 bg-transparent"
         >
           {/* (Removed) extra background glow behind hero mockup */}
           {/* BawoSocial Logo - Top Left */}
@@ -458,8 +459,8 @@ function App() {
 
 
           {/* Main Content Container */}
-          <div className="relative z-10 container mx-auto px-6 py-24 md:py-36 lg:py-40">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="relative z-10 container mx-auto px-6 py-10 sm:py-14 md:py-24 lg:py-36 xl:py-40">
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start lg:items-center">
               {/* Left Content - Text */}
               <div className="text-left space-y-10 order-2 lg:order-1">
                 {/* Main Heading */}
@@ -491,7 +492,10 @@ function App() {
                       size="md"
                       onClick={handleFoundingMember}
                     />
-                    <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full ring-2 ring-[var(--bawo-canvas,#06030C)] animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.65)]" aria-hidden />
+                    <span
+                      className="pointer-events-none absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full bg-[#D4AF37] shadow-[0_0_14px_rgba(212,175,55,0.75)] ring-2 ring-[var(--bawo-canvas,#06030C)]"
+                      aria-hidden
+                    />
                   </div>
 
                   <div className="mt-8 md:mt-11 flex flex-col gap-3 w-full max-w-2xl">
@@ -519,24 +523,24 @@ function App() {
               {previewImages.length > 0 && (
                 <div
                   ref={phoneRef}
-                  className="flex flex-col items-center lg:items-end lg:pr-10 xl:pr-16 order-1 lg:order-2 -mt-10 md:-mt-14 gap-6"
+                  className="flex flex-col items-center lg:items-end lg:pr-10 xl:pr-16 order-1 lg:order-2 -mt-2 sm:-mt-4 md:-mt-10 lg:-mt-14 gap-3 sm:gap-4 md:gap-6 w-full max-w-[19rem] sm:max-w-none mx-auto lg:mx-0"
                 >
-                  <div className="relative pb-8">
-                    <div className="relative">
+                  <div className="relative pb-4 md:pb-6 w-full flex flex-col items-center">
+                    <div className="relative w-full max-w-[15.5rem] sm:max-w-none sm:w-auto mx-auto">
                       <img
                         ref={previewImgRef}
                         src={previewImages[activePreviewIndex]}
                         alt="BawoSocial App Preview"
                         loading="eager"
                         decoding="async"
-                        className="w-64 md:w-80 lg:w-96 h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] transform-gpu transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-[2rem] animate-breathing object-cover will-change-transform"
+                        className="w-full sm:w-64 md:w-80 lg:w-96 h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] transform-gpu transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-[2rem] animate-breathing object-cover will-change-transform"
                         style={{ opacity: 1 }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[rgba(255,107,0,0.14)] via-transparent to-transparent rounded-[2rem] pointer-events-none"></div>
                       <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-white/5 to-transparent rounded-t-[2rem] pointer-events-none"></div>
                     </div>
                     {/* Dots */}
-                    <div className="flex items-center justify-center gap-2 absolute -bottom-2 left-1/2 -translate-x-1/2">
+                    <div className="flex items-center justify-center gap-2 absolute -bottom-1 sm:-bottom-2 left-1/2 -translate-x-1/2">
                       {previewImages.map((_, idx) => (
                         <span
                           key={idx}
@@ -554,7 +558,7 @@ function App() {
                     href={CONTENT.hero.testflightLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="pill-warm-auth bawo-pill-cta-surface w-64 md:w-80 lg:w-96 shrink-0"
+                    className="pill-warm-auth bawo-cta-glass-secondary w-full max-w-[15.5rem] sm:w-64 sm:max-w-none md:w-80 lg:w-96 shrink-0 min-h-[3.5rem] py-3 sm:py-2"
                   >
                     <span className="pill-warm-auth__icon" aria-hidden>
                       <Download className="h-5 w-5" strokeWidth={2.25} />
@@ -644,69 +648,106 @@ function App() {
       <section
         ref={globalReachRef}
         id="building-the-network"
-        className="relative bg-transparent py-16 md:py-20 lg:py-24"
+        className="relative bg-transparent py-20 md:py-24 lg:py-28 overflow-hidden"
       >
-        <div className="relative z-10 container mx-auto px-6 py-10">
-          <div className="text-center space-y-12 md:space-y-16 max-w-7xl mx-auto">
-            <div className="space-y-4">
-              <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white font-museo-bold">
+        <div className="relative z-10 container mx-auto px-5 sm:px-6 py-12 md:py-14">
+          <div className="text-center space-y-8 md:space-y-12 max-w-[1400px] mx-auto">
+            <div className="space-y-5 md:space-y-7">
+              <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white font-museo-bold leading-[1.08] tracking-tight">
                 {CONTENT.globalReach.title}
               </h2>
-              <p className="text-lg md:text-2xl font-museo-medium text-white/80">
+              <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-museo-medium text-white/85 max-w-4xl mx-auto leading-snug">
                 {CONTENT.globalReach.subtitle}
               </p>
-              <p className="text-base md:text-lg font-museo-regular bawo-text-cta-gradient">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-museo-regular bawo-text-cta-gradient max-w-3xl mx-auto leading-relaxed">
                 {CONTENT.globalReach.description}
               </p>
             </div>
 
-            <div className="relative mt-8 md:mt-12">
-              <div
-                className="pointer-events-none absolute inset-x-4 md:inset-x-12 top-1/2 h-px bg-gradient-to-r from-transparent via-[rgba(255,107,0,0.65)] to-transparent opacity-70 blur-[1px]"
-                aria-hidden
-              />
-              <div className="flex flex-wrap justify-center gap-12 md:gap-16">
-                {CONTENT.globalReach.cities.map((city, index) => {
-                  const rotatingGallery =
-                    city.name === "Brooklyn"
-                      ? IMAGES.globalReach.brooklynGallery
-                      : city.name === "Harlem"
-                        ? IMAGES.globalReach.harlemGallery
-                        : city.name === "Queens"
-                          ? IMAGES.globalReach.queensGallery
-                          : city.name === "The Bronx"
-                            ? IMAGES.globalReach.bronxGallery
-                            : city.name === "Staten Island"
-                              ? IMAGES.globalReach.statenIslandGallery
-                              : null;
-
-                  return (
-                  <div key={city.name} className="city-stat text-center space-y-5">
-                    {rotatingGallery ? (
-                      <div className="relative w-44 h-44 md:w-64 md:h-64 lg:w-72 lg:h-72 mx-auto overflow-hidden rounded-2xl shadow-[0_22px_60px_rgba(0,0,0,0.65)] ring-1 ring-white/[0.14] transition-transform duration-300 hover:scale-110 hover:ring-[#D4AF37]/35">
-                        <BoroughSquareCarousel
-                          images={rotatingGallery}
-                          alt={`${city.name} — Nigerian diaspora community in NYC`}
-                          rotationStaggerMs={index * 700}
-                        />
+            <div className="relative mx-auto w-full max-w-[1280px] min-h-[480px] sm:min-h-[560px] md:min-h-[700px] lg:min-h-[780px] mt-10 md:mt-14">
+              <BoroughNetworkGraphic className="pointer-events-none absolute inset-0 z-0 hidden h-full w-full opacity-[0.94] md:block [mask-image:radial-gradient(ellipse_88%_78%_at_50%_48%,#000_32%,transparent_72%)]" />
+              <div className="relative z-[1] flex flex-col items-stretch gap-12 sm:gap-16 md:gap-24 lg:gap-28 pt-2 pb-4 md:pt-4 md:pb-8">
+                <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-10 lg:gap-12 xl:gap-14 justify-items-center w-full">
+                  {CONTENT.globalReach.cities.slice(0, 3).map((city, index) => {
+                    const rotatingGallery =
+                      city.name === "Brooklyn"
+                        ? IMAGES.globalReach.brooklynGallery
+                        : city.name === "Harlem"
+                          ? IMAGES.globalReach.harlemGallery
+                          : city.name === "Queens"
+                            ? IMAGES.globalReach.queensGallery
+                            : null;
+                    return (
+                      <div
+                        key={city.name}
+                        className="city-stat text-center space-y-6 md:space-y-8 w-full max-w-[20rem] mx-auto"
+                      >
+                        {rotatingGallery ? (
+                          <div className="relative w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-[22rem] xl:h-[22rem] mx-auto overflow-hidden rounded-3xl shadow-[0_28px_80px_rgba(0,0,0,0.72)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#D4AF37]/45 hover:shadow-[0_32px_90px_rgba(212,175,55,0.12)]">
+                            <BoroughSquareCarousel
+                              images={rotatingGallery}
+                              alt={`${city.name} — Nigerian diaspora community in NYC`}
+                              rotationStaggerMs={index * 700}
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-[22rem] xl:h-[22rem] mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-3xl flex items-center justify-center shadow-[0_28px_80px_rgba(0,0,0,0.72)] overflow-hidden hover:scale-[1.04] transition-transform duration-300">
+                            <img
+                              src={IMAGES.globalReach.cities[index]}
+                              alt={city.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        )}
+                        <div className="mt-1 md:mt-2">
+                          <h3 className="font-museo-bold text-white text-lg sm:text-xl md:text-3xl lg:text-4xl xl:text-[2.65rem] tracking-[0.14em] drop-shadow-[0_2px_24px_rgba(0,0,0,0.65)]">
+                            {city.name.toUpperCase()}
+                          </h3>
+                        </div>
                       </div>
-                    ) : (
-                      <div className="w-44 h-44 md:w-64 md:h-64 lg:w-72 lg:h-72 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_22px_60px_rgba(0,0,0,0.65)] overflow-hidden hover:scale-110 transition-transform duration-300">
-                        <img
-                          src={IMAGES.globalReach.cities[index]}
-                          alt={city.name}
-                          className="w-full h-full object-cover"
-                        />
+                    );
+                  })}
+                </div>
+                <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 sm:mx-auto sm:max-w-2xl md:max-w-5xl md:grid-cols-2 md:gap-12 lg:gap-14 xl:gap-16 justify-items-center w-full px-2 sm:px-4">
+                  {CONTENT.globalReach.cities.slice(3).map((city, index) => {
+                    const i = index + 3;
+                    const rotatingGallery =
+                      city.name === "The Bronx"
+                        ? IMAGES.globalReach.bronxGallery
+                        : city.name === "Staten Island"
+                          ? IMAGES.globalReach.statenIslandGallery
+                          : null;
+                    return (
+                      <div
+                        key={city.name}
+                        className="city-stat text-center space-y-6 md:space-y-8 w-full max-w-[20rem] mx-auto"
+                      >
+                        {rotatingGallery ? (
+                          <div className="relative w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-[22rem] xl:h-[22rem] mx-auto overflow-hidden rounded-3xl shadow-[0_28px_80px_rgba(0,0,0,0.72)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#D4AF37]/45 hover:shadow-[0_32px_90px_rgba(212,175,55,0.12)]">
+                            <BoroughSquareCarousel
+                              images={rotatingGallery}
+                              alt={`${city.name} — Nigerian diaspora community in NYC`}
+                              rotationStaggerMs={i * 700}
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-[22rem] xl:h-[22rem] mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-3xl flex items-center justify-center shadow-[0_28px_80px_rgba(0,0,0,0.72)] overflow-hidden hover:scale-[1.04] transition-transform duration-300">
+                            <img
+                              src={IMAGES.globalReach.cities[i]}
+                              alt={city.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        )}
+                        <div className="mt-1 md:mt-2">
+                          <h3 className="font-museo-bold text-white text-lg sm:text-xl md:text-3xl lg:text-4xl xl:text-[2.65rem] tracking-[0.14em] drop-shadow-[0_2px_24px_rgba(0,0,0,0.65)]">
+                            {city.name.toUpperCase()}
+                          </h3>
+                        </div>
                       </div>
-                    )}
-                    <div className="mt-2">
-                      <h3 className="font-museo-bold text-white text-lg md:text-3xl tracking-[0.12em]">
-                        {city.name.toUpperCase()}
-                      </h3>
-                    </div>
-                  </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
@@ -1408,7 +1449,7 @@ function App() {
                     href={CONTENT.hero.testflightLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="pill-warm-auth bawo-pill-cta-surface"
+                    className="pill-warm-auth bawo-cta-glass-secondary min-h-[3.5rem]"
                   >
                     <span className="pill-warm-auth__icon" aria-hidden>
                       <Download className="h-5 w-5" strokeWidth={2.25} />

@@ -93,16 +93,16 @@ export default function BoroughSquareCarousel({
       />
       {showDots && safeImages.length > 1 ? (
         <div
-          className="absolute bottom-3 left-0 right-0 z-[3] flex justify-center gap-1.5"
+          className="absolute bottom-3.5 left-0 right-0 z-[3] flex justify-center gap-2 md:bottom-4 md:gap-2"
           aria-hidden
         >
           {safeImages.map((_, i) => (
             <span
               key={i}
-              className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${
+              className={`rounded-full transition-all duration-300 ${
                 i === index
-                  ? "bg-[#D4AF37] w-4 shadow-[0_0_10px_rgba(212,175,55,0.45)]"
-                  : "bg-white/35"
+                  ? "h-2 w-5 bg-[#D4AF37] shadow-[0_0_12px_rgba(212,175,55,0.5)]"
+                  : "h-1.5 w-1.5 bg-white/38"
               }`}
             />
           ))}
