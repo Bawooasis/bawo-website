@@ -52,7 +52,7 @@ export default function PartnerWithUsSection() {
             <div className="shrink-0 flex flex-col items-stretch gap-3 w-full md:w-auto md:min-w-[240px]">
               <a
                 href={mailHref}
-                className="inline-flex items-center justify-center text-center rounded-[var(--bawo-radius-pill)] min-h-12 px-6 text-sm font-museo-bold text-white border border-white/20 bg-white/[0.06] backdrop-blur-md transition-[background-color,border-color,transform] duration-200 hover:bg-white/[0.1] hover:border-white/28 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D4AF37]"
+                className="inline-flex items-center justify-center text-center rounded-[var(--bawo-radius-pill)] min-h-12 px-6 text-sm font-museo-bold text-white bg-white/[0.06] backdrop-blur-md transition-[background-color,transform,box-shadow] duration-200 hover:bg-white/[0.1] hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C47B44] border-2 border-[#C47B44] shadow-[0_0_0_1px_rgba(196,123,68,0.35),inset_0_1px_0_rgba(255,242,235,0.12)] hover:border-[#d4915e] hover:shadow-[0_0_0_1px_rgba(212,145,94,0.45),0_8px_24px_rgba(196,123,68,0.2),inset_0_1px_0_rgba(255,248,242,0.18)]"
               >
                 {ctaLabel}
               </a>

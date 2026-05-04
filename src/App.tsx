@@ -16,6 +16,7 @@ import {
   Star,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import BoroughSquareCarousel from "./components/BoroughSquareCarousel";
 import BawoPillButton from "./components/BawoPillButton";
 import FoundingMemberCheckoutCard from "./components/FoundingMemberCheckoutCard";
 import MailchimpSignupRow from "./components/MailchimpSignupRow";
@@ -31,12 +32,12 @@ gsap.registerPlugin(ScrollTrigger);
 // Live signup notifications data
 const signupNotifications = [
   { name: "Adanna", location: "Brooklyn" },
-  { name: "Tunde", location: "Manhattan" },
+  { name: "Tunde", location: "Harlem" },
   { name: "Chiamaka", location: "Queens" },
   { name: "Obinna", location: "The Bronx" },
   { name: "Ngozi", location: "Brooklyn" },
   { name: "Emeka", location: "Staten Island" },
-  { name: "Amara", location: "Manhattan" },
+  { name: "Amara", location: "Harlem" },
   { name: "Chukwudi", location: "Queens" },
 ];
 
@@ -639,6 +640,79 @@ function App() {
           </div>
         </section>
 
+      {/* Building the Network — section 2 (borough hubs) */}
+      <section
+        ref={globalReachRef}
+        id="building-the-network"
+        className="relative bg-transparent py-16 md:py-20 lg:py-24"
+      >
+        <div className="relative z-10 container mx-auto px-6 py-10">
+          <div className="text-center space-y-12 md:space-y-16 max-w-7xl mx-auto">
+            <div className="space-y-4">
+              <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white font-museo-bold">
+                {CONTENT.globalReach.title}
+              </h2>
+              <p className="text-lg md:text-2xl font-museo-medium text-white/80">
+                {CONTENT.globalReach.subtitle}
+              </p>
+              <p className="text-base md:text-lg font-museo-regular bawo-text-cta-gradient">
+                {CONTENT.globalReach.description}
+              </p>
+            </div>
+
+            <div className="relative mt-8 md:mt-12">
+              <div
+                className="pointer-events-none absolute inset-x-4 md:inset-x-12 top-1/2 h-px bg-gradient-to-r from-transparent via-[rgba(255,107,0,0.65)] to-transparent opacity-70 blur-[1px]"
+                aria-hidden
+              />
+              <div className="flex flex-wrap justify-center gap-12 md:gap-16">
+                {CONTENT.globalReach.cities.map((city, index) => {
+                  const rotatingGallery =
+                    city.name === "Brooklyn"
+                      ? IMAGES.globalReach.brooklynGallery
+                      : city.name === "Harlem"
+                        ? IMAGES.globalReach.harlemGallery
+                        : city.name === "Queens"
+                          ? IMAGES.globalReach.queensGallery
+                          : city.name === "The Bronx"
+                            ? IMAGES.globalReach.bronxGallery
+                            : city.name === "Staten Island"
+                              ? IMAGES.globalReach.statenIslandGallery
+                              : null;
+
+                  return (
+                  <div key={city.name} className="city-stat text-center space-y-5">
+                    {rotatingGallery ? (
+                      <div className="relative w-44 h-44 md:w-64 md:h-64 lg:w-72 lg:h-72 mx-auto overflow-hidden rounded-2xl shadow-[0_22px_60px_rgba(0,0,0,0.65)] ring-1 ring-white/[0.14] transition-transform duration-300 hover:scale-110 hover:ring-[#D4AF37]/35">
+                        <BoroughSquareCarousel
+                          images={rotatingGallery}
+                          alt={`${city.name} — Nigerian diaspora community in NYC`}
+                          rotationStaggerMs={index * 700}
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-44 h-44 md:w-64 md:h-64 lg:w-72 lg:h-72 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_22px_60px_rgba(0,0,0,0.65)] overflow-hidden hover:scale-110 transition-transform duration-300">
+                        <img
+                          src={IMAGES.globalReach.cities[index]}
+                          alt={city.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    )}
+                    <div className="mt-2">
+                      <h3 className="font-museo-bold text-white text-lg md:text-3xl tracking-[0.12em]">
+                        {city.name.toUpperCase()}
+                      </h3>
+                    </div>
+                  </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
         <div className="relative bg-transparent space-y-14 md:space-y-20 pb-4 md:pb-8">
           <div className="container mx-auto px-6 max-w-5xl">
             <FoundingMemberCheckoutCard />
@@ -793,7 +867,7 @@ function App() {
                       T
                     </div>
                     <div>
-                      <p className="text-white/90 font-museo-medium">Tunde from <span className="text-[var(--bawo-brand-cta-orange)]">Manhattan</span></p>
+                      <p className="text-white/90 font-museo-medium">Tunde from <span className="text-[var(--bawo-brand-cta-orange)]">Harlem</span></p>
                       <p className="text-white/50 text-xs font-museo-regular">joined as Founding Member</p>
                     </div>
                   </div>
@@ -1272,53 +1346,6 @@ function App() {
                 A night of culture, music, and pride with the NYC Nigerian
                 community.
               </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section
-        ref={globalReachRef}
-        className="relative min-h-screen flex items-center justify-center bg-transparent py-28"
-      >
-        <div className="relative z-10 container mx-auto px-6 py-10">
-          <div className="text-center space-y-16 max-w-7xl mx-auto">
-            <div className="space-y-4">
-              <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white font-museo-bold">
-                {CONTENT.globalReach.title}
-              </h2>
-              <p className="text-lg md:text-2xl font-museo-medium text-white/80">
-                {CONTENT.globalReach.subtitle}
-              </p>
-              <p className="text-base md:text-lg font-museo-regular bawo-text-cta-gradient">
-                {CONTENT.globalReach.description}
-              </p>
-            </div>
-
-            {/* City Statistics Grid – city names only, connected by a subtle line */}
-            <div className="relative mt-8 md:mt-12">
-              <div
-                className="pointer-events-none absolute inset-x-4 md:inset-x-12 top-1/2 h-px bg-gradient-to-r from-transparent via-[rgba(255,107,0,0.65)] to-transparent opacity-70 blur-[1px]"
-                aria-hidden
-              />
-              <div className="flex flex-wrap justify-center gap-12 md:gap-16">
-                {CONTENT.globalReach.cities.map((city, index) => (
-                  <div key={city.name} className="city-stat text-center space-y-5">
-                    <div className="w-44 h-44 md:w-64 md:h-64 lg:w-72 lg:h-72 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_22px_60px_rgba(0,0,0,0.65)] overflow-hidden hover:scale-110 transition-transform duration-300">
-                      <img
-                        src={IMAGES.globalReach.cities[index]}
-                        alt={city.name}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="mt-2">
-                      <h3 className="font-museo-bold text-white text-lg md:text-3xl tracking-[0.12em]">
-                        {city.name.toUpperCase()}
-                      </h3>
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </div>

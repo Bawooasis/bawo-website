@@ -13,7 +13,7 @@ export default function MailchimpSignupRow({
   buttonLabel = "Join Waitlist",
   compact = false,
 }: MailchimpSignupRowProps) {
-  const inputPad = compact ? "px-4 py-3 text-base" : "px-6 py-4 text-lg";
+  const inputTypography = compact ? "py-3 text-base" : "py-4 text-lg";
   const btnPad = compact ? "px-6 py-3 text-sm min-h-[44px]" : "px-10 py-4 text-base min-h-[48px]";
 
   return (
@@ -23,13 +23,14 @@ export default function MailchimpSignupRow({
       target="_self"
       className={`relative ${className}`.trim()}
     >
-      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+      <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 sm:items-end">
         <input
           type="email"
           name="EMAIL"
           placeholder="Enter email for launch updates"
           required
-          className={`flex-1 rounded-[12px] border-2 focus:outline-none transition-all bg-white/10 backdrop-blur-sm text-white placeholder-white/70 font-museo-medium border-white/20 focus:border-[var(--bawo-brand-cta-orange)] ${inputPad}`}
+          autoComplete="email"
+          className={`flex-1 min-w-0 bg-transparent border-0 border-b-2 border-white/25 rounded-none shadow-none focus:ring-0 focus:outline-none focus:border-[#D4AF37] transition-colors duration-200 font-museo-medium text-white placeholder:text-[#D4AF37] placeholder:opacity-90 ${inputTypography}`}
         />
         <div style={{ position: "absolute", left: "-5000px" }} aria-hidden="true">
           <input

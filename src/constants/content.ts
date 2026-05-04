@@ -29,7 +29,7 @@ export const CONTENT = {
     body: "We are onboarding thousands of highly-educated NYC professionals. Secure an exclusive Founding Sponsor placement in our Resource Directory.",
     ctaLabel: "Inquire About Sponsorships",
     inquiryEmail:
-      import.meta.env.VITE_B2B_CONTACT_EMAIL || "support@bawoapp.com",
+      import.meta.env.VITE_B2B_CONTACT_EMAIL || "Axadegbenro@gmail.com",
     emailSubject: "BawoSocial B2B Sponsorship",
   },
 
@@ -173,7 +173,7 @@ export const CONTENT = {
     description: "Join the First 500 Founding Members to shape the culture of your city's hub.",
     cities: [
       { name: "Brooklyn", country: "🇺🇸" },
-      { name: "Manhattan", country: "🇺🇸" },
+      { name: "Harlem", country: "🇺🇸" },
       { name: "Queens", country: "🇺🇸" },
       { name: "The Bronx", country: "🇺🇸" },
       { name: "Staten Island", country: "🇺🇸" },
