@@ -1,65 +1,9 @@
-/* MuseoModerno Font Family */
-@font-face {
-  font-family: 'MuseoModerno';
-  src: url('./assets/fonts/MuseoModerno/MuseoModerno-Thin.ttf') format('truetype');
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'MuseoModerno';
-  src: url('./assets/fonts/MuseoModerno/MuseoModerno-ThinItalic.ttf') format('truetype');
-  font-weight: 100;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'MuseoModerno';
-  src: url('./assets/fonts/MuseoModerno/MuseoModerno-ExtraLight.ttf') format('truetype');
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'MuseoModerno';
-  src: url('./assets/fonts/MuseoModerno/MuseoModerno-ExtraLightItalic.ttf') format('truetype');
-  font-weight: 200;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'MuseoModerno';
-  src: url('./assets/fonts/MuseoModerno/MuseoModerno-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'MuseoModerno';
-  src: url('./assets/fonts/MuseoModerno/MuseoModerno-LightItalic.ttf') format('truetype');
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-
+/* MuseoModerno Font Family — only the 3 weights actually used */
 @font-face {
   font-family: 'MuseoModerno';
   src: url('./assets/fonts/MuseoModerno/MuseoModerno-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'MuseoModerno';
-  src: url('./assets/fonts/MuseoModerno/MuseoModerno-Italic.ttf') format('truetype');
-  font-weight: 400;
-  font-style: italic;
   font-display: swap;
 }
 
@@ -73,73 +17,9 @@
 
 @font-face {
   font-family: 'MuseoModerno';
-  src: url('./assets/fonts/MuseoModerno/MuseoModerno-MediumItalic.ttf') format('truetype');
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'MuseoModerno';
-  src: url('./assets/fonts/MuseoModerno/MuseoModerno-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'MuseoModerno';
-  src: url('./assets/fonts/MuseoModerno/MuseoModerno-SemiBoldItalic.ttf') format('truetype');
-  font-weight: 600;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'MuseoModerno';
   src: url('./assets/fonts/MuseoModerno/MuseoModerno-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'MuseoModerno';
-  src: url('./assets/fonts/MuseoModerno/MuseoModerno-BoldItalic.ttf') format('truetype');
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'MuseoModerno';
-  src: url('./assets/fonts/MuseoModerno/MuseoModerno-ExtraBold.ttf') format('truetype');
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'MuseoModerno';
-  src: url('./assets/fonts/MuseoModerno/MuseoModerno-ExtraBoldItalic.ttf') format('truetype');
-  font-weight: 800;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'MuseoModerno';
-  src: url('./assets/fonts/MuseoModerno/MuseoModerno-Black.ttf') format('truetype');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'MuseoModerno';
-  src: url('./assets/fonts/MuseoModerno/MuseoModerno-BlackItalic.ttf') format('truetype');
-  font-weight: 900;
-  font-style: italic;
   font-display: swap;
 }
 
@@ -197,35 +77,42 @@ button.bawo-pill-cta-surface:disabled:hover {
 }
 
 /**
- * Premium hero CTAs — obsidian glass + heritage gold / copper trim.
- * Prefer over flat orange gradients for primary conversion controls.
+ * Premium primary CTA — layered glass with gold glow and shimmer
  */
-.bawo-cta-glass-primary {
+.bawo-cta-premium {
   position: relative;
   isolation: isolate;
-  background: linear-gradient(
-    152deg,
-    rgba(255, 255, 255, 0.16) 0%,
-    rgba(255, 255, 255, 0.05) 38%,
-    rgba(12, 8, 20, 0.55) 100%
-  );
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
-  border: 1px solid rgba(212, 175, 55, 0.48);
+  background: 
+    linear-gradient(135deg, 
+      rgba(212, 175, 55, 0.25) 0%, 
+      rgba(196, 123, 68, 0.15) 50%, 
+      rgba(90, 38, 12, 0.3) 100%
+    ),
+    linear-gradient(
+      152deg,
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0.06) 38%,
+      rgba(12, 8, 20, 0.7) 100%
+    );
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(212, 175, 55, 0.6);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-    0 2px 6px rgba(0, 0, 0, 0.45),
-    0 14px 36px rgba(0, 0, 0, 0.52),
-    0 0 40px rgba(212, 175, 55, 0.06);
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    0 2px 8px rgba(0, 0, 0, 0.5),
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 16px 48px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(212, 175, 55, 0.1),
+    0 0 60px rgba(212, 175, 55, 0.15);
   transition:
     transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.22s ease,
-    border-color 0.22s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
     filter 0.22s ease;
 }
 
-.bawo-cta-glass-primary::before {
+.bawo-cta-premium::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -233,20 +120,145 @@ button.bawo-pill-cta-surface:disabled:hover {
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.2) 0%,
-    transparent 42%
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.05) 25%,
+    transparent 50%
   );
-  opacity: 0.85;
+  opacity: 0.9;
+}
+
+.bawo-cta-premium:hover:not(:disabled) {
+  border-color: rgba(212, 175, 55, 0.85);
+  filter: brightness(1.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    0 12px 32px rgba(0, 0, 0, 0.45),
+    0 20px 56px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(212, 175, 55, 0.2),
+    0 0 80px rgba(212, 175, 55, 0.3),
+    0 0 120px rgba(212, 175, 55, 0.15);
+}
+
+/**
+ * Secondary CTA — refined glass with subtle border glow
+ */
+.bawo-cta-secondary {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.04) 50%,
+    rgba(6, 3, 12, 0.4) 100%
+  );
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.35),
+    0 8px 24px rgba(0, 0, 0, 0.25);
+  transition:
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease;
+}
+
+.bawo-cta-secondary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    transparent 40%
+  );
+  opacity: 0.7;
+}
+
+.bawo-cta-secondary:hover:not(:disabled) {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(6, 3, 12, 0.3) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 6px 16px rgba(0, 0, 0, 0.3),
+    0 12px 32px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(255, 255, 255, 0.05);
+}
+
+/**
+ * Legacy glass-primary for checkout card and other uses
+ */
+.bawo-cta-glass-primary {
+  position: relative;
+  isolation: isolate;
+  background: 
+    linear-gradient(135deg, 
+      rgba(212, 175, 55, 0.25) 0%, 
+      rgba(196, 123, 68, 0.15) 50%, 
+      rgba(90, 38, 12, 0.3) 100%
+    ),
+    linear-gradient(
+      152deg,
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0.06) 38%,
+      rgba(12, 8, 20, 0.7) 100%
+    );
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(212, 175, 55, 0.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    0 2px 8px rgba(0, 0, 0, 0.5),
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 16px 48px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(212, 175, 55, 0.1),
+    0 0 60px rgba(212, 175, 55, 0.15);
+  transition:
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    filter 0.22s ease;
+}
+
+.bawo-cta-glass-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.05) 25%,
+    transparent 50%
+  );
+  opacity: 0.9;
 }
 
 .bawo-cta-glass-primary:hover:not(:disabled) {
-  border-color: rgba(212, 175, 55, 0.72);
-  filter: brightness(1.05);
+  border-color: rgba(212, 175, 55, 0.85);
+  filter: brightness(1.08);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.3),
-    0 4px 10px rgba(0, 0, 0, 0.35),
-    0 18px 44px rgba(0, 0, 0, 0.48),
-    0 0 48px rgba(212, 175, 55, 0.14);
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    0 12px 32px rgba(0, 0, 0, 0.45),
+    0 20px 56px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(212, 175, 55, 0.2),
+    0 0 80px rgba(212, 175, 55, 0.3),
+    0 0 120px rgba(212, 175, 55, 0.15);
 }
 
 .bawo-cta-glass-secondary {
@@ -328,14 +340,11 @@ button.bawo-pill-cta-surface:disabled:hover {
 @layer base {
   html {
     font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     scroll-padding-top: 1rem;
-    /* Hardware acceleration for smooth scrolling */
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
   }
 
   body {
@@ -343,9 +352,8 @@ button.bawo-pill-cta-surface:disabled:hover {
     overflow-x: hidden;
     background-color: var(--bawo-canvas, #06030c);
     color: var(--bawo-text-primary, #fff);
-    touch-action: manipulation;
-    /* Optimize for scroll performance */
-    overscroll-behavior: none;
+    touch-action: auto;
+    overscroll-behavior-y: auto;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -359,9 +367,6 @@ button.bawo-pill-cta-surface:disabled:hover {
   /* Don't use transform on #root: it would make fixed elements stick to #root and scroll away. */
   #root {
     min-height: 100vh;
-    /* Enable GPU acceleration */
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
   }
 
   /* Performance optimizations for all elements */
@@ -370,16 +375,10 @@ button.bawo-pill-cta-surface:disabled:hover {
   }
 }
 
-/* GPU layer for main scroll content – smooth 60fps scroll */
+/* Light compositing hint — avoid `will-change` on the whole page (hurts scroll). */
 .scroll-content-gpu {
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
-  will-change: transform;
-  contain: layout style paint;
-  /* Force GPU acceleration */
-  -webkit-transform: translate3d(0, 0, 0);
-  -webkit-backface-visibility: hidden;
-  -webkit-perspective: 1000;
 }
 
 /* Glassmorphism — recipes.glassCard / surface.glass */
@@ -390,7 +389,6 @@ button.bawo-pill-cta-surface:disabled:hover {
   -webkit-backdrop-filter: blur(20px);
   box-shadow: var(--bawo-glass-card-shadow);
   border-radius: var(--bawo-glass-card-radius, 1rem);
-  will-change: transform, opacity;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
 }
@@ -785,18 +783,6 @@ button.bawo-pill-cta-surface:disabled:hover {
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
   }
-  /* Breathing animation for phone mockup */
-  .animate-breathing {
-    animation: breathing 5s ease-in-out infinite;
-    will-change: transform;
-    transform: translateZ(0);
-  }
-  
-  @keyframes breathing {
-    0%, 100% { transform: scale(1) translateZ(0); }
-    50% { transform: scale(1.02) translateZ(0); }
-  }
-
   /* Premium airport-style scrolling banner animation */
   .animate-scroll-left {
     animation: scrollLeft 40s linear infinite;
@@ -946,12 +932,10 @@ button.bawo-pill-cta-surface:disabled:hover {
     }
   }
 
-  /* Optimize all animated elements */
-  .animate-on-scroll,
+  /* Scroll-driven animations promote their own layers as needed */
   .feature-card,
   .testimonial-card,
   .city-stat {
-    will-change: transform, opacity;
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
@@ -969,11 +953,6 @@ button.bawo-pill-cta-surface:disabled:hover {
   .interactive {
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
-  }
-
-  /* Reduce repaints on scroll */
-  section {
-    contain: layout style;
   }
 
   /* Slow gradient movement for hero background */

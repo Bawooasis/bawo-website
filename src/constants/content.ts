@@ -56,7 +56,7 @@ export const CONTENT = {
     title: "Founding Member Batch 1 is Open.",
     subtitle:
       "Lock in lifetime access for $25. After Batch 1 closes, membership costs $19.99/month.",
-    tagline: "Do the math: $25 once — vs. $240/year if you wait.",
+    tagline: "Do the math: $25 once vs. $1,200+ over five years on the monthly plan.",
     metrics: {
       batch1: {
         value: "500",

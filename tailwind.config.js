@@ -40,6 +40,13 @@ export default {
       },
       animation: {
         'spin-slow': 'spin 30s linear infinite',
+        'subtle-float': 'subtleFloat 7s ease-in-out infinite',
+      },
+      keyframes: {
+        subtleFloat: {
+          '0%, 100%': { transform: 'translate3d(0, 0, 0)' },
+          '50%': { transform: 'translate3d(0, -6px, 0)' },
+        },
       },
     },
   },

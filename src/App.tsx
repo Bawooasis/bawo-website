@@ -98,12 +98,11 @@ function App() {
 
     if (prefersReducedMotion) return;
 
-    // Configure ScrollTrigger for better performance
     ScrollTrigger.config({
       limitCallbacks: true,
-      syncInterval: 150, // Reduce update frequency for better performance
     });
 
+    const ctx = gsap.context(() => {
     // Hero section entrance animation (smoother ease/durations)
     const heroTimeline = gsap.timeline({ 
       defaults: { 
@@ -160,28 +159,22 @@ function App() {
       "-=0.2"
     );
 
-    // Scroll-triggered animations with performance optimizations
-    gsap.utils.toArray(".animate-on-scroll").forEach((element) => {
-      const target = element as HTMLElement;
-      gsap.fromTo(
-        target as HTMLElement,
-        { y: 24, opacity: 0 },
-        {
-          y: 0,
+    gsap.set(".animate-on-scroll", { opacity: 0, y: 24, force3D: true });
+    ScrollTrigger.batch(".animate-on-scroll", {
+      interval: 0.18,
+      batchMax: 4,
+      start: "top 90%",
+      onEnter: (elements) => {
+        gsap.to(elements, {
           opacity: 1,
-          duration: 1.1,
+          y: 0,
+          duration: 1.02,
+          stagger: 0.07,
           ease: "power3.out",
           force3D: true,
-          scrollTrigger: {
-            trigger: target as HTMLElement,
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse",
-            fastScrollEnd: true,
-            preventOverlaps: true,
-          },
-        }
-      );
+          overwrite: "auto",
+        });
+      },
     });
 
     // Staggered card animations with batching
@@ -248,11 +241,9 @@ function App() {
       }
     );
 
-    // Cleanup function - properly kill all ScrollTriggers
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      heroTimeline.kill();
-    };
+    });
+
+    return () => ctx.revert();
   }, []);
 
   // Simple auto-rotating preview in hero
@@ -326,7 +317,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-x-hidden">
       <div
         className="fixed inset-0 z-0 bg-gradient-to-b from-[var(--bawo-canvas)] via-[var(--bawo-elevated)] to-[var(--bawo-canvas)]"
         aria-hidden
@@ -459,12 +450,12 @@ function App() {
 
 
           {/* Main Content Container */}
-          <div className="relative z-10 container mx-auto px-6 py-10 sm:py-14 md:py-24 lg:py-36 xl:py-40">
-            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start lg:items-center">
+          <div className="relative z-10 container mx-auto px-6 py-10 sm:py-14 md:py-20 lg:py-28 xl:py-32">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 xl:gap-24 items-start lg:items-center">
               {/* Left Content - Text */}
-              <div className="text-left space-y-10 order-2 lg:order-1">
+              <div className="text-left space-y-10 order-2 lg:order-1 lg:pt-4">
                 {/* Main Heading */}
-                <div className="space-y-6">
+                <div className="space-y-7 md:space-y-8">
                   <h1
                     ref={headlineRef}
                     className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.2] font-display text-white"
@@ -523,7 +514,7 @@ function App() {
               {previewImages.length > 0 && (
                 <div
                   ref={phoneRef}
-                  className="flex flex-col items-center lg:items-end lg:pr-10 xl:pr-16 order-1 lg:order-2 -mt-2 sm:-mt-4 md:-mt-10 lg:-mt-14 gap-3 sm:gap-4 md:gap-6 w-full max-w-[19rem] sm:max-w-none mx-auto lg:mx-0"
+                  className="flex flex-col items-center lg:items-end lg:pr-6 xl:pr-12 order-1 lg:order-2 mt-4 sm:mt-6 lg:mt-2 gap-4 sm:gap-5 md:gap-6 w-full max-w-[19rem] sm:max-w-none mx-auto lg:mx-0"
                 >
                   <div className="relative pb-4 md:pb-6 w-full flex flex-col items-center">
                     <div className="relative w-full max-w-[15.5rem] sm:max-w-none sm:w-auto mx-auto">
@@ -533,7 +524,8 @@ function App() {
                         alt="BawoSocial App Preview"
                         loading="eager"
                         decoding="async"
-                        className="w-full sm:w-64 md:w-80 lg:w-96 h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] transform-gpu transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-[2rem] animate-breathing object-cover will-change-transform"
+                        fetchPriority="high"
+                        className="w-full sm:w-64 md:w-80 lg:w-96 h-auto rounded-[2rem] object-cover transform-gpu shadow-[0_20px_48px_rgba(0,0,0,0.35)] motion-safe:animate-subtle-float"
                         style={{ opacity: 1 }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[rgba(255,107,0,0.14)] via-transparent to-transparent rounded-[2rem] pointer-events-none"></div>
@@ -648,7 +640,7 @@ function App() {
       <section
         ref={globalReachRef}
         id="building-the-network"
-        className="relative bg-transparent py-20 md:py-24 lg:py-28 overflow-hidden"
+        className="relative bg-transparent py-20 md:py-[5rem] overflow-x-hidden"
       >
         <div className="relative z-10 container mx-auto px-5 sm:px-6 py-12 md:py-14">
           <div className="text-center space-y-8 md:space-y-12 max-w-[1400px] mx-auto">
@@ -754,7 +746,7 @@ function App() {
         </div>
       </section>
 
-        <div className="relative bg-transparent space-y-14 md:space-y-20 pb-4 md:pb-8">
+        <div className="relative bg-transparent space-y-16 md:space-y-20 pt-[5rem] pb-6 md:pb-10">
           <div className="container mx-auto px-6 max-w-5xl">
             <FoundingMemberCheckoutCard />
           </div>
@@ -874,7 +866,7 @@ function App() {
               
               <div className="h-3 w-full rounded-full bg-white/[0.08] overflow-hidden backdrop-blur-sm border border-[rgba(255,255,255,0.08)] shadow-inner relative">
                 <div
-                  className="h-full w-[10%] rounded-full bg-[#ff6b00] transition-all duration-500 shadow-[0_0_14px_rgba(255,107,0,0.55)] animate-pulse"
+                  className="h-full w-[10%] rounded-full bg-[#ff6b00] shadow-[0_0_14px_rgba(255,107,0,0.45)] transition-[width] duration-500"
                   aria-label="50 of 500 spots taken"
                 />
               </div>
@@ -884,83 +876,35 @@ function App() {
               </p>
 
               {/* Live Activity Feed */}
-              <div className="mt-8 bg-white/[0.04] backdrop-blur-sm rounded-xl border border-[rgba(255,255,255,0.06)] p-4 space-y-3">
-                <h4 className="text-xs uppercase tracking-wider text-white/50 font-museo-bold mb-3">Recent Activity</h4>
-                
-                {/* Activity Item 1 */}
-                <div className="flex items-center justify-between text-sm animate-fade-in">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#ff6b00] to-[#5a260c] flex items-center justify-center text-white text-xs font-bold">
-                      A
-                    </div>
-                    <div>
-                      <p className="text-white/90 font-museo-medium">Adanna from <span className="text-[var(--bawo-brand-cta-orange)]">Brooklyn</span></p>
-                      <p className="text-white/50 text-xs font-museo-regular">joined as Founding Member</p>
-                    </div>
-                  </div>
-                  <span className="text-white/40 text-xs font-museo-regular whitespace-nowrap">2m ago</span>
-                </div>
-
-                {/* Activity Item 2 */}
-                <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#10b981] to-[#059669] flex items-center justify-center text-white text-xs font-bold">
-                      T
-                    </div>
-                    <div>
-                      <p className="text-white/90 font-museo-medium">Tunde from <span className="text-[var(--bawo-brand-cta-orange)]">Harlem</span></p>
-                      <p className="text-white/50 text-xs font-museo-regular">joined as Founding Member</p>
-                    </div>
-                  </div>
-                  <span className="text-white/40 text-xs font-museo-regular whitespace-nowrap">8m ago</span>
-                </div>
-
-                {/* Activity Item 3 */}
-                <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#3b82f6] to-[#1d4ed8] flex items-center justify-center text-white text-xs font-bold">
-                      C
-                    </div>
-                    <div>
-                      <p className="text-white/90 font-museo-medium">Chiamaka from <span className="text-[var(--bawo-brand-cta-orange)]">Queens</span></p>
-                      <p className="text-white/50 text-xs font-museo-regular">joined as Founding Member</p>
-                    </div>
-                  </div>
-                  <span className="text-white/40 text-xs font-museo-regular whitespace-nowrap">15m ago</span>
-                </div>
-
-                {/* Activity Item 4 */}
-                <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#a855f7] to-[#7e22ce] flex items-center justify-center text-white text-xs font-bold">
-                      O
-                    </div>
-                    <div>
-                      <p className="text-white/90 font-museo-medium">Obinna from <span className="text-[var(--bawo-brand-cta-orange)]">The Bronx</span></p>
-                      <p className="text-white/50 text-xs font-museo-regular">joined as Founding Member</p>
-                    </div>
-                  </div>
-                  <span className="text-white/40 text-xs font-museo-regular whitespace-nowrap">23m ago</span>
-                </div>
-
-                {/* Activity Item 5 */}
-                <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#ec4899] to-[#be185d] flex items-center justify-center text-white text-xs font-bold">
-                      N
-                    </div>
-                    <div>
-                      <p className="text-white/90 font-museo-medium">Ngozi from <span className="text-[var(--bawo-brand-cta-orange)]">Brooklyn</span></p>
-                      <p className="text-white/50 text-xs font-museo-regular">joined as Founding Member</p>
-                    </div>
-                  </div>
-                  <span className="text-white/40 text-xs font-museo-regular whitespace-nowrap">41m ago</span>
-                </div>
-              </div>
-
               {/* Price Comparison Calculator */}
               <div className="mt-8 bg-white/[0.06] backdrop-blur-md rounded-xl border border-[rgba(255,255,255,0.08)] p-6 max-w-3xl mx-auto">
                 <h4 className="text-white font-museo-bold text-lg mb-4 text-center">The Math: Founding Member vs. Monthly Subscription</h4>
+
+                <div className="mb-6 rounded-2xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-br from-[rgba(212,175,55,0.12)] via-[rgba(6,3,12,0.72)] to-[rgba(255,107,0,0.08)] px-4 py-5 sm:px-8 sm:py-6 text-center shadow-[0_12px_40px_rgba(0,0,0,0.35)]">
+                  <p className="text-[10px] sm:text-xs font-museo-bold uppercase tracking-[0.2em] text-[#D4AF37]/90 mb-2">
+                    Lifetime pass vs. paying monthly (5 yrs)
+                  </p>
+                  <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-8">
+                    <div>
+                      <p className="text-xs text-white/55 font-museo-medium mb-1">Pay once</p>
+                      <p className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tabular-nums text-[#D4AF37] drop-shadow-[0_2px_24px_rgba(212,175,55,0.35)]">
+                        $25
+                      </p>
+                    </div>
+                    <span className="hidden sm:block text-3xl font-museo-bold text-white/25" aria-hidden>
+                      vs
+                    </span>
+                    <div>
+                      <p className="text-xs text-white/55 font-museo-medium mb-1">Monthly path</p>
+                      <p className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tabular-nums text-white drop-shadow-[0_2px_20px_rgba(255,255,255,0.12)]">
+                        $1,200
+                      </p>
+                      <p className="text-[11px] text-white/45 font-museo-regular mt-1">
+                        stacked over five years · no founder perks
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Founding Member */}
@@ -1025,8 +969,8 @@ function App() {
                         <span className="font-museo-bold">$1,200</span>
                       </div>
                       <div className="border-t border-white/10 pt-2 flex justify-between text-red-400 font-museo-bold">
-                        <span>Forever:</span>
-                        <span>$$$</span>
+                        <span>5-year total:</span>
+                        <span>$1,200+</span>
                       </div>
                     </div>
                   </div>
@@ -1421,23 +1365,11 @@ function App() {
               </div>
             </div>
 
-            <MailchimpSignupRow
-              className="relative w-full max-w-2xl mx-auto"
-              buttonLabel="Get updates"
-            />
-
-            {/* Divider: OR — waitlist first, then founding / TestFlight */}
-            <div className="flex items-center gap-4 max-w-2xl mx-auto w-full">
-              <span className="flex-1 h-px bg-white/20" aria-hidden />
-              <span className="text-white/60 font-museo-medium text-sm uppercase tracking-wider">Or</span>
-              <span className="flex-1 h-px bg-white/20" aria-hidden />
-            </div>
-
             <div className="flex flex-col gap-5 justify-center items-center w-full max-w-2xl mx-auto">
               <div className="flex flex-col sm:flex-row gap-4 w-full items-center justify-center sm:items-stretch">
                 <div className="flex w-full sm:w-auto justify-center shrink-0">
                   <BawoPillButton
-                    label={CONTENT.finalCta.cta}
+                    label={CONTENT.foundingMemberCheckout.ctaLabel}
                     icon={Lock}
                     variant="primary"
                     size="md"
@@ -1477,6 +1409,20 @@ function App() {
                 <span>{CONTENT.hero.trustIndicators.cancel}</span>
               </div>
             </div>
+
+            <div className="flex items-center gap-4 max-w-2xl mx-auto w-full">
+              <span className="flex-1 h-px bg-white/20" aria-hidden />
+              <span className="text-white/55 font-museo-medium text-xs sm:text-sm text-center uppercase tracking-wider px-2">
+                Or get launch updates · no payment
+              </span>
+              <span className="flex-1 h-px bg-white/20" aria-hidden />
+            </div>
+
+            <MailchimpSignupRow
+              className="relative w-full max-w-2xl mx-auto"
+              variant="ghost"
+              buttonLabel={CONTENT.finalCta.ctaSecondary}
+            />
           </div>
         </div>
       </section>
@@ -1490,7 +1436,7 @@ function App() {
               Only 450 Spots Left
             </span>
             <BawoPillButton
-              label="Join for $25"
+              label={CONTENT.foundingMemberCheckout.ctaLabel}
               variant="primary"
               size="sm"
               className="shrink-0"

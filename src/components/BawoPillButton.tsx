@@ -49,19 +49,21 @@ export default function BawoPillButton({
   const m = metrics[size];
 
   const base =
-    "inline-flex flex-row items-center justify-center gap-2.5 rounded-full font-semibold outline-none overflow-hidden " +
+    "inline-flex flex-row items-center justify-center gap-2.5 rounded-full font-semibold outline-none overflow-hidden relative " +
     "transition-[transform,box-shadow,filter] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] " +
     "active:translate-y-0 active:scale-[0.98] " +
     "disabled:opacity-[0.55] disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:active:scale-100 " +
-    "focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bawo-canvas,#06030C)]";
+    "focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bawo-canvas,#06030C)] " +
+    "before:absolute before:inset-0 before:rounded-full before:opacity-0 before:transition-opacity before:duration-300 " +
+    "hover:before:opacity-100";
 
   const primary =
-    "text-white bawo-cta-glass-primary hover:-translate-y-0.5 disabled:hover:translate-y-0";
+    "text-white bawo-cta-premium hover:-translate-y-1 disabled:hover:translate-y-0 active:brightness-[0.93] " +
+    "before:bg-[radial-gradient(circle_at_50%_0%,rgba(212,175,55,0.3)_0%,transparent_60%)]";
 
   const secondary =
-    "bg-white/[0.08] border border-white/[0.12] text-white/[0.92] " +
-    "shadow-[0_8px_14px_rgba(0,0,0,0.28)] hover:bg-white/[0.1] hover:-translate-y-0.5 hover:shadow-[0_10px_26px_rgba(0,0,0,0.38)] " +
-    "active:shadow-[0_6px_16px_rgba(0,0,0,0.32)] disabled:hover:translate-y-0 disabled:hover:shadow-[0_8px_14px_rgba(0,0,0,0.28)]";
+    "bawo-cta-secondary text-white/[0.92] hover:-translate-y-1 " +
+    "before:bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.15)_0%,transparent_50%)]";
 
   return (
     <button
@@ -79,15 +81,17 @@ export default function BawoPillButton({
       {Icon ? (
         <Icon
           className={`relative z-[1] shrink-0 ${
-            variant === "primary" ? "text-[#D4AF37] drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]" : "text-white"
+            variant === "primary" 
+              ? "text-[#D4AF37] drop-shadow-[0_2px_8px_rgba(212,175,55,0.6)] filter brightness-110" 
+              : "text-white/90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
           }`}
           size={m.icon}
-          strokeWidth={2}
+          strokeWidth={2.25}
           aria-hidden
         />
       ) : null}
       <span
-        className={`relative z-[1] min-w-0 leading-snug text-white [text-wrap:balance] ${
+        className={`relative z-[1] min-w-0 leading-snug text-white [text-wrap:balance] drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)] ${
           fullWidth ? "flex-1 text-center" : "shrink-0 text-center px-0.5"
         }`}
       >
