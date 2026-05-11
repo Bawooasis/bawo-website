@@ -3,6 +3,7 @@
 // Local asset imports
 // import globeImage from "../assets/images/GLOBE.png"; // File removed
 import bawoLogo from "../assets/images/bawo-logo.png";
+import bawoLogoMain from "../assets/images/Logo.png";
 import adoraImage from "../assets/images/ADORA.jpg";
 import emekaImage from "../assets/images/Emeka.jpg";
 import fatimaImage from "../assets/images/Fatima.jpg";
@@ -49,23 +50,26 @@ import si04 from "../assets/images/staten/si-04.png";
 import si05 from "../assets/images/staten/si-05.png";
 
 // Inside the App Images - screenshots
-import appScreenshot1 from "../assets/images/InsideTheAppImages/1.png";
-import appScreenshot2 from "../assets/images/HomeMock2.png";
+import appResourcesScreen from "../assets/images/app-resources-full.png";
+import appEventsScreen from "../assets/images/app-events-detail.png";
+import appConciergeScreen from "../assets/images/app-concierge.png";
 
 export const IMAGES = {
   // Local Assets
   assets: {
     globe: "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=400&q=80&auto=format&fit=crop", // Placeholder globe image
-    logo: bawoLogo,
+    logo: bawoLogoMain,
+    logoOld: bawoLogo,
     // Add more local images here as needed
   },
 
   // App Preview/Demo Images
   previews: {
-    main: appScreenshot1,
+    main: appResourcesScreen,
     gallery: [
-      appScreenshot1,
-      appScreenshot2
+      appResourcesScreen,
+      appEventsScreen,
+      appConciergeScreen
     ]
   },
 
@@ -79,8 +83,9 @@ export const IMAGES = {
   // In-App Feature Screenshots
   inApp: {
     features: [
-      appScreenshot1,
-      appScreenshot2
+      appResourcesScreen,
+      appEventsScreen,
+      appConciergeScreen
     ]
   },
 

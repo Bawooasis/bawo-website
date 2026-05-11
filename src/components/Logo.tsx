@@ -1,10 +1,16 @@
+import { IMAGES } from '../constants/images';
 
 const Logo = () => {
   return (
     <div className="relative">
-      <div className="text-white font-display font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl drop-shadow-[0_4px_8px_rgba(0,0,0,0.4)] transition-all duration-300 hover:scale-105">
-        BawoSocial
-      </div>
+      <img 
+        src={IMAGES.assets.logo} 
+        alt="BawoSocial - Culture, Connection, Community"
+        className="h-24 sm:h-28 md:h-32 lg:h-40 xl:h-48 w-auto drop-shadow-[0_8px_24px_rgba(212,175,55,0.5)] transition-all duration-300 hover:scale-[1.02] hover:drop-shadow-[0_12px_36px_rgba(212,175,55,0.7)]"
+        style={{ 
+          filter: 'drop-shadow(0 0 20px rgba(212, 175, 55, 0.3))'
+        }}
+      />
     </div>
   );
 };

@@ -6,9 +6,9 @@ const BRAND_CTA_ORANGE = "#ff6b00";
 
 export const palette = {
   obsidian: {
-    canvas: "#06030C",
-    elevated: "#0E0A14",
-    depth: "#141018",
+    canvas: "#1A0A28",
+    elevated: "#2A1438",
+    depth: "#3A1D48",
   },
   copper: {
     /** CORE.primaryAction / `signal.action` */

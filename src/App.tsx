@@ -339,82 +339,41 @@ function App() {
       )}
       
       {/* Promo strip — full-bleed glass, yellow copy + white icons, ribbon animation (see `index.css`) */}
-      <div className="bawo-promo-strip fixed top-0 left-0 right-0 z-40 py-2.5 md:py-3">
+      <div className="bawo-promo-strip fixed top-0 left-0 right-0 z-40 py-2 overflow-hidden">
         <div
-          className="bawo-promo-ribbon flex w-full flex-wrap items-center justify-center gap-x-3 gap-y-2 px-4 text-xs md:gap-x-5 md:text-sm text-yellow-300"
+          className="bawo-promo-ribbon flex w-full items-center justify-center gap-x-3 px-4 text-[10px] md:text-xs text-yellow-300 animate-slide-in-left"
           style={{
             textShadow:
-              "0 0 16px rgba(250, 204, 21, 0.5), 0 0 34px rgba(234, 179, 8, 0.22)",
+              "0 0 12px rgba(250, 204, 21, 0.4), 0 0 24px rgba(234, 179, 8, 0.18)",
           }}
         >
-          <span className="flex items-center justify-center gap-2 font-museo-medium">
-            <Gem className="h-[18px] w-[18px] shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-5 md:w-5" strokeWidth={2} aria-hidden />
-            <span>
-              <span aria-hidden className="mr-1 inline-block">
-                ✨
-              </span>
-              Lifetime Access — One Payment
-            </span>
+          <span className="flex items-center gap-1.5 font-museo-medium whitespace-nowrap">
+            <Gem className="h-3 w-3 shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-3.5 md:w-3.5" strokeWidth={2} aria-hidden />
+            <span>Lifetime Access — One Payment</span>
           </span>
-          <span className="text-white/40" aria-hidden>
+          <span className="text-white/30 hidden sm:inline" aria-hidden>
             ·
           </span>
-          <span className="flex items-center justify-center gap-2">
-            <Crown className="h-[18px] w-[18px] shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-5 md:w-5" strokeWidth={2} aria-hidden />
-            <span className="font-museo-bold font-display tracking-wide">
-              <span aria-hidden className="mr-1 inline-block">
-                🎖️
-              </span>
-              Founding Member Badge
-            </span>
+          <span className="hidden sm:flex items-center gap-1.5 font-museo-bold whitespace-nowrap">
+            <Crown className="h-3 w-3 shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-3.5 md:w-3.5" strokeWidth={2} aria-hidden />
+            <span>Founding Member Badge</span>
           </span>
-          <span className="text-white/40" aria-hidden>
+          <span className="text-white/30 hidden md:inline" aria-hidden>
             ·
           </span>
-          <span className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
-            <Clock className="h-[18px] w-[18px] shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-5 md:w-5" strokeWidth={2} aria-hidden />
-            <span className="font-museo-medium text-yellow-300/90">
-              <span aria-hidden className="mr-1 inline-block">
-                ⏰
-              </span>
-              Closes:
-            </span>
+          <span className="hidden md:flex items-center gap-1.5 font-museo-medium whitespace-nowrap">
+            <Clock className="h-3 w-3 shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-3.5 md:w-3.5" strokeWidth={2} aria-hidden />
+            <span className="text-yellow-300/90">Closes:</span>
             <span className="font-museo-bold tabular-nums">
-              {timeLeft.days}
-              <span className="ml-0.5 text-[10px] font-museo-medium opacity-75 md:text-xs">
-                D
-              </span>
-            </span>
-            <span className="font-museo-bold tabular-nums">
-              {String(timeLeft.hours).padStart(2, "0")}
-              <span className="ml-0.5 text-[10px] font-museo-medium opacity-75 md:text-xs">
-                H
-              </span>
-            </span>
-            <span className="font-museo-bold tabular-nums">
-              {String(timeLeft.minutes).padStart(2, "0")}
-              <span className="ml-0.5 text-[10px] font-museo-medium opacity-75 md:text-xs">
-                M
-              </span>
-            </span>
-            <span className="font-museo-bold tabular-nums">
-              {String(timeLeft.seconds).padStart(2, "0")}
-              <span className="ml-0.5 text-[10px] font-museo-medium opacity-75 md:text-xs">
-                S
-              </span>
+              {timeLeft.days}d {String(timeLeft.hours).padStart(2, "0")}h {String(timeLeft.minutes).padStart(2, "0")}m
             </span>
           </span>
-          <span className="text-white/40" aria-hidden>
+          <span className="text-white/30 hidden lg:inline" aria-hidden>
             ·
           </span>
-          <span className="flex items-center justify-center gap-2 font-museo-bold">
-            <Flame className="h-[18px] w-[18px] shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-5 md:w-5" strokeWidth={2} aria-hidden />
-            <span>
-              <span aria-hidden className="mr-1 inline-block">
-                🔥
-              </span>
-              Only 450 Spots Left
-            </span>
+          <span className="hidden lg:flex items-center gap-1.5 font-museo-bold whitespace-nowrap">
+            <Flame className="h-3 w-3 shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-3.5 md:w-3.5" strokeWidth={2} aria-hidden />
+            <span>450 Spots Left</span>
           </span>
         </div>
       </div>
@@ -441,7 +400,7 @@ function App() {
           {/* BawoSocial Logo - Top Left */}
           <div
             ref={logoRef}
-            className="absolute top-14 sm:top-16 md:top-18 left-4 sm:left-6 md:left-8 lg:left-10 xl:left-12 2xl:left-16 z-20"
+            className="absolute top-20 sm:top-24 md:top-28 lg:top-32 xl:top-36 left-4 sm:left-6 md:left-8 lg:left-10 xl:left-12 2xl:left-16 z-20"
           >
             <div className="relative z-10">
               <Logo />
@@ -494,16 +453,16 @@ function App() {
                       {CONTENT.hero.ctaMicrocopy}
                     </p>
 
-                    <div className="bawo-trust-row flex flex-wrap items-center gap-3 text-xs md:text-sm font-normal">
+                    <div className="bawo-trust-row flex flex-wrap items-center gap-2.5 text-[10px] md:text-xs font-museo-medium text-yellow-300">
                       <span className="flex items-center gap-1.5">
-                        <svg className="w-4 h-4 text-[#635bff]" fill="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3 h-3 md:w-3.5 md:h-3.5 text-[#635bff]" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z"/>
                         </svg>
                         {CONTENT.hero.trustIndicators.stripe}
                       </span>
-                      <span className="bawo-trust-row__sep">|</span>
+                      <span className="text-white/30">|</span>
                       <span>{CONTENT.hero.trustIndicators.oneTime}</span>
-                      <span className="bawo-trust-row__sep">|</span>
+                      <span className="text-white/30">|</span>
                       <span>{CONTENT.hero.trustIndicators.cancel}</span>
                     </div>
                   </div>
@@ -514,7 +473,7 @@ function App() {
               {previewImages.length > 0 && (
                 <div
                   ref={phoneRef}
-                  className="flex flex-col items-center lg:items-end lg:pr-6 xl:pr-12 order-1 lg:order-2 mt-4 sm:mt-6 lg:mt-2 gap-4 sm:gap-5 md:gap-6 w-full max-w-[19rem] sm:max-w-none mx-auto lg:mx-0"
+                  className="flex flex-col items-center lg:items-end lg:pr-6 xl:pr-12 order-1 lg:order-2 -mt-24 sm:-mt-20 lg:-mt-32 xl:-mt-40 gap-4 sm:gap-5 md:gap-6 w-full max-w-[19rem] sm:max-w-none mx-auto lg:mx-0"
                 >
                   <div className="relative pb-4 md:pb-6 w-full flex flex-col items-center">
                     <div className="relative w-full max-w-[15.5rem] sm:max-w-none sm:w-auto mx-auto">
@@ -525,20 +484,18 @@ function App() {
                         loading="eager"
                         decoding="async"
                         fetchPriority="high"
-                        className="w-full sm:w-64 md:w-80 lg:w-96 h-auto rounded-[2rem] object-cover transform-gpu shadow-[0_20px_48px_rgba(0,0,0,0.35)] motion-safe:animate-subtle-float"
+                        className="w-full sm:w-64 md:w-80 lg:w-96 h-auto object-contain transform-gpu shadow-[0_20px_48px_rgba(0,0,0,0.35)] motion-safe:animate-subtle-float"
                         style={{ opacity: 1 }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[rgba(255,107,0,0.14)] via-transparent to-transparent rounded-[2rem] pointer-events-none"></div>
-                      <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-white/5 to-transparent rounded-t-[2rem] pointer-events-none"></div>
                     </div>
                     {/* Dots */}
                     <div className="flex items-center justify-center gap-2 absolute -bottom-1 sm:-bottom-2 left-1/2 -translate-x-1/2">
                       {previewImages.map((_, idx) => (
                         <span
                           key={idx}
-                          className={`w-2.5 h-2.5 rounded-full ${
+                          className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
                             idx === activePreviewIndex
-                              ? "bg-[var(--bawo-brand-cta-orange)]"
+                              ? "bg-[#D4AF37] shadow-[0_0_10px_rgba(212,175,55,0.6)]"
                               : "bg-white/30"
                           }`}
                         />
@@ -1272,14 +1229,13 @@ function App() {
                   <img
                     src={image}
                     alt={`BawoSocial Feature ${index + 1}`}
-                    className="h-80 w-full object-contain mx-auto bg-black/40"
+                    className="h-80 w-full object-contain mx-auto"
                   />
                 </div>
                 <p className="text-white mt-1 font-museo-medium">
-                  {index === 0 && "Join Your Groups - local communities, no noise."}
-                  {index === 1 && "Access The Black Book - vetted resources & contacts."}
-                  {index === 2 && "Smart Matching - connect based on intent."}
-                  {index === 3 && "Attend Events - real-world meetups."}
+                  {index === 0 && "Access Resources - Find Nigerian restaurants, churches, and verified services."}
+                  {index === 1 && "Discover Events - Naija Night Out, film screenings, and community meetups."}
+                  {index === 2 && "Meet Concierge - AI assistant for NIN renewals, shipping, and local intel."}
                 </p>
               </div>
             ))}
@@ -1396,16 +1352,16 @@ function App() {
                 </div>
               </div>
 
-              <div className="bawo-trust-row flex flex-wrap items-center justify-center gap-3 text-xs md:text-sm font-normal">
+              <div className="bawo-trust-row flex flex-wrap items-center justify-center gap-2.5 text-[10px] md:text-xs font-museo-medium text-yellow-300">
                 <span className="flex items-center gap-1.5">
-                  <svg className="w-4 h-4 text-[#635bff]" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3 h-3 md:w-3.5 md:h-3.5 text-[#635bff]" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z"/>
                   </svg>
                   {CONTENT.hero.trustIndicators.stripe}
                 </span>
-                <span className="bawo-trust-row__sep">|</span>
+                <span className="text-white/30">|</span>
                 <span>{CONTENT.hero.trustIndicators.oneTime}</span>
-                <span className="bawo-trust-row__sep">|</span>
+                <span className="text-white/30">|</span>
                 <span>{CONTENT.hero.trustIndicators.cancel}</span>
               </div>
             </div>
