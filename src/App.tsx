@@ -394,13 +394,13 @@ function App() {
         {/* Hero Section */}
         <section
           ref={heroRef}
-          className="relative min-h-0 md:min-h-screen flex items-start md:items-center justify-center overflow-hidden pt-20 sm:pt-24 md:pt-28 pb-8 md:pb-0 bg-transparent"
+          className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 sm:pt-36 md:pt-40 lg:pt-44 pb-12 md:pb-16 bg-transparent"
         >
           {/* (Removed) extra background glow behind hero mockup */}
           {/* BawoSocial Logo - Top Left */}
           <div
             ref={logoRef}
-            className="absolute top-20 sm:top-24 md:top-28 lg:top-32 xl:top-36 left-4 sm:left-6 md:left-8 lg:left-10 xl:left-12 2xl:left-16 z-20"
+            className="absolute top-10 sm:top-12 md:top-14 lg:top-16 xl:top-20 left-4 sm:left-6 md:left-8 lg:left-10 xl:left-12 2xl:left-16 z-20"
           >
             <div className="relative z-10">
               <Logo />
@@ -409,21 +409,21 @@ function App() {
 
 
           {/* Main Content Container */}
-          <div className="relative z-10 container mx-auto px-6 py-10 sm:py-14 md:py-20 lg:py-28 xl:py-32">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 xl:gap-24 items-start lg:items-center">
+          <div className="relative z-10 container mx-auto px-4 sm:px-6 py-8 sm:py-10 md:py-12 lg:py-16 xl:py-20 max-w-7xl">
+            <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 xl:gap-20 lg:items-center">
               {/* Left Content - Text */}
-              <div className="text-left space-y-10 order-2 lg:order-1 lg:pt-4">
+              <div className="text-left space-y-8 md:space-y-10 w-full min-h-0">
                 {/* Main Heading */}
-                <div className="space-y-7 md:space-y-8">
+                <div className="space-y-5 md:space-y-7">
                   <h1
                     ref={headlineRef}
-                    className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.2] font-display text-white"
+                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.15] font-display text-white break-words"
                   >
             {CONTENT.hero.title}
           </h1>
                   <p
                     ref={subheadlineRef}
-                    className="text-base md:text-lg opacity-90 font-medium text-white leading-[1.8]"
+                    className="text-sm sm:text-base md:text-lg opacity-90 font-medium text-white leading-[1.6] max-w-2xl break-words"
                   >
             {CONTENT.hero.subtitle}
           </p>
@@ -473,7 +473,7 @@ function App() {
               {previewImages.length > 0 && (
                 <div
                   ref={phoneRef}
-                  className="flex flex-col items-center lg:items-end lg:pr-6 xl:pr-12 order-1 lg:order-2 -mt-24 sm:-mt-20 lg:-mt-32 xl:-mt-40 gap-4 sm:gap-5 md:gap-6 w-full max-w-[19rem] sm:max-w-none mx-auto lg:mx-0"
+                  className="flex flex-col items-center lg:items-end lg:pr-6 xl:pr-12 mt-8 lg:mt-0 gap-4 sm:gap-5 md:gap-6 w-full max-w-[19rem] sm:max-w-none mx-auto lg:mx-0"
                 >
                   <div className="relative pb-4 md:pb-6 w-full flex flex-col items-center">
                     <div className="relative w-full max-w-[15.5rem] sm:max-w-none sm:w-auto mx-auto">
