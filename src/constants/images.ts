@@ -51,8 +51,18 @@ import si05 from "../assets/images/staten/si-05.png";
 
 // Inside the App Images - screenshots
 import appResourcesScreen from "../assets/images/app-resources-full.png";
-import appEventsScreen from "../assets/images/app-events-detail.png";
 import appConciergeScreen from "../assets/images/app-concierge.png";
+import appCommunityScreen from "../assets/images/app-community-screen.png";
+import appEventsScreen from "../assets/images/app-events-screen.png";
+import appCommunityAltScreen from "../assets/images/app-community-alt.png";
+
+const appPreviewGallery = [
+  appResourcesScreen,
+  appConciergeScreen,
+  appCommunityScreen,
+  appEventsScreen,
+  appCommunityAltScreen,
+] as const;
 
 export const IMAGES = {
   // Local Assets
@@ -66,11 +76,7 @@ export const IMAGES = {
   // App Preview/Demo Images
   previews: {
     main: appResourcesScreen,
-    gallery: [
-      appResourcesScreen,
-      appEventsScreen,
-      appConciergeScreen
-    ]
+    gallery: [...appPreviewGallery],
   },
 
   // Testimonial Avatar Images
@@ -82,11 +88,7 @@ export const IMAGES = {
 
   // In-App Feature Screenshots
   inApp: {
-    features: [
-      appResourcesScreen,
-      appEventsScreen,
-      appConciergeScreen
-    ]
+    features: [...appPreviewGallery],
   },
 
   // Event/Community Images

@@ -1219,7 +1219,7 @@ function App() {
           <h2 className="text-center text-4xl md:text-5xl font-bold font-museo-bold text-white mb-12">
             This Is What Belonging Looks Like
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-[90rem] mx-auto">
             {IMAGES.inApp.features.map((image, index) => (
               <div
                 key={index}
@@ -1233,9 +1233,16 @@ function App() {
                   />
                 </div>
                 <p className="text-white mt-1 font-museo-medium">
-                  {index === 0 && "Access Resources - Find Nigerian restaurants, churches, and verified services."}
-                  {index === 1 && "Discover Events - Naija Night Out, film screenings, and community meetups."}
-                  {index === 2 && "Meet Concierge - AI assistant for NIN renewals, shipping, and local intel."}
+                  {index === 0 &&
+                    "Access Resources — Nigerian restaurants, churches, mental health, and more."}
+                  {index === 1 &&
+                    "Meet Concierge — NIN renewals, passports, shipping, and local intel."}
+                  {index === 2 &&
+                    "Join Communities — Soft Life NYC, Outside & Owambe, Heart & Vibes, The Safe Space."}
+                  {index === 3 &&
+                    "Discover Events — rooftop nights, film screenings, and diaspora meetups."}
+                  {index === 4 &&
+                    "Community, your way — My Groups, Discover, and For You in one hub."}
                 </p>
               </div>
             ))}
