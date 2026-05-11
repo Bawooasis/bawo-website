@@ -1,7 +1,7 @@
 import { IMAGES } from "./images";
 
 const STRIPE_FOUNDING_DEFAULT =
-  "https://buy.stripe.com/fZu7sMgBBfgmeK2caf3Nm00";
+  "https://buy.stripe.com/eVq3cwaddb06bxQ1vB3Nm02";
 
 export const CONTENT = {
   revenue: {

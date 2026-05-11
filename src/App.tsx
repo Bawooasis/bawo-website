@@ -394,7 +394,7 @@ function App() {
         {/* Hero Section */}
         <section
           ref={heroRef}
-          className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 sm:pt-36 md:pt-40 lg:pt-44 pb-12 md:pb-16 bg-transparent"
+          className="relative flex justify-center items-start overflow-x-hidden overflow-y-visible pt-[max(5rem,calc(env(safe-area-inset-top,0px)+3.75rem))] sm:pt-[max(5.5rem,calc(env(safe-area-inset-top,0px)+4rem))] md:pt-[max(7rem,calc(env(safe-area-inset-top,0px)+5.25rem))] lg:pt-[max(7rem,calc(env(safe-area-inset-top,0px)+5.25rem))] xl:pt-[max(8rem,calc(env(safe-area-inset-top,0px)+6rem))] pb-10 sm:pb-12 md:pb-14 min-h-0 lg:min-h-[100dvh] bg-transparent"
         >
           {/* (Removed) extra background glow behind hero mockup */}
           {/* BawoSocial Logo - Top Left */}
@@ -409,10 +409,10 @@ function App() {
 
 
           {/* Main Content Container */}
-          <div className="relative z-10 container mx-auto px-4 sm:px-6 py-8 sm:py-10 md:py-12 lg:py-16 xl:py-20 max-w-7xl">
-            <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 xl:gap-20 lg:items-center">
+          <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-2 sm:pt-3 pb-2 max-w-7xl w-full">
+            <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 xl:gap-12 lg:items-start lg:pt-0">
               {/* Left Content - Text */}
-              <div className="text-left space-y-8 md:space-y-10 w-full min-h-0">
+              <div className="text-left space-y-6 md:space-y-8 w-full min-h-0 pt-20 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-40">
                 {/* Main Heading */}
                 <div className="space-y-5 md:space-y-7">
                   <h1
@@ -448,21 +448,24 @@ function App() {
                     />
                   </div>
 
-                  <div className="mt-8 md:mt-11 flex flex-col gap-3 w-full max-w-2xl">
+                  <div className="mt-5 md:mt-7 flex flex-col gap-3 w-full max-w-2xl">
                     <p className="text-white/80 text-sm md:text-base font-medium leading-relaxed">
                       {CONTENT.hero.ctaMicrocopy}
                     </p>
 
-                    <div className="bawo-trust-row flex flex-wrap items-center gap-2.5 text-[10px] md:text-xs font-museo-medium text-yellow-300">
+                    <div
+                      className="bawo-trust-row flex flex-wrap items-center gap-2.5 text-[10px] md:text-xs font-museo-medium text-[#E8CA6A]"
+                      style={{ textShadow: "0 0 12px rgba(212, 175, 55, 0.22)" }}
+                    >
                       <span className="flex items-center gap-1.5">
                         <svg className="w-3 h-3 md:w-3.5 md:h-3.5 text-[#635bff]" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z"/>
                         </svg>
                         {CONTENT.hero.trustIndicators.stripe}
                       </span>
-                      <span className="text-white/30">|</span>
+                      <span className="text-[#D4AF37]/45">|</span>
                       <span>{CONTENT.hero.trustIndicators.oneTime}</span>
-                      <span className="text-white/30">|</span>
+                      <span className="text-[#D4AF37]/45">|</span>
                       <span>{CONTENT.hero.trustIndicators.cancel}</span>
                     </div>
                   </div>
@@ -473,10 +476,10 @@ function App() {
               {previewImages.length > 0 && (
                 <div
                   ref={phoneRef}
-                  className="flex flex-col items-center lg:items-end lg:pr-6 xl:pr-12 mt-8 lg:mt-0 gap-4 sm:gap-5 md:gap-6 w-full max-w-[19rem] sm:max-w-none mx-auto lg:mx-0"
+                  className="flex flex-col items-center lg:items-end self-center lg:self-start lg:justify-self-end w-full max-w-[19rem] sm:max-w-[min(100%,22rem)] md:max-w-[24rem] lg:max-w-none lg:w-min lg:shrink-0 -mt-1 sm:mt-0 lg:-mt-8 xl:-mt-12 2xl:-mt-16 lg:ml-auto lg:translate-x-1 xl:translate-x-4 2xl:translate-x-8 lg:pr-0 gap-3 sm:gap-4"
                 >
-                  <div className="relative pb-4 md:pb-6 w-full flex flex-col items-center">
-                    <div className="relative w-full max-w-[15.5rem] sm:max-w-none sm:w-auto mx-auto">
+                  <div className="relative pb-9 sm:pb-10 w-full lg:w-fit flex flex-col items-center">
+                    <div className="relative w-full max-w-[15.5rem] sm:max-w-none sm:w-auto mx-auto lg:mx-0">
                       <img
                         ref={previewImgRef}
                         src={previewImages[activePreviewIndex]}
@@ -484,12 +487,12 @@ function App() {
                         loading="eager"
                         decoding="async"
                         fetchPriority="high"
-                        className="w-full sm:w-64 md:w-80 lg:w-96 h-auto object-contain transform-gpu shadow-[0_20px_48px_rgba(0,0,0,0.35)] motion-safe:animate-subtle-float"
+                        className="w-full sm:w-64 md:w-72 lg:w-80 xl:w-[22rem] h-auto max-h-[58vh] lg:max-h-[min(68vh,40rem)] object-contain transform-gpu shadow-[0_20px_48px_rgba(0,0,0,0.35)] motion-safe:animate-subtle-float"
                         style={{ opacity: 1 }}
                       />
                     </div>
                     {/* Dots */}
-                    <div className="flex items-center justify-center gap-2 absolute -bottom-1 sm:-bottom-2 left-1/2 -translate-x-1/2">
+                    <div className="flex items-center justify-center gap-2 absolute bottom-1 inset-x-0">
                       {previewImages.map((_, idx) => (
                         <span
                           key={idx}
@@ -507,7 +510,7 @@ function App() {
                     href={CONTENT.hero.testflightLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="pill-warm-auth bawo-cta-glass-secondary w-full max-w-[15.5rem] sm:w-64 sm:max-w-none md:w-80 lg:w-96 shrink-0 min-h-[3.5rem] py-3 sm:py-2"
+                    className="pill-warm-auth bawo-cta-glass-secondary w-full max-w-[15.5rem] sm:w-64 md:max-w-[18rem] lg:w-80 xl:w-[22rem] shrink-0 min-h-[3.5rem] py-3 sm:py-2 lg:self-end"
                   >
                     <span className="pill-warm-auth__icon" aria-hidden>
                       <Download className="h-5 w-5" strokeWidth={2.25} />
@@ -524,7 +527,7 @@ function App() {
             </div>
 
             {/* Social Media Icons - Bottom of Hero */}
-            <div className="flex justify-center gap-6 mt-16 pt-10 border-t border-white/10">
+            <div className="flex flex-wrap justify-center gap-5 sm:gap-6 mt-8 sm:mt-10 pt-6 sm:pt-8 border-t border-white/10">
               <a
                 href="https://www.instagram.com/bawo.social/"
                 target="_blank"
@@ -1359,16 +1362,19 @@ function App() {
                 </div>
               </div>
 
-              <div className="bawo-trust-row flex flex-wrap items-center justify-center gap-2.5 text-[10px] md:text-xs font-museo-medium text-yellow-300">
+              <div
+                className="bawo-trust-row flex flex-wrap items-center justify-center gap-2.5 text-[10px] md:text-xs font-museo-medium text-[#E8CA6A]"
+                style={{ textShadow: "0 0 12px rgba(212, 175, 55, 0.22)" }}
+              >
                 <span className="flex items-center gap-1.5">
                   <svg className="w-3 h-3 md:w-3.5 md:h-3.5 text-[#635bff]" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z"/>
                   </svg>
                   {CONTENT.hero.trustIndicators.stripe}
                 </span>
-                <span className="text-white/30">|</span>
+                <span className="text-[#D4AF37]/45">|</span>
                 <span>{CONTENT.hero.trustIndicators.oneTime}</span>
-                <span className="text-white/30">|</span>
+                <span className="text-[#D4AF37]/45">|</span>
                 <span>{CONTENT.hero.trustIndicators.cancel}</span>
               </div>
             </div>
