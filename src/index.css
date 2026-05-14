@@ -27,14 +27,14 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Shared founding / TestFlight pill chrome — one gradient direction, softer depth than heavy glow. */
+/* PathWay / Resources active pill ramp (matches `palette.pathwayPillGradient` + `pillActiveGradient` in theme). */
 :root {
   --bawo-pill-gradient: linear-gradient(
-    105deg,
-    #5a260c 0%,
-    #8b3310 22%,
-    #c24a12 58%,
-    var(--bawo-brand-cta-orange, #ff6b00) 100%
+    135deg,
+    rgba(255, 107, 0, 0.52) 0%,
+    rgba(255, 107, 0, 0.82) 38%,
+    rgba(255, 132, 58, 0.55) 62%,
+    rgba(14, 8, 12, 0.85) 100%
   );
   --bawo-pill-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.22),
@@ -77,34 +77,34 @@ button.bawo-pill-cta-surface:disabled:hover {
 }
 
 /**
- * Premium primary CTA — layered glass with gold glow and shimmer
+ * Ember + obsidian glass — brand orange rim, purple depth, no heavy gold chrome.
+ * Shared by pill `appearance="premium"` (`.bawo-cta-premium`) and checkout (`.bawo-cta-glass-primary`).
  */
-.bawo-cta-premium {
+.bawo-cta-premium,
+.bawo-cta-glass-primary {
   position: relative;
   isolation: isolate;
-  background: 
-    linear-gradient(135deg, 
-      rgba(212, 175, 55, 0.25) 0%, 
-      rgba(196, 123, 68, 0.15) 50%, 
-      rgba(90, 38, 12, 0.3) 100%
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 107, 0, 0.16) 0%,
+      rgba(42, 20, 56, 0.42) 42%,
+      rgba(10, 5, 16, 0.88) 100%
     ),
     linear-gradient(
-      152deg,
-      rgba(255, 255, 255, 0.18) 0%,
-      rgba(255, 255, 255, 0.06) 38%,
-      rgba(12, 8, 20, 0.7) 100%
+      165deg,
+      rgba(255, 255, 255, 0.09) 0%,
+      rgba(255, 255, 255, 0.03) 38%,
+      rgba(6, 3, 12, 0.78) 100%
     );
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  border: 1.5px solid rgba(212, 175, 55, 0.6);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 140, 95, 0.38);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.3),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
-    0 2px 8px rgba(0, 0, 0, 0.5),
-    0 8px 24px rgba(0, 0, 0, 0.4),
-    0 16px 48px rgba(0, 0, 0, 0.35),
-    0 0 0 1px rgba(212, 175, 55, 0.1),
-    0 0 60px rgba(212, 175, 55, 0.15);
+    inset 0 1px 0 rgba(255, 255, 255, 0.11),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.32),
+    0 4px 16px rgba(0, 0, 0, 0.48),
+    0 0 0 1px rgba(255, 107, 0, 0.06);
   transition:
     transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.25s ease,
@@ -112,7 +112,8 @@ button.bawo-pill-cta-surface:disabled:hover {
     filter 0.22s ease;
 }
 
-.bawo-cta-premium::after {
+.bawo-cta-premium::after,
+.bawo-cta-glass-primary::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -120,25 +121,99 @@ button.bawo-pill-cta-surface:disabled:hover {
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.25) 0%,
-    rgba(255, 255, 255, 0.05) 25%,
-    transparent 50%
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.04) 22%,
+    transparent 48%
   );
-  opacity: 0.9;
+  opacity: 0.55;
 }
 
-.bawo-cta-premium:hover:not(:disabled) {
-  border-color: rgba(212, 175, 55, 0.85);
-  filter: brightness(1.08);
+.bawo-cta-premium:hover:not(:disabled),
+.bawo-cta-glass-primary:hover:not(:disabled) {
+  border-color: rgba(255, 160, 110, 0.52);
+  filter: brightness(1.05);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.4),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.25),
-    0 4px 12px rgba(0, 0, 0, 0.4),
-    0 12px 32px rgba(0, 0, 0, 0.45),
-    0 20px 56px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(212, 175, 55, 0.2),
-    0 0 80px rgba(212, 175, 55, 0.3),
-    0 0 120px rgba(212, 175, 55, 0.15);
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.32),
+    0 6px 22px rgba(0, 0, 0, 0.5),
+    0 0 28px rgba(255, 107, 0, 0.12);
+}
+
+/**
+ * Quiet primary CTA — default: liquid glass (live-toast style). Orange PathWay ramp only while pressed (:active).
+ */
+.bawo-cta-quiet {
+  position: relative;
+  isolation: isolate;
+  color: #fff;
+  /* Glass shell — aligned with hero signup toast (`bg-white/[0.1]` + hairline ring) */
+  background-color: rgba(255, 255, 255, 0.1);
+  background-image: linear-gradient(
+    168deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.05) 38%,
+    rgba(18, 10, 28, 0.42) 100%
+  );
+  background-size: 100% 100%;
+  background-position: 50% 50%;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 4px 28px rgba(0, 0, 0, 0.42);
+  transition:
+    background-color 0.2s ease,
+    background-image 0.2s ease,
+    background-size 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.12s ease,
+    filter 0.2s ease,
+    -webkit-backdrop-filter 0.2s ease,
+    backdrop-filter 0.2s ease;
+}
+
+@media (hover: hover) {
+  .bawo-cta-quiet:hover:not(:disabled):not(:active),
+  a.bawo-cta-quiet:hover:not(:active) {
+    border-color: rgba(255, 255, 255, 0.22);
+    background-color: rgba(255, 255, 255, 0.12);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.24),
+      0 6px 32px rgba(0, 0, 0, 0.48);
+  }
+}
+
+/* Tap / press — Resources / PathWay orange gradient (screenshot reference) */
+.bawo-cta-quiet:active:not(:disabled),
+a.bawo-cta-quiet:active {
+  background-color: var(--bawo-brand-cta-orange, #ff6b00);
+  background-image: var(--bawo-pill-active-bg, var(--bawo-pill-gradient));
+  background-size: 120% 100%;
+  background-position: 0% 50%;
+  border: var(--bawo-pill-active-border, 1px solid rgba(255, 255, 255, 0.18));
+  box-shadow: var(
+    --bawo-pill-shadow,
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 1px 2px rgba(0, 0, 0, 0.35),
+    0 10px 28px rgba(0, 0, 0, 0.38)
+  );
+  -webkit-backdrop-filter: blur(0);
+  backdrop-filter: blur(0);
+  transform: scale(0.985);
+  filter: brightness(1.03) saturate(1.04);
+}
+
+.bawo-cta-quiet:focus-visible {
+  outline: 2px solid rgba(255, 160, 110, 0.55);
+  outline-offset: 2px;
+}
+
+.bawo-cta-quiet:disabled {
+  opacity: 0.48;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 /**
@@ -194,71 +269,6 @@ button.bawo-pill-cta-surface:disabled:hover {
     0 6px 16px rgba(0, 0, 0, 0.3),
     0 12px 32px rgba(0, 0, 0, 0.3),
     0 0 40px rgba(255, 255, 255, 0.05);
-}
-
-/**
- * Legacy glass-primary for checkout card and other uses
- */
-.bawo-cta-glass-primary {
-  position: relative;
-  isolation: isolate;
-  background: 
-    linear-gradient(135deg, 
-      rgba(212, 175, 55, 0.25) 0%, 
-      rgba(196, 123, 68, 0.15) 50%, 
-      rgba(90, 38, 12, 0.3) 100%
-    ),
-    linear-gradient(
-      152deg,
-      rgba(255, 255, 255, 0.18) 0%,
-      rgba(255, 255, 255, 0.06) 38%,
-      rgba(12, 8, 20, 0.7) 100%
-    );
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  border: 1.5px solid rgba(212, 175, 55, 0.6);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.3),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
-    0 2px 8px rgba(0, 0, 0, 0.5),
-    0 8px 24px rgba(0, 0, 0, 0.4),
-    0 16px 48px rgba(0, 0, 0, 0.35),
-    0 0 0 1px rgba(212, 175, 55, 0.1),
-    0 0 60px rgba(212, 175, 55, 0.15);
-  transition:
-    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.25s ease,
-    border-color 0.25s ease,
-    filter 0.22s ease;
-}
-
-.bawo-cta-glass-primary::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.25) 0%,
-    rgba(255, 255, 255, 0.05) 25%,
-    transparent 50%
-  );
-  opacity: 0.9;
-}
-
-.bawo-cta-glass-primary:hover:not(:disabled) {
-  border-color: rgba(212, 175, 55, 0.85);
-  filter: brightness(1.08);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.4),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.25),
-    0 4px 12px rgba(0, 0, 0, 0.4),
-    0 12px 32px rgba(0, 0, 0, 0.45),
-    0 20px 56px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(212, 175, 55, 0.2),
-    0 0 80px rgba(212, 175, 55, 0.3),
-    0 0 120px rgba(212, 175, 55, 0.15);
 }
 
 .bawo-cta-glass-secondary {
@@ -322,9 +332,13 @@ button.bawo-pill-cta-surface:disabled:hover {
     0 0 32px rgba(243, 112, 33, 0.08);
 }
 
-.bawo-cta-glass-primary:focus-visible,
+.bawo-cta-glass-primary:focus-visible {
+  outline: 2px solid rgba(255, 150, 105, 0.55);
+  outline-offset: 3px;
+}
+
 .bawo-cta-glass-secondary:focus-visible {
-  outline: 2px solid rgba(212, 175, 55, 0.75);
+  outline: 2px solid rgba(255, 150, 105, 0.45);
   outline-offset: 3px;
 }
 

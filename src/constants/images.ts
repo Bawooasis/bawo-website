@@ -55,8 +55,13 @@ import appConciergeScreen from "../assets/images/app-concierge.png";
 import appCommunityScreen from "../assets/images/app-community-screen.png";
 import appEventsScreen from "../assets/images/app-events-screen.png";
 import appCommunityAltScreen from "../assets/images/app-community-alt.png";
+import heroTripleMockup from "../assets/images/hero-app-triple-mockup.png";
 
-const appPreviewGallery = [
+/** Hero: single wide composite (Resources, Concierge, Events). Add more slides here when ready. */
+const heroPreviewGallery = [heroTripleMockup] as const;
+
+/** Lower “In-App Preview” grid — individual screens. */
+const appFeatureScreens = [
   appResourcesScreen,
   appConciergeScreen,
   appCommunityScreen,
@@ -75,8 +80,8 @@ export const IMAGES = {
 
   // App Preview/Demo Images
   previews: {
-    main: appResourcesScreen,
-    gallery: [...appPreviewGallery],
+    main: heroTripleMockup,
+    gallery: [...heroPreviewGallery],
   },
 
   // Testimonial Avatar Images
@@ -88,7 +93,7 @@ export const IMAGES = {
 
   // In-App Feature Screenshots
   inApp: {
-    features: [...appPreviewGallery],
+    features: [...appFeatureScreens],
   },
 
   // Event/Community Images

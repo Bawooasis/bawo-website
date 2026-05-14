@@ -24,7 +24,7 @@ export default function PartnerWithUsSection() {
             <div className="space-y-5 max-w-xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-museo-bold uppercase tracking-wider text-white/65">
                 <Building2 className="w-3.5 h-3.5 text-[#D4AF37]" aria-hidden />
-                B2B · NYC
+                B2B, NYC
               </div>
               <h2
                 id="partner-with-us-heading"

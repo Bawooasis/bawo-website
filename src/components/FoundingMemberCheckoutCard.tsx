@@ -82,7 +82,7 @@ export default function FoundingMemberCheckoutCard() {
                   Included: The Black Book
                 </p>
                 <p className="mt-1 text-sm text-white/75 font-museo-medium leading-snug">
-                  Vetted contacts, pros, and cultural resources — unlocked with your pass.
+                  Vetted contacts, pros, and cultural resources, unlocked with your pass.
                 </p>
               </div>
             </div>
@@ -96,7 +96,7 @@ export default function FoundingMemberCheckoutCard() {
               {CONTENT.hero.trustIndicators.stripe}
             </span>
             <span className="text-white/25" aria-hidden>
-              ·
+              |
             </span>
             <span className="inline-flex items-center gap-1.5">
               <Crown className="w-3.5 h-3.5 text-[#D4AF37]/80" aria-hidden />

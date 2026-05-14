@@ -31,7 +31,7 @@ export default function RecentActivitySnippet({ className = "" }: RecentActivity
             <p className="min-w-0 font-museo-medium text-white/85">
               <span className="font-museo-bold text-[var(--bawo-brand-cta-orange)]">{row.name}</span>{" "}
               from <span className="text-[var(--bawo-brand-cta-orange)]">{row.place}</span>
-              <span className="text-white/45"> · founding</span>
+              <span className="text-white/45">, founding</span>
             </p>
           </li>
         ))}

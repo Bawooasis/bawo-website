@@ -63,6 +63,8 @@ export function injectDesignTokens() {
 
   r.setProperty("--bawo-pill-active-bg", pillBg);
   r.setProperty("--bawo-pill-active-border", pill.border);
+  /* Resources / PathWay active pill ramp — keep headline text gradient + CTAs in sync */
+  r.setProperty("--bawo-pill-gradient", pillBg);
   r.setProperty("--bawo-brand-cta-orange", palette.brandCtaOrange);
 
   r.setProperty("--bawo-space-xs", `${spacing.xs}px`);

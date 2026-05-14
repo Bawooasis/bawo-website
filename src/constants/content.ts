@@ -11,7 +11,7 @@ export const CONTENT = {
   },
 
   foundingMemberCheckout: {
-    kicker: "Day-1 revenue · BawoSocial",
+    kicker: "Day-1 revenue, BawoSocial",
     title: "Founding Member Lifetime Pass",
     description:
       "Lock in early. One payment, permanent status in our NYC Naija private network.",
@@ -35,15 +35,18 @@ export const CONTENT = {
 
   // Hero Section
   hero: {
-    title: "Culture. Connection. Community.",
+    title: "Culture, connection, community",
     subtitle:
       "The algorithmic platforms failed us. We are building the premier private ecosystem for the NYC Naija Diaspora. No noise, just vetted plugs, digitized Ajo, and real connection.",
-    ctaPrimary: "Secure My Spot — $25",
-    ctaMicrocopy:
-      "Founding Lifetime Pass · TestFlight beta included · Limited spots.",
+    ctaPrimary: "Secure My Spot, $25",
+    ctaMicrocopy: "Founding lifetime pass, limited spots.",
     ctaSecondary: "Join Waitlist",
     testflightLink: "https://testflight.apple.com/join/xAp29Euh",
     ctaTestFlight: "Download via TestFlight",
+    downloadIos: "Download for iOS",
+    downloadIosSub: "TestFlight",
+    downloadAndroid: "Android",
+    downloadAndroidSoon: "Coming soon",
     trustIndicators: {
       stripe: "Secured by Stripe",
       oneTime: "One-time payment",
@@ -84,7 +87,7 @@ export const CONTENT = {
   // Origin Story Section
   origin: {
     title: "Why BawoSocial Exists",
-    mainText: "Most Nigerians in the diaspora feel isolated and disconnected from opportunity. We miss our culture, our people, and our network. BawoSocial was created to fix that. We are a utility-first platform to find your tribe, access The Black Book of resources, and build meaningful wealth and relationships—powered by smart technology that understands who we are.",
+    mainText: "Most Nigerians in the diaspora feel isolated and disconnected from opportunity. We miss our culture, our people, and our network. BawoSocial was created to fix that. We are a utility-first platform to find your tribe, access The Black Book of resources, and build meaningful wealth and relationships, powered by smart technology that understands who we are.",
     visionText: "",
   },
 
@@ -114,7 +117,7 @@ export const CONTENT = {
         description: "First access to smart introductions.",
       },
     ],
-    cta: "Become a Founding Member — $25",
+    cta: "Become a Founding Member, $25",
     spotsRemaining: "",
     securityBadges: {},
     missionText:
@@ -135,7 +138,7 @@ export const CONTENT = {
       },
       {
         title: "Smart Introductions",
-        description: "We replaced the swipe. Our system introduces you to people with shared intent—whether for business, friendship, or love.",
+        description: "We replaced the swipe. Our system introduces you to people with shared intent, whether for business, friendship, or love.",
       },
     ],
   },
@@ -148,7 +151,7 @@ export const CONTENT = {
       {
         name: "T.",
         role: "New York",
-        quote: "I didn't realize how much I needed a network until BawoSocial helped me find my people—and my new apartment.",
+        quote: "I didn't realize how much I needed a network until BawoSocial helped me find my people and my new apartment.",
         avatar: IMAGES.testimonials.adaora,
       },
       {
@@ -184,7 +187,7 @@ export const CONTENT = {
   finalCta: {
     title: "Join the First 500. Shape the Platform.",
     subtitle: "Founding Membership is limited. Once Batch 1 closes, the price increases.",
-    cta: "Become a Founding Member — $25",
+    cta: "Become a Founding Member, $25",
     ctaSecondary: "Join Waitlist",
   },
 

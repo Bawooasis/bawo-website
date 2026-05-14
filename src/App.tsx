@@ -6,12 +6,10 @@ import {
   Calendar,
   Clock,
   Crown,
-  Download,
   Flame,
   Gem,
   Headphones,
   Home,
-  Lock,
   Sparkles,
   Star,
 } from "lucide-react";
@@ -19,6 +17,7 @@ import { useEffect, useRef, useState } from "react";
 import BoroughNetworkGraphic from "./components/BoroughNetworkGraphic";
 import BoroughSquareCarousel from "./components/BoroughSquareCarousel";
 import BawoPillButton from "./components/BawoPillButton";
+import MobileAppDownloadRow from "./components/MobileAppDownloadRow";
 import FoundingMemberCheckoutCard from "./components/FoundingMemberCheckoutCard";
 import MailchimpSignupRow from "./components/MailchimpSignupRow";
 import Logo from "./components/Logo";
@@ -349,17 +348,17 @@ function App() {
         >
           <span className="flex items-center gap-1.5 font-museo-medium whitespace-nowrap">
             <Gem className="h-3 w-3 shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-3.5 md:w-3.5" strokeWidth={2} aria-hidden />
-            <span>Lifetime Access — One Payment</span>
+            <span>Lifetime access, one payment</span>
           </span>
           <span className="text-white/30 hidden sm:inline" aria-hidden>
-            ·
+            |
           </span>
           <span className="hidden sm:flex items-center gap-1.5 font-museo-bold whitespace-nowrap">
             <Crown className="h-3 w-3 shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-3.5 md:w-3.5" strokeWidth={2} aria-hidden />
             <span>Founding Member Badge</span>
           </span>
           <span className="text-white/30 hidden md:inline" aria-hidden>
-            ·
+            |
           </span>
           <span className="hidden md:flex items-center gap-1.5 font-museo-medium whitespace-nowrap">
             <Clock className="h-3 w-3 shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-3.5 md:w-3.5" strokeWidth={2} aria-hidden />
@@ -369,7 +368,7 @@ function App() {
             </span>
           </span>
           <span className="text-white/30 hidden lg:inline" aria-hidden>
-            ·
+            |
           </span>
           <span className="hidden lg:flex items-center gap-1.5 font-museo-bold whitespace-nowrap">
             <Flame className="h-3 w-3 shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-3.5 md:w-3.5" strokeWidth={2} aria-hidden />
@@ -400,7 +399,7 @@ function App() {
           {/* BawoSocial Logo - Top Left */}
           <div
             ref={logoRef}
-            className="absolute top-10 sm:top-12 md:top-14 lg:top-16 xl:top-20 left-4 sm:left-6 md:left-8 lg:left-10 xl:left-12 2xl:left-16 z-20"
+            className="absolute top-[max(0.35rem,calc(env(safe-area-inset-top,0px)+2.85rem))] sm:top-[max(0.5rem,calc(env(safe-area-inset-top,0px)+3rem))] md:top-[max(0.5rem,calc(env(safe-area-inset-top,0px)+3.15rem))] lg:top-[max(0.5rem,calc(env(safe-area-inset-top,0px)+3.15rem))] xl:top-[max(0.65rem,calc(env(safe-area-inset-top,0px)+3.35rem))] left-4 sm:left-6 md:left-8 lg:left-10 xl:left-12 2xl:left-16 z-20"
           >
             <div className="relative z-10">
               <Logo />
@@ -409,8 +408,8 @@ function App() {
 
 
           {/* Main Content Container */}
-          <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-2 sm:pt-3 pb-2 max-w-7xl w-full">
-            <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 xl:gap-12 lg:items-start lg:pt-0">
+          <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-2 sm:pt-3 pb-2 max-w-screen-2xl w-full">
+            <div className="flex flex-col lg:grid lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.55fr)] gap-6 md:gap-8 lg:gap-8 xl:gap-10 lg:items-start lg:pt-0">
               {/* Left Content - Text */}
               <div className="text-left space-y-6 md:space-y-8 w-full min-h-0 pt-20 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-40">
                 {/* Main Heading */}
@@ -434,17 +433,12 @@ function App() {
                   ref={ctaRef}
                   className="flex flex-col gap-4 justify-start items-start w-full"
                 >
-                  <div className="relative w-fit max-w-full">
+                  <div className="w-fit max-w-full">
                     <BawoPillButton
                       label={CONTENT.hero.ctaPrimary}
-                      icon={Lock}
                       variant="primary"
                       size="md"
                       onClick={handleFoundingMember}
-                    />
-                    <span
-                      className="pointer-events-none absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full bg-[#D4AF37] shadow-[0_0_14px_rgba(212,175,55,0.75)] ring-2 ring-[var(--bawo-canvas,#06030C)]"
-                      aria-hidden
                     />
                   </div>
 
@@ -476,52 +470,40 @@ function App() {
               {previewImages.length > 0 && (
                 <div
                   ref={phoneRef}
-                  className="flex flex-col items-center lg:items-end self-center lg:self-start lg:justify-self-end w-full max-w-[19rem] sm:max-w-[min(100%,22rem)] md:max-w-[24rem] lg:max-w-none lg:w-min lg:shrink-0 -mt-1 sm:mt-0 lg:-mt-8 xl:-mt-12 2xl:-mt-16 lg:ml-auto lg:translate-x-1 xl:translate-x-4 2xl:translate-x-8 lg:pr-0 gap-3 sm:gap-4"
+                  className="flex flex-col items-center lg:items-stretch self-center lg:self-start w-full max-w-none lg:w-full -mt-1 sm:mt-0 lg:-mt-4 xl:-mt-8 2xl:-mt-10 gap-2 sm:gap-3"
                 >
-                  <div className="relative pb-9 sm:pb-10 w-full lg:w-fit flex flex-col items-center">
-                    <div className="relative w-full max-w-[15.5rem] sm:max-w-none sm:w-auto mx-auto lg:mx-0">
+                  <div
+                    className={`relative w-full flex flex-col items-stretch lg:items-end ${previewImages.length > 1 ? "pb-9 sm:pb-10" : "pb-0"}`}
+                  >
+                    <div className="relative w-full max-w-none sm:max-w-[min(100%,42rem)] md:max-w-[min(100%,52rem)] lg:max-w-none lg:w-full">
                       <img
                         ref={previewImgRef}
                         src={previewImages[activePreviewIndex]}
-                        alt="BawoSocial App Preview"
+                        alt="BawoSocial app: Resources, Concierge, and Events"
                         loading="eager"
                         decoding="async"
                         fetchPriority="high"
-                        className="w-full sm:w-64 md:w-72 lg:w-80 xl:w-[22rem] h-auto max-h-[58vh] lg:max-h-[min(68vh,40rem)] object-contain transform-gpu shadow-[0_20px_48px_rgba(0,0,0,0.35)] motion-safe:animate-subtle-float"
+                        className="w-full h-auto max-h-[min(62vh,34rem)] sm:max-h-[min(68vh,40rem)] md:max-h-[min(72vh,46rem)] lg:max-h-[min(82vh,52rem)] xl:max-h-[min(84vh,58rem)] 2xl:max-h-[min(86vh,62rem)] object-contain object-center lg:object-right motion-safe:animate-subtle-float"
                         style={{ opacity: 1 }}
                       />
                     </div>
-                    {/* Dots */}
-                    <div className="flex items-center justify-center gap-2 absolute bottom-1 inset-x-0">
-                      {previewImages.map((_, idx) => (
-                        <span
-                          key={idx}
-                          className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                            idx === activePreviewIndex
-                              ? "bg-[#D4AF37] shadow-[0_0_10px_rgba(212,175,55,0.6)]"
-                              : "bg-white/30"
-                          }`}
-                        />
-                      ))}
-                    </div>
+                    {previewImages.length > 1 && (
+                      <div className="flex items-center justify-center gap-2 absolute bottom-1 inset-x-0">
+                        {previewImages.map((_, idx) => (
+                          <span
+                            key={idx}
+                            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                              idx === activePreviewIndex
+                                ? "bg-[#D4AF37] shadow-[0_0_10px_rgba(212,175,55,0.6)]"
+                                : "bg-white/30"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    )}
                   </div>
 
-                  <a
-                    href={CONTENT.hero.testflightLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="pill-warm-auth bawo-cta-glass-secondary w-full max-w-[15.5rem] sm:w-64 md:max-w-[18rem] lg:w-80 xl:w-[22rem] shrink-0 min-h-[3.5rem] py-3 sm:py-2 lg:self-end"
-                  >
-                    <span className="pill-warm-auth__icon" aria-hidden>
-                      <Download className="h-5 w-5" strokeWidth={2.25} />
-                    </span>
-                    <span className="pill-warm-auth__label">
-                      <span className="block">Or download via TestFlight</span>
-                      <span className="pill-warm-auth__label-sub block">
-                        (free beta)
-                      </span>
-                    </span>
-                  </a>
+                  <MobileAppDownloadRow className="self-center lg:self-end" />
                 </div>
               )}
             </div>
@@ -638,7 +620,7 @@ function App() {
                           <div className="relative w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-[22rem] xl:h-[22rem] mx-auto overflow-hidden rounded-3xl shadow-[0_28px_80px_rgba(0,0,0,0.72)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#D4AF37]/45 hover:shadow-[0_32px_90px_rgba(212,175,55,0.12)]">
                             <BoroughSquareCarousel
                               images={rotatingGallery}
-                              alt={`${city.name} — Nigerian diaspora community in NYC`}
+                              alt={`${city.name}, Nigerian diaspora community in NYC`}
                               rotationStaggerMs={index * 700}
                             />
                           </div>
@@ -678,7 +660,7 @@ function App() {
                           <div className="relative w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-[22rem] xl:h-[22rem] mx-auto overflow-hidden rounded-3xl shadow-[0_28px_80px_rgba(0,0,0,0.72)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#D4AF37]/45 hover:shadow-[0_32px_90px_rgba(212,175,55,0.12)]">
                             <BoroughSquareCarousel
                               images={rotatingGallery}
-                              alt={`${city.name} — Nigerian diaspora community in NYC`}
+                              alt={`${city.name}, Nigerian diaspora community in NYC`}
                               rotationStaggerMs={i * 700}
                             />
                           </div>
@@ -860,7 +842,7 @@ function App() {
                         $1,200
                       </p>
                       <p className="text-[11px] text-white/45 font-museo-regular mt-1">
-                        stacked over five years · no founder perks
+                        stacked over five years, no founder perks
                       </p>
                     </div>
                   </div>
@@ -981,7 +963,7 @@ function App() {
               <div className="text-4xl mb-3">💯</div>
               <h4 className="text-white font-museo-bold text-xl mb-2">Zero-Risk 30-Day Guarantee</h4>
               <p className="text-white/80 font-museo-medium text-base mb-4">
-                Try BawoSocial for 30 days. If you're not connecting, networking, and winning — we'll refund your $25. No questions asked.
+                Try BawoSocial for 30 days. If you're not connecting, networking, and winning, we'll refund your $25. No questions asked.
               </p>
               <p className="text-[#10b981] font-museo-bold text-sm">
                 {CONTENT.stats.urgency.guarantee}
@@ -1004,7 +986,7 @@ function App() {
                   <strong className="font-museo-bold text-white">disconnected from opportunity</strong>. We miss our culture, our people, and our network. BawoSocial was created to fix that.
                 </p>
                 <p className="text-white/95 font-museo-medium text-xl md:text-2xl leading-relaxed md:leading-[2] text-left">
-                  We are a <strong className="font-museo-bold text-white">utility-first platform</strong> to find your tribe, access The Black Book of resources, and build meaningful wealth and relationships—powered by smart technology that understands who we are.
+                  We are a <strong className="font-museo-bold text-white">utility-first platform</strong> to find your tribe, access The Black Book of resources, and build meaningful wealth and relationships, powered by smart technology that understands who we are.
                 </p>
               </div>
               {CONTENT.origin.visionText && (
@@ -1066,7 +1048,6 @@ function App() {
             <div className="hidden lg:flex h-full w-full items-center justify-end mt-10 lg:mt-0">
               <BawoPillButton
                 label={CONTENT.foundingMember.cta}
-                icon={Lock}
                 variant="primary"
                 size="lg"
                 onClick={handleFoundingMember}
@@ -1077,7 +1058,6 @@ function App() {
             <div className="flex lg:hidden justify-center mt-10 w-full px-2">
               <BawoPillButton
                 label={CONTENT.foundingMember.cta}
-                icon={Lock}
                 variant="primary"
                 size="md"
                 onClick={handleFoundingMember}
@@ -1237,15 +1217,15 @@ function App() {
                 </div>
                 <p className="text-white mt-1 font-museo-medium">
                   {index === 0 &&
-                    "Access Resources — Nigerian restaurants, churches, mental health, and more."}
+                    "Access Resources: Nigerian restaurants, churches, mental health, and more."}
                   {index === 1 &&
-                    "Meet Concierge — NIN renewals, passports, shipping, and local intel."}
+                    "Meet Concierge: NIN renewals, passports, shipping, and local intel."}
                   {index === 2 &&
-                    "Join Communities — Soft Life NYC, Outside & Owambe, Heart & Vibes, The Safe Space."}
+                    "Join Communities: Soft Life NYC, Outside & Owambe, Heart & Vibes, The Safe Space."}
                   {index === 3 &&
-                    "Discover Events — rooftop nights, film screenings, and diaspora meetups."}
+                    "Discover Events: rooftop nights, film screenings, and diaspora meetups."}
                   {index === 4 &&
-                    "Community, your way — My Groups, Discover, and For You in one hub."}
+                    "Community, your way: My Groups, Discover, and For You in one hub."}
                 </p>
               </div>
             ))}
@@ -1267,7 +1247,7 @@ function App() {
               <div className="flex items-center gap-3 mb-3">
                 <Calendar className="w-5 h-5 text-white" />
                 <span className="font-museo-bold">
-                  Diaspora Networking Night – Downtown Brooklyn
+                  Diaspora Networking Night, Downtown Brooklyn
                 </span>
               </div>
               <p className="text-white/80 font-museo-medium">
@@ -1290,7 +1270,7 @@ function App() {
               <div className="flex items-center gap-3 mb-3">
                 <Star className="w-5 h-5 text-white" />
                 <span className="font-museo-bold">
-                  Nigerian Independence Celebration – Manhattan, NYC
+                  Nigerian Independence Celebration, Manhattan, NYC
                 </span>
               </div>
               <p className="text-white/80 font-museo-medium">
@@ -1332,34 +1312,14 @@ function App() {
             </div>
 
             <div className="flex flex-col gap-5 justify-center items-center w-full max-w-2xl mx-auto">
-              <div className="flex flex-col sm:flex-row gap-4 w-full items-center justify-center sm:items-stretch">
-                <div className="flex w-full sm:w-auto justify-center shrink-0">
-                  <BawoPillButton
-                    label={CONTENT.foundingMemberCheckout.ctaLabel}
-                    icon={Lock}
-                    variant="primary"
-                    size="md"
-                    onClick={handleFoundingMember}
-                  />
-                </div>
-                <div className="w-full sm:flex-1 sm:min-w-0 flex">
-                  <a
-                    href={CONTENT.hero.testflightLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="pill-warm-auth bawo-cta-glass-secondary min-h-[3.5rem]"
-                  >
-                    <span className="pill-warm-auth__icon" aria-hidden>
-                      <Download className="h-5 w-5" strokeWidth={2.25} />
-                    </span>
-                    <span className="pill-warm-auth__label">
-                      <span className="block">Or download via TestFlight</span>
-                      <span className="pill-warm-auth__label-sub block">
-                        (free beta)
-                      </span>
-                    </span>
-                  </a>
-                </div>
+              <div className="flex w-full flex-col items-center gap-5 sm:flex-row sm:flex-wrap sm:justify-center">
+                <BawoPillButton
+                  label={CONTENT.foundingMemberCheckout.ctaLabel}
+                  variant="primary"
+                  size="md"
+                  onClick={handleFoundingMember}
+                />
+                <MobileAppDownloadRow className="items-stretch sm:max-w-[19.5rem]" />
               </div>
 
               <div
@@ -1382,7 +1342,7 @@ function App() {
             <div className="flex items-center gap-4 max-w-2xl mx-auto w-full">
               <span className="flex-1 h-px bg-white/20" aria-hidden />
               <span className="text-white/55 font-museo-medium text-xs sm:text-sm text-center uppercase tracking-wider px-2">
-                Or get launch updates · no payment
+                Or get launch updates, no payment
               </span>
               <span className="flex-1 h-px bg-white/20" aria-hidden />
             </div>
