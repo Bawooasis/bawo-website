@@ -373,14 +373,14 @@ function App() {
       </div>
       
       {/* Navigation Header */}
-      <nav className="fixed top-[calc(1.75rem+4px)] left-0 right-0 z-30 transition-all duration-300">
+      <nav className="fixed top-[2.5rem] left-0 right-0 z-30 transition-all duration-300">
         <div className="container mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
-          <div className="flex items-center justify-between h-20 md:h-24">
+          <div className="flex items-center justify-between h-24 md:h-32">
             <a href="#" className="shrink-0" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
               <img
                 src={IMAGES.assets.logo}
                 alt="BawoSocial"
-                className="h-16 sm:h-20 md:h-24 w-auto drop-shadow-[0_4px_12px_rgba(212,175,55,0.4)]"
+                className="h-20 sm:h-24 md:h-32 w-auto drop-shadow-[0_4px_12px_rgba(212,175,55,0.4)]"
               />
             </a>
 
@@ -403,11 +403,12 @@ function App() {
               ))}
               <a
                 href="#pricing"
-                className="ml-3 px-6 py-2.5 text-sm font-museo-bold font-bold text-white rounded-full transition-all duration-300 hover:-translate-y-0.5"
+                className="ml-3 px-6 py-2.5 text-sm font-museo-bold font-bold text-[#F5D565] rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:bg-[rgba(212,175,55,0.1)]"
                 style={{
-                  background: "linear-gradient(145deg, #D4AF37 0%, #B8860B 50%, #8B6914 100%)",
-                  boxShadow: "0 4px 16px rgba(212, 175, 55, 0.35), inset 0 1px 0 rgba(255, 223, 130, 0.5)",
-                  border: "1px solid rgba(212, 175, 55, 0.6)",
+                  background: "transparent",
+                  border: "2px solid #D4AF37",
+                  boxShadow: "0 0 14px rgba(212, 175, 55, 0.45), 0 0 40px rgba(212, 175, 55, 0.2), 0 0 80px rgba(212, 175, 55, 0.1)",
+                  textShadow: "0 0 10px rgba(212, 175, 55, 0.6), 0 0 30px rgba(212, 175, 55, 0.3)",
                 }}
               >
                 Join Now
@@ -446,11 +447,12 @@ function App() {
                 ))}
                 <a
                   href="#pricing"
-                  className="mt-2 mx-4 px-5 py-3 text-sm font-museo-bold font-bold text-white text-center rounded-full transition-all duration-300"
+                  className="mt-2 mx-4 px-5 py-3 text-sm font-museo-bold font-bold text-[#F5D565] text-center rounded-full transition-all duration-300"
                   style={{
-                    background: "linear-gradient(145deg, #D4AF37 0%, #B8860B 50%, #8B6914 100%)",
-                    boxShadow: "0 4px 16px rgba(212, 175, 55, 0.35), inset 0 1px 0 rgba(255, 223, 130, 0.5)",
-                    border: "1px solid rgba(212, 175, 55, 0.6)",
+                    background: "transparent",
+                    border: "2px solid #D4AF37",
+                    boxShadow: "0 0 14px rgba(212, 175, 55, 0.45), 0 0 40px rgba(212, 175, 55, 0.2), 0 0 80px rgba(212, 175, 55, 0.1)",
+                    textShadow: "0 0 10px rgba(212, 175, 55, 0.6), 0 0 30px rgba(212, 175, 55, 0.3)",
                   }}
                   onClick={() => setMobileMenuOpen(false)}
                 >
