@@ -10,8 +10,10 @@ import {
   Gem,
   Headphones,
   Home,
+  Menu,
   Sparkles,
   Star,
+  X,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import BoroughNetworkGraphic from "./components/BoroughNetworkGraphic";
@@ -20,7 +22,6 @@ import BawoPillButton from "./components/BawoPillButton";
 import MobileAppDownloadRow from "./components/MobileAppDownloadRow";
 import FoundingMemberCheckoutCard from "./components/FoundingMemberCheckoutCard";
 import MailchimpSignupRow from "./components/MailchimpSignupRow";
-import Logo from "./components/Logo";
 import PartnerWithUsSection from "./components/PartnerWithUsSection";
 import { CONTENT } from "./constants/content";
 import { TAILWIND_COLORS } from "./constants/colors";
@@ -47,6 +48,7 @@ function App() {
   const [showNotification, setShowNotification] = useState(false);
   const [notificationData, setNotificationData] = useState({ name: "", location: "" });
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const previewImages = IMAGES.previews.gallery;
   const previewImgRef = useRef<HTMLImageElement | null>(null);
@@ -109,13 +111,6 @@ function App() {
         force3D: true, // Force GPU acceleration
       } 
     });
-
-    // Logo animation
-    heroTimeline.fromTo(
-      logoRef.current,
-      { scale: 0.98, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 1.0, clearProps: "transform" }
-    );
 
     // Headline animation
     heroTimeline.fromTo(
@@ -377,17 +372,95 @@ function App() {
         </div>
       </div>
       
-      {/* Sticky Banner - Hidden on first page */}
-      {/* <div className="fixed top-0 w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 py-3 px-4 text-center font-bold z-50 shadow-lg font-museo-bold">
-        <div className="flex items-center justify-center gap-3">
-          <img
-            src={IMAGES.assets.logo}
-              alt="BawoSocial"
-            className="h-10 w-auto"
-          />
-          <span>🚨 ONLY 73 FOUNDING MEMBER SPOTS REMAINING - SECURE YOURS NOW! 🇳🇬</span>
-      </div>
-      </div> */}
+      {/* Navigation Header */}
+      <nav className="fixed top-[calc(1.75rem+4px)] left-0 right-0 z-30 transition-all duration-300">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
+          <div className="flex items-center justify-between h-20 md:h-24">
+            <a href="#" className="shrink-0" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              <img
+                src={IMAGES.assets.logo}
+                alt="BawoSocial"
+                className="h-16 sm:h-20 md:h-24 w-auto drop-shadow-[0_4px_12px_rgba(212,175,55,0.4)]"
+              />
+            </a>
+
+            {/* Desktop Nav Links */}
+            <div className="hidden md:flex items-center gap-1 lg:gap-2">
+              {[
+                { label: "Network", href: "#building-the-network" },
+                { label: "About", href: "#about" },
+                { label: "Features", href: "#features" },
+                { label: "Testimonials", href: "#testimonials" },
+                { label: "Events", href: "#events" },
+              ].map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="px-3 lg:px-4 py-2 text-sm font-museo-medium text-white/80 hover:text-white rounded-lg hover:bg-white/[0.08] transition-all duration-200"
+                >
+                  {link.label}
+                </a>
+              ))}
+              <a
+                href="#pricing"
+                className="ml-3 px-6 py-2.5 text-sm font-museo-bold font-bold text-white rounded-full transition-all duration-300 hover:-translate-y-0.5"
+                style={{
+                  background: "linear-gradient(145deg, #D4AF37 0%, #B8860B 50%, #8B6914 100%)",
+                  boxShadow: "0 4px 16px rgba(212, 175, 55, 0.35), inset 0 1px 0 rgba(255, 223, 130, 0.5)",
+                  border: "1px solid rgba(212, 175, 55, 0.6)",
+                }}
+              >
+                Join Now
+              </a>
+            </div>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              className="md:hidden p-2 text-white/80 hover:text-white transition-colors"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden mt-2 pb-4 bg-black/80 backdrop-blur-xl rounded-2xl border border-white/10 overflow-hidden">
+              <div className="flex flex-col px-4 py-3 gap-1">
+                {[
+                  { label: "Network", href: "#building-the-network" },
+                  { label: "About", href: "#about" },
+                  { label: "Features", href: "#features" },
+                  { label: "Testimonials", href: "#testimonials" },
+                  { label: "Events", href: "#events" },
+                ].map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="px-4 py-3 text-sm font-museo-medium text-white/80 hover:text-white rounded-lg hover:bg-white/[0.08] transition-all duration-200"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                <a
+                  href="#pricing"
+                  className="mt-2 mx-4 px-5 py-3 text-sm font-museo-bold font-bold text-white text-center rounded-full transition-all duration-300"
+                  style={{
+                    background: "linear-gradient(145deg, #D4AF37 0%, #B8860B 50%, #8B6914 100%)",
+                    boxShadow: "0 4px 16px rgba(212, 175, 55, 0.35), inset 0 1px 0 rgba(255, 223, 130, 0.5)",
+                    border: "1px solid rgba(212, 175, 55, 0.6)",
+                  }}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Join Now
+                </a>
+              </div>
+            </div>
+          )}
+        </div>
+      </nav>
 
       <div className="relative z-10 bg-transparent min-h-screen scroll-content-gpu">
         {/* Hero Section */}
@@ -395,43 +468,29 @@ function App() {
           ref={heroRef}
           className="relative flex justify-center items-start overflow-x-hidden overflow-y-visible pt-[max(5rem,calc(env(safe-area-inset-top,0px)+3.75rem))] sm:pt-[max(5.5rem,calc(env(safe-area-inset-top,0px)+4rem))] md:pt-[max(7rem,calc(env(safe-area-inset-top,0px)+5.25rem))] lg:pt-[max(7rem,calc(env(safe-area-inset-top,0px)+5.25rem))] xl:pt-[max(8rem,calc(env(safe-area-inset-top,0px)+6rem))] pb-10 sm:pb-12 md:pb-14 min-h-0 lg:min-h-[100dvh] bg-transparent"
         >
-          {/* (Removed) extra background glow behind hero mockup */}
-          {/* BawoSocial Logo - Top Left */}
-          <div
-            ref={logoRef}
-            className="absolute top-[max(0.35rem,calc(env(safe-area-inset-top,0px)+2.85rem))] sm:top-[max(0.5rem,calc(env(safe-area-inset-top,0px)+3rem))] md:top-[max(0.5rem,calc(env(safe-area-inset-top,0px)+3.15rem))] lg:top-[max(0.5rem,calc(env(safe-area-inset-top,0px)+3.15rem))] xl:top-[max(0.65rem,calc(env(safe-area-inset-top,0px)+3.35rem))] left-4 sm:left-6 md:left-8 lg:left-10 xl:left-12 2xl:left-16 z-20"
-          >
-            <div className="relative z-10">
-              <Logo />
-            </div>
-          </div>
-
-
           {/* Main Content Container */}
           <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-2 sm:pt-3 pb-2 max-w-screen-2xl w-full">
-            <div className="flex flex-col lg:grid lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.55fr)] gap-6 md:gap-8 lg:gap-8 xl:gap-10 lg:items-start lg:pt-0">
-              {/* Left Content - Text */}
-              <div className="text-left space-y-6 md:space-y-8 w-full min-h-0 pt-20 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-40">
-                {/* Main Heading */}
+            <div className="flex flex-col items-center gap-10 md:gap-14">
+              {/* Hero Text - Centered */}
+              <div className="text-center space-y-6 md:space-y-8 w-full max-w-4xl mx-auto pt-20 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-36">
                 <div className="space-y-5 md:space-y-7">
                   <h1
                     ref={headlineRef}
                     className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.15] font-display text-white break-words"
                   >
-            {CONTENT.hero.title}
-          </h1>
+                    {CONTENT.hero.title}
+                  </h1>
                   <p
                     ref={subheadlineRef}
-                    className="text-sm sm:text-base md:text-lg opacity-90 font-medium text-white leading-[1.6] max-w-2xl break-words"
+                    className="text-sm sm:text-base md:text-lg opacity-90 font-medium text-white leading-[1.6] max-w-2xl mx-auto break-words"
                   >
-            {CONTENT.hero.subtitle}
-          </p>
+                    {CONTENT.hero.subtitle}
+                  </p>
                 </div>
 
-                {/* Call to Action Buttons – founding pass */}
                 <div
                   ref={ctaRef}
-                  className="flex flex-col gap-4 justify-start items-start w-full"
+                  className="flex flex-col gap-4 justify-center items-center w-full"
                 >
                   <div className="w-fit max-w-full">
                     <BawoPillButton
@@ -442,13 +501,13 @@ function App() {
                     />
                   </div>
 
-                  <div className="mt-5 md:mt-7 flex flex-col gap-3 w-full max-w-2xl">
+                  <div className="mt-5 md:mt-7 flex flex-col gap-3 items-center w-full max-w-2xl">
                     <p className="text-white/80 text-sm md:text-base font-medium leading-relaxed">
                       {CONTENT.hero.ctaMicrocopy}
                     </p>
 
                     <div
-                      className="bawo-trust-row flex flex-wrap items-center gap-2.5 text-[10px] md:text-xs font-museo-medium text-[#E8CA6A]"
+                      className="bawo-trust-row flex flex-wrap items-center justify-center gap-2.5 text-[10px] md:text-xs font-museo-medium text-[#E8CA6A]"
                       style={{ textShadow: "0 0 12px rgba(212, 175, 55, 0.22)" }}
                     >
                       <span className="flex items-center gap-1.5">
@@ -465,17 +524,17 @@ function App() {
                   </div>
                 </div>
               </div>
-          
-              {/* Right Content - iPhone Mockup */}
+
+              {/* App Preview Mockup - Below centered text */}
               {previewImages.length > 0 && (
                 <div
                   ref={phoneRef}
-                  className="flex flex-col items-center lg:items-stretch self-center lg:self-start w-full max-w-none lg:w-full -mt-1 sm:mt-0 lg:-mt-4 xl:-mt-8 2xl:-mt-10 gap-2 sm:gap-3"
+                  className="flex flex-col items-center w-full max-w-5xl mx-auto gap-2 sm:gap-3"
                 >
                   <div
-                    className={`relative w-full flex flex-col items-stretch lg:items-end ${previewImages.length > 1 ? "pb-9 sm:pb-10" : "pb-0"}`}
+                    className={`relative w-full flex flex-col items-center ${previewImages.length > 1 ? "pb-9 sm:pb-10" : "pb-0"}`}
                   >
-                    <div className="relative w-full max-w-none sm:max-w-[min(100%,42rem)] md:max-w-[min(100%,52rem)] lg:max-w-none lg:w-full">
+                    <div className="relative w-full max-w-none sm:max-w-[min(100%,42rem)] md:max-w-[min(100%,52rem)]">
                       <img
                         ref={previewImgRef}
                         src={previewImages[activePreviewIndex]}
@@ -483,7 +542,7 @@ function App() {
                         loading="eager"
                         decoding="async"
                         fetchPriority="high"
-                        className="w-full h-auto max-h-[min(62vh,34rem)] sm:max-h-[min(68vh,40rem)] md:max-h-[min(72vh,46rem)] lg:max-h-[min(82vh,52rem)] xl:max-h-[min(84vh,58rem)] 2xl:max-h-[min(86vh,62rem)] object-contain object-center lg:object-right motion-safe:animate-subtle-float"
+                        className="w-full h-auto max-h-[min(62vh,34rem)] sm:max-h-[min(68vh,40rem)] md:max-h-[min(72vh,46rem)] lg:max-h-[min(82vh,52rem)] xl:max-h-[min(84vh,58rem)] 2xl:max-h-[min(86vh,62rem)] object-contain object-center motion-safe:animate-subtle-float"
                         style={{ opacity: 1 }}
                       />
                     </div>
@@ -503,7 +562,7 @@ function App() {
                     )}
                   </div>
 
-                  <MobileAppDownloadRow className="self-center lg:self-end" />
+                  <MobileAppDownloadRow className="self-center" />
                 </div>
               )}
             </div>
@@ -974,7 +1033,7 @@ function App() {
       </section>
 
         {/* Origin Story Section – structured block with clear hierarchy */}
-        <section className="relative min-h-screen flex items-center justify-center bg-transparent py-24">
+        <section id="about" className="relative min-h-screen flex items-center justify-center bg-transparent py-24">
           <div className="relative z-10 container mx-auto px-6 flex flex-col items-center">
             <div className="text-white space-y-14 w-full max-w-5xl mx-auto">
               <h2 className="text-6xl md:text-7xl lg:text-8xl font-extrabold font-museo-bold leading-tight text-center tracking-tight">
@@ -1001,6 +1060,7 @@ function App() {
       {/* Founding Member Section */}
       <section
         ref={foundingMemberRef}
+        id="pricing"
         className="relative min-h-screen bg-transparent py-24"
       >
         <div className="relative z-10 container mx-auto px-6 py-20 min-h-[calc(100vh-10rem)]">
@@ -1070,6 +1130,7 @@ function App() {
       {/* Features Section – 3-column cards with icons */}
       <section
         ref={featuresRef}
+        id="features"
         className="relative min-h-screen flex items-center justify-center bg-transparent py-24"
       >
         <div className="relative z-10 text-white px-6 md:px-10 max-w-7xl py-20 mx-auto w-full">
@@ -1105,6 +1166,7 @@ function App() {
       {/* Testimonials Section */}
       <section
         ref={testimonialsRef}
+        id="testimonials"
         className="relative py-24 bg-transparent"
       >
 
@@ -1235,6 +1297,7 @@ function App() {
 
       {/* Event Highlights Section */}
       <section
+        id="events"
         className="relative py-24 bg-transparent"
       >
 
