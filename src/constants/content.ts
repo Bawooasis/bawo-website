@@ -50,7 +50,7 @@ export const CONTENT = {
     trustIndicators: {
       stripe: "Secured by Stripe",
       oneTime: "One-time payment",
-      cancel: "Cancel anytime before public launch"
+      cancel: "30-day money-back guarantee"
     },
   },
 
@@ -79,7 +79,7 @@ export const CONTENT = {
     },
     urgency: {
       price: "After 500 members: $19.99/month ($240/year)",
-      deadline: "Batch 1 closes when full or May 15, 2026",
+      deadline: "Batch 1 closes when full or August 1, 2026",
       guarantee: "30-day money-back guarantee. No questions asked."
     }
   },
@@ -149,19 +149,19 @@ export const CONTENT = {
     subtitle: "Hear from Nigerians already building connections",
     reviews: [
       {
-        name: "T.",
+        name: "Tunde",
         role: "New York",
         quote: "I didn't realize how much I needed a network until BawoSocial helped me find my people and my new apartment.",
         avatar: IMAGES.testimonials.adaora,
       },
       {
-        name: "A.",
+        name: "Amara",
         role: "Queens, NY",
         quote: "My borough is full of Africans, but I never found the Nigerians until BawoSocial connected me.",
         avatar: IMAGES.testimonials.emeka,
       },
       {
-        name: "D.",
+        name: "Dami",
         role: "The Bronx, NY",
         quote: "It feels like a professional network and a family reunion in one app.",
         avatar: IMAGES.testimonials.fatima,

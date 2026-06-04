@@ -525,7 +525,7 @@ a.bawo-cta-quiet:active {
 }
 
 .bawo-promo-ribbon {
-  will-change: clip-path, transform, opacity, filter;
+  will-change: transform, opacity;
   animation: bawo-promo-ribbon 18s cubic-bezier(0.42, 0, 0.2, 1) infinite;
   -webkit-clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
   clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
@@ -820,7 +820,6 @@ a.bawo-cta-quiet:active {
   }
   .animate-lift:hover {
     transform: translateY(-2px) translateZ(0);
-    will-change: transform;
   }
 
   .cta-glow {
@@ -842,18 +841,6 @@ a.bawo-cta-quiet:active {
     }
   }
   
-  /* Smooth fade-in for scroll animations */
-  .animate-fade-in {
-    opacity: 0;
-    transform: translate3d(0, 20px, 0);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    will-change: transform, opacity;
-  }
-  
-  .animate-fade-in.visible {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
   
   /* Pulse animation for urgency indicators */
   .animate-pulse-gentle {
@@ -870,7 +857,6 @@ a.bawo-cta-quiet:active {
     opacity: 0;
     transform: translate3d(0, 20px, 0);
     transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: transform, opacity;
   }
   
   .stagger-animation > *:nth-child(1) { transition-delay: 0.1s; }
@@ -932,7 +918,6 @@ a.bawo-cta-quiet:active {
   /* Fade in from left animation for activity items */
   .animate-fade-in {
     animation: fadeInLeft 0.5s ease-out;
-    will-change: transform, opacity;
   }
   
   @keyframes fadeInLeft {
@@ -946,16 +931,30 @@ a.bawo-cta-quiet:active {
     }
   }
 
-  /* Scroll-driven animations promote their own layers as needed */
+  /* Gentle vertical float for hero mockup — transform only, no layout cost */
+  @keyframes subtle-float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-10px); }
+  }
+  .animate-subtle-float {
+    animation: subtle-float 5s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  /* Promote GSAP targets to their own compositor layer upfront */
   .feature-card,
   .testimonial-card,
   .city-stat {
-    transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
   }
 
-  /* Image performance optimizations */
+  /* Isolate section layout so scroll doesn't cause full-page reflow */
+  .section-contain {
+    contain: layout style;
+  }
+
+  /* Image GPU hint */
   img {
     -webkit-transform: translateZ(0);
     transform: translateZ(0);

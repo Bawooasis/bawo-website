@@ -49,14 +49,22 @@ function App() {
   const [notificationData, setNotificationData] = useState({ name: "", location: "" });
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [viewerCount] = useState(() => Math.floor(Math.random() * 18) + 14);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const previewImages = IMAGES.previews.gallery;
   const previewImgRef = useRef<HTMLImageElement | null>(null);
 
-  // Countdown timer to May 15, 2026
+  // Countdown timer to August 1, 2026
   useEffect(() => {
     const calculateTimeLeft = () => {
-      const targetDate = new Date('2026-05-15T23:59:59').getTime();
+      const targetDate = new Date('2026-08-01T23:59:59').getTime();
       const now = new Date().getTime();
       const difference = targetDate - now;
 
@@ -78,7 +86,6 @@ function App() {
 
   // Animation refs
   const heroRef = useRef(null);
-  const logoRef = useRef(null);
   const headlineRef = useRef(null);
   const subheadlineRef = useRef(null);
   const phoneRef = useRef(null);
@@ -92,180 +99,146 @@ function App() {
 
   // Animation setup
   useEffect(() => {
-    // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-
     if (prefersReducedMotion) return;
 
-    ScrollTrigger.config({
-      limitCallbacks: true,
-    });
+    ScrollTrigger.config({ limitCallbacks: true });
 
     const ctx = gsap.context(() => {
-    // Hero section entrance animation (smoother ease/durations)
-    const heroTimeline = gsap.timeline({ 
-      defaults: { 
-        ease: "power3.out",
-        force3D: true, // Force GPU acceleration
-      } 
-    });
+      // Hero entrance — staggered, transform-only where possible for 60fps
+      const heroTimeline = gsap.timeline({
+        defaults: { ease: "power2.out", force3D: true },
+      });
 
-    // Headline animation
-    heroTimeline.fromTo(
-      headlineRef.current,
-      { y: 24, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.2, clearProps: "transform" },
-      "-=0.6"
-    );
+      heroTimeline
+        .fromTo(
+          headlineRef.current,
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.9, clearProps: "transform" }
+        )
+        .fromTo(
+          subheadlineRef.current,
+          { y: 12, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.75, clearProps: "transform" },
+          "-=0.55"
+        )
+        .fromTo(
+          phoneRef.current,
+          { y: 18, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.9, clearProps: "transform" },
+          "-=0.45"
+        )
+        .fromTo(
+          ctaRef.current,
+          { y: 12, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7, clearProps: "transform" },
+          "-=0.35"
+        );
 
-    // Subheadline animation
-    heroTimeline.fromTo(
-      subheadlineRef.current,
-      { opacity: 0, y: 8 },
-      { opacity: 1, y: 0, duration: 1.0, clearProps: "transform" },
-      "-=0.6"
-    );
+      // Scroll-triggered batch — opacity + translateY only (GPU composited)
+      gsap.set(".animate-on-scroll", { opacity: 0, y: 20 });
+      ScrollTrigger.batch(".animate-on-scroll", {
+        interval: 0.15,
+        batchMax: 4,
+        start: "top 92%",
+        onEnter: (els) =>
+          gsap.to(els, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.06,
+            ease: "power2.out",
+            force3D: true,
+            overwrite: true,
+            clearProps: "transform",
+          }),
+      });
 
-
-    // Phone mockup animation
-    heroTimeline.fromTo(
-      phoneRef.current,
-      { x: 20, opacity: 0 },
-      { x: 0, opacity: 1, duration: 1.3, clearProps: "transform" },
-      "-=0.4"
-    );
-
-    // CTA buttons animation
-    heroTimeline.fromTo(
-      ctaRef.current,
-      { y: 16, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.0, clearProps: "transform" },
-      "-=0.3"
-    );
-
-    // Stats animation
-    heroTimeline.fromTo(
-      statsRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 1.0 },
-      "-=0.2"
-    );
-
-    gsap.set(".animate-on-scroll", { opacity: 0, y: 24, force3D: true });
-    ScrollTrigger.batch(".animate-on-scroll", {
-      interval: 0.18,
-      batchMax: 4,
-      start: "top 90%",
-      onEnter: (elements) => {
-        gsap.to(elements, {
-          opacity: 1,
+      // Feature cards
+      gsap.fromTo(
+        ".feature-card",
+        { y: 24, opacity: 0 },
+        {
           y: 0,
-          duration: 1.02,
-          stagger: 0.07,
-          ease: "power3.out",
+          opacity: 1,
+          duration: 0.7,
+          stagger: 0.12,
+          ease: "power2.out",
           force3D: true,
-          overwrite: "auto",
-        });
-      },
-    });
+          clearProps: "transform",
+          scrollTrigger: {
+            trigger: featuresRef.current,
+            start: "top 82%",
+            toggleActions: "play none none none",
+            fastScrollEnd: true,
+          },
+        }
+      );
 
-    // Staggered card animations with batching
-    gsap.fromTo(
-      ".feature-card",
-      { y: 20, opacity: 0, scale: 0.98 },
-      {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 0.9,
-        stagger: 0.15,
-        ease: "power3.out",
-        force3D: true,
-        scrollTrigger: {
-          trigger: featuresRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-          fastScrollEnd: true,
-        },
-      }
-    );
+      // Testimonial cards
+      gsap.fromTo(
+        ".testimonial-card",
+        { y: 24, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          stagger: 0.12,
+          ease: "power2.out",
+          force3D: true,
+          clearProps: "transform",
+          scrollTrigger: {
+            trigger: testimonialsRef.current,
+            start: "top 82%",
+            toggleActions: "play none none none",
+            fastScrollEnd: true,
+          },
+        }
+      );
 
-    // Testimonial animations
-    gsap.fromTo(
-      ".testimonial-card",
-      { y: 20, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.9,
-        stagger: 0.15,
-        ease: "power3.out",
-        force3D: true,
-        scrollTrigger: {
-          trigger: testimonialsRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-          fastScrollEnd: true,
-        },
-      }
-    );
-
-    // City statistics animations
-    gsap.fromTo(
-      ".city-stat",
-      { scale: 0.92, opacity: 0 },
-      {
-        scale: 1,
-        opacity: 1,
-        duration: 0.7,
-        stagger: 0.1,
-        ease: "power3.out",
-        force3D: true,
-        scrollTrigger: {
-          trigger: globalReachRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-          fastScrollEnd: true,
-        },
-      }
-    );
-
+      // Borough tiles — scale up from 0.96 (subtle, GPU-friendly)
+      gsap.fromTo(
+        ".city-stat",
+        { scale: 0.96, opacity: 0 },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 0.65,
+          stagger: 0.08,
+          ease: "power2.out",
+          force3D: true,
+          clearProps: "transform",
+          scrollTrigger: {
+            trigger: globalReachRef.current,
+            start: "top 82%",
+            toggleActions: "play none none none",
+            fastScrollEnd: true,
+          },
+        }
+      );
     });
 
     return () => ctx.revert();
   }, []);
 
-  // Simple auto-rotating preview in hero
+  // Hero preview crossfade — fade out first, swap image in onComplete, then fade in
   useEffect(() => {
-    if (!previewImages || previewImages.length < 2) {
-      return;
-    }
-    
+    if (!previewImages || previewImages.length < 2) return;
     const intervalId = setInterval(() => {
-      // crossfade
-      if (previewImgRef.current) {
-        gsap.to(previewImgRef.current, {
-          opacity: 0,
-          duration: 0.25,
-          ease: "power1.out",
-        });
-      }
-      setActivePreviewIndex((prev) => (prev + 1) % previewImages.length);
-      requestAnimationFrame(() => {
-        if (previewImgRef.current) {
-          gsap.to(previewImgRef.current, {
-            opacity: 1,
-            duration: 0.5,
-            ease: "power2.out",
-          });
-        }
+      const el = previewImgRef.current;
+      if (!el) return;
+      gsap.to(el, {
+        opacity: 0,
+        duration: 0.3,
+        ease: "power1.inOut",
+        onComplete: () => {
+          setActivePreviewIndex((prev) => (prev + 1) % previewImages.length);
+          gsap.to(el, { opacity: 1, duration: 0.5, ease: "power2.out" });
+        },
       });
-    }, 3500);
+    }, 4000);
     return () => clearInterval(intervalId);
   }, [previewImages]);
 
@@ -357,7 +330,7 @@ function App() {
           </span>
           <span className="hidden md:flex items-center gap-1.5 font-museo-medium whitespace-nowrap">
             <Clock className="h-3 w-3 shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-3.5 md:w-3.5" strokeWidth={2} aria-hidden />
-            <span className="text-yellow-300/90">Closes:</span>
+            <span className="text-yellow-300/90">Batch 1 Closes:</span>
             <span className="font-museo-bold tabular-nums">
               {timeLeft.days}d {String(timeLeft.hours).padStart(2, "0")}h {String(timeLeft.minutes).padStart(2, "0")}m
             </span>
@@ -373,19 +346,49 @@ function App() {
       </div>
       
       {/* Navigation Header */}
-      <nav className="fixed top-[2.5rem] left-0 right-0 z-30 transition-all duration-300">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
-          <div className="flex items-center justify-between h-24 md:h-32">
-            <a href="#" className="shrink-0" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+      <nav className="fixed top-[2.5rem] left-0 right-0 z-30">
+        <div className="container mx-auto px-3 sm:px-4 lg:px-8 xl:px-12">
+          {/* Scroll-aware pill container */}
+          <div
+            className="flex items-center justify-between transition-all duration-500 ease-out"
+            style={
+              scrolled
+                ? {
+                    background: "rgba(6, 3, 12, 0.72)",
+                    backdropFilter: "blur(20px)",
+                    WebkitBackdropFilter: "blur(20px)",
+                    border: "1px solid rgba(255, 255, 255, 0.08)",
+                    borderRadius: "9999px",
+                    boxShadow:
+                      "0 8px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(212,175,55,0.06), inset 0 1px 0 rgba(255,255,255,0.06)",
+                    padding: "0.35rem 0.75rem 0.35rem 0.5rem",
+                    marginTop: "0.5rem",
+                  }
+                : {
+                    background: "transparent",
+                    border: "1px solid transparent",
+                    borderRadius: "9999px",
+                    boxShadow: "none",
+                    padding: "0 0.25rem",
+                    marginTop: "0",
+                  }
+            }
+          >
+            <a
+              href="#"
+              className="shrink-0"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            >
               <img
                 src={IMAGES.assets.logo}
                 alt="BawoSocial"
-                className="h-20 sm:h-24 md:h-32 w-auto drop-shadow-[0_4px_12px_rgba(212,175,55,0.4)]"
+                className="w-auto drop-shadow-[0_4px_12px_rgba(212,175,55,0.4)] transition-all duration-500"
+                style={{ height: scrolled ? "3rem" : "5rem" }}
               />
             </a>
 
             {/* Desktop Nav Links */}
-            <div className="hidden md:flex items-center gap-1 lg:gap-2">
+            <div className="hidden md:flex items-center gap-0.5 lg:gap-1">
               {[
                 { label: "Network", href: "#building-the-network" },
                 { label: "About", href: "#about" },
@@ -396,19 +399,20 @@ function App() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="px-3 lg:px-4 py-2 text-sm font-museo-medium text-white/80 hover:text-white rounded-lg hover:bg-white/[0.08] transition-all duration-200"
+                  className="px-3 lg:px-4 py-2 text-sm font-museo-medium text-white/75 hover:text-white rounded-full hover:bg-white/[0.08] transition-all duration-200"
                 >
                   {link.label}
                 </a>
               ))}
               <a
                 href="#pricing"
-                className="ml-3 px-6 py-2.5 text-sm font-museo-bold font-bold text-[#F5D565] rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:bg-[rgba(212,175,55,0.1)]"
+                className="ml-2 px-5 py-2 text-sm font-museo-bold text-[#F5D565] rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:bg-[rgba(212,175,55,0.1)]"
                 style={{
-                  background: "transparent",
-                  border: "2px solid #D4AF37",
-                  boxShadow: "0 0 14px rgba(212, 175, 55, 0.45), 0 0 40px rgba(212, 175, 55, 0.2), 0 0 80px rgba(212, 175, 55, 0.1)",
-                  textShadow: "0 0 10px rgba(212, 175, 55, 0.6), 0 0 30px rgba(212, 175, 55, 0.3)",
+                  border: "1.5px solid #D4AF37",
+                  boxShadow:
+                    "0 0 12px rgba(212,175,55,0.4), 0 0 32px rgba(212,175,55,0.15)",
+                  textShadow:
+                    "0 0 10px rgba(212,175,55,0.6), 0 0 24px rgba(212,175,55,0.25)",
                 }}
               >
                 Join Now
@@ -417,17 +421,21 @@ function App() {
 
             {/* Mobile Menu Toggle */}
             <button
-              className="md:hidden p-2 text-white/80 hover:text-white transition-colors"
+              className="md:hidden p-2 text-white/80 hover:text-white transition-colors rounded-full hover:bg-white/[0.08]"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
             </button>
           </div>
 
-          {/* Mobile Menu */}
+          {/* Mobile Menu Dropdown */}
           {mobileMenuOpen && (
-            <div className="md:hidden mt-2 pb-4 bg-black/80 backdrop-blur-xl rounded-2xl border border-white/10 overflow-hidden">
+            <div className="md:hidden mt-2 pb-4 bg-black/85 backdrop-blur-xl rounded-2xl border border-white/10 overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.6)]">
               <div className="flex flex-col px-4 py-3 gap-1">
                 {[
                   { label: "Network", href: "#building-the-network" },
@@ -439,7 +447,7 @@ function App() {
                   <a
                     key={link.href}
                     href={link.href}
-                    className="px-4 py-3 text-sm font-museo-medium text-white/80 hover:text-white rounded-lg hover:bg-white/[0.08] transition-all duration-200"
+                    className="px-4 py-3 text-sm font-museo-medium text-white/80 hover:text-white rounded-xl hover:bg-white/[0.08] transition-all duration-200"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.label}
@@ -447,12 +455,13 @@ function App() {
                 ))}
                 <a
                   href="#pricing"
-                  className="mt-2 mx-4 px-5 py-3 text-sm font-museo-bold font-bold text-[#F5D565] text-center rounded-full transition-all duration-300"
+                  className="mt-2 mx-2 px-5 py-3 text-sm font-museo-bold text-[#F5D565] text-center rounded-full transition-all duration-300"
                   style={{
-                    background: "transparent",
-                    border: "2px solid #D4AF37",
-                    boxShadow: "0 0 14px rgba(212, 175, 55, 0.45), 0 0 40px rgba(212, 175, 55, 0.2), 0 0 80px rgba(212, 175, 55, 0.1)",
-                    textShadow: "0 0 10px rgba(212, 175, 55, 0.6), 0 0 30px rgba(212, 175, 55, 0.3)",
+                    border: "1.5px solid #D4AF37",
+                    boxShadow:
+                      "0 0 12px rgba(212,175,55,0.4), 0 0 32px rgba(212,175,55,0.15)",
+                    textShadow:
+                      "0 0 10px rgba(212,175,55,0.6), 0 0 24px rgba(212,175,55,0.25)",
                   }}
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -544,7 +553,7 @@ function App() {
                         loading="eager"
                         decoding="async"
                         fetchPriority="high"
-                        className="w-full h-auto max-h-[min(62vh,34rem)] sm:max-h-[min(68vh,40rem)] md:max-h-[min(72vh,46rem)] lg:max-h-[min(82vh,52rem)] xl:max-h-[min(84vh,58rem)] 2xl:max-h-[min(86vh,62rem)] object-contain object-center motion-safe:animate-subtle-float"
+                        className="w-full h-auto max-h-[min(62vh,34rem)] sm:max-h-[min(68vh,40rem)] md:max-h-[min(72vh,46rem)] lg:max-h-[min(82vh,52rem)] xl:max-h-[min(84vh,58rem)] 2xl:max-h-[min(86vh,62rem)] object-contain object-center animate-subtle-float"
                         style={{ opacity: 1 }}
                       />
                     </div>
@@ -569,73 +578,6 @@ function App() {
               )}
             </div>
 
-            {/* Social Media Icons - Bottom of Hero */}
-            <div className="flex flex-wrap justify-center gap-5 sm:gap-6 mt-8 sm:mt-10 pt-6 sm:pt-8 border-t border-white/10">
-              <a
-                href="https://www.instagram.com/bawo.social/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                title="Instagram"
-                className="transform hover:scale-110 transition-transform duration-300"
-              >
-                <svg className="w-8 h-8" viewBox="0 0 24 24" fill="url(#instagram-gradient-row)">
-                  <defs>
-                    <linearGradient id="instagram-gradient-row" x1="0%" y1="100%" x2="100%" y2="0%">
-                      <stop offset="0%" style={{ stopColor: "#FD5949", stopOpacity: 1 }} />
-                      <stop offset="50%" style={{ stopColor: "#D6249F", stopOpacity: 1 }} />
-                      <stop offset="100%" style={{ stopColor: "#285AEB", stopOpacity: 1 }} />
-                    </linearGradient>
-                  </defs>
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                </svg>
-              </a>
-              <a
-                href="https://twitter.com/bawoapp"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="X (Twitter)"
-                title="X (Twitter)"
-                className="transform hover:scale-110 transition-transform duration-300"
-              >
-                <svg className="w-8 h-8" fill="#1DA1F2" viewBox="0 0 24 24">
-                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-                </svg>
-              </a>
-              <a
-                href="https://linkedin.com/company/bawoapp"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                title="LinkedIn"
-                className="transform hover:scale-110 transition-transform duration-300"
-              >
-                <svg className="w-8 h-8" fill="#0A66C2" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-              </a>
-              <a
-                href="https://www.tiktok.com/@bawosocial"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="TikTok"
-                title="TikTok"
-                className="transform hover:scale-110 transition-transform duration-300"
-              >
-                <svg className="w-8 h-8" viewBox="0 0 24 24">
-                  <defs>
-                    <linearGradient id="tiktok-gradient-row" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" style={{ stopColor: "#00F2EA", stopOpacity: 1 }} />
-                      <stop offset="100%" style={{ stopColor: "#FF0050", stopOpacity: 1 }} />
-                    </linearGradient>
-                  </defs>
-                  <path
-                    fill="url(#tiktok-gradient-row)"
-                    d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"
-                  />
-                </svg>
-              </a>
-            </div>
           </div>
         </section>
 
@@ -643,7 +585,7 @@ function App() {
       <section
         ref={globalReachRef}
         id="building-the-network"
-        className="relative bg-transparent py-20 md:py-[5rem] overflow-x-hidden"
+        className="relative bg-transparent py-20 md:py-[5rem] overflow-x-hidden section-contain"
       >
         <div className="relative z-10 container mx-auto px-5 sm:px-6 py-12 md:py-14">
           <div className="text-center space-y-8 md:space-y-12 max-w-[1400px] mx-auto">
@@ -859,11 +801,11 @@ function App() {
                 </span>
                 <span className="text-[#10b981]">Live</span>
                 <span>•</span>
-                <span>23 people viewing now</span>
+                <span>{viewerCount} people viewing now</span>
               </div>
 
               <p className="text-base md:text-lg font-bold font-museo-bold text-white/95 text-center">
-                <span className="bawo-text-cta-gradient text-2xl md:text-3xl">050</span>{" "}
+                <span className="bawo-text-cta-gradient text-2xl md:text-3xl">50</span>{" "}
                 / <span className="bawo-text-cta-gradient">500</span> Founding Spots Taken
               </p>
               
@@ -1133,7 +1075,7 @@ function App() {
       <section
         ref={featuresRef}
         id="features"
-        className="relative min-h-screen flex items-center justify-center bg-transparent py-24"
+        className="relative min-h-screen flex items-center justify-center bg-transparent py-24 section-contain"
       >
         <div className="relative z-10 text-white px-6 md:px-10 max-w-7xl py-20 mx-auto w-full">
           <h2 className={`text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-16 ${TAILWIND_COLORS.primary.text} font-museo-bold`}>
@@ -1169,7 +1111,7 @@ function App() {
       <section
         ref={testimonialsRef}
         id="testimonials"
-        className="relative py-24 bg-transparent"
+        className="relative py-24 bg-transparent section-contain"
       >
 
         <div className="relative z-10 container mx-auto px-6 md:px-10">
@@ -1456,13 +1398,23 @@ function App() {
                 >
                   Instagram
                 </a>
-                <a href="#" className="text-white/60 hover:text-white">
+                <a
+                  href="https://www.tiktok.com/@bawosocial"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/60 hover:text-white"
+                >
                   TikTok
                 </a>
-                <a href="#" className="text-white/60 hover:text-white">
+                <a
+                  href="https://linkedin.com/company/bawoapp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/60 hover:text-white"
+                >
                   LinkedIn
                 </a>
-            </div>
+              </div>
             </div>
 
             {/* Quick Links */}
@@ -1470,30 +1422,30 @@ function App() {
               <h3 className="text-white font-museo-bold mb-4">Quick Links</h3>
               <div className="space-y-2">
                 <a
-                  href="#"
+                  href="#about"
                   className="block text-white/80 hover:text-white text-sm font-museo-medium"
                 >
                   About Us
                 </a>
                 <a
-                  href="#"
+                  href="#features"
                   className="block text-white/80 hover:text-white text-sm font-museo-medium"
                 >
-                  How It Works
+                  Features
                 </a>
                 <a
-                  href="#"
+                  href="#pricing"
                   className="block text-white/80 hover:text-white text-sm font-museo-medium"
                 >
                   Founding Members
                 </a>
                 <a
-                  href="#"
+                  href="#testimonials"
                   className="block text-white/80 hover:text-white text-sm font-museo-medium"
                 >
-                  Contact
+                  Community
                 </a>
-            </div>
+              </div>
           </div>
 
             {/* Legal */}
@@ -1543,7 +1495,7 @@ function App() {
                 </button>
               </div>
               <p className="text-gray-600 font-museo-medium mt-2">
-                Last Updated: July 2025
+                Last Updated: June 2026
               </p>
             </div>
 
@@ -2032,75 +1984,6 @@ function App() {
         </div>
       )}
 
-      <div
-        className="fixed z-50 bottom-6 right-6 flex flex-col gap-4 items-end pointer-events-auto"
-        aria-label="BawoSocial on social media"
-      >
-        <a
-          href="https://www.instagram.com/bawo.social/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Instagram"
-          title="Instagram"
-          className="transform hover:scale-110 transition-transform duration-300"
-        >
-          <svg className="w-8 h-8" viewBox="0 0 24 24" fill="url(#instagram-gradient-float)">
-            <defs>
-              <linearGradient id="instagram-gradient-float" x1="0%" y1="100%" x2="100%" y2="0%">
-                <stop offset="0%" style={{ stopColor: "#FD5949", stopOpacity: 1 }} />
-                <stop offset="50%" style={{ stopColor: "#D6249F", stopOpacity: 1 }} />
-                <stop offset="100%" style={{ stopColor: "#285AEB", stopOpacity: 1 }} />
-              </linearGradient>
-            </defs>
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-          </svg>
-        </a>
-        <a
-          href="https://twitter.com/bawoapp"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="X (Twitter)"
-          title="X (Twitter)"
-          className="transform hover:scale-110 transition-transform duration-300"
-        >
-          <svg className="w-8 h-8" fill="#1DA1F2" viewBox="0 0 24 24">
-            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-          </svg>
-        </a>
-        <a
-          href="https://linkedin.com/company/bawoapp"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="LinkedIn"
-          title="LinkedIn"
-          className="transform hover:scale-110 transition-transform duration-300"
-        >
-          <svg className="w-8 h-8" fill="#0A66C2" viewBox="0 0 24 24">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-          </svg>
-        </a>
-        <a
-          href="https://www.tiktok.com/@bawosocial"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="TikTok"
-          title="TikTok"
-          className="transform hover:scale-110 transition-transform duration-300"
-        >
-          <svg className="w-8 h-8" viewBox="0 0 24 24">
-            <defs>
-              <linearGradient id="tiktok-gradient-float" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style={{ stopColor: "#00F2EA", stopOpacity: 1 }} />
-                <stop offset="100%" style={{ stopColor: "#FF0050", stopOpacity: 1 }} />
-              </linearGradient>
-            </defs>
-            <path
-              fill="url(#tiktok-gradient-float)"
-              d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"
-            />
-          </svg>
-        </a>
-      </div>
 
       </div>
     </div>
