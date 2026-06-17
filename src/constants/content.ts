@@ -17,7 +17,7 @@ export const CONTENT = {
       "Lock in early. One payment, permanent status in our NYC Naija private network.",
     price: "$25",
     benefits: [
-      'Lifetime access to the "Secure the Bag" premium tier',
+      "Lifetime access to the premium membership tier",
       "Verified profile badge on launch",
       "Day-1 beta access before public rollout",
     ],
@@ -37,7 +37,7 @@ export const CONTENT = {
   hero: {
     title: "Culture, connection, community",
     subtitle:
-      "The algorithmic platforms failed us. We are building the premier private ecosystem for the NYC Naija Diaspora. No noise, just vetted plugs, digitized Ajo, and real connection.",
+      "The algorithmic platforms failed us. We built the private operating system for the NYC Naija Diaspora. No noise — just curated resources, culturally-filtered events, and real community.",
     ctaPrimary: "Secure My Spot, $25",
     ctaMicrocopy: "Founding lifetime pass, limited spots.",
     ctaSecondary: "Join Waitlist",
@@ -87,7 +87,7 @@ export const CONTENT = {
   // Origin Story Section
   origin: {
     title: "Why BawoSocial Exists",
-    mainText: "Most Nigerians in the diaspora feel isolated and disconnected from opportunity. We miss our culture, our people, and our network. BawoSocial was created to fix that. We are a utility-first platform to find your tribe, access The Black Book of resources, and build meaningful wealth and relationships, powered by smart technology that understands who we are.",
+    mainText: "Most Nigerians in the diaspora feel isolated and disconnected from opportunity. We miss our culture, our people, and our network. BawoSocial was created to fix that. We are a utility-first platform to find your tribe, access curated diaspora resources, and build meaningful relationships — powered by technology that understands our culture, our boroughs, and our community.",
     visionText: "",
   },
 
@@ -105,16 +105,16 @@ export const CONTENT = {
         description: "Never pay monthly fees again.",
       },
       {
-        title: "The Black Book Unlocked",
-        description: "Full access to the vetted resource directory.",
+        title: "Resource Directory Unlocked",
+        description: "Full access to curated restaurants, consulates, shipping, churches, and more.",
       },
       {
         title: "Founding Member Badge",
         description: "A permanent \"Day One\" badge on your profile.",
       },
       {
-        title: "Priority Matching",
-        description: "First access to smart introductions.",
+        title: "Priority Access",
+        description: "First access to new features and community introductions.",
       },
     ],
     cta: "Become a Founding Member, $25",
@@ -133,37 +133,37 @@ export const CONTENT = {
         description: "No noisy feeds. Your experience is centered around high-quality micro-communities where you actually know the people.",
       },
       {
-        title: "The Black Book",
-        description: "Stop asking 'Who knows a guy?' Access a curated, member-vetted directory of Nigerian lawyers, realtors, and businesses in your city.",
+        title: "The Resource Directory",
+        description: "Stop asking 'Who knows a guy?' Nigerian restaurants, consulates with live fee schedules, NIN enrollment maps, shipping with vessel tracking, churches, and mental health support. All verified.",
       },
       {
-        title: "Smart Introductions",
-        description: "We replaced the swipe. Our system introduces you to people with shared intent, whether for business, friendship, or love.",
+        title: "Community Matching",
+        description: "Connect with people who share your heritage, borough, and intentions. Whether you're here for friendship, business, or something more.",
       },
     ],
   },
 
   // Testimonials Section
   testimonials: {
-    title: "Voices of the BawoSocial Family",
-    subtitle: "Hear from Nigerians already building connections",
+    title: "What We're Building For",
+    subtitle: "Voices from the diaspora",
     reviews: [
       {
-        name: "Tunde",
+        name: "The NYC Diaspora",
         role: "New York",
-        quote: "I didn't realize how much I needed a network until BawoSocial helped me find my people and my new apartment.",
+        quote: "I need a network that understands where I'm from and where I'm going.",
         avatar: IMAGES.testimonials.adaora,
       },
       {
-        name: "Amara",
+        name: "Queens, NY",
         role: "Queens, NY",
-        quote: "My borough is full of Africans, but I never found the Nigerians until BawoSocial connected me.",
+        quote: "My borough is full of Africans, but finding your specific community shouldn't be this hard.",
         avatar: IMAGES.testimonials.emeka,
       },
       {
-        name: "Dami",
+        name: "The Bronx, NY",
         role: "The Bronx, NY",
-        quote: "It feels like a professional network and a family reunion in one app.",
+        quote: "Something between a professional network and a family reunion.",
         avatar: IMAGES.testimonials.fatima,
       },
     ],

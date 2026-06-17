@@ -79,10 +79,10 @@ export default function FoundingMemberCheckoutCard() {
               </div>
               <div className="min-w-0">
                 <p className="text-xs font-museo-bold uppercase tracking-wider text-[#D4AF37]/90">
-                  Included: The Black Book
+                  Included: The Resource Directory
                 </p>
                 <p className="mt-1 text-sm text-white/75 font-museo-medium leading-snug">
-                  Vetted contacts, pros, and cultural resources, unlocked with your pass.
+                  Nigerian restaurants, consulates, shipping services, and verified professionals, unlocked with your pass.
                 </p>
               </div>
             </div>
@@ -90,9 +90,9 @@ export default function FoundingMemberCheckoutCard() {
             <RecentActivitySnippet />
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 text-xs text-white/45 font-museo-medium">
+          <div className="flex flex-wrap items-center gap-3 text-xs text-[#E8CA6A] font-museo-medium">
             <span className="inline-flex items-center gap-1.5">
-              <ShieldCheck className="w-3.5 h-3.5 text-white/50" aria-hidden />
+              <ShieldCheck className="w-3.5 h-3.5 text-[#D4AF37]" aria-hidden />
               {CONTENT.hero.trustIndicators.stripe}
             </span>
             <span className="text-white/25" aria-hidden>

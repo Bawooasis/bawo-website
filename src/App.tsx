@@ -177,27 +177,48 @@ function App() {
         }
       );
 
-      // Testimonial cards
-      gsap.fromTo(
-        ".testimonial-card",
-        { y: 24, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.7,
-          stagger: 0.12,
-          ease: "power2.out",
-          force3D: true,
-          clearProps: "transform",
-          scrollTrigger: {
-            trigger: testimonialsRef.current,
-            start: "top 82%",
-            toggleActions: "play none none none",
-            fastScrollEnd: true,
-          },
-        }
-      );
+    // Staggered card animations with batching
+    gsap.fromTo(
+      ".feature-card",
+      { y: 20, opacity: 0, scale: 0.98 },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.9,
+        stagger: 0.15,
+        ease: "power3.out",
+        force3D: true,
+        scrollTrigger: {
+          trigger: featuresRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+          fastScrollEnd: true,
+        },
+      }
+    );
 
+    // City statistics animations
+    gsap.fromTo(
+      ".city-stat",
+      { scale: 0.92, opacity: 0 },
+      {
+        scale: 1,
+        opacity: 1,
+        duration: 0.7,
+        stagger: 0.1,
+        ease: "power3.out",
+        force3D: true,
+        scrollTrigger: {
+          trigger: globalReachRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+          fastScrollEnd: true,
+        },
+      }
+    );
       // Borough tiles — scale up from 0.96 (subtle, GPU-friendly)
       gsap.fromTo(
         ".city-stat",
@@ -393,7 +414,6 @@ function App() {
                 { label: "Network", href: "#building-the-network" },
                 { label: "About", href: "#about" },
                 { label: "Features", href: "#features" },
-                { label: "Testimonials", href: "#testimonials" },
                 { label: "Events", href: "#events" },
               ].map((link) => (
                 <a
@@ -441,7 +461,6 @@ function App() {
                   { label: "Network", href: "#building-the-network" },
                   { label: "About", href: "#about" },
                   { label: "Features", href: "#features" },
-                  { label: "Testimonials", href: "#testimonials" },
                   { label: "Events", href: "#events" },
                 ].map((link) => (
                   <a
@@ -545,16 +564,27 @@ function App() {
                   <div
                     className={`relative w-full flex flex-col items-center ${previewImages.length > 1 ? "pb-9 sm:pb-10" : "pb-0"}`}
                   >
-                    <div className="relative w-full max-w-none sm:max-w-[min(100%,42rem)] md:max-w-[min(100%,52rem)]">
+                    <div className="relative w-full max-w-none sm:max-w-[min(100%,42rem)] md:max-w-[min(100%,52rem)] overflow-hidden rounded-2xl">
                       <img
                         ref={previewImgRef}
                         src={previewImages[activePreviewIndex]}
-                        alt="BawoSocial app: Resources, Concierge, and Events"
+                        alt="BawoSocial app: Explore, Community, and Concierge"
                         loading="eager"
                         decoding="async"
                         fetchPriority="high"
                         className="w-full h-auto max-h-[min(62vh,34rem)] sm:max-h-[min(68vh,40rem)] md:max-h-[min(72vh,46rem)] lg:max-h-[min(82vh,52rem)] xl:max-h-[min(84vh,58rem)] 2xl:max-h-[min(86vh,62rem)] object-contain object-center animate-subtle-float"
                         style={{ opacity: 1 }}
+                      />
+                      <div
+                        className="pointer-events-none absolute inset-0"
+                        style={{
+                          background: `
+                            linear-gradient(to top, #1A0A28 0%, transparent 18%),
+                            linear-gradient(to bottom, #1A0A28 0%, transparent 14%),
+                            linear-gradient(to left, #1A0A28 0%, transparent 12%),
+                            linear-gradient(to right, #1A0A28 0%, transparent 12%)
+                          `,
+                        }}
                       />
                     </div>
                     {previewImages.length > 1 && (
@@ -1107,98 +1137,7 @@ function App() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section
-        ref={testimonialsRef}
-        id="testimonials"
-        className="relative py-24 bg-transparent section-contain"
-      >
 
-        <div className="relative z-10 container mx-auto px-6 md:px-10">
-          <div className="text-center mb-14">
-            <h2 className="text-4xl md:text-5xl font-bold text-white font-museo-bold mb-4">
-              What Our Community Says
-          </h2>
-            <p className="text-lg md:text-xl text-white/80 font-museo-medium">
-              Hear from Nigerians excited to connect on BawoSocial
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-10 max-w-6xl mx-auto">
-            {/* Testimonial 1 */}
-            <div className="testimonial-card bg-white/[0.06] backdrop-blur-md rounded-2xl p-7 md:p-8 border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,107,0,0.45)] shadow-[0_8px_32px_rgba(0,0,0,0.37)] transition-all duration-300">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden ring-2 ring-white/40">
-                  <img
-                    src={IMAGES.testimonials.adaora}
-                    alt={CONTENT.testimonials.reviews[0].name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="ml-3">
-                  <h4 className="font-museo-bold text-white text-sm md:text-base">
-                    {CONTENT.testimonials.reviews[0].name}
-                  </h4>
-                  <p className="text-xs md:text-sm text-white/80 font-museo-medium">
-                    {CONTENT.testimonials.reviews[0].role}
-                  </p>
-                </div>
-              </div>
-              <p className="text-white/85 font-museo-medium leading-relaxed text-sm md:text-base">
-                "{CONTENT.testimonials.reviews[0].quote}"
-              </p>
-            </div>
-
-            {/* Testimonial 2 */}
-            <div className="testimonial-card bg-white/[0.06] backdrop-blur-md rounded-2xl p-7 md:p-8 border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,107,0,0.45)] shadow-[0_8px_32px_rgba(0,0,0,0.37)] transition-all duration-300">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden ring-2 ring-white/40">
-                  <img
-                    src={IMAGES.testimonials.emeka}
-                    alt={CONTENT.testimonials.reviews[1].name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="ml-3">
-                  <h4 className="font-museo-bold text-white text-sm md:text-base">
-                    {CONTENT.testimonials.reviews[1].name}
-                  </h4>
-                  <p className="text-xs md:text-sm text-white/80 font-museo-medium">
-                    {CONTENT.testimonials.reviews[1].role}
-                  </p>
-                </div>
-              </div>
-              <p className="text-white/85 font-museo-medium leading-relaxed text-sm md:text-base">
-                "{CONTENT.testimonials.reviews[1].quote}"
-              </p>
-            </div>
-
-            {/* Testimonial 3 */}
-            <div className="testimonial-card bg-white/[0.06] backdrop-blur-md rounded-2xl p-7 md:p-8 border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,107,0,0.45)] shadow-[0_8px_32px_rgba(0,0,0,0.37)] transition-all duration-300">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden ring-2 ring-white/40">
-                  <img
-                    src={IMAGES.testimonials.fatima}
-                    alt={CONTENT.testimonials.reviews[2].name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="ml-3">
-                  <h4 className="font-museo-bold text-white text-sm md:text-base">
-                    {CONTENT.testimonials.reviews[2].name}
-                  </h4>
-                  <p className="text-xs md:text-sm text-white/80 font-museo-medium">
-                    {CONTENT.testimonials.reviews[2].role}
-                  </p>
-                </div>
-              </div>
-              <p className="text-white/85 font-museo-medium leading-relaxed text-sm md:text-base">
-                "{CONTENT.testimonials.reviews[2].quote}"
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* In-App Preview Section */}
       <section
@@ -1366,13 +1305,26 @@ function App() {
       {/* Footer */}
       <footer className="py-12 bg-transparent">
         {/* Mobile Sticky CTA */}
-        <div className="md:hidden mobile-sticky-cta bg-black/70 backdrop-blur-md border-t border-[rgba(255,255,255,0.08)]">
-          <div className="px-4 py-3 flex items-center justify-between gap-3">
-            <span className="text-white font-museo-medium text-sm shrink-0">
-              Only 450 Spots Left
-            </span>
+        <div className="md:hidden mobile-sticky-cta bg-[#1A0A28]/92 backdrop-blur-xl border-t border-[rgba(212,175,55,0.15)]">
+          <div className="px-4 pt-2 pb-1">
+            <div className="w-full h-1 rounded-full bg-white/10 overflow-hidden mb-2">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-[#D4AF37] to-[#ff6b00]"
+                style={{ width: "10%" }}
+              />
+            </div>
+          </div>
+          <div className="px-4 pb-3 flex items-center justify-between gap-3">
+            <div className="flex flex-col min-w-0">
+              <span className="text-[#E8CA6A] font-museo-bold text-xs uppercase tracking-wide">
+                Batch 1 Open
+              </span>
+              <span className="text-white/70 font-museo-medium text-[11px]">
+                450 of 500 spots left
+              </span>
+            </div>
             <BawoPillButton
-              label={CONTENT.foundingMemberCheckout.ctaLabel}
+              label="Secure My Spot"
               variant="primary"
               size="sm"
               className="shrink-0"
@@ -1386,7 +1338,7 @@ function App() {
             <div className="text-center md:text-left">
               <h3 className="text-white font-museo-bold mb-4">BawoSocial</h3>
               <p className="text-white/80 text-sm font-museo-medium mb-4">
-                Connecting the Nigerian diaspora worldwide through authentic
+                Connecting the Nigerian diaspora in New York City through authentic
                 relationships, resources, and cultural pride.
               </p>
               <div className="flex justify-center md:justify-start gap-4">
