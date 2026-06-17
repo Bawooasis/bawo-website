@@ -49,7 +49,6 @@ function App() {
   const [notificationData, setNotificationData] = useState({ name: "", location: "" });
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [viewerCount] = useState(() => Math.floor(Math.random() * 18) + 14);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -293,7 +292,15 @@ function App() {
 
 
   const handleFoundingMember = () => {
-    window.open(CONTENT.revenue.foundingStripeCheckoutUrl, "_blank");
+    const baseUrl = CONTENT.revenue.foundingStripeCheckoutUrl;
+    const params = new URLSearchParams(window.location.search);
+    const utmSource = params.get("utm_source") || "direct";
+    const utmMedium = params.get("utm_medium") || "";
+    const utmCampaign = params.get("utm_campaign") || "";
+    const ref = [utmSource, utmMedium, utmCampaign].filter(Boolean).join("_");
+    const separator = baseUrl.includes("?") ? "&" : "?";
+    const checkoutUrl = `${baseUrl}${separator}client_reference_id=${encodeURIComponent(ref)}`;
+    window.open(checkoutUrl, "_blank");
     // Track click for analytics
     const win = window as unknown as { gtag?: (...args: unknown[]) => void };
     if (typeof win.gtag !== "undefined") {
@@ -530,6 +537,18 @@ function App() {
                       onClick={handleFoundingMember}
                     />
                   </div>
+
+                  <a
+                    href={`https://wa.me/?text=${encodeURIComponent("I just found BawoSocial — the private network for NYC Nigerians. $25 lifetime access, only 450 spots left. Join here: https://joinbawo.com?utm_source=whatsapp")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-transparent text-white/70 text-xs font-museo-medium hover:border-[#25D366]/50 hover:text-[#25D366] transition-all duration-200"
+                  >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    Share on WhatsApp
+                  </a>
 
                   <div className="mt-5 md:mt-7 flex flex-col gap-3 items-center w-full max-w-2xl">
                     <p className="text-white/80 text-sm md:text-base font-medium leading-relaxed">
@@ -831,7 +850,7 @@ function App() {
                 </span>
                 <span className="text-[#10b981]">Live</span>
                 <span>•</span>
-                <span>{viewerCount} people viewing now</span>
+                <span>Batch 1 open — spots filling</span>
               </div>
 
               <p className="text-base md:text-lg font-bold font-museo-bold text-white/95 text-center">
@@ -984,6 +1003,9 @@ function App() {
                     <div className="pt-2 border-t border-white/10">
                       <p className="text-xs text-white/60 font-museo-regular italic">
                         {CONTENT.stats.urgency.deadline}
+                      </p>
+                      <p className="text-sm text-[#E8CA6A] font-museo-bold mt-2 tabular-nums">
+                        {timeLeft.days}d {String(timeLeft.hours).padStart(2, "0")}h {String(timeLeft.minutes).padStart(2, "0")}m {String(timeLeft.seconds).padStart(2, "0")}s remaining
                       </p>
                     </div>
                   </div>
@@ -1298,6 +1320,47 @@ function App() {
               variant="ghost"
               buttonLabel={CONTENT.finalCta.ctaSecondary}
             />
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section — SEO keywords */}
+      <section className="relative py-20 bg-transparent">
+        <div className="relative z-10 container mx-auto px-6 md:px-10 max-w-4xl">
+          <h2 className="text-3xl md:text-4xl font-bold text-white font-museo-bold mb-10 text-center">
+            Frequently Asked Questions
+          </h2>
+          <div className="space-y-6">
+            <div className="glass-card rounded-2xl p-6 border border-[rgba(255,255,255,0.08)]">
+              <h3 className="text-lg font-museo-bold text-white mb-2">What is BawoSocial?</h3>
+              <p className="text-white/75 font-museo-medium text-sm leading-relaxed">
+                BawoSocial is the private community platform for the Nigerian diaspora in New York City. We connect Nigerians across Brooklyn, Harlem, Queens, The Bronx, and Staten Island with curated resources, culturally-relevant events, and community groups. It's the Nigerian community app NYC has been missing.
+              </p>
+            </div>
+            <div className="glass-card rounded-2xl p-6 border border-[rgba(255,255,255,0.08)]">
+              <h3 className="text-lg font-museo-bold text-white mb-2">Who is BawoSocial for?</h3>
+              <p className="text-white/75 font-museo-medium text-sm leading-relaxed">
+                BawoSocial is for Nigerians and the broader African community living in NYC who want to find their people, discover Nigerian restaurants and businesses, attend Afrobeats and cultural events, and connect with professionals who share their background. Whether you're new to New York or been here for years — this is your Naija network New York.
+              </p>
+            </div>
+            <div className="glass-card rounded-2xl p-6 border border-[rgba(255,255,255,0.08)]">
+              <h3 className="text-lg font-museo-bold text-white mb-2">How much does BawoSocial cost?</h3>
+              <p className="text-white/75 font-museo-medium text-sm leading-relaxed">
+                Founding members get lifetime access for a one-time $25 payment. After Batch 1 closes, membership will be $19.99/month ($240/year). The founding member pass gives you permanent access to the Nigerian diaspora community, the Resource Directory of Nigerian restaurants NYC, and all premium features — forever.
+              </p>
+            </div>
+            <div className="glass-card rounded-2xl p-6 border border-[rgba(255,255,255,0.08)]">
+              <h3 className="text-lg font-museo-bold text-white mb-2">What resources does BawoSocial offer?</h3>
+              <p className="text-white/75 font-museo-medium text-sm leading-relaxed">
+                Our Resource Directory includes Nigerian restaurants NYC, consulates with live fee schedules, NIN enrollment centers with maps, shipping services with vessel tracking, churches, African stores, and mental health support. All listings are verified with real photos and business details. It's the most complete Nigerian events NYC and resources guide available.
+              </p>
+            </div>
+            <div className="glass-card rounded-2xl p-6 border border-[rgba(255,255,255,0.08)]">
+              <h3 className="text-lg font-museo-bold text-white mb-2">How is BawoSocial different from Facebook groups?</h3>
+              <p className="text-white/75 font-museo-medium text-sm leading-relaxed">
+                Unlike algorithmic platforms, BawoSocial is built specifically for the African community app experience. No ads, no algorithm deciding what you see. Your experience is organized around vetted micro-communities, a curated directory, and a concierge that understands Nigerian diaspora needs — from passport renewals to finding the best jollof in your borough.
+              </p>
+            </div>
           </div>
         </div>
       </section>
