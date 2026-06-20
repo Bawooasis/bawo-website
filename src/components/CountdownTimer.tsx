@@ -16,24 +16,11 @@ const CountdownTimer = () => {
   });
 
   useEffect(() => {
-    // Find the next December 1st at midnight UTC from today
-    const getNextLaunchDate = () => {
-      const now = new Date();
-      const currentYear = now.getUTCFullYear();
-      const decemberFirstThisYear = Date.UTC(currentYear, 11, 1, 0, 0, 0);
-      // If we're past this year's Dec 1, roll to next year so the timer never sits at zero
-      const target =
-        now.getTime() > decemberFirstThisYear
-          ? Date.UTC(currentYear + 1, 11, 1, 0, 0, 0)
-          : decemberFirstThisYear;
-      return target;
-    };
-
-    let launchDate = getNextLaunchDate();
+    const targetDate = new Date('2026-08-01T23:59:59').getTime();
 
     const calculateTimeLeft = () => {
       const now = new Date().getTime();
-      const difference = launchDate - now;
+      const difference = targetDate - now;
 
       if (difference > 0) {
         setTimeLeft({
@@ -43,16 +30,11 @@ const CountdownTimer = () => {
           seconds: Math.floor((difference % (1000 * 60)) / 1000),
         });
       } else {
-        // Recompute launch date to keep timer rolling year over year
-        launchDate = getNextLaunchDate();
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       }
     };
 
-    // Calculate immediately
     calculateTimeLeft();
-
-    // Update every second
     const interval = setInterval(calculateTimeLeft, 1000);
 
     return () => clearInterval(interval);

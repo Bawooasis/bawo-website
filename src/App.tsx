@@ -775,6 +775,32 @@ function App() {
             <p className="text-xl md:text-2xl font-bold bawo-text-cta-gradient font-museo-bold">
               {CONTENT.stats.tagline}
             </p>
+
+            {/* Prominent Countdown Timer */}
+            <div className="pt-6">
+              <p className="text-xs uppercase tracking-widest text-white/50 font-museo-bold mb-3">Batch 1 Closes In</p>
+              <div className="flex items-center justify-center gap-3 md:gap-5">
+                <div className="flex flex-col items-center">
+                  <span className="text-4xl md:text-5xl lg:text-6xl font-museo-bold tabular-nums text-[var(--bawo-brand-cta-orange)]">{timeLeft.days}</span>
+                  <span className="text-[10px] md:text-xs uppercase tracking-wider text-white/60 font-museo-medium mt-1">Days</span>
+                </div>
+                <span className="text-2xl md:text-3xl text-white/30 font-museo-bold -mt-4">:</span>
+                <div className="flex flex-col items-center">
+                  <span className="text-4xl md:text-5xl lg:text-6xl font-museo-bold tabular-nums text-[var(--bawo-brand-cta-orange)]">{String(timeLeft.hours).padStart(2, "0")}</span>
+                  <span className="text-[10px] md:text-xs uppercase tracking-wider text-white/60 font-museo-medium mt-1">Hours</span>
+                </div>
+                <span className="text-2xl md:text-3xl text-white/30 font-museo-bold -mt-4">:</span>
+                <div className="flex flex-col items-center">
+                  <span className="text-4xl md:text-5xl lg:text-6xl font-museo-bold tabular-nums text-[var(--bawo-brand-cta-orange)]">{String(timeLeft.minutes).padStart(2, "0")}</span>
+                  <span className="text-[10px] md:text-xs uppercase tracking-wider text-white/60 font-museo-medium mt-1">Minutes</span>
+                </div>
+                <span className="text-2xl md:text-3xl text-white/30 font-museo-bold -mt-4">:</span>
+                <div className="flex flex-col items-center">
+                  <span className="text-4xl md:text-5xl lg:text-6xl font-museo-bold tabular-nums text-white">{String(timeLeft.seconds).padStart(2, "0")}</span>
+                  <span className="text-[10px] md:text-xs uppercase tracking-wider text-white/60 font-museo-medium mt-1">Seconds</span>
+                </div>
+              </div>
+            </div>
             
             <div className="flex flex-wrap justify-center gap-8 md:gap-16 pt-8">
               {/* Batch 1 Spots */}
@@ -1041,7 +1067,7 @@ function App() {
                   <strong className="font-museo-bold text-white">disconnected from opportunity</strong>. We miss our culture, our people, and our network. BawoSocial was created to fix that.
                 </p>
                 <p className="text-white/95 font-museo-medium text-xl md:text-2xl leading-relaxed md:leading-[2] text-left">
-                  We are a <strong className="font-museo-bold text-white">utility-first platform</strong> to find your tribe, access The Black Book of resources, and build meaningful wealth and relationships, powered by smart technology that understands who we are.
+                  We are a <strong className="font-museo-bold text-white">utility-first platform</strong> to find your tribe, access the Resource Directory, and build meaningful wealth and relationships, powered by smart technology that understands who we are.
                 </p>
               </div>
               {CONTENT.origin.visionText && (
@@ -1227,7 +1253,7 @@ function App() {
               <div className="flex items-center gap-3 mb-3">
                 <Headphones className="w-5 h-5 text-white" />
                 <span className="font-museo-bold">
-                  The Black Book: Live Q&A
+                  The Resource Directory: Live Q&A
                 </span>
               </div>
               <p className="text-white/80 font-museo-medium">
