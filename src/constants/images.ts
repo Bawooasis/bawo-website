@@ -3,7 +3,6 @@
 // Local asset imports
 // import globeImage from "../assets/images/GLOBE.png"; // File removed
 import bawoLogo from "../assets/images/bawo-logo.png";
-import bawoLogoMain from "../assets/images/Logo.png";
 import adoraImage from "../assets/images/ADORA.jpg";
 import emekaImage from "../assets/images/Emeka.jpg";
 import fatimaImage from "../assets/images/Fatima.jpg";
@@ -73,7 +72,7 @@ export const IMAGES = {
   // Local Assets
   assets: {
     globe: "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=400&q=80&auto=format&fit=crop", // Placeholder globe image
-    logo: bawoLogoMain,
+    logo: "/bawosocial-logo.png?v=5",
     logoOld: bawoLogo,
     // Add more local images here as needed
   },

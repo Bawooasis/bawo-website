@@ -30,23 +30,9 @@ import { IMAGES } from "./constants/images";
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
-// Live signup notifications data
-const signupNotifications = [
-  { name: "Adanna", location: "Brooklyn" },
-  { name: "Tunde", location: "Harlem" },
-  { name: "Chiamaka", location: "Queens" },
-  { name: "Obinna", location: "The Bronx" },
-  { name: "Ngozi", location: "Brooklyn" },
-  { name: "Emeka", location: "Staten Island" },
-  { name: "Amara", location: "Harlem" },
-  { name: "Chukwudi", location: "Queens" },
-];
-
 function App() {
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
   const [activePreviewIndex, setActivePreviewIndex] = useState(0);
-  const [showNotification, setShowNotification] = useState(false);
-  const [notificationData, setNotificationData] = useState({ name: "", location: "" });
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -263,34 +249,6 @@ function App() {
   }, [previewImages]);
 
 
-  // Live signup notification system
-  useEffect(() => {
-    const showRandomNotification = () => {
-      const randomSignup = signupNotifications[Math.floor(Math.random() * signupNotifications.length)];
-      setNotificationData(randomSignup);
-      setShowNotification(true);
-      
-      // Hide notification after 4 seconds
-      setTimeout(() => {
-        setShowNotification(false);
-      }, 4000);
-    };
-
-    // Show first notification after 3 seconds
-    const initialTimeout = setTimeout(showRandomNotification, 3000);
-    
-    // Show subsequent notifications every 12-18 seconds
-    const notificationInterval = setInterval(() => {
-      showRandomNotification();
-    }, Math.random() * 6000 + 12000); // Random between 12-18 seconds
-
-    return () => {
-      clearTimeout(initialTimeout);
-      clearInterval(notificationInterval);
-    };
-  }, []);
-
-
   const handleFoundingMember = () => {
     const baseUrl = CONTENT.revenue.foundingStripeCheckoutUrl;
     const params = new URLSearchParams(window.location.search);
@@ -314,24 +272,9 @@ function App() {
   return (
     <div className="min-h-screen relative overflow-x-hidden">
       <div
-        className="fixed inset-0 z-0 bg-gradient-to-b from-[var(--bawo-canvas)] via-[var(--bawo-elevated)] to-[var(--bawo-canvas)]"
+        className="fixed inset-0 z-0 bawo-page-bg"
         aria-hidden
       />
-      
-      {/* Live Signup Notification Toast */}
-      {showNotification && (
-        <div className="fixed top-14 md:top-16 left-1/2 -translate-x-1/2 z-50 animate-slide-down">
-          <div className="bg-white/[0.1] backdrop-blur-md border border-[rgba(255,255,255,0.12)] rounded-full px-4 md:px-6 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.4)] flex items-center gap-2">
-            <div className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10b981] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10b981]"></span>
-            </div>
-            <p className="text-white text-xs md:text-sm font-museo-medium">
-              <span className="font-museo-bold text-[var(--bawo-brand-cta-orange)]">{notificationData.name}</span> from {notificationData.location} just joined
-            </p>
-          </div>
-        </div>
-      )}
       
       {/* Promo strip — full-bleed glass, yellow copy + white icons, ribbon animation (see `index.css`) */}
       <div className="bawo-promo-strip fixed top-0 left-0 right-0 z-40 py-2 overflow-hidden">
@@ -404,14 +347,17 @@ function App() {
           >
             <a
               href="#"
-              className="shrink-0"
+              className="shrink-0 flex items-center self-center -translate-y-0.5"
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             >
               <img
                 src={IMAGES.assets.logo}
                 alt="BawoSocial"
-                className="w-auto drop-shadow-[0_4px_12px_rgba(212,175,55,0.4)] transition-all duration-500"
-                style={{ height: scrolled ? "3rem" : "5rem" }}
+                className={`block h-auto transition-all duration-500 ${
+                  scrolled
+                    ? "w-[7.5rem]"
+                    : "w-[8.5rem] sm:w-[9.5rem] md:w-[10.5rem]"
+                }`}
               />
             </a>
 
@@ -433,13 +379,13 @@ function App() {
               ))}
               <a
                 href="#pricing"
-                className="ml-2 px-5 py-2 text-sm font-museo-bold text-[#F5D565] rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:bg-[rgba(212,175,55,0.1)]"
+                className="ml-2 px-5 py-2 text-sm font-museo-bold text-[#ff8a33] rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:bg-[rgba(255,107,0,0.12)]"
                 style={{
-                  border: "1.5px solid #D4AF37",
+                  border: "1.5px solid #ff6b00",
                   boxShadow:
-                    "0 0 12px rgba(212,175,55,0.4), 0 0 32px rgba(212,175,55,0.15)",
+                    "0 0 12px rgba(255,107,0,0.45), 0 0 32px rgba(255,107,0,0.15)",
                   textShadow:
-                    "0 0 10px rgba(212,175,55,0.6), 0 0 24px rgba(212,175,55,0.25)",
+                    "0 0 10px rgba(255,107,0,0.55), 0 0 24px rgba(255,107,0,0.2)",
                 }}
               >
                 Join Now
@@ -481,13 +427,13 @@ function App() {
                 ))}
                 <a
                   href="#pricing"
-                  className="mt-2 mx-2 px-5 py-3 text-sm font-museo-bold text-[#F5D565] text-center rounded-full transition-all duration-300"
+                  className="mt-2 mx-2 px-5 py-3 text-sm font-museo-bold text-[#ff8a33] text-center rounded-full transition-all duration-300"
                   style={{
-                    border: "1.5px solid #D4AF37",
+                    border: "1.5px solid #ff6b00",
                     boxShadow:
-                      "0 0 12px rgba(212,175,55,0.4), 0 0 32px rgba(212,175,55,0.15)",
+                      "0 0 12px rgba(255,107,0,0.45), 0 0 32px rgba(255,107,0,0.15)",
                     textShadow:
-                      "0 0 10px rgba(212,175,55,0.6), 0 0 24px rgba(212,175,55,0.25)",
+                      "0 0 10px rgba(255,107,0,0.55), 0 0 24px rgba(255,107,0,0.2)",
                   }}
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -505,6 +451,7 @@ function App() {
           ref={heroRef}
           className="relative flex justify-center items-start overflow-x-hidden overflow-y-visible pt-[max(5rem,calc(env(safe-area-inset-top,0px)+3.75rem))] sm:pt-[max(5.5rem,calc(env(safe-area-inset-top,0px)+4rem))] md:pt-[max(7rem,calc(env(safe-area-inset-top,0px)+5.25rem))] lg:pt-[max(7rem,calc(env(safe-area-inset-top,0px)+5.25rem))] xl:pt-[max(8rem,calc(env(safe-area-inset-top,0px)+6rem))] pb-10 sm:pb-12 md:pb-14 min-h-0 lg:min-h-[100dvh] bg-transparent"
         >
+          <div className="bawo-hero-ambient pointer-events-none absolute inset-0 z-0" aria-hidden />
           {/* Main Content Container */}
           <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-2 sm:pt-3 pb-2 max-w-screen-2xl w-full">
             <div className="flex flex-col items-center gap-10 md:gap-14">
@@ -534,6 +481,7 @@ function App() {
                       label={CONTENT.hero.ctaPrimary}
                       variant="primary"
                       size="md"
+                      className="bawo-pill-cta-surface min-w-[14rem]"
                       onClick={handleFoundingMember}
                     />
                   </div>
@@ -598,10 +546,10 @@ function App() {
                         className="pointer-events-none absolute inset-0"
                         style={{
                           background: `
-                            linear-gradient(to top, #1A0A28 0%, transparent 18%),
-                            linear-gradient(to bottom, #1A0A28 0%, transparent 14%),
-                            linear-gradient(to left, #1A0A28 0%, transparent 12%),
-                            linear-gradient(to right, #1A0A28 0%, transparent 12%)
+                            linear-gradient(to top, var(--bawo-canvas) 0%, transparent 18%),
+                            linear-gradient(to bottom, var(--bawo-canvas) 0%, transparent 14%),
+                            linear-gradient(to left, var(--bawo-canvas) 0%, transparent 12%),
+                            linear-gradient(to right, var(--bawo-canvas) 0%, transparent 12%)
                           `,
                         }}
                       />
@@ -669,7 +617,7 @@ function App() {
                         className="city-stat text-center space-y-6 md:space-y-8 w-full max-w-[20rem] mx-auto"
                       >
                         {rotatingGallery ? (
-                          <div className="relative w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-[22rem] xl:h-[22rem] mx-auto overflow-hidden rounded-3xl shadow-[0_28px_80px_rgba(0,0,0,0.72)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#D4AF37]/45 hover:shadow-[0_32px_90px_rgba(212,175,55,0.12)]">
+                          <div className="relative w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-[22rem] xl:h-[22rem] mx-auto overflow-hidden rounded-full shadow-[0_28px_80px_rgba(0,0,0,0.72)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#D4AF37]/45 hover:shadow-[0_32px_90px_rgba(212,175,55,0.12)]">
                             <BoroughSquareCarousel
                               images={rotatingGallery}
                               alt={`${city.name}, Nigerian diaspora community in NYC`}
@@ -677,7 +625,7 @@ function App() {
                             />
                           </div>
                         ) : (
-                          <div className="w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-[22rem] xl:h-[22rem] mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-3xl flex items-center justify-center shadow-[0_28px_80px_rgba(0,0,0,0.72)] overflow-hidden hover:scale-[1.04] transition-transform duration-300">
+                          <div className="w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-[22rem] xl:h-[22rem] mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_28px_80px_rgba(0,0,0,0.72)] overflow-hidden hover:scale-[1.04] transition-transform duration-300">
                             <img
                               src={IMAGES.globalReach.cities[index]}
                               alt={city.name}
@@ -709,7 +657,7 @@ function App() {
                         className="city-stat text-center space-y-6 md:space-y-8 w-full max-w-[20rem] mx-auto"
                       >
                         {rotatingGallery ? (
-                          <div className="relative w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-[22rem] xl:h-[22rem] mx-auto overflow-hidden rounded-3xl shadow-[0_28px_80px_rgba(0,0,0,0.72)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#D4AF37]/45 hover:shadow-[0_32px_90px_rgba(212,175,55,0.12)]">
+                          <div className="relative w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-[22rem] xl:h-[22rem] mx-auto overflow-hidden rounded-full shadow-[0_28px_80px_rgba(0,0,0,0.72)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#D4AF37]/45 hover:shadow-[0_32px_90px_rgba(212,175,55,0.12)]">
                             <BoroughSquareCarousel
                               images={rotatingGallery}
                               alt={`${city.name}, Nigerian diaspora community in NYC`}
@@ -717,7 +665,7 @@ function App() {
                             />
                           </div>
                         ) : (
-                          <div className="w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-[22rem] xl:h-[22rem] mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-3xl flex items-center justify-center shadow-[0_28px_80px_rgba(0,0,0,0.72)] overflow-hidden hover:scale-[1.04] transition-transform duration-300">
+                          <div className="w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-[22rem] xl:h-[22rem] mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_28px_80px_rgba(0,0,0,0.72)] overflow-hidden hover:scale-[1.04] transition-transform duration-300">
                             <img
                               src={IMAGES.globalReach.cities[i]}
                               alt={city.name}
@@ -1394,7 +1342,7 @@ function App() {
       {/* Footer */}
       <footer className="py-12 bg-transparent">
         {/* Mobile Sticky CTA */}
-        <div className="md:hidden mobile-sticky-cta bg-[#1A0A28]/92 backdrop-blur-xl border-t border-[rgba(212,175,55,0.15)]">
+        <div className="md:hidden mobile-sticky-cta bg-[var(--bawo-canvas)]/92 backdrop-blur-xl border-t border-[rgba(255,107,0,0.2)]">
           <div className="px-4 pt-2 pb-1">
             <div className="w-full h-1 rounded-full bg-white/10 overflow-hidden mb-2">
               <div

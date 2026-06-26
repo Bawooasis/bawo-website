@@ -1,6 +1,5 @@
 import { BadgeCheck, BookOpen, Crown, ShieldCheck } from "lucide-react";
 import { CONTENT } from "../constants/content";
-import RecentActivitySnippet from "./RecentActivitySnippet";
 
 export default function FoundingMemberCheckoutCard() {
   const openCheckout = () => {
@@ -64,30 +63,26 @@ export default function FoundingMemberCheckoutCard() {
             ))}
           </ul>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="relative overflow-hidden rounded-2xl border border-[#D4AF37]/30 bg-gradient-to-br from-[#1a1008]/90 to-[#06030c]/80 p-4 flex gap-4 items-center">
-              <div
-                className="relative h-[4.5rem] w-[3.25rem] shrink-0 rounded-md border border-[#D4AF37]/40 shadow-[0_12px_28px_rgba(0,0,0,0.5)] bg-gradient-to-b from-[#3d2818] to-[#120a06]"
+          <div className="relative overflow-hidden rounded-2xl border border-[#D4AF37]/30 bg-gradient-to-br from-[#1a1008]/90 to-[#06030c]/80 p-4 flex gap-4 items-center">
+            <div
+              className="relative h-[4.5rem] w-[3.25rem] shrink-0 rounded-md border border-[#D4AF37]/40 shadow-[0_12px_28px_rgba(0,0,0,0.5)] bg-gradient-to-b from-[#3d2818] to-[#120a06]"
+              aria-hidden
+            >
+              <div className="absolute inset-y-2 left-1.5 w-[3px] rounded-full bg-[#D4AF37]/70" />
+              <BookOpen
+                className="absolute bottom-2 right-2 h-7 w-7 text-[#D4AF37]/90 drop-shadow-md"
+                strokeWidth={2}
                 aria-hidden
-              >
-                <div className="absolute inset-y-2 left-1.5 w-[3px] rounded-full bg-[#D4AF37]/70" />
-                <BookOpen
-                  className="absolute bottom-2 right-2 h-7 w-7 text-[#D4AF37]/90 drop-shadow-md"
-                  strokeWidth={2}
-                  aria-hidden
-                />
-              </div>
-              <div className="min-w-0">
-                <p className="text-xs font-museo-bold uppercase tracking-wider text-[#D4AF37]/90">
-                  Included: The Resource Directory
-                </p>
-                <p className="mt-1 text-sm text-white/75 font-museo-medium leading-snug">
-                  Nigerian restaurants, consulates, shipping services, and verified professionals, unlocked with your pass.
-                </p>
-              </div>
+              />
             </div>
-
-            <RecentActivitySnippet />
+            <div className="min-w-0">
+              <p className="text-xs font-museo-bold uppercase tracking-wider text-[#D4AF37]/90">
+                Included: The Resource Directory
+              </p>
+              <p className="mt-1 text-sm text-white/75 font-museo-medium leading-snug">
+                Nigerian restaurants, consulates, shipping services, and verified professionals, unlocked with your pass.
+              </p>
+            </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-3 text-xs text-[#E8CA6A] font-museo-medium">

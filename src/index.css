@@ -61,6 +61,25 @@
     border-color 0.22s ease;
 }
 
+/* Hero / primary CTAs — pumpkin ramp wins over glass `.bawo-cta-quiet` shell */
+button.bawo-pill-cta-surface.bawo-cta-quiet,
+a.bawo-pill-cta-surface.bawo-cta-quiet {
+  background-color: var(--bawo-brand-cta-orange, #ff6b00);
+  background-image: var(--bawo-pill-gradient);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border: 1px solid rgba(255, 200, 150, 0.38);
+  box-shadow: var(--bawo-pill-shadow);
+}
+
+button.bawo-pill-cta-surface.bawo-cta-quiet:hover:not(:disabled):not(:active),
+a.bawo-pill-cta-surface.bawo-cta-quiet:hover:not(:active) {
+  filter: brightness(1.06) saturate(1.04);
+  box-shadow: var(--bawo-pill-shadow-hover);
+  border-color: rgba(255, 220, 190, 0.45);
+  background-color: var(--bawo-brand-cta-orange, #ff6b00);
+}
+
 .bawo-pill-cta-surface:hover {
   box-shadow: var(--bawo-pill-shadow-hover);
   filter: brightness(1.06) saturate(1.04);
@@ -349,6 +368,44 @@ a.bawo-cta-quiet:active {
 
 .bawo-trust-row__sep {
   color: rgba(255, 255, 255, 0.28);
+}
+
+/** Warm obsidian canvas — pumpkin ember glow, no cool blue cast */
+.bawo-page-bg {
+  background:
+    radial-gradient(ellipse 90% 55% at 50% -5%, rgba(255, 107, 0, 0.14) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 45% at 85% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 10% 75%, rgba(255, 107, 0, 0.06) 0%, transparent 45%),
+    linear-gradient(
+      180deg,
+      var(--bawo-canvas, #12080f) 0%,
+      var(--bawo-elevated, #1c0e14) 48%,
+      var(--bawo-canvas, #12080f) 100%
+    );
+}
+
+/** Hero band — orange mesh replaces cool blue scanline look */
+.bawo-hero-ambient {
+  background:
+    radial-gradient(ellipse 85% 42% at 50% 38%, rgba(255, 107, 0, 0.22) 0%, transparent 68%),
+    radial-gradient(ellipse 55% 30% at 50% 42%, rgba(212, 175, 55, 0.1) 0%, transparent 70%),
+    repeating-linear-gradient(
+      -4deg,
+      transparent 0,
+      transparent 7px,
+      rgba(255, 107, 0, 0.045) 7px,
+      rgba(255, 107, 0, 0.045) 8px
+    ),
+    repeating-linear-gradient(
+      4deg,
+      transparent 0,
+      transparent 11px,
+      rgba(212, 175, 55, 0.035) 11px,
+      rgba(212, 175, 55, 0.035) 12px
+    );
+  mask-image: radial-gradient(ellipse 92% 72% at 50% 42%, #000 25%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 92% 72% at 50% 42%, #000 25%, transparent 78%);
+  opacity: 0.95;
 }
 
 @layer base {
