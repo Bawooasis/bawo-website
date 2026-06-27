@@ -25,12 +25,35 @@ export const CONTENT = {
   },
 
   partnerWithUs: {
-    headline: "Own the NYC Diaspora Market.",
-    body: "We are onboarding thousands of highly-educated NYC professionals. Secure an exclusive Founding Sponsor placement in our Resource Directory.",
-    ctaLabel: "Inquire About Sponsorships",
+    headline: "Help our community find trusted local partners.",
+    body: "If you serve African, African American, Caribbean, or Latin New York — restaurants, professionals, or community businesses — list in our Resource Directory and connect with members who show up for culture.",
+    ctaLabel: "Partner With BawoSocial",
     inquiryEmail:
       import.meta.env.VITE_B2B_CONTACT_EMAIL || "Axadegbenro@gmail.com",
-    emailSubject: "BawoSocial B2B Sponsorship",
+    emailSubject: "BawoSocial Community Partner",
+  },
+
+  communityMission: {
+    title: "More than an app. A home for our culture.",
+    subtitle:
+      "BawoSocial exists so our people can preserve what makes us us, connect with intention, and find community that feels like belonging — not another feed.",
+    pillars: [
+      {
+        title: "Preserve culture",
+        description:
+          "Events, resources, and groups rooted in heritage — from Independence celebrations to borough cookouts.",
+      },
+      {
+        title: "Connect with purpose",
+        description:
+          "Find your people by borough, background, and goals — friendship, mentorship, business, or more.",
+      },
+      {
+        title: "Find your community",
+        description:
+          "Join groups like The Cookout, Carnival Crew, and Sabor NYC where members actually know each other.",
+      },
+    ],
   },
 
   // Hero Section

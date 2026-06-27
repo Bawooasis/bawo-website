@@ -15,17 +15,25 @@ import {
   Star,
   X,
 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import BoroughNetworkGraphic from "./components/BoroughNetworkGraphic";
 import BoroughSquareCarousel from "./components/BoroughSquareCarousel";
 import BawoPillButton from "./components/BawoPillButton";
 import MobileAppDownloadRow from "./components/MobileAppDownloadRow";
 import FoundingMemberCheckoutCard from "./components/FoundingMemberCheckoutCard";
+import CommunityMissionSection from "./components/CommunityMissionSection";
 import MailchimpSignupRow from "./components/MailchimpSignupRow";
 import PartnerWithUsSection from "./components/PartnerWithUsSection";
 import { CONTENT } from "./constants/content";
 import { TAILWIND_COLORS } from "./constants/colors";
 import { IMAGES } from "./constants/images";
+
+const HeroShaderBackground = lazy(
+  () => import("./components/ui/hero-shader-background"),
+);
+const SectionShaderAmbient = lazy(
+  () => import("./components/ui/section-shader-ambient"),
+);
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -275,6 +283,10 @@ function App() {
         className="fixed inset-0 z-0 bawo-page-bg"
         aria-hidden
       />
+      <div
+        className="fixed inset-0 z-0 bawo-site-ambient pointer-events-none"
+        aria-hidden
+      />
       
       {/* Promo strip — full-bleed glass, yellow copy + white icons, ribbon animation (see `index.css`) */}
       <div className="bawo-promo-strip fixed top-0 left-0 right-0 z-40 py-2 overflow-hidden">
@@ -451,7 +463,16 @@ function App() {
           ref={heroRef}
           className="relative flex justify-center items-start overflow-x-hidden overflow-y-visible pt-[max(5rem,calc(env(safe-area-inset-top,0px)+3.75rem))] sm:pt-[max(5.5rem,calc(env(safe-area-inset-top,0px)+4rem))] md:pt-[max(7rem,calc(env(safe-area-inset-top,0px)+5.25rem))] lg:pt-[max(7rem,calc(env(safe-area-inset-top,0px)+5.25rem))] xl:pt-[max(8rem,calc(env(safe-area-inset-top,0px)+6rem))] pb-10 sm:pb-12 md:pb-14 min-h-0 lg:min-h-[100dvh] bg-transparent"
         >
-          <div className="bawo-hero-ambient pointer-events-none absolute inset-0 z-0" aria-hidden />
+          <Suspense
+            fallback={
+              <div
+                className="bawo-hero-ambient pointer-events-none absolute inset-0 z-0"
+                aria-hidden
+              />
+            }
+          >
+            <HeroShaderBackground />
+          </Suspense>
           {/* Main Content Container */}
           <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-2 sm:pt-3 pb-2 max-w-screen-2xl w-full">
             <div className="flex flex-col items-center gap-10 md:gap-14">
@@ -582,7 +603,7 @@ function App() {
       <section
         ref={globalReachRef}
         id="building-the-network"
-        className="relative bg-transparent py-20 md:py-[5rem] overflow-x-hidden section-contain"
+        className="relative bawo-section-warmth bg-transparent py-20 md:py-[5rem] overflow-x-hidden section-contain"
       >
         <div className="relative z-10 container mx-auto px-5 sm:px-6 py-12 md:py-14">
           <div className="text-center space-y-8 md:space-y-12 max-w-[1400px] mx-auto">
@@ -688,316 +709,96 @@ function App() {
         </div>
       </section>
 
-        <div className="relative bg-transparent space-y-16 md:space-y-20 pt-[5rem] pb-6 md:pb-10">
-          <div className="container mx-auto px-6 max-w-5xl">
+        <div className="relative bawo-section-warmth bg-transparent space-y-12 md:space-y-16 pt-12 md:pt-16 pb-6 md:pb-10 overflow-hidden">
+          <Suspense fallback={null}>
+            <SectionShaderAmbient />
+          </Suspense>
+          <CommunityMissionSection />
+          <div className="relative z-10 container mx-auto px-6 max-w-5xl">
             <FoundingMemberCheckoutCard />
           </div>
-          <PartnerWithUsSection />
+          <div className="relative z-10">
+            <PartnerWithUsSection />
+          </div>
         </div>
 
-      {/* Stats Section – Batch 1 scarcity + progress bar */}
+      {/* Stats Section – Batch 1 (simplified) */}
       <section
         ref={statsRef}
-        className="relative py-20 md:py-24 bg-transparent"
+        id="pricing-stats"
+        className="relative py-16 md:py-20 bg-transparent overflow-hidden bawo-section-warmth"
       >
-        <div className="relative z-10 container mx-auto px-6">
-          <div className="text-center space-y-6">
+        <Suspense fallback={null}>
+          <SectionShaderAmbient />
+        </Suspense>
+        <div className="relative z-10 container mx-auto px-6 max-w-2xl">
+          <div className="text-center space-y-8">
             <div className="space-y-3">
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10b981] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#10b981]"></span>
-                </span>
-                <span className="text-[#10b981] text-sm font-museo-bold uppercase tracking-wider">Now Open</span>
-              </div>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white font-museo-bold tracking-tight">
+              <p className="text-[#10b981] text-xs font-museo-bold uppercase tracking-wider">
+                Batch 1 Open
+              </p>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white font-museo-bold tracking-tight">
                 {CONTENT.stats.title}
               </h2>
-              <p className="text-sm text-white/50 font-museo-medium">
-                Batch opened April 23, 2026 at 4:15 PM ET
+              <p className="text-base text-white/75 font-museo-medium max-w-lg mx-auto">
+                {CONTENT.stats.subtitle}
               </p>
             </div>
-            <p className="text-lg text-white/80 font-museo-medium max-w-2xl mx-auto">
-              {CONTENT.stats.subtitle}
-            </p>
-            <p className="text-xl md:text-2xl font-bold bawo-text-cta-gradient font-museo-bold">
-              {CONTENT.stats.tagline}
-            </p>
 
-            {/* Prominent Countdown Timer */}
-            <div className="pt-6">
-              <p className="text-xs uppercase tracking-widest text-white/50 font-museo-bold mb-3">Batch 1 Closes In</p>
-              <div className="flex items-center justify-center gap-3 md:gap-5">
-                <div className="flex flex-col items-center">
-                  <span className="text-4xl md:text-5xl lg:text-6xl font-museo-bold tabular-nums text-[var(--bawo-brand-cta-orange)]">{timeLeft.days}</span>
-                  <span className="text-[10px] md:text-xs uppercase tracking-wider text-white/60 font-museo-medium mt-1">Days</span>
-                </div>
-                <span className="text-2xl md:text-3xl text-white/30 font-museo-bold -mt-4">:</span>
-                <div className="flex flex-col items-center">
-                  <span className="text-4xl md:text-5xl lg:text-6xl font-museo-bold tabular-nums text-[var(--bawo-brand-cta-orange)]">{String(timeLeft.hours).padStart(2, "0")}</span>
-                  <span className="text-[10px] md:text-xs uppercase tracking-wider text-white/60 font-museo-medium mt-1">Hours</span>
-                </div>
-                <span className="text-2xl md:text-3xl text-white/30 font-museo-bold -mt-4">:</span>
-                <div className="flex flex-col items-center">
-                  <span className="text-4xl md:text-5xl lg:text-6xl font-museo-bold tabular-nums text-[var(--bawo-brand-cta-orange)]">{String(timeLeft.minutes).padStart(2, "0")}</span>
-                  <span className="text-[10px] md:text-xs uppercase tracking-wider text-white/60 font-museo-medium mt-1">Minutes</span>
-                </div>
-                <span className="text-2xl md:text-3xl text-white/30 font-museo-bold -mt-4">:</span>
-                <div className="flex flex-col items-center">
-                  <span className="text-4xl md:text-5xl lg:text-6xl font-museo-bold tabular-nums text-white">{String(timeLeft.seconds).padStart(2, "0")}</span>
-                  <span className="text-[10px] md:text-xs uppercase tracking-wider text-white/60 font-museo-medium mt-1">Seconds</span>
-                </div>
-              </div>
-            </div>
-            
-            <div className="flex flex-wrap justify-center gap-8 md:gap-16 pt-8">
-              {/* Batch 1 Spots */}
-              <div className="text-center">
-                <p className={`text-4xl md:text-5xl font-bold ${TAILWIND_COLORS.primary.text} font-museo-bold`}>
-                  {CONTENT.stats.metrics.batch1.value}
-                </p>
-                <p className="text-sm md:text-base text-white/80 font-museo-medium uppercase tracking-wide mt-1">
-                  {CONTENT.stats.metrics.batch1.label}
-                </p>
-                <p className="text-xs text-white/60 font-museo-regular mt-1">
-                  {CONTENT.stats.metrics.batch1.subtext}
-                </p>
-              </div>
-              
-              {/* Lifetime Savings */}
-              <div className="text-center">
-                <p className="text-4xl md:text-5xl font-bold bawo-text-cta-gradient font-museo-bold">
-                  {CONTENT.stats.metrics.savings.value}
-                </p>
-                <p className="text-sm md:text-base text-white/80 font-museo-medium uppercase tracking-wide mt-1">
-                  {CONTENT.stats.metrics.savings.label}
-                </p>
-                <p className="text-xs text-white/60 font-museo-regular mt-1">
-                  {CONTENT.stats.metrics.savings.subtext}
-                </p>
-              </div>
-              
-              {/* No Monthly Fees */}
-              <div className="text-center">
-                <p className="text-4xl md:text-5xl font-bold text-white font-museo-bold">
-                  {CONTENT.stats.metrics.access.value}
-                </p>
-                <p className="text-sm md:text-base text-white/80 font-museo-medium uppercase tracking-wide mt-1">
-                  {CONTENT.stats.metrics.access.label}
-                </p>
-                <p className="text-xs text-white/60 font-museo-regular mt-1">
-                  {CONTENT.stats.metrics.access.subtext}
-                </p>
-              </div>
-            </div>
-
-            {/* Value Prop Cards */}
-            <div className="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto pt-8">
-              {/* Card 1 - Price Lock */}
-              <div className="bg-white/[0.06] backdrop-blur-md rounded-xl border border-[rgba(255,255,255,0.08)] p-5 text-center hover:border-[rgba(255,107,0,0.45)] transition-all duration-300">
-                <div className="text-3xl mb-2">🔒</div>
-                <p className="text-white/90 font-museo-bold text-lg mb-1">Price Locked Forever</p>
-                <p className="text-white/60 text-sm font-museo-regular">Never pay $19.99/month</p>
-              </div>
-              
-              {/* Card 2 - Money Back */}
-              <div className="bg-white/[0.06] backdrop-blur-md rounded-xl border border-[rgba(255,255,255,0.08)] p-5 text-center hover:border-[#10b981]/40 transition-all duration-300">
-                <div className="text-3xl mb-2">✅</div>
-                <p className="text-white/90 font-museo-bold text-lg mb-1">30-Day Guarantee</p>
-                <p className="text-white/60 text-sm font-museo-regular">Full refund, no questions asked</p>
-              </div>
-              
-              {/* Card 3 - Exclusive Access */}
-              <div className="bg-white/[0.06] backdrop-blur-md rounded-xl border border-[rgba(255,255,255,0.08)] p-5 text-center hover:border-[var(--bawo-section-title-accent)]/40 transition-all duration-300">
-                <div className="text-3xl mb-2">⭐</div>
-                <p className="text-white/90 font-museo-bold text-lg mb-1">Founding Member Badge</p>
-                <p className="text-white/60 text-sm font-museo-regular">Permanent "Day One" status</p>
-              </div>
-            </div>
-            {/* Progress bar – Premium FOMO visual with live activity */}
-            <div className="max-w-2xl mx-auto pt-8 space-y-5">
-              {/* Live indicator */}
-              <div className="flex items-center justify-center gap-2 text-sm text-white/70 font-museo-medium">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10b981] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10b981]"></span>
+            <div>
+              <p className="text-[10px] uppercase tracking-widest text-white/45 font-museo-bold mb-2">
+                Closes in
+              </p>
+              <div className="flex items-center justify-center gap-1 md:gap-2 tabular-nums font-museo-bold">
+                <span className="text-2xl md:text-3xl text-[#ff6b00]">{timeLeft.days}</span>
+                <span className="text-white/25 pb-4">:</span>
+                <span className="text-2xl md:text-3xl text-[#ff6b00]">
+                  {String(timeLeft.hours).padStart(2, "0")}
                 </span>
-                <span className="text-[#10b981]">Live</span>
-                <span>•</span>
-                <span>Batch 1 open — spots filling</span>
+                <span className="text-white/25 pb-4">:</span>
+                <span className="text-2xl md:text-3xl text-[#ff6b00]">
+                  {String(timeLeft.minutes).padStart(2, "0")}
+                </span>
+                <span className="text-white/25 pb-4">:</span>
+                <span className="text-2xl md:text-3xl text-white/90">
+                  {String(timeLeft.seconds).padStart(2, "0")}
+                </span>
               </div>
-
-              <p className="text-base md:text-lg font-bold font-museo-bold text-white/95 text-center">
-                <span className="bawo-text-cta-gradient text-2xl md:text-3xl">50</span>{" "}
-                / <span className="bawo-text-cta-gradient">500</span> Founding Spots Taken
+              <p className="text-[10px] text-white/45 font-museo-medium mt-1">
+                days · hrs · min · sec
               </p>
-              
-              <div className="h-3 w-full rounded-full bg-white/[0.08] overflow-hidden backdrop-blur-sm border border-[rgba(255,255,255,0.08)] shadow-inner relative">
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm font-museo-medium text-white/70">
+              <span>
+                <strong className="text-[#ff6b00]">500</strong> spots
+              </span>
+              <span>
+                <strong className="text-white">$25</strong> once
+              </span>
+              <span>30-day guarantee</span>
+            </div>
+
+            <div className="space-y-2 pt-2">
+              <div className="flex justify-between text-xs text-white/55 font-museo-medium">
+                <span>50 / 500 taken</span>
+                <span>450 left</span>
+              </div>
+              <div className="h-2 w-full rounded-full bg-white/[0.08] overflow-hidden">
                 <div
-                  className="h-full w-[10%] rounded-full bg-[#ff6b00] shadow-[0_0_14px_rgba(255,107,0,0.45)] transition-[width] duration-500"
+                  className="h-full w-[10%] rounded-full bg-[#ff6b00]"
                   aria-label="50 of 500 spots taken"
                 />
               </div>
-              
-              <p className="text-xs md:text-sm text-white/60 font-museo-medium italic text-center">
-                Only 450 spots remaining in Batch 1
-              </p>
-
-              {/* Live Activity Feed */}
-              {/* Price Comparison Calculator */}
-              <div className="mt-8 bg-white/[0.06] backdrop-blur-md rounded-xl border border-[rgba(255,255,255,0.08)] p-6 max-w-3xl mx-auto">
-                <h4 className="text-white font-museo-bold text-lg mb-4 text-center">The Math: Founding Member vs. Monthly Subscription</h4>
-
-                <div className="mb-6 rounded-2xl border border-[rgba(212,175,55,0.35)] bg-gradient-to-br from-[rgba(212,175,55,0.12)] via-[rgba(6,3,12,0.72)] to-[rgba(255,107,0,0.08)] px-4 py-5 sm:px-8 sm:py-6 text-center shadow-[0_12px_40px_rgba(0,0,0,0.35)]">
-                  <p className="text-[10px] sm:text-xs font-museo-bold uppercase tracking-[0.2em] text-[#D4AF37]/90 mb-2">
-                    Lifetime pass vs. paying monthly (5 yrs)
-                  </p>
-                  <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-8">
-                    <div>
-                      <p className="text-xs text-white/55 font-museo-medium mb-1">Pay once</p>
-                      <p className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tabular-nums text-[#D4AF37] drop-shadow-[0_2px_24px_rgba(212,175,55,0.35)]">
-                        $25
-                      </p>
-                    </div>
-                    <span className="hidden sm:block text-3xl font-museo-bold text-white/25" aria-hidden>
-                      vs
-                    </span>
-                    <div>
-                      <p className="text-xs text-white/55 font-museo-medium mb-1">Monthly path</p>
-                      <p className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tabular-nums text-white drop-shadow-[0_2px_20px_rgba(255,255,255,0.12)]">
-                        $1,200
-                      </p>
-                      <p className="text-[11px] text-white/45 font-museo-regular mt-1">
-                        stacked over five years, no founder perks
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="grid md:grid-cols-2 gap-6">
-                  {/* Founding Member */}
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-2xl">👑</span>
-                      <h5 className="text-[var(--bawo-brand-cta-orange)] font-museo-bold text-lg">Founding Member</h5>
-                    </div>
-                    <div className="space-y-2 text-white/80 text-sm font-museo-medium">
-                      <div className="flex justify-between">
-                        <span>Today:</span>
-                        <span className="font-museo-bold text-white">$25</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Year 1:</span>
-                        <span className="font-museo-bold text-white">$25</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Year 2:</span>
-                        <span className="font-museo-bold text-white">$25</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Year 3:</span>
-                        <span className="font-museo-bold text-white">$25</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Year 5:</span>
-                        <span className="font-museo-bold text-white">$25</span>
-                      </div>
-                      <div className="border-t border-white/10 pt-2 flex justify-between text-[#10b981] font-museo-bold">
-                        <span>Forever:</span>
-                        <span>$25 total</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Monthly Subscription */}
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-2xl">📅</span>
-                      <h5 className="text-white/60 font-museo-bold text-lg">Monthly Member</h5>
-                    </div>
-                    <div className="space-y-2 text-white/60 text-sm font-museo-medium">
-                      <div className="flex justify-between">
-                        <span>Today:</span>
-                        <span className="font-museo-bold">$0</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Year 1:</span>
-                        <span className="font-museo-bold">$240</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Year 2:</span>
-                        <span className="font-museo-bold">$480</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Year 3:</span>
-                        <span className="font-museo-bold">$720</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Year 5:</span>
-                        <span className="font-museo-bold">$1,200</span>
-                      </div>
-                      <div className="border-t border-white/10 pt-2 flex justify-between text-red-400 font-museo-bold">
-                        <span>5-year total:</span>
-                        <span>$1,200+</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6 pt-6 border-t border-white/10 text-center">
-                  <p className="bawo-text-cta-gradient font-museo-bold text-xl">
-                    Save $215 in Year 1 alone. $1,175+ over 5 years.
-                  </p>
-                  <p className="text-white/60 text-sm font-museo-regular mt-2">
-                    Your $25 pays for itself in under 2 months.
-                  </p>
-                </div>
-              </div>
-
-              {/* Urgency Warning Box */}
-              <div className="mt-8 bg-gradient-to-r from-[rgba(255,107,0,0.14)] to-[rgba(255,107,0,0.06)] backdrop-blur-sm rounded-xl border border-[rgba(255,107,0,0.35)] p-6 max-w-2xl mx-auto">
-                <div className="flex items-start gap-4">
-                  <div className="text-3xl">⚠️</div>
-                  <div className="flex-1 space-y-3">
-                    <h4 className="text-white font-museo-bold text-lg">After Batch 1 Closes...</h4>
-                    <ul className="space-y-2 text-white/80 text-sm font-museo-medium">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[var(--bawo-brand-cta-orange)] mt-0.5">→</span>
-                        <span>Price increases to <strong className="text-white">$19.99/month</strong> ($240/year)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[var(--bawo-brand-cta-orange)] mt-0.5">→</span>
-                        <span>No more lifetime access option</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[var(--bawo-brand-cta-orange)] mt-0.5">→</span>
-                        <span>Founding Member badge becomes exclusive</span>
-                      </li>
-                    </ul>
-                    <div className="pt-2 border-t border-white/10">
-                      <p className="text-xs text-white/60 font-museo-regular italic">
-                        {CONTENT.stats.urgency.deadline}
-                      </p>
-                      <p className="text-sm text-[#E8CA6A] font-museo-bold mt-2 tabular-nums">
-                        {timeLeft.days}d {String(timeLeft.hours).padStart(2, "0")}h {String(timeLeft.minutes).padStart(2, "0")}m {String(timeLeft.seconds).padStart(2, "0")}s remaining
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
 
-            {/* Risk Reversal - Money Back Guarantee */}
-            <div className="max-w-2xl mx-auto mt-8 bg-gradient-to-r from-[#10b981]/10 to-[#059669]/10 backdrop-blur-sm rounded-xl border border-[#10b981]/30 p-6 text-center">
-              <div className="text-4xl mb-3">💯</div>
-              <h4 className="text-white font-museo-bold text-xl mb-2">Zero-Risk 30-Day Guarantee</h4>
-              <p className="text-white/80 font-museo-medium text-base mb-4">
-                Try BawoSocial for 30 days. If you're not connecting, networking, and winning, we'll refund your $25. No questions asked.
-              </p>
-              <p className="text-[#10b981] font-museo-bold text-sm">
-                {CONTENT.stats.urgency.guarantee}
-              </p>
-            </div>
+            <p className="text-sm text-white/50 font-museo-medium">
+              {CONTENT.stats.tagline}
+            </p>
+
+            <p className="text-xs text-white/40 font-museo-regular">
+              {CONTENT.stats.urgency.deadline} · {CONTENT.stats.urgency.guarantee}
+            </p>
           </div>
         </div>
       </section>

@@ -370,18 +370,38 @@ a.bawo-cta-quiet:active {
   color: rgba(255, 255, 255, 0.28);
 }
 
-/** Warm obsidian canvas — pumpkin ember glow, no cool blue cast */
+/** Unified warm canvas — single base tone + soft ember glows (no eggplant mid-band) */
 .bawo-page-bg {
+  background-color: var(--bawo-canvas, #12080f);
+  background-image:
+    radial-gradient(ellipse 110% 70% at 50% -8%, rgba(255, 107, 0, 0.14) 0%, transparent 52%),
+    radial-gradient(ellipse 85% 55% at 18% 32%, rgba(255, 107, 0, 0.07) 0%, transparent 58%),
+    radial-gradient(ellipse 75% 50% at 82% 38%, rgba(212, 175, 55, 0.06) 0%, transparent 55%),
+    radial-gradient(ellipse 90% 60% at 50% 62%, rgba(255, 107, 0, 0.05) 0%, transparent 58%),
+    radial-gradient(ellipse 80% 55% at 30% 88%, rgba(196, 123, 68, 0.05) 0%, transparent 52%),
+    radial-gradient(ellipse 70% 45% at 75% 78%, rgba(212, 175, 55, 0.04) 0%, transparent 48%);
+}
+
+/** Site-wide ambient wash — keeps scroll sections visually connected to the hero */
+.bawo-site-ambient {
   background:
-    radial-gradient(ellipse 90% 55% at 50% -5%, rgba(255, 107, 0, 0.14) 0%, transparent 55%),
-    radial-gradient(ellipse 70% 45% at 85% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 40% at 10% 75%, rgba(255, 107, 0, 0.06) 0%, transparent 45%),
-    linear-gradient(
-      180deg,
-      var(--bawo-canvas, #12080f) 0%,
-      var(--bawo-elevated, #1c0e14) 48%,
-      var(--bawo-canvas, #12080f) 100%
-    );
+    radial-gradient(ellipse 120% 45% at 50% 18%, rgba(255, 107, 0, 0.09) 0%, transparent 68%),
+    radial-gradient(ellipse 100% 40% at 50% 52%, rgba(255, 107, 0, 0.04) 0%, transparent 62%),
+    radial-gradient(ellipse 90% 35% at 50% 82%, rgba(212, 175, 55, 0.035) 0%, transparent 58%);
+  opacity: 1;
+}
+
+/** Soft top glow when entering a section below the hero */
+.bawo-section-warmth::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 90% 55% at 50% 0%,
+    rgba(255, 107, 0, 0.08) 0%,
+    transparent 65%
+  );
 }
 
 /** Hero band — orange mesh replaces cool blue scanline look */
@@ -421,7 +441,7 @@ a.bawo-cta-quiet:active {
   body {
     font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
-    background-color: var(--bawo-canvas, #06030c);
+    background-color: var(--bawo-canvas, #12080f);
     color: var(--bawo-text-primary, #fff);
     touch-action: auto;
     overscroll-behavior-y: auto;
