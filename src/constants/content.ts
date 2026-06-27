@@ -14,7 +14,7 @@ export const CONTENT = {
     kicker: "Day-1 revenue, BawoSocial",
     title: "Founding Member Lifetime Pass",
     description:
-      "Lock in early. One payment, permanent status in our NYC Naija private network.",
+      "Lock in early. One payment, permanent status in our African, African American, Caribbean, and Latin NYC community.",
     price: "$25",
     benefits: [
       "Lifetime access to the premium membership tier",
@@ -37,7 +37,7 @@ export const CONTENT = {
   hero: {
     title: "Culture, connection, community",
     subtitle:
-      "The algorithmic platforms failed us. We built the private operating system for the NYC Naija Diaspora. No noise — just curated resources, culturally-filtered events, and real community.",
+      "The big platforms weren't built for our communities. BawoSocial is a private network for African, African American, Caribbean, and Latin NYC — curated resources, culture-first events, and real community without the noise.",
     ctaPrimary: "Secure My Spot, $25",
     ctaMicrocopy: "Founding lifetime pass, limited spots.",
     ctaSecondary: "Join Waitlist",
@@ -87,7 +87,7 @@ export const CONTENT = {
   // Origin Story Section
   origin: {
     title: "Why BawoSocial Exists",
-    mainText: "Most Nigerians in the diaspora feel isolated and disconnected from opportunity. We miss our culture, our people, and our network. BawoSocial was created to fix that. We are a utility-first platform to find your tribe, access curated diaspora resources, and build meaningful relationships — powered by technology that understands our culture, our boroughs, and our community.",
+    mainText: "Most of us in the diaspora feel isolated and disconnected from opportunity. We miss our culture, our people, and our network. BawoSocial was created to fix that. We are a utility-first platform to find your tribe, access curated diaspora resources, and build meaningful relationships — powered by technology that understands our culture, our boroughs, and our community.",
     visionText: "",
   },
 
@@ -106,7 +106,7 @@ export const CONTENT = {
       },
       {
         title: "Resource Directory Unlocked",
-        description: "Full access to curated restaurants, consulates, shipping, churches, and more.",
+        description: "Full access to African and African American-owned businesses, Latin-owned businesses, consulates, community resources, churches, and more.",
       },
       {
         title: "Founding Member Badge",
@@ -194,7 +194,7 @@ export const CONTENT = {
   // Footer
   footer: {
     brand: "BawoSocial",
-    tagline: "Where Nigerians Connect",
+    tagline: "Connecting African, African American, Caribbean, and Latin New York through authentic relationships, resources, and cultural pride.",
     sections: {
       quickLinks: {
         title: "Quick Links",

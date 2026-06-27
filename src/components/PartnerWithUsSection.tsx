@@ -4,7 +4,7 @@ import { CONTENT } from "../constants/content";
 const audiences = [
   { label: "Immigration attorneys", Icon: Scale },
   { label: "Real estate partners", Icon: Home },
-  { label: "Shipping & logistics (e.g. Naija Cargo)", Icon: Package },
+  { label: "Shipping & logistics partners", Icon: Package },
 ] as const;
 
 export default function PartnerWithUsSection() {

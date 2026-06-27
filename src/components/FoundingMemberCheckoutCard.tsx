@@ -80,7 +80,7 @@ export default function FoundingMemberCheckoutCard() {
                 Included: The Resource Directory
               </p>
               <p className="mt-1 text-sm text-white/75 font-museo-medium leading-snug">
-                Nigerian restaurants, consulates, shipping services, and verified professionals, unlocked with your pass.
+                African and African American-owned and Latin restaurants and businesses, community resources, and verified professionals, unlocked with your pass.
               </p>
             </div>
           </div>

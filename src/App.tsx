@@ -1011,7 +1011,7 @@ function App() {
               </h2>
               <div className="glass-card rounded-2xl px-6 md:px-10 py-12 space-y-8">
                 <p className="text-white/95 font-museo-medium text-xl md:text-2xl leading-relaxed md:leading-[2] text-left">
-                  Most Nigerians in the diaspora feel isolated and{" "}
+                  Most of us in the diaspora feel isolated and{" "}
                   <strong className="font-museo-bold text-white">disconnected from opportunity</strong>. We miss our culture, our people, and our network. BawoSocial was created to fix that.
                 </p>
                 <p className="text-white/95 font-museo-medium text-xl md:text-2xl leading-relaxed md:leading-[2] text-left">
@@ -1158,11 +1158,11 @@ function App() {
                 </div>
                 <p className="text-white mt-1 font-museo-medium">
                   {index === 0 &&
-                    "Access Resources: Nigerian restaurants, churches, mental health, and more."}
+                    "Access Resources: African and African American-owned restaurants, churches, mental health, and more."}
                   {index === 1 &&
                     "Meet Concierge: NIN renewals, passports, shipping, and local intel."}
                   {index === 2 &&
-                    "Join Communities: Soft Life NYC, Outside & Owambe, Heart & Vibes, The Safe Space."}
+                    "Join Communities: Soft Life NYC, The Cookout, Carnival Crew, Sabor NYC, Outside & Owambe."}
                   {index === 3 &&
                     "Discover Events: rooftop nights, film screenings, and diaspora meetups."}
                   {index === 4 &&
@@ -1189,12 +1189,12 @@ function App() {
               <div className="flex items-center gap-3 mb-3">
                 <Calendar className="w-5 h-5 text-white" />
                 <span className="font-museo-bold">
-                  Diaspora Networking Night, Downtown Brooklyn
+                  Caribbean Carnival Block Party, Brooklyn
                 </span>
               </div>
               <p className="text-white/80 font-museo-medium">
-                Connect with professionals across industries and build lasting
-                relationships.
+                Dancehall, soca, and Caribbean food — a block party celebrating
+                Brooklyn&apos;s island culture.
               </p>
             </div>
             <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,107,0,0.45)] text-white transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
@@ -1308,13 +1308,13 @@ function App() {
             <div className="glass-card rounded-2xl p-6 border border-[rgba(255,255,255,0.08)]">
               <h3 className="text-lg font-museo-bold text-white mb-2">What is BawoSocial?</h3>
               <p className="text-white/75 font-museo-medium text-sm leading-relaxed">
-                BawoSocial is the private community platform for the Nigerian diaspora in New York City. We connect Nigerians across Brooklyn, Harlem, Queens, The Bronx, and Staten Island with curated resources, culturally-relevant events, and community groups. It's the Nigerian community app NYC has been missing.
+                BawoSocial is a private community platform for African, African American, Caribbean, and Latin NYC across all 5 boroughs.
               </p>
             </div>
             <div className="glass-card rounded-2xl p-6 border border-[rgba(255,255,255,0.08)]">
               <h3 className="text-lg font-museo-bold text-white mb-2">Who is BawoSocial for?</h3>
               <p className="text-white/75 font-museo-medium text-sm leading-relaxed">
-                BawoSocial is for Nigerians and the broader African community living in NYC who want to find their people, discover Nigerian restaurants and businesses, attend Afrobeats and cultural events, and connect with professionals who share their background. Whether you're new to New York or been here for years — this is your Naija network New York.
+                African, African American, Caribbean, and Latino New Yorkers — plus friends of the culture. Your community network in New York.
               </p>
             </div>
             <div className="glass-card rounded-2xl p-6 border border-[rgba(255,255,255,0.08)]">
@@ -1326,7 +1326,7 @@ function App() {
             <div className="glass-card rounded-2xl p-6 border border-[rgba(255,255,255,0.08)]">
               <h3 className="text-lg font-museo-bold text-white mb-2">What resources does BawoSocial offer?</h3>
               <p className="text-white/75 font-museo-medium text-sm leading-relaxed">
-                Our Resource Directory includes Nigerian restaurants NYC, consulates with live fee schedules, NIN enrollment centers with maps, shipping services with vessel tracking, churches, African stores, and mental health support. All listings are verified with real photos and business details. It's the most complete Nigerian events NYC and resources guide available.
+                Our Resource Directory includes restaurants, consulates with live fee schedules, NIN enrollment centers with maps, shipping services with vessel tracking, churches, African, African American, and Latin-owned stores, and mental health support. All listings are verified with real photos and business details.
               </p>
             </div>
             <div className="glass-card rounded-2xl p-6 border border-[rgba(255,255,255,0.08)]">
@@ -1375,8 +1375,7 @@ function App() {
             <div className="text-center md:text-left">
               <h3 className="text-white font-museo-bold mb-4">BawoSocial</h3>
               <p className="text-white/80 text-sm font-museo-medium mb-4">
-                Connecting the Nigerian diaspora in New York City through authentic
-                relationships, resources, and cultural pride.
+                {CONTENT.footer.tagline}
               </p>
               <div className="flex justify-center md:justify-start gap-4">
                 <a
