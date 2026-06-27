@@ -614,10 +614,10 @@ function App() {
                     return (
                       <div
                         key={city.name}
-                        className="city-stat text-center space-y-6 md:space-y-8 w-full max-w-[20rem] mx-auto"
+                        className="city-stat text-center space-y-5 md:space-y-6 w-full max-w-[16rem] mx-auto"
                       >
                         {rotatingGallery ? (
-                          <div className="relative w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-[22rem] xl:h-[22rem] mx-auto overflow-hidden rounded-full shadow-[0_28px_80px_rgba(0,0,0,0.72)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#D4AF37]/45 hover:shadow-[0_32px_90px_rgba(212,175,55,0.12)]">
+                          <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 mx-auto overflow-hidden rounded-full shadow-[0_28px_80px_rgba(0,0,0,0.72)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#D4AF37]/45 hover:shadow-[0_32px_90px_rgba(212,175,55,0.12)]">
                             <BoroughSquareCarousel
                               images={rotatingGallery}
                               alt={`${city.name}, Nigerian diaspora community in NYC`}
@@ -625,7 +625,7 @@ function App() {
                             />
                           </div>
                         ) : (
-                          <div className="w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-[22rem] xl:h-[22rem] mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_28px_80px_rgba(0,0,0,0.72)] overflow-hidden hover:scale-[1.04] transition-transform duration-300">
+                          <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_28px_80px_rgba(0,0,0,0.72)] overflow-hidden hover:scale-[1.04] transition-transform duration-300">
                             <img
                               src={IMAGES.globalReach.cities[index]}
                               alt={city.name}
@@ -654,10 +654,10 @@ function App() {
                     return (
                       <div
                         key={city.name}
-                        className="city-stat text-center space-y-6 md:space-y-8 w-full max-w-[20rem] mx-auto"
+                        className="city-stat text-center space-y-5 md:space-y-6 w-full max-w-[16rem] mx-auto"
                       >
                         {rotatingGallery ? (
-                          <div className="relative w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-[22rem] xl:h-[22rem] mx-auto overflow-hidden rounded-full shadow-[0_28px_80px_rgba(0,0,0,0.72)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#D4AF37]/45 hover:shadow-[0_32px_90px_rgba(212,175,55,0.12)]">
+                          <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 mx-auto overflow-hidden rounded-full shadow-[0_28px_80px_rgba(0,0,0,0.72)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#D4AF37]/45 hover:shadow-[0_32px_90px_rgba(212,175,55,0.12)]">
                             <BoroughSquareCarousel
                               images={rotatingGallery}
                               alt={`${city.name}, Nigerian diaspora community in NYC`}
@@ -665,7 +665,7 @@ function App() {
                             />
                           </div>
                         ) : (
-                          <div className="w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-[22rem] xl:h-[22rem] mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_28px_80px_rgba(0,0,0,0.72)] overflow-hidden hover:scale-[1.04] transition-transform duration-300">
+                          <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_28px_80px_rgba(0,0,0,0.72)] overflow-hidden hover:scale-[1.04] transition-transform duration-300">
                             <img
                               src={IMAGES.globalReach.cities[i]}
                               alt={city.name}
