@@ -49,50 +49,102 @@
 }
 
 .bawo-pill-cta-surface {
-  background-image: var(--bawo-pill-gradient);
-  background-size: 118% 100%;
-  background-position: 0% 50%;
-  border: 1px solid rgba(255, 238, 225, 0.24);
-  box-shadow: var(--bawo-pill-shadow);
+  background-color: #1c0e14;
+  background-image: linear-gradient(
+    128deg,
+    #12080f 0%,
+    #1c0e14 22%,
+    #261018 42%,
+    #5c2818 62%,
+    #c44a10 82%,
+    #ff6b00 100%
+  );
+  border: 1px solid rgba(255, 140, 95, 0.42);
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transition:
-    box-shadow 0.22s ease,
-    filter 0.22s ease,
-    transform 0.22s ease,
-    border-color 0.22s ease;
+    background-image 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease,
+    filter 0.15s ease;
 }
 
-/* Hero / primary CTAs — pumpkin ramp wins over glass `.bawo-cta-quiet` shell */
+.bawo-pill-cta-surface svg {
+  color: rgba(255, 232, 200, 0.96);
+  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.35));
+}
+
+/* Hero / primary CTAs — eggplant depth → pumpkin ember */
 button.bawo-pill-cta-surface.bawo-cta-quiet,
 a.bawo-pill-cta-surface.bawo-cta-quiet {
-  background-color: var(--bawo-brand-cta-orange, #ff6b00);
-  background-image: var(--bawo-pill-gradient);
+  background-color: #1c0e14;
+  background-image: linear-gradient(
+    128deg,
+    #12080f 0%,
+    #1c0e14 22%,
+    #261018 42%,
+    #5c2818 62%,
+    #c44a10 82%,
+    #ff6b00 100%
+  );
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
-  border: 1px solid rgba(255, 200, 150, 0.38);
-  box-shadow: var(--bawo-pill-shadow);
+  border: 1px solid rgba(255, 140, 95, 0.42);
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 button.bawo-pill-cta-surface.bawo-cta-quiet:hover:not(:disabled):not(:active),
-a.bawo-pill-cta-surface.bawo-cta-quiet:hover:not(:active) {
-  filter: brightness(1.06) saturate(1.04);
-  box-shadow: var(--bawo-pill-shadow-hover);
-  border-color: rgba(255, 220, 190, 0.45);
-  background-color: var(--bawo-brand-cta-orange, #ff6b00);
+a.bawo-pill-cta-surface.bawo-cta-quiet:hover:not(:active),
+.bawo-pill-cta-surface:hover:not(:disabled):not(:active) {
+  background-color: #261018;
+  background-image: linear-gradient(
+    128deg,
+    #1c0e14 0%,
+    #261018 24%,
+    #3d2214 46%,
+    #8b3310 68%,
+    #ff6b00 88%,
+    #ff8a33 100%
+  );
+  filter: brightness(1.04);
+  border-color: rgba(255, 170, 110, 0.55);
+  box-shadow:
+    0 4px 18px rgba(255, 107, 0, 0.22),
+    0 2px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  transform: translateY(-1px);
 }
 
-.bawo-pill-cta-surface:hover {
-  box-shadow: var(--bawo-pill-shadow-hover);
-  filter: brightness(1.06) saturate(1.04);
+button.bawo-pill-cta-surface.bawo-cta-quiet:active:not(:disabled),
+a.bawo-pill-cta-surface.bawo-cta-quiet:active,
+.bawo-pill-cta-surface:active:not(:disabled) {
+  background-color: #1c0e14;
+  background-image: linear-gradient(
+    128deg,
+    #12080f 0%,
+    #1c0e14 30%,
+    #261018 55%,
+    #5c2818 78%,
+    #ff6b00 100%
+  );
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  transform: translateY(0) scale(0.985);
+  box-shadow:
+    0 1px 8px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  filter: brightness(0.98);
 }
 
-button.bawo-pill-cta-surface:disabled {
-  filter: none;
-  box-shadow: var(--bawo-pill-shadow);
-}
-
+button.bawo-pill-cta-surface:disabled,
 button.bawo-pill-cta-surface:disabled:hover {
   filter: none;
-  box-shadow: var(--bawo-pill-shadow);
+  box-shadow: none;
+  opacity: 0.5;
 }
 
 /**
@@ -235,6 +287,186 @@ a.bawo-cta-quiet:active {
   -webkit-backdrop-filter: blur(10px);
 }
 
+/** Outline pill — rounded border, no fill (header Join Now, etc.) */
+.bawo-cta-outline {
+  background: transparent;
+  background-image: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  box-shadow: none;
+  color: #fff;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.12s ease;
+}
+
+@media (hover: hover) {
+  .bawo-cta-outline:hover:not(:disabled):not(:active) {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: none;
+  }
+}
+
+.bawo-cta-outline:active:not(:disabled) {
+  background: transparent;
+  background-image: none;
+  border-color: rgba(255, 107, 0, 0.55);
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  transform: scale(0.985);
+  filter: none;
+}
+
+.bawo-cta-outline:focus-visible {
+  outline: 2px solid rgba(255, 160, 110, 0.55);
+  outline-offset: 2px;
+}
+
+.bawo-cta-outline:disabled {
+  opacity: 0.45;
+}
+
+/* Polished CTA — soft glow, gradient drift, hover shimmer */
+.bawo-cta-polished {
+  isolation: isolate;
+  overflow: hidden;
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease,
+    border-color 0.22s ease,
+    filter 0.22s ease;
+}
+
+.bawo-cta-polished::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 36%,
+    rgba(255, 255, 255, 0.38) 50%,
+    transparent 64%
+  );
+  transform: translateX(-140%) skewX(-14deg);
+  opacity: 0;
+}
+
+.bawo-pill-cta-surface.bawo-cta-polished {
+  animation: none;
+}
+
+.bawo-pill-cta-surface.bawo-cta-polished::after {
+  display: none;
+}
+
+@keyframes bawoCtaGlow {
+  0%,
+  100% {
+    filter: brightness(1) saturate(1);
+    box-shadow:
+      var(--bawo-pill-shadow),
+      0 0 22px rgba(255, 107, 0, 0.12);
+  }
+  50% {
+    filter: brightness(1.05) saturate(1.04);
+    box-shadow:
+      var(--bawo-pill-shadow-hover),
+      0 0 38px rgba(255, 107, 0, 0.28);
+  }
+}
+
+@keyframes bawoCtaGradientDrift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.bawo-cta-outline.bawo-cta-polished {
+  animation: bawoOutlinePulse 2.8s ease-in-out infinite;
+}
+
+.bawo-cta-outline.bawo-cta-polished::after {
+  animation: bawoCtaIdleShimmer 6s ease-in-out infinite;
+}
+
+@keyframes bawoOutlinePulse {
+  0%,
+  100% {
+    border-color: rgba(255, 255, 255, 0.24);
+    box-shadow: 0 0 0 rgba(255, 107, 0, 0);
+  }
+  50% {
+    border-color: rgba(255, 138, 51, 0.58);
+    box-shadow:
+      0 0 0 1px rgba(255, 107, 0, 0.06),
+      0 0 22px rgba(255, 107, 0, 0.14);
+  }
+}
+
+@keyframes bawoCtaIdleShimmer {
+  0%,
+  72%,
+  100% {
+    transform: translateX(-140%) skewX(-14deg);
+    opacity: 0;
+  }
+  82% {
+    opacity: 0.45;
+  }
+  92% {
+    transform: translateX(140%) skewX(-14deg);
+    opacity: 0;
+  }
+}
+
+@keyframes bawoCtaShimmer {
+  from {
+    transform: translateX(-140%) skewX(-14deg);
+  }
+  to {
+    transform: translateX(140%) skewX(-14deg);
+  }
+}
+
+@media (hover: hover) {
+  .bawo-cta-polished:hover:not(:disabled):not(:active) {
+    transform: translateY(-2px);
+  }
+
+  .bawo-pill-cta-surface.bawo-cta-polished:hover:not(:disabled):not(:active) {
+    animation: none;
+    filter: none;
+  }
+
+  .bawo-cta-polished:hover:not(:disabled):not(:active)::after {
+    opacity: 1;
+    animation: bawoCtaShimmer 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .bawo-cta-outline.bawo-cta-polished:hover:not(:disabled):not(:active) {
+    animation: none;
+    border-color: rgba(255, 160, 110, 0.72);
+    box-shadow:
+      0 0 0 1px rgba(255, 107, 0, 0.1),
+      0 0 30px rgba(255, 107, 0, 0.22);
+  }
+}
+
+.bawo-cta-polished:active:not(:disabled) {
+  transform: translateY(0) scale(0.985);
+}
+
 /**
  * Secondary CTA — refined glass with subtle border glow
  */
@@ -370,7 +602,382 @@ a.bawo-cta-quiet:active {
   color: rgba(255, 255, 255, 0.28);
 }
 
-/** Unified warm canvas — single base tone + soft ember glows (no eggplant mid-band) */
+/** Canvas underlay — solid base; mesh + radials sit in `.bawo-site-mesh-root` */
+.bawo-page-bg-base {
+  background-color: var(--bawo-canvas, #12080f);
+}
+
+.bawo-site-mesh-root {
+  contain: layout paint;
+  will-change: auto;
+  pointer-events: none;
+}
+
+/** Hero CTA cluster — quiet secondary links */
+.bawo-hero-actions {
+  text-align: center;
+}
+
+.bawo-secondary-bar--strip {
+  width: 100%;
+}
+
+.bawo-secondary-bar--strip .bawo-secondary-bar__row--five {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.375rem 0.5rem;
+  width: 100%;
+}
+
+.bawo-secondary-bar__row--five {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.bawo-action-tile__label--compact {
+  max-width: 4.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bawo-action-tile__label-short {
+  display: none;
+}
+
+@media (max-width: 380px) {
+  .bawo-action-tile__label-full {
+    display: none;
+  }
+
+  .bawo-action-tile__label-short {
+    display: inline;
+  }
+
+  .bawo-secondary-bar--strip .bawo-action-tile__icon {
+    width: 2.125rem;
+    height: 2.125rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .bawo-secondary-bar--strip .bawo-secondary-bar__row--five {
+    gap: 0.5rem 1rem;
+  }
+
+  .bawo-action-tile__label--compact {
+    max-width: 5.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .bawo-secondary-bar--strip .bawo-secondary-bar__row--five {
+    gap: 0.75rem 1.25rem;
+  }
+
+  .bawo-action-tile__label--compact {
+    max-width: none;
+  }
+}
+
+.bawo-secondary-bar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+}
+
+.bawo-secondary-bar__row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.625rem 1.25rem;
+  width: 100%;
+}
+
+.bawo-secondary-bar__row--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.625rem 2rem;
+  padding: 0 0.5rem;
+}
+
+.bawo-action-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.125rem 0.25rem;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.58);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+@media (hover: hover) {
+  .bawo-action-tile:hover {
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .bawo-action-tile:hover .bawo-action-tile__icon {
+    transform: translateY(-1px);
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+}
+
+.bawo-action-tile:active {
+  transform: scale(0.98);
+}
+
+.bawo-action-tile__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.375rem;
+  height: 2.375rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.bawo-action-tile__icon--whatsapp {
+  color: #fff;
+  background: rgba(37, 211, 102, 0.18);
+  border-color: rgba(37, 211, 102, 0.35);
+}
+
+.bawo-action-tile__icon--x {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.bawo-action-tile__icon--neutral {
+  color: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.bawo-action-tile__icon--apple {
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.bawo-action-tile__icon--accent {
+  color: #ff8a33;
+  background: rgba(255, 107, 0, 0.12);
+  border-color: rgba(255, 107, 0, 0.28);
+}
+
+.bawo-action-tile__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.6875rem;
+  line-height: 1.25;
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+@media (min-width: 640px) {
+  .bawo-action-tile__label {
+    font-size: 0.75rem;
+  }
+
+  .bawo-secondary-bar__row {
+    gap: 0.75rem 1.75rem;
+  }
+
+  .bawo-secondary-bar__row--two {
+    gap: 0.75rem 2.5rem;
+    padding: 0 1rem;
+  }
+}
+
+.bawo-action-tile__arrow {
+  width: 0.65rem;
+  height: 0.65rem;
+  opacity: 0.55;
+  flex-shrink: 0;
+}
+
+/** Founding member checkout modal */
+.bawo-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: max(1rem, env(safe-area-inset-top)) 1rem max(1rem, env(safe-area-inset-bottom));
+  background: rgba(6, 3, 12, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: bawo-modal-fade-in 0.2s ease-out;
+}
+
+.bawo-modal-panel {
+  position: relative;
+  width: 100%;
+  max-width: 26rem;
+  max-height: min(90dvh, 42rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1.5rem 1.5rem 1.75rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(
+    165deg,
+    rgba(28, 14, 22, 0.98) 0%,
+    rgba(12, 6, 10, 0.98) 100%
+  );
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  animation: bawo-modal-slide-up 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+  outline: none;
+}
+
+.bawo-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.65);
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: hover) {
+  .bawo-modal-close:hover {
+    color: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.16);
+  }
+}
+
+.bawo-modal-waitlist-link {
+  display: block;
+  width: 100%;
+  padding: 0.625rem 0.5rem;
+  text-align: center;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-family: Montserrat, system-ui, sans-serif;
+  color: rgba(255, 255, 255, 0.58);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(255, 255, 255, 0.22);
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: hover) {
+  .bawo-modal-waitlist-link:hover {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration-color: rgba(255, 138, 51, 0.55);
+  }
+}
+
+@keyframes bawo-modal-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bawo-modal-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bawo-modal-backdrop,
+  .bawo-modal-panel {
+    animation: none;
+  }
+}
+
+.bawo-whatsapp-link {
+  color: rgba(255, 255, 255, 0.52);
+  transition: color 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bawo-whatsapp-link svg {
+  color: #25d366;
+}
+
+@media (hover: hover) {
+  .bawo-whatsapp-link:hover {
+    color: rgba(255, 255, 255, 0.82);
+  }
+}
+
+.bawo-hero-secondary-link {
+  color: rgba(255, 255, 255, 0.52);
+  transition: color 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+@media (hover: hover) {
+  .bawo-hero-secondary-link:hover {
+    color: rgba(255, 255, 255, 0.82);
+  }
+}
+
+/** WhatsApp pill — used outside hero if needed */
+.bawo-whatsapp-btn {
+  color: #fff;
+  background-color: rgba(37, 211, 102, 0.18);
+  border: 1px solid rgba(37, 211, 102, 0.45);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bawo-whatsapp-btn svg {
+  color: #25d366;
+}
+
+@media (hover: hover) {
+  .bawo-whatsapp-btn:hover {
+    color: #fff;
+    background-color: rgba(37, 211, 102, 0.32);
+    border-color: rgba(37, 211, 102, 0.65);
+    box-shadow: 0 0 20px rgba(37, 211, 102, 0.2);
+  }
+}
+
+.bawo-whatsapp-btn:active {
+  background-color: rgba(37, 211, 102, 0.4);
+  transform: scale(0.98);
+}
+
+/** Unified warm canvas — static fallback when mesh is loading */
 .bawo-page-bg {
   background-color: var(--bawo-canvas, #12080f);
   background-image:
@@ -431,19 +1038,29 @@ a.bawo-cta-quiet:active {
 @layer base {
   html {
     font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
-    scroll-behavior: auto;
+    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-    scroll-padding-top: 1rem;
+    overflow-x: clip;
+    overflow-y: auto;
+    scroll-padding-top: 4.5rem;
+    height: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   body {
     font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
-    overflow-x: hidden;
+    overflow-x: clip;
+    overflow-y: auto;
+    min-height: 100%;
     background-color: var(--bawo-canvas, #12080f);
     color: var(--bawo-text-primary, #fff);
-    touch-action: auto;
+    touch-action: pan-y;
     overscroll-behavior-y: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -466,12 +1083,6 @@ a.bawo-cta-quiet:active {
   }
 }
 
-/* Light compositing hint — avoid `will-change` on the whole page (hurts scroll). */
-.scroll-content-gpu {
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-}
-
 /* Glassmorphism — recipes.glassCard / surface.glass */
 .glass-card {
   background: var(--bawo-glass-card-bg);
@@ -480,8 +1091,6 @@ a.bawo-cta-quiet:active {
   -webkit-backdrop-filter: blur(20px);
   box-shadow: var(--bawo-glass-card-shadow);
   border-radius: var(--bawo-glass-card-radius, 1rem);
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
 }
 
 /* Primary CTA — native `recipes.liquidGlassCTA` / pressed / disabled / text */
@@ -588,7 +1197,39 @@ a.bawo-cta-quiet:active {
   padding-inline: 2.75rem;
 }
 
-/* Top promo — glass bar; yellow promo copy + ribbon wipe animation */
+/* Header — barely-there tint so nav reads; page + hero still show through */
+.bawo-site-header {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 8, 15, 0.38) 0%,
+    rgba(18, 8, 15, 0.12) 100%
+  );
+  border: none;
+  box-shadow: none;
+}
+
+.bawo-site-header__glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  opacity: 0.65;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 107, 0, 0.4) 22%,
+    rgba(212, 175, 55, 0.45) 50%,
+    rgba(255, 107, 0, 0.4) 78%,
+    transparent 100%
+  );
+}
+
+.bawo-scroll-anchor {
+  scroll-margin-top: 4.5rem;
+}
+
+/** Top promo — deprecated; kept for reference if re-enabled */
 .bawo-promo-strip {
   background: linear-gradient(
     180deg,
@@ -1031,12 +1672,6 @@ a.bawo-cta-quiet:active {
     contain: layout style;
   }
 
-  /* Image GPU hint */
-  img {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-  }
-
   /* Button and interactive element optimizations */
   button,
   a,
@@ -1069,7 +1704,10 @@ a.bawo-cta-quiet:active {
   
   /* Disable hero animations for accessibility */
   .hero-shimmer::before,
-  .hero-gradient-animate {
+  .hero-gradient-animate,
+  .bawo-cta-polished,
+  .bawo-cta-polished::after,
+  .bawo-site-mesh-root canvas {
     animation: none !important;
   }
 }

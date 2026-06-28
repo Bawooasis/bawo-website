@@ -1,14 +1,12 @@
-import { Heart, Sparkles, Users } from "lucide-react";
 import { CONTENT } from "../constants/content";
-
-const pillarIcons = [Heart, Users, Sparkles] as const;
 
 export default function CommunityMissionSection() {
   const { title, subtitle, pillars } = CONTENT.communityMission;
 
   return (
     <section
-      className="relative z-10 px-6"
+      id="community-mission"
+      className="relative z-10 bawo-scroll-anchor px-6"
       aria-labelledby="community-mission-heading"
     >
       <div className="mx-auto max-w-3xl text-center space-y-4">
@@ -21,31 +19,22 @@ export default function CommunityMissionSection() {
         >
           {title}
         </h2>
-        <p className="text-base sm:text-lg text-white/78 font-museo-medium leading-relaxed max-w-2xl mx-auto">
+        <p className="text-base sm:text-lg text-white/72 font-museo-medium leading-relaxed max-w-2xl mx-auto">
           {subtitle}
         </p>
       </div>
 
-      <ul className="mx-auto mt-10 grid max-w-4xl gap-4 sm:grid-cols-3">
-        {pillars.map(({ title: pillarTitle, description }, index) => {
-          const Icon = pillarIcons[index] ?? Heart;
-          return (
-            <li
-              key={pillarTitle}
-              className="glass-card rounded-2xl border border-white/[0.1] p-5 text-center sm:text-left"
-            >
-              <div className="mx-auto sm:mx-0 mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#ff6b00]/15 text-[#ff8a33]">
-                <Icon className="h-5 w-5" strokeWidth={2} aria-hidden />
-              </div>
-              <h3 className="font-museo-bold text-white text-base mb-1.5">
-                {pillarTitle}
-              </h3>
-              <p className="text-sm text-white/65 font-museo-medium leading-relaxed">
-                {description}
-              </p>
-            </li>
-          );
-        })}
+      <ul className="mx-auto mt-10 md:mt-12 grid max-w-5xl gap-10 md:gap-12 sm:grid-cols-3">
+        {pillars.map(({ title: pillarTitle, description }) => (
+          <li key={pillarTitle} className="feature-card space-y-2 text-center sm:text-left">
+            <h3 className="font-display text-lg md:text-xl font-bold text-white">
+              {pillarTitle}
+            </h3>
+            <p className="text-sm text-white/65 font-museo-medium leading-relaxed">
+              {description}
+            </p>
+          </li>
+        ))}
       </ul>
     </section>
   );

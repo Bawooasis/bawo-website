@@ -1,4 +1,4 @@
-var L=Object.defineProperty;var F=(t,e,r)=>e in t?L(t,e,{enumerable:!0,configurable:!0,writable:!0,value:r}):t[e]=r;var a=(t,e,r)=>F(t,typeof e!="symbol"?e+"":e,r);import{r as g,j as M}from"./three-BnvexCI6.js";const D=`#version 300 es
+var L=Object.defineProperty;var F=(t,e,r)=>e in t?L(t,e,{enumerable:!0,configurable:!0,writable:!0,value:r}):t[e]=r;var a=(t,e,r)=>F(t,typeof e!="symbol"?e+"":e,r);import{r as g,j as M}from"./three-BVBiHVO-.js";const D=`#version 300 es
 precision mediump float;
 
 layout(location = 0) in vec4 a_position;

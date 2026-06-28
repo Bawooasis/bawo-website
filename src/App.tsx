@@ -2,37 +2,31 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   BadgeCheck,
-  BookOpen,
   Calendar,
-  Clock,
-  Crown,
-  Flame,
-  Gem,
   Headphones,
-  Home,
-  Menu,
-  Sparkles,
   Star,
-  X,
 } from "lucide-react";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import BoroughNetworkGraphic from "./components/BoroughNetworkGraphic";
 import BoroughSquareCarousel from "./components/BoroughSquareCarousel";
-import BawoPillButton from "./components/BawoPillButton";
+import FoundingMemberButton from "./components/FoundingMemberButton";
+import HeroActionStack from "./components/HeroActionStack";
+import HeroSecondaryBar from "./components/HeroSecondaryBar";
 import MobileAppDownloadRow from "./components/MobileAppDownloadRow";
+import FaqSection from "./components/FaqSection";
 import FoundingMemberCheckoutCard from "./components/FoundingMemberCheckoutCard";
+import FoundingMemberModal from "./components/FoundingMemberModal";
 import CommunityMissionSection from "./components/CommunityMissionSection";
 import MailchimpSignupRow from "./components/MailchimpSignupRow";
 import PartnerWithUsSection from "./components/PartnerWithUsSection";
+import BatchCountdownDisplay from "./components/BatchCountdownDisplay";
+import SiteHeader from "./components/SiteHeader";
 import { CONTENT } from "./constants/content";
 import { TAILWIND_COLORS } from "./constants/colors";
 import { IMAGES } from "./constants/images";
 
-const HeroShaderBackground = lazy(
-  () => import("./components/ui/hero-shader-background"),
-);
-const SectionShaderAmbient = lazy(
-  () => import("./components/ui/section-shader-ambient"),
+const SiteMeshBackground = lazy(
+  () => import("./components/ui/site-mesh-background"),
 );
 
 // Register ScrollTrigger plugin
@@ -40,51 +34,17 @@ gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
-  const [activePreviewIndex, setActivePreviewIndex] = useState(0);
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [foundingModalOpen, setFoundingModalOpen] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const previewImages = IMAGES.previews.gallery;
-  const previewImgRef = useRef<HTMLImageElement | null>(null);
-
-  // Countdown timer to August 1, 2026
-  useEffect(() => {
-    const calculateTimeLeft = () => {
-      const targetDate = new Date('2026-08-01T23:59:59').getTime();
-      const now = new Date().getTime();
-      const difference = targetDate - now;
-
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60),
-        });
-      }
-    };
-
-    calculateTimeLeft();
-    const timer = setInterval(calculateTimeLeft, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
+  const openFoundingModal = () => setFoundingModalOpen(true);
+  const closeFoundingModal = () => setFoundingModalOpen(false);
 
   // Animation refs
   const heroRef = useRef(null);
   const headlineRef = useRef(null);
   const subheadlineRef = useRef(null);
-  const phoneRef = useRef(null);
   const ctaRef = useRef(null);
   const statsRef = useRef(null);
-  const testimonialsRef = useRef(null);
   const foundingMemberRef = useRef(null);
   const featuresRef = useRef(null);
   const globalReachRef = useRef(null);
@@ -118,12 +78,6 @@ function App() {
           "-=0.55"
         )
         .fromTo(
-          phoneRef.current,
-          { y: 18, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.9, clearProps: "transform" },
-          "-=0.45"
-        )
-        .fromTo(
           ctaRef.current,
           { y: 12, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.7, clearProps: "transform" },
@@ -149,85 +103,43 @@ function App() {
           }),
       });
 
-      // Feature cards
+      // Feature cards — single trigger, play once (no reverse jank on scroll-up)
       gsap.fromTo(
         ".feature-card",
-        { y: 24, opacity: 0 },
+        { y: 20, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.7,
-          stagger: 0.12,
+          duration: 0.65,
+          stagger: 0.1,
           ease: "power2.out",
           force3D: true,
           clearProps: "transform",
           scrollTrigger: {
             trigger: featuresRef.current,
-            start: "top 82%",
-            toggleActions: "play none none none",
+            start: "top 85%",
+            once: true,
             fastScrollEnd: true,
           },
         }
       );
 
-    // Staggered card animations with batching
-    gsap.fromTo(
-      ".feature-card",
-      { y: 20, opacity: 0, scale: 0.98 },
-      {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 0.9,
-        stagger: 0.15,
-        ease: "power3.out",
-        force3D: true,
-        scrollTrigger: {
-          trigger: featuresRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-          fastScrollEnd: true,
-        },
-      }
-    );
-
-    // City statistics animations
-    gsap.fromTo(
-      ".city-stat",
-      { scale: 0.92, opacity: 0 },
-      {
-        scale: 1,
-        opacity: 1,
-        duration: 0.7,
-        stagger: 0.1,
-        ease: "power3.out",
-        force3D: true,
-        scrollTrigger: {
-          trigger: globalReachRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-          fastScrollEnd: true,
-        },
-      }
-    );
-      // Borough tiles — scale up from 0.96 (subtle, GPU-friendly)
+      // Borough tiles — single trigger, play once
       gsap.fromTo(
         ".city-stat",
-        { scale: 0.96, opacity: 0 },
+        { y: 16, opacity: 0 },
         {
-          scale: 1,
+          y: 0,
           opacity: 1,
-          duration: 0.65,
+          duration: 0.6,
           stagger: 0.08,
           ease: "power2.out",
           force3D: true,
           clearProps: "transform",
           scrollTrigger: {
             trigger: globalReachRef.current,
-            start: "top 82%",
-            toggleActions: "play none none none",
+            start: "top 85%",
+            once: true,
             fastScrollEnd: true,
           },
         }
@@ -237,253 +149,44 @@ function App() {
     return () => ctx.revert();
   }, []);
 
-  // Hero preview crossfade — fade out first, swap image in onComplete, then fade in
-  useEffect(() => {
-    if (!previewImages || previewImages.length < 2) return;
-    const intervalId = setInterval(() => {
-      const el = previewImgRef.current;
-      if (!el) return;
-      gsap.to(el, {
-        opacity: 0,
-        duration: 0.3,
-        ease: "power1.inOut",
-        onComplete: () => {
-          setActivePreviewIndex((prev) => (prev + 1) % previewImages.length);
-          gsap.to(el, { opacity: 1, duration: 0.5, ease: "power2.out" });
-        },
-      });
-    }, 4000);
-    return () => clearInterval(intervalId);
-  }, [previewImages]);
-
-
-  const handleFoundingMember = () => {
-    const baseUrl = CONTENT.revenue.foundingStripeCheckoutUrl;
-    const params = new URLSearchParams(window.location.search);
-    const utmSource = params.get("utm_source") || "direct";
-    const utmMedium = params.get("utm_medium") || "";
-    const utmCampaign = params.get("utm_campaign") || "";
-    const ref = [utmSource, utmMedium, utmCampaign].filter(Boolean).join("_");
-    const separator = baseUrl.includes("?") ? "&" : "?";
-    const checkoutUrl = `${baseUrl}${separator}client_reference_id=${encodeURIComponent(ref)}`;
-    window.open(checkoutUrl, "_blank");
-    // Track click for analytics
-    const win = window as unknown as { gtag?: (...args: unknown[]) => void };
-    if (typeof win.gtag !== "undefined") {
-      win.gtag("event", "founding_member_click", {
-        event_category: "conversion",
-        event_label: "stripe_payment",
-      });
-    }
-  };
+  const handleFoundingMember = openFoundingModal;
 
   return (
-    <div className="min-h-screen relative overflow-x-hidden">
+    <div className="min-h-screen relative overflow-x-clip">
+      <FoundingMemberModal open={foundingModalOpen} onClose={closeFoundingModal} />
       <div
-        className="fixed inset-0 z-0 bawo-page-bg"
+        className="fixed inset-0 z-0 bawo-page-bg-base"
         aria-hidden
       />
-      <div
-        className="fixed inset-0 z-0 bawo-site-ambient pointer-events-none"
-        aria-hidden
-      />
-      
-      {/* Promo strip — full-bleed glass, yellow copy + white icons, ribbon animation (see `index.css`) */}
-      <div className="bawo-promo-strip fixed top-0 left-0 right-0 z-40 py-2 overflow-hidden">
-        <div
-          className="bawo-promo-ribbon flex w-full items-center justify-center gap-x-3 px-4 text-[10px] md:text-xs text-yellow-300 animate-slide-in-left"
-          style={{
-            textShadow:
-              "0 0 12px rgba(250, 204, 21, 0.4), 0 0 24px rgba(234, 179, 8, 0.18)",
-          }}
-        >
-          <span className="flex items-center gap-1.5 font-museo-medium whitespace-nowrap">
-            <Gem className="h-3 w-3 shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-3.5 md:w-3.5" strokeWidth={2} aria-hidden />
-            <span>Lifetime access, one payment</span>
-          </span>
-          <span className="text-white/30 hidden sm:inline" aria-hidden>
-            |
-          </span>
-          <span className="hidden sm:flex items-center gap-1.5 font-museo-bold whitespace-nowrap">
-            <Crown className="h-3 w-3 shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-3.5 md:w-3.5" strokeWidth={2} aria-hidden />
-            <span>Founding Member Badge</span>
-          </span>
-          <span className="text-white/30 hidden md:inline" aria-hidden>
-            |
-          </span>
-          <span className="hidden md:flex items-center gap-1.5 font-museo-medium whitespace-nowrap">
-            <Clock className="h-3 w-3 shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-3.5 md:w-3.5" strokeWidth={2} aria-hidden />
-            <span className="text-yellow-300/90">Batch 1 Closes:</span>
-            <span className="font-museo-bold tabular-nums">
-              {timeLeft.days}d {String(timeLeft.hours).padStart(2, "0")}h {String(timeLeft.minutes).padStart(2, "0")}m
-            </span>
-          </span>
-          <span className="text-white/30 hidden lg:inline" aria-hidden>
-            |
-          </span>
-          <span className="hidden lg:flex items-center gap-1.5 font-museo-bold whitespace-nowrap">
-            <Flame className="h-3 w-3 shrink-0 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)] md:h-3.5 md:w-3.5" strokeWidth={2} aria-hidden />
-            <span>450 Spots Left</span>
-          </span>
-        </div>
-      </div>
-      
-      {/* Navigation Header */}
-      <nav className="fixed top-[2.5rem] left-0 right-0 z-30">
-        <div className="container mx-auto px-3 sm:px-4 lg:px-8 xl:px-12">
-          {/* Scroll-aware pill container */}
+      <Suspense
+        fallback={
           <div
-            className="flex items-center justify-between transition-all duration-500 ease-out"
-            style={
-              scrolled
-                ? {
-                    background: "rgba(6, 3, 12, 0.72)",
-                    backdropFilter: "blur(20px)",
-                    WebkitBackdropFilter: "blur(20px)",
-                    border: "1px solid rgba(255, 255, 255, 0.08)",
-                    borderRadius: "9999px",
-                    boxShadow:
-                      "0 8px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(212,175,55,0.06), inset 0 1px 0 rgba(255,255,255,0.06)",
-                    padding: "0.35rem 0.75rem 0.35rem 0.5rem",
-                    marginTop: "0.5rem",
-                  }
-                : {
-                    background: "transparent",
-                    border: "1px solid transparent",
-                    borderRadius: "9999px",
-                    boxShadow: "none",
-                    padding: "0 0.25rem",
-                    marginTop: "0",
-                  }
-            }
-          >
-            <a
-              href="#"
-              className="shrink-0 flex items-center self-center -translate-y-0.5"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            >
-              <img
-                src={IMAGES.assets.logo}
-                alt="BawoSocial"
-                className={`block h-auto transition-all duration-500 ${
-                  scrolled
-                    ? "w-[7.5rem]"
-                    : "w-[8.5rem] sm:w-[9.5rem] md:w-[10.5rem]"
-                }`}
-              />
-            </a>
+            className="bawo-hero-ambient pointer-events-none fixed inset-0 z-0"
+            aria-hidden
+          />
+        }
+      >
+        <SiteMeshBackground />
+      </Suspense>
 
-            {/* Desktop Nav Links */}
-            <div className="hidden md:flex items-center gap-0.5 lg:gap-1">
-              {[
-                { label: "Network", href: "#building-the-network" },
-                { label: "About", href: "#about" },
-                { label: "Features", href: "#features" },
-                { label: "Events", href: "#events" },
-              ].map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="px-3 lg:px-4 py-2 text-sm font-museo-medium text-white/75 hover:text-white rounded-full hover:bg-white/[0.08] transition-all duration-200"
-                >
-                  {link.label}
-                </a>
-              ))}
-              <a
-                href="#pricing"
-                className="ml-2 px-5 py-2 text-sm font-museo-bold text-[#ff8a33] rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:bg-[rgba(255,107,0,0.12)]"
-                style={{
-                  border: "1.5px solid #ff6b00",
-                  boxShadow:
-                    "0 0 12px rgba(255,107,0,0.45), 0 0 32px rgba(255,107,0,0.15)",
-                  textShadow:
-                    "0 0 10px rgba(255,107,0,0.55), 0 0 24px rgba(255,107,0,0.2)",
-                }}
-              >
-                Join Now
-              </a>
-            </div>
+      <SiteHeader onJoinClick={handleFoundingMember} />
 
-            {/* Mobile Menu Toggle */}
-            <button
-              className="md:hidden p-2 text-white/80 hover:text-white transition-colors rounded-full hover:bg-white/[0.08]"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? (
-                <X className="w-5 h-5" />
-              ) : (
-                <Menu className="w-5 h-5" />
-              )}
-            </button>
-          </div>
-
-          {/* Mobile Menu Dropdown */}
-          {mobileMenuOpen && (
-            <div className="md:hidden mt-2 pb-4 bg-black/85 backdrop-blur-xl rounded-2xl border border-white/10 overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.6)]">
-              <div className="flex flex-col px-4 py-3 gap-1">
-                {[
-                  { label: "Network", href: "#building-the-network" },
-                  { label: "About", href: "#about" },
-                  { label: "Features", href: "#features" },
-                  { label: "Events", href: "#events" },
-                ].map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    className="px-4 py-3 text-sm font-museo-medium text-white/80 hover:text-white rounded-xl hover:bg-white/[0.08] transition-all duration-200"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </a>
-                ))}
-                <a
-                  href="#pricing"
-                  className="mt-2 mx-2 px-5 py-3 text-sm font-museo-bold text-[#ff8a33] text-center rounded-full transition-all duration-300"
-                  style={{
-                    border: "1.5px solid #ff6b00",
-                    boxShadow:
-                      "0 0 12px rgba(255,107,0,0.45), 0 0 32px rgba(255,107,0,0.15)",
-                    textShadow:
-                      "0 0 10px rgba(255,107,0,0.55), 0 0 24px rgba(255,107,0,0.2)",
-                  }}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Join Now
-                </a>
-              </div>
-            </div>
-          )}
-        </div>
-      </nav>
-
-      <div className="relative z-10 bg-transparent min-h-screen scroll-content-gpu">
+      <div className="relative z-10 bg-transparent min-h-screen">
         {/* Hero Section */}
         <section
           ref={heroRef}
-          className="relative flex justify-center items-start overflow-x-hidden overflow-y-visible pt-[max(5rem,calc(env(safe-area-inset-top,0px)+3.75rem))] sm:pt-[max(5.5rem,calc(env(safe-area-inset-top,0px)+4rem))] md:pt-[max(7rem,calc(env(safe-area-inset-top,0px)+5.25rem))] lg:pt-[max(7rem,calc(env(safe-area-inset-top,0px)+5.25rem))] xl:pt-[max(8rem,calc(env(safe-area-inset-top,0px)+6rem))] pb-10 sm:pb-12 md:pb-14 min-h-0 lg:min-h-[100dvh] bg-transparent"
+          className="relative flex flex-col min-h-[100dvh] overflow-x-clip pt-[max(4.75rem,calc(env(safe-area-inset-top,0px)+4rem))] sm:pt-[max(5rem,calc(env(safe-area-inset-top,0px)+4.25rem))] md:pt-[max(5.5rem,calc(env(safe-area-inset-top,0px)+4.75rem))] pb-0 bg-transparent"
         >
-          <Suspense
-            fallback={
-              <div
-                className="bawo-hero-ambient pointer-events-none absolute inset-0 z-0"
-                aria-hidden
-              />
-            }
-          >
-            <HeroShaderBackground />
-          </Suspense>
-          {/* Main Content Container */}
-          <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-2 sm:pt-3 pb-2 max-w-screen-2xl w-full">
-            <div className="flex flex-col items-center gap-10 md:gap-14">
-              {/* Hero Text - Centered */}
-              <div className="text-center space-y-6 md:space-y-8 w-full max-w-4xl mx-auto pt-20 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-36">
+          <div className="relative z-10 flex flex-1 flex-col container mx-auto px-4 sm:px-6 pt-2 sm:pt-3 max-w-screen-2xl w-full">
+            <div className="flex flex-1 flex-col items-center justify-center w-full">
+              <div className="text-center space-y-6 md:space-y-8 w-full max-w-4xl mx-auto pt-8 sm:pt-12 md:pt-16 lg:pt-20">
                 <div className="space-y-5 md:space-y-7">
                   <h1
                     ref={headlineRef}
                     className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.15] font-display text-white break-words"
                   >
-                    {CONTENT.hero.title}
+                    {CONTENT.hero.title.lead}
+                    <span className="text-[#ff6b00]">{CONTENT.hero.title.highlight}</span>
                   </h1>
                   <p
                     ref={subheadlineRef}
@@ -493,109 +196,18 @@ function App() {
                   </p>
                 </div>
 
-                <div
-                  ref={ctaRef}
-                  className="flex flex-col gap-4 justify-center items-center w-full"
-                >
-                  <div className="w-fit max-w-full">
-                    <BawoPillButton
-                      label={CONTENT.hero.ctaPrimary}
-                      variant="primary"
-                      size="md"
-                      className="bawo-pill-cta-surface min-w-[14rem]"
-                      onClick={handleFoundingMember}
-                    />
-                  </div>
-
-                  <a
-                    href={`https://wa.me/?text=${encodeURIComponent("I just found BawoSocial — the private network for NYC Nigerians. $25 lifetime access, only 450 spots left. Join here: https://joinbawo.com?utm_source=whatsapp")}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-transparent text-white/70 text-xs font-museo-medium hover:border-[#25D366]/50 hover:text-[#25D366] transition-all duration-200"
-                  >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                    </svg>
-                    Share on WhatsApp
-                  </a>
-
-                  <div className="mt-5 md:mt-7 flex flex-col gap-3 items-center w-full max-w-2xl">
-                    <p className="text-white/80 text-sm md:text-base font-medium leading-relaxed">
-                      {CONTENT.hero.ctaMicrocopy}
-                    </p>
-
-                    <div
-                      className="bawo-trust-row flex flex-wrap items-center justify-center gap-2.5 text-[10px] md:text-xs font-museo-medium text-[#E8CA6A]"
-                      style={{ textShadow: "0 0 12px rgba(212, 175, 55, 0.22)" }}
-                    >
-                      <span className="flex items-center gap-1.5">
-                        <svg className="w-3 h-3 md:w-3.5 md:h-3.5 text-[#635bff]" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z"/>
-                        </svg>
-                        {CONTENT.hero.trustIndicators.stripe}
-                      </span>
-                      <span className="text-[#D4AF37]/45">|</span>
-                      <span>{CONTENT.hero.trustIndicators.oneTime}</span>
-                      <span className="text-[#D4AF37]/45">|</span>
-                      <span>{CONTENT.hero.trustIndicators.cancel}</span>
-                    </div>
-                  </div>
+                <div ref={ctaRef} className="flex justify-center w-full pt-1">
+                  <HeroActionStack onJoinClick={handleFoundingMember} />
                 </div>
               </div>
-
-              {/* App Preview Mockup - Below centered text */}
-              {previewImages.length > 0 && (
-                <div
-                  ref={phoneRef}
-                  className="flex flex-col items-center w-full max-w-5xl mx-auto gap-2 sm:gap-3"
-                >
-                  <div
-                    className={`relative w-full flex flex-col items-center ${previewImages.length > 1 ? "pb-9 sm:pb-10" : "pb-0"}`}
-                  >
-                    <div className="relative w-full max-w-none sm:max-w-[min(100%,42rem)] md:max-w-[min(100%,52rem)] overflow-hidden rounded-2xl">
-                      <img
-                        ref={previewImgRef}
-                        src={previewImages[activePreviewIndex]}
-                        alt="BawoSocial app: Explore, Community, and Concierge"
-                        loading="eager"
-                        decoding="async"
-                        fetchPriority="high"
-                        className="w-full h-auto max-h-[min(62vh,34rem)] sm:max-h-[min(68vh,40rem)] md:max-h-[min(72vh,46rem)] lg:max-h-[min(82vh,52rem)] xl:max-h-[min(84vh,58rem)] 2xl:max-h-[min(86vh,62rem)] object-contain object-center animate-subtle-float"
-                        style={{ opacity: 1 }}
-                      />
-                      <div
-                        className="pointer-events-none absolute inset-0"
-                        style={{
-                          background: `
-                            linear-gradient(to top, var(--bawo-canvas) 0%, transparent 18%),
-                            linear-gradient(to bottom, var(--bawo-canvas) 0%, transparent 14%),
-                            linear-gradient(to left, var(--bawo-canvas) 0%, transparent 12%),
-                            linear-gradient(to right, var(--bawo-canvas) 0%, transparent 12%)
-                          `,
-                        }}
-                      />
-                    </div>
-                    {previewImages.length > 1 && (
-                      <div className="flex items-center justify-center gap-2 absolute bottom-1 inset-x-0">
-                        {previewImages.map((_, idx) => (
-                          <span
-                            key={idx}
-                            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                              idx === activePreviewIndex
-                                ? "bg-[#D4AF37] shadow-[0_0_10px_rgba(212,175,55,0.6)]"
-                                : "bg-white/30"
-                            }`}
-                          />
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  <MobileAppDownloadRow className="self-center" />
-                </div>
-              )}
             </div>
 
+            <div
+              className="w-full max-w-3xl mx-auto mt-auto pt-8 pb-[max(1.25rem,env(safe-area-inset-bottom))] border-t border-white/[0.08]"
+              aria-label="Secondary actions"
+            >
+              <HeroSecondaryBar layout="strip" />
+            </div>
           </div>
         </section>
 
@@ -603,7 +215,7 @@ function App() {
       <section
         ref={globalReachRef}
         id="building-the-network"
-        className="relative bawo-section-warmth bg-transparent py-20 md:py-[5rem] overflow-x-hidden section-contain"
+        className="relative bawo-scroll-anchor bg-transparent py-20 md:py-[5rem] overflow-x-hidden section-contain"
       >
         <div className="relative z-10 container mx-auto px-5 sm:px-6 py-12 md:py-14">
           <div className="text-center space-y-8 md:space-y-12 max-w-[1400px] mx-auto">
@@ -641,7 +253,7 @@ function App() {
                           <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 mx-auto overflow-hidden rounded-full shadow-[0_28px_80px_rgba(0,0,0,0.72)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#D4AF37]/45 hover:shadow-[0_32px_90px_rgba(212,175,55,0.12)]">
                             <BoroughSquareCarousel
                               images={rotatingGallery}
-                              alt={`${city.name}, Nigerian diaspora community in NYC`}
+                              alt={`${city.name} community hub, BawoSocial NYC`}
                               rotationStaggerMs={index * 700}
                             />
                           </div>
@@ -681,7 +293,7 @@ function App() {
                           <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 mx-auto overflow-hidden rounded-full shadow-[0_28px_80px_rgba(0,0,0,0.72)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#D4AF37]/45 hover:shadow-[0_32px_90px_rgba(212,175,55,0.12)]">
                             <BoroughSquareCarousel
                               images={rotatingGallery}
-                              alt={`${city.name}, Nigerian diaspora community in NYC`}
+                              alt={`${city.name} community hub, BawoSocial NYC`}
                               rotationStaggerMs={i * 700}
                             />
                           </div>
@@ -709,13 +321,10 @@ function App() {
         </div>
       </section>
 
-        <div className="relative bawo-section-warmth bg-transparent space-y-12 md:space-y-16 pt-12 md:pt-16 pb-6 md:pb-10 overflow-hidden">
-          <Suspense fallback={null}>
-            <SectionShaderAmbient />
-          </Suspense>
+        <div className="relative bg-transparent space-y-16 md:space-y-20 pt-12 md:pt-16 pb-6 md:pb-10 section-contain">
           <CommunityMissionSection />
           <div className="relative z-10 container mx-auto px-6 max-w-5xl">
-            <FoundingMemberCheckoutCard />
+            <FoundingMemberCheckoutCard onJoinClick={handleFoundingMember} />
           </div>
           <div className="relative z-10">
             <PartnerWithUsSection />
@@ -726,11 +335,8 @@ function App() {
       <section
         ref={statsRef}
         id="pricing-stats"
-        className="relative py-16 md:py-20 bg-transparent overflow-hidden bawo-section-warmth"
+        className="relative py-16 md:py-20 bg-transparent overflow-hidden"
       >
-        <Suspense fallback={null}>
-          <SectionShaderAmbient />
-        </Suspense>
         <div className="relative z-10 container mx-auto px-6 max-w-2xl">
           <div className="text-center space-y-8">
             <div className="space-y-3">
@@ -749,21 +355,7 @@ function App() {
               <p className="text-[10px] uppercase tracking-widest text-white/45 font-museo-bold mb-2">
                 Closes in
               </p>
-              <div className="flex items-center justify-center gap-1 md:gap-2 tabular-nums font-museo-bold">
-                <span className="text-2xl md:text-3xl text-[#ff6b00]">{timeLeft.days}</span>
-                <span className="text-white/25 pb-4">:</span>
-                <span className="text-2xl md:text-3xl text-[#ff6b00]">
-                  {String(timeLeft.hours).padStart(2, "0")}
-                </span>
-                <span className="text-white/25 pb-4">:</span>
-                <span className="text-2xl md:text-3xl text-[#ff6b00]">
-                  {String(timeLeft.minutes).padStart(2, "0")}
-                </span>
-                <span className="text-white/25 pb-4">:</span>
-                <span className="text-2xl md:text-3xl text-white/90">
-                  {String(timeLeft.seconds).padStart(2, "0")}
-                </span>
-              </div>
+              <BatchCountdownDisplay />
               <p className="text-[10px] text-white/45 font-museo-medium mt-1">
                 days · hrs · min · sec
               </p>
@@ -804,20 +396,36 @@ function App() {
       </section>
 
         {/* Origin Story Section – structured block with clear hierarchy */}
-        <section id="about" className="relative min-h-screen flex items-center justify-center bg-transparent py-24">
+        <section id="about" className="relative bawo-scroll-anchor flex items-center justify-center bg-transparent py-20 md:py-28">
           <div className="relative z-10 container mx-auto px-6 flex flex-col items-center">
             <div className="text-white space-y-14 w-full max-w-5xl mx-auto">
               <h2 className="text-6xl md:text-7xl lg:text-8xl font-extrabold font-museo-bold leading-tight text-center tracking-tight">
-                {CONTENT.origin.title}
+                {CONTENT.origin.title.lead}
+                <span className="text-[#ff6b00]">{CONTENT.origin.title.highlight}</span>
+                {CONTENT.origin.title.closing}
               </h2>
-              <div className="glass-card rounded-2xl px-6 md:px-10 py-12 space-y-8">
-                <p className="text-white/95 font-museo-medium text-xl md:text-2xl leading-relaxed md:leading-[2] text-left">
-                  Most of us in the diaspora feel isolated and{" "}
-                  <strong className="font-museo-bold text-white">disconnected from opportunity</strong>. We miss our culture, our people, and our network. BawoSocial was created to fix that.
-                </p>
-                <p className="text-white/95 font-museo-medium text-xl md:text-2xl leading-relaxed md:leading-[2] text-left">
-                  We are a <strong className="font-museo-bold text-white">utility-first platform</strong> to find your tribe, access the Resource Directory, and build meaningful wealth and relationships, powered by smart technology that understands who we are.
-                </p>
+              <div className="mx-auto max-w-3xl space-y-8 text-left">
+                {CONTENT.origin.paragraphs.map((paragraph) => (
+                  <p
+                    key={
+                      typeof paragraph === "string"
+                        ? paragraph.slice(0, 32)
+                        : paragraph.highlight
+                    }
+                    className="text-white/90 font-museo-medium text-xl md:text-2xl leading-relaxed md:leading-[1.85]"
+                  >
+                    {typeof paragraph === "string" ? (
+                      paragraph
+                    ) : (
+                      <>
+                        <span className="text-[#ff6b00] font-semibold">
+                          {paragraph.highlight}
+                        </span>
+                        {paragraph.text}
+                      </>
+                    )}
+                  </p>
+                ))}
               </div>
               {CONTENT.origin.visionText && (
                 <p className="text-white/80 font-museo-regular text-xl md:text-2xl leading-loose text-left">
@@ -832,65 +440,48 @@ function App() {
       <section
         ref={foundingMemberRef}
         id="pricing"
-        className="relative min-h-screen bg-transparent py-24"
+        className="relative bawo-scroll-anchor bg-transparent py-20 md:py-28"
       >
-        <div className="relative z-10 container mx-auto px-6 py-20 min-h-[calc(100vh-10rem)]">
-          <div className="grid lg:grid-cols-2 gap-12 h-full items-stretch">
-            {/* Left Content - Benefits */}
-            <div className="glass-card rounded-2xl p-8 md:p-10 text-white space-y-8">
-              <div className="space-y-4">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-museo-bold">
-              {CONTENT.foundingMember.title}
-                  <br />
-                  <span className="bawo-text-cta-gradient">{CONTENT.foundingMember.titleHighlight}</span>
-          </h2>
-                <p className="text-base md:text-lg font-museo-regular text-white/80">
-                  {CONTENT.foundingMember.subtitle}
+        <div className="relative z-10 container mx-auto px-6 py-12 md:py-16 max-w-2xl">
+          <div className="space-y-10 text-white">
+            <div className="space-y-3 text-center">
+              <h2 className="text-4xl md:text-5xl font-bold font-display leading-tight">
+                {CONTENT.foundingMember.title}{" "}
+                <span className="text-[#ff6b00]">{CONTENT.foundingMember.titleHighlight}</span>
+              </h2>
+              <p className="text-sm md:text-base font-museo-medium text-white/65 uppercase tracking-wider">
+                {CONTENT.foundingMember.subtitle}
+              </p>
+            </div>
+
+            <ul className="space-y-5">
+              {CONTENT.foundingMember.benefits.map((benefit) => (
+                <li key={benefit.title} className="flex items-start gap-3">
+                  <BadgeCheck
+                    className="w-5 h-5 text-[#ff6b00] flex-shrink-0 mt-0.5"
+                    strokeWidth={2.25}
+                    aria-hidden
+                  />
+                  <div>
+                    <p className="font-museo-bold text-base text-white">{benefit.title}</p>
+                    <p className="text-sm text-white/70 mt-0.5 font-museo-medium leading-relaxed">
+                      {benefit.description}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            <p className="text-sm text-white/55 font-museo-medium text-center leading-relaxed">
+              {CONTENT.foundingMember.missionText}
             </p>
-          </div>
 
-              <div className="space-y-6">
-                <div className="space-y-4">
-              {CONTENT.foundingMember.benefits.map((benefit, index) => (
-                    <div key={index} className="flex items-start gap-4">
-                      <BadgeCheck className="w-5 h-5 text-white flex-shrink-0 mt-0.5" />
-                      <div>
-                        <span className="font-museo-bold text-base text-white">
-                          {benefit.title}
-                  </span>
-                        <div className="text-sm text-white/80 mt-1 font-museo-regular">
-                          {benefit.description}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* The Trust Note */}
-              <div className="pt-6">
-                <p className="text-sm md:text-base text-white/90 font-museo-regular leading-relaxed">
-                  {CONTENT.foundingMember.missionText}
-                </p>
-              </div>
-            </div>
-
-            {/* Right Content - CTA on right, vertically centered */}
-            <div className="hidden lg:flex h-full w-full items-center justify-end mt-10 lg:mt-0">
-              <BawoPillButton
-                label={CONTENT.foundingMember.cta}
-                variant="primary"
-                size="lg"
-                onClick={handleFoundingMember}
-              />
-            </div>
-
-            {/* Mobile / tablet CTA centered below card */}
-            <div className="flex lg:hidden justify-center mt-10 w-full px-2">
-              <BawoPillButton
+            <div className="flex justify-center pt-2">
+              <FoundingMemberButton
                 label={CONTENT.foundingMember.cta}
                 variant="primary"
                 size="md"
+                className="min-w-[14rem]"
                 onClick={handleFoundingMember}
               />
             </div>
@@ -902,72 +493,20 @@ function App() {
       <section
         ref={featuresRef}
         id="features"
-        className="relative min-h-screen flex items-center justify-center bg-transparent py-24 section-contain"
+        className="relative bawo-scroll-anchor flex items-center justify-center bg-transparent py-20 md:py-28 section-contain"
       >
-        <div className="relative z-10 text-white px-6 md:px-10 max-w-7xl py-20 mx-auto w-full">
+        <div className="relative z-10 text-white px-6 md:px-10 max-w-7xl py-12 md:py-16 mx-auto w-full">
           <h2 className={`text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-16 ${TAILWIND_COLORS.primary.text} font-museo-bold`}>
             {CONTENT.features.title}
           </h2>
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
-            {CONTENT.features.items.map((item, index) => {
-              const Icon = index === 0 ? Home : index === 1 ? BookOpen : Sparkles;
-              return (
-                <div
-                  key={index}
-                  className="feature-card glass-card rounded-2xl p-8 text-center flex flex-col items-center border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,107,0,0.55)] transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.37)]"
-                >
-                  <Icon
-                    className="w-8 h-8 md:w-9 md:h-9 text-white shrink-0 mb-6"
-                    strokeWidth={2}
-                    aria-hidden
-                  />
-                  <h3 className="text-xl md:text-2xl font-bold font-museo-bold text-white mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="text-base md:text-lg font-museo-regular leading-relaxed text-white/85 max-w-prose">
-                    {item.description}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-
-
-      {/* In-App Preview Section */}
-      <section
-        className="relative py-24 bg-transparent"
-      >
-        <div className="relative z-10 container mx-auto px-6">
-          <h2 className="text-center text-4xl md:text-5xl font-bold font-museo-bold text-white mb-12">
-            This Is What Belonging Looks Like
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-[90rem] mx-auto">
-            {IMAGES.inApp.features.map((image, index) => (
-              <div
-                key={index}
-                className="text-center bg-black/40 backdrop-blur-md rounded-2xl border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,107,0,0.55)] shadow-[0_8px_32px_rgba(0,0,0,0.37)] p-4 transition-all duration-300"
-              >
-                <div className="rounded-xl overflow-hidden mb-3">
-                  <img
-                    src={image}
-                    alt={`BawoSocial Feature ${index + 1}`}
-                    className="h-80 w-full object-contain mx-auto"
-                  />
-                </div>
-                <p className="text-white mt-1 font-museo-medium">
-                  {index === 0 &&
-                    "Access Resources: African and African American-owned restaurants, churches, mental health, and more."}
-                  {index === 1 &&
-                    "Meet Concierge: NIN renewals, passports, shipping, and local intel."}
-                  {index === 2 &&
-                    "Join Communities: Soft Life NYC, The Cookout, Carnival Crew, Sabor NYC, Outside & Owambe."}
-                  {index === 3 &&
-                    "Discover Events: rooftop nights, film screenings, and diaspora meetups."}
-                  {index === 4 &&
-                    "Community, your way: My Groups, Discover, and For You in one hub."}
+          <div className="grid md:grid-cols-3 gap-10 md:gap-12 max-w-5xl mx-auto">
+            {CONTENT.features.items.map((item) => (
+              <div key={item.title} className="feature-card space-y-3 text-center md:text-left">
+                <h3 className="text-xl md:text-2xl font-bold font-display text-white">
+                  {item.title}
+                </h3>
+                <p className="text-base font-museo-medium leading-relaxed text-white/75">
+                  {item.description}
                 </p>
               </div>
             ))}
@@ -978,49 +517,36 @@ function App() {
       {/* Event Highlights Section */}
       <section
         id="events"
-        className="relative py-24 bg-transparent"
+        className="relative bawo-scroll-anchor py-24 bg-transparent"
       >
 
         <div className="relative z-10 container mx-auto px-6">
           <h2 className="text-center text-4xl md:text-5xl font-bold font-museo-bold text-white mb-12">
-            Featured Events
+            {CONTENT.events.title}
           </h2>
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,107,0,0.45)] text-white transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
-              <div className="flex items-center gap-3 mb-3">
-                <Calendar className="w-5 h-5 text-white" />
-                <span className="font-museo-bold">
-                  Caribbean Carnival Block Party, Brooklyn
-                </span>
-              </div>
-              <p className="text-white/80 font-museo-medium">
-                Dancehall, soca, and Caribbean food — a block party celebrating
-                Brooklyn&apos;s island culture.
-              </p>
-            </div>
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,107,0,0.45)] text-white transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
-              <div className="flex items-center gap-3 mb-3">
-                <Headphones className="w-5 h-5 text-white" />
-                <span className="font-museo-bold">
-                  The Resource Directory: Live Q&A
-                </span>
-              </div>
-              <p className="text-white/80 font-museo-medium">
-                Immigration & Housing experts answering member questions live.
-              </p>
-            </div>
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,107,0,0.45)] text-white transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
-              <div className="flex items-center gap-3 mb-3">
-                <Star className="w-5 h-5 text-white" />
-                <span className="font-museo-bold">
-                  Nigerian Independence Celebration, Manhattan, NYC
-                </span>
-              </div>
-              <p className="text-white/80 font-museo-medium">
-                A night of culture, music, and pride with the NYC Nigerian
-                community.
-              </p>
-            </div>
+            {CONTENT.events.items.map((event) => {
+              const Icon =
+                event.icon === "calendar"
+                  ? Calendar
+                  : event.icon === "headphones"
+                    ? Headphones
+                    : Star;
+              return (
+                <div
+                  key={event.title}
+                  className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,107,0,0.45)] text-white transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.37)]"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <Icon className="w-5 h-5 text-white" />
+                    <span className="font-museo-bold">{event.title}</span>
+                  </div>
+                  <p className="text-white/80 font-museo-medium">
+                    {event.description}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -1029,10 +555,10 @@ function App() {
       <section
         ref={finalCtaRef}
         id="email-section"
-        className="relative min-h-screen flex items-center justify-center bg-transparent"
+        className="relative bawo-scroll-anchor flex items-center justify-center bg-transparent py-20 md:py-28 section-contain"
       >
         
-        <div className="relative z-10 container mx-auto px-6 py-24">
+        <div className="relative z-10 container mx-auto px-6 py-12 md:py-16">
           <div className="text-center space-y-10 max-w-2xl mx-auto">
             <div className="space-y-4">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white font-museo-bold">
@@ -1056,7 +582,7 @@ function App() {
 
             <div className="flex flex-col gap-5 justify-center items-center w-full max-w-2xl mx-auto">
               <div className="flex w-full flex-col items-center gap-5 sm:flex-row sm:flex-wrap sm:justify-center">
-                <BawoPillButton
+                <FoundingMemberButton
                   label={CONTENT.foundingMemberCheckout.ctaLabel}
                   variant="primary"
                   size="md"
@@ -1099,46 +625,7 @@ function App() {
         </div>
       </section>
 
-      {/* FAQ Section — SEO keywords */}
-      <section className="relative py-20 bg-transparent">
-        <div className="relative z-10 container mx-auto px-6 md:px-10 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-white font-museo-bold mb-10 text-center">
-            Frequently Asked Questions
-          </h2>
-          <div className="space-y-6">
-            <div className="glass-card rounded-2xl p-6 border border-[rgba(255,255,255,0.08)]">
-              <h3 className="text-lg font-museo-bold text-white mb-2">What is BawoSocial?</h3>
-              <p className="text-white/75 font-museo-medium text-sm leading-relaxed">
-                BawoSocial is a private community platform for African, African American, Caribbean, and Latin NYC across all 5 boroughs.
-              </p>
-            </div>
-            <div className="glass-card rounded-2xl p-6 border border-[rgba(255,255,255,0.08)]">
-              <h3 className="text-lg font-museo-bold text-white mb-2">Who is BawoSocial for?</h3>
-              <p className="text-white/75 font-museo-medium text-sm leading-relaxed">
-                African, African American, Caribbean, and Latino New Yorkers — plus friends of the culture. Your community network in New York.
-              </p>
-            </div>
-            <div className="glass-card rounded-2xl p-6 border border-[rgba(255,255,255,0.08)]">
-              <h3 className="text-lg font-museo-bold text-white mb-2">How much does BawoSocial cost?</h3>
-              <p className="text-white/75 font-museo-medium text-sm leading-relaxed">
-                Founding members get lifetime access for a one-time $25 payment. After Batch 1 closes, membership will be $19.99/month ($240/year). The founding member pass gives you permanent access to the Nigerian diaspora community, the Resource Directory of Nigerian restaurants NYC, and all premium features — forever.
-              </p>
-            </div>
-            <div className="glass-card rounded-2xl p-6 border border-[rgba(255,255,255,0.08)]">
-              <h3 className="text-lg font-museo-bold text-white mb-2">What resources does BawoSocial offer?</h3>
-              <p className="text-white/75 font-museo-medium text-sm leading-relaxed">
-                Our Resource Directory includes restaurants, consulates with live fee schedules, NIN enrollment centers with maps, shipping services with vessel tracking, churches, African, African American, and Latin-owned stores, and mental health support. All listings are verified with real photos and business details.
-              </p>
-            </div>
-            <div className="glass-card rounded-2xl p-6 border border-[rgba(255,255,255,0.08)]">
-              <h3 className="text-lg font-museo-bold text-white mb-2">How is BawoSocial different from Facebook groups?</h3>
-              <p className="text-white/75 font-museo-medium text-sm leading-relaxed">
-                Unlike algorithmic platforms, BawoSocial is built specifically for the African community app experience. No ads, no algorithm deciding what you see. Your experience is organized around vetted micro-communities, a curated directory, and a concierge that understands Nigerian diaspora needs — from passport renewals to finding the best jollof in your borough.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FaqSection />
 
       {/* Footer */}
       <footer className="py-12 bg-transparent">
@@ -1161,8 +648,8 @@ function App() {
                 450 of 500 spots left
               </span>
             </div>
-            <BawoPillButton
-              label="Secure My Spot"
+            <FoundingMemberButton
+              label={CONTENT.foundingMemberCheckout.ctaLabel}
               variant="primary"
               size="sm"
               className="shrink-0"
@@ -1208,34 +695,21 @@ function App() {
 
             {/* Quick Links */}
             <div className="text-center md:text-left">
-              <h3 className="text-white font-museo-bold mb-4">Quick Links</h3>
+              <h3 className="text-white font-museo-bold mb-4">
+                {CONTENT.footer.sections.quickLinks.title}
+              </h3>
               <div className="space-y-2">
-                <a
-                  href="#about"
-                  className="block text-white/80 hover:text-white text-sm font-museo-medium"
-                >
-                  About Us
-                </a>
-                <a
-                  href="#features"
-                  className="block text-white/80 hover:text-white text-sm font-museo-medium"
-                >
-                  Features
-                </a>
-                <a
-                  href="#pricing"
-                  className="block text-white/80 hover:text-white text-sm font-museo-medium"
-                >
-                  Founding Members
-                </a>
-                <a
-                  href="#testimonials"
-                  className="block text-white/80 hover:text-white text-sm font-museo-medium"
-                >
-                  Community
-                </a>
+                {CONTENT.footer.sections.quickLinks.links.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="block text-white/80 hover:text-white text-sm font-museo-medium"
+                  >
+                    {link.label}
+                  </a>
+                ))}
               </div>
-          </div>
+            </div>
 
             {/* Legal */}
             <div className="text-center md:text-left">

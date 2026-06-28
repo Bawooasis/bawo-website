@@ -4,11 +4,13 @@ export type BawoPillButtonProps = {
   label: string;
   icon?: LucideIcon;
   variant?: "primary" | "secondary";
-  /** `quiet` = solid brand orange; `premium` = ember + obsidian glass (soft orange rim, not gold chrome). */
-  appearance?: "quiet" | "premium";
+  /** `quiet` = glass pill; `premium` = ember glass; `outline` = transparent fill, border only. */
+  appearance?: "quiet" | "premium" | "outline";
   size?: "sm" | "md" | "lg";
   /** Stretch to 100% of parent (pair with `max-w-md` on parent for app-like width). */
   fullWidth?: boolean;
+  /** Inviting glow + shimmer motion (hero / header CTAs). */
+  polished?: boolean;
   disabled?: boolean;
   className?: string;
   onClick?: () => void;
@@ -43,6 +45,7 @@ export default function BawoPillButton({
   appearance = "quiet",
   size = "md",
   fullWidth,
+  polished,
   disabled,
   className = "",
   onClick,
@@ -50,6 +53,7 @@ export default function BawoPillButton({
 }: BawoPillButtonProps) {
   const m = metrics[size];
   const isQuiet = appearance === "quiet";
+  const isOutline = appearance === "outline";
 
   const baseQuiet =
     "inline-flex flex-row items-center justify-center gap-2 rounded-full font-semibold outline-none relative overflow-hidden " +
@@ -66,7 +70,9 @@ export default function BawoPillButton({
     "before:absolute before:inset-0 before:rounded-full before:opacity-0 before:transition-opacity before:duration-300 " +
     "hover:before:opacity-100";
 
-  const primaryQuiet = "text-white bawo-cta-quiet";
+  const primaryQuiet = isOutline
+    ? "text-white bawo-cta-outline"
+    : "text-white bawo-cta-quiet";
 
   const primaryPremium =
     "text-white bawo-cta-premium hover:-translate-y-1 disabled:hover:translate-y-0 active:brightness-[0.93] " +
@@ -79,13 +85,13 @@ export default function BawoPillButton({
   const base =
     variant === "secondary"
       ? basePremium
-      : isQuiet
+      : isQuiet || isOutline
         ? baseQuiet
         : basePremium;
 
   const primaryClass =
     variant === "primary"
-      ? isQuiet
+      ? isQuiet || isOutline
         ? primaryQuiet
         : primaryPremium
       : secondaryPremium;
@@ -96,10 +102,10 @@ export default function BawoPillButton({
       onClick={onClick}
       disabled={disabled}
       className={`${base} ${m.h} ${m.px} ${m.text} ${primaryClass} ${
-        fullWidth ? "w-full" : "w-fit max-w-full"
-      } ${className}`}
+        polished ? "bawo-cta-polished" : ""
+      } ${fullWidth ? "w-full" : "w-fit max-w-full"} ${className}`}
       style={{
-        letterSpacing: isQuiet ? "0.01em" : "0.2px",
+        letterSpacing: isQuiet || isOutline ? "0.01em" : "0.2px",
         fontFamily: "Montserrat, system-ui, sans-serif",
       }}
     >
@@ -107,7 +113,7 @@ export default function BawoPillButton({
         <Icon
           className={`relative z-[1] shrink-0 ${
             variant === "primary"
-              ? isQuiet
+              ? isQuiet || isOutline
                 ? "text-white/90"
                 : "text-white/90 drop-shadow-[0_1px_8px_rgba(255,107,0,0.22)]"
               : "text-white/90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
@@ -119,7 +125,7 @@ export default function BawoPillButton({
       ) : null}
       <span
         className={`relative z-[1] min-w-0 leading-snug text-white [text-wrap:balance] ${
-          isQuiet ? "font-semibold" : "drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]"
+          isQuiet || isOutline ? "font-semibold" : "drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]"
         } ${fullWidth ? "flex-1 text-center" : "shrink-0 text-center px-0.5"}`}
       >
         {label}

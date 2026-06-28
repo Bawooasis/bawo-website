@@ -1,65 +1,73 @@
 import { BadgeCheck } from "lucide-react";
-import BawoPillButton from "./BawoPillButton";
+import FoundingMemberButton from "./FoundingMemberButton";
+import HeroSecondaryBar from "./HeroSecondaryBar";
+import { AppleIcon } from "./icons/BrandIcons";
 import { CONTENT } from "../constants/content";
 
-export default function FoundingMemberCheckoutCard() {
-  const openCheckout = () => {
-    window.open(CONTENT.revenue.foundingStripeCheckoutUrl, "_blank", "noopener,noreferrer");
-    const win = window as unknown as { gtag?: (...args: unknown[]) => void };
-    if (typeof win.gtag !== "undefined") {
-      win.gtag("event", "founding_member_checkout_click", {
-        event_category: "conversion",
-        event_label: "stripe_payment",
-      });
-    }
-  };
+const IOS_BETA_BENEFIT_INDEX = 2;
+
+type FoundingMemberCheckoutCardProps = {
+  onJoinClick: () => void;
+};
+
+export default function FoundingMemberCheckoutCard({ onJoinClick }: FoundingMemberCheckoutCardProps) {
+  const { title, description, price, benefits, ctaLabel } = CONTENT.foundingMemberCheckout;
 
   return (
-    <div className="animate-on-scroll mx-auto w-full max-w-xl">
-      <div className="glass-card relative overflow-hidden rounded-2xl border border-white/[0.1] p-6 sm:p-8">
-        <div className="relative flex flex-col gap-6">
-          <div className="flex items-start justify-between gap-4">
-            <div className="space-y-2 min-w-0">
-              <h2 className="font-display text-2xl sm:text-3xl font-bold text-white leading-tight">
-                {CONTENT.foundingMemberCheckout.title}
-              </h2>
-              <p className="text-sm text-white/70 font-museo-medium leading-relaxed">
-                {CONTENT.foundingMemberCheckout.description}
-              </p>
-            </div>
-            <p className="shrink-0 font-display text-3xl sm:text-4xl font-bold tabular-nums text-[#ff6b00]">
-              {CONTENT.foundingMemberCheckout.price}
+    <div className="animate-on-scroll mx-auto w-full max-w-xl text-center">
+      <div className="space-y-6">
+        <div className="space-y-3">
+          <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-center gap-1 sm:gap-3">
+            <h2 className="font-display text-2xl sm:text-3xl font-bold text-white leading-tight">
+              {title}
+            </h2>
+            <p className="font-display text-2xl sm:text-3xl font-bold tabular-nums text-[#ff6b00]">
+              {price}
             </p>
           </div>
-
-          <ul className="space-y-2.5">
-            {CONTENT.foundingMemberCheckout.benefits.map((line) => (
-              <li key={line} className="flex items-start gap-2.5">
-                <BadgeCheck
-                  className="w-4 h-4 shrink-0 mt-0.5 text-[#ff6b00]"
-                  strokeWidth={2}
-                  aria-hidden
-                />
-                <span className="text-sm text-white/85 font-museo-medium">{line}</span>
-              </li>
-            ))}
-          </ul>
-
-          <p className="text-xs text-white/55 font-museo-medium leading-relaxed border-t border-white/[0.08] pt-4">
-            Includes the Resource Directory — Black-owned businesses, community resources, and verified professionals.
+          <p className="text-sm sm:text-base text-white/65 font-museo-medium leading-relaxed max-w-md mx-auto">
+            {description}
           </p>
+        </div>
 
-          <BawoPillButton
-            label={CONTENT.foundingMemberCheckout.ctaLabel}
+        <ul className="space-y-3 text-left max-w-sm mx-auto">
+          {benefits.map((line, index) => (
+            <li key={line} className="flex items-start gap-2.5">
+              <BadgeCheck
+                className="w-4 h-4 shrink-0 mt-0.5 text-[#ff6b00]"
+                strokeWidth={2}
+                aria-hidden
+              />
+              <span className="text-sm text-white/80 font-museo-medium inline-flex flex-wrap items-center gap-1.5">
+                {line}
+                {index === IOS_BETA_BENEFIT_INDEX && (
+                  <AppleIcon className="w-3.5 h-3.5 text-white/70 shrink-0" aria-label="iOS" />
+                )}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <p className="text-xs text-white/45 font-museo-medium leading-relaxed max-w-sm mx-auto">
+          Includes the Resource Directory — Black-owned businesses, community resources, and verified professionals.
+        </p>
+
+        <div className="space-y-4 pt-1">
+          <FoundingMemberButton
+            label={ctaLabel}
             variant="primary"
             size="md"
-            className="w-full"
-            onClick={openCheckout}
+            className="w-full max-w-xs mx-auto"
+            onClick={onJoinClick}
           />
 
-          <p className="text-center text-[11px] text-white/45 font-museo-medium">
+          <p className="text-[11px] text-white/40 font-museo-medium">
             {CONTENT.hero.trustIndicators.stripe} · {CONTENT.hero.trustIndicators.oneTime}
           </p>
+
+          <div className="pt-4 border-t border-white/[0.06] max-w-[26rem] mx-auto">
+            <HeroSecondaryBar />
+          </div>
         </div>
       </div>
     </div>

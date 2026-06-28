@@ -19,9 +19,29 @@ export const CONTENT = {
     benefits: [
       "Lifetime access to the premium membership tier",
       "Verified profile badge on launch",
-      "Day-1 beta access before public rollout",
+      "Day-1 iOS beta access before public rollout",
     ],
-    ctaLabel: "Secure My Spot",
+    ctaLabel: "Become a Founding Member",
+  },
+
+  foundingMemberModal: {
+    kicker: "Batch 1 · 500 spots",
+    title: "Become a Founding Member",
+    subtitle:
+      "Lock in lifetime access for our African, African American, Caribbean, and Latin NYC community — before Batch 1 closes.",
+    price: "$25",
+    priceNote: "one-time payment",
+    benefits: [
+      "Lifetime access to the premium membership tier",
+      "Verified founding profile badge on launch",
+      "Day-1 iOS beta access before public rollout",
+      "Full Resource Directory — businesses, services, and community intel",
+    ],
+    checkoutCta: "Continue to checkout — $25",
+    waitlistCta: "Join waitlist instead",
+    waitlistHint: "Not ready to pay? Get launch updates by email — no payment required.",
+    footerNote:
+      "Community-built and independent. Your membership helps grow a platform made for our culture.",
   },
 
   partnerWithUs: {
@@ -58,11 +78,14 @@ export const CONTENT = {
 
   // Hero Section
   hero: {
-    title: "Culture, connection, community",
+    title: {
+      lead: "Culture, connection, ",
+      highlight: "community",
+    },
     subtitle:
-      "The big platforms weren't built for our communities. BawoSocial is a private network for African, African American, Caribbean, and Latin NYC — curated resources, culture-first events, and real community without the noise.",
-    ctaPrimary: "Secure My Spot, $25",
-    ctaMicrocopy: "Founding lifetime pass, limited spots.",
+      "The Culture Hub for African, African American, Caribbean, and Latin NYC. Curated resources, culture-led events. We are stronger together.",
+    ctaPrimary: "Become a Founding Member",
+    ctaMicrocopy: "Founding pass · limited spots",
     ctaSecondary: "Join Waitlist",
     testflightLink: "https://testflight.apple.com/join/xAp29Euh",
     ctaTestFlight: "Download via TestFlight",
@@ -70,10 +93,19 @@ export const CONTENT = {
     downloadIosSub: "TestFlight",
     downloadAndroid: "Android",
     downloadAndroidSoon: "Coming soon",
+    shareWhatsApp:
+      "I just found BawoSocial — the private network for African, Caribbean, Latin & African American NYC. $25 lifetime access, only 450 spots left. Join here: https://joinbawo.com?utm_source=whatsapp",
+    shareLink: "https://joinbawo.com?utm_source=share",
+    shareTweet:
+      "BawoSocial — the Culture Hub for African, Caribbean, Latin & African American NYC. $25 lifetime founding access.",
+    shareCopy: "Copy link",
+    shareCopied: "Copied!",
+    knowWhenLaunch: "Know when we launch",
+    knowWhenLaunchShort: "Launch updates",
     trustIndicators: {
       stripe: "Secured by Stripe",
       oneTime: "One-time payment",
-      cancel: "30-day money-back guarantee"
+      cancel: "30-day money-back guarantee",
     },
   },
 
@@ -109,42 +141,47 @@ export const CONTENT = {
 
   // Origin Story Section
   origin: {
-    title: "Why BawoSocial Exists",
-    mainText: "Most of us in the diaspora feel isolated and disconnected from opportunity. We miss our culture, our people, and our network. BawoSocial was created to fix that. We are a utility-first platform to find your tribe, access curated diaspora resources, and build meaningful relationships — powered by technology that understands our culture, our boroughs, and our community.",
+    title: {
+      lead: "Why ",
+      highlight: "BawoSocial",
+      closing: " Exists",
+    },
+    paragraphs: [
+      "New York has our people everywhere, yet too many of us still feel out of place. We miss our culture, our circle, and the belonging that big platforms never offered.",
+      {
+        highlight: "BawoSocial",
+        text: " is the Culture Hub to find your tribe, explore local tools and the Resource Directory, and build real relationships. Built for our culture and our community.",
+      },
+    ],
     visionText: "",
   },
 
   // Founding Member Section
   foundingMember: {
-    title: "Founding Member Benefits",
-    titleHighlight: "(One-Time $25)",
-    titleEmoji: "",
-    subtitle: "Batch 1: Limited to 500 Spots.",
+    title: "Founding Member",
+    titleHighlight: "$25 once",
+    subtitle: "500 spots · Batch 1 open",
     description: "",
     benefitsTitle: "",
     benefits: [
       {
-        title: "Lifetime Premium Access",
-        description: "Never pay monthly fees again.",
+        title: "Lifetime access",
+        description: "Premium features unlocked. No monthly fees, ever.",
       },
       {
-        title: "Resource Directory Unlocked",
-        description: "Full access to African and African American-owned businesses, Latin-owned businesses, consulates, community resources, churches, and more.",
+        title: "Resource Directory",
+        description: "Local businesses, services, and community resources you can trust.",
       },
       {
-        title: "Founding Member Badge",
-        description: "A permanent \"Day One\" badge on your profile.",
-      },
-      {
-        title: "Priority Access",
-        description: "First access to new features and community introductions.",
+        title: "Day One badge",
+        description: "Permanent founding status on your profile.",
       },
     ],
-    cta: "Become a Founding Member, $25",
+    cta: "Become a Founding Member",
     spotsRemaining: "",
     securityBadges: {},
     missionText:
-      "We are building this independently. Your $25 funds a platform that respects our culture.",
+      "Community-built and independent. Your $25 helps grow a platform made for our culture.",
   },
 
   // Features Section
@@ -157,7 +194,7 @@ export const CONTENT = {
       },
       {
         title: "The Resource Directory",
-        description: "Stop asking 'Who knows a guy?' Nigerian restaurants, consulates with live fee schedules, NIN enrollment maps, shipping with vessel tracking, churches, and mental health support. All verified.",
+        description: "Stop asking 'Who knows a guy?' Verified restaurants, consulates, community businesses, churches, mental health support, and local intel — all in one directory.",
       },
       {
         title: "Community Matching",
@@ -169,7 +206,7 @@ export const CONTENT = {
   // Testimonials Section
   testimonials: {
     title: "What We're Building For",
-    subtitle: "Voices from the diaspora",
+    subtitle: "Voices from across NYC",
     reviews: [
       {
         name: "The NYC Diaspora",
@@ -195,7 +232,7 @@ export const CONTENT = {
   // Global Reach Section (no member counts – honest)
   globalReach: {
     title: "Building the Network.",
-    subtitle: "Connecting the diaspora, borough by borough.",
+    subtitle: "Connecting our communities, borough by borough.",
     description: "Join the First 500 Founding Members to shape the culture of your city's hub.",
     cities: [
       { name: "Brooklyn", country: "🇺🇸" },
@@ -206,12 +243,75 @@ export const CONTENT = {
     ],
   },
 
+  events: {
+    title: "Featured Events",
+    items: [
+      {
+        icon: "calendar" as const,
+        title: "Caribbean Carnival Block Party, Brooklyn",
+        description:
+          "Dancehall, soca, and Caribbean food — a block party celebrating Brooklyn's island culture.",
+      },
+      {
+        icon: "headphones" as const,
+        title: "The Resource Directory: Live Q&A",
+        description:
+          "Immigration & housing experts answering member questions live.",
+      },
+      {
+        icon: "star" as const,
+        title: "Afro-Latin Heritage Night, Manhattan",
+        description:
+          "A night of culture, music, and pride with African, Caribbean, and Latin New York.",
+      },
+    ],
+  },
+
+  inAppFeatureCaptions: [
+    "Access Resources: African and African American-owned restaurants, churches, mental health, and more.",
+    "Meet Concierge: immigration, housing, shipping, and local intel.",
+    "Join Communities: Soft Life NYC, The Cookout, Carnival Crew, Sabor NYC, Outside & Owambe.",
+    "Discover Events: rooftop nights, film screenings, and culture-first meetups.",
+    "Community, your way: My Groups, Discover, and For You in one hub.",
+  ],
+
   // Final CTA Section
   finalCta: {
     title: "Join the First 500. Shape the Platform.",
     subtitle: "Founding Membership is limited. Once Batch 1 closes, the price increases.",
     cta: "Become a Founding Member, $25",
     ctaSecondary: "Join Waitlist",
+  },
+
+  faq: {
+    title: "Frequently asked questions",
+    items: [
+      {
+        question: "What is BawoSocial?",
+        answer:
+          "BawoSocial is a private community platform for African, African American, Caribbean, and Latin New Yorkers across all five boroughs — built for culture-first connection, not another algorithmic feed.",
+      },
+      {
+        question: "Who is BawoSocial for?",
+        answer:
+          "African, African American, Caribbean, and Latino New Yorkers — plus friends of the culture who want intentional community, local resources, and real-world events in NYC.",
+      },
+      {
+        question: "How much does BawoSocial cost?",
+        answer:
+          "Founding members get lifetime access for a one-time $25 payment during Batch 1. After that window closes, membership moves to $19.99/month. The founding pass includes permanent access to premium features and the Resource Directory.",
+      },
+      {
+        question: "What resources does BawoSocial offer?",
+        answer:
+          "Our Resource Directory includes restaurants, consulates, community businesses, churches, mental health support, and more — verified listings with real photos and details, organized for how our communities actually live in NYC.",
+      },
+      {
+        question: "How is BawoSocial different from Facebook groups?",
+        answer:
+          "No ads, no algorithm deciding what you see. BawoSocial is organized around vetted micro-communities, a curated directory, and culture-first events — built for belonging, not engagement bait.",
+      },
+    ],
   },
 
   // Footer
@@ -222,10 +322,11 @@ export const CONTENT = {
       quickLinks: {
         title: "Quick Links",
         links: [
-          { label: "About Us", href: "#about" },
+          { label: "About", href: "#about" },
           { label: "Features", href: "#features" },
-          { label: "Pricing", href: "#pricing" },
-          { label: "Contact", href: "#contact" },
+          { label: "Founding Members", href: "#pricing" },
+          { label: "Network", href: "#building-the-network" },
+          { label: "FAQ", href: "#faq" },
         ],
       },
       legal: {
