@@ -171,16 +171,16 @@ function App() {
 
       <SiteHeader onJoinClick={handleFoundingMember} />
 
-      <div className="relative z-10 bg-transparent min-h-screen">
+      <div className="relative z-10 bg-transparent min-h-screen pb-[var(--bawo-mobile-sticky-cta-height)] md:pb-0">
         {/* Hero Section */}
         <section
           ref={heroRef}
-          className="relative flex flex-col min-h-[100dvh] overflow-x-clip pt-[max(4.75rem,calc(env(safe-area-inset-top,0px)+4rem))] sm:pt-[max(5rem,calc(env(safe-area-inset-top,0px)+4.25rem))] md:pt-[max(5.5rem,calc(env(safe-area-inset-top,0px)+4.75rem))] pb-0 bg-transparent"
+          className="bawo-hero-section relative flex flex-col min-h-[100dvh] overflow-x-clip bg-transparent"
         >
-          <div className="relative z-10 flex flex-1 flex-col container mx-auto px-4 sm:px-6 pt-2 sm:pt-3 max-w-screen-2xl w-full">
-            <div className="flex flex-1 flex-col items-center justify-center w-full">
-              <div className="text-center space-y-6 md:space-y-8 w-full max-w-4xl mx-auto pt-8 sm:pt-12 md:pt-16 lg:pt-20">
-                <div className="space-y-5 md:space-y-7">
+          <div className="relative z-10 flex flex-1 flex-col container mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-2xl w-full">
+            <div className="flex flex-1 flex-col items-center justify-center w-full min-h-0 py-6 sm:py-8 md:py-10">
+              <div className="text-center space-y-5 sm:space-y-6 md:space-y-8 w-full max-w-4xl mx-auto">
+                <div className="space-y-4 sm:space-y-5 md:space-y-7">
                   <h1
                     ref={headlineRef}
                     className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.15] font-display text-white break-words"
@@ -203,7 +203,7 @@ function App() {
             </div>
 
             <div
-              className="w-full max-w-3xl mx-auto mt-auto pt-8 pb-[max(1.25rem,env(safe-area-inset-bottom))] border-t border-white/[0.08]"
+              className="w-full max-w-[22rem] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto mt-auto pt-6 sm:pt-8 bawo-hero-share-strip"
               aria-label="Secondary actions"
             >
               <HeroSecondaryBar layout="strip" />
@@ -649,10 +649,10 @@ function App() {
               </span>
             </div>
             <FoundingMemberButton
-              label={CONTENT.foundingMemberCheckout.ctaLabel}
+              label="Join — $25"
               variant="primary"
               size="sm"
-              className="shrink-0"
+              className="shrink-0 max-w-[9.5rem] sm:max-w-none"
               onClick={handleFoundingMember}
             />
           </div>

@@ -1,8 +1,8 @@
 import { Menu, X } from "lucide-react";
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useState, type MouseEvent } from "react";
 import BawoPillButton from "./BawoPillButton";
+import SiteLogo from "./SiteLogo";
 import { formatCountdownShort, useBatchCountdown } from "../hooks/useBatchCountdown";
-import { IMAGES } from "../constants/images";
 
 const NAV_LINKS = [
   { label: "Network", href: "#building-the-network" },
@@ -28,57 +28,32 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
     };
   }, [mobileOpen]);
 
+  const scrollHome = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    setMobileOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <header className="bawo-site-header fixed top-0 left-0 right-0 z-50">
+    <header className="bawo-site-header fixed inset-x-0 top-0 z-50">
       <div className="bawo-site-header__glow" aria-hidden />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid h-14 sm:h-[3.75rem] grid-cols-[auto_1fr_auto] items-center gap-3 md:gap-6">
-          <a
-            href="#"
-            className="shrink-0 flex items-center"
-            onClick={(e) => {
-              e.preventDefault();
-              setMobileOpen(false);
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-          >
-            <img
-              src={IMAGES.assets.logo}
-              alt="BawoSocial"
-              className="block h-7 sm:h-8 w-auto"
-              width={168}
-              height={32}
-              decoding="async"
-            />
-          </a>
+        <div className="bawo-site-header__bar">
+          <SiteLogo className="bawo-site-header__logo" onClick={scrollHome} />
 
-          <nav
-            className="hidden md:flex items-center justify-center gap-0.5 lg:gap-1 min-w-0"
-            aria-label="Main"
-          >
+          <nav className="bawo-site-header__nav" aria-label="Main">
             {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="px-3 lg:px-4 py-2 text-sm font-museo-medium text-white/72 hover:text-white rounded-full hover:bg-white/[0.06] transition-colors"
-              >
+              <a key={link.href} href={link.href} className="bawo-site-header__nav-link">
                 {link.label}
               </a>
             ))}
           </nav>
 
-          <div className="flex items-center justify-end gap-2 sm:gap-2.5 shrink-0">
-            <a
-              href="#pricing"
-              className="hidden lg:inline-flex flex-col items-end leading-tight rounded-lg border border-[#ff6b00]/30 bg-[#ff6b00]/10 px-2.5 py-1 hover:bg-[#ff6b00]/15 transition-colors"
-            >
-              <span className="text-[10px] font-museo-bold uppercase tracking-wider text-[#ff8a33]">
-                Founding · $25
-              </span>
-              <span className="text-[11px] font-museo-medium text-white/75 tabular-nums">
-                {countdown}
-              </span>
+          <div className="bawo-site-header__actions">
+            <a href="#pricing" className="bawo-site-header__founding-chip hidden md:inline-flex">
+              <span className="bawo-site-header__founding-chip-label">Founding · $25</span>
+              <span className="bawo-site-header__founding-chip-countdown tabular-nums">{countdown}</span>
             </a>
 
             <BawoPillButton
@@ -87,37 +62,37 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
               appearance="outline"
               size="sm"
               polished
-              className="inline-flex min-w-[4.5rem] sm:min-w-[6.75rem] text-xs sm:text-sm"
+              className="bawo-site-header__join-btn"
               onClick={onJoinClick}
             />
 
             <button
               type="button"
-              className="md:hidden flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/90 hover:bg-white/[0.06] transition-colors"
-              onClick={() => setMobileOpen((o) => !o)}
+              className="bawo-site-header__menu-btn md:hidden"
+              onClick={() => setMobileOpen((open) => !open)}
               aria-expanded={mobileOpen}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
             >
-              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {mobileOpen ? <X className="h-5 w-5" strokeWidth={2} /> : <Menu className="h-5 w-5" strokeWidth={2} />}
             </button>
           </div>
         </div>
       </div>
 
       {mobileOpen && (
-        <div className="md:hidden border-t border-white/[0.06] bg-[rgba(18,8,15,0.32)]">
+        <div className="bawo-site-header__mobile-panel md:hidden">
           <nav className="container mx-auto px-4 py-4 flex flex-col gap-1" aria-label="Mobile">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="rounded-xl px-4 py-3 text-sm font-museo-medium text-white/88 hover:bg-white/[0.06]"
+                className="bawo-site-header__mobile-link"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
               </a>
             ))}
-            <p className="px-4 pt-2 text-xs text-white/50 font-museo-medium tabular-nums">
+            <p className="px-4 pt-3 text-xs text-white/50 font-museo-medium tabular-nums">
               Founding pass $25 · Batch 1 closes in {countdown}
             </p>
             <div className="px-2 pt-3">
