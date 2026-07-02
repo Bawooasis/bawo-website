@@ -9,13 +9,12 @@ export default function HeroActionStack({ onJoinClick }: HeroActionStackProps) {
   const { ctaPrimary, ctaMicrocopy, trustIndicators } = CONTENT.hero;
 
   return (
-    <div className="bawo-hero-actions w-full max-w-[26rem] sm:max-w-[28rem] mx-auto">
+    <div className="bawo-hero-actions w-full max-w-[22rem] sm:max-w-[24rem] mx-auto">
       <div className="flex flex-col items-center gap-2.5">
         <FoundingMemberButton
           label={ctaPrimary}
           variant="primary"
           size="md"
-          fullWidth
           onClick={onJoinClick}
         />
         <p className="text-[11px] sm:text-xs text-white/45 font-museo-medium text-center leading-snug">

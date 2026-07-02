@@ -67,6 +67,16 @@ export function injectDesignTokens() {
   r.setProperty("--bawo-pill-gradient", pillBg);
   r.setProperty("--bawo-brand-cta-orange", palette.brandCtaOrange);
 
+  const cp = palette.content;
+  r.setProperty("--bawo-pumpkin", cp.pumpkin);
+  r.setProperty("--bawo-peach", cp.peach);
+  r.setProperty("--bawo-ink", cp.ink);
+  r.setProperty("--bawo-forest", cp.forest);
+  r.setProperty("--bawo-forest-bright", cp.forestBright);
+  r.setProperty("--bawo-navy", cp.navy);
+  r.setProperty("--bawo-eggplant", cp.eggplant);
+  r.setProperty("--bawo-eggplant-light", cp.eggplantLight);
+
   r.setProperty("--bawo-space-xs", `${spacing.xs}px`);
   r.setProperty("--bawo-space-sm", `${spacing.sm}px`);
   r.setProperty("--bawo-space-md", `${spacing.md}px`);

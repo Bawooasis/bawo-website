@@ -25,7 +25,7 @@ export default function FaqSection() {
           {title}
         </h2>
 
-        <div className="border-t border-white/[0.12]">
+        <div className="border-t border-bawo-eggplant-light/35">
           {items.map((item, index) => {
             const isOpen = openIndex === index;
             const panelId = `${baseId}-panel-${index}`;
@@ -34,7 +34,7 @@ export default function FaqSection() {
             return (
               <div
                 key={item.question}
-                className="border-b border-white/[0.12]"
+                className="border-b border-bawo-eggplant-light/35"
               >
                 <h3>
                   <button
@@ -49,8 +49,8 @@ export default function FaqSection() {
                       {item.question}
                     </span>
                     <ChevronDown
-                      className={`h-5 w-5 shrink-0 text-white/40 transition-transform duration-200 ${
-                        isOpen ? "rotate-180" : ""
+                      className={`h-5 w-5 shrink-0 transition-transform duration-200 ${
+                        isOpen ? "rotate-180 text-bawo-peach" : "text-white/40"
                       }`}
                       aria-hidden
                     />

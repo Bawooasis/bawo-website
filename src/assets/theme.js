@@ -28,6 +28,14 @@ export const semanticTokens = {
     },
     accent: {
       heritageGold,
+      peach: palette.content.peach,
+      pumpkin: palette.content.pumpkin,
+      forest: palette.content.forest,
+      forestBright: palette.content.forestBright,
+      eggplant: palette.content.eggplant,
+      eggplantLight: palette.content.eggplantLight,
+      navy: palette.content.navy,
+      ink: palette.content.ink,
     },
     text: {
       primary: "#FFFFFF",

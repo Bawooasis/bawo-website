@@ -177,36 +177,36 @@ function App() {
           ref={heroRef}
           className="bawo-hero-section relative flex flex-col min-h-[100dvh] overflow-x-clip bg-transparent"
         >
-          <div className="relative z-10 flex flex-1 flex-col container mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-2xl w-full">
+          <div className="relative z-10 flex flex-1 flex-col container mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-2xl w-full min-h-0">
             <div className="flex flex-1 flex-col items-center justify-center w-full min-h-0 py-6 sm:py-8 md:py-10">
-              <div className="text-center space-y-5 sm:space-y-6 md:space-y-8 w-full max-w-4xl mx-auto">
-                <div className="space-y-4 sm:space-y-5 md:space-y-7">
-                  <h1
-                    ref={headlineRef}
-                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.15] font-display text-white break-words"
-                  >
-                    {CONTENT.hero.title.lead}
-                    <span className="text-[#ff6b00]">{CONTENT.hero.title.highlight}</span>
-                  </h1>
-                  <p
-                    ref={subheadlineRef}
-                    className="text-sm sm:text-base md:text-lg opacity-90 font-medium text-white leading-[1.6] max-w-2xl mx-auto break-words"
-                  >
-                    {CONTENT.hero.subtitle}
-                  </p>
-                </div>
-
-                <div ref={ctaRef} className="flex justify-center w-full pt-1">
-                  <HeroActionStack onJoinClick={handleFoundingMember} />
-                </div>
+              <div className="text-center space-y-4 sm:space-y-5 md:space-y-7 w-full max-w-4xl mx-auto">
+                <h1
+                  ref={headlineRef}
+                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.15] font-display text-white break-words"
+                >
+                  {CONTENT.hero.title.lead}
+                  <span className="bawo-accent">{CONTENT.hero.title.highlight}</span>
+                </h1>
+                <p
+                  ref={subheadlineRef}
+                  className="text-sm sm:text-base md:text-lg opacity-90 font-medium text-white leading-[1.6] max-w-2xl mx-auto break-words"
+                >
+                  {CONTENT.hero.subtitle}
+                </p>
               </div>
             </div>
 
-            <div
-              className="w-full max-w-[22rem] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto mt-auto pt-6 sm:pt-8 bawo-hero-share-strip"
-              aria-label="Secondary actions"
-            >
-              <HeroSecondaryBar layout="strip" />
+            <div className="mt-auto w-full shrink-0">
+              <div ref={ctaRef} className="bawo-hero-cta-block">
+                <HeroActionStack onJoinClick={handleFoundingMember} />
+              </div>
+
+              <div
+                className="w-full max-w-[22rem] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto bawo-hero-share-strip"
+                aria-label="Secondary actions"
+              >
+                <HeroSecondaryBar layout="strip" />
+              </div>
             </div>
           </div>
         </section>
@@ -250,7 +250,7 @@ function App() {
                         className="city-stat text-center space-y-5 md:space-y-6 w-full max-w-[16rem] mx-auto"
                       >
                         {rotatingGallery ? (
-                          <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 mx-auto overflow-hidden rounded-full shadow-[0_28px_80px_rgba(0,0,0,0.72)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#D4AF37]/45 hover:shadow-[0_32px_90px_rgba(212,175,55,0.12)]">
+                          <div className="bawo-hub-ring relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 mx-auto overflow-hidden rounded-full shadow-[0_28px_80px_rgba(0,0,0,0.72)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-bawo-peach/45">
                             <BoroughSquareCarousel
                               images={rotatingGallery}
                               alt={`${city.name} community hub, BawoSocial NYC`}
@@ -290,7 +290,7 @@ function App() {
                         className="city-stat text-center space-y-5 md:space-y-6 w-full max-w-[16rem] mx-auto"
                       >
                         {rotatingGallery ? (
-                          <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 mx-auto overflow-hidden rounded-full shadow-[0_28px_80px_rgba(0,0,0,0.72)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#D4AF37]/45 hover:shadow-[0_32px_90px_rgba(212,175,55,0.12)]">
+                          <div className="bawo-hub-ring relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 mx-auto overflow-hidden rounded-full shadow-[0_28px_80px_rgba(0,0,0,0.72)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-bawo-peach/45">
                             <BoroughSquareCarousel
                               images={rotatingGallery}
                               alt={`${city.name} community hub, BawoSocial NYC`}
@@ -340,7 +340,7 @@ function App() {
         <div className="relative z-10 container mx-auto px-6 max-w-2xl">
           <div className="text-center space-y-8">
             <div className="space-y-3">
-              <p className="text-[#10b981] text-xs font-museo-bold uppercase tracking-wider">
+              <p className="bawo-forest-text text-xs font-museo-bold uppercase tracking-wider">
                 Batch 1 Open
               </p>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white font-museo-bold tracking-tight">
@@ -363,7 +363,7 @@ function App() {
 
             <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm font-museo-medium text-white/70">
               <span>
-                <strong className="text-[#ff6b00]">500</strong> spots
+                <strong className="bawo-accent">500</strong> spots
               </span>
               <span>
                 <strong className="text-white">$25</strong> once
@@ -378,7 +378,7 @@ function App() {
               </div>
               <div className="h-2 w-full rounded-full bg-white/[0.08] overflow-hidden">
                 <div
-                  className="h-full w-[10%] rounded-full bg-[#ff6b00]"
+                  className="h-full w-[10%] rounded-full bg-bawo-pumpkin"
                   aria-label="50 of 500 spots taken"
                 />
               </div>
@@ -401,7 +401,7 @@ function App() {
             <div className="text-white space-y-14 w-full max-w-5xl mx-auto">
               <h2 className="text-6xl md:text-7xl lg:text-8xl font-extrabold font-museo-bold leading-tight text-center tracking-tight">
                 {CONTENT.origin.title.lead}
-                <span className="text-[#ff6b00]">{CONTENT.origin.title.highlight}</span>
+                <span className="bawo-accent">{CONTENT.origin.title.highlight}</span>
                 {CONTENT.origin.title.closing}
               </h2>
               <div className="mx-auto max-w-3xl space-y-8 text-left">
@@ -418,7 +418,7 @@ function App() {
                       paragraph
                     ) : (
                       <>
-                        <span className="text-[#ff6b00] font-semibold">
+                        <span className="bawo-accent font-semibold">
                           {paragraph.highlight}
                         </span>
                         {paragraph.text}
@@ -447,7 +447,7 @@ function App() {
             <div className="space-y-3 text-center">
               <h2 className="text-4xl md:text-5xl font-bold font-display leading-tight">
                 {CONTENT.foundingMember.title}{" "}
-                <span className="text-[#ff6b00]">{CONTENT.foundingMember.titleHighlight}</span>
+                <span className="bawo-accent">{CONTENT.foundingMember.titleHighlight}</span>
               </h2>
               <p className="text-sm md:text-base font-museo-medium text-white/65 uppercase tracking-wider">
                 {CONTENT.foundingMember.subtitle}
@@ -458,7 +458,7 @@ function App() {
               {CONTENT.foundingMember.benefits.map((benefit) => (
                 <li key={benefit.title} className="flex items-start gap-3">
                   <BadgeCheck
-                    className="w-5 h-5 text-[#ff6b00] flex-shrink-0 mt-0.5"
+                    className="w-5 h-5 bawo-accent flex-shrink-0 mt-0.5"
                     strokeWidth={2.25}
                     aria-hidden
                   />
@@ -592,7 +592,7 @@ function App() {
               </div>
 
               <div
-                className="bawo-trust-row flex flex-wrap items-center justify-center gap-2.5 text-[10px] md:text-xs font-museo-medium text-[#E8CA6A]"
+                className="bawo-trust-row flex flex-wrap items-center justify-center gap-2.5 text-[10px] md:text-xs font-museo-medium"
                 style={{ textShadow: "0 0 12px rgba(212, 175, 55, 0.22)" }}
               >
                 <span className="flex items-center gap-1.5">
@@ -601,9 +601,9 @@ function App() {
                   </svg>
                   {CONTENT.hero.trustIndicators.stripe}
                 </span>
-                <span className="text-[#D4AF37]/45">|</span>
+                <span className="text-bawo-eggplant-light/80">|</span>
                 <span>{CONTENT.hero.trustIndicators.oneTime}</span>
-                <span className="text-[#D4AF37]/45">|</span>
+                <span className="text-bawo-eggplant-light/80">|</span>
                 <span>{CONTENT.hero.trustIndicators.cancel}</span>
               </div>
             </div>
@@ -630,18 +630,18 @@ function App() {
       {/* Footer */}
       <footer className="py-12 bg-transparent">
         {/* Mobile Sticky CTA */}
-        <div className="md:hidden mobile-sticky-cta bg-[var(--bawo-canvas)]/92 backdrop-blur-xl border-t border-[rgba(255,107,0,0.2)]">
+        <div className="md:hidden mobile-sticky-cta bg-bawo-ink/92 backdrop-blur-xl border-t border-bawo-eggplant-light/50">
           <div className="px-4 pt-2 pb-1">
             <div className="w-full h-1 rounded-full bg-white/10 overflow-hidden mb-2">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-[#D4AF37] to-[#ff6b00]"
+                className="h-full rounded-full bg-gradient-to-r from-bawo-peach to-bawo-pumpkin"
                 style={{ width: "10%" }}
               />
             </div>
           </div>
           <div className="px-4 pb-3 flex items-center justify-between gap-3">
             <div className="flex flex-col min-w-0">
-              <span className="text-[#E8CA6A] font-museo-bold text-xs uppercase tracking-wide">
+              <span className="bawo-accent-soft font-museo-bold text-xs uppercase tracking-wide">
                 Batch 1 Open
               </span>
               <span className="text-white/70 font-museo-medium text-[11px]">

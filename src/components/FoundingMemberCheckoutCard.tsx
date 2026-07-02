@@ -21,7 +21,7 @@ export default function FoundingMemberCheckoutCard({ onJoinClick }: FoundingMemb
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-white leading-tight">
               {title}
             </h2>
-            <p className="font-display text-2xl sm:text-3xl font-bold tabular-nums text-[#ff6b00]">
+            <p className="font-display text-2xl sm:text-3xl font-bold tabular-nums bawo-accent">
               {price}
             </p>
           </div>
@@ -34,7 +34,7 @@ export default function FoundingMemberCheckoutCard({ onJoinClick }: FoundingMemb
           {benefits.map((line, index) => (
             <li key={line} className="flex items-start gap-2.5">
               <BadgeCheck
-                className="w-4 h-4 shrink-0 mt-0.5 text-[#ff6b00]"
+                className="w-4 h-4 shrink-0 mt-0.5 bawo-accent"
                 strokeWidth={2}
                 aria-hidden
               />

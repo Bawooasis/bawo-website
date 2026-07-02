@@ -75,7 +75,7 @@ export default function FoundingMemberModal({ open, onClose }: FoundingMemberMod
 
         <div className="space-y-6">
           <div className="space-y-2 pr-8">
-            <p className="text-xs font-museo-bold uppercase tracking-[0.16em] text-[#ff8a33]">
+            <p className="text-xs font-museo-bold uppercase tracking-[0.16em] bawo-eyebrow">
               {foundingMemberModal.kicker}
             </p>
             <h2
@@ -93,7 +93,7 @@ export default function FoundingMemberModal({ open, onClose }: FoundingMemberMod
           </div>
 
           <div className="flex items-baseline gap-2">
-            <span className="font-display text-3xl font-bold tabular-nums text-[#ff6b00]">
+            <span className="font-display text-3xl font-bold tabular-nums bawo-accent">
               {foundingMemberModal.price}
             </span>
             <span className="text-sm text-white/50 font-museo-medium">
@@ -105,7 +105,7 @@ export default function FoundingMemberModal({ open, onClose }: FoundingMemberMod
             {foundingMemberModal.benefits.map((line, index) => (
               <li key={line} className="flex items-start gap-2.5">
                 <BadgeCheck
-                  className="w-4 h-4 shrink-0 mt-0.5 text-[#ff6b00]"
+                  className="w-4 h-4 shrink-0 mt-0.5 bawo-accent"
                   strokeWidth={2}
                   aria-hidden
                 />

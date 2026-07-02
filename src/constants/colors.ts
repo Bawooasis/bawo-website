@@ -47,10 +47,10 @@ export const COLORS = {
     copperLight: c.bright,
   },
   status: {
-    success: "#10b981",
+    success: "#6db896",
     error: "#ef4444",
-    warning: "#f59e0b",
-    info: "#3b82f6",
+    warning: "#ff8c42",
+    info: "#3a1d48",
   },
   gradients: {
     background: {
@@ -99,13 +99,13 @@ export const TAILWIND_COLORS = {
     },
   },
   gold: {
-    text: "text-[#D4AF37]",
-    bg: "bg-[#D4AF37]",
-    border: "border-[#D4AF37]",
+    text: "text-bawo-peach",
+    bg: "bg-bawo-peach",
+    border: "border-bawo-peach",
   },
   gradients: {
-    primary: "bg-gradient-to-r from-[#8b3310] via-[#e05818] to-[#ff6b00]",
-    primaryHover: "hover:from-[#ff6b00] hover:to-[#ff9f52]",
+    primary: "bg-gradient-to-r from-bawo-navy via-bawo-eggplant to-bawo-pumpkin",
+    primaryHover: "hover:from-bawo-eggplant hover:to-bawo-peach",
     background:
       "bg-gradient-to-b from-[#06030C] via-[#0E0A14] to-[#06030C]",
     subtle: "bg-gradient-to-b from-[#06030C] to-[#0E0A14]",

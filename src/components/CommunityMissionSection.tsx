@@ -10,7 +10,7 @@ export default function CommunityMissionSection() {
       aria-labelledby="community-mission-heading"
     >
       <div className="mx-auto max-w-3xl text-center space-y-4">
-        <p className="text-xs font-museo-bold uppercase tracking-[0.18em] text-[#ff8a33]">
+        <p className="text-xs font-museo-bold uppercase tracking-[0.18em] bawo-eyebrow">
           Why we built this
         </p>
         <h2

@@ -14,7 +14,7 @@ export const CONTENT = {
     kicker: "Day-1 revenue, BawoSocial",
     title: "Founding Member Lifetime Pass",
     description:
-      "Lock in early. One payment, permanent status in our African, African American, Caribbean, and Latin NYC community.",
+      "Lock in early. One payment, permanent status for Nigerians in the diaspora — starting with our NYC community.",
     price: "$25",
     benefits: [
       "Lifetime access to the premium membership tier",
@@ -28,7 +28,7 @@ export const CONTENT = {
     kicker: "Batch 1 · 500 spots",
     title: "Become a Founding Member",
     subtitle:
-      "Lock in lifetime access for our African, African American, Caribbean, and Latin NYC community — before Batch 1 closes.",
+      "Lock in lifetime access for Nigerians in the diaspora — our NYC hub first, with more cities to follow.",
     price: "$25",
     priceNote: "one-time payment",
     benefits: [
@@ -46,7 +46,7 @@ export const CONTENT = {
 
   partnerWithUs: {
     headline: "Help our community find trusted local partners.",
-    body: "If you serve African, African American, Caribbean, or Latin New York — restaurants, professionals, or community businesses — list in our Resource Directory and connect with members who show up for culture.",
+    body: "If you serve Nigerians in New York — restaurants, professionals, shipping, or community businesses — list in our Resource Directory and connect with members who show up for culture.",
     ctaLabel: "Partner With BawoSocial",
     inquiryEmail:
       import.meta.env.VITE_B2B_CONTACT_EMAIL || "Axadegbenro@gmail.com",
@@ -56,12 +56,12 @@ export const CONTENT = {
   communityMission: {
     title: "More than an app. A home for our culture.",
     subtitle:
-      "BawoSocial exists so our people can preserve what makes us us, connect with intention, and find community that feels like belonging — not another feed.",
+      "BawoSocial exists so Nigerians in the diaspora can preserve what makes us us, connect with intention, and find community that feels like home — not another feed.",
     pillars: [
       {
         title: "Preserve culture",
         description:
-          "Events, resources, and groups rooted in heritage — from Independence celebrations to borough cookouts.",
+          "Events, resources, and groups rooted in Nigerian heritage — from Independence Day to owambe season.",
       },
       {
         title: "Connect with purpose",
@@ -71,7 +71,7 @@ export const CONTENT = {
       {
         title: "Find your community",
         description:
-          "Join groups like The Cookout, Carnival Crew, and Sabor NYC where members actually know each other.",
+          "Join groups like Owambe, Naija NYC, Soft Life, and Outside where members actually know each other.",
       },
     ],
   },
@@ -83,7 +83,7 @@ export const CONTENT = {
       highlight: "community",
     },
     subtitle:
-      "The Culture Hub for African, African American, Caribbean, and Latin NYC. Curated resources, culture-led events. We are stronger together.",
+      "The Culture Hub for Nigerians in the diaspora. Curated resources, culture-led events, starting in NYC. We are stronger together.",
     ctaPrimary: "Become a Founding Member",
     ctaMicrocopy: "Founding pass · limited spots",
     ctaSecondary: "Join Waitlist",
@@ -94,10 +94,10 @@ export const CONTENT = {
     downloadAndroid: "Android",
     downloadAndroidSoon: "Coming soon",
     shareWhatsApp:
-      "I just found BawoSocial — the private network for African, Caribbean, Latin & African American NYC. $25 lifetime access, only 450 spots left. Join here: https://joinbawo.com?utm_source=whatsapp",
+      "I just found BawoSocial — the private network for Nigerians in the diaspora. $25 lifetime access, only 450 spots left. Join here: https://joinbawo.com?utm_source=whatsapp",
     shareLink: "https://joinbawo.com?utm_source=share",
     shareTweet:
-      "BawoSocial — the Culture Hub for African, Caribbean, Latin & African American NYC. $25 lifetime founding access.",
+      "BawoSocial — the Culture Hub for Nigerians in the diaspora. $25 lifetime founding access.",
     shareCopy: "Copy link",
     shareCopied: "Copied!",
     knowWhenLaunch: "Know when we launch",
@@ -147,10 +147,10 @@ export const CONTENT = {
       closing: " Exists",
     },
     paragraphs: [
-      "New York has our people everywhere, yet too many of us still feel out of place. We miss our culture, our circle, and the belonging that big platforms never offered.",
+      "Across the diaspora, Nigerians are everywhere — yet too many of us still feel out of place. We miss home, our circle, and the belonging that big platforms never offered.",
       {
         highlight: "BawoSocial",
-        text: " is the Culture Hub to find your tribe, explore local tools and the Resource Directory, and build real relationships. Built for our culture and our community.",
+        text: " is the Culture Hub for Nigerians abroad to find your tribe, explore local tools and the Resource Directory, and build real relationships. Built for our culture and our community.",
       },
     ],
     visionText: "",
@@ -198,7 +198,7 @@ export const CONTENT = {
       },
       {
         title: "Community Matching",
-        description: "Connect with people who share your heritage, borough, and intentions. Whether you're here for friendship, business, or something more.",
+        description: "Connect with Nigerians who share your heritage, borough, and intentions. Whether you're here for friendship, business, or something more.",
       },
     ],
   },
@@ -206,10 +206,10 @@ export const CONTENT = {
   // Testimonials Section
   testimonials: {
     title: "What We're Building For",
-    subtitle: "Voices from across NYC",
+    subtitle: "Voices from the Nigerian diaspora",
     reviews: [
       {
-        name: "The NYC Diaspora",
+        name: "The Nigerian Diaspora",
         role: "New York",
         quote: "I need a network that understands where I'm from and where I'm going.",
         avatar: IMAGES.testimonials.adaora,
@@ -217,7 +217,7 @@ export const CONTENT = {
       {
         name: "Queens, NY",
         role: "Queens, NY",
-        quote: "My borough is full of Africans, but finding your specific community shouldn't be this hard.",
+        quote: "My borough is full of Nigerians, but finding your specific people shouldn't be this hard.",
         avatar: IMAGES.testimonials.emeka,
       },
       {
@@ -232,8 +232,8 @@ export const CONTENT = {
   // Global Reach Section (no member counts – honest)
   globalReach: {
     title: "Building the Network.",
-    subtitle: "Connecting our communities, borough by borough.",
-    description: "Join the First 500 Founding Members to shape the culture of your city's hub.",
+    subtitle: "Connecting Nigerians in the diaspora, borough by borough.",
+    description: "Join the First 500 Founding Members to shape the hub for Nigerian New York — and the diaspora beyond.",
     cities: [
       { name: "Brooklyn", country: "🇺🇸" },
       { name: "Harlem", country: "🇺🇸" },
@@ -248,29 +248,29 @@ export const CONTENT = {
     items: [
       {
         icon: "calendar" as const,
-        title: "Caribbean Carnival Block Party, Brooklyn",
+        title: "Naija Independence Day, Brooklyn",
         description:
-          "Dancehall, soca, and Caribbean food — a block party celebrating Brooklyn's island culture.",
+          "Green-and-white pride, live Afrobeats, and Nigerian food — a block party for the diaspora.",
       },
       {
         icon: "headphones" as const,
         title: "The Resource Directory: Live Q&A",
         description:
-          "Immigration & housing experts answering member questions live.",
+          "Immigration, housing, and shipping experts answering member questions live.",
       },
       {
         icon: "star" as const,
-        title: "Afro-Latin Heritage Night, Manhattan",
+        title: "Owambe Night, Manhattan",
         description:
-          "A night of culture, music, and pride with African, Caribbean, and Latin New York.",
+          "A night of culture, music, and aso ebi energy with Nigerian New York.",
       },
     ],
   },
 
   inAppFeatureCaptions: [
-    "Access Resources: African and African American-owned restaurants, churches, mental health, and more.",
-    "Meet Concierge: immigration, housing, shipping, and local intel.",
-    "Join Communities: Soft Life NYC, The Cookout, Carnival Crew, Sabor NYC, Outside & Owambe.",
+    "Access Resources: Nigerian-owned restaurants, consulates, churches, mental health support, and more.",
+    "Meet Concierge: immigration, housing, shipping, and local intel for the diaspora.",
+    "Join Communities: Owambe, Naija NYC, Soft Life, Outside, and more.",
     "Discover Events: rooftop nights, film screenings, and culture-first meetups.",
     "Community, your way: My Groups, Discover, and For You in one hub.",
   ],
@@ -289,12 +289,12 @@ export const CONTENT = {
       {
         question: "What is BawoSocial?",
         answer:
-          "BawoSocial is a private community platform for African, African American, Caribbean, and Latin New Yorkers across all five boroughs — built for culture-first connection, not another algorithmic feed.",
+          "BawoSocial is a private community platform for Nigerians in the diaspora — starting in NYC across all five boroughs — built for culture-first connection, not another algorithmic feed.",
       },
       {
         question: "Who is BawoSocial for?",
         answer:
-          "African, African American, Caribbean, and Latino New Yorkers — plus friends of the culture who want intentional community, local resources, and real-world events in NYC.",
+          "Nigerians in the diaspora who want intentional community, trusted local resources, and real-world events — beginning in New York, with more cities to come.",
       },
       {
         question: "How much does BawoSocial cost?",
@@ -304,7 +304,7 @@ export const CONTENT = {
       {
         question: "What resources does BawoSocial offer?",
         answer:
-          "Our Resource Directory includes restaurants, consulates, community businesses, churches, mental health support, and more — verified listings with real photos and details, organized for how our communities actually live in NYC.",
+          "Our Resource Directory includes Nigerian restaurants, consulates, community businesses, churches, mental health support, and more — verified listings organized for how we actually live abroad.",
       },
       {
         question: "How is BawoSocial different from Facebook groups?",
@@ -317,7 +317,7 @@ export const CONTENT = {
   // Footer
   footer: {
     brand: "BawoSocial",
-    tagline: "Connecting African, African American, Caribbean, and Latin New York through authentic relationships, resources, and cultural pride.",
+    tagline: "Connecting Nigerians in the diaspora through authentic relationships, resources, and cultural pride.",
     sections: {
       quickLinks: {
         title: "Quick Links",
@@ -340,7 +340,7 @@ export const CONTENT = {
   // Email Signup
   emailSignup: {
     title: "Be First to Know",
-    subtitle: "Get early access when BawoSocial lands in your city",
+    subtitle: "Get early access when BawoSocial expands to your city in the diaspora",
     placeholder: "Enter your email address",
     cta: "Join the Waitlist",
     success: "Thanks! You're on the list.",

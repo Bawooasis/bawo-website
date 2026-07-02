@@ -31,6 +31,18 @@ export default {
         'bawo-xl': 'var(--bawo-space-xl)',
         'bawo-xxl': 'var(--bawo-space-xxl)',
       },
+      colors: {
+        bawo: {
+          pumpkin: "var(--bawo-pumpkin, #ff6b00)",
+          peach: "var(--bawo-peach, #ff8c42)",
+          ink: "var(--bawo-ink, #0e0a14)",
+          forest: "var(--bawo-forest, #1f493c)",
+          "forest-bright": "var(--bawo-forest-bright, #6db896)",
+          navy: "var(--bawo-navy, #1a0a28)",
+          eggplant: "var(--bawo-eggplant, #2a1438)",
+          "eggplant-light": "var(--bawo-eggplant-light, #3a1d48)",
+        },
+      },
       borderRadius: {
         'bawo-sm': 'var(--bawo-radius-sm)',
         'bawo-md': 'var(--bawo-radius-md)',

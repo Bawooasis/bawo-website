@@ -101,7 +101,7 @@ export default function BoroughSquareCarousel({
               key={i}
               className={`rounded-full transition-all duration-300 ${
                 i === index
-                  ? "h-2 w-5 bg-[#D4AF37] shadow-[0_0_12px_rgba(212,175,55,0.5)]"
+                  ? "h-2 w-5 bg-bawo-peach shadow-[0_0_12px_rgba(255,140,66,0.45)]"
                   : "h-1.5 w-1.5 bg-white/38"
               }`}
             />
