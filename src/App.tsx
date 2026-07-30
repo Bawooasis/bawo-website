@@ -11,6 +11,7 @@ import BoroughNetworkGraphic from "./components/BoroughNetworkGraphic";
 import BoroughSquareCarousel from "./components/BoroughSquareCarousel";
 import FoundingMemberButton from "./components/FoundingMemberButton";
 import HeroActionStack from "./components/HeroActionStack";
+import HeroAppPreview from "./components/HeroAppPreview";
 import HeroSecondaryBar from "./components/HeroSecondaryBar";
 import MobileAppDownloadRow from "./components/MobileAppDownloadRow";
 import FaqSection from "./components/FaqSection";
@@ -44,6 +45,7 @@ function App() {
   const headlineRef = useRef(null);
   const subheadlineRef = useRef(null);
   const ctaRef = useRef(null);
+  const mockupRef = useRef(null);
   const statsRef = useRef(null);
   const foundingMemberRef = useRef(null);
   const featuresRef = useRef(null);
@@ -76,6 +78,12 @@ function App() {
           { y: 12, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.75, clearProps: "transform" },
           "-=0.55"
+        )
+        .fromTo(
+          mockupRef.current,
+          { x: 28, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.95, clearProps: "transform" },
+          "-=0.65"
         )
         .fromTo(
           ctaRef.current,
@@ -178,21 +186,30 @@ function App() {
           className="bawo-hero-section relative flex flex-col min-h-[100dvh] overflow-x-clip bg-transparent"
         >
           <div className="relative z-10 flex flex-1 flex-col container mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-2xl w-full min-h-0">
-            <div className="flex flex-1 flex-col items-center justify-center w-full min-h-0 py-6 sm:py-8 md:py-10">
-              <div className="text-center space-y-4 sm:space-y-5 md:space-y-7 w-full max-w-4xl mx-auto">
-                <h1
-                  ref={headlineRef}
-                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.15] font-display text-white break-words"
-                >
-                  {CONTENT.hero.title.lead}
-                  <span className="bawo-accent">{CONTENT.hero.title.highlight}</span>
-                </h1>
-                <p
-                  ref={subheadlineRef}
-                  className="text-sm sm:text-base md:text-lg opacity-90 font-medium text-white leading-[1.6] max-w-2xl mx-auto break-words"
-                >
-                  {CONTENT.hero.subtitle}
-                </p>
+            <div className="flex flex-1 flex-col lg:flex-row lg:items-center w-full min-h-0 gap-8 lg:gap-10 xl:gap-14 py-6 sm:py-8 md:py-10">
+              <div className="flex flex-1 flex-col justify-center w-full lg:max-w-[48%] xl:max-w-[46%] text-center lg:text-left">
+                <div className="space-y-4 sm:space-y-5 md:space-y-7 w-full max-w-4xl mx-auto lg:mx-0">
+                  <h1
+                    ref={headlineRef}
+                    className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.35rem] xl:text-7xl font-bold leading-[1.15] font-display text-white break-words"
+                  >
+                    {CONTENT.hero.title.lead}
+                    <span className="bawo-accent">{CONTENT.hero.title.highlight}</span>
+                  </h1>
+                  <p
+                    ref={subheadlineRef}
+                    className="text-sm sm:text-base md:text-lg opacity-90 font-medium text-white leading-[1.6] max-w-2xl mx-auto lg:mx-0 break-words"
+                  >
+                    {CONTENT.hero.subtitle}
+                  </p>
+                </div>
+              </div>
+
+              <div
+                ref={mockupRef}
+                className="flex flex-1 min-h-0 items-end justify-center w-full lg:justify-end"
+              >
+                <HeroAppPreview />
               </div>
             </div>
 
@@ -557,7 +574,7 @@ function App() {
         id="email-section"
         className="relative bawo-scroll-anchor flex items-center justify-center bg-transparent py-20 md:py-28 section-contain"
       >
-        
+
         <div className="relative z-10 container mx-auto px-6 py-12 md:py-16">
           <div className="text-center space-y-10 max-w-2xl mx-auto">
             <div className="space-y-4">

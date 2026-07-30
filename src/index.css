@@ -1556,6 +1556,82 @@ a.bawo-cta-quiet:active {
   padding-bottom: 0.625rem;
 }
 
+/* Hero proof-of-concept — exact 4K landscape device frames (3840×3072), no recompress. */
+.bawo-hero-mockup {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.bawo-hero-mockup__glow {
+  pointer-events: none;
+  position: absolute;
+  inset: -4% -8%;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse 48% 55% at 50% 50%,
+    rgba(255, 107, 0, 0.28) 0%,
+    rgba(255, 140, 66, 0.1) 42%,
+    transparent 72%
+  );
+  filter: blur(40px);
+}
+
+.bawo-hero-mockup__stage {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 22rem);
+  aspect-ratio: 3840 / 3072;
+}
+
+.bawo-hero-mockup__image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Exact bitmap — no CSS filter on the visible frame (keeps UI text crisp). */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s ease;
+}
+
+.bawo-hero-mockup__image.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+@media (min-width: 640px) {
+  .bawo-hero-mockup__stage {
+    width: min(100%, 28rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .bawo-hero-mockup {
+    justify-content: flex-end;
+  }
+
+  .bawo-hero-mockup__stage {
+    width: min(100%, 40rem);
+  }
+}
+
+@media (min-width: 1280px) {
+  .bawo-hero-mockup__stage {
+    width: min(100%, 44rem);
+  }
+}
+
 @media (min-width: 640px) {
   .bawo-hero-cta-block {
     padding-bottom: 0.75rem;
@@ -1885,7 +1961,7 @@ a.bawo-cta-quiet:active {
     animation: scrollLeft 40s linear infinite;
     will-change: transform;
   }
-  
+
   @keyframes scrollLeft {
     0% {
       transform: translateX(0);
@@ -1894,7 +1970,7 @@ a.bawo-cta-quiet:active {
       transform: translateX(-50%);
     }
   }
-  
+
   /* Gentle lift animation for buttons – transform only for 60fps */
   .animate-lift {
     transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
@@ -1923,32 +1999,32 @@ a.bawo-cta-quiet:active {
       transform: translateY(-1px) translateZ(0);
     }
   }
-  
-  
+
+
   /* Pulse animation for urgency indicators */
   .animate-pulse-gentle {
     animation: pulse-gentle 2s ease-in-out infinite;
   }
-  
+
   @keyframes pulse-gentle {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.7; }
   }
-  
+
   /* Staggered entrance for cards */
   .stagger-animation > * {
     opacity: 0;
     transform: translate3d(0, 20px, 0);
     transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  
+
   .stagger-animation > *:nth-child(1) { transition-delay: 0.1s; }
   .stagger-animation > *:nth-child(2) { transition-delay: 0.2s; }
   .stagger-animation > *:nth-child(3) { transition-delay: 0.3s; }
   .stagger-animation > *:nth-child(4) { transition-delay: 0.4s; }
   .stagger-animation > *:nth-child(5) { transition-delay: 0.5s; }
   .stagger-animation > *:nth-child(6) { transition-delay: 0.6s; }
-  
+
   .stagger-animation.visible > * {
     opacity: 1;
     transform: translate3d(0, 0, 0);
@@ -1959,7 +2035,7 @@ a.bawo-cta-quiet:active {
     position: relative;
     overflow: hidden;
   }
-  
+
   .hero-shimmer::before {
     content: '';
     position: absolute;
@@ -1976,7 +2052,7 @@ a.bawo-cta-quiet:active {
     animation: shimmer 8s infinite;
     z-index: 1;
   }
-  
+
   @keyframes shimmer {
     0% { transform: translateX(-100%); }
     100% { transform: translateX(200%); }
@@ -1986,7 +2062,7 @@ a.bawo-cta-quiet:active {
   .animate-slide-down {
     animation: slideDown 0.4s ease-out;
   }
-  
+
   @keyframes slideDown {
     from {
       transform: translate3d(-50%, -100%, 0);
@@ -2002,7 +2078,7 @@ a.bawo-cta-quiet:active {
   .animate-fade-in {
     animation: fadeInLeft 0.5s ease-out;
   }
-  
+
   @keyframes fadeInLeft {
     from {
       transform: translate3d(-20px, 0, 0);
@@ -2021,7 +2097,12 @@ a.bawo-cta-quiet:active {
   }
   .animate-subtle-float {
     animation: subtle-float 5s ease-in-out infinite;
-    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-subtle-float {
+      animation: none;
+    }
   }
 
   /* Promote GSAP targets to their own compositor layer upfront */
@@ -2050,7 +2131,7 @@ a.bawo-cta-quiet:active {
     background-size: 200% 100%;
     animation: gradientShift 12s ease-in-out infinite;
   }
-  
+
   @keyframes gradientShift {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -2066,7 +2147,7 @@ a.bawo-cta-quiet:active {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  
+
   /* Disable hero animations for accessibility */
   .hero-shimmer::before,
   .hero-gradient-animate,
