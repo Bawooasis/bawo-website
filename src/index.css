@@ -1585,7 +1585,8 @@ a.bawo-cta-quiet:active {
 .bawo-hero-mockup__stage {
   position: relative;
   z-index: 1;
-  width: min(100%, 22rem);
+  /* Fill available column; cap by viewport so the phone reads large. */
+  width: min(100%, 96vw, calc(52dvh * 3840 / 3072));
   aspect-ratio: 3840 / 3072;
 }
 
@@ -1612,7 +1613,7 @@ a.bawo-cta-quiet:active {
 
 @media (min-width: 640px) {
   .bawo-hero-mockup__stage {
-    width: min(100%, 28rem);
+    width: min(100%, 94vw, calc(58dvh * 3840 / 3072));
   }
 }
 
@@ -1622,13 +1623,19 @@ a.bawo-cta-quiet:active {
   }
 
   .bawo-hero-mockup__stage {
-    width: min(100%, 40rem);
+    width: min(100%, 62vw, calc(72dvh * 3840 / 3072), 70rem);
   }
 }
 
 @media (min-width: 1280px) {
   .bawo-hero-mockup__stage {
-    width: min(100%, 44rem);
+    width: min(100%, 58vw, calc(78dvh * 3840 / 3072), 76rem);
+  }
+}
+
+@media (min-width: 1536px) {
+  .bawo-hero-mockup__stage {
+    width: min(100%, 56vw, calc(82dvh * 3840 / 3072), 84rem);
   }
 }
 
