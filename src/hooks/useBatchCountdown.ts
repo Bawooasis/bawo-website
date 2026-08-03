@@ -1,21 +1,47 @@
 import { useEffect, useState } from "react";
 
-const BATCH_END = new Date("2026-08-01T23:59:59").getTime();
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+/** Anchoring the reset to one timezone keeps the clock identical for every
+ *  visitor instead of following their local midnight. */
+const BATCH_TIMEZONE = "America/New_York";
 
 export type CountdownParts = {
-  days: number;
   hours: number;
   minutes: number;
   seconds: number;
 };
 
+const zonedClock = new Intl.DateTimeFormat("en-US", {
+  timeZone: BATCH_TIMEZONE,
+  hour12: false,
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+});
+
+/** Milliseconds until the next midnight in `BATCH_TIMEZONE`.
+ *  Treats the two DST-shifted days as a flat 24h; the drift lasts one day and
+ *  corrects itself at the following reset. */
+function msUntilReset(now: number): number {
+  const parts = zonedClock.formatToParts(new Date(now));
+  const read = (type: string) =>
+    Number(parts.find((part) => part.type === type)?.value ?? 0);
+
+  const hours = read("hour") % 24; // some engines report midnight as hour 24
+  const elapsed =
+    ((hours * 60 + read("minute")) * 60 + read("second")) * 1000 + (now % 1000);
+
+  return DAY_MS - elapsed;
+}
+
 function computeCountdown(): CountdownParts {
-  const diff = Math.max(0, BATCH_END - Date.now());
+  const remaining = msUntilReset(Date.now());
+
   return {
-    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-    minutes: Math.floor((diff / 1000 / 60) % 60),
-    seconds: Math.floor((diff / 1000) % 60),
+    hours: Math.floor(remaining / (1000 * 60 * 60)),
+    minutes: Math.floor((remaining / 1000 / 60) % 60),
+    seconds: Math.floor((remaining / 1000) % 60),
   };
 }
 
@@ -33,15 +59,16 @@ export function useBatchCountdown(active = true) {
   return timeLeft;
 }
 
+const pad = (value: number) => String(value).padStart(2, "0");
+
 export function formatCountdownShort(t: CountdownParts) {
-  return `${t.days}d ${String(t.hours).padStart(2, "0")}h ${String(t.minutes).padStart(2, "0")}m`;
+  return `${pad(t.hours)}:${pad(t.minutes)}:${pad(t.seconds)}`;
 }
 
 export function formatCountdownClock(t: CountdownParts) {
   return {
-    days: t.days,
-    hours: String(t.hours).padStart(2, "0"),
-    minutes: String(t.minutes).padStart(2, "0"),
-    seconds: String(t.seconds).padStart(2, "0"),
+    hours: pad(t.hours),
+    minutes: pad(t.minutes),
+    seconds: pad(t.seconds),
   };
 }

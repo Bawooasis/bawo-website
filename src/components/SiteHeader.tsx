@@ -93,7 +93,7 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
               </a>
             ))}
             <p className="px-4 pt-3 text-xs text-white/50 font-museo-medium tabular-nums">
-              Founding pass $25 · Batch 1 closes in {countdown}
+              Founding pass $25 · Today's window closes in {countdown}
             </p>
             <div className="px-2 pt-3">
               <BawoPillButton

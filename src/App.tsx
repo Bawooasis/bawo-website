@@ -369,11 +369,11 @@ function App() {
 
               <div>
                 <p className="text-[10px] uppercase tracking-widest text-white/45 font-museo-bold mb-2">
-                  Closes in
+                  Today's window closes in
                 </p>
                 <BatchCountdownDisplay />
                 <p className="text-[10px] text-white/45 font-museo-medium mt-1">
-                  days · hrs · min · sec
+                  hrs · min · sec
                 </p>
               </div>
 

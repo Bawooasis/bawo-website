@@ -4,6 +4,7 @@
 // import globeImage from "../assets/images/GLOBE.png"; // File removed
 import adoraImage from "../assets/images/ADORA.jpg";
 import bawoLogo from "../assets/images/bawo-logo.png";
+import bawoSocialWordmark from "../assets/images/bawosocial-logo.png";
 import emekaImage from "../assets/images/Emeka.jpg";
 import fatimaImage from "../assets/images/Fatima.jpg";
 
@@ -78,7 +79,8 @@ export const IMAGES = {
   assets: {
     globe:
       "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=400&q=80&auto=format&fit=crop", // Placeholder globe image
-    logo: "/bawosocial-logo.png?v=5",
+    /** Vite-bundled wordmark — avoids /public path 404s that show as a white broken-image box */
+    logo: bawoSocialWordmark,
     logoOld: bawoLogo,
     // Add more local images here as needed
   },

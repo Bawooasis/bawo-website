@@ -14,8 +14,6 @@ function BatchCountdownDisplay({ className = "", size = "lg" }: BatchCountdownDi
 
   return (
     <div className={`flex items-center justify-center gap-1 md:gap-2 font-museo-bold tabular-nums ${className}`}>
-      <span className={`${num} bawo-accent`}>{c.days}</span>
-      <span className="text-white/25 pb-1">:</span>
       <span className={`${num} bawo-accent`}>{c.hours}</span>
       <span className="text-white/25 pb-1">:</span>
       <span className={`${num} bawo-accent`}>{c.minutes}</span>

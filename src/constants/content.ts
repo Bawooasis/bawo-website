@@ -134,7 +134,7 @@ export const CONTENT = {
     },
     urgency: {
       price: "After 500 members: $19.99/month ($240/year)",
-      deadline: "Batch 1 closes when full or August 1, 2026",
+      deadline: "Batch 1 closes once all 500 spots are taken — first come, first served",
       guarantee: "30-day money-back guarantee. No questions asked."
     }
   },
