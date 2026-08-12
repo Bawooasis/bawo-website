@@ -233,7 +233,7 @@ export const CONTENT = {
   globalReach: {
     title: "Building the Network.",
     subtitle: "Connecting Nigerians in the diaspora, borough by borough.",
-    description: "Join the First 500 Founding Members to shape the hub for Nigerian New York — and the diaspora beyond.",
+    description: "Join the First 500 Founding Members to shape the hub for Nigerian New York and the diaspora beyond.",
     cities: [
       { name: "Brooklyn", country: "🇺🇸" },
       { name: "Harlem", country: "🇺🇸" },

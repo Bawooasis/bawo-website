@@ -2,11 +2,12 @@ import { Suspense, useEffect, useState } from "react";
 import { MeshGradient } from "@paper-design/shaders-react";
 import { palette } from "../../assets/colors.js";
 
+/** Cool eggplant ramp — no warm brown stops. */
 const MESH_COLORS = [
   palette.obsidian.canvas,
-  "#14090E",
-  "#18100F",
-  "#3D2214",
+  "#0E0A14",
+  "#1A0A28",
+  "#2A1438",
 ] as const;
 
 function StaticSiteFallback() {
@@ -31,12 +32,12 @@ function AnimatedMeshLayer() {
         className="pointer-events-none absolute inset-0"
         style={{
           background: `
-            radial-gradient(ellipse 110% 70% at 50% -8%, rgba(255, 107, 0, 0.14) 0%, transparent 52%),
-            radial-gradient(ellipse 85% 55% at 18% 32%, rgba(255, 107, 0, 0.08) 0%, transparent 58%),
-            radial-gradient(ellipse 75% 50% at 82% 38%, rgba(212, 175, 55, 0.07) 0%, transparent 55%),
-            radial-gradient(ellipse 90% 60% at 50% 62%, rgba(255, 107, 0, 0.06) 0%, transparent 58%),
-            radial-gradient(ellipse 80% 55% at 30% 88%, rgba(196, 123, 68, 0.05) 0%, transparent 52%),
-            radial-gradient(ellipse 70% 45% at 75% 78%, rgba(212, 175, 55, 0.05) 0%, transparent 48%)
+            radial-gradient(ellipse 110% 70% at 50% -8%, rgba(255, 107, 0, 0.12) 0%, transparent 52%),
+            radial-gradient(ellipse 85% 55% at 18% 32%, rgba(42, 20, 56, 0.55) 0%, transparent 58%),
+            radial-gradient(ellipse 75% 50% at 82% 38%, rgba(58, 29, 72, 0.4) 0%, transparent 55%),
+            radial-gradient(ellipse 90% 60% at 50% 62%, rgba(26, 10, 40, 0.45) 0%, transparent 58%),
+            radial-gradient(ellipse 80% 55% at 30% 88%, rgba(42, 20, 56, 0.35) 0%, transparent 52%),
+            radial-gradient(ellipse 70% 45% at 75% 78%, rgba(255, 107, 0, 0.05) 0%, transparent 48%)
           `,
         }}
       />
@@ -57,7 +58,7 @@ function usePrefersReducedMotion() {
   return reduced;
 }
 
-/** Fixed full-page mesh + warm wash — same feel as hero, across the whole scroll. */
+/** Fixed full-page mesh + eggplant wash — across the whole scroll. */
 export default function SiteMeshBackground() {
   const reducedMotion = usePrefersReducedMotion();
   const [active, setActive] = useState(true);

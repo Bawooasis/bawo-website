@@ -57,7 +57,7 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
             </a>
 
             <BawoPillButton
-              label="Join Now"
+              label="Join Waitlist"
               variant="primary"
               appearance="outline"
               size="sm"
@@ -97,7 +97,7 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
             </p>
             <div className="px-2 pt-3">
               <BawoPillButton
-                label="Join Now — $25"
+                label="Join Waitlist"
                 variant="primary"
                 appearance="outline"
                 size="md"

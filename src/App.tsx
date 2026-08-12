@@ -240,15 +240,15 @@ function App() {
                 <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-museo-medium text-white/85 max-w-4xl mx-auto leading-snug">
                   {CONTENT.globalReach.subtitle}
                 </p>
-                <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-museo-regular bawo-text-cta-gradient max-w-3xl mx-auto leading-relaxed">
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-museo-regular text-bawo-peach max-w-3xl mx-auto leading-relaxed">
                   {CONTENT.globalReach.description}
                 </p>
               </div>
 
-              <div className="relative mx-auto w-full max-w-[1280px] min-h-[480px] sm:min-h-[560px] md:min-h-[700px] lg:min-h-[780px] mt-10 md:mt-14">
+              <div className="relative mx-auto w-full max-w-[1100px] min-h-[360px] sm:min-h-[420px] md:min-h-[520px] lg:min-h-[580px] mt-8 md:mt-12">
                 <BoroughNetworkGraphic className="pointer-events-none absolute inset-0 z-0 hidden h-full w-full opacity-[0.94] md:block [mask-image:radial-gradient(ellipse_88%_78%_at_50%_48%,#000_32%,transparent_72%)]" />
-                <div className="relative z-[1] flex flex-col items-stretch gap-12 sm:gap-16 md:gap-24 lg:gap-28 pt-2 pb-4 md:pt-4 md:pb-8">
-                  <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-10 lg:gap-12 xl:gap-14 justify-items-center w-full">
+                <div className="relative z-[1] flex flex-col items-stretch gap-10 sm:gap-12 md:gap-16 lg:gap-20 pt-2 pb-4 md:pt-4 md:pb-8">
+                  <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8 lg:gap-10 justify-items-center w-full">
                     {CONTENT.globalReach.cities
                       .slice(0, 3)
                       .map((city, index) => {
@@ -263,10 +263,10 @@ function App() {
                         return (
                           <div
                             key={city.name}
-                            className="city-stat text-center space-y-5 md:space-y-6 w-full max-w-[16rem] mx-auto"
+                            className="city-stat text-center space-y-3 md:space-y-4 w-full max-w-[12rem] mx-auto"
                           >
                             {rotatingGallery ? (
-                              <div className="bawo-hub-ring relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 mx-auto overflow-hidden rounded-full shadow-[0_28px_80px_rgba(0,0,0,0.72)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-bawo-peach/45">
+                              <div className="bawo-hub-ring relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto overflow-hidden rounded-full shadow-[0_20px_48px_rgba(0,0,0,0.65)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-bawo-peach/45">
                                 <BoroughSquareCarousel
                                   images={rotatingGallery}
                                   alt={`${city.name} community hub, BawoSocial NYC`}
@@ -274,7 +274,7 @@ function App() {
                                 />
                               </div>
                             ) : (
-                              <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_28px_80px_rgba(0,0,0,0.72)] overflow-hidden hover:scale-[1.04] transition-transform duration-300">
+                              <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_20px_48px_rgba(0,0,0,0.65)] overflow-hidden hover:scale-[1.04] transition-transform duration-300">
                                 <img
                                   src={IMAGES.globalReach.cities[index]}
                                   alt={city.name}
@@ -282,8 +282,8 @@ function App() {
                                 />
                               </div>
                             )}
-                            <div className="mt-1 md:mt-2">
-                              <h3 className="font-museo-bold text-white text-lg sm:text-xl md:text-3xl lg:text-4xl xl:text-[2.65rem] tracking-[0.14em] drop-shadow-[0_2px_24px_rgba(0,0,0,0.65)]">
+                            <div className="mt-1">
+                              <h3 className="font-museo-bold text-white text-sm sm:text-base md:text-lg lg:text-xl tracking-[0.12em] drop-shadow-[0_2px_16px_rgba(0,0,0,0.65)]">
                                 {city.name.toUpperCase()}
                               </h3>
                             </div>
@@ -291,7 +291,7 @@ function App() {
                         );
                       })}
                   </div>
-                  <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 sm:mx-auto sm:max-w-2xl md:max-w-5xl md:grid-cols-2 md:gap-12 lg:gap-14 xl:gap-16 justify-items-center w-full px-2 sm:px-4">
+                  <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:mx-auto sm:max-w-xl md:max-w-3xl md:grid-cols-2 md:gap-10 lg:gap-12 justify-items-center w-full px-2 sm:px-4">
                     {CONTENT.globalReach.cities.slice(3).map((city, index) => {
                       const i = index + 3;
                       const rotatingGallery =
@@ -303,10 +303,10 @@ function App() {
                       return (
                         <div
                           key={city.name}
-                          className="city-stat text-center space-y-5 md:space-y-6 w-full max-w-[16rem] mx-auto"
+                          className="city-stat text-center space-y-3 md:space-y-4 w-full max-w-[12rem] mx-auto"
                         >
                           {rotatingGallery ? (
-                            <div className="bawo-hub-ring relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 mx-auto overflow-hidden rounded-full shadow-[0_28px_80px_rgba(0,0,0,0.72)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-bawo-peach/45">
+                            <div className="bawo-hub-ring relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto overflow-hidden rounded-full shadow-[0_20px_48px_rgba(0,0,0,0.65)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-bawo-peach/45">
                               <BoroughSquareCarousel
                                 images={rotatingGallery}
                                 alt={`${city.name} community hub, BawoSocial NYC`}
@@ -314,7 +314,7 @@ function App() {
                               />
                             </div>
                           ) : (
-                            <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_28px_80px_rgba(0,0,0,0.72)] overflow-hidden hover:scale-[1.04] transition-transform duration-300">
+                            <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_20px_48px_rgba(0,0,0,0.65)] overflow-hidden hover:scale-[1.04] transition-transform duration-300">
                               <img
                                 src={IMAGES.globalReach.cities[i]}
                                 alt={city.name}
@@ -322,8 +322,8 @@ function App() {
                               />
                             </div>
                           )}
-                          <div className="mt-1 md:mt-2">
-                            <h3 className="font-museo-bold text-white text-lg sm:text-xl md:text-3xl lg:text-4xl xl:text-[2.65rem] tracking-[0.14em] drop-shadow-[0_2px_24px_rgba(0,0,0,0.65)]">
+                          <div className="mt-1">
+                            <h3 className="font-museo-bold text-white text-sm sm:text-base md:text-lg lg:text-xl tracking-[0.12em] drop-shadow-[0_2px_16px_rgba(0,0,0,0.65)]">
                               {city.name.toUpperCase()}
                             </h3>
                           </div>
@@ -682,10 +682,10 @@ function App() {
                 </span>
               </div>
               <FoundingMemberButton
-                label="Join — $25"
+                label="Join Waitlist"
                 variant="primary"
                 size="sm"
-                className="shrink-0 max-w-[9.5rem] sm:max-w-none"
+                className="shrink-0 max-w-[10.5rem] sm:max-w-none"
                 onClick={handleFoundingMember}
               />
             </div>

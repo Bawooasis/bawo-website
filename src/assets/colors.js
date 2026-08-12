@@ -18,9 +18,10 @@ export const contentPalette = {
 
 export const palette = {
   obsidian: {
-    canvas: "#12080F",
-    elevated: "#1C0E14",
-    depth: "#261018",
+    /** Pitch-deck slide canvas — deep eggplant near-black */
+    canvas: "#06030C",
+    elevated: "#0E0A14",
+    depth: "#1A0A28",
   },
   content: contentPalette,
   copper: {
