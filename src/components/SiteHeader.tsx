@@ -40,15 +40,17 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bawo-site-header__bar">
-          <SiteLogo className="bawo-site-header__logo" onClick={scrollHome} />
+          <div className="bawo-site-header__leading">
+            <SiteLogo className="bawo-site-header__logo" onClick={scrollHome} />
 
-          <nav className="bawo-site-header__nav" aria-label="Main">
-            {NAV_LINKS.map((link) => (
-              <a key={link.href} href={link.href} className="bawo-site-header__nav-link">
-                {link.label}
-              </a>
-            ))}
-          </nav>
+            <nav className="bawo-site-header__nav" aria-label="Main">
+              {NAV_LINKS.map((link) => (
+                <a key={link.href} href={link.href} className="bawo-site-header__nav-link">
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+          </div>
 
           <div className="bawo-site-header__actions">
             <a href="#pricing" className="bawo-site-header__founding-chip hidden md:inline-flex">
@@ -78,6 +80,8 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
           </div>
         </div>
       </div>
+
+      <div className="bawo-site-header__divider" aria-hidden />
 
       {mobileOpen && (
         <div className="bawo-site-header__mobile-panel md:hidden">

@@ -12,7 +12,9 @@ import FoundingMemberCheckoutCard from "./components/FoundingMemberCheckoutCard"
 import FoundingMemberModal from "./components/FoundingMemberModal";
 import HeroActionStack from "./components/HeroActionStack";
 import HeroAppPreview from "./components/HeroAppPreview";
+import HeroNextPreview from "./components/HeroNextPreview";
 import HeroSecondaryBar from "./components/HeroSecondaryBar";
+import SectionPillNav from "./components/SectionPillNav";
 import MailchimpSignupRow from "./components/MailchimpSignupRow";
 import MobileAppDownloadRow from "./components/MobileAppDownloadRow";
 import PartnerWithUsSection from "./components/PartnerWithUsSection";
@@ -210,10 +212,14 @@ function App() {
               </div>
             </div>
 
-            <div className="mt-auto w-full shrink-0">
+            <div className="mt-auto w-full shrink-0 space-y-5 sm:space-y-6 pb-2">
               <div ref={ctaRef} className="bawo-hero-cta-block">
                 <HeroActionStack onJoinClick={handleFoundingMember} />
               </div>
+
+              <SectionPillNav />
+
+              <HeroNextPreview />
 
               <div
                 className="w-full max-w-[22rem] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto bawo-hero-share-strip"

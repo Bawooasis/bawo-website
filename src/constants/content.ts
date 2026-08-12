@@ -107,6 +107,37 @@ export const CONTENT = {
       oneTime: "One-time payment",
       cancel: "30-day money-back guarantee",
     },
+    /** First-screen preview footer — images optional; swap later via `image`. */
+    nextPreview: [
+      {
+        kicker: "Next up",
+        title: "Explore the map",
+        description:
+          "Find Nigerian restaurants, stores, and services across NYC — verified spots your community actually uses.",
+        image: null as string | null,
+      },
+      {
+        kicker: "Next up",
+        title: "Join your groups",
+        description:
+          "Owambe, Soft Life, Naija NYC, Outside — micro-communities where you actually know the people.",
+        image: null as string | null,
+      },
+      {
+        kicker: "Next up",
+        title: "Culture-led events",
+        description:
+          "Independence Day, owambe nights, and gatherings filtered for diaspora culture — not generic city feeds.",
+        image: null as string | null,
+      },
+      {
+        kicker: "Next up",
+        title: "Ask the Concierge",
+        description:
+          "Need Agege bread, a salon, or a lawyer? Ask the AI Concierge and get culturally relevant answers fast.",
+        image: null as string | null,
+      },
+    ],
   },
 
   // Stats Section (Scarcity metrics – Batch 1)
