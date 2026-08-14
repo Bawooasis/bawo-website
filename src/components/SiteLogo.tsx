@@ -15,6 +15,16 @@ export default function SiteLogo({ className = "", onClick }: SiteLogoProps) {
       aria-label="BawoSocial home"
     >
       <img
+        src={IMAGES.assets.mark}
+        alt=""
+        className="bawo-site-logo__mark"
+        width={112}
+        height={128}
+        decoding="async"
+        fetchPriority="high"
+        aria-hidden
+      />
+      <img
         src={IMAGES.assets.logo}
         alt="BawoSocial"
         className="bawo-site-logo__img"

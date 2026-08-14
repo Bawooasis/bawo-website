@@ -1321,10 +1321,19 @@ a.bawo-cta-quiet:active {
 .bawo-site-logo {
   display: inline-flex;
   align-items: center;
+  gap: 0.45rem;
   flex-shrink: 0;
   min-width: 0;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
+}
+
+.bawo-site-logo__mark {
+  display: block;
+  height: 1.65rem;
+  width: auto;
+  flex-shrink: 0;
+  object-fit: contain;
 }
 
 .bawo-site-logo__img {
@@ -1337,6 +1346,14 @@ a.bawo-cta-quiet:active {
 }
 
 @media (min-width: 640px) {
+  .bawo-site-logo {
+    gap: 0.55rem;
+  }
+
+  .bawo-site-logo__mark {
+    height: 1.85rem;
+  }
+
   .bawo-site-logo__img {
     height: 2rem;
     max-width: 9.75rem;
@@ -1344,6 +1361,10 @@ a.bawo-cta-quiet:active {
 }
 
 @media (min-width: 1024px) {
+  .bawo-site-logo__mark {
+    height: 2rem;
+  }
+
   .bawo-site-logo__img {
     height: 2.125rem;
     max-width: 10.75rem;
