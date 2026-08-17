@@ -94,8 +94,8 @@ export const CONTENT = {
     downloadAndroid: "Android",
     downloadAndroidSoon: "Coming soon",
     shareWhatsApp:
-      "I just found BawoSocial — the private network for Nigerians in the diaspora. $25 lifetime access, only 450 spots left. Join here: https://joinbawo.com?utm_source=whatsapp",
-    shareLink: "https://joinbawo.com?utm_source=share",
+      "I just found BawoSocial — the private network for Nigerians in the diaspora. $25 lifetime access, only 450 spots left. Join here: https://www.joinbawo.com?utm_source=whatsapp",
+    shareLink: "https://www.joinbawo.com?utm_source=share",
     shareTweet:
       "BawoSocial — the Culture Hub for Nigerians in the diaspora. $25 lifetime founding access.",
     shareCopy: "Copy link",
