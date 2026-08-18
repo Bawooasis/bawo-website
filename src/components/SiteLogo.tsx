@@ -21,8 +21,8 @@ export default function SiteLogo({ className = "", onClick }: SiteLogoProps) {
           src={IMAGES.assets.mark}
           alt=""
           className="bawo-site-logo__mark"
-          width={105}
-          height={128}
+          width={225}
+          height={256}
           decoding="async"
           fetchPriority="high"
           aria-hidden

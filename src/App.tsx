@@ -14,10 +14,10 @@ import HeroActionStack from "./components/HeroActionStack";
 import HeroAppPreview from "./components/HeroAppPreview";
 import HeroNextPreview from "./components/HeroNextPreview";
 import HeroSecondaryBar from "./components/HeroSecondaryBar";
-import SectionPillNav from "./components/SectionPillNav";
 import MailchimpSignupRow from "./components/MailchimpSignupRow";
 import MobileAppDownloadRow from "./components/MobileAppDownloadRow";
 import PartnerWithUsSection from "./components/PartnerWithUsSection";
+import SectionPillNav from "./components/SectionPillNav";
 import SiteHeader from "./components/SiteHeader";
 import { TAILWIND_COLORS } from "./constants/colors";
 import { CONTENT } from "./constants/content";
@@ -157,7 +157,7 @@ function App() {
   const handleFoundingMember = openFoundingModal;
 
   return (
-    <div className="min-h-screen relative overflow-x-clip">
+    <div className="min-h-screen relative">
       <FoundingMemberModal
         open={foundingModalOpen}
         onClose={closeFoundingModal}
@@ -176,7 +176,7 @@ function App() {
 
       <SiteHeader onJoinClick={handleFoundingMember} />
 
-      <div className="relative z-10 bg-transparent min-h-screen pb-[var(--bawo-mobile-sticky-cta-height)] md:pb-0">
+      <div className="relative z-10 bg-transparent min-h-screen overflow-x-clip pb-[var(--bawo-mobile-sticky-cta-height)] md:pb-0">
         {/* Hero Section */}
         <section
           ref={heroRef}
