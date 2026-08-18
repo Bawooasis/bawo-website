@@ -10,7 +10,7 @@ const ROTATE_MS = 6500;
 const SLIDES = [
   {
     src: IMAGES.previews.main,
-    alt: "BawoSocial Explore app on iPhone — map, AI concierge, and nearby restaurants in NYC",
+    alt: "BawoSocial Explore app on iPhone — NYC map pins and nearby West African spots",
   },
   {
     src: IMAGES.previews.events,
@@ -47,8 +47,8 @@ export default function HeroAppPreview({
             className={`bawo-hero-mockup__image animate-subtle-float${
               index === active ? " is-active" : ""
             }`}
-            width={3840}
-            height={3072}
+            width={909}
+            height={1830}
             loading={index === 0 ? "eager" : "lazy"}
             decoding="async"
             fetchPriority={index === 0 ? "high" : "low"}

@@ -60,7 +60,7 @@ import heroAppEventsMockup from "../assets/images/hero-app-events-mockup.png";
 import heroAppExploreMockup from "../assets/images/hero-app-explore-mockup.png";
 import heroTripleMockup from "../assets/images/hero-app-triple-mockup.png";
 
-/** Hero: exact 4K shots.so device frames (3840×3072 PNG, no recompress). */
+/** Hero: iPhone cutouts (Explore map + Events), transparent backdrop. */
 const heroPreviewGallery = [heroAppExploreMockup, heroAppEventsMockup] as const;
 
 /** Lower “In-App Preview” grid — individual screens. */
