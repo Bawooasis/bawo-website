@@ -1,4 +1,4 @@
-import type { MouseEvent } from "react";
+import { useState, type MouseEvent } from "react";
 import { IMAGES } from "../constants/images";
 
 type SiteLogoProps = {
@@ -7,6 +7,8 @@ type SiteLogoProps = {
 };
 
 export default function SiteLogo({ className = "", onClick }: SiteLogoProps) {
+  const [markOk, setMarkOk] = useState(true);
+
   return (
     <a
       href="#"
@@ -14,16 +16,19 @@ export default function SiteLogo({ className = "", onClick }: SiteLogoProps) {
       onClick={onClick}
       aria-label="BawoSocial home"
     >
-      <img
-        src={IMAGES.assets.mark}
-        alt=""
-        className="bawo-site-logo__mark"
-        width={112}
-        height={128}
-        decoding="async"
-        fetchPriority="high"
-        aria-hidden
-      />
+      {markOk ? (
+        <img
+          src={IMAGES.assets.mark}
+          alt=""
+          className="bawo-site-logo__mark"
+          width={105}
+          height={128}
+          decoding="async"
+          fetchPriority="high"
+          aria-hidden
+          onError={() => setMarkOk(false)}
+        />
+      ) : null}
       <img
         src={IMAGES.assets.logo}
         alt="BawoSocial"

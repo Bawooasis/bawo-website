@@ -61,10 +61,7 @@ import heroAppExploreMockup from "../assets/images/hero-app-explore-mockup.png";
 import heroTripleMockup from "../assets/images/hero-app-triple-mockup.png";
 
 /** Hero: exact 4K shots.so device frames (3840×3072 PNG, no recompress). */
-const heroPreviewGallery = [
-  heroAppExploreMockup,
-  heroAppEventsMockup,
-] as const;
+const heroPreviewGallery = [heroAppExploreMockup, heroAppEventsMockup] as const;
 
 /** Lower “In-App Preview” grid — individual screens. */
 const appFeatureScreens = [
@@ -182,7 +179,7 @@ export const IMAGES = {
 
   // Public assets (from public folder)
   public: {
-    favicon: "/favicon.png",
+    favicon: "/favicon.png?v=6",
     foundingMemberBg: "/founding-member-background.png",
     heroSection: "/hero-section.png",
     phoneMockup: "/phone-mockup.png",
