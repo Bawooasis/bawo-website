@@ -64,7 +64,7 @@
 :root {
   --bawo-header-height: 3.5rem;
   --bawo-header-offset: calc(env(safe-area-inset-top, 0px) + var(--bawo-header-height));
-  --bawo-mobile-sticky-cta-height: 5rem;
+  --bawo-mobile-sticky-cta-height: 4.5rem;
   --bawo-pill-gradient: linear-gradient(
     135deg,
     rgba(255, 107, 0, 0.52) 0%,

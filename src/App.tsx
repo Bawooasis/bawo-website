@@ -385,25 +385,10 @@ function App() {
 
               <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm font-museo-medium text-white/70">
                 <span>
-                  <strong className="bawo-accent">500</strong> spots
+                  <strong className="text-white">$25</strong> lifetime
                 </span>
-                <span>
-                  <strong className="text-white">$25</strong> once
-                </span>
+                <span>500 founding passes</span>
                 <span>30-day guarantee</span>
-              </div>
-
-              <div className="space-y-2 pt-2">
-                <div className="flex justify-between text-xs text-white/55 font-museo-medium">
-                  <span>50 / 500 taken</span>
-                  <span>450 left</span>
-                </div>
-                <div className="h-2 w-full rounded-full bg-white/[0.08] overflow-hidden">
-                  <div
-                    className="h-full w-[10%] rounded-full bg-bawo-pumpkin"
-                    aria-label="50 of 500 spots taken"
-                  />
-                </div>
               </div>
 
               <p className="text-sm text-white/50 font-museo-medium">
@@ -670,22 +655,12 @@ function App() {
         <footer className="py-12 bg-transparent">
           {/* Mobile Sticky CTA */}
           <div className="md:hidden mobile-sticky-cta bg-bawo-ink/92 backdrop-blur-xl border-t border-bawo-eggplant-light/50">
-            <div className="px-4 pt-2 pb-1">
-              <div className="w-full h-1 rounded-full bg-white/10 overflow-hidden mb-2">
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-bawo-peach to-bawo-pumpkin"
-                  style={{ width: "10%" }}
-                />
-              </div>
-            </div>
-            <div className="px-4 pb-3 flex items-center justify-between gap-3">
-              <div className="flex flex-col min-w-0">
-                <span className="bawo-accent-soft font-museo-bold text-xs uppercase tracking-wide">
-                  Batch 1 Open
+            <div className="px-4 py-3 flex items-center justify-between gap-3">
+              <div className="flex flex-col min-w-0 gap-0.5">
+                <span className="text-white/55 font-museo-medium text-[10px] uppercase tracking-wider">
+                  Today&apos;s window closes in
                 </span>
-                <span className="text-white/70 font-museo-medium text-[11px]">
-                  450 of 500 spots left
-                </span>
+                <BatchCountdownDisplay size="sm" className="justify-start" />
               </div>
               <FoundingMemberButton
                 label="Join Waitlist"
