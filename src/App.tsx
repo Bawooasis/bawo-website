@@ -735,6 +735,12 @@ function App() {
                   >
                     Privacy Policy
                   </button>
+                  <a
+                    href="/admin"
+                    className="block text-white/50 hover:text-white/80 text-xs font-museo-medium"
+                  >
+                    Platform access
+                  </a>
                 </div>
               </div>
             </div>

@@ -1,0 +1,145 @@
+import type { PortalSession } from "./types";
+
+const SESSION_KEY = "bawo-platform-session";
+
+type ApiEnvelope<T> = {
+  success?: boolean;
+  data?: T;
+  error?: string;
+  error_description?: string;
+  msg?: string;
+};
+
+export type PortalConfig = {
+  supabaseUrl: string;
+  publishableKey: string;
+};
+
+export function getPortalConfig(): PortalConfig {
+  return {
+    supabaseUrl: String(import.meta.env.VITE_SUPABASE_URL || "")
+      .trim()
+      .replace(/\/+$/, ""),
+    publishableKey: String(
+      import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || "",
+    ).trim(),
+  };
+}
+
+export function isPortalConfigured(config: PortalConfig): boolean {
+  return (
+    config.supabaseUrl.startsWith("https://") &&
+    config.publishableKey.length > 20
+  );
+}
+
+async function parseResponse<T>(response: Response): Promise<T> {
+  const body = (await response.json().catch(() => ({}))) as ApiEnvelope<T>;
+  if (!response.ok || body.success === false) {
+    throw new Error(
+      body.error_description ||
+        body.msg ||
+        body.error ||
+        `Request failed (${response.status})`,
+    );
+  }
+  return (body.data ?? body) as T;
+}
+
+export class PlatformApi {
+  private readonly config: PortalConfig;
+
+  constructor(config = getPortalConfig()) {
+    this.config = config;
+  }
+
+  getSession(): PortalSession | null {
+    try {
+      const stored = window.localStorage.getItem(SESSION_KEY);
+      return stored ? (JSON.parse(stored) as PortalSession) : null;
+    } catch {
+      window.localStorage.removeItem(SESSION_KEY);
+      return null;
+    }
+  }
+
+  private saveSession(session: PortalSession): PortalSession {
+    const expiresAt =
+      session.expires_at ||
+      Math.floor(Date.now() / 1000) + Number(session.expires_in || 3600);
+    const stored = { ...session, expires_at: expiresAt };
+    window.localStorage.setItem(SESSION_KEY, JSON.stringify(stored));
+    return stored;
+  }
+
+  async signIn(email: string, password: string): Promise<PortalSession> {
+    const response = await fetch(
+      `${this.config.supabaseUrl}/auth/v1/token?grant_type=password`,
+      {
+        method: "POST",
+        headers: {
+          apikey: this.config.publishableKey,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      },
+    );
+    return this.saveSession(await parseResponse<PortalSession>(response));
+  }
+
+  private async refreshSession(): Promise<PortalSession> {
+    const session = this.getSession();
+    if (!session?.refresh_token) {
+      throw new Error("Your session expired. Sign in again.");
+    }
+    const response = await fetch(
+      `${this.config.supabaseUrl}/auth/v1/token?grant_type=refresh_token`,
+      {
+        method: "POST",
+        headers: {
+          apikey: this.config.publishableKey,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ refresh_token: session.refresh_token }),
+      },
+    );
+    return this.saveSession(await parseResponse<PortalSession>(response));
+  }
+
+  private async activeSession(): Promise<PortalSession> {
+    const session = this.getSession();
+    if (!session?.access_token) throw new Error("Sign in to continue.");
+    const now = Math.floor(Date.now() / 1000);
+    if (session.expires_at <= now + 60) return this.refreshSession();
+    return session;
+  }
+
+  async invoke<T>(
+    functionName: "platform-control-center" | "vendor-portal",
+    payload: object,
+    retry = true,
+  ): Promise<T> {
+    const session = await this.activeSession();
+    const response = await fetch(
+      `${this.config.supabaseUrl}/functions/v1/${functionName}`,
+      {
+        method: "POST",
+        headers: {
+          apikey: this.config.publishableKey,
+          Authorization: `Bearer ${session.access_token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      },
+    );
+    if (response.status === 401 && retry) {
+      await this.refreshSession();
+      return this.invoke<T>(functionName, payload, false);
+    }
+    return parseResponse<T>(response);
+  }
+
+  signOut(): void {
+    window.localStorage.removeItem(SESSION_KEY);
+  }
+}

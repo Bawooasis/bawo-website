@@ -47,12 +47,20 @@ export default function PartnerWithUsSection() {
               ))}
             </ul>
 
-            <a
-              href={mailHref}
-              className="inline-flex w-full sm:w-auto items-center justify-center rounded-[var(--bawo-radius-pill)] min-h-11 px-6 text-sm font-museo-bold text-white border border-bawo-pumpkin/45 bg-bawo-eggplant/35 transition-colors hover:bg-bawo-eggplant-light/45 hover:border-bawo-peach/50"
-            >
-              {ctaLabel}
-            </a>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <a
+                href="/business"
+                className="inline-flex w-full sm:w-auto items-center justify-center rounded-[var(--bawo-radius-pill)] min-h-11 px-6 text-sm font-museo-bold text-bawo-eggplant border border-bawo-peach/45 bg-bawo-pumpkin transition-colors hover:bg-bawo-peach"
+              >
+                {ctaLabel}
+              </a>
+              <a
+                href={mailHref}
+                className="inline-flex w-full sm:w-auto items-center justify-center rounded-[var(--bawo-radius-pill)] min-h-11 px-6 text-sm font-museo-bold text-white border border-bawo-pumpkin/30 bg-bawo-eggplant/25 transition-colors hover:bg-bawo-eggplant-light/45"
+              >
+                Contact partnerships
+              </a>
+            </div>
           </div>
         </div>
       </div>

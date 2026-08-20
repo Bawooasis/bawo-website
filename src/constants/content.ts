@@ -47,7 +47,7 @@ export const CONTENT = {
   partnerWithUs: {
     headline: "Help our community find trusted local partners.",
     body: "If you serve Nigerians in New York — restaurants, professionals, shipping, or community businesses — list in our Resource Directory and connect with members who show up for culture.",
-    ctaLabel: "Partner With BawoSocial",
+    ctaLabel: "Open Business Portal",
     inquiryEmail:
       import.meta.env.VITE_B2B_CONTACT_EMAIL || "Axadegbenro@gmail.com",
     emailSubject: "BawoSocial Community Partner",
@@ -357,6 +357,7 @@ export const CONTENT = {
           { label: "Features", href: "#features" },
           { label: "Founding Members", href: "#pricing" },
           { label: "Network", href: "#building-the-network" },
+          { label: "Business Portal", href: "/business" },
           { label: "FAQ", href: "#faq" },
         ],
       },
