@@ -107,35 +107,47 @@ export const CONTENT = {
       oneTime: "One-time payment",
       cancel: "30-day money-back guarantee",
     },
-    /** First-screen preview footer — images optional; swap later via `image`. */
+    /** First-screen preview footer — real mobile product screens. */
     nextPreview: [
       {
-        kicker: "Next up",
+        kicker: "Live in the app",
         title: "Explore the map",
         description:
           "Find Nigerian restaurants, stores, and services across NYC — verified spots your community actually uses.",
-        image: null as string | null,
+        image: IMAGES.previews.main,
+        imageAlt:
+          "BawoSocial Explore screen showing community businesses across the New York City map",
+        layout: "map-crop" as const,
       },
       {
-        kicker: "Next up",
+        kicker: "Live in the app",
         title: "Join your groups",
         description:
           "Owambe, Soft Life, Naija NYC, Outside — micro-communities where you actually know the people.",
-        image: null as string | null,
+        image: IMAGES.inApp.community,
+        imageAlt:
+          "BawoSocial Community screen showing Nigerian diaspora groups in New York City",
+        layout: "device" as const,
       },
       {
-        kicker: "Next up",
+        kicker: "Live in the app",
         title: "Culture-led events",
         description:
           "Independence Day, owambe nights, and gatherings filtered for diaspora culture — not generic city feeds.",
-        image: null as string | null,
+        image: IMAGES.inApp.events,
+        imageAlt:
+          "BawoSocial Events screen showing culture-led gatherings in New York City",
+        layout: "device" as const,
       },
       {
-        kicker: "Next up",
+        kicker: "Live in the app",
         title: "Ask the Concierge",
         description:
           "Need Agege bread, a salon, or a lawyer? Ask the AI Concierge and get culturally relevant answers fast.",
-        image: null as string | null,
+        image: IMAGES.inApp.concierge,
+        imageAlt:
+          "BawoSocial Concierge screen offering culturally relevant recommendations",
+        layout: "device" as const,
       },
     ],
   },

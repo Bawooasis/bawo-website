@@ -1803,7 +1803,7 @@ a.bawo-cta-quiet:active {
 
 .bawo-next-preview__visual {
   position: relative;
-  min-height: 11rem;
+  min-height: 18rem;
   border-radius: 1.25rem;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1816,15 +1816,131 @@ a.bawo-cta-quiet:active {
 
 @media (min-width: 900px) {
   .bawo-next-preview__visual {
-    min-height: 16rem;
+    min-height: 22rem;
   }
 }
 
+.bawo-next-preview__backdrop {
+  position: absolute;
+  inset: -2rem;
+  width: calc(100% + 4rem);
+  height: calc(100% + 4rem);
+  object-fit: cover;
+  opacity: 0.32;
+  filter: blur(24px) saturate(1.2);
+  transform: scale(1.08);
+}
+
+.bawo-next-preview__visual::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(5, 2, 9, 0.35), transparent 32%),
+    linear-gradient(0deg, rgba(5, 2, 9, 0.42), transparent 34%);
+}
+
 .bawo-next-preview__image {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  padding: 0.6rem;
+  object-fit: contain;
+  animation: bawo-preview-in 260ms ease-out both;
+}
+
+.bawo-next-preview__visual[data-layout="map-crop"] .bawo-next-preview__image {
+  inset: -2.5% auto auto -8%;
+  width: 116%;
+  height: auto;
+  max-width: none;
+  padding: 0;
+  object-fit: unset;
+}
+
+@keyframes bawo-preview-in {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.bawo-next-preview__chrome {
+  position: absolute;
+  z-index: 3;
+  inset: 0.85rem 0.85rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  pointer-events: none;
+}
+
+.bawo-next-preview__status,
+.bawo-next-preview__expand {
+  min-height: 2.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: rgba(6, 3, 12, 0.78);
+  color: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(12px);
+}
+
+.bawo-next-preview__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.75rem;
+  font-family: Montserrat, system-ui, sans-serif;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.bawo-next-preview__status > span {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: #35d07f;
+  box-shadow: 0 0 0.8rem rgba(53, 208, 127, 0.8);
+}
+
+.bawo-next-preview__expand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.7rem;
+  border-color: rgba(255, 255, 255, 0.28);
+  font-family: Montserrat, system-ui, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background 150ms ease, border-color 150ms ease;
+}
+
+@media (hover: hover) {
+  .bawo-next-preview__expand:hover {
+    background: rgba(25, 13, 31, 0.94);
+    border-color: rgba(255, 140, 66, 0.68);
+  }
+}
+
+.bawo-next-preview__expand:focus-visible,
+.bawo-next-preview__dialog-close:focus-visible {
+  outline: 2px solid rgba(255, 140, 66, 0.85);
+  outline-offset: 2px;
 }
 
 .bawo-next-preview__placeholder {
@@ -1923,6 +2039,52 @@ a.bawo-cta-quiet:active {
 .bawo-next-preview__tab:focus-visible {
   outline: 2px solid rgba(255, 140, 66, 0.55);
   outline-offset: 2px;
+}
+
+.bawo-next-preview__dialog {
+  width: min(92vw, 58rem);
+  height: min(90vh, 54rem);
+  margin: auto;
+  padding: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1.5rem;
+  background: rgba(8, 4, 13, 0.96);
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.72);
+}
+
+.bawo-next-preview__dialog::backdrop {
+  background: rgba(3, 1, 7, 0.82);
+  backdrop-filter: blur(12px);
+}
+
+.bawo-next-preview__dialog img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.bawo-next-preview__dialog-close {
+  position: absolute;
+  z-index: 1;
+  top: 1rem;
+  right: 1rem;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background: rgba(6, 3, 12, 0.86);
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bawo-next-preview__image {
+    animation: none;
+  }
 }
 
 @media (max-width: 767px) {

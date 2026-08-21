@@ -102,6 +102,11 @@ export const IMAGES = {
 
   // In-App Feature Screenshots
   inApp: {
+    resources: appResourcesScreen,
+    concierge: appConciergeScreen,
+    community: appCommunityScreen,
+    communityAlt: appCommunityAltScreen,
+    events: appEventsScreen,
     features: [...appFeatureScreens],
   },
 
