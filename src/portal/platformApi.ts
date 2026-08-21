@@ -1,6 +1,8 @@
 import type { PortalSession } from "./types";
 
 const SESSION_KEY = "bawo-platform-session";
+const DEFAULT_SUPABASE_URL = "https://wyarfsymnyrraowwluhf.supabase.co";
+const DEFAULT_SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5YXJmc3ltbnlycmFvd3dsdWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NTY3MTYsImV4cCI6MjA4NzMxNjcxNn0.wmET17KAduP60VHCSmKeVADKfHcpM3-m53EzeGnQy2I";
 
 type ApiEnvelope<T> = {
   success?: boolean;
@@ -17,11 +19,14 @@ export type PortalConfig = {
 
 export function getPortalConfig(): PortalConfig {
   return {
-    supabaseUrl: String(import.meta.env.VITE_SUPABASE_URL || "")
+    supabaseUrl: String(
+      import.meta.env.VITE_SUPABASE_URL || DEFAULT_SUPABASE_URL,
+    )
       .trim()
       .replace(/\/+$/, ""),
     publishableKey: String(
-      import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || "",
+      import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
+        DEFAULT_SUPABASE_PUBLISHABLE_KEY,
     ).trim(),
   };
 }

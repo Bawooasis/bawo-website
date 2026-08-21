@@ -9,7 +9,8 @@ The application also recognizes `business.joinbawo.com` and `admin.joinbawo.com`
 
 ## Production dependencies
 
-Add only these public browser values to the Vercel project:
+The production site includes the BawoSocial browser-public configuration.
+These Vercel values can override it when the project changes:
 
 ```text
 VITE_SUPABASE_URL
@@ -39,7 +40,7 @@ https://www.joinbawo.com,https://joinbawo.com,https://admin.joinbawo.com,https:/
 ## Release sequence
 
 1. Merge and deploy the backend migration/functions.
-2. Add the two public Vercel environment values.
+2. Confirm the browser-public Supabase configuration or add Vercel overrides.
 3. Verify an authorized admin account and a normal business account.
 4. Preview this website branch and test `/admin` and `/business`.
 5. Merge this website branch to `main` only after those checks pass.
