@@ -1863,6 +1863,15 @@ a.bawo-cta-quiet:active {
   object-fit: unset;
 }
 
+.bawo-next-preview__visual[data-layout="screen-crop"] .bawo-next-preview__image {
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: auto;
+  max-width: none;
+  padding: 0;
+  object-fit: unset;
+}
+
 @keyframes bawo-preview-in {
   from {
     opacity: 0;

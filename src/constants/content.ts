@@ -114,7 +114,7 @@ export const CONTENT = {
         title: "Explore the map",
         description:
           "Find Nigerian restaurants, stores, and services across NYC — verified spots your community actually uses.",
-        image: IMAGES.previews.main,
+        image: IMAGES.showcase.explore,
         imageAlt:
           "BawoSocial Explore screen showing community businesses across the New York City map",
         layout: "map-crop" as const,
@@ -124,30 +124,30 @@ export const CONTENT = {
         title: "Join your groups",
         description:
           "Owambe, Soft Life, Naija NYC, Outside — micro-communities where you actually know the people.",
-        image: IMAGES.inApp.community,
+        image: IMAGES.showcase.community,
         imageAlt:
           "BawoSocial Community screen showing Nigerian diaspora groups in New York City",
-        layout: "device" as const,
+        layout: "screen-crop" as const,
       },
       {
         kicker: "Live in the app",
         title: "Culture-led events",
         description:
           "Independence Day, owambe nights, and gatherings filtered for diaspora culture — not generic city feeds.",
-        image: IMAGES.inApp.events,
+        image: IMAGES.showcase.events,
         imageAlt:
           "BawoSocial Events screen showing culture-led gatherings in New York City",
-        layout: "device" as const,
+        layout: "screen-crop" as const,
       },
       {
         kicker: "Live in the app",
         title: "Ask the Concierge",
         description:
           "Need Agege bread, a salon, or a lawyer? Ask the AI Concierge and get culturally relevant answers fast.",
-        image: IMAGES.inApp.concierge,
+        image: IMAGES.showcase.concierge,
         imageAlt:
           "BawoSocial Concierge screen offering culturally relevant recommendations",
-        layout: "device" as const,
+        layout: "screen-crop" as const,
       },
     ],
   },

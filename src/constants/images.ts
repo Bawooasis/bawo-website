@@ -59,6 +59,10 @@ import appResourcesScreen from "../assets/images/app-resources-full.png";
 import heroAppEventsMockup from "../assets/images/hero-app-events-mockup.png";
 import heroAppExploreMockup from "../assets/images/hero-app-explore-mockup.png";
 import heroTripleMockup from "../assets/images/hero-app-triple-mockup.png";
+import showcaseCommunity from "../assets/images/showcase-community.jpg";
+import showcaseConcierge from "../assets/images/showcase-concierge.jpg";
+import showcaseEvents from "../assets/images/showcase-events.jpg";
+import showcaseExplore from "../assets/images/showcase-explore.jpg";
 
 /** Hero: iPhone cutouts (Explore map + Events), transparent backdrop. */
 const heroPreviewGallery = [heroAppExploreMockup, heroAppEventsMockup] as const;
@@ -91,6 +95,13 @@ export const IMAGES = {
     events: heroAppEventsMockup,
     triple: heroTripleMockup,
     gallery: [...heroPreviewGallery],
+  },
+
+  showcase: {
+    explore: showcaseExplore,
+    community: showcaseCommunity,
+    events: showcaseEvents,
+    concierge: showcaseConcierge,
   },
 
   // Testimonial Avatar Images
