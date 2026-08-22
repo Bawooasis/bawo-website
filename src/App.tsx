@@ -410,7 +410,7 @@ function App() {
         >
           <div className="relative z-10 container mx-auto px-6 flex flex-col items-center">
             <div className="text-white space-y-14 w-full max-w-5xl mx-auto">
-              <h2 className="text-6xl md:text-7xl lg:text-8xl font-extrabold font-museo-bold leading-tight text-center tracking-tight">
+              <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold font-museo-bold leading-tight text-center tracking-tight">
                 {CONTENT.origin.title.lead}
                 <span className="bawo-accent">
                   {CONTENT.origin.title.highlight}
@@ -684,7 +684,7 @@ function App() {
                     href="https://www.instagram.com/bawo.social/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white/60 hover:text-white"
+                    className="inline-flex min-h-11 items-center text-white/60 hover:text-white"
                   >
                     Instagram
                   </a>
@@ -692,7 +692,7 @@ function App() {
                     href="https://www.tiktok.com/@bawosocial"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white/60 hover:text-white"
+                    className="inline-flex min-h-11 items-center text-white/60 hover:text-white"
                   >
                     TikTok
                   </a>
@@ -700,7 +700,7 @@ function App() {
                     href="https://linkedin.com/company/bawoapp"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white/60 hover:text-white"
+                    className="inline-flex min-h-11 items-center text-white/60 hover:text-white"
                   >
                     LinkedIn
                   </a>
@@ -717,7 +717,7 @@ function App() {
                     <a
                       key={link.href}
                       href={link.href}
-                      className="block text-white/80 hover:text-white text-sm font-museo-medium"
+                      className="flex min-h-11 items-center justify-center text-white/80 hover:text-white text-sm font-museo-medium md:justify-start"
                     >
                       {link.label}
                     </a>
@@ -731,13 +731,13 @@ function App() {
                 <div className="space-y-2">
                   <button
                     onClick={() => setShowPrivacyPolicy(true)}
-                    className="block text-white/80 hover:text-white text-sm font-museo-medium text-left w-full"
+                    className="flex min-h-11 w-full items-center justify-center text-white/80 hover:text-white text-sm font-museo-medium md:justify-start"
                   >
                     Privacy Policy
                   </button>
                   <a
                     href="/admin"
-                    className="block text-white/50 hover:text-white/80 text-xs font-museo-medium"
+                    className="flex min-h-11 items-center justify-center text-white/50 hover:text-white/80 text-xs font-museo-medium md:justify-start"
                   >
                     Platform access
                   </a>
