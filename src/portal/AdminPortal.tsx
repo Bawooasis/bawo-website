@@ -1,5 +1,6 @@
-import { Check, ShieldAlert, Star, X } from "lucide-react";
+import { Check, Pencil, ShieldAlert, Star, X } from "lucide-react";
 import { useMemo, useState } from "react";
+import GroupEditor, { type GroupEditorInput } from "./GroupEditor";
 import type { PortalTab } from "./PortalLayout";
 import type { AdminAction, AdminOverview, PlatformUser } from "./types";
 
@@ -7,7 +8,8 @@ type AdminPortalProps = {
   data: AdminOverview;
   activeTab: PortalTab;
   busy: boolean;
-  onAction: (action: AdminAction, successMessage: string) => Promise<void>;
+  onAction: (action: AdminAction, successMessage: string) => Promise<boolean>;
+  onUploadGroupImage: (groupId: string, file: File) => Promise<string>;
 };
 
 const formatDate = (value: string | null) =>
@@ -30,8 +32,10 @@ export default function AdminPortal({
   activeTab,
   busy,
   onAction,
+  onUploadGroupImage,
 }: AdminPortalProps) {
   const [query, setQuery] = useState("");
+  const [editingGroupId, setEditingGroupId] = useState<string | null>(null);
   const filteredUsers = useMemo(() => {
     const normalized = query.trim().toLowerCase();
     if (!normalized) return data.users;
@@ -49,6 +53,23 @@ export default function AdminPortal({
   ) => {
     if (!window.confirm(message)) return;
     await onAction(action, successMessage);
+  };
+
+  const saveGroup = async (
+    groupId: string,
+    input: GroupEditorInput,
+  ): Promise<boolean> => {
+    const imageUrl = input.file
+      ? await onUploadGroupImage(groupId, input.file)
+      : input.imageUrl || null;
+    return onAction(
+      {
+        action: "set_group_state",
+        targetId: groupId,
+        groupState: { name: input.name, imageUrl },
+      },
+      "Group name and picture updated.",
+    );
   };
 
   if (activeTab === "overview") {
@@ -157,31 +178,57 @@ export default function AdminPortal({
         <section className="portal-panel">
           <div className="portal-panel-heading"><div><span className="portal-kicker">Community</span><h2>Groups</h2></div></div>
           <div className="portal-list">
-            {data.groups.map((group) => (
-              <article className="portal-list-row" key={group.id}>
-                <div className="portal-list-main">
-                  <strong>{group.name}</strong>
-                  <span>{group.category || "Uncategorized"} · {group.member_count || 0} members</span>
-                </div>
-                <span className={`portal-status ${group.is_active ? "is-success" : "is-muted"}`}>
-                  {group.is_active ? "Active" : "Inactive"}
-                </span>
-                <div className="portal-row-actions">
-                  <button disabled={busy} onClick={() => onAction({
-                    action: "set_group_state",
-                    targetId: group.id,
-                    groupState: { isFeatured: !group.is_featured },
-                  }, group.is_featured ? "Group removed from featured." : "Group featured.")}>
-                    <Star aria-hidden /> {group.is_featured ? "Unfeature" : "Feature"}
-                  </button>
-                  <button disabled={busy} onClick={() => confirmAction(
-                    `${group.is_active ? "Deactivate" : "Activate"} ${group.name}?`,
-                    { action: "set_group_state", targetId: group.id, groupState: { isActive: !group.is_active } },
-                    `Group ${group.is_active ? "deactivated" : "activated"}.`,
-                  )}>{group.is_active ? "Deactivate" : "Activate"}</button>
-                </div>
-              </article>
-            ))}
+            {data.groups.map((group) => {
+              const editing = editingGroupId === group.id;
+              return (
+                <article className="portal-list-row portal-group-row" key={group.id}>
+                  <div className="portal-group-summary">
+                    <div className="portal-group-thumb">
+                      {group.image_url ? (
+                        <img src={group.image_url} alt="" />
+                      ) : (
+                        <span>{group.name.slice(0, 1).toUpperCase()}</span>
+                      )}
+                    </div>
+                    <div className="portal-list-main">
+                      <strong>{group.name}</strong>
+                      <span>{group.category || "Uncategorized"} · {group.member_count || 0} members</span>
+                    </div>
+                  </div>
+                  <span className={`portal-status ${group.is_active ? "is-success" : "is-muted"}`}>
+                    {group.is_active ? "Active" : "Inactive"}
+                  </span>
+                  <div className="portal-row-actions">
+                    <button
+                      disabled={busy}
+                      onClick={() => setEditingGroupId(editing ? null : group.id)}
+                    >
+                      <Pencil aria-hidden /> {editing ? "Close editor" : "Edit"}
+                    </button>
+                    <button disabled={busy} onClick={() => onAction({
+                      action: "set_group_state",
+                      targetId: group.id,
+                      groupState: { isFeatured: !group.is_featured },
+                    }, group.is_featured ? "Group removed from featured." : "Group featured.")}>
+                      <Star aria-hidden /> {group.is_featured ? "Unfeature" : "Feature"}
+                    </button>
+                    <button disabled={busy} onClick={() => confirmAction(
+                      `${group.is_active ? "Deactivate" : "Activate"} ${group.name}?`,
+                      { action: "set_group_state", targetId: group.id, groupState: { isActive: !group.is_active } },
+                      `Group ${group.is_active ? "deactivated" : "activated"}.`,
+                    )}>{group.is_active ? "Deactivate" : "Activate"}</button>
+                  </div>
+                  {editing && (
+                    <GroupEditor
+                      group={group}
+                      busy={busy}
+                      onCancel={() => setEditingGroupId(null)}
+                      onSave={(input) => saveGroup(group.id, input)}
+                    />
+                  )}
+                </article>
+              );
+            })}
           </div>
         </section>
         <section className="portal-panel">

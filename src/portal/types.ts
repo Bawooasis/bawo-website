@@ -50,6 +50,8 @@ export type PlatformGroup = {
   is_public: boolean | null;
   is_featured: boolean | null;
   is_active: boolean | null;
+  image_url: string | null;
+  cover_image_url: string | null;
   created_at: string | null;
   last_activity: string | null;
 };
@@ -142,6 +144,8 @@ export type AdminAction = {
   groupState?: {
     isActive?: boolean;
     isFeatured?: boolean;
+    name?: string;
+    imageUrl?: string | null;
   };
   decision?: "approved" | "rejected";
 };

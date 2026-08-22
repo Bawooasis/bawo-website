@@ -54,7 +54,6 @@ export default function PortalApp({ mode }: PortalAppProps) {
       } else {
         setVendorData(await api.invoke<VendorOverview>("vendor-portal", { action: "overview" }));
       }
-      setSession(api.getSession());
     } catch (loadError) {
       setError(loadError instanceof Error ? loadError.message : "Unable to load portal.");
     } finally {
@@ -94,12 +93,17 @@ export default function PortalApp({ mode }: PortalAppProps) {
       await api.invoke("platform-control-center", action);
       setNotice(successMessage);
       if (mode === "admin") setAdminData(await api.invoke<AdminOverview>("platform-control-center", { action: "overview" }));
+      return true;
     } catch (actionError) {
       setError(actionError instanceof Error ? actionError.message : "Action failed.");
+      return false;
     } finally {
       setBusy(false);
     }
   };
+
+  const uploadGroupImage = (groupId: string, file: File) =>
+    api.uploadGroupImage(groupId, file);
 
   const submitClaim = async (input: VendorClaimInput) => {
     setBusy(true);
@@ -143,7 +147,15 @@ export default function PortalApp({ mode }: PortalAppProps) {
   return (
     <PortalLayout mode={mode} activeTab={activeTab} email={session.user?.email || email || "Signed in"} title={titles[activeTab]} notice={notice} error={error} onTabChange={setActiveTab} onRefresh={() => void load()} onSignOut={signOut}>
       {busy && !dataReady && <div className="portal-loading">Loading secure workspace…</div>}
-      {mode === "admin" && adminData && <AdminPortal data={adminData} activeTab={activeTab} busy={busy} onAction={runAdminAction} />}
+      {mode === "admin" && adminData && (
+        <AdminPortal
+          data={adminData}
+          activeTab={activeTab}
+          busy={busy}
+          onAction={runAdminAction}
+          onUploadGroupImage={uploadGroupImage}
+        />
+      )}
       {mode === "business" && vendorData && <BusinessPortal data={vendorData} activeTab={activeTab} busy={busy} onSubmit={submitClaim} />}
     </PortalLayout>
   );

@@ -1,6 +1,14 @@
 import type { PortalSession } from "./types";
 
 const SESSION_KEY = "bawo-platform-session";
+const GROUP_IMAGE_BUCKET = "group-images";
+const GROUP_IMAGE_TYPES = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/gif",
+  "image/webp",
+]);
+const MAX_GROUP_IMAGE_BYTES = 5 * 1024 * 1024;
 const DEFAULT_SUPABASE_URL = "https://wyarfsymnyrraowwluhf.supabase.co";
 const DEFAULT_SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5YXJmc3ltbnlycmFvd3dsdWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NTY3MTYsImV4cCI6MjA4NzMxNjcxNn0.wmET17KAduP60VHCSmKeVADKfHcpM3-m53EzeGnQy2I";
 
@@ -142,6 +150,51 @@ export class PlatformApi {
       return this.invoke<T>(functionName, payload, false);
     }
     return parseResponse<T>(response);
+  }
+
+  async uploadGroupImage(
+    groupId: string,
+    file: File,
+    retry = true,
+  ): Promise<string> {
+    if (!GROUP_IMAGE_TYPES.has(file.type)) {
+      throw new Error("Choose a JPG, PNG, GIF, or WebP image.");
+    }
+    if (file.size > MAX_GROUP_IMAGE_BYTES) {
+      throw new Error("Group pictures must be 5 MB or smaller.");
+    }
+
+    const session = await this.activeSession();
+    const extension = file.type === "image/jpeg"
+      ? "jpg"
+      : file.type.split("/")[1];
+    const safeGroupId = groupId.replace(/[^a-zA-Z0-9_-]/g, "-").slice(0, 80);
+    const objectPath =
+      `control-center/${safeGroupId}/${crypto.randomUUID()}.${extension}`;
+    const encodedPath = objectPath
+      .split("/")
+      .map((segment) => encodeURIComponent(segment))
+      .join("/");
+    const response = await fetch(
+      `${this.config.supabaseUrl}/storage/v1/object/${GROUP_IMAGE_BUCKET}/${encodedPath}`,
+      {
+        method: "POST",
+        headers: {
+          apikey: this.config.publishableKey,
+          Authorization: `Bearer ${session.access_token}`,
+          "Content-Type": file.type,
+          "Cache-Control": "3600",
+          "x-upsert": "false",
+        },
+        body: file,
+      },
+    );
+    if (response.status === 401 && retry) {
+      await this.refreshSession();
+      return this.uploadGroupImage(groupId, file, false);
+    }
+    await parseResponse<Record<string, string>>(response);
+    return `${this.config.supabaseUrl}/storage/v1/object/public/${GROUP_IMAGE_BUCKET}/${encodedPath}`;
   }
 
   signOut(): void {
