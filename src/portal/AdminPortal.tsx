@@ -1,7 +1,21 @@
-import { Check, Pencil, ShieldAlert, Star, X } from "lucide-react";
+import {
+  Activity,
+  Building2,
+  Check,
+  AlertCircle,
+  FileWarning,
+  Inbox,
+  Pencil,
+  ShieldAlert,
+  Star,
+  UserRound,
+  UsersRound,
+  X,
+} from "lucide-react";
 import { useMemo, useState } from "react";
 import GroupEditor, { type GroupEditorInput } from "./GroupEditor";
 import type { PortalTab } from "./PortalLayout";
+import { EmptyState, MetricCard } from "./PortalUi";
 import type { AdminAction, AdminOverview, PlatformUser } from "./types";
 
 type AdminPortalProps = {
@@ -74,21 +88,61 @@ export default function AdminPortal({
 
   if (activeTab === "overview") {
     const metrics = [
-      ["Members", data.metrics.users],
-      ["Active groups", data.metrics.activeGroups],
-      ["Pending group requests", data.metrics.pendingGroupRequests],
-      ["Pending business claims", data.metrics.pendingBusinessClaims],
-      ["Suspended accounts", data.metrics.suspendedUsers],
-      ["Pending reports", data.metrics.pendingReports],
+      {
+        label: "Members",
+        value: data.metrics.users,
+        detail: "Registered community accounts",
+        icon: UserRound,
+        tone: "accent" as const,
+      },
+      {
+        label: "Active groups",
+        value: data.metrics.activeGroups,
+        detail: "Live community spaces",
+        icon: UsersRound,
+        tone: "success" as const,
+      },
+      {
+        label: "Group requests",
+        value: data.metrics.pendingGroupRequests,
+        detail: "Waiting for a decision",
+        icon: AlertCircle,
+        tone: data.metrics.pendingGroupRequests > 0 ? "warning" as const : "neutral" as const,
+      },
+      {
+        label: "Business claims",
+        value: data.metrics.pendingBusinessClaims,
+        detail: "Ownership requests to verify",
+        icon: Building2,
+        tone: data.metrics.pendingBusinessClaims > 0 ? "warning" as const : "neutral" as const,
+      },
+      {
+        label: "Suspended accounts",
+        value: data.metrics.suspendedUsers,
+        detail: "Restricted platform access",
+        icon: ShieldAlert,
+        tone: data.metrics.suspendedUsers > 0 ? "warning" as const : "neutral" as const,
+      },
+      {
+        label: "Pending reports",
+        value: data.metrics.pendingReports,
+        detail: "Member reports to review",
+        icon: FileWarning,
+        tone: data.metrics.pendingReports > 0 ? "warning" as const : "neutral" as const,
+      },
     ];
     return (
       <>
-        <section className="portal-metrics" aria-label="Platform metrics">
-          {metrics.map(([label, value]) => (
-            <article className="portal-metric" key={label}>
-              <span>{label}</span>
-              <strong>{Number(value).toLocaleString()}</strong>
-            </article>
+        <section className="portal-metrics portal-metrics-admin" aria-label="Platform metrics">
+          {metrics.map((metric) => (
+            <MetricCard
+              key={metric.label}
+              icon={metric.icon}
+              label={metric.label}
+              value={Number(metric.value).toLocaleString()}
+              detail={metric.detail}
+              tone={metric.tone}
+            />
           ))}
         </section>
         <section className="portal-panel">
@@ -99,9 +153,9 @@ export default function AdminPortal({
             </div>
           </div>
           <div className="portal-queue-grid">
-            <div><strong>{data.metrics.pendingGroupRequests}</strong><span>group requests</span></div>
-            <div><strong>{data.metrics.pendingBusinessClaims}</strong><span>business claims</span></div>
-            <div><strong>{data.metrics.pendingReports}</strong><span>member reports</span></div>
+            <div className={data.metrics.pendingGroupRequests > 0 ? "has-work" : ""}><strong>{data.metrics.pendingGroupRequests}</strong><span>group requests</span></div>
+            <div className={data.metrics.pendingBusinessClaims > 0 ? "has-work" : ""}><strong>{data.metrics.pendingBusinessClaims}</strong><span>business claims</span></div>
+            <div className={data.metrics.pendingReports > 0 ? "has-work" : ""}><strong>{data.metrics.pendingReports}</strong><span>member reports</span></div>
           </div>
         </section>
       </>
@@ -122,6 +176,13 @@ export default function AdminPortal({
           />
         </div>
         <div className="portal-list">
+          {filteredUsers.length === 0 && (
+            <EmptyState
+              icon={UserRound}
+              title="No members found"
+              body="Try a different name, email address, or city."
+            />
+          )}
           {filteredUsers.map((user) => {
             const suspended = user.account_status === "suspended" || Boolean(user.suspended_at);
             return (
@@ -178,6 +239,13 @@ export default function AdminPortal({
         <section className="portal-panel">
           <div className="portal-panel-heading"><div><span className="portal-kicker">Community</span><h2>Groups</h2></div></div>
           <div className="portal-list">
+            {data.groups.length === 0 && (
+              <EmptyState
+                icon={UsersRound}
+                title="No groups yet"
+                body="Community spaces will appear here once they are created."
+              />
+            )}
             {data.groups.map((group) => {
               const editing = editingGroupId === group.id;
               return (
@@ -234,7 +302,13 @@ export default function AdminPortal({
         <section className="portal-panel">
           <div className="portal-panel-heading"><div><span className="portal-kicker">Member requests</span><h2>Pending groups</h2></div></div>
           <div className="portal-list">
-            {data.groupRequests.length === 0 && <p className="portal-empty">No pending group requests.</p>}
+            {data.groupRequests.length === 0 && (
+              <EmptyState
+                icon={Inbox}
+                title="Queue is clear"
+                body="New community group requests will appear here for review."
+              />
+            )}
             {data.groupRequests.map((request) => (
               <article className="portal-list-row" key={request.id}>
                 <div className="portal-list-main"><strong>{request.group_name}</strong><span>{request.description} · {request.votes} votes</span></div>
@@ -255,7 +329,13 @@ export default function AdminPortal({
       <section className="portal-panel">
         <div className="portal-panel-heading"><div><span className="portal-kicker">Directory onboarding</span><h2>Business claims</h2></div></div>
         <div className="portal-list">
-          {data.businessClaims.length === 0 && <p className="portal-empty">No pending business claims.</p>}
+          {data.businessClaims.length === 0 && (
+            <EmptyState
+              icon={Building2}
+              title="No claims waiting"
+              body="New business ownership requests will appear here for verification."
+            />
+          )}
           {data.businessClaims.map((claim) => (
             <article className="portal-list-row" key={claim.id}>
               <div className="portal-list-main"><strong>{claim.name}</strong><span>{claim.category || "Explore"} · {claim.city || "NYC"} · {claim.contact || "No contact"}</span></div>
@@ -277,6 +357,13 @@ export default function AdminPortal({
       <section className="portal-panel">
         <div className="portal-panel-heading"><div><span className="portal-kicker">Privileged accounts</span><h2>Administrators</h2></div></div>
         <div className="portal-list">
+          {admins.length === 0 && (
+            <EmptyState
+              icon={ShieldAlert}
+              title="No administrators found"
+              body="Grant trusted operators access from the Consumers screen."
+            />
+          )}
           {admins.map((user) => (
             <article className="portal-list-row" key={user.id}>
               <div className="portal-list-main"><strong>{userName(user)}</strong><span>{user.email || "No email"} · {user.admin_level || "admin"}</span></div>
@@ -289,7 +376,13 @@ export default function AdminPortal({
       <section className="portal-panel">
         <div className="portal-panel-heading"><div><span className="portal-kicker">Immutable record</span><h2>Recent audit activity</h2></div><ShieldAlert aria-hidden /></div>
         <div className="portal-list">
-          {data.auditLog.length === 0 && <p className="portal-empty">No control-center actions recorded yet.</p>}
+          {data.auditLog.length === 0 && (
+            <EmptyState
+              icon={Activity}
+              title="No activity recorded"
+              body="Control Center decisions will appear here as an audit trail."
+            />
+          )}
           {data.auditLog.map((entry) => (
             <article className="portal-list-row" key={entry.id}>
               <div className="portal-list-main"><strong>{entry.action.replaceAll("_", " ")}</strong><span>{entry.target_type} · {formatDate(entry.created_at)}{entry.reason ? ` · ${entry.reason}` : ""}</span></div>

@@ -1,6 +1,16 @@
-import { BarChart3, Building2, MousePointerClick } from "lucide-react";
+import {
+  BadgeCheck,
+  BarChart3,
+  Building2,
+  Clock3,
+  MapPinned,
+  MousePointerClick,
+  Route,
+  Sparkles,
+} from "lucide-react";
 import { useState, type FormEvent } from "react";
 import type { PortalTab } from "./PortalLayout";
+import { EmptyState, MetricCard } from "./PortalUi";
 import type { VendorClaimInput, VendorOverview } from "./types";
 
 type BusinessPortalProps = {
@@ -27,13 +37,13 @@ export default function BusinessPortal({ data, activeTab, busy, onSubmit }: Busi
     return (
       <>
         <section className="portal-metrics" aria-label="Business metrics">
-          <article className="portal-metric"><span>Live listings</span><strong>{data.metrics.listings}</strong></article>
-          <article className="portal-metric"><span>Pending claims</span><strong>{data.metrics.pendingClaims}</strong></article>
-          <article className="portal-metric"><span>Tracked clicks</span><strong>{data.metrics.trackedClicks ?? "—"}</strong><small>{data.metrics.trackedClicks === null ? "Not connected yet" : "All time"}</small></article>
-          <article className="portal-metric"><span>Plan</span><strong>{data.metrics.plan || "Free"}</strong><small>{data.metrics.plan === null ? "Billing not connected" : "Current subscription"}</small></article>
+          <MetricCard icon={MapPinned} label="Live listings" value={data.metrics.listings} detail="Approved directory presence" tone="success" />
+          <MetricCard icon={Clock3} label="Pending claims" value={data.metrics.pendingClaims} detail="Waiting for BawoSocial review" tone={data.metrics.pendingClaims > 0 ? "warning" : "neutral"} />
+          <MetricCard icon={MousePointerClick} label="Tracked actions" value={data.metrics.trackedClicks ?? "—"} detail={data.metrics.trackedClicks === null ? "Measurement is being connected" : "All time"} tone="accent" />
+          <MetricCard icon={BadgeCheck} label="Current plan" value={data.metrics.plan || "Free"} detail={data.metrics.plan === null ? "Billing is not active yet" : "Current subscription"} />
         </section>
-        <section className="portal-panel portal-callout">
-          <div><span className="portal-kicker">NYC launch</span><h2>Put your business where the community looks first.</h2><p>Submit a claim, get reviewed by BawoSocial, then manage approved directory listings from one workspace.</p></div>
+        <section className="portal-panel portal-callout portal-business-hero">
+          <div><span className="portal-kicker">NYC launch workspace</span><h2>Build a trusted presence before paid growth begins.</h2><p>Claim your business, keep its directory identity accurate, and prepare for customer-action reporting without exposing member information.</p><div className="portal-feature-row"><span><BadgeCheck aria-hidden />Admin-reviewed claims</span><span><Route aria-hidden />Outcome tracking next</span><span><Sparkles aria-hidden />Growth plans later</span></div></div>
           <Building2 aria-hidden />
         </section>
       </>
@@ -43,8 +53,15 @@ export default function BusinessPortal({ data, activeTab, busy, onSubmit }: Busi
   if (activeTab === "growth") {
     return (
       <div className="portal-stack">
-        <section className="portal-panel portal-callout"><div><span className="portal-kicker">Measurement status</span><h2>Click analytics is the next connected system.</h2><p>The portal does not invent performance numbers. Tracked clicks remain unavailable until vendor click events and the reporting view are deployed.</p></div><MousePointerClick aria-hidden /></section>
-        <section className="portal-panel portal-callout"><div><span className="portal-kicker">Revenue status</span><h2>$29 and $49 plans are targets—not active billing.</h2><p>Subscription checkout, entitlements, webhooks, and account enforcement still require an approved Stripe implementation before plans can be sold here.</p></div><BarChart3 aria-hidden /></section>
+        <section className="portal-panel">
+          <div className="portal-panel-heading"><div><span className="portal-kicker">Business growth path</span><h2>What unlocks next</h2></div><BarChart3 aria-hidden /></div>
+          <div className="portal-roadmap-grid">
+            <article className="is-ready"><span>01</span><strong>Verified presence</strong><p>Claim approval and owned listings are already connected.</p></article>
+            <article className="is-next"><span>02</span><strong>Customer outcomes</strong><p>Views, calls, directions, and website clicks are the next system.</p></article>
+            <article><span>03</span><strong>Growth plans</strong><p>$29 and $49 subscriptions remain targets until reporting is trustworthy.</p></article>
+          </div>
+        </section>
+        <section className="portal-panel portal-callout"><div><span className="portal-kicker">Measurement promise</span><h2>No invented performance numbers.</h2><p>The dashboard will stay honest and unavailable until secure aggregate reporting is deployed for each verified listing.</p></div><MousePointerClick aria-hidden /></section>
       </div>
     );
   }
@@ -60,17 +77,20 @@ export default function BusinessPortal({ data, activeTab, busy, onSubmit }: Busi
       <section className="portal-panel">
         <div className="portal-panel-heading"><div><span className="portal-kicker">Owned directory presence</span><h2>Your listings</h2></div></div>
         <div className="portal-list">
-          {data.listings.length === 0 && <p className="portal-empty">No approved listings yet. Submit your business for review.</p>}
+          {data.listings.length === 0 && <EmptyState icon={MapPinned} title="No approved listings yet" body="Submit your business for review to start building an owned directory presence." />}
           {data.listings.map((listing) => (
-            <article className="portal-list-row" key={listing.id}>
-              <div className="portal-list-main"><strong>{listing.name}</strong><span>{listing.category || "Restaurant"} · {listing.neighborhood || listing.borough || "NYC"}</span></div>
+            <article className="portal-list-row portal-listing-row" key={listing.id}>
+              <div className="portal-listing-summary">
+                <div className="portal-listing-thumb">{listing.image_url ? <img src={listing.image_url} alt="" /> : <span>{listing.name.slice(0, 1).toUpperCase()}</span>}</div>
+                <div className="portal-list-main"><strong>{listing.name}</strong><span>{listing.category || "Restaurant"} · {listing.neighborhood || listing.borough || "NYC"}</span></div>
+              </div>
               <span className={`portal-status ${listing.is_active === false ? "is-muted" : "is-success"}`}>{listing.is_active === false ? "Inactive" : "Live"}</span>
             </article>
           ))}
         </div>
         <div className="portal-panel-heading portal-panel-heading-spaced"><div><span className="portal-kicker">Review history</span><h2>Claims</h2></div></div>
         <div className="portal-list">
-          {data.claims.length === 0 && <p className="portal-empty">No claims submitted yet.</p>}
+          {data.claims.length === 0 && <EmptyState icon={Clock3} title="No claims submitted" body="New submissions and their review status will appear here." />}
           {data.claims.map((item) => <article className="portal-list-row" key={item.id}><div className="portal-list-main"><strong>{item.name}</strong><span>{item.category || "Explore"} · {item.city || "NYC"}</span></div><span className={`portal-status ${item.status === "approved" ? "is-success" : item.status === "rejected" ? "is-danger" : "is-warning"}`}>{item.status}</span></article>)}
         </div>
       </section>

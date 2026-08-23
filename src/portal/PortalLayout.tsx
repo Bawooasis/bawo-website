@@ -26,6 +26,7 @@ type PortalLayoutProps = {
   activeTab: PortalTab;
   email: string;
   title: string;
+  description: string;
   notice: string;
   error: string;
   children: ReactNode;
@@ -50,6 +51,7 @@ export default function PortalLayout({
   activeTab,
   email,
   title,
+  description,
   notice,
   error,
   children,
@@ -82,6 +84,7 @@ export default function PortalLayout({
             <small>{mode === "admin" ? "Control Center" : "Business"}</small>
           </span>
         </a>
+        <div className="portal-sidebar-context"><span aria-hidden />NYC launch workspace</div>
         <nav aria-label={`${mode} portal`}>
           {tabs.map(({ id, label }) => {
             const Icon = icons[id];
@@ -109,16 +112,23 @@ export default function PortalLayout({
 
       <main className="portal-workspace">
         <header className="portal-topbar">
-          <div>
+          <div className="portal-topbar-copy">
             <span className="portal-eyebrow">
               {mode === "admin" ? "NYC launch operations" : "Business workspace"}
             </span>
             <h1>{title}</h1>
+            <p>{description}</p>
           </div>
           <div className="portal-topbar-actions">
-            <span>{email}</span>
+            <div className="portal-account">
+              <span className="portal-live-indicator"><span aria-hidden />Live</span>
+              <span className="portal-account-email">{email}</span>
+            </div>
             <button type="button" onClick={onRefresh} aria-label="Refresh portal">
               <RefreshCw aria-hidden />
+            </button>
+            <button type="button" className="portal-topbar-signout" onClick={onSignOut} aria-label="Sign out">
+              <LogOut aria-hidden />
             </button>
           </div>
         </header>

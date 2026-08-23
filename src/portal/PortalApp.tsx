@@ -19,6 +19,17 @@ const titles: Record<PortalTab, string> = {
   growth: "Growth and billing",
 };
 
+const descriptions: Record<PortalTab, string> = {
+  overview: "Monitor the launch queue and the health of BawoSocial's core operations.",
+  users: "Review member access, account standing, and trusted operations roles.",
+  groups: "Shape community spaces, review requests, and keep group presentation current.",
+  businesses: "Review submitted businesses before they appear in the community directory.",
+  access: "Manage privileged access and review the record of administrative actions.",
+  dashboard: "See your BawoSocial presence and the systems being prepared for growth.",
+  listings: "Review owned listings and submit new businesses for administrator approval.",
+  growth: "Follow the path from verified presence to measurable customer outcomes.",
+};
+
 export default function PortalApp({ mode }: PortalAppProps) {
   const config = useMemo(() => getPortalConfig(), []);
   const api = useMemo(() => new PlatformApi(config), [config]);
@@ -145,7 +156,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
 
   const dataReady = mode === "admin" ? Boolean(adminData) : Boolean(vendorData);
   return (
-    <PortalLayout mode={mode} activeTab={activeTab} email={session.user?.email || email || "Signed in"} title={titles[activeTab]} notice={notice} error={error} onTabChange={setActiveTab} onRefresh={() => void load()} onSignOut={signOut}>
+    <PortalLayout mode={mode} activeTab={activeTab} email={session.user?.email || email || "Signed in"} title={titles[activeTab]} description={descriptions[activeTab]} notice={notice} error={error} onTabChange={setActiveTab} onRefresh={() => void load()} onSignOut={signOut}>
       {busy && !dataReady && <div className="portal-loading">Loading secure workspace…</div>}
       {mode === "admin" && adminData && (
         <AdminPortal
