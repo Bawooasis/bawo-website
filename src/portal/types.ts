@@ -88,6 +88,34 @@ export type AuditEntry = {
   created_at: string;
 };
 
+export type SocialPlatform = "tiktok" | "instagram";
+export type SocialContentStatus = "idea" | "scripted" | "ready" | "scheduled" | "published";
+
+export type SocialContentItem = {
+  id: string;
+  platform: SocialPlatform;
+  title: string;
+  content_type: "short_video" | "carousel" | "story" | "static" | "live";
+  status: SocialContentStatus;
+  goal: "awareness" | "engagement" | "downloads" | "leads" | "vendors" | "events";
+  hook: string;
+  caption: string;
+  call_to_action: string;
+  owner_name: string;
+  scheduled_for: string | null;
+  published_at: string | null;
+  post_url: string | null;
+  views: number;
+  likes: number;
+  comments: number;
+  shares: number;
+  saves: number;
+  follows: number;
+  link_clicks: number;
+  created_at: string;
+  updated_at: string;
+};
+
 export type AdminOverview = {
   currentAdmin: {
     id: string;
@@ -101,6 +129,7 @@ export type AdminOverview = {
   groups: PlatformGroup[];
   groupRequests: GroupRequest[];
   businessClaims: BusinessClaim[];
+  socialContent: SocialContentItem[];
   auditLog: AuditEntry[];
 };
 
@@ -136,7 +165,9 @@ export type AdminAction = {
     | "revoke_admin"
     | "set_group_state"
     | "review_group_request"
-    | "review_business_claim";
+    | "review_business_claim"
+    | "save_social_content"
+    | "archive_social_content";
   targetId?: string;
   reason?: string;
   adminLevel?: "admin" | "moderator";
@@ -148,6 +179,27 @@ export type AdminAction = {
     imageUrl?: string | null;
   };
   decision?: "approved" | "rejected";
+  socialContent?: {
+    platform: SocialPlatform;
+    title: string;
+    contentType: SocialContentItem["content_type"];
+    status: SocialContentStatus;
+    goal: SocialContentItem["goal"];
+    hook: string;
+    caption: string;
+    callToAction: string;
+    ownerName: string;
+    scheduledFor: string | null;
+    publishedAt: string | null;
+    postUrl: string | null;
+    views: number;
+    likes: number;
+    comments: number;
+    shares: number;
+    saves: number;
+    follows: number;
+    linkClicks: number;
+  };
 };
 
 export type VendorClaimInput = {

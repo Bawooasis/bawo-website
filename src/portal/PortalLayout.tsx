@@ -2,6 +2,7 @@ import {
   Building2,
   LayoutDashboard,
   LogOut,
+  Megaphone,
   RefreshCw,
   ShieldCheck,
   TrendingUp,
@@ -16,6 +17,7 @@ export type PortalTab =
   | "users"
   | "groups"
   | "businesses"
+  | "social"
   | "access"
   | "dashboard"
   | "listings"
@@ -40,6 +42,7 @@ const icons = {
   users: UserRound,
   groups: UsersRound,
   businesses: Building2,
+  social: Megaphone,
   access: ShieldCheck,
   dashboard: LayoutDashboard,
   listings: Building2,
@@ -66,6 +69,7 @@ export default function PortalLayout({
           { id: "users", label: "Consumers" },
           { id: "groups", label: "Groups" },
           { id: "businesses", label: "Businesses" },
+          { id: "social", label: "Social Media" },
           { id: "access", label: "Access & Audit" },
         ]
       : [

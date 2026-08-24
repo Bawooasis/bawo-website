@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import GroupEditor, { type GroupEditorInput } from "./GroupEditor";
+import SocialMediaPanel from "./SocialMediaPanel";
 import type { PortalTab } from "./PortalLayout";
 import { EmptyState, MetricCard } from "./PortalUi";
 import type { AdminAction, AdminOverview, PlatformUser } from "./types";
@@ -348,6 +349,16 @@ export default function AdminPortal({
           ))}
         </div>
       </section>
+    );
+  }
+
+  if (activeTab === "social") {
+    return (
+      <SocialMediaPanel
+        items={data.socialContent || []}
+        busy={busy}
+        onAction={onAction}
+      />
     );
   }
 
