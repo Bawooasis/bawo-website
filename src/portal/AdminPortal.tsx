@@ -15,6 +15,7 @@ import {
 import { useMemo, useState } from "react";
 import GroupEditor, { type GroupEditorInput } from "./GroupEditor";
 import SocialMediaPanel from "./SocialMediaPanel";
+import CrmPanel from "./CrmPanel";
 import type { PortalTab } from "./PortalLayout";
 import { EmptyState, MetricCard } from "./PortalUi";
 import type { AdminAction, AdminOverview, PlatformUser } from "./types";
@@ -371,6 +372,10 @@ export default function AdminPortal({
         onQueuePublish={onQueueSocialPublish}
       />
     );
+  }
+
+  if (activeTab === "crm") {
+    return <CrmPanel leads={data.crmLeads || []} activities={data.crmActivities || []} busy={busy} onAction={onAction} />;
   }
 
   const admins = data.users.filter((user) => user.is_admin || user.role === "admin");

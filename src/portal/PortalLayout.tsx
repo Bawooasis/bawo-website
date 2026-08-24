@@ -6,6 +6,7 @@ import {
   RefreshCw,
   ShieldCheck,
   TrendingUp,
+  Target,
   UserRound,
   UsersRound,
 } from "lucide-react";
@@ -18,6 +19,7 @@ export type PortalTab =
   | "groups"
   | "businesses"
   | "social"
+  | "crm"
   | "access"
   | "dashboard"
   | "listings"
@@ -43,6 +45,7 @@ const icons = {
   groups: UsersRound,
   businesses: Building2,
   social: Megaphone,
+  crm: Target,
   access: ShieldCheck,
   dashboard: LayoutDashboard,
   listings: Building2,
@@ -70,6 +73,7 @@ export default function PortalLayout({
           { id: "groups", label: "Groups" },
           { id: "businesses", label: "Businesses" },
           { id: "social", label: "Social Media" },
+          { id: "crm", label: "Outreach CRM" },
           { id: "access", label: "Access & Audit" },
         ]
       : [

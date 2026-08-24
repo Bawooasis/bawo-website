@@ -149,6 +149,49 @@ export type SocialPublishJob = {
   updated_at: string;
 };
 
+export type CrmStage = "researched" | "ready" | "drafted" | "contacted" | "replied" | "meeting" | "proposal" | "partnered" | "not_fit" | "paused";
+export type CrmLead = {
+  id: string;
+  name: string;
+  category: "restaurant" | "retail" | "entertainment" | "influencer" | "agency" | "professional" | "sponsor" | "other";
+  stage: CrmStage;
+  priority: "high" | "medium" | "low";
+  score: number | null;
+  email: string | null;
+  phone: string | null;
+  city: string | null;
+  borough: string | null;
+  website_url: string | null;
+  instagram_handle: string | null;
+  follower_count: number | null;
+  contact_name: string | null;
+  contact_role: string | null;
+  owner_name: string | null;
+  source: string;
+  source_detail: string | null;
+  offer: string | null;
+  next_action: string | null;
+  next_action_at: string | null;
+  last_contact_at: string | null;
+  last_reply_at: string | null;
+  notes: string | null;
+  emails_drafted: number;
+  emails_sent: number;
+  created_at: string;
+  updated_at: string;
+};
+
+export type CrmActivity = {
+  id: string;
+  lead_id: string;
+  activity_type: "note" | "email_drafted" | "email_sent" | "reply_received" | "call" | "meeting" | "proposal_sent" | "status_change";
+  channel: "email" | "phone" | "instagram" | "in_person" | "system" | null;
+  subject: string | null;
+  details: string | null;
+  occurred_at: string;
+  created_at: string;
+};
+
 export type AdminOverview = {
   currentAdmin: {
     id: string;
@@ -165,6 +208,8 @@ export type AdminOverview = {
   socialContent: SocialContentItem[];
   socialConnections: SocialConnection[];
   socialPublishJobs: SocialPublishJob[];
+  crmLeads: CrmLead[];
+  crmActivities: CrmActivity[];
   auditLog: AuditEntry[];
 };
 
@@ -206,7 +251,11 @@ export type AdminAction = {
     | "start_instagram_connection"
     | "create_social_upload"
     | "queue_social_publish"
-    | "retry_social_publish";
+    | "retry_social_publish"
+    | "save_crm_lead"
+    | "set_crm_stage"
+    | "log_crm_activity"
+    | "archive_crm_lead";
   targetId?: string;
   reason?: string;
   adminLevel?: "admin" | "moderator";
@@ -247,6 +296,37 @@ export type AdminAction = {
   };
   socialPublish?: {
     scheduledFor: string;
+  };
+  crmLead?: {
+    name: string;
+    category: CrmLead["category"];
+    stage: CrmStage;
+    priority: CrmLead["priority"];
+    score: number | null;
+    email: string | null;
+    phone: string | null;
+    city: string | null;
+    borough: string | null;
+    websiteUrl: string | null;
+    instagramHandle: string | null;
+    followerCount: number | null;
+    contactName: string | null;
+    contactRole: string | null;
+    ownerName: string | null;
+    source: string;
+    sourceDetail: string | null;
+    offer: string | null;
+    nextAction: string | null;
+    nextActionAt: string | null;
+    notes: string | null;
+  };
+  crmStage?: CrmStage;
+  crmActivity?: {
+    activityType: "note" | "email_drafted" | "email_sent" | "reply_received" | "call" | "meeting" | "proposal_sent";
+    channel: "email" | "phone" | "instagram" | "in_person" | "system" | null;
+    subject: string | null;
+    details: string | null;
+    occurredAt: string;
   };
 };
 
