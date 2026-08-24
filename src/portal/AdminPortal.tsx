@@ -25,6 +25,9 @@ type AdminPortalProps = {
   busy: boolean;
   onAction: (action: AdminAction, successMessage: string) => Promise<boolean>;
   onUploadGroupImage: (groupId: string, file: File) => Promise<string>;
+  onConnectInstagram: () => Promise<void>;
+  onUploadSocialMedia: (contentId: string, file: File) => Promise<void>;
+  onQueueSocialPublish: (contentId: string, scheduledFor: string) => Promise<boolean>;
 };
 
 const formatDate = (value: string | null) =>
@@ -48,6 +51,9 @@ export default function AdminPortal({
   busy,
   onAction,
   onUploadGroupImage,
+  onConnectInstagram,
+  onUploadSocialMedia,
+  onQueueSocialPublish,
 }: AdminPortalProps) {
   const [query, setQuery] = useState("");
   const [editingGroupId, setEditingGroupId] = useState<string | null>(null);
@@ -356,8 +362,13 @@ export default function AdminPortal({
     return (
       <SocialMediaPanel
         items={data.socialContent || []}
+        connections={data.socialConnections || []}
+        publishJobs={data.socialPublishJobs || []}
         busy={busy}
         onAction={onAction}
+        onConnectInstagram={onConnectInstagram}
+        onUploadMedia={onUploadSocialMedia}
+        onQueuePublish={onQueueSocialPublish}
       />
     );
   }

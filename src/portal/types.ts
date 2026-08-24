@@ -105,6 +105,8 @@ export type SocialContentItem = {
   scheduled_for: string | null;
   published_at: string | null;
   post_url: string | null;
+  media_path: string | null;
+  media_type: "image" | "video" | null;
   views: number;
   likes: number;
   comments: number;
@@ -112,6 +114,37 @@ export type SocialContentItem = {
   saves: number;
   follows: number;
   link_clicks: number;
+  created_at: string;
+  updated_at: string;
+};
+
+export type SocialConnection = {
+  id: string;
+  platform: SocialPlatform;
+  platform_account_id: string;
+  username: string | null;
+  account_type: string | null;
+  status: "connected" | "expired" | "disconnected" | "error";
+  scopes: string[];
+  token_expires_at: string | null;
+  connected_at: string;
+  updated_at: string;
+};
+
+export type SocialPublishJob = {
+  id: string;
+  content_id: string;
+  connection_id: string;
+  status: "queued" | "publishing" | "published" | "failed" | "cancelled";
+  scheduled_for: string;
+  media_path: string;
+  media_type: "image" | "video";
+  platform_post_id: string | null;
+  post_url: string | null;
+  attempts: number;
+  last_error: string | null;
+  started_at: string | null;
+  published_at: string | null;
   created_at: string;
   updated_at: string;
 };
@@ -130,6 +163,8 @@ export type AdminOverview = {
   groupRequests: GroupRequest[];
   businessClaims: BusinessClaim[];
   socialContent: SocialContentItem[];
+  socialConnections: SocialConnection[];
+  socialPublishJobs: SocialPublishJob[];
   auditLog: AuditEntry[];
 };
 
@@ -167,7 +202,11 @@ export type AdminAction = {
     | "review_group_request"
     | "review_business_claim"
     | "save_social_content"
-    | "archive_social_content";
+    | "archive_social_content"
+    | "start_instagram_connection"
+    | "create_social_upload"
+    | "queue_social_publish"
+    | "retry_social_publish";
   targetId?: string;
   reason?: string;
   adminLevel?: "admin" | "moderator";
@@ -199,6 +238,15 @@ export type AdminAction = {
     saves: number;
     follows: number;
     linkClicks: number;
+  };
+  returnUrl?: string;
+  socialUpload?: {
+    fileName: string;
+    mimeType: string;
+    fileSize: number;
+  };
+  socialPublish?: {
+    scheduledFor: string;
   };
 };
 

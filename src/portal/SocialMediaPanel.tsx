@@ -12,15 +12,23 @@ import {
   Send,
   Share2,
   Sparkles,
+  Upload,
+  Link2,
+  RotateCcw,
 } from "lucide-react";
 import { useMemo, useState, type FormEvent } from "react";
 import { EmptyState, MetricCard } from "./PortalUi";
-import type { AdminAction, SocialContentItem, SocialPlatform } from "./types";
+import type { AdminAction, SocialConnection, SocialContentItem, SocialPlatform, SocialPublishJob } from "./types";
 
 type SocialMediaPanelProps = {
   items: SocialContentItem[];
+  connections: SocialConnection[];
+  publishJobs: SocialPublishJob[];
   busy: boolean;
   onAction: (action: AdminAction, successMessage: string) => Promise<boolean>;
+  onConnectInstagram: () => Promise<void>;
+  onUploadMedia: (contentId: string, file: File) => Promise<void>;
+  onQueuePublish: (contentId: string, scheduledFor: string) => Promise<boolean>;
 };
 
 type Draft = {
@@ -94,10 +102,11 @@ const formatDate = (value: string | null) => value
   ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }).format(new Date(value))
   : "Not scheduled";
 
-export default function SocialMediaPanel({ items, busy, onAction }: SocialMediaPanelProps) {
+export default function SocialMediaPanel({ items, connections, publishJobs, busy, onAction, onConnectInstagram, onUploadMedia, onQueuePublish }: SocialMediaPanelProps) {
   const [platform, setPlatform] = useState<"all" | SocialPlatform>("all");
   const [editingId, setEditingId] = useState<string | null>(null);
   const [draft, setDraft] = useState<Draft>(emptyDraft);
+  const [scheduleTimes, setScheduleTimes] = useState<Record<string, string>>({});
   const visibleItems = useMemo(
     () => platform === "all" ? items : items.filter((item) => item.platform === platform),
     [items, platform],
@@ -109,6 +118,8 @@ export default function SocialMediaPanel({ items, busy, onAction }: SocialMediaP
   const published = items.filter((item) => item.status === "published").length;
   const scheduled = items.filter((item) => item.status === "scheduled").length;
   const engagementRate = totals.views > 0 ? `${((totals.engagement / totals.views) * 100).toFixed(1)}%` : "0%";
+  const instagramConnection = connections.find((connection) => connection.platform === "instagram" && connection.status === "connected");
+  const jobsByContent = useMemo(() => new Map(publishJobs.map((job) => [job.content_id, job])), [publishJobs]);
 
   const openNew = () => {
     setEditingId("new");
@@ -153,6 +164,10 @@ export default function SocialMediaPanel({ items, busy, onAction }: SocialMediaP
 
   return (
     <div className="portal-stack social-ops">
+      <section className={`social-connection-card ${instagramConnection ? "is-connected" : ""}`}>
+        <div><span className="portal-kicker">Publishing connection</span><h2>{instagramConnection ? `Instagram @${instagramConnection.username || "connected"}` : "Connect Instagram securely"}</h2><p>{instagramConnection ? "OAuth is active. Upload media, then post now or schedule it." : "Use Meta OAuth—BawoSocial never receives or stores your Instagram password."}</p></div>
+        <button className="portal-primary-button" type="button" disabled={busy} onClick={() => void onConnectInstagram()}><Link2 aria-hidden /> {instagramConnection ? "Reconnect" : "Connect Instagram"}</button>
+      </section>
       <section className="social-ops-hero">
         <div><span className="portal-kicker">Growth studio</span><h2>Make the next post measurable</h2><p>TikTok leads the launch. Instagram follows with reusable cuts, carousels, and community proof.</p></div>
         <button className="portal-primary-button" type="button" onClick={openNew}><Plus aria-hidden /> New content</button>
@@ -208,10 +223,27 @@ export default function SocialMediaPanel({ items, busy, onAction }: SocialMediaP
           {visibleItems.length === 0 && <EmptyState icon={Megaphone} title="No content tracked yet" body="Create the first TikTok idea, assign an owner, and move it through the publishing pipeline." />}
           {visibleItems.map((item) => (
             <article className="social-content-card" key={item.id}>
+              {(() => {
+                const job = jobsByContent.get(item.id);
+                return job ? <div className={`social-job-status is-${job.status}`}><strong>{job.status}</strong><span>{job.last_error || formatDate(job.scheduled_for)}</span>{job.status === "failed" && <button disabled={busy} onClick={() => void onAction({ action: "retry_social_publish", targetId: job.id }, "Publishing retry queued.")}><RotateCcw aria-hidden /> Retry</button>}</div> : null;
+              })()}
               <div className="social-content-top"><span className={`social-platform is-${item.platform}`}>{item.platform === "tiktok" ? <Sparkles aria-hidden /> : <Instagram aria-hidden />}{item.platform}</span><span className={`portal-status is-${item.status === "published" ? "success" : item.status === "scheduled" ? "warning" : "muted"}`}>{item.status}</span></div>
               <div><span className="social-goal">{item.goal}</span><h3>{item.title}</h3><p>{item.hook || "Add a hook that earns the first three seconds."}</p></div>
               <div className="social-card-meta"><span><CalendarClock aria-hidden /> {formatDate(item.scheduled_for || item.published_at)}</span><span>{item.owner_name || "Unassigned"}</span></div>
               <div className="social-card-stats"><span><Eye aria-hidden /> {Number(item.views).toLocaleString()}</span><span><Heart aria-hidden /> {Number(item.likes).toLocaleString()}</span><span><MessageCircle aria-hidden /> {Number(item.comments).toLocaleString()}</span><span><Share2 aria-hidden /> {Number(item.shares).toLocaleString()}</span></div>
+              {item.platform === "instagram" && (
+                <div className="social-publish-controls">
+                  <label className="social-upload-button"><Upload aria-hidden /> {item.media_path ? "Replace media" : "Upload media"}<input type="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/quicktime" disabled={busy} onChange={(event) => { const file = event.target.files?.[0]; if (file) void onUploadMedia(item.id, file); event.currentTarget.value = ""; }} /></label>
+                  <span className="social-media-state">{item.media_path ? `${item.media_type} ready` : "No media uploaded"}</span>
+                  {instagramConnection && item.media_path && !["queued", "publishing", "published"].includes(jobsByContent.get(item.id)?.status || "") && (
+                    <div className="social-schedule-row">
+                      <input aria-label="Publishing time" type="datetime-local" value={scheduleTimes[item.id] || toLocalDate(item.scheduled_for)} onChange={(event) => setScheduleTimes((current) => ({ ...current, [item.id]: event.target.value }))} />
+                      <button disabled={busy} onClick={() => void onQueuePublish(item.id, new Date().toISOString())}>Post now</button>
+                      <button disabled={busy || !(scheduleTimes[item.id] || item.scheduled_for)} onClick={() => { const value = scheduleTimes[item.id] || item.scheduled_for; if (value) void onQueuePublish(item.id, new Date(value).toISOString()); }}>Schedule</button>
+                    </div>
+                  )}
+                </div>
+              )}
               <div className="portal-row-actions"><button onClick={() => openEdit(item)}><Pencil aria-hidden /> Edit</button>{item.post_url && <a className="social-post-link" href={item.post_url} target="_blank" rel="noreferrer">View post</a>}<button className="is-danger" disabled={busy} onClick={() => { if (window.confirm(`Archive ${item.title}?`)) void onAction({ action: "archive_social_content", targetId: item.id }, "Content item archived."); }}><Archive aria-hidden /> Archive</button></div>
             </article>
           ))}

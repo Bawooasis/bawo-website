@@ -269,6 +269,10 @@
 .social-ops-hero h2 { margin: 0.35rem 0 0; font-family: Georgia, serif; font-size: clamp(1.65rem, 3vw, 2.35rem); }
 .social-ops-hero p { max-width: 650px; margin: 0.65rem 0 0; color: var(--portal-muted); line-height: 1.6; }
 .social-ops-hero .portal-primary-button { flex: 0 0 auto; }
+.social-connection-card { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1.15rem 1.3rem; border: 1px solid rgba(244, 189, 92, 0.28); border-radius: 18px; background: linear-gradient(135deg, rgba(244, 189, 92, 0.08), rgba(255, 255, 255, 0.02)); }
+.social-connection-card.is-connected { border-color: rgba(97, 210, 154, 0.3); background: linear-gradient(135deg, rgba(97, 210, 154, 0.1), rgba(255, 255, 255, 0.02)); }
+.social-connection-card h2 { margin: 0.3rem 0 0; font-size: 1.1rem; }
+.social-connection-card p { margin: 0.35rem 0 0; color: var(--portal-muted); font-size: 0.75rem; line-height: 1.5; }
 .social-form-grid-3 { grid-template-columns: repeat(3, 1fr); }
 .social-metric-inputs { display: grid; grid-template-columns: repeat(7, minmax(90px, 1fr)); gap: 0.65rem; }
 .social-metric-inputs label { text-transform: capitalize; }
@@ -281,6 +285,12 @@
 .social-content-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.8rem; }
 .social-content-grid > .portal-empty-state { grid-column: 1 / -1; }
 .social-content-card { min-width: 0; display: flex; flex-direction: column; gap: 1rem; padding: 1.05rem; border: 1px solid var(--portal-border-soft); border-radius: 17px; background: linear-gradient(145deg, rgba(255, 255, 255, 0.035), rgba(6, 3, 12, 0.3)); }
+.social-job-status { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 0.5rem; padding: 0.6rem 0.7rem; border: 1px solid var(--portal-border-soft); border-radius: 11px; color: var(--portal-muted); background: rgba(6, 3, 12, 0.32); font-size: 0.65rem; }
+.social-job-status strong { color: var(--portal-warning); text-transform: capitalize; }
+.social-job-status.is-published strong { color: var(--portal-success); }
+.social-job-status.is-failed strong { color: var(--portal-danger); }
+.social-job-status button { display: inline-flex; align-items: center; gap: 0.3rem; border: 0; color: var(--portal-text); background: transparent; cursor: pointer; }
+.social-job-status svg { width: 13px; height: 13px; }
 .social-content-top { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; }
 .social-platform { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--portal-text); font-size: 0.7rem; font-weight: 800; text-transform: capitalize; }
 .social-platform svg { width: 15px; height: 15px; }
@@ -296,6 +306,15 @@
 .social-card-stats span { display: grid; justify-items: center; gap: 0.28rem; color: var(--portal-muted); font-size: 0.64rem; }
 .social-card-stats svg { width: 14px; height: 14px; color: var(--portal-copper-soft); }
 .social-post-link { min-height: 38px; display: inline-flex; align-items: center; padding: 0.5rem 0.7rem; border: 1px solid var(--portal-border); border-radius: 10px; color: var(--portal-text); background: rgba(184, 115, 51, 0.08); font-size: 0.71rem; text-decoration: none; }
+.social-publish-controls { display: grid; gap: 0.65rem; padding: 0.75rem; border: 1px solid var(--portal-border-soft); border-radius: 13px; background: rgba(184, 115, 51, 0.05); }
+.social-upload-button { min-height: 40px; display: flex; align-items: center; justify-content: center; gap: 0.4rem; border: 1px dashed rgba(242, 179, 126, 0.42); border-radius: 10px; color: var(--portal-copper-soft); font-size: 0.72rem; font-weight: 800; cursor: pointer; }
+.social-upload-button input { display: none; }
+.social-upload-button svg { width: 15px; height: 15px; }
+.social-media-state { color: var(--portal-muted); font-size: 0.66rem; text-transform: capitalize; }
+.social-schedule-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 0.4rem; }
+.social-schedule-row input,
+.social-schedule-row button { min-width: 0; min-height: 38px; border: 1px solid var(--portal-border); border-radius: 9px; padding: 0.45rem 0.55rem; color: var(--portal-text); background: rgba(6, 3, 12, 0.7); font-size: 0.66rem; }
+.social-schedule-row button { color: #1a0918; background: linear-gradient(135deg, #f0b17b, #b87333); font-weight: 800; cursor: pointer; }
 
 .portal-callout { display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
 .portal-callout h2 { max-width: 700px; font-size: clamp(1.45rem, 3vw, 2rem); }
@@ -377,11 +396,15 @@
   .portal-feature-row span { border-radius: 12px; }
   .social-ops-hero { align-items: flex-start; flex-direction: column; gap: 1.2rem; }
   .social-ops-hero .portal-primary-button { width: 100%; }
+  .social-connection-card { align-items: stretch; flex-direction: column; }
+  .social-connection-card .portal-primary-button { width: 100%; }
   .social-form-grid-3,
   .social-content-grid { grid-template-columns: 1fr; }
   .social-metric-inputs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .social-pipeline-heading { align-items: stretch; }
   .social-platform-filter { overflow-x: auto; }
+  .social-schedule-row { grid-template-columns: 1fr 1fr; }
+  .social-schedule-row input { grid-column: 1 / -1; }
 }
 
 @media (max-width: 640px) {

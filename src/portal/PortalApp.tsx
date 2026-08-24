@@ -118,6 +118,45 @@ export default function PortalApp({ mode }: PortalAppProps) {
   const uploadGroupImage = (groupId: string, file: File) =>
     api.uploadGroupImage(groupId, file);
 
+  const connectInstagram = async () => {
+    setBusy(true);
+    setError("");
+    try {
+      const result = await api.invoke<{ authorizationUrl: string }>("platform-control-center", {
+        action: "start_instagram_connection",
+        targetId: "instagram",
+        returnUrl: `${window.location.origin}/admin`,
+      });
+      window.location.assign(result.authorizationUrl);
+    } catch (connectionError) {
+      setError(connectionError instanceof Error ? connectionError.message : "Unable to connect Instagram.");
+      setBusy(false);
+    }
+  };
+
+  const uploadSocialMedia = async (contentId: string, file: File) => {
+    setBusy(true);
+    setError("");
+    setNotice("");
+    try {
+      await api.uploadSocialMedia(contentId, file);
+      setNotice("Media uploaded securely.");
+      setAdminData(await api.invoke<AdminOverview>("platform-control-center", { action: "overview" }));
+    } catch (uploadError) {
+      setError(uploadError instanceof Error ? uploadError.message : "Unable to upload media.");
+      throw uploadError;
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const queueSocialPublish = async (contentId: string, scheduledFor: string) =>
+    runAdminAction({
+      action: "queue_social_publish",
+      targetId: contentId,
+      socialPublish: { scheduledFor },
+    }, new Date(scheduledFor).getTime() <= Date.now() + 60_000 ? "Instagram post queued now." : "Instagram post scheduled.");
+
   const submitClaim = async (input: VendorClaimInput) => {
     setBusy(true);
     setError("");
@@ -167,6 +206,9 @@ export default function PortalApp({ mode }: PortalAppProps) {
           busy={busy}
           onAction={runAdminAction}
           onUploadGroupImage={uploadGroupImage}
+          onConnectInstagram={connectInstagram}
+          onUploadSocialMedia={uploadSocialMedia}
+          onQueueSocialPublish={queueSocialPublish}
         />
       )}
       {mode === "business" && vendorData && <BusinessPortal data={vendorData} activeTab={activeTab} busy={busy} onSubmit={submitClaim} />}

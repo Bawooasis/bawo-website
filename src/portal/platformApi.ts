@@ -9,6 +9,14 @@ const GROUP_IMAGE_TYPES = new Set([
   "image/webp",
 ]);
 const MAX_GROUP_IMAGE_BYTES = 5 * 1024 * 1024;
+const SOCIAL_MEDIA_TYPES = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "video/mp4",
+  "video/quicktime",
+]);
+const MAX_SOCIAL_MEDIA_BYTES = 100 * 1024 * 1024;
 const DEFAULT_SUPABASE_URL = "https://wyarfsymnyrraowwluhf.supabase.co";
 const DEFAULT_SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5YXJmc3ltbnlycmFvd3dsdWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NTY3MTYsImV4cCI6MjA4NzMxNjcxNn0.wmET17KAduP60VHCSmKeVADKfHcpM3-m53EzeGnQy2I";
 
@@ -195,6 +203,30 @@ export class PlatformApi {
     }
     await parseResponse<Record<string, string>>(response);
     return `${this.config.supabaseUrl}/storage/v1/object/public/${GROUP_IMAGE_BUCKET}/${encodedPath}`;
+  }
+
+  async uploadSocialMedia(contentId: string, file: File): Promise<void> {
+    if (!SOCIAL_MEDIA_TYPES.has(file.type)) {
+      throw new Error("Choose a JPG, PNG, WebP, MP4, or MOV file.");
+    }
+    if (file.size > MAX_SOCIAL_MEDIA_BYTES) {
+      throw new Error("Social media files must be 100 MB or smaller.");
+    }
+    const upload = await this.invoke<{ signedUrl: string }>("platform-control-center", {
+      action: "create_social_upload",
+      targetId: contentId,
+      socialUpload: {
+        fileName: file.name,
+        mimeType: file.type,
+        fileSize: file.size,
+      },
+    });
+    const response = await fetch(upload.signedUrl, {
+      method: "PUT",
+      headers: { "Content-Type": file.type, "x-upsert": "false" },
+      body: file,
+    });
+    if (!response.ok) throw new Error("Media upload failed. Try again.");
   }
 
   signOut(): void {
