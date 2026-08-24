@@ -269,6 +269,9 @@
 .social-ops-hero h2 { margin: 0.35rem 0 0; font-family: Georgia, serif; font-size: clamp(1.65rem, 3vw, 2.35rem); }
 .social-ops-hero p { max-width: 650px; margin: 0.65rem 0 0; color: var(--portal-muted); line-height: 1.6; }
 .social-ops-hero .portal-primary-button { flex: 0 0 auto; }
+.social-hero-actions { position: relative; display: flex; align-items: center; gap: 0.65rem; }
+.portal-secondary-link { min-height: 42px; display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; padding: 0.65rem 0.9rem; border: 1px solid var(--portal-border); border-radius: 11px; color: var(--portal-text); background: rgba(255, 255, 255, 0.035); font-size: 0.72rem; font-weight: 800; text-decoration: none; }
+.portal-secondary-link svg { width: 15px; height: 15px; color: var(--portal-copper-soft); }
 .social-connection-card { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1.15rem 1.3rem; border: 1px solid rgba(244, 189, 92, 0.28); border-radius: 18px; background: linear-gradient(135deg, rgba(244, 189, 92, 0.08), rgba(255, 255, 255, 0.02)); }
 .social-connection-card.is-connected { border-color: rgba(97, 210, 154, 0.3); background: linear-gradient(135deg, rgba(97, 210, 154, 0.1), rgba(255, 255, 255, 0.02)); }
 .social-connection-card h2 { margin: 0.3rem 0 0; font-size: 1.1rem; }
@@ -302,6 +305,9 @@
 .social-card-meta { display: grid; gap: 0.35rem; color: var(--portal-muted); font-size: 0.68rem; }
 .social-card-meta span { display: flex; align-items: center; gap: 0.35rem; }
 .social-card-meta svg { width: 13px; height: 13px; color: var(--portal-copper-soft); }
+.social-drive-link { display: flex; align-items: center; gap: 0.4rem; color: #d6c5e1; font-size: 0.68rem; font-weight: 700; text-decoration: none; }
+.social-drive-link svg { width: 13px; height: 13px; color: var(--portal-copper-soft); }
+.social-drive-link svg:last-child { margin-left: auto; }
 .social-card-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.35rem; padding: 0.7rem; border: 1px solid var(--portal-border-soft); border-radius: 12px; background: rgba(6, 3, 12, 0.34); }
 .social-card-stats span { display: grid; justify-items: center; gap: 0.28rem; color: var(--portal-muted); font-size: 0.64rem; }
 .social-card-stats svg { width: 14px; height: 14px; color: var(--portal-copper-soft); }
@@ -315,6 +321,12 @@
 .social-schedule-row input,
 .social-schedule-row button { min-width: 0; min-height: 38px; border: 1px solid var(--portal-border); border-radius: 9px; padding: 0.45rem 0.55rem; color: var(--portal-text); background: rgba(6, 3, 12, 0.7); font-size: 0.66rem; }
 .social-schedule-row button { color: #1a0918; background: linear-gradient(135deg, #f0b17b, #b87333); font-weight: 800; cursor: pointer; }
+.social-tiktok-controls p { margin: 0; min-height: 0; color: var(--portal-muted); font-size: 0.67rem; line-height: 1.5; }
+.social-tiktok-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+.social-tiktok-actions button,
+.social-tiktok-actions a { min-height: 38px; display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem; border: 1px solid var(--portal-border); border-radius: 9px; padding: 0.45rem 0.55rem; color: var(--portal-text); background: rgba(6, 3, 12, 0.7); font-size: 0.66rem; font-weight: 800; text-decoration: none; cursor: pointer; }
+.social-tiktok-actions svg { width: 14px; height: 14px; color: #8fe8f2; }
+.social-tiktok-schedule { grid-template-columns: minmax(0, 1fr) auto; }
 
 .crm-hero { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: clamp(1.3rem, 3vw, 2.2rem); border: 1px solid rgba(97, 210, 154, 0.24); border-radius: 24px; background: radial-gradient(circle at 85% 10%, rgba(97, 210, 154, 0.13), transparent 17rem), linear-gradient(135deg, rgba(29, 34, 30, 0.98), rgba(11, 6, 17, 0.98)); }
 .crm-hero h2 { margin: 0.35rem 0 0; font-family: Georgia, serif; font-size: clamp(1.65rem, 3vw, 2.35rem); }
@@ -431,6 +443,7 @@
   .portal-feature-row span { border-radius: 12px; }
   .social-ops-hero { align-items: flex-start; flex-direction: column; gap: 1.2rem; }
   .social-ops-hero .portal-primary-button { width: 100%; }
+  .social-hero-actions { width: 100%; display: grid; grid-template-columns: 1fr 1fr; }
   .social-connection-card { align-items: stretch; flex-direction: column; }
   .social-connection-card .portal-primary-button { width: 100%; }
   .social-form-grid-3,

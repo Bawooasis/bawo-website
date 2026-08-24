@@ -159,6 +159,13 @@ export default function PortalApp({ mode }: PortalAppProps) {
       socialPublish: { scheduledFor },
     }, new Date(scheduledFor).getTime() <= Date.now() + 60_000 ? "Instagram post queued now." : "Instagram post scheduled.");
 
+  const scheduleTikTok = async (contentId: string, scheduledFor: string) =>
+    runAdminAction({
+      action: "schedule_tiktok_reminder",
+      targetId: contentId,
+      socialPublish: { scheduledFor },
+    }, "TikTok manual post added to the schedule.");
+
   const submitClaim = async (input: VendorClaimInput) => {
     setBusy(true);
     setError("");
@@ -211,6 +218,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
           onConnectInstagram={connectInstagram}
           onUploadSocialMedia={uploadSocialMedia}
           onQueueSocialPublish={queueSocialPublish}
+          onScheduleTikTok={scheduleTikTok}
         />
       )}
       {mode === "business" && vendorData && <BusinessPortal data={vendorData} activeTab={activeTab} busy={busy} onSubmit={submitClaim} />}

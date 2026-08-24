@@ -29,6 +29,7 @@ type AdminPortalProps = {
   onConnectInstagram: () => Promise<void>;
   onUploadSocialMedia: (contentId: string, file: File) => Promise<void>;
   onQueueSocialPublish: (contentId: string, scheduledFor: string) => Promise<boolean>;
+  onScheduleTikTok: (contentId: string, scheduledFor: string) => Promise<boolean>;
 };
 
 const formatDate = (value: string | null) =>
@@ -55,6 +56,7 @@ export default function AdminPortal({
   onConnectInstagram,
   onUploadSocialMedia,
   onQueueSocialPublish,
+  onScheduleTikTok,
 }: AdminPortalProps) {
   const [query, setQuery] = useState("");
   const [editingGroupId, setEditingGroupId] = useState<string | null>(null);
@@ -370,6 +372,7 @@ export default function AdminPortal({
         onConnectInstagram={onConnectInstagram}
         onUploadMedia={onUploadSocialMedia}
         onQueuePublish={onQueueSocialPublish}
+        onScheduleTikTok={onScheduleTikTok}
       />
     );
   }

@@ -2,7 +2,10 @@ import {
   Archive,
   BarChart3,
   CalendarClock,
+  Clipboard,
+  ExternalLink,
   Eye,
+  FolderOpen,
   Heart,
   Instagram,
   Megaphone,
@@ -29,6 +32,7 @@ type SocialMediaPanelProps = {
   onConnectInstagram: () => Promise<void>;
   onUploadMedia: (contentId: string, file: File) => Promise<void>;
   onQueuePublish: (contentId: string, scheduledFor: string) => Promise<boolean>;
+  onScheduleTikTok: (contentId: string, scheduledFor: string) => Promise<boolean>;
 };
 
 type Draft = {
@@ -44,6 +48,7 @@ type Draft = {
   scheduledFor: string;
   publishedAt: string;
   postUrl: string;
+  driveAssetUrl: string;
   views: string;
   likes: string;
   comments: string;
@@ -66,6 +71,7 @@ const emptyDraft = (): Draft => ({
   scheduledFor: "",
   publishedAt: "",
   postUrl: "",
+  driveAssetUrl: "",
   views: "0",
   likes: "0",
   comments: "0",
@@ -89,6 +95,7 @@ const fromItem = (item: SocialContentItem): Draft => ({
   scheduledFor: toLocalDate(item.scheduled_for),
   publishedAt: toLocalDate(item.published_at),
   postUrl: item.post_url || "",
+  driveAssetUrl: item.drive_asset_url || "",
   views: String(item.views),
   likes: String(item.likes),
   comments: String(item.comments),
@@ -102,11 +109,14 @@ const formatDate = (value: string | null) => value
   ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }).format(new Date(value))
   : "Not scheduled";
 
-export default function SocialMediaPanel({ items, connections, publishJobs, busy, onAction, onConnectInstagram, onUploadMedia, onQueuePublish }: SocialMediaPanelProps) {
+const driveLibraryUrl = import.meta.env.VITE_SOCIAL_DRIVE_FOLDER_URL || "https://drive.google.com/drive/folders/1eL45S1A5pqs8-bDBeANPR8-V8D5mjiz9";
+
+export default function SocialMediaPanel({ items, connections, publishJobs, busy, onAction, onConnectInstagram, onUploadMedia, onQueuePublish, onScheduleTikTok }: SocialMediaPanelProps) {
   const [platform, setPlatform] = useState<"all" | SocialPlatform>("all");
   const [editingId, setEditingId] = useState<string | null>(null);
   const [draft, setDraft] = useState<Draft>(emptyDraft);
   const [scheduleTimes, setScheduleTimes] = useState<Record<string, string>>({});
+  const [copiedId, setCopiedId] = useState<string | null>(null);
   const visibleItems = useMemo(
     () => platform === "all" ? items : items.filter((item) => item.platform === platform),
     [items, platform],
@@ -130,6 +140,12 @@ export default function SocialMediaPanel({ items, connections, publishJobs, busy
     setDraft(fromItem(item));
   };
   const update = <K extends keyof Draft>(key: K, value: Draft[K]) => setDraft((current) => ({ ...current, [key]: value }));
+  const copyTikTokPacket = async (item: SocialContentItem) => {
+    const packet = [item.hook, item.caption, item.call_to_action].filter(Boolean).join("\n\n");
+    await navigator.clipboard.writeText(packet);
+    setCopiedId(item.id);
+    window.setTimeout(() => setCopiedId((current) => current === item.id ? null : current), 1800);
+  };
 
   const save = async (event: FormEvent) => {
     event.preventDefault();
@@ -150,6 +166,7 @@ export default function SocialMediaPanel({ items, connections, publishJobs, busy
         scheduledFor: draft.scheduledFor || null,
         publishedAt: draft.publishedAt || null,
         postUrl: draft.postUrl || null,
+        driveAssetUrl: draft.driveAssetUrl || null,
         views: count(draft.views),
         likes: count(draft.likes),
         comments: count(draft.comments),
@@ -170,7 +187,7 @@ export default function SocialMediaPanel({ items, connections, publishJobs, busy
       </section>
       <section className="social-ops-hero">
         <div><span className="portal-kicker">Growth studio</span><h2>Make the next post measurable</h2><p>TikTok leads the launch. Instagram follows with reusable cuts, carousels, and community proof.</p></div>
-        <button className="portal-primary-button" type="button" onClick={openNew}><Plus aria-hidden /> New content</button>
+        <div className="social-hero-actions"><a className="portal-secondary-link" href={driveLibraryUrl} target="_blank" rel="noreferrer"><FolderOpen aria-hidden /> Media library</a><button className="portal-primary-button" type="button" onClick={openNew}><Plus aria-hidden /> New content</button></div>
       </section>
 
       <section className="portal-metrics" aria-label="Social performance">
@@ -202,6 +219,7 @@ export default function SocialMediaPanel({ items, connections, publishJobs, busy
               <label>Published at<input type="datetime-local" value={draft.publishedAt} onChange={(event) => update("publishedAt", event.target.value)} /></label>
             </div>
             <label>Live post URL<input type="url" value={draft.postUrl} onChange={(event) => update("postUrl", event.target.value)} placeholder="https://www.tiktok.com/@bawo/..." /></label>
+            <label>Google Drive asset<input type="url" value={draft.driveAssetUrl} onChange={(event) => update("driveAssetUrl", event.target.value)} placeholder="https://drive.google.com/file/d/..." /></label>
             <div className="social-metric-inputs">
               {(["views", "likes", "comments", "shares", "saves", "follows", "linkClicks"] as const).map((key) => <label key={key}>{key.replace(/([A-Z])/g, " $1")}<input min="0" type="number" value={draft[key]} onChange={(event) => update(key, event.target.value)} /></label>)}
             </div>
@@ -230,6 +248,7 @@ export default function SocialMediaPanel({ items, connections, publishJobs, busy
               <div className="social-content-top"><span className={`social-platform is-${item.platform}`}>{item.platform === "tiktok" ? <Sparkles aria-hidden /> : <Instagram aria-hidden />}{item.platform}</span><span className={`portal-status is-${item.status === "published" ? "success" : item.status === "scheduled" ? "warning" : "muted"}`}>{item.status}</span></div>
               <div><span className="social-goal">{item.goal}</span><h3>{item.title}</h3><p>{item.hook || "Add a hook that earns the first three seconds."}</p></div>
               <div className="social-card-meta"><span><CalendarClock aria-hidden /> {formatDate(item.scheduled_for || item.published_at)}</span><span>{item.owner_name || "Unassigned"}</span></div>
+              {item.drive_asset_url && <a className="social-drive-link" href={item.drive_asset_url} target="_blank" rel="noreferrer"><FolderOpen aria-hidden /> Open source asset <ExternalLink aria-hidden /></a>}
               <div className="social-card-stats"><span><Eye aria-hidden /> {Number(item.views).toLocaleString()}</span><span><Heart aria-hidden /> {Number(item.likes).toLocaleString()}</span><span><MessageCircle aria-hidden /> {Number(item.comments).toLocaleString()}</span><span><Share2 aria-hidden /> {Number(item.shares).toLocaleString()}</span></div>
               {item.platform === "instagram" && (
                 <div className="social-publish-controls">
@@ -242,6 +261,19 @@ export default function SocialMediaPanel({ items, connections, publishJobs, busy
                       <button disabled={busy || !(scheduleTimes[item.id] || item.scheduled_for)} onClick={() => { const value = scheduleTimes[item.id] || item.scheduled_for; if (value) void onQueuePublish(item.id, new Date(value).toISOString()); }}>Schedule</button>
                     </div>
                   )}
+                </div>
+              )}
+              {item.platform === "tiktok" && (
+                <div className="social-publish-controls social-tiktok-controls">
+                  <p>TikTok requires a human final review. Copy the posting packet, open the Drive asset, and publish in TikTok.</p>
+                  <div className="social-tiktok-actions">
+                    <button disabled={busy || (!item.caption && !item.hook)} onClick={() => void copyTikTokPacket(item)}><Clipboard aria-hidden /> {copiedId === item.id ? "Copied" : "Copy post packet"}</button>
+                    {item.drive_asset_url && <a href={item.drive_asset_url} target="_blank" rel="noreferrer"><FolderOpen aria-hidden /> Open media</a>}
+                  </div>
+                  <div className="social-schedule-row social-tiktok-schedule">
+                    <input aria-label="TikTok reminder time" type="datetime-local" value={scheduleTimes[item.id] || toLocalDate(item.scheduled_for)} onChange={(event) => setScheduleTimes((current) => ({ ...current, [item.id]: event.target.value }))} />
+                      <button disabled={busy || !(scheduleTimes[item.id] || item.scheduled_for)} onClick={() => { const value = scheduleTimes[item.id] || item.scheduled_for; if (value) void onScheduleTikTok(item.id, new Date(value).toISOString()); }}>Add to schedule</button>
+                  </div>
                 </div>
               )}
               <div className="portal-row-actions"><button onClick={() => openEdit(item)}><Pencil aria-hidden /> Edit</button>{item.post_url && <a className="social-post-link" href={item.post_url} target="_blank" rel="noreferrer">View post</a>}<button className="is-danger" disabled={busy} onClick={() => { if (window.confirm(`Archive ${item.title}?`)) void onAction({ action: "archive_social_content", targetId: item.id }, "Content item archived."); }}><Archive aria-hidden /> Archive</button></div>

@@ -105,6 +105,8 @@ export type SocialContentItem = {
   scheduled_for: string | null;
   published_at: string | null;
   post_url: string | null;
+  drive_asset_url: string | null;
+  drive_file_id: string | null;
   media_path: string | null;
   media_type: "image" | "video" | null;
   views: number;
@@ -252,6 +254,7 @@ export type AdminAction = {
     | "create_social_upload"
     | "queue_social_publish"
     | "retry_social_publish"
+    | "schedule_tiktok_reminder"
     | "save_crm_lead"
     | "set_crm_stage"
     | "log_crm_activity"
@@ -280,6 +283,7 @@ export type AdminAction = {
     scheduledFor: string | null;
     publishedAt: string | null;
     postUrl: string | null;
+    driveAssetUrl: string | null;
     views: number;
     likes: number;
     comments: number;
