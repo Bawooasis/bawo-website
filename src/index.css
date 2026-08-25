@@ -1628,7 +1628,7 @@ a.bawo-cta-quiet:active {
   padding-bottom: 0.625rem;
 }
 
-/* Hero proof-of-concept — exact 4K landscape device frames (3840×3072), no recompress. */
+/* Hero proof-of-concept — device cutouts; size asset to 2× native for Retina (no giant upscale). */
 .bawo-hero-mockup {
   position: relative;
   isolation: isolate;
@@ -1657,14 +1657,12 @@ a.bawo-cta-quiet:active {
 .bawo-hero-mockup__stage {
   position: relative;
   z-index: 1;
-  /* Fill available column; cap by viewport so the phone reads large. */
-  width: min(100%, 96vw, calc(52dvh * 909 / 1830));
-  aspect-ratio: 909 / 1830;
+  /* Native 2572×5284 Figma export — fill column, scale by viewport height. */
+  width: min(100%, 96vw, calc(52dvh * 2572 / 5284));
+  aspect-ratio: 2572 / 5284;
 }
 
 .bawo-hero-mockup__image {
-  position: absolute;
-  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
@@ -1672,20 +1670,11 @@ a.bawo-cta-quiet:active {
   /* Exact bitmap — no CSS filter on the visible frame (keeps UI text crisp). */
   transform: translateZ(0);
   backface-visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.7s ease;
-}
-
-.bawo-hero-mockup__image.is-active {
-  opacity: 1;
-  pointer-events: auto;
-  z-index: 1;
 }
 
 @media (min-width: 640px) {
   .bawo-hero-mockup__stage {
-    width: min(100%, 94vw, calc(58dvh * 909 / 1830));
+    width: min(100%, 94vw, calc(58dvh * 2572 / 5284));
   }
 }
 
@@ -1695,19 +1684,19 @@ a.bawo-cta-quiet:active {
   }
 
   .bawo-hero-mockup__stage {
-    width: min(100%, 62vw, calc(72dvh * 909 / 1830), 70rem);
+    width: min(100%, 62vw, calc(72dvh * 2572 / 5284));
   }
 }
 
 @media (min-width: 1280px) {
   .bawo-hero-mockup__stage {
-    width: min(100%, 58vw, calc(78dvh * 909 / 1830), 76rem);
+    width: min(100%, 58vw, calc(78dvh * 2572 / 5284));
   }
 }
 
 @media (min-width: 1536px) {
   .bawo-hero-mockup__stage {
-    width: min(100%, 56vw, calc(82dvh * 909 / 1830), 84rem);
+    width: min(100%, 56vw, calc(82dvh * 2572 / 5284));
   }
 }
 

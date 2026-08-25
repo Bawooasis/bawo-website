@@ -56,16 +56,11 @@ import appCommunityScreen from "../assets/images/app-community-screen.png";
 import appConciergeScreen from "../assets/images/app-concierge.png";
 import appEventsScreen from "../assets/images/app-events-screen.png";
 import appResourcesScreen from "../assets/images/app-resources-full.png";
-import heroAppEventsMockup from "../assets/images/hero-app-events-mockup.png";
-import heroAppExploreMockup from "../assets/images/hero-app-explore-mockup.png";
-import heroTripleMockup from "../assets/images/hero-app-triple-mockup.png";
+import heroAppCommunityMockup from "../assets/images/hero-app-community-mockup.webp";
 import showcaseCommunity from "../assets/images/showcase-community.jpg";
 import showcaseConcierge from "../assets/images/showcase-concierge.jpg";
 import showcaseEvents from "../assets/images/showcase-events.jpg";
 import showcaseExplore from "../assets/images/showcase-explore.jpg";
-
-/** Hero: iPhone cutouts (Explore map + Events), transparent backdrop. */
-const heroPreviewGallery = [heroAppExploreMockup, heroAppEventsMockup] as const;
 
 /** Lower “In-App Preview” grid — individual screens. */
 const appFeatureScreens = [
@@ -91,10 +86,7 @@ export const IMAGES = {
 
   // App Preview/Demo Images
   previews: {
-    main: heroAppExploreMockup,
-    events: heroAppEventsMockup,
-    triple: heroTripleMockup,
-    gallery: [...heroPreviewGallery],
+    main: heroAppCommunityMockup,
   },
 
   showcase: {
@@ -211,8 +203,8 @@ export const getCityImage = (index: number) => {
   return IMAGES.globalReach.cities[index] || IMAGES.placeholders.feature;
 };
 
-export const getPreviewImage = (index: number) => {
-  return IMAGES.previews.gallery[index] || IMAGES.previews.main;
+export const getPreviewImage = () => {
+  return IMAGES.previews.main;
 };
 
 export const getEventImage = (index: number) => {
