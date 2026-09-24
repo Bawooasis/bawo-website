@@ -1482,29 +1482,14 @@ a.bawo-cta-quiet:active {
 }
 
 .bawo-site-header__founding-chip {
-  flex-direction: column;
-  align-items: flex-end;
-  padding: 0.35rem 0.625rem;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.4rem 0.75rem;
   border-radius: 0.5rem;
   border: 1px solid rgba(58, 29, 72, 0.65);
   background: rgba(42, 20, 56, 0.45);
   text-decoration: none;
   transition: background-color 0.15s ease, border-color 0.15s ease;
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  .bawo-site-header__founding-chip-label {
-    display: none;
-  }
-
-  .bawo-site-header__founding-chip {
-    align-items: center;
-    padding: 0.4rem 0.55rem;
-  }
-
-  .bawo-site-header__founding-chip-countdown {
-    font-size: 0.6875rem;
-  }
 }
 
 @media (min-width: 1024px) {
@@ -1521,18 +1506,11 @@ a.bawo-cta-quiet:active {
 }
 
 .bawo-site-header__founding-chip-label {
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--bawo-peach);
-  line-height: 1.2;
-}
-
-.bawo-site-header__founding-chip-countdown {
-  font-size: 0.6875rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.78);
   line-height: 1.2;
 }
 

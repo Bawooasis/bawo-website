@@ -2,7 +2,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BadgeCheck, Calendar, Headphones, Star } from "lucide-react";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
-import BatchCountdownDisplay from "./components/BatchCountdownDisplay";
 import BoroughNetworkGraphic from "./components/BoroughNetworkGraphic";
 import BoroughSquareCarousel from "./components/BoroughSquareCarousel";
 import CommunityMissionSection from "./components/CommunityMissionSection";
@@ -373,16 +372,6 @@ function App() {
                 </p>
               </div>
 
-              <div>
-                <p className="text-[10px] uppercase tracking-widest text-white/45 font-museo-bold mb-2">
-                  Today's window closes in
-                </p>
-                <BatchCountdownDisplay />
-                <p className="text-[10px] text-white/45 font-museo-medium mt-1">
-                  hrs · min · sec
-                </p>
-              </div>
-
               <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm font-museo-medium text-white/70">
                 <span>
                   <strong className="text-white">$25</strong> lifetime
@@ -657,10 +646,10 @@ function App() {
           <div className="md:hidden mobile-sticky-cta bg-bawo-ink/92 backdrop-blur-xl border-t border-bawo-eggplant-light/50">
             <div className="px-4 py-3 flex items-center justify-between gap-3">
               <div className="flex flex-col min-w-0 gap-0.5">
+                <span className="text-white font-museo-bold text-sm">Founding · $25</span>
                 <span className="text-white/55 font-museo-medium text-[10px] uppercase tracking-wider">
-                  Today&apos;s window closes in
+                  Lifetime access
                 </span>
-                <BatchCountdownDisplay size="sm" className="justify-start" />
               </div>
               <FoundingMemberButton
                 label="Join Waitlist"

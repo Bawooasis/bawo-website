@@ -2,7 +2,6 @@ import { Menu, X } from "lucide-react";
 import { memo, useEffect, useState, type MouseEvent } from "react";
 import BawoPillButton from "./BawoPillButton";
 import SiteLogo from "./SiteLogo";
-import { formatCountdownShort, useBatchCountdown } from "../hooks/useBatchCountdown";
 
 const NAV_LINKS = [
   { label: "Network", href: "#building-the-network" },
@@ -19,8 +18,6 @@ type SiteHeaderProps = {
 
 function SiteHeader({ onJoinClick }: SiteHeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const timeLeft = useBatchCountdown(true);
-  const countdown = formatCountdownShort(timeLeft);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -56,7 +53,6 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
           <div className="bawo-site-header__actions">
             <a href="#pricing" className="bawo-site-header__founding-chip hidden md:inline-flex">
               <span className="bawo-site-header__founding-chip-label">Founding · $25</span>
-              <span className="bawo-site-header__founding-chip-countdown tabular-nums">{countdown}</span>
             </a>
 
             <BawoPillButton
@@ -97,9 +93,6 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
                 {link.label}
               </a>
             ))}
-            <p className="px-4 pt-3 text-xs text-white/50 font-museo-medium tabular-nums">
-              Founding pass $25 · Today's window closes in {countdown}
-            </p>
             <div className="px-2 pt-3">
               <BawoPillButton
                 label="Join Waitlist"
