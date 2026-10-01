@@ -4,7 +4,7 @@ type MailchimpSignupRowProps = {
   className?: string;
   buttonLabel?: string;
   compact?: boolean;
-  /** Ghost outline — use for email list so paid CTAs stay visually primary. */
+  /** Outline — secondary to TestFlight; solid border for waitlist submit. */
   variant?: "default" | "ghost";
 };
 

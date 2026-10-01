@@ -7,8 +7,6 @@ import BoroughSquareCarousel from "./components/BoroughSquareCarousel";
 import CommunityMissionSection from "./components/CommunityMissionSection";
 import FaqSection from "./components/FaqSection";
 import FoundingMemberButton from "./components/FoundingMemberButton";
-import FoundingMemberCheckoutCard from "./components/FoundingMemberCheckoutCard";
-import FoundingMemberModal from "./components/FoundingMemberModal";
 import HeroActionStack from "./components/HeroActionStack";
 import HeroAppPreview from "./components/HeroAppPreview";
 import HeroNextPreview from "./components/HeroNextPreview";
@@ -21,6 +19,7 @@ import SiteHeader from "./components/SiteHeader";
 import { TAILWIND_COLORS } from "./constants/colors";
 import { CONTENT } from "./constants/content";
 import { IMAGES } from "./constants/images";
+import { scrollToWaitlist } from "./utils/scrollToWaitlist";
 
 const SiteMeshBackground = lazy(
   () => import("./components/ui/site-mesh-background"),
@@ -31,10 +30,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
-  const [foundingModalOpen, setFoundingModalOpen] = useState(false);
-
-  const openFoundingModal = () => setFoundingModalOpen(true);
-  const closeFoundingModal = () => setFoundingModalOpen(false);
 
   // Animation refs
   const heroRef = useRef(null);
@@ -42,8 +37,7 @@ function App() {
   const subheadlineRef = useRef(null);
   const ctaRef = useRef(null);
   const mockupRef = useRef(null);
-  const statsRef = useRef(null);
-  const foundingMemberRef = useRef(null);
+  const earlyAccessRef = useRef(null);
   const featuresRef = useRef(null);
   const globalReachRef = useRef(null);
   const finalCtaRef = useRef(null);
@@ -153,14 +147,8 @@ function App() {
     return () => ctx.revert();
   }, []);
 
-  const handleFoundingMember = openFoundingModal;
-
   return (
     <div className="min-h-screen relative">
-      <FoundingMemberModal
-        open={foundingModalOpen}
-        onClose={closeFoundingModal}
-      />
       <div className="fixed inset-0 z-0 bawo-page-bg-base" aria-hidden />
       <Suspense
         fallback={
@@ -173,7 +161,7 @@ function App() {
         <SiteMeshBackground />
       </Suspense>
 
-      <SiteHeader onJoinClick={handleFoundingMember} />
+      <SiteHeader onJoinClick={scrollToWaitlist} />
 
       <div className="relative z-10 bg-transparent min-h-screen overflow-x-clip pb-[var(--bawo-mobile-sticky-cta-height)] md:pb-0">
         {/* Hero Section */}
@@ -214,7 +202,7 @@ function App() {
 
             <div className="mt-auto w-full shrink-0 space-y-5 sm:space-y-6 pb-2">
               <div ref={ctaRef} className="bawo-hero-cta-block">
-                <HeroActionStack onJoinClick={handleFoundingMember} />
+                <HeroActionStack onJoinClick={scrollToWaitlist} />
               </div>
 
               <SectionPillNav />
@@ -345,53 +333,10 @@ function App() {
 
         <div className="relative bg-transparent space-y-16 md:space-y-20 pt-12 md:pt-16 pb-6 md:pb-10 section-contain">
           <CommunityMissionSection />
-          <div className="relative z-10 container mx-auto px-6 max-w-5xl">
-            <FoundingMemberCheckoutCard onJoinClick={handleFoundingMember} />
-          </div>
           <div className="relative z-10">
             <PartnerWithUsSection />
           </div>
         </div>
-
-        {/* Stats Section – Batch 1 (simplified) */}
-        <section
-          ref={statsRef}
-          id="pricing-stats"
-          className="relative py-16 md:py-20 bg-transparent overflow-hidden"
-        >
-          <div className="relative z-10 container mx-auto px-6 max-w-2xl">
-            <div className="text-center space-y-8">
-              <div className="space-y-3">
-                <p className="bawo-forest-text text-xs font-museo-bold uppercase tracking-wider">
-                  Batch 1 Open
-                </p>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white font-museo-bold tracking-tight">
-                  {CONTENT.stats.title}
-                </h2>
-                <p className="text-base text-white/75 font-museo-medium max-w-lg mx-auto">
-                  {CONTENT.stats.subtitle}
-                </p>
-              </div>
-
-              <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm font-museo-medium text-white/70">
-                <span>
-                  <strong className="text-white">$25</strong> lifetime
-                </span>
-                <span>500 founding passes</span>
-                <span>30-day guarantee</span>
-              </div>
-
-              <p className="text-sm text-white/50 font-museo-medium">
-                {CONTENT.stats.tagline}
-              </p>
-
-              <p className="text-xs text-white/40 font-museo-regular">
-                {CONTENT.stats.urgency.deadline} ·{" "}
-                {CONTENT.stats.urgency.guarantee}
-              </p>
-            </div>
-          </div>
-        </section>
 
         {/* Origin Story Section – structured block with clear hierarchy */}
         <section
@@ -439,28 +384,28 @@ function App() {
           </div>
         </section>
 
-        {/* Founding Member Section */}
+        {/* Early Access — TestFlight + waitlist */}
         <section
-          ref={foundingMemberRef}
-          id="pricing"
+          ref={earlyAccessRef}
+          id="early-access"
           className="relative bawo-scroll-anchor bg-transparent py-20 md:py-28"
         >
           <div className="relative z-10 container mx-auto px-6 py-12 md:py-16 max-w-2xl">
             <div className="space-y-10 text-white">
               <div className="space-y-3 text-center">
                 <h2 className="text-4xl md:text-5xl font-bold font-display leading-tight">
-                  {CONTENT.foundingMember.title}{" "}
+                  {CONTENT.earlyAccess.title}{" "}
                   <span className="bawo-accent">
-                    {CONTENT.foundingMember.titleHighlight}
+                    {CONTENT.earlyAccess.titleHighlight}
                   </span>
                 </h2>
                 <p className="text-sm md:text-base font-museo-medium text-white/65 uppercase tracking-wider">
-                  {CONTENT.foundingMember.subtitle}
+                  {CONTENT.earlyAccess.subtitle}
                 </p>
               </div>
 
               <ul className="space-y-5">
-                {CONTENT.foundingMember.benefits.map((benefit) => (
+                {CONTENT.earlyAccess.benefits.map((benefit) => (
                   <li key={benefit.title} className="flex items-start gap-3">
                     <BadgeCheck
                       className="w-5 h-5 bawo-accent flex-shrink-0 mt-0.5"
@@ -480,16 +425,18 @@ function App() {
               </ul>
 
               <p className="text-sm text-white/55 font-museo-medium text-center leading-relaxed">
-                {CONTENT.foundingMember.missionText}
+                {CONTENT.earlyAccess.missionText}
               </p>
 
-              <div className="flex justify-center pt-2">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-2">
+                <MobileAppDownloadRow className="items-stretch sm:max-w-[19.5rem]" />
                 <FoundingMemberButton
-                  label={CONTENT.foundingMember.cta}
+                  label={CONTENT.earlyAccess.cta}
                   variant="primary"
+                  appearance="outline"
                   size="md"
                   className="min-w-[14rem]"
-                  onClick={handleFoundingMember}
+                  onClick={scrollToWaitlist}
                 />
               </div>
             </div>
@@ -591,48 +538,19 @@ function App() {
               </div>
 
               <div className="flex flex-col gap-5 justify-center items-center w-full max-w-2xl mx-auto">
-                <div className="flex w-full flex-col items-center gap-5 sm:flex-row sm:flex-wrap sm:justify-center">
-                  <FoundingMemberButton
-                    label={CONTENT.foundingMemberCheckout.ctaLabel}
-                    variant="primary"
-                    size="md"
-                    onClick={handleFoundingMember}
-                  />
-                  <MobileAppDownloadRow className="items-stretch sm:max-w-[19.5rem]" />
-                </div>
-
-                <div
-                  className="bawo-trust-row flex flex-wrap items-center justify-center gap-2.5 text-[10px] md:text-xs font-museo-medium"
-                  style={{ textShadow: "0 0 12px rgba(212, 175, 55, 0.22)" }}
-                >
-                  <span className="flex items-center gap-1.5">
-                    <svg
-                      className="w-3 h-3 md:w-3.5 md:h-3.5 text-[#635bff]"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z" />
-                    </svg>
-                    {CONTENT.hero.trustIndicators.stripe}
-                  </span>
-                  <span className="text-bawo-eggplant-light/80">|</span>
-                  <span>{CONTENT.hero.trustIndicators.oneTime}</span>
-                  <span className="text-bawo-eggplant-light/80">|</span>
-                  <span>{CONTENT.hero.trustIndicators.cancel}</span>
-                </div>
+                <MobileAppDownloadRow className="items-stretch sm:max-w-[19.5rem]" />
               </div>
 
               <div className="flex items-center gap-4 max-w-2xl mx-auto w-full">
                 <span className="flex-1 h-px bg-white/20" aria-hidden />
                 <span className="text-white/55 font-museo-medium text-xs sm:text-sm text-center uppercase tracking-wider px-2">
-                  Or get launch updates, no payment
+                  Or join the waitlist
                 </span>
                 <span className="flex-1 h-px bg-white/20" aria-hidden />
               </div>
 
               <MailchimpSignupRow
                 className="relative w-full max-w-2xl mx-auto"
-                variant="ghost"
                 buttonLabel={CONTENT.finalCta.ctaSecondary}
               />
             </div>
@@ -647,18 +565,34 @@ function App() {
           <div className="md:hidden mobile-sticky-cta bg-bawo-ink/92 backdrop-blur-xl border-t border-bawo-eggplant-light/50">
             <div className="px-4 py-3 flex items-center justify-between gap-3">
               <div className="flex flex-col min-w-0 gap-0.5">
-                <span className="text-white font-museo-bold text-sm">Founding · $25</span>
+                <span className="text-white font-museo-bold text-sm">Try the beta</span>
                 <span className="text-white/55 font-museo-medium text-[10px] uppercase tracking-wider">
-                  Lifetime access
+                  TestFlight · Waitlist
                 </span>
               </div>
-              <FoundingMemberButton
-                label="Join Waitlist"
-                variant="primary"
-                size="sm"
-                className="shrink-0 max-w-[10.5rem] sm:max-w-none"
-                onClick={handleFoundingMember}
-              />
+              <div className="flex shrink-0 items-center gap-2">
+                <FoundingMemberButton
+                  label="TestFlight"
+                  variant="primary"
+                  size="sm"
+                  className="max-w-[7.5rem]"
+                  onClick={() => {
+                    window.open(
+                      CONTENT.hero.testflightLink,
+                      "_blank",
+                      "noopener,noreferrer",
+                    );
+                  }}
+                />
+                <FoundingMemberButton
+                  label="Waitlist"
+                  variant="primary"
+                  appearance="outline"
+                  size="sm"
+                  className="max-w-[7.5rem]"
+                  onClick={scrollToWaitlist}
+                />
+              </div>
             </div>
           </div>
           <div className="container mx-auto px-6">
@@ -799,7 +733,7 @@ function App() {
                       </li>
                       <li>
                         <strong>Contact information</strong>: Email address when
-                        you sign up for updates or founding membership
+                        you sign up for launch updates or the waitlist
                       </li>
                       <li>
                         <strong>Analytics data</strong>: How you interact with
@@ -809,10 +743,6 @@ function App() {
                         <strong>Cookies</strong>: Used for basic site
                         functionality and analytics (you can control cookies in
                         your browser settings)
-                      </li>
-                      <li>
-                        <strong>Payment information</strong>: Processed securely
-                        by Stripe when you become a founding member
                       </li>
                     </ul>
                   </div>
@@ -873,7 +803,7 @@ function App() {
                     <ul className="list-disc list-inside space-y-1 text-sm">
                       <li>
                         <strong>Provide our website services</strong> and
-                        process founding member signups
+                        manage waitlist signups
                       </li>
                       <li>
                         <strong>Send updates</strong> about BawoSocial launch
@@ -882,10 +812,6 @@ function App() {
                       <li>
                         <strong>Improve website performance</strong> and user
                         experience
-                      </li>
-                      <li>
-                        <strong>Process payments</strong> securely through
-                        Stripe
                       </li>
                       <li>
                         <strong>Respond to inquiries</strong> and provide

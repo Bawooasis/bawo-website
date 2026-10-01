@@ -2,12 +2,14 @@ import { Menu, X } from "lucide-react";
 import { memo, useEffect, useState, type MouseEvent } from "react";
 import BawoPillButton from "./BawoPillButton";
 import SiteLogo from "./SiteLogo";
+import { CONTENT } from "../constants/content";
 
 const NAV_LINKS = [
   { label: "Network", href: "#building-the-network" },
   { label: "About", href: "#about" },
   { label: "Features", href: "#features" },
   { label: "Events", href: "#events" },
+  { label: "Try the App", href: "#early-access" },
   { label: "Business", href: "/business" },
   { label: "FAQ", href: "#faq" },
 ] as const;
@@ -51,12 +53,19 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
           </div>
 
           <div className="bawo-site-header__actions">
-            <a href="#pricing" className="bawo-site-header__founding-chip hidden md:inline-flex">
-              <span className="bawo-site-header__founding-chip-label">Founding · $25</span>
+            <a
+              href={CONTENT.hero.testflightLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bawo-site-header__founding-chip hidden md:inline-flex"
+            >
+              <span className="bawo-site-header__founding-chip-label">
+                {CONTENT.hero.ctaTestFlight}
+              </span>
             </a>
 
             <BawoPillButton
-              label="Join Waitlist"
+              label={CONTENT.hero.ctaSecondary}
               variant="primary"
               appearance="outline"
               size="sm"
@@ -93,9 +102,20 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
                 {link.label}
               </a>
             ))}
-            <div className="px-2 pt-3">
+            <div className="px-2 pt-3 flex flex-col gap-2">
               <BawoPillButton
-                label="Join Waitlist"
+                label={CONTENT.hero.ctaTestFlight}
+                variant="primary"
+                size="md"
+                polished
+                fullWidth
+                onClick={() => {
+                  setMobileOpen(false);
+                  window.open(CONTENT.hero.testflightLink, "_blank", "noopener,noreferrer");
+                }}
+              />
+              <BawoPillButton
+                label={CONTENT.hero.ctaSecondary}
                 variant="primary"
                 appearance="outline"
                 size="md"

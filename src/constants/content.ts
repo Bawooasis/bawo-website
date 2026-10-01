@@ -1,49 +1,6 @@
 import { IMAGES } from "./images";
 
-const STRIPE_FOUNDING_DEFAULT =
-  "https://buy.stripe.com/eVq3cwaddb06bxQ1vB3Nm02";
-
 export const CONTENT = {
-  revenue: {
-    /** Replace with your $25 Stripe Payment Link; override via `VITE_STRIPE_FOUNDING_CHECKOUT_URL`. */
-    foundingStripeCheckoutUrl:
-      import.meta.env.VITE_STRIPE_FOUNDING_CHECKOUT_URL || STRIPE_FOUNDING_DEFAULT,
-  },
-
-  foundingMemberCheckout: {
-    kicker: "Day-1 revenue, BawoSocial",
-    title: "Founding Member Lifetime Pass",
-    description:
-      "Lock in early. One payment, permanent status for Nigerians in the diaspora — starting with our NYC community.",
-    price: "$25",
-    benefits: [
-      "Lifetime access to the premium membership tier",
-      "Verified profile badge on launch",
-      "Day-1 iOS beta access before public rollout",
-    ],
-    ctaLabel: "Become a Founding Member",
-  },
-
-  foundingMemberModal: {
-    kicker: "Batch 1 · 500 spots",
-    title: "Become a Founding Member",
-    subtitle:
-      "Lock in lifetime access for Nigerians in the diaspora — our NYC hub first, with more cities to follow.",
-    price: "$25",
-    priceNote: "one-time payment",
-    benefits: [
-      "Lifetime access to the premium membership tier",
-      "Verified founding profile badge on launch",
-      "Day-1 iOS beta access before public rollout",
-      "Full Resource Directory — businesses, services, and community intel",
-    ],
-    checkoutCta: "Continue to checkout — $25",
-    waitlistCta: "Join waitlist instead",
-    waitlistHint: "Not ready to pay? Get launch updates by email — no payment required.",
-    footerNote:
-      "Community-built and independent. Your membership helps grow a platform made for our culture.",
-  },
-
   partnerWithUs: {
     headline: "Help our community find trusted local partners.",
     body: "If you serve Nigerians in New York — restaurants, professionals, shipping, or community businesses — list in our Resource Directory and connect with members who show up for culture.",
@@ -84,29 +41,24 @@ export const CONTENT = {
     },
     subtitle:
       "The Culture Hub for Nigerians in the diaspora. Curated resources, culture-led events, starting in NYC. We are stronger together.",
-    ctaPrimary: "Become a Founding Member",
-    ctaMicrocopy: "Founding pass · limited spots",
+    ctaPrimary: "Join the Waitlist",
+    ctaMicrocopy: "Get launch updates by email",
     ctaSecondary: "Join Waitlist",
-    testflightLink: "https://testflight.apple.com/join/xAp29Euh",
+    testflightLink: "https://testflight.apple.com/join/RU883akC",
     ctaTestFlight: "Download via TestFlight",
     downloadIos: "Download for iOS",
     downloadIosSub: "TestFlight",
     downloadAndroid: "Android",
     downloadAndroidSoon: "Coming soon",
     shareWhatsApp:
-      "I just found BawoSocial — the private network for Nigerians in the diaspora. $25 lifetime access, only 450 spots left. Join here: https://www.joinbawo.com?utm_source=whatsapp",
+      "I just found BawoSocial — the private network for Nigerians in the diaspora. Try the iOS beta or join the waitlist: https://www.joinbawo.com?utm_source=whatsapp",
     shareLink: "https://www.joinbawo.com?utm_source=share",
     shareTweet:
-      "BawoSocial — the Culture Hub for Nigerians in the diaspora. $25 lifetime founding access.",
+      "BawoSocial — the Culture Hub for Nigerians in the diaspora. Try the iOS beta or join the waitlist.",
     shareCopy: "Copy link",
     shareCopied: "Copied!",
     knowWhenLaunch: "Know when we launch",
     knowWhenLaunchShort: "Launch updates",
-    trustIndicators: {
-      stripe: "Secured by Stripe",
-      oneTime: "One-time payment",
-      cancel: "30-day money-back guarantee",
-    },
     /** First-screen preview footer — real mobile product screens. */
     nextPreview: [
       {
@@ -152,34 +104,31 @@ export const CONTENT = {
     ],
   },
 
-  // Stats Section (Scarcity metrics – Batch 1)
-  stats: {
-    title: "Founding Member Batch 1 is Open.",
-    subtitle:
-      "Lock in lifetime access for $25. After Batch 1 closes, membership costs $19.99/month.",
-    tagline: "Do the math: $25 once vs. $1,200+ over five years on the monthly plan.",
-    metrics: {
-      batch1: {
-        value: "500",
-        label: "BATCH 1 SPOTS",
-        subtext: "Only 450 remaining"
+  // Early access — TestFlight + waitlist
+  earlyAccess: {
+    title: "Try the app.",
+    titleHighlight: "Join the list.",
+    subtitle: "iOS beta on TestFlight · waitlist for launch updates",
+    benefits: [
+      {
+        title: "Test on iOS",
+        description:
+          "Download the BawoSocial beta through TestFlight and explore the Culture Hub.",
       },
-      savings: {
-        value: "$240/yr",
-        label: "LIFETIME SAVINGS",
-        subtext: "vs. monthly members"
+      {
+        title: "Join the waitlist",
+        description:
+          "Get email updates when we launch and expand — no payment required.",
       },
-      access: {
-        value: "FOREVER",
-        label: "NO MONTHLY FEES",
-        subtext: "One $25 payment",
+      {
+        title: "Resource Directory",
+        description:
+          "Local businesses, services, and community resources you can trust.",
       },
-    },
-    urgency: {
-      price: "After 500 members: $19.99/month ($240/year)",
-      deadline: "Batch 1 closes once all 500 spots are taken — first come, first served",
-      guarantee: "30-day money-back guarantee. No questions asked."
-    }
+    ],
+    cta: "Join the Waitlist",
+    missionText:
+      "Community-built and independent. Help us shape a platform made for our culture.",
   },
 
   // Origin Story Section
@@ -197,34 +146,6 @@ export const CONTENT = {
       },
     ],
     visionText: "",
-  },
-
-  // Founding Member Section
-  foundingMember: {
-    title: "Founding Member",
-    titleHighlight: "$25 once",
-    subtitle: "500 spots · Batch 1 open",
-    description: "",
-    benefitsTitle: "",
-    benefits: [
-      {
-        title: "Lifetime access",
-        description: "Premium features unlocked. No monthly fees, ever.",
-      },
-      {
-        title: "Resource Directory",
-        description: "Local businesses, services, and community resources you can trust.",
-      },
-      {
-        title: "Day One badge",
-        description: "Permanent founding status on your profile.",
-      },
-    ],
-    cta: "Become a Founding Member",
-    spotsRemaining: "",
-    securityBadges: {},
-    missionText:
-      "Community-built and independent. Your $25 helps grow a platform made for our culture.",
   },
 
   // Features Section
@@ -276,7 +197,7 @@ export const CONTENT = {
   globalReach: {
     title: "Building the Network.",
     subtitle: "Connecting Nigerians in the diaspora, borough by borough.",
-    description: "Join the First 500 Founding Members to shape the hub for Nigerian New York and the diaspora beyond.",
+    description: "Try the iOS beta or join the waitlist to help shape the hub for Nigerian New York and the diaspora beyond.",
     cities: [
       { name: "Brooklyn", country: "🇺🇸" },
       { name: "Harlem", country: "🇺🇸" },
@@ -320,9 +241,10 @@ export const CONTENT = {
 
   // Final CTA Section
   finalCta: {
-    title: "Join the First 500. Shape the Platform.",
-    subtitle: "Founding Membership is limited. Once Batch 1 closes, the price increases.",
-    cta: "Become a Founding Member, $25",
+    title: "Test the app. Join the waitlist.",
+    subtitle:
+      "Download the iOS beta on TestFlight, or leave your email for launch updates.",
+    cta: "Download via TestFlight",
     ctaSecondary: "Join Waitlist",
   },
 
@@ -340,9 +262,14 @@ export const CONTENT = {
           "Nigerians in the diaspora who want intentional community, trusted local resources, and real-world events — beginning in New York, with more cities to come.",
       },
       {
-        question: "How much does BawoSocial cost?",
+        question: "How do I try the app?",
         answer:
-          "Founding members get lifetime access for a one-time $25 payment during Batch 1. After that window closes, membership moves to $19.99/month. The founding pass includes permanent access to premium features and the Resource Directory.",
+          "The iOS beta is available on TestFlight. Tap Download for iOS on this site, or open the TestFlight link to install. Android is coming soon — join the waitlist for updates.",
+      },
+      {
+        question: "What is the waitlist for?",
+        answer:
+          "The waitlist is for launch updates by email. No payment is required. Leave your email and we will keep you posted as BawoSocial grows.",
       },
       {
         question: "What resources does BawoSocial offer?",
@@ -367,7 +294,8 @@ export const CONTENT = {
         links: [
           { label: "About", href: "#about" },
           { label: "Features", href: "#features" },
-          { label: "Founding Members", href: "#pricing" },
+          { label: "Try the App", href: "#early-access" },
+          { label: "Waitlist", href: "#email-section" },
           { label: "Network", href: "#building-the-network" },
           { label: "Business Portal", href: "/business" },
           { label: "FAQ", href: "#faq" },
