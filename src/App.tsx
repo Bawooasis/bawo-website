@@ -205,9 +205,10 @@ function App() {
 
               <div
                 ref={mockupRef}
-                className="flex flex-[1.45] min-h-0 items-center justify-center w-full lg:justify-end -mx-2 sm:mx-0"
+                className="flex flex-[1.45] min-h-0 flex-col items-center justify-center gap-2 sm:gap-3 w-full lg:items-end lg:justify-end -mx-2 sm:mx-0"
               >
                 <HeroAppPreview />
+                <MobileAppDownloadRow className="self-center" />
               </div>
             </div>
 
