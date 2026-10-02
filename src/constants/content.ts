@@ -295,7 +295,7 @@ export const CONTENT = {
           { label: "About", href: "#about" },
           { label: "Features", href: "#features" },
           { label: "Try the App", href: "#early-access" },
-          { label: "Waitlist", href: "#email-section" },
+          { label: "Waitlist", href: "#waitlist-form" },
           { label: "Network", href: "#building-the-network" },
           { label: "Business Portal", href: "/business" },
           { label: "FAQ", href: "#faq" },

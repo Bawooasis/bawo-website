@@ -2113,6 +2113,18 @@ a.bawo-cta-quiet:active {
   scroll-margin-top: var(--bawo-header-offset);
 }
 
+/* Waitlist form: clear sticky header; mobile overshoots so the field isn't under the fold. */
+.bawo-waitlist-form-anchor {
+  scroll-margin-top: calc(var(--bawo-header-offset) + 1.5rem);
+}
+
+@media (max-width: 767px) {
+  .bawo-waitlist-form-anchor {
+    /* header + breathing room — keeps email + Join CTA above the sticky bottom bar */
+    scroll-margin-top: calc(var(--bawo-header-offset) + 4rem);
+  }
+}
+
 /** Top promo — deprecated; kept for reference if re-enabled */
 .bawo-promo-strip {
   background: linear-gradient(

@@ -2,6 +2,7 @@ import { useCallback, useState, type ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { AppleIcon, BellIcon, LinkIcon, WhatsAppIcon, XIcon } from "./icons/BrandIcons";
 import { CONTENT } from "../constants/content";
+import { scrollToWaitlist } from "../utils/scrollToWaitlist";
 
 type HeroSecondaryBarProps = {
   className?: string;
@@ -139,7 +140,7 @@ export default function HeroSecondaryBar({
       shortLabel: knowWhenLaunchShort,
       icon: <BellIcon className="w-[17px] h-[17px]" />,
       iconTone: "accent" as const,
-      href: "#email-section",
+      onClick: scrollToWaitlist,
     },
   ];
 

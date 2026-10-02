@@ -62,8 +62,9 @@ export default function MailchimpSignupRow({
 
   return (
     <form
+      id="waitlist-form"
       onSubmit={handleSubmit}
-      className={`relative ${className}`.trim()}
+      className={`relative bawo-waitlist-form-anchor ${className}`.trim()}
     >
       <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 sm:items-end">
         <input

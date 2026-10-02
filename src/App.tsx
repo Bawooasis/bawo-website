@@ -642,6 +642,15 @@ function App() {
                       key={link.href}
                       href={link.href}
                       className="flex min-h-11 items-center justify-center text-white/80 hover:text-white text-sm font-museo-medium md:justify-start"
+                      onClick={
+                        link.href === "#waitlist-form" ||
+                        link.href === "#email-section"
+                          ? (event) => {
+                              event.preventDefault();
+                              scrollToWaitlist();
+                            }
+                          : undefined
+                      }
                     >
                       {link.label}
                     </a>
