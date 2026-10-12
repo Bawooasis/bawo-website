@@ -1412,6 +1412,16 @@ a.bawo-cta-quiet:active {
   }
 }
 
+@media (max-width: 1023px) {
+  .bawo-site-header__nav {
+    display: none;
+  }
+
+  .bawo-site-header__menu-btn {
+    display: inline-flex !important;
+  }
+}
+
 .bawo-site-header__nav-link {
   padding: 0.4rem 0.75rem;
   font-size: 0.8125rem;
@@ -1597,6 +1607,275 @@ a.bawo-cta-quiet:active {
   padding-top: var(--bawo-header-offset);
   min-height: 100dvh;
   min-height: 100svh;
+}
+
+.bawo-site-header__chevron {
+  display: none;
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  opacity: 0.45;
+}
+
+.bawo-particle-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 55% 42% at 58% 38%, rgba(227, 83, 200, 0.16) 0%, transparent 62%),
+    radial-gradient(ellipse 42% 36% at 38% 46%, rgba(53, 208, 127, 0.14) 0%, transparent 64%),
+    #070414;
+}
+
+.bawo-particle-field canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.bawo-hero-cinematic {
+  background: #070414;
+  isolation: isolate;
+}
+
+.bawo-hero-cinematic__stage {
+  min-height: calc(100dvh - var(--bawo-header-offset));
+}
+
+.bawo-hero-cinematic__shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 46% 24% at 50% 56%, rgba(7, 4, 20, 0.42) 0%, transparent 72%),
+    linear-gradient(to top, rgba(7, 4, 20, 0.72) 0%, transparent 32%),
+    linear-gradient(to bottom, rgba(7, 4, 20, 0.28) 0%, transparent 18%);
+}
+
+.bawo-hero-cinematic__top {
+  display: none;
+}
+
+.bawo-hero-cinematic__title {
+  max-width: 12ch;
+  margin: 0;
+  color: #fff;
+  font-weight: 700;
+  font-size: clamp(2.7rem, 6.6vw, 5.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.bawo-hero-neon {
+  color: #7dffc2;
+  text-shadow: 0 0 28px rgba(53, 208, 127, 0.45);
+}
+
+.bawo-hero-cinematic__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0 1.25rem calc(var(--bawo-mobile-sticky-cta-height) + 3.25rem);
+}
+
+.bawo-hero-cinematic__copy {
+  max-width: 28rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-family: Montserrat, system-ui, sans-serif;
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.bawo-hero-cinematic__footer-actions,
+.bawo-hero-cinematic__top {
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.bawo-hero-cinematic__footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.bawo-hero-cinematic__textlink {
+  color: rgba(255, 255, 255, 0.88);
+  font-family: Montserrat, system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.45rem 0.35rem;
+}
+
+.bawo-hero-cinematic__textlink:hover {
+  color: #7dffc2;
+}
+
+.bawo-hero-cinematic__pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.6rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(16, 8, 28, 0.72);
+  color: #fff;
+  font-family: Montserrat, system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+}
+
+.bawo-hero-cinematic__pill:hover {
+  border-color: rgba(125, 255, 194, 0.55);
+  background: rgba(53, 208, 127, 0.12);
+}
+
+.bawo-hero-cinematic__pill--solid {
+  background: #fff;
+  color: #120818;
+  border-color: transparent;
+}
+
+.bawo-hero-cinematic__pill--solid:hover {
+  background: #7dffc2;
+  color: #07140e;
+  border-color: transparent;
+}
+
+@media (min-width: 768px) {
+  .bawo-hero-cinematic__footer {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 0 2.5rem 2.75rem;
+  }
+
+  .bawo-hero-cinematic__footer-actions {
+    justify-content: flex-end;
+    flex-shrink: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bawo-site-header {
+    inset: 0 auto 0 0;
+    width: 15.5rem;
+    height: 100dvh;
+    overflow: auto;
+    padding-top: 0;
+    background: linear-gradient(180deg, rgba(8, 4, 18, 0.92) 0%, rgba(8, 4, 18, 0.72) 100%);
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .bawo-site-header .container {
+    max-width: none;
+    height: 100%;
+    padding: 1.6rem 1.15rem 1.25rem;
+  }
+
+  .bawo-site-header__bar {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    height: 100%;
+    gap: 2rem;
+    padding-block: 0;
+  }
+
+  .bawo-site-header__leading {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2.25rem;
+    flex: 1 1 auto;
+  }
+
+  .bawo-site-header__nav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.15rem;
+  }
+
+  .bawo-site-header__nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.72rem 0.15rem;
+    border-radius: 0;
+    font-size: 0.98rem;
+    color: rgba(255, 255, 255, 0.9);
+    background: transparent;
+  }
+
+  .bawo-site-header__nav-link:hover {
+    color: #7dffc2;
+    background: transparent;
+  }
+
+  .bawo-site-header__chevron {
+    display: block;
+  }
+
+  .bawo-site-header__actions,
+  .bawo-site-header__divider {
+    display: none;
+  }
+
+  .bawo-page-shell {
+    padding-left: 15.5rem;
+  }
+
+  .bawo-hero-cinematic.bawo-hero-section {
+    padding-top: 0;
+  }
+
+  .bawo-hero-cinematic__stage {
+    min-height: 100dvh;
+  }
+
+  .bawo-hero-cinematic__top {
+    position: fixed;
+    top: 1.35rem;
+    right: 1.6rem;
+    z-index: 60;
+    display: flex;
+  }
+
+  .bawo-site-header__mobile-panel {
+    display: none;
+  }
+
+  .bawo-site-header__glow {
+    display: none;
+  }
+
+  .bawo-site-logo__img {
+    height: 1.65rem;
+    max-width: 8.4rem;
+  }
+
+  .bawo-scroll-anchor {
+    scroll-margin-top: 1.25rem;
+  }
+
+  html {
+    scroll-padding-top: 1.25rem;
+  }
 }
 
 .bawo-hero-cta-block {

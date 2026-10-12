@@ -1,4 +1,4 @@
-import { Menu, X } from "lucide-react";
+import { ChevronRight, Menu, X } from "lucide-react";
 import { memo, useEffect, useState, type MouseEvent } from "react";
 import BawoPillButton from "./BawoPillButton";
 import SiteLogo from "./SiteLogo";
@@ -46,7 +46,8 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
             <nav className="bawo-site-header__nav" aria-label="Main">
               {NAV_LINKS.map((link) => (
                 <a key={link.href} href={link.href} className="bawo-site-header__nav-link">
-                  {link.label}
+                  <span>{link.label}</span>
+                  <ChevronRight className="bawo-site-header__chevron" aria-hidden strokeWidth={1.75} />
                 </a>
               ))}
             </nav>
@@ -90,7 +91,7 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
       <div className="bawo-site-header__divider" aria-hidden />
 
       {mobileOpen && (
-        <div className="bawo-site-header__mobile-panel md:hidden">
+        <div className="bawo-site-header__mobile-panel">
           <nav className="container mx-auto px-4 py-4 flex flex-col gap-1" aria-label="Mobile">
             {NAV_LINKS.map((link) => (
               <a

@@ -15,6 +15,7 @@ import MailchimpSignupRow from "./components/MailchimpSignupRow";
 import MobileAppDownloadRow from "./components/MobileAppDownloadRow";
 import PartnerWithUsSection from "./components/PartnerWithUsSection";
 import SectionPillNav from "./components/SectionPillNav";
+import HeroParticleField from "./components/ui/HeroParticleField";
 import SiteHeader from "./components/SiteHeader";
 import { TAILWIND_COLORS } from "./constants/colors";
 import { CONTENT } from "./constants/content";
@@ -163,45 +164,76 @@ function App() {
 
       <SiteHeader onJoinClick={scrollToWaitlist} />
 
-      <div className="relative z-10 bg-transparent min-h-screen overflow-x-clip pb-[var(--bawo-mobile-sticky-cta-height)] md:pb-0">
-        {/* Hero Section */}
+      <div className="bawo-page-shell relative z-10 bg-transparent min-h-screen overflow-x-clip pb-[var(--bawo-mobile-sticky-cta-height)] md:pb-0">
+        {/* Hero — cinematic particle field */}
         <section
           ref={heroRef}
-          className="bawo-hero-section relative flex flex-col min-h-[100dvh] overflow-x-clip bg-transparent"
+          className="bawo-hero-section bawo-hero-cinematic relative flex min-h-[100dvh] flex-col overflow-hidden"
         >
-          <div className="relative z-10 flex flex-1 flex-col container mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-2xl w-full min-h-0">
-            <div className="flex flex-1 flex-col lg:flex-row lg:items-center w-full min-h-0 gap-8 lg:gap-10 xl:gap-14 py-6 sm:py-8 md:py-10">
-              <div className="flex flex-1 flex-col justify-center w-full lg:max-w-[40%] xl:max-w-[38%] text-center lg:text-left">
-                <div className="space-y-4 sm:space-y-5 md:space-y-7 w-full max-w-4xl mx-auto lg:mx-0">
-                  <h1
-                    ref={headlineRef}
-                    className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.35rem] xl:text-7xl font-bold leading-[1.15] font-display text-white break-words"
-                  >
-                    {CONTENT.hero.title.lead}
-                    <span className="bawo-accent">
-                      {CONTENT.hero.title.highlight}
-                    </span>
-                  </h1>
-                  <p
-                    ref={subheadlineRef}
-                    className="text-sm sm:text-base md:text-lg opacity-90 font-medium text-white leading-[1.6] max-w-2xl mx-auto lg:mx-0 break-words"
-                  >
-                    {CONTENT.hero.subtitle}
-                  </p>
-                </div>
-              </div>
+          <HeroParticleField />
+          <div className="bawo-hero-cinematic__shade" aria-hidden />
 
-              <div
-                ref={mockupRef}
-                className="flex flex-[1.45] min-h-0 flex-col items-center justify-center gap-2 sm:gap-3 w-full lg:items-end lg:justify-end -mx-2 sm:mx-0"
-              >
-                <HeroAppPreview />
-                <MobileAppDownloadRow className="self-center" />
-              </div>
+          <div className="bawo-hero-cinematic__top">
+            <a
+              href={CONTENT.hero.testflightLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bawo-hero-cinematic__textlink"
+            >
+              Get the app
+            </a>
+            <button
+              type="button"
+              className="bawo-hero-cinematic__pill"
+              onClick={scrollToWaitlist}
+            >
+              Join the waitlist
+            </button>
+            <button
+              type="button"
+              className="bawo-hero-cinematic__pill bawo-hero-cinematic__pill--solid"
+              onClick={scrollToWaitlist}
+            >
+              Get started
+            </button>
+          </div>
+
+          <div className="bawo-hero-cinematic__stage relative z-10 flex flex-col">
+            <div className="flex flex-1 items-center justify-center px-6 pb-6 pt-16 sm:pt-10">
+              <h1 ref={headlineRef} className="bawo-hero-cinematic__title font-display">
+                {CONTENT.hero.title.lead}
+                <span className="bawo-hero-neon">{CONTENT.hero.title.highlight}</span>
+              </h1>
             </div>
 
-            <div className="mt-auto w-full shrink-0 space-y-5 sm:space-y-6 pb-2">
-              <div ref={ctaRef} className="bawo-hero-cta-block">
+            <div className="bawo-hero-cinematic__footer">
+              <p ref={subheadlineRef} className="bawo-hero-cinematic__copy">
+                {CONTENT.hero.subtitle}
+              </p>
+              <div ref={ctaRef} className="bawo-hero-cinematic__footer-actions">
+                <a href="#about" className="bawo-hero-cinematic__pill">
+                  For community
+                </a>
+                <a href="#events" className="bawo-hero-cinematic__pill">
+                  For events
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="relative bg-transparent py-16 md:py-24 overflow-x-clip">
+          <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-2xl w-full">
+            <div
+              ref={mockupRef}
+              className="flex flex-col items-center justify-center gap-3 w-full"
+            >
+              <HeroAppPreview />
+              <MobileAppDownloadRow className="self-center" />
+            </div>
+
+            <div className="mt-10 w-full space-y-5 sm:space-y-6">
+              <div className="bawo-hero-cta-block">
                 <HeroActionStack onJoinClick={scrollToWaitlist} />
               </div>
 
