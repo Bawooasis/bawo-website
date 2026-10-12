@@ -182,7 +182,7 @@ export default function SocialMediaPanel({ items, connections, publishJobs, busy
   return (
     <div className="portal-stack social-ops">
       <section className={`social-connection-card ${instagramConnection ? "is-connected" : ""}`}>
-        <div><span className="portal-kicker">Publishing connection</span><h2>{instagramConnection ? `Instagram @${instagramConnection.username || "connected"}` : "Connect Instagram securely"}</h2><p>{instagramConnection ? "OAuth is active. Upload media, then post now or schedule it." : "Use Meta OAuth—BawoSocial never receives or stores your Instagram password."}</p></div>
+        <div><span className="portal-kicker">Publishing connection</span><h2>{instagramConnection ? `Instagram @${instagramConnection.username || "connected"}` : "Connect Instagram securely"}</h2><p>{instagramConnection ? "OAuth is active. Upload media, then post now or schedule it." : "Use Meta OAuth. BawoSocial never receives or stores your Instagram password."}</p></div>
         <button className="portal-primary-button" type="button" disabled={busy} onClick={() => void onConnectInstagram()}><Link2 aria-hidden /> {instagramConnection ? "Reconnect" : "Connect Instagram"}</button>
       </section>
       <section className="social-ops-hero">
@@ -210,7 +210,7 @@ export default function SocialMediaPanel({ items, connections, publishJobs, busy
               <label>Content title<input required minLength={2} maxLength={120} value={draft.title} onChange={(event) => update("title", event.target.value)} placeholder="Three NYC jollof spots" /></label>
               <label>Growth goal<select value={draft.goal} onChange={(event) => update("goal", event.target.value as Draft["goal"])}><option value="awareness">Awareness</option><option value="engagement">Engagement</option><option value="downloads">App downloads</option><option value="leads">Leads</option><option value="vendors">Vendors</option><option value="events">Events</option></select></label>
             </div>
-            <label>Opening hook<textarea rows={2} maxLength={500} value={draft.hook} onChange={(event) => update("hook", event.target.value)} placeholder="NYC, stop scrolling—your next jollof spot is here." /></label>
+            <label>Opening hook<textarea rows={2} maxLength={500} value={draft.hook} onChange={(event) => update("hook", event.target.value)} placeholder="NYC, stop scrolling. Your next jollof spot is here." /></label>
             <label>Caption / script<textarea rows={4} maxLength={2200} value={draft.caption} onChange={(event) => update("caption", event.target.value)} /></label>
             <div className="portal-form-grid">
               <label>Call to action<input maxLength={240} value={draft.callToAction} onChange={(event) => update("callToAction", event.target.value)} /></label>

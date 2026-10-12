@@ -39,7 +39,7 @@ export default function BusinessPortal({ data, activeTab, busy, onSubmit }: Busi
         <section className="portal-metrics" aria-label="Business metrics">
           <MetricCard icon={MapPinned} label="Live listings" value={data.metrics.listings} detail="Approved directory presence" tone="success" />
           <MetricCard icon={Clock3} label="Pending claims" value={data.metrics.pendingClaims} detail="Waiting for BawoSocial review" tone={data.metrics.pendingClaims > 0 ? "warning" : "neutral"} />
-          <MetricCard icon={MousePointerClick} label="Tracked actions" value={data.metrics.trackedClicks ?? "—"} detail={data.metrics.trackedClicks === null ? "Measurement is being connected" : "All time"} tone="accent" />
+          <MetricCard icon={MousePointerClick} label="Tracked actions" value={data.metrics.trackedClicks ?? "n/a"} detail={data.metrics.trackedClicks === null ? "Measurement is being connected" : "All time"} tone="accent" />
           <MetricCard icon={BadgeCheck} label="Current plan" value={data.metrics.plan || "Free"} detail={data.metrics.plan === null ? "Billing is not active yet" : "Current subscription"} />
         </section>
         <section className="portal-panel portal-callout portal-business-hero">

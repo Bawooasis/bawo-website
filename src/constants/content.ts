@@ -3,7 +3,7 @@ import { IMAGES } from "./images";
 export const CONTENT = {
   partnerWithUs: {
     headline: "Help our community find trusted local partners.",
-    body: "If you serve Nigerians in New York — restaurants, professionals, shipping, or community businesses — list in our Resource Directory and connect with members who show up for culture.",
+    body: "If you serve Nigerians in New York, restaurants, professionals, shipping, or community businesses, list in our Resource Directory and connect with members who show up for culture.",
     ctaLabel: "Open Business Portal",
     inquiryEmail:
       import.meta.env.VITE_B2B_CONTACT_EMAIL || "Axadegbenro@gmail.com",
@@ -13,17 +13,17 @@ export const CONTENT = {
   communityMission: {
     title: "More than an app. A home for our culture.",
     subtitle:
-      "BawoSocial exists so Nigerians in the diaspora can preserve what makes us us, connect with intention, and find community that feels like home — not another feed.",
+      "BawoSocial exists so Nigerians in the diaspora can preserve what makes us us, connect with intention, and find community that feels like home, not another feed.",
     pillars: [
       {
         title: "Preserve culture",
         description:
-          "Events, resources, and groups rooted in Nigerian heritage — from Independence Day to owambe season.",
+          "Events, resources, and groups rooted in Nigerian heritage, from Independence Day to owambe season.",
       },
       {
         title: "Connect with purpose",
         description:
-          "Find your people by borough, background, and goals — friendship, mentorship, business, or more.",
+          "Find your people by borough, background, and goals: friendship, mentorship, business, or more.",
       },
       {
         title: "Find your community",
@@ -40,7 +40,7 @@ export const CONTENT = {
       highlight: "community",
     },
     subtitle:
-      "The Culture Hub for Nigerians in the diaspora. Curated resources, culture-led events, starting in NYC. We are stronger together.",
+      "The Culture Hub for Nigerians in the diaspora. Curated resources, culture led events, starting in NYC. We are stronger together.",
     ctaPrimary: "Join the Waitlist",
     ctaMicrocopy: "Get launch updates by email",
     ctaSecondary: "Join Waitlist",
@@ -51,10 +51,10 @@ export const CONTENT = {
     downloadAndroid: "Android",
     downloadAndroidSoon: "Coming soon",
     shareWhatsApp:
-      "I just found BawoSocial — the private network for Nigerians in the diaspora. Try the iOS beta or join the waitlist: https://www.joinbawo.com?utm_source=whatsapp",
+      "I just found BawoSocial, the private network for Nigerians in the diaspora. Try the iOS beta or join the waitlist: https://www.joinbawo.com?utm_source=whatsapp",
     shareLink: "https://www.joinbawo.com?utm_source=share",
     shareTweet:
-      "BawoSocial — the Culture Hub for Nigerians in the diaspora. Try the iOS beta or join the waitlist.",
+      "BawoSocial, the Culture Hub for Nigerians in the diaspora. Try the iOS beta or join the waitlist.",
     shareCopy: "Copy link",
     shareCopied: "Copied!",
     knowWhenLaunch: "Know when we launch",
@@ -65,7 +65,7 @@ export const CONTENT = {
         kicker: "Live in the app",
         title: "Explore the map",
         description:
-          "Find Nigerian restaurants, stores, and services across NYC — verified spots your community actually uses.",
+          "Find Nigerian restaurants, stores, and services across NYC. Verified spots your community actually uses.",
         image: IMAGES.showcase.explore,
         imageAlt:
           "BawoSocial Explore screen showing community businesses across the New York City map",
@@ -75,7 +75,7 @@ export const CONTENT = {
         kicker: "Live in the app",
         title: "Join your groups",
         description:
-          "Owambe, Soft Life, Naija NYC, Outside — micro-communities where you actually know the people.",
+          "Owambe, Soft Life, Naija NYC, Outside. Micro communities where you actually know the people.",
         image: IMAGES.showcase.community,
         imageAlt:
           "BawoSocial Community screen showing Nigerian diaspora groups in New York City",
@@ -83,12 +83,12 @@ export const CONTENT = {
       },
       {
         kicker: "Live in the app",
-        title: "Culture-led events",
+        title: "Culture led events",
         description:
-          "Independence Day, owambe nights, and gatherings filtered for diaspora culture — not generic city feeds.",
+          "Independence Day, owambe nights, and gatherings filtered for diaspora culture, not generic city feeds.",
         image: IMAGES.showcase.events,
         imageAlt:
-          "BawoSocial Events screen showing culture-led gatherings in New York City",
+          "BawoSocial Events screen showing culture led gatherings in New York City",
         layout: "screen-crop" as const,
       },
       {
@@ -108,7 +108,7 @@ export const CONTENT = {
   earlyAccess: {
     title: "Try the app.",
     titleHighlight: "Join the list.",
-    subtitle: "iOS beta on TestFlight · waitlist for launch updates",
+    subtitle: "iOS beta on TestFlight. Waitlist for launch updates",
     benefits: [
       {
         title: "Test on iOS",
@@ -118,7 +118,7 @@ export const CONTENT = {
       {
         title: "Join the waitlist",
         description:
-          "Get email updates when we launch and expand — no payment required.",
+          "Get email updates when we launch and expand. No payment required.",
       },
       {
         title: "Resource Directory",
@@ -128,7 +128,7 @@ export const CONTENT = {
     ],
     cta: "Join the Waitlist",
     missionText:
-      "Community-built and independent. Help us shape a platform made for our culture.",
+      "Community built and independent. Help us shape a platform made for our culture.",
   },
 
   // Origin Story Section
@@ -139,7 +139,7 @@ export const CONTENT = {
       closing: " Exists",
     },
     paragraphs: [
-      "Across the diaspora, Nigerians are everywhere — yet too many of us still feel out of place. We miss home, our circle, and the belonging that big platforms never offered.",
+      "Across the diaspora, Nigerians are everywhere, yet too many of us still feel out of place. We miss home, our circle, and the belonging that big platforms never offered.",
       {
         highlight: "BawoSocial",
         text: " is the Culture Hub for Nigerians abroad to find your tribe, explore local tools and the Resource Directory, and build real relationships. Built for our culture and our community.",
@@ -154,11 +154,11 @@ export const CONTENT = {
     items: [
       {
         title: "Groups are Home",
-        description: "No noisy feeds. Your experience is centered around high-quality micro-communities where you actually know the people.",
+        description: "No noisy feeds. Your experience is centered around high quality micro communities where you actually know the people.",
       },
       {
         title: "The Resource Directory",
-        description: "Stop asking 'Who knows a guy?' Verified restaurants, consulates, community businesses, churches, mental health support, and local intel — all in one directory.",
+        description: "Stop asking 'Who knows a guy?' Verified restaurants, consulates, community businesses, churches, mental health support, and local intel, all in one directory.",
       },
       {
         title: "Community Matching",
@@ -214,7 +214,7 @@ export const CONTENT = {
         icon: "calendar" as const,
         title: "Naija Independence Day, Brooklyn",
         description:
-          "Green-and-white pride, live Afrobeats, and Nigerian food — a block party for the diaspora.",
+          "Green and white pride, live Afrobeats, and Nigerian food. A block party for the diaspora.",
       },
       {
         icon: "headphones" as const,
@@ -232,10 +232,10 @@ export const CONTENT = {
   },
 
   inAppFeatureCaptions: [
-    "Access Resources: Nigerian-owned restaurants, consulates, churches, mental health support, and more.",
+    "Access Resources: Nigerian owned restaurants, consulates, churches, mental health support, and more.",
     "Meet Concierge: immigration, housing, shipping, and local intel for the diaspora.",
     "Join Communities: Owambe, Naija NYC, Soft Life, Outside, and more.",
-    "Discover Events: rooftop nights, film screenings, and culture-first meetups.",
+    "Discover Events: rooftop nights, film screenings, and culture first meetups.",
     "Community, your way: My Groups, Discover, and For You in one hub.",
   ],
 
@@ -254,17 +254,17 @@ export const CONTENT = {
       {
         question: "What is BawoSocial?",
         answer:
-          "BawoSocial is a private community platform for Nigerians in the diaspora — starting in NYC across all five boroughs — built for culture-first connection, not another algorithmic feed.",
+          "BawoSocial is a private community platform for Nigerians in the diaspora, starting in NYC across all five boroughs, built for culture first connection, not another algorithmic feed.",
       },
       {
         question: "Who is BawoSocial for?",
         answer:
-          "Nigerians in the diaspora who want intentional community, trusted local resources, and real-world events — beginning in New York, with more cities to come.",
+          "Nigerians in the diaspora who want intentional community, trusted local resources, and real world events, beginning in New York, with more cities to come.",
       },
       {
         question: "How do I try the app?",
         answer:
-          "The iOS beta is available on TestFlight. Tap Download for iOS on this site, or open the TestFlight link to install. Android is coming soon — join the waitlist for updates.",
+          "The iOS beta is available on TestFlight. Tap Download for iOS on this site, or open the TestFlight link to install. Android is coming soon. Join the waitlist for updates.",
       },
       {
         question: "What is the waitlist for?",
@@ -274,12 +274,12 @@ export const CONTENT = {
       {
         question: "What resources does BawoSocial offer?",
         answer:
-          "Our Resource Directory includes Nigerian restaurants, consulates, community businesses, churches, mental health support, and more — verified listings organized for how we actually live abroad.",
+          "Our Resource Directory includes Nigerian restaurants, consulates, community businesses, churches, mental health support, and more. Verified listings organized for how we actually live abroad.",
       },
       {
         question: "How is BawoSocial different from Facebook groups?",
         answer:
-          "No ads, no algorithm deciding what you see. BawoSocial is organized around vetted micro-communities, a curated directory, and culture-first events — built for belonging, not engagement bait.",
+          "No ads, no algorithm deciding what you see. BawoSocial is organized around vetted micro communities, a curated directory, and culture first events, built for belonging, not engagement bait.",
       },
     ],
   },

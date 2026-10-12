@@ -1621,12 +1621,29 @@ a.bawo-cta-quiet:active {
   display: none;
 }
 
+.bawo-hero-cinematic__main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  min-height: 0;
+  width: 100%;
+  padding: 4.5rem 1.25rem 0.35rem;
+}
+
+.bawo-hero-cinematic__phone {
+  width: min(34vw, 8.25rem);
+  flex: 0 0 auto;
+}
+
 .bawo-hero-cinematic__title {
   max-width: 12ch;
   margin: 0;
   color: #fff;
   font-weight: 700;
-  font-size: clamp(2.7rem, 6.6vw, 5.75rem);
+  font-size: clamp(2.35rem, 6.2vw, 4.75rem);
   line-height: 1.02;
   letter-spacing: -0.035em;
   text-align: center;
@@ -1718,6 +1735,25 @@ a.bawo-cta-quiet:active {
   background: #7dffc2;
   color: #07140e;
   border-color: transparent;
+}
+
+@media (min-width: 900px) {
+  .bawo-hero-cinematic__main {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2.75rem;
+    padding: 5.25rem 2.5rem 0.5rem;
+  }
+
+  .bawo-hero-cinematic__title {
+    text-align: left;
+    font-size: clamp(3rem, 4.4vw, 4.75rem);
+  }
+
+  .bawo-hero-cinematic__phone {
+    width: min(15vw, 12.5rem);
+  }
 }
 
 @media (min-width: 768px) {
@@ -1869,6 +1905,10 @@ a.bawo-cta-quiet:active {
   /* Native 2572×5284 Figma export — fill column, scale by viewport height. */
   width: min(100%, 96vw, calc(52dvh * 2572 / 5284));
   aspect-ratio: 2572 / 5284;
+}
+
+.bawo-hero-mockup.bawo-hero-mockup--compact .bawo-hero-mockup__stage {
+  width: 100%;
 }
 
 .bawo-hero-mockup__image {

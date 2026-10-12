@@ -124,7 +124,7 @@ export default function CrmPanel({ leads, activities, busy, onAction }: CrmPanel
           <label>Email<input type="email" value={draft.email} onChange={(event) => update("email", event.target.value)} /></label>
           <label>Instagram<input value={draft.instagramHandle} onChange={(event) => update("instagramHandle", event.target.value)} placeholder="handle" /></label>
           <label>Followers<input min="0" type="number" value={draft.followerCount} onChange={(event) => update("followerCount", event.target.value)} /></label>
-          <label>Score (1–10)<input min="1" max="10" type="number" value={draft.score} onChange={(event) => update("score", event.target.value)} /></label>
+          <label>Score (1 to 10)<input min="1" max="10" type="number" value={draft.score} onChange={(event) => update("score", event.target.value)} /></label>
         </div>
         <div className="portal-form-grid crm-form-grid-4">
           <label>City<input value={draft.city} onChange={(event) => update("city", event.target.value)} /></label>

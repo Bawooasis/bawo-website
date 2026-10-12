@@ -185,11 +185,14 @@ function App() {
           </div>
 
           <div className="bawo-hero-cinematic__stage relative z-10 flex flex-col">
-            <div className="flex flex-1 items-center justify-center px-6 pb-6 pt-16 sm:pt-10">
+            <div className="bawo-hero-cinematic__main">
               <h1 ref={headlineRef} className="bawo-hero-cinematic__title font-display">
                 {CONTENT.hero.title.lead}
                 <span className="bawo-hero-neon">{CONTENT.hero.title.highlight}</span>
               </h1>
+              <div ref={mockupRef} className="bawo-hero-cinematic__phone">
+                <HeroAppPreview className="bawo-hero-mockup--compact" />
+              </div>
             </div>
 
             <div className="bawo-hero-cinematic__footer">
@@ -210,11 +213,7 @@ function App() {
 
         <section className="relative bg-transparent py-16 md:py-24 overflow-x-clip">
           <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-2xl w-full">
-            <div
-              ref={mockupRef}
-              className="flex flex-col items-center justify-center gap-3 w-full"
-            >
-              <HeroAppPreview />
+            <div className="flex flex-col items-center justify-center gap-3 w-full">
               <MobileAppDownloadRow className="self-center" />
             </div>
 
@@ -585,7 +584,7 @@ function App() {
               <div className="flex flex-col min-w-0 gap-0.5">
                 <span className="text-white font-museo-bold text-sm">Try the beta</span>
                 <span className="text-white/55 font-museo-medium text-[10px] uppercase tracking-wider">
-                  TestFlight · Waitlist
+                  TestFlight. Waitlist
                 </span>
               </div>
               <div className="flex shrink-0 items-center gap-2">

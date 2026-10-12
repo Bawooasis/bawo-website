@@ -39,7 +39,7 @@ const formatDate = (value: string | null) =>
         day: "numeric",
         year: "numeric",
       }).format(new Date(value))
-    : "—";
+    : "n/a";
 
 const userName = (user: PlatformUser) =>
   user.display_name ||
