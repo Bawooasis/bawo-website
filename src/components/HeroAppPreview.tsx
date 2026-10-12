@@ -15,7 +15,6 @@ export default function HeroAppPreview({
       className={`bawo-hero-mockup ${className}`.trim()}
       aria-label="BawoSocial app preview"
     >
-      <div className="bawo-hero-mockup__glow" aria-hidden />
       <div className="bawo-hero-mockup__stage">
         <img
           src={IMAGES.previews.main}
