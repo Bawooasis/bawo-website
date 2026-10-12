@@ -13,6 +13,8 @@ export const heroParticlePalette = {
   magenta: "#E453C8",
   purple: "#C084FC",
   violet: "#8B5CF6",
+  white: "#FFFFFF",
+  whiteSoft: "#F7F4FF",
   canvas: "#070414",
   depth: "#12081C",
 } as const;

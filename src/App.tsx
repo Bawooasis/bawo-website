@@ -1,7 +1,7 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BadgeCheck, Calendar, Headphones, Star } from "lucide-react";
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import BoroughNetworkGraphic from "./components/BoroughNetworkGraphic";
 import BoroughSquareCarousel from "./components/BoroughSquareCarousel";
 import CommunityMissionSection from "./components/CommunityMissionSection";
@@ -21,10 +21,6 @@ import { TAILWIND_COLORS } from "./constants/colors";
 import { CONTENT } from "./constants/content";
 import { IMAGES } from "./constants/images";
 import { scrollToWaitlist } from "./utils/scrollToWaitlist";
-
-const SiteMeshBackground = lazy(
-  () => import("./components/ui/site-mesh-background"),
-);
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -151,16 +147,7 @@ function App() {
   return (
     <div className="min-h-screen relative">
       <div className="fixed inset-0 z-0 bawo-page-bg-base" aria-hidden />
-      <Suspense
-        fallback={
-          <div
-            className="bawo-hero-ambient pointer-events-none fixed inset-0 z-0"
-            aria-hidden
-          />
-        }
-      >
-        <SiteMeshBackground />
-      </Suspense>
+      <HeroParticleField className="bawo-particle-field--site" />
 
       <SiteHeader onJoinClick={scrollToWaitlist} />
 
@@ -170,7 +157,6 @@ function App() {
           ref={heroRef}
           className="bawo-hero-section bawo-hero-cinematic relative flex min-h-[100dvh] flex-col overflow-hidden"
         >
-          <HeroParticleField />
           <div className="bawo-hero-cinematic__shade" aria-hidden />
 
           <div className="bawo-hero-cinematic__top">

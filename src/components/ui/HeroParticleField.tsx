@@ -16,7 +16,7 @@ const VERT = `
     vColor = aColor;
     vAlpha = aAlpha;
     vec4 mv = modelViewMatrix * vec4(position, 1.0);
-    gl_PointSize = clamp(aSize * (300.0 / max(1.0, -mv.z)), 1.0, 7.5);
+    gl_PointSize = clamp(aSize * (260.0 / max(1.0, -mv.z)), 1.0, 220.0);
     gl_Position = projectionMatrix * mv;
   }
 `;
@@ -26,12 +26,13 @@ const FRAG = `
   varying float vAlpha;
   void main() {
     vec2 p = gl_PointCoord - vec2(0.5);
-    float d = length(p);
-    if (d > 0.5) discard;
-    float rim = smoothstep(0.5, 0.08, d);
-    float core = smoothstep(0.22, 0.0, d);
-    vec3 col = vColor * (0.65 + core * 1.15);
-    gl_FragColor = vec4(col, rim * vAlpha);
+    float dist = length(p) * 2.0;
+    if (dist > 1.0) discard;
+    float halo = exp(-dist * dist * 3.4);
+    float core = exp(-dist * dist * 14.0);
+    vec3 col = vColor + core * 0.12;
+    float alpha = halo * vAlpha;
+    gl_FragColor = vec4(col * alpha, alpha);
   }
 `;
 
@@ -42,14 +43,20 @@ const PINK = new THREE.Color(palette.pink);
 const MAGENTA = new THREE.Color(palette.magenta);
 const PURPLE = new THREE.Color(palette.purple);
 const VIOLET = new THREE.Color(palette.violet);
+const WHITE = new THREE.Color(palette.white);
+const WHITE_SOFT = new THREE.Color(palette.whiteSoft);
 
 function pickColor(x: number, bias: number) {
   const roll = Math.random();
+  if (roll < 0.14) {
+    return Math.random() > 0.4 ? WHITE : WHITE_SOFT;
+  }
+  const colorRoll = (roll - 0.14) / 0.86;
   const greenWeight = x < 0 ? 0.62 : 0.16 + bias;
-  if (roll < greenWeight) {
+  if (colorRoll < greenWeight) {
     return Math.random() > 0.45 ? NEON_HOT : Math.random() > 0.35 ? NEON : FOREST;
   }
-  if (roll < greenWeight + 0.42) {
+  if (colorRoll < greenWeight + 0.42) {
     return Math.random() > 0.5 ? PINK : MAGENTA;
   }
   return Math.random() > 0.45 ? PURPLE : VIOLET;
@@ -141,8 +148,8 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
           x,
           y: py,
           z,
-          size: band < 0.34 ? 1.15 + Math.random() * 1.7 : 0.55 + Math.random() * 1.25,
-          alpha: 0.35 + Math.random() * 0.65,
+          size: band < 0.34 ? 0.2 + Math.random() * 0.08 : 0.13 + Math.random() * 0.09,
+          alpha: band < 0.34 ? 0.38 + Math.random() * 0.28 : 0.48 + Math.random() * 0.4,
           color: pickColor(x, band < 0.34 ? 0.08 : 0),
         };
       }),
@@ -150,6 +157,23 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
     );
     sphere.position.set(0.2, 0.72, 0);
     scene.add(sphere);
+
+    const coreGlow = new THREE.Points(
+      fillAttributes(14, (i) => {
+        const angle = (i / 14) * Math.PI * 2;
+        const ring = i < 2 ? 0.05 : 0.25 + (i % 4) * 0.22;
+        return {
+          x: Math.cos(angle) * ring,
+          y: Math.sin(angle * 0.85) * ring * 0.72,
+          z: Math.sin(angle) * 0.28,
+          size: i < 2 ? 1.85 : 1.25 + (i % 3) * 0.22,
+          alpha: i < 2 ? 0.06 : 0.042 + (i % 3) * 0.01,
+          color: i % 3 === 0 ? NEON : i % 3 === 1 ? PINK : PURPLE,
+        };
+      }),
+      makeMaterial(),
+    );
+    sphere.add(coreGlow);
 
     const waveBaseX = new Float32Array(waveCount);
     const waveBaseY = new Float32Array(waveCount);
@@ -170,22 +194,43 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
         x,
         y,
         z,
-        size: spark ? 1.6 + Math.random() * 1.4 : 0.45 + Math.random() * 1.05,
-        alpha: (0.18 + density * 0.7) * (0.55 + Math.random() * 0.45),
-        color: spark ? (Math.random() > 0.4 ? NEON_HOT : NEON) : pickColor(x, -0.05),
+        size: spark ? 0.22 + Math.random() * 0.06 : 0.11 + Math.random() * 0.08,
+        alpha: (0.2 + density * 0.55) * (0.55 + Math.random() * 0.4),
+        color: spark
+          ? Math.random() > 0.62
+            ? WHITE
+            : Math.random() > 0.4
+              ? NEON_HOT
+              : NEON
+          : pickColor(x, -0.05),
       };
     });
     const wave = new THREE.Points(waveGeometry, makeMaterial());
     wave.position.set(0, -0.42, 0);
     scene.add(wave);
 
+    const horizonGlow = new THREE.Points(
+      fillAttributes(9, (i) => {
+        const x = (i - 4) * 0.85;
+        return {
+          x,
+          y: Math.sin(x * 0.55) * 0.12,
+          z: 0,
+          size: 1.2 - Math.abs(i - 4) * 0.06,
+          alpha: 0.028 + (1 - Math.abs(i - 4) / 5) * 0.02,
+          color: i % 2 === 0 ? PURPLE : i % 3 === 0 ? NEON : MAGENTA,
+        };
+      }),
+      makeMaterial(),
+    );
+    wave.add(horizonGlow);
+
     const pointer = { x: 0, y: 0 };
     const onPointer = (event: PointerEvent) => {
-      const rect = host.getBoundingClientRect();
-      pointer.x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
-      pointer.y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+      pointer.x = (event.clientX / window.innerWidth - 0.5) * 2;
+      pointer.y = (event.clientY / window.innerHeight - 0.5) * 2;
     };
-    host.addEventListener("pointermove", onPointer);
+    window.addEventListener("pointermove", onPointer);
 
     const resize = () => {
       const width = host.clientWidth || 1;
@@ -243,12 +288,16 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
     return () => {
       window.cancelAnimationFrame(frame);
       document.removeEventListener("visibilitychange", onVisibility);
-      host.removeEventListener("pointermove", onPointer);
+      window.removeEventListener("pointermove", onPointer);
       observer.disconnect();
       sphere.geometry.dispose();
       wave.geometry.dispose();
+      coreGlow.geometry.dispose();
+      horizonGlow.geometry.dispose();
       (sphere.material as THREE.Material).dispose();
       (wave.material as THREE.Material).dispose();
+      (coreGlow.material as THREE.Material).dispose();
+      (horizonGlow.material as THREE.Material).dispose();
       renderer.dispose();
       renderer.forceContextLoss();
       if (renderer.domElement.parentElement === host) {
