@@ -100,7 +100,7 @@ function App() {
 
       // Feature cards — single trigger, play once (no reverse jank on scroll-up)
       gsap.fromTo(
-        ".feature-card",
+        "#features .feature-card",
         { y: 20, opacity: 0 },
         {
           y: 0,
@@ -278,7 +278,7 @@ function App() {
                             className="city-stat text-center space-y-3 md:space-y-4 w-full max-w-[12rem] mx-auto"
                           >
                             {rotatingGallery ? (
-                              <div className="bawo-hub-ring relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto overflow-hidden rounded-full shadow-[0_20px_48px_rgba(0,0,0,0.65)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-bawo-peach/45">
+                              <div className="bawo-hub-ring relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto overflow-hidden rounded-full shadow-[0_20px_48px_rgba(0,0,0,0.65)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#F4BD5C]/50">
                                 <BoroughSquareCarousel
                                   images={rotatingGallery}
                                   alt={`${city.name} community hub, BawoSocial NYC`}
@@ -318,7 +318,7 @@ function App() {
                           className="city-stat text-center space-y-3 md:space-y-4 w-full max-w-[12rem] mx-auto"
                         >
                           {rotatingGallery ? (
-                            <div className="bawo-hub-ring relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto overflow-hidden rounded-full shadow-[0_20px_48px_rgba(0,0,0,0.65)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-bawo-peach/45">
+                            <div className="bawo-hub-ring relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto overflow-hidden rounded-full shadow-[0_20px_48px_rgba(0,0,0,0.65)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#F4BD5C]/50">
                               <BoroughSquareCarousel
                                 images={rotatingGallery}
                                 alt={`${city.name} community hub, BawoSocial NYC`}
@@ -422,9 +422,9 @@ function App() {
                 </p>
               </div>
 
-              <ul className="space-y-5">
+              <ul className="space-y-4">
                 {CONTENT.earlyAccess.benefits.map((benefit) => (
-                  <li key={benefit.title} className="flex items-start gap-3">
+                  <li key={benefit.title} className="glass-card flex items-start gap-3 p-5">
                     <BadgeCheck
                       className="w-5 h-5 bawo-accent flex-shrink-0 mt-0.5"
                       strokeWidth={2.25}
@@ -477,7 +477,7 @@ function App() {
               {CONTENT.features.items.map((item) => (
                 <div
                   key={item.title}
-                  className="feature-card space-y-3 text-center md:text-left"
+                  className="feature-card glass-card space-y-3 p-6 text-center md:text-left"
                 >
                   <h3 className="text-xl md:text-2xl font-bold font-display text-white">
                     {item.title}
@@ -511,7 +511,7 @@ function App() {
                 return (
                   <div
                     key={event.title}
-                    className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,107,0,0.45)] text-white transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.37)]"
+                    className="glass-card p-6 text-white"
                   >
                     <div className="flex items-center gap-3 mb-3">
                       <Icon className="w-5 h-5 text-white" />
@@ -547,7 +547,7 @@ function App() {
                   {CONTENT.globalReach.cities.map((city) => (
                     <span
                       key={city.name}
-                      className="px-4 py-2 rounded-full bg-white/[0.06] backdrop-blur-md border border-[rgba(255,255,255,0.08)] text-white/90 text-sm font-museo-medium hover:border-[rgba(255,107,0,0.55)] hover:bg-white/[0.08] transition-all duration-300"
+                      className="glass-pill px-4 py-2 text-white/90 text-sm font-museo-medium"
                     >
                       {city.name}
                     </span>

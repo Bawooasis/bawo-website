@@ -12,8 +12,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           gsap: ['gsap', 'gsap/ScrollTrigger'],
-          three: ['three', '@react-three/fiber'],
-          shaders: ['@paper-design/shaders-react'],
+          three: ['three'],
         },
       },
     },

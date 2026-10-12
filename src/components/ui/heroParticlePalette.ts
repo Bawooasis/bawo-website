@@ -15,6 +15,8 @@ export const heroParticlePalette = {
   violet: "#8B5CF6",
   white: "#FFFFFF",
   whiteSoft: "#F7F4FF",
+  /** Warm yellow used in the app UI (alerts, highlights). */
+  yellow: "#F4BD5C",
   canvas: "#070414",
   depth: "#12081C",
 } as const;

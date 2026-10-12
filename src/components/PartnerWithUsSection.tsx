@@ -21,7 +21,7 @@ export default function PartnerWithUsSection() {
       <div className="relative z-10 container mx-auto px-6 max-w-3xl">
         <div className="animate-on-scroll glass-card rounded-2xl p-6 sm:p-8 border border-bawo-eggplant-light/40">
           <div className="space-y-5 text-center sm:text-left">
-            <div className="inline-flex items-center gap-2 rounded-full border border-bawo-pumpkin/30 bg-bawo-eggplant/40 px-3 py-1.5 text-xs font-museo-bold uppercase tracking-wider bawo-accent-soft">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-museo-bold uppercase tracking-wider text-[#F4BD5C]">
               <Handshake className="w-3.5 h-3.5" aria-hidden />
               For local businesses
             </div>
@@ -39,7 +39,7 @@ export default function PartnerWithUsSection() {
               {audiences.map(({ label, Icon }) => (
                 <li
                   key={label}
-                  className="inline-flex items-center gap-2 rounded-full border border-bawo-eggplant-light/35 bg-bawo-eggplant/25 px-3 py-1.5 text-xs text-white/85 font-museo-medium"
+                  className="glass-pill inline-flex items-center gap-2 px-3 py-1.5 text-xs text-white/85 font-museo-medium"
                 >
                   <Icon className="w-3.5 h-3.5 bawo-accent-soft shrink-0" aria-hidden />
                   {label}

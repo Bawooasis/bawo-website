@@ -26,7 +26,7 @@ export default function CommunityMissionSection() {
 
       <ul className="mx-auto mt-10 md:mt-12 grid max-w-5xl gap-10 md:gap-12 sm:grid-cols-3">
         {pillars.map(({ title: pillarTitle, description }) => (
-          <li key={pillarTitle} className="feature-card space-y-2 text-center sm:text-left">
+          <li key={pillarTitle} className="glass-card space-y-2 p-6 text-center sm:text-left">
             <h3 className="font-display text-lg md:text-xl font-bold text-white">
               {pillarTitle}
             </h3>

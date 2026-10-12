@@ -25,17 +25,14 @@ export default function FaqSection() {
           {title}
         </h2>
 
-        <div className="border-t border-bawo-eggplant-light/35">
+        <div className="space-y-3">
           {items.map((item, index) => {
             const isOpen = openIndex === index;
             const panelId = `${baseId}-panel-${index}`;
             const buttonId = `${baseId}-button-${index}`;
 
             return (
-              <div
-                key={item.question}
-                className="border-b border-bawo-eggplant-light/35"
-              >
+              <div key={item.question} className="glass-card px-5 md:px-6">
                 <h3>
                   <button
                     id={buttonId}

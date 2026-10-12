@@ -9,13 +9,19 @@ type HeroParticleFieldProps = {
 const VERT = `
   attribute float aSize;
   attribute float aAlpha;
+  attribute float aPhase;
+  attribute float aDrift;
   attribute vec3 aColor;
+  uniform float uTime;
   varying vec3 vColor;
   varying float vAlpha;
   void main() {
     vColor = aColor;
     vAlpha = aAlpha;
-    vec4 mv = modelViewMatrix * vec4(position, 1.0);
+    vec3 pos = position;
+    pos.x += sin(uTime * 0.35 + aPhase) * 0.08 * aDrift;
+    pos.y += sin(uTime * 0.7 + aPhase) * 0.045 * aDrift;
+    vec4 mv = modelViewMatrix * vec4(pos, 1.0);
     gl_PointSize = clamp(aSize * (260.0 / max(1.0, -mv.z)), 1.0, 220.0);
     gl_Position = projectionMatrix * mv;
   }
@@ -45,13 +51,15 @@ const PURPLE = new THREE.Color(palette.purple);
 const VIOLET = new THREE.Color(palette.violet);
 const WHITE = new THREE.Color(palette.white);
 const WHITE_SOFT = new THREE.Color(palette.whiteSoft);
+const YELLOW = new THREE.Color(palette.yellow);
 
 function pickColor(x: number, bias: number) {
   const roll = Math.random();
-  if (roll < 0.14) {
+  if (roll < 0.1) return YELLOW;
+  if (roll < 0.22) {
     return Math.random() > 0.4 ? WHITE : WHITE_SOFT;
   }
-  const colorRoll = (roll - 0.14) / 0.86;
+  const colorRoll = (roll - 0.22) / 0.78;
   const greenWeight = x < 0 ? 0.62 : 0.16 + bias;
   if (colorRoll < greenWeight) {
     return Math.random() > 0.45 ? NEON_HOT : Math.random() > 0.35 ? NEON : FOREST;
@@ -64,6 +72,7 @@ function pickColor(x: number, bias: number) {
 
 function makeMaterial() {
   return new THREE.ShaderMaterial({
+    uniforms: { uTime: { value: 0 } },
     vertexShader: VERT,
     fragmentShader: FRAG,
     transparent: true,
@@ -73,14 +82,24 @@ function makeMaterial() {
   });
 }
 
-function fillAttributes(
-  count: number,
-  place: (i: number) => { x: number; y: number; z: number; size: number; alpha: number; color: THREE.Color },
-) {
+type ParticlePoint = {
+  x: number;
+  y: number;
+  z: number;
+  size: number;
+  alpha: number;
+  color: THREE.Color;
+  phase?: number;
+  drift?: number;
+};
+
+function fillAttributes(count: number, place: (i: number) => ParticlePoint) {
   const positions = new Float32Array(count * 3);
   const colors = new Float32Array(count * 3);
   const sizes = new Float32Array(count);
   const alphas = new Float32Array(count);
+  const phases = new Float32Array(count);
+  const drifts = new Float32Array(count);
   const color = new THREE.Color();
 
   for (let i = 0; i < count; i += 1) {
@@ -94,6 +113,8 @@ function fillAttributes(
     colors[i * 3 + 2] = color.b;
     sizes[i] = p.size;
     alphas[i] = p.alpha;
+    phases[i] = p.phase ?? 0;
+    drifts[i] = p.drift ?? 0;
   }
 
   const geometry = new THREE.BufferGeometry();
@@ -101,6 +122,8 @@ function fillAttributes(
   geometry.setAttribute("aColor", new THREE.BufferAttribute(colors, 3));
   geometry.setAttribute("aSize", new THREE.BufferAttribute(sizes, 1));
   geometry.setAttribute("aAlpha", new THREE.BufferAttribute(alphas, 1));
+  geometry.setAttribute("aPhase", new THREE.BufferAttribute(phases, 1));
+  geometry.setAttribute("aDrift", new THREE.BufferAttribute(drifts, 1));
   return geometry;
 }
 
@@ -122,7 +145,7 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
       powerPreference: "high-performance",
     });
     renderer.setClearColor(palette.canvas, 1);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 1.75));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobile ? 1.25 : 1.5));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     host.appendChild(renderer.domElement);
 
@@ -168,32 +191,28 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
           z: Math.sin(angle) * 0.28,
           size: i < 2 ? 1.85 : 1.25 + (i % 3) * 0.22,
           alpha: i < 2 ? 0.06 : 0.042 + (i % 3) * 0.01,
-          color: i % 3 === 0 ? NEON : i % 3 === 1 ? PINK : PURPLE,
+          color: i % 4 === 0 ? YELLOW : i % 4 === 1 ? NEON : i % 4 === 2 ? PINK : PURPLE,
         };
       }),
       makeMaterial(),
     );
     sphere.add(coreGlow);
 
-    const waveBaseX = new Float32Array(waveCount);
-    const waveBaseY = new Float32Array(waveCount);
-    const wavePhase = new Float32Array(waveCount);
-    const waveGeometry = fillAttributes(waveCount, (i) => {
+    const waveGeometry = fillAttributes(waveCount, () => {
       const n = Math.random() + Math.random() + Math.random() - 1.5;
       const x = n * 4.8;
-      wavePhase[i] = Math.random() * Math.PI * 2;
       const density = Math.exp(-(x * x) / 16);
       const y =
         Math.sin(x * 0.62) * 0.22 +
         (Math.random() - 0.5) * (0.12 + density * 0.95);
-      waveBaseX[i] = x;
-      waveBaseY[i] = y;
       const z = (Math.random() - 0.5) * (0.35 + density * 1.7);
       const spark = Math.random() > 0.9;
       return {
         x,
         y,
         z,
+        phase: Math.random() * Math.PI * 2,
+        drift: 1,
         size: spark ? 0.22 + Math.random() * 0.06 : 0.11 + Math.random() * 0.08,
         alpha: (0.2 + density * 0.55) * (0.55 + Math.random() * 0.4),
         color: spark
@@ -246,24 +265,22 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
     let frame = 0;
     let running = !document.hidden;
     const started = performance.now();
-    const wavePositions = waveGeometry.getAttribute("position") as THREE.BufferAttribute;
+    const materials = [
+      sphere.material,
+      wave.material,
+      coreGlow.material,
+      horizonGlow.material,
+    ] as THREE.ShaderMaterial[];
 
     const draw = (now: number) => {
       const t = (now - started) / 1000;
+      if (!reduced) {
+        for (const material of materials) material.uniforms.uTime.value = t;
+      }
       sphere.rotation.y = t * 0.07;
       sphere.rotation.x = Math.sin(t * 0.15) * 0.04;
       sphere.rotation.y += pointer.x * 0.12;
       sphere.rotation.x += pointer.y * -0.05;
-
-      if (!reduced) {
-        const arr = wavePositions.array as Float32Array;
-        for (let i = 0; i < waveCount; i += 1) {
-          const phase = wavePhase[i];
-          arr[i * 3] = waveBaseX[i] + Math.sin(t * 0.35 + phase) * 0.08;
-          arr[i * 3 + 1] = waveBaseY[i] + Math.sin(t * 0.7 + phase) * 0.045;
-        }
-        wavePositions.needsUpdate = true;
-      }
 
       camera.position.x += (pointer.x * 0.28 - camera.position.x) * 0.04;
       camera.position.y += (0.15 - pointer.y * 0.18 - camera.position.y) * 0.04;
