@@ -20,7 +20,7 @@ export default function FaqSection() {
       <div className="relative z-10 container mx-auto px-6 md:px-10 max-w-3xl">
         <h2
           id="faq-heading"
-          className="text-3xl md:text-[2.125rem] font-bold text-white font-display tracking-tight mb-8 md:mb-10 text-left"
+          className="text-3xl md:text-[2.125rem] font-bold tracking-tight mb-8 md:mb-10 text-left text-[var(--bawo-text-primary,#F4F4F5)] font-sans"
         >
           {title}
         </h2>
@@ -32,23 +32,22 @@ export default function FaqSection() {
             const buttonId = `${baseId}-button-${index}`;
 
             return (
-              <div key={item.question} className="glass-card px-5 md:px-6">
+              <div
+                key={item.question}
+                className={`bawo-faq-panel${isOpen ? " is-open" : ""}`}
+              >
                 <h3>
                   <button
                     id={buttonId}
                     type="button"
-                    className="flex w-full items-center justify-between gap-6 py-5 md:py-6 text-left group"
+                    className="bawo-faq-panel__trigger group"
                     aria-expanded={isOpen}
                     aria-controls={panelId}
                     onClick={() => toggle(index)}
                   >
-                    <span className="font-museo-medium text-base md:text-[1.0625rem] text-white/92 group-hover:text-white transition-colors pr-2">
-                      {item.question}
-                    </span>
+                    <span className="bawo-faq-panel__question">{item.question}</span>
                     <ChevronDown
-                      className={`h-5 w-5 shrink-0 transition-transform duration-200 ${
-                        isOpen ? "rotate-180 text-bawo-peach" : "text-white/40"
-                      }`}
+                      className={`bawo-faq-panel__chevron${isOpen ? " is-open" : ""}`}
                       aria-hidden
                     />
                   </button>
@@ -57,14 +56,11 @@ export default function FaqSection() {
                   id={panelId}
                   role="region"
                   aria-labelledby={buttonId}
-                  className={`grid transition-[grid-template-rows] duration-200 ease-out ${
-                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                  }`}
+                  className={`bawo-faq-panel__collapse${isOpen ? " is-open" : ""}`}
                 >
-                  <div className="overflow-hidden">
-                    <p className="pb-5 md:pb-6 pr-10 text-sm md:text-[0.9375rem] text-white/65 font-museo-medium leading-relaxed">
-                      {item.answer}
-                    </p>
+                  <div className="bawo-faq-panel__collapse-inner">
+                    <div className="bawo-faq-panel__divider" aria-hidden />
+                    <p className="bawo-faq-panel__answer">{item.answer}</p>
                   </div>
                 </div>
               </div>
