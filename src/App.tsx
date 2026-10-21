@@ -277,7 +277,7 @@ function App() {
                             className="city-stat text-center space-y-3 md:space-y-4 w-full max-w-[12rem] mx-auto"
                           >
                             {rotatingGallery ? (
-                              <div className="bawo-hub-ring relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto overflow-hidden rounded-full shadow-[0_20px_48px_rgba(0,0,0,0.65)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#F4BD5C]/50">
+                              <div className="bawo-hub-ring relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto overflow-hidden rounded-full shadow-[0_20px_48px_rgba(0,0,0,0.65)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#FFBC42]/50">
                                 <BoroughSquareCarousel
                                   images={rotatingGallery}
                                   alt={`${city.name} community hub, BawoSocial NYC`}
@@ -317,7 +317,7 @@ function App() {
                           className="city-stat text-center space-y-3 md:space-y-4 w-full max-w-[12rem] mx-auto"
                         >
                           {rotatingGallery ? (
-                            <div className="bawo-hub-ring relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto overflow-hidden rounded-full shadow-[0_20px_48px_rgba(0,0,0,0.65)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#F4BD5C]/50">
+                            <div className="bawo-hub-ring relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto overflow-hidden rounded-full shadow-[0_20px_48px_rgba(0,0,0,0.65)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#FFBC42]/50">
                               <BoroughSquareCarousel
                                 images={rotatingGallery}
                                 alt={`${city.name} community hub, BawoSocial NYC`}

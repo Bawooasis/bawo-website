@@ -1,6 +1,7 @@
 /**
  * Proportional mesh behind the 3+2 borough grid (viewBox matches % layout).
  * Spokes tie each borough to a central hub; chains link neighbors.
+ * Colors: build 165 gold / pumpkin / eggplant (no neon green).
  */
 export default function BoroughNetworkGraphic({
   className = "",
@@ -16,19 +17,19 @@ export default function BoroughNetworkGraphic({
     >
       <defs>
         <linearGradient id="bawo-net-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#F4BD5C" stopOpacity="0.22" />
-          <stop offset="40%" stopColor="#35D07F" stopOpacity="0.45" />
+          <stop offset="0%" stopColor="#FFBC42" stopOpacity="0.22" />
+          <stop offset="40%" stopColor="#FF6B00" stopOpacity="0.45" />
           <stop offset="100%" stopColor="#3a1d48" stopOpacity="0.35" />
         </linearGradient>
         <linearGradient id="bawo-net-stroke-soft" x1="100%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#F4BD5C" stopOpacity="0.14" />
+          <stop offset="0%" stopColor="#FFBC42" stopOpacity="0.14" />
           <stop offset="50%" stopColor="#2a1438" stopOpacity="0.4" />
-          <stop offset="100%" stopColor="#35D07F" stopOpacity="0.12" />
+          <stop offset="100%" stopColor="#FF8C42" stopOpacity="0.12" />
         </linearGradient>
         <radialGradient id="bawo-net-hub-glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#F4BD5C" stopOpacity="0.5" />
-          <stop offset="55%" stopColor="#35D07F" stopOpacity="0.12" />
-          <stop offset="100%" stopColor="#06030C" stopOpacity="0" />
+          <stop offset="0%" stopColor="#FFBC42" stopOpacity="0.5" />
+          <stop offset="55%" stopColor="#FF6B00" stopOpacity="0.12" />
+          <stop offset="100%" stopColor="#0E0A14" stopOpacity="0" />
         </radialGradient>
         <filter id="bawo-net-glow" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur in="SourceGraphic" stdDeviation="0.35" result="b" />
@@ -130,7 +131,7 @@ export default function BoroughNetworkGraphic({
         cx="50"
         cy="48"
         r="1.35"
-        fill="#F4BD5C"
+        fill="#FFBC42"
         stroke="rgba(255,248,235,0.45)"
         strokeWidth="0.12"
         className="bawo-net-hub-core"

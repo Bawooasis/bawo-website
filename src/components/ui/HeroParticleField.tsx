@@ -42,32 +42,31 @@ const FRAG = `
   }
 `;
 
-const NEON = new THREE.Color(palette.neon);
-const NEON_HOT = new THREE.Color(palette.neonHot);
-const FOREST = new THREE.Color(palette.forest);
-const PINK = new THREE.Color(palette.pink);
-const MAGENTA = new THREE.Color(palette.magenta);
-const PURPLE = new THREE.Color(palette.purple);
-const VIOLET = new THREE.Color(palette.violet);
+const PUMPKIN = new THREE.Color(palette.pumpkin);
+const PEACH = new THREE.Color(palette.peach);
+const GOLD = new THREE.Color(palette.gold);
+const COPPER = new THREE.Color(palette.copper);
+const EGGPLANT = new THREE.Color(palette.eggplant);
+const EGGPLANT_LIGHT = new THREE.Color(palette.eggplantLight);
 const WHITE = new THREE.Color(palette.white);
 const WHITE_SOFT = new THREE.Color(palette.whiteSoft);
-const YELLOW = new THREE.Color(palette.yellow);
 
+/** Warm brand distribution — denser pumpkin/peach on the lit side. */
 function pickColor(x: number, bias: number) {
   const roll = Math.random();
-  if (roll < 0.1) return YELLOW;
-  if (roll < 0.22) {
-    return Math.random() > 0.4 ? WHITE : WHITE_SOFT;
+  if (roll < 0.08) return GOLD;
+  if (roll < 0.16) return Math.random() > 0.45 ? WHITE : WHITE_SOFT;
+  if (roll < 0.22 + bias * 0.05) return COPPER;
+
+  const colorRoll = (roll - 0.16) / 0.84;
+  const warmWeight = x < 0 ? 0.58 : 0.72 + bias;
+  if (colorRoll < warmWeight) {
+    return Math.random() > 0.4 ? PUMPKIN : Math.random() > 0.35 ? PEACH : GOLD;
   }
-  const colorRoll = (roll - 0.22) / 0.78;
-  const greenWeight = x < 0 ? 0.62 : 0.16 + bias;
-  if (colorRoll < greenWeight) {
-    return Math.random() > 0.45 ? NEON_HOT : Math.random() > 0.35 ? NEON : FOREST;
+  if (colorRoll < warmWeight + 0.18) {
+    return Math.random() > 0.5 ? COPPER : GOLD;
   }
-  if (colorRoll < greenWeight + 0.42) {
-    return Math.random() > 0.5 ? PINK : MAGENTA;
-  }
-  return Math.random() > 0.45 ? PURPLE : VIOLET;
+  return Math.random() > 0.45 ? EGGPLANT_LIGHT : EGGPLANT;
 }
 
 function makeMaterial() {
@@ -199,11 +198,11 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
         size: spark ? 0.22 + Math.random() * 0.06 : 0.11 + Math.random() * 0.08,
         alpha: (0.2 + density * 0.55) * (0.55 + Math.random() * 0.4),
         color: spark
-          ? Math.random() > 0.62
+          ? Math.random() > 0.55
             ? WHITE
             : Math.random() > 0.4
-              ? NEON_HOT
-              : NEON
+              ? GOLD
+              : PUMPKIN
           : pickColor(x, -0.05),
       };
     });
@@ -216,7 +215,7 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
       pointer.x = (event.clientX / window.innerWidth - 0.5) * 2;
       pointer.y = (event.clientY / window.innerHeight - 0.5) * 2;
     };
-    window.addEventListener("pointermove", onPointer);
+    window.addEventListener("pointermove", onPointer, { passive: true });
 
     const resize = () => {
       const width = host.clientWidth || 1;
@@ -230,7 +229,9 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
     observer.observe(host);
 
     let frame = 0;
-    let running = !document.hidden;
+    let pageVisible = !document.hidden;
+    /** Hero in view → animate; otherwise keep last frame (static backdrop). */
+    let heroVisible = true;
     const started = performance.now();
     const materials = [sphere.material, wave.material] as THREE.ShaderMaterial[];
 
@@ -250,9 +251,11 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
       renderer.render(scene, camera);
     };
 
+    const shouldAnimate = () => pageVisible && heroVisible && !reduced;
+
     const loop = (now: number) => {
       frame = window.requestAnimationFrame(loop);
-      if (!running) return;
+      if (!shouldAnimate()) return;
       draw(now);
     };
 
@@ -260,15 +263,27 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
     if (!reduced) frame = window.requestAnimationFrame(loop);
 
     const onVisibility = () => {
-      running = !document.hidden;
+      pageVisible = !document.hidden;
     };
     document.addEventListener("visibilitychange", onVisibility);
+
+    const heroEl =
+      document.querySelector<HTMLElement>(".bawo-hero-section") ??
+      document.querySelector<HTMLElement>("#root");
+    const intersectObs = new IntersectionObserver(
+      ([entry]) => {
+        heroVisible = entry?.isIntersecting ?? true;
+      },
+      { threshold: 0.08, rootMargin: "0px" },
+    );
+    if (heroEl) intersectObs.observe(heroEl);
 
     return () => {
       window.cancelAnimationFrame(frame);
       document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("pointermove", onPointer);
       observer.disconnect();
+      intersectObs.disconnect();
       sphere.geometry.dispose();
       wave.geometry.dispose();
       (sphere.material as THREE.Material).dispose();

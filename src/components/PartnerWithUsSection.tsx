@@ -21,7 +21,7 @@ export default function PartnerWithUsSection() {
       <div className="relative z-10 container mx-auto px-6 max-w-3xl">
         <div className="animate-on-scroll glass-card rounded-2xl p-6 sm:p-8 border border-bawo-eggplant-light/40">
           <div className="space-y-5 text-center sm:text-left">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-museo-bold uppercase tracking-wider text-[#F4BD5C]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-museo-bold uppercase tracking-wider text-[#FFBC42]">
               <Handshake className="w-3.5 h-3.5" aria-hidden />
               For local businesses
             </div>

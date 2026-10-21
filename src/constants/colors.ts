@@ -11,10 +11,10 @@ export const COLORS = {
     copper: c.base,
     copperLight: c.bright,
     copperDark: c.deep,
-    pumpkinDeprecated: "#FF6B00",
+    pumpkin: palette.content.pumpkin,
     gold: g,
-    goldLight: "#E4C76A",
-    goldDark: "#B8922E",
+    goldLight: "#FFD078",
+    goldDark: "#C49220",
   },
   background: {
     obsidian: palette.obsidian.canvas,
@@ -22,7 +22,7 @@ export const COLORS = {
     deepest: palette.obsidian.canvas,
     main: palette.obsidian.canvas,
     surface: palette.obsidian.elevated,
-    card: palette.glass.fill,
+    card: palette.obsidian.elevated,
     dark: {
       primary: palette.obsidian.canvas,
       secondary: palette.obsidian.elevated,
@@ -47,10 +47,10 @@ export const COLORS = {
     copperLight: c.bright,
   },
   status: {
-    success: "#6db896",
+    success: palette.content.gold,
     error: "#ef4444",
-    warning: "#ff8c42",
-    info: "#3a1d48",
+    warning: palette.content.peach,
+    info: palette.content.eggplantLight,
   },
   gradients: {
     background: {
@@ -90,37 +90,37 @@ export const TAILWIND_COLORS = {
     bg: "bg-[var(--bawo-brand-cta-orange)]",
     border: "border-[rgba(255,107,0,0.45)]",
     hover: {
-      bg: "hover:bg-[#ff6b00]",
-      text: "hover:text-[#ff8f42]",
-      border: "hover:border-[#ff8f42]",
+      bg: "hover:bg-[#FF6B00]",
+      text: "hover:text-[#FF8C42]",
+      border: "hover:border-[#FF8C42]",
     },
     focus: {
       border: "focus:border-[var(--bawo-brand-cta-orange)]",
     },
   },
   gold: {
-    text: "text-bawo-peach",
-    bg: "bg-bawo-peach",
-    border: "border-bawo-peach",
+    text: "text-[var(--bawo-gold,#FFBC42)]",
+    bg: "bg-[var(--bawo-gold,#FFBC42)]",
+    border: "border-[var(--bawo-gold,#FFBC42)]",
   },
   gradients: {
     primary: "bg-gradient-to-r from-bawo-navy via-bawo-eggplant to-bawo-pumpkin",
     primaryHover: "hover:from-bawo-eggplant hover:to-bawo-peach",
     background:
-      "bg-gradient-to-b from-[#06030C] via-[#0E0A14] to-[#06030C]",
-    subtle: "bg-gradient-to-b from-[#06030C] to-[#0E0A14]",
+      "bg-gradient-to-b from-[#0E0A14] via-[#221525] to-[#0E0A14]",
+    subtle: "bg-gradient-to-b from-[#0E0A14] to-[#221525]",
   },
   text: {
-    primary: "text-white",
+    primary: "text-[var(--bawo-text-primary,#F4F4F5)]",
     secondary: "text-white/90",
     muted: "text-white/60",
   },
   bg: {
-    obsidian: "bg-[#06030C]",
-    deepest: "bg-[#06030C]",
-    main: "bg-[#06030C]",
-    surface: "bg-[#0E0A14]",
-    card: "bg-[var(--bawo-surface-glass)]",
+    obsidian: "bg-[#0E0A14]",
+    deepest: "bg-[#0E0A14]",
+    main: "bg-[#0E0A14]",
+    surface: "bg-[#221525]",
+    card: "bg-[var(--bawo-card,#221525)]",
     overlay: {
       light: "bg-white/8",
       medium: "bg-white/12",

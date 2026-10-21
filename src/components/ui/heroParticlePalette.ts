@@ -1,22 +1,17 @@
 /**
- * Particle-hero colors already living in the app and site.
- * Neon green is the live-status green (`#35D07F` in `index.css`).
- * Pink is the portal social accent. Purples are the eggplant ramp,
- * lifted so they read as particles on a near-black canvas.
- * Swap this object when a newer app palette is provided.
+ * Globe / particle-hero colors — build 165 brand system only.
+ * No neon greens or off-palette pinks; warm pumpkin → gold → copper ramp
+ * on the app canvas so the web field matches the native port target.
  */
 export const heroParticlePalette = {
-  neon: "#35D07F",
-  neonHot: "#7DFFC2",
-  forest: "#6DB896",
-  pink: "#FF76B8",
-  magenta: "#E453C8",
-  purple: "#C084FC",
-  violet: "#8B5CF6",
+  pumpkin: "#FF6B00",
+  peach: "#FF8C42",
+  gold: "#FFBC42",
+  copper: "#B87333",
+  eggplant: "#2A1438",
+  eggplantLight: "#3A1D48",
   white: "#FFFFFF",
-  whiteSoft: "#F7F4FF",
-  /** Warm yellow used in the app UI (alerts, highlights). */
-  yellow: "#F4BD5C",
-  canvas: "#070414",
-  depth: "#12081C",
+  whiteSoft: "#F4F4F5",
+  canvas: "#0E0A14",
+  depth: "#221525",
 } as const;

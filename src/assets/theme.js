@@ -10,7 +10,7 @@ const {
   pathwayPillGradient,
 } = palette;
 
-/** Tier-2 semantic tokens (dark / app shell) */
+/** Tier-2 semantic tokens (dark / app shell) — build 165 aligned */
 export const semanticTokens = {
   dark: {
     surface: {
@@ -19,28 +19,30 @@ export const semanticTokens = {
       depth: obsidian.depth,
       glass: glass.fill,
       glassRaised: glass.fillRaised,
+      card: obsidian.elevated,
     },
     signal: {
-      action: copper.base,
-      /** Hover / pressed bright copper — `liquidGlassCTAPressed` */
-      actionPressed: copper.bright,
+      /** Primary action = pumpkin */
+      action: palette.content.pumpkin,
+      /** Hover / pressed */
+      actionPressed: palette.content.peach,
       actionMuted: copper.muted,
     },
     accent: {
       heritageGold,
       peach: palette.content.peach,
       pumpkin: palette.content.pumpkin,
-      forest: palette.content.forest,
-      forestBright: palette.content.forestBright,
+      gold: palette.content.gold,
+      copper: copper.base,
       eggplant: palette.content.eggplant,
       eggplantLight: palette.content.eggplantLight,
       navy: palette.content.navy,
       ink: palette.content.ink,
     },
     text: {
-      primary: "#FFFFFF",
-      secondary: "rgba(255, 255, 255, 0.9)",
-      muted: "rgba(255, 255, 255, 0.6)",
+      primary: "#F4F4F5",
+      secondary: "rgba(244, 244, 245, 0.9)",
+      muted: "rgba(244, 244, 245, 0.6)",
       onAction: textOnCta,
     },
     border: {
@@ -63,7 +65,8 @@ export const spacing = {
 };
 
 /**
- * Typography scale — rem equivalents of native `typography.fontSize` (moderateScale bases).
+ * Typography scale — rem equivalents of native `typography.fontSize`.
+ * Font family: Montserrat everywhere (build 165).
  */
 export const fontSize = {
   xs: "0.75rem",
@@ -81,7 +84,7 @@ export const fontSize = {
   "8xl": "6rem",
 };
 
-/** Border radii — align with native `borderRadius` (xl = liquid glass standard ≈ 24px). */
+/** Border radii — align with native `borderRadius` (xl ≈ 24px). */
 export const radii = {
   xs: "0.25rem",
   sm: "0.5rem",
@@ -93,23 +96,24 @@ export const radii = {
 
 const sem = semanticTokens.dark;
 
-/** iOS liquidGlassCTA shadow → CSS (bronze tint, less orange than raw `copper.base`) */
-const LIQUID_GLASS_CTA_SHADOW = `0 8px 18px rgba(94, 58, 40, 0.42)`;
+/** Primary CTA shadow — pumpkin-tinted */
+const PRIMARY_CTA_SHADOW = `0 8px 18px rgba(255, 107, 0, 0.28)`;
 
 /**
- * Tier-3 recipes — mirror native `src/assets/theme.js` shapes (web/CSS projection).
+ * Tier-3 recipes — web/CSS projection of native theme shapes.
+ * Primary CTAs use pumpkin; copper is accent-only (borders / edge).
  */
 export const recipes = {
   liquidGlassCTA: {
-    backgroundColor: copper.base,
+    backgroundColor: palette.content.pumpkin,
     border: `1px solid ${liquidGlass.borderOuter}`,
     borderTop: `1px solid ${liquidGlass.edgeTop}`,
     borderRadius: radii.xl,
-    boxShadow: `${LIQUID_GLASS_CTA_SHADOW}, inset 0 1px 0 ${liquidGlass.edgeTop}`,
+    boxShadow: `${PRIMARY_CTA_SHADOW}, inset 0 1px 0 ${liquidGlass.edgeTop}`,
     padding: `${spacing.md}px ${spacing.lg}px`,
   },
   liquidGlassCTAPressed: {
-    backgroundColor: copper.bright,
+    backgroundColor: palette.content.peach,
   },
   liquidGlassCTADisabled: {
     backgroundColor: copper.muted,
@@ -130,7 +134,7 @@ export const recipes = {
     borderRadius: radii.lg,
     backdropFilter: "blur(20px)",
     WebkitBackdropFilter: "blur(20px)",
-    boxShadow: "0 0 12px rgba(255, 255, 255, 0.06)",
+    boxShadow: "0 0 12px rgba(255, 188, 66, 0.06)",
   },
   pillActiveGradient: {
     angle: pathwayPillGradient.angle,
