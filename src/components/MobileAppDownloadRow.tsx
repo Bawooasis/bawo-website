@@ -17,7 +17,7 @@ export default function MobileAppDownloadRow({ className = "" }: MobileAppDownlo
         href={CONTENT.hero.testflightLink}
         target="_blank"
         rel="noopener noreferrer"
-        className="group inline-flex min-h-[48px] w-full flex-row items-center gap-3 rounded-full border border-white/20 bg-transparent px-5 sm:px-6 py-2 font-semibold text-white no-underline outline-none transition-[border-color,transform] duration-150 ease-out hover:border-white/40 focus-visible:ring-2 focus-visible:ring-white/25 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bawo-canvas,#06030C)] active:scale-[0.99] motion-reduce:transition-none"
+        className="group inline-flex min-h-[48px] w-full flex-row items-center gap-3 rounded-full border border-white/20 bg-transparent px-5 sm:px-6 py-2 font-semibold text-white no-underline outline-none transition-[border-color,transform] duration-150 ease-out hover:border-white/40 focus-visible:ring-2 focus-visible:ring-white/25 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bawo-canvas,#0E0A14)] active:scale-[0.99] motion-reduce:transition-none"
         style={{ fontFamily: "Montserrat, system-ui, sans-serif" }}
       >
         <Download className="h-5 w-5 shrink-0 text-white/90" strokeWidth={2} aria-hidden />

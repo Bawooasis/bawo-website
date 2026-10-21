@@ -88,7 +88,7 @@ export default function MailchimpSignupRow({
       {message && (
         <p
           className={`mt-3 text-sm font-museo-medium ${
-            status === "success" ? "text-green-400" : "text-red-400"
+            status === "success" ? "text-[var(--bawo-gold,#FFBC42)]" : "text-red-400"
           }`}
         >
           {message}

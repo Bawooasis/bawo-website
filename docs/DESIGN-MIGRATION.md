@@ -1,9 +1,25 @@
 # BawoSocial Design Migration Guide
 
-**Purpose:** Mirror the new website look & feel in the mobile app.  
+**Purpose:** Mirror the website look & feel in the mobile app.  
 **Source of truth:** `src/assets/colors.js`, `src/assets/theme.js`, `src/index.css`  
 **Website:** [joinbawo.com](https://joinbawo.com)  
-**Last updated:** June 2026 (commit `27fd42e`)
+**Last updated:** Oct 2026 — **build 165 brand pass** (pumpkin primary, Montserrat everywhere).  
+See also: [`docs/globe-animation.md`](./globe-animation.md) for the WebGL particle globe.
+
+### Build 165 tokens (canonical)
+
+| Role | Hex |
+|------|-----|
+| Pumpkin (primary) | `#FF6B00` |
+| Light orange | `#FF8C42` |
+| Gold | `#FFBC42` |
+| Copper (accent only) | `#B87333` |
+| Background | `#0E0A14` |
+| Card | `#221525` |
+| Text | `#F4F4F5` |
+| Font | Montserrat |
+
+> Older sections below may still mention MuseoModerno / neon greens / `#06030C` — prefer the table above and the live token files.
 
 ---
 

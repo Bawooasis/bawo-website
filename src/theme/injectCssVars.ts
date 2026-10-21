@@ -17,6 +17,7 @@ export function injectDesignTokens() {
 
   r.setProperty("--bawo-canvas", d.surface.canvas);
   r.setProperty("--bawo-elevated", d.surface.elevated);
+  r.setProperty("--bawo-card", d.surface.card);
   r.setProperty("--bawo-depth", d.surface.depth);
   r.setProperty("--bawo-surface-glass", d.surface.glass);
   r.setProperty("--bawo-surface-glass-raised", d.surface.glassRaised);
@@ -26,9 +27,11 @@ export function injectDesignTokens() {
   r.setProperty("--bawo-signal-action-pressed", d.signal.actionPressed);
   r.setProperty("--bawo-signal-action-muted", d.signal.actionMuted);
 
+  r.setProperty("--bawo-copper", palette.copper.base);
   r.setProperty("--bawo-copper-bright", palette.copper.bright);
   r.setProperty("--bawo-copper-muted", palette.copper.muted);
   r.setProperty("--bawo-heritage-gold", palette.heritageGold);
+  r.setProperty("--bawo-gold", palette.content.gold);
   r.setProperty("--bawo-section-title-accent", palette.sectionTitleAccent);
 
   r.setProperty("--bawo-text-primary", d.text.primary);
@@ -38,7 +41,7 @@ export function injectDesignTokens() {
   r.setProperty("--bawo-border-subtle", d.border.subtle);
   r.setProperty("--bawo-border-hairline", d.border.hairline);
 
-  /* recipes.liquidGlassCTA — solid copper + edge + shadow (native-aligned) */
+  /* recipes.liquidGlassCTA — pumpkin fill + copper edge accent */
   r.setProperty("--bawo-liquid-glass-fill", lg.backgroundColor);
   r.setProperty("--bawo-liquid-glass-border", lg.border);
   r.setProperty("--bawo-liquid-glass-border-top", lg.borderTop);
@@ -63,7 +66,6 @@ export function injectDesignTokens() {
 
   r.setProperty("--bawo-pill-active-bg", pillBg);
   r.setProperty("--bawo-pill-active-border", pill.border);
-  /* Resources / PathWay active pill ramp — keep headline text gradient + CTAs in sync */
   r.setProperty("--bawo-pill-gradient", pillBg);
   r.setProperty("--bawo-brand-cta-orange", palette.brandCtaOrange);
 
@@ -71,8 +73,6 @@ export function injectDesignTokens() {
   r.setProperty("--bawo-pumpkin", cp.pumpkin);
   r.setProperty("--bawo-peach", cp.peach);
   r.setProperty("--bawo-ink", cp.ink);
-  r.setProperty("--bawo-forest", cp.forest);
-  r.setProperty("--bawo-forest-bright", cp.forestBright);
   r.setProperty("--bawo-navy", cp.navy);
   r.setProperty("--bawo-eggplant", cp.eggplant);
   r.setProperty("--bawo-eggplant-light", cp.eggplantLight);

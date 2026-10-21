@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        /* Build 165: Montserrat everywhere (legacy museo-* class names map here). */
         sans: [
           'Montserrat',
           'system-ui',
@@ -12,16 +13,16 @@ export default {
           'Roboto',
           'sans-serif',
         ],
-        display: ['MuseoModerno', 'Montserrat', 'system-ui', 'sans-serif'],
-        museo: ['MuseoModerno', 'Montserrat', 'sans-serif'],
-        'museo-thin': ['MuseoModerno', 'sans-serif'],
-        'museo-light': ['MuseoModerno', 'sans-serif'],
-        'museo-regular': ['MuseoModerno', 'sans-serif'],
-        'museo-medium': ['MuseoModerno', 'sans-serif'],
-        'museo-semibold': ['MuseoModerno', 'sans-serif'],
-        'museo-bold': ['MuseoModerno', 'sans-serif'],
-        'museo-extrabold': ['MuseoModerno', 'sans-serif'],
-        'museo-black': ['MuseoModerno', 'sans-serif'],
+        display: ['Montserrat', 'system-ui', 'sans-serif'],
+        museo: ['Montserrat', 'sans-serif'],
+        'museo-thin': ['Montserrat', 'sans-serif'],
+        'museo-light': ['Montserrat', 'sans-serif'],
+        'museo-regular': ['Montserrat', 'sans-serif'],
+        'museo-medium': ['Montserrat', 'sans-serif'],
+        'museo-semibold': ['Montserrat', 'sans-serif'],
+        'museo-bold': ['Montserrat', 'sans-serif'],
+        'museo-extrabold': ['Montserrat', 'sans-serif'],
+        'museo-black': ['Montserrat', 'sans-serif'],
       },
       spacing: {
         'bawo-xs': 'var(--bawo-space-xs)',
@@ -33,11 +34,12 @@ export default {
       },
       colors: {
         bawo: {
-          pumpkin: "var(--bawo-pumpkin, #ff6b00)",
-          peach: "var(--bawo-peach, #ff8c42)",
-          ink: "var(--bawo-ink, #0e0a14)",
-          forest: "var(--bawo-forest, #1f493c)",
-          "forest-bright": "var(--bawo-forest-bright, #6db896)",
+          pumpkin: "var(--bawo-pumpkin, #FF6B00)",
+          peach: "var(--bawo-peach, #FF8C42)",
+          gold: "var(--bawo-gold, #FFBC42)",
+          copper: "var(--bawo-copper, #B87333)",
+          ink: "var(--bawo-ink, #0E0A14)",
+          card: "var(--bawo-card, #221525)",
           navy: "var(--bawo-navy, #1a0a28)",
           eggplant: "var(--bawo-eggplant, #2a1438)",
           "eggplant-light": "var(--bawo-eggplant-light, #3a1d48)",
