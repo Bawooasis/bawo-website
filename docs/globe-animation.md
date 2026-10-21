@@ -160,21 +160,34 @@ Wave points only bob via the vertex `sin` terms above (no mesh rotation).
 
 ---
 
-## 7. Colors and sizes (build 165)
+## 7. Colors and sizes (build 165 + flag accents)
 
 From `heroParticlePalette.ts`:
 
 | Token | Hex | Use in field |
 |-------|-----|----------------|
-| pumpkin | `#FF6B00` | Dominant warm dots |
+| pumpkin | `#FF6B00` | Dominant brand dots |
 | peach | `#FF8C42` | Secondary warm |
-| gold | `#FFBC42` | Sparks / accents (~8%) |
-| copper | `#B87333` | Accent only (~6%) |
-| eggplant / light | `#2A1438` / `#3A1D48` | Deep fill dots |
-| white / whiteSoft | `#FFFFFF` / `#F4F4F5` | Spec highlights |
+| gold | `#FFBC42` | Warm accent within the 50% warm bucket |
+| flagGreen / soft | `#008751` / `#1AA36A` | Nigerian green (~30%), soft alpha |
+| white / whiteSoft | `#FFFFFF` / `#E8E6E3` | Soft whites (~20%); prefer soft |
 | canvas | `#0E0A14` | Clear color / page bg |
 
-`pickColor(x, bias)` weights warmer tones toward `x > 0`, with a small gold/white/copper chance. Neon greens and pinks were removed for brand alignment.
+`pickColor` target mix: **~50% pumpkin/peach/gold · ~30% flag green · ~20% soft white**. Tuned for a premium field on `#0E0A14`, not a literal flag stripe.
+
+### Mobile (~390px / ≤767px)
+
+| Param | Mobile | Desktop |
+|-------|--------|---------|
+| Sphere count | **2800** | 10400 |
+| Wave count | **1600** | 8200 |
+| Size boost | **1.35×** | 1× |
+| DPR cap | **1.15** | 1.5 |
+| Camera FOV / Z | 42° / `8.2` | 36° / `7.6` |
+| Sphere position | `(0, 0.28, 0)` | `(0.2, 0.72, 0)` |
+| Pointer coupling | off for touch | on |
+
+Pause only when hero `intersectionRatio === 0` (with generous `rootMargin` on mobile) or the tab is hidden — do not pause while any of the hero is visible.
 
 Point **attribute sizes** are in the ranges in §3; on-screen pixel size is perspective-scaled in the vertex shader (`260 / -mv.z`).
 
