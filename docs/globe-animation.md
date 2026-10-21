@@ -122,8 +122,8 @@ Attributes: `position`, `aSize`, `aAlpha`, `aPhase`, `aDrift`, `aColor`.
 Per-frame drift (wave only uses non-zero `aDrift`):
 
 ```
-pos.x += sin(uTime * 0.35 + aPhase) * 0.08 * aDrift
-pos.y += sin(uTime * 0.70 + aPhase) * 0.045 * aDrift
+pos.x += sin(uTime * 0.28 + aPhase) * 0.045 * aDrift
+pos.y += sin(uTime * 0.52 + aPhase) * 0.028 * aDrift
 gl_PointSize = clamp(aSize * (260.0 / max(1.0, -mv.z)), 1.0, 220.0)
 ```
 
@@ -143,20 +143,28 @@ output = vec4(color * alpha, alpha)   // premultiplied-style additive
 
 ---
 
-## 6. Rotation, camera, and timing
+## 6. Rotation, camera, and timing (buttery continuous spin)
 
-Time `t` = seconds since mount (`(now - started) / 1000`).
+Animation is **delta-time based** from `requestAnimationFrame`, not fixed per-frame increments.
+
+```
+dt = clamp((now - lastNow) / 1000, 0, 1/30)
+simTime += dt                         // only while animating
+ease = smoothstep(easeT / 1.35s)      // eased start, then stays 1
+pointerSmooth = damp(pointerSmooth, pointerTarget, λ≈3.2, dt)
+```
 
 | Motion | Formula |
 |--------|---------|
-| Sphere yaw | `rotation.y = t * 0.07 + pointer.x * 0.12` |
-| Sphere pitch | `rotation.x = sin(t * 0.15) * 0.04 + pointer.y * -0.05` |
-| Camera follow | lerp toward `pointer * (0.28, -0.18)` with factor `0.04` each frame |
-| Pointer | normalized: `((clientX / width) - 0.5) * 2`, same for Y |
+| Sphere yaw | `rotation.y = simTime * 0.055 * ease + pointerSmooth.x * 0.05 * ease` |
+| Sphere pitch | `rotation.x = sin(simTime * 0.07) * 0.022 * ease + pointerSmooth.y * -0.02 * ease` |
+| Camera | exponential damp toward rest (+ tiny desktop pointer offset); no scroll-linked spin |
+| Pointer | desktop only; touch ignored; heavily damped so it never fights auto rotation |
+| Pause | tab hidden **or** hero fully off-screen — `simTime` does **not** advance; `lastNow` resets on resume to avoid dt spikes |
 
-Full rotation period around Y at rest ≈ `2π / 0.07 ≈ 90s` per turn (very slow).
+Constant angular velocity ≈ **0.055 rad/s** → full Y turn ≈ `2π / 0.055 ≈ 114s`. No wrap/reset of rotation angles (floats grow freely — no loop seam).
 
-Wave points only bob via the vertex `sin` terms above (no mesh rotation).
+Wave points only bob via softened vertex `sin` terms (`0.045` / `0.028` amp) — no mesh rotation.
 
 ---
 
@@ -171,9 +179,9 @@ From `heroParticlePalette.ts`:
 | gold | `#FFBC42` | Warm accent within the 50% warm bucket |
 | flagGreen / soft | `#00C853` / `#69FFA0` | Nigerian green (~30%); lifted from `#008751` + size bump so greens stay distinct under additive pumpkin |
 | white / whiteSoft | `#FFFFFF` / `#E8E6E3` | Soft whites (~20%); prefer soft |
-| canvas | `#0E0A14` | Clear color / page bg |
+| canvas | `#08060C` | Clear color / page bg (near-black) |
 
-`pickColor` target mix: **~50% pumpkin/peach/gold · ~30% flag green · ~20% soft white**. Tuned for a premium field on `#0E0A14`, not a literal flag stripe.
+`pickColor` target mix: **~50% pumpkin/peach/gold · ~30% flag green · ~20% soft white**. Tuned for a premium field on `#08060C`.
 
 ### Mobile (~390px / ≤767px)
 
@@ -185,9 +193,9 @@ From `heroParticlePalette.ts`:
 | DPR cap | **1.15** | 1.5 |
 | Camera FOV / Z | 42° / `8.2` | 36° / `7.6` |
 | Sphere position | `(0, 0.28, 0)` | `(0.2, 0.72, 0)` |
-| Pointer coupling | off for touch | on |
+| Pointer coupling | off | damped desktop only |
 
-Pause only when hero `intersectionRatio === 0` (with generous `rootMargin` on mobile) or the tab is hidden — do not pause while any of the hero is visible.
+Pause when hero `intersectionRatio === 0` (generous `rootMargin` on mobile) or the tab is hidden.
 
 Point **attribute sizes** are in the ranges in §3; on-screen pixel size is perspective-scaled in the vertex shader (`260 / -mv.z`).
 
@@ -196,14 +204,14 @@ Point **attribute sizes** are in the ranges in §3; on-screen pixel size is pers
 ## 8. Performance tricks (match these on native)
 
 1. **No antialiasing** on the GL context.
-2. **Capped DPR** (1.25 mobile / 1.5 desktop).
-3. **Fewer particles on mobile** (4600+3200 vs 10400+8200).
-4. **Single `requestAnimationFrame` loop**; early-return when paused (no `render` call).
-5. **Pause when document hidden** (`visibilitychange`).
-6. **Pause when hero is off-screen** — `IntersectionObserver` on `.bawo-hero-section` (threshold `0.08`). Last frame remains as a static backdrop while the rest of the page scrolls.
-7. **`prefers-reduced-motion: reduce`** — draw **one** static frame; do not start the rAF loop; skip time-based drift.
-8. **Passive** `pointermove` listener.
-9. **ResizeObserver** on the host only (no window resize spam).
+2. **Capped DPR** (1.15 mobile / 1.5 desktop).
+3. **Fewer particles on mobile** (2800+1600 vs 10400+8200).
+4. **Single `requestAnimationFrame` loop**; skip `render` when paused; clamp `dt ≤ 1/30`.
+5. **Pause when document hidden** (`visibilitychange`) — reset `lastNow` on return.
+6. **Pause when hero is off-screen** — `IntersectionObserver` on `.bawo-hero-section`; last frame stays as static backdrop.
+7. **`prefers-reduced-motion: reduce`** — one static frame; no rAF loop.
+8. **Passive** `pointermove`; no touch pointer coupling.
+9. **ResizeObserver** on the host only.
 10. Dispose geometries, materials, and force context loss on unmount.
 
 Host CSS: fixed full viewport (`.bawo-particle-field--site`), `pointer-events: none`, behind content (`z-index: 0`).
@@ -213,10 +221,10 @@ Host CSS: fixed full viewport (`.bawo-particle-field--site`), `pointer-events: n
 ## 9. Suggested RN parity checklist
 
 - [ ] Same fibonacci band radii and counts (or proportional on low-end devices).
-- [ ] Same rotation rates (`0.07`, `sin(0.15)*0.04`) and pointer coupling.
+- [ ] Delta-time spin at `0.055` rad/s yaw + tiny pitch sine; smoothstep ease-in ~1.35s.
 - [ ] Additive soft discs (or Skia blur) in brand palette only.
-- [ ] Pause on app background + when hero not visible + reduced motion.
-- [ ] Clear color `#0E0A14`.
+- [ ] Pause on app background + when hero not visible + reduced motion (no dt spike on resume).
+- [ ] Clear color `#08060C`.
 - [ ] Optional: skip the wave layer on very low-end devices; keep the sphere.
 
 ---

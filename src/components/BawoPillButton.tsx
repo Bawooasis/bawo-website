@@ -59,14 +59,14 @@ export default function BawoPillButton({
     "inline-flex flex-row items-center justify-center gap-2 rounded-full font-semibold outline-none relative overflow-hidden " +
     "transition-[filter,transform,border-color] duration-150 ease-out " +
     "disabled:opacity-45 disabled:cursor-not-allowed disabled:hover:brightness-100 disabled:active:scale-100 " +
-    "focus-visible:ring-2 focus-visible:ring-white/25 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bawo-canvas,#0E0A14)]";
+    "focus-visible:ring-2 focus-visible:ring-white/25 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bawo-canvas,#08060C)]";
 
   const basePremium =
     "inline-flex flex-row items-center justify-center gap-2.5 rounded-full font-semibold outline-none overflow-hidden relative " +
     "transition-[transform,box-shadow,filter] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] " +
     "active:translate-y-0 active:scale-[0.98] " +
     "disabled:opacity-[0.55] disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:active:scale-100 " +
-    "focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bawo-canvas,#0E0A14)] " +
+    "focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bawo-canvas,#08060C)] " +
     "before:absolute before:inset-0 before:rounded-full before:opacity-0 before:transition-opacity before:duration-300 " +
     "hover:before:opacity-100";
 

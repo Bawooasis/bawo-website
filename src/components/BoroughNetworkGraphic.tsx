@@ -29,7 +29,7 @@ export default function BoroughNetworkGraphic({
         <radialGradient id="bawo-net-hub-glow" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor="#FFBC42" stopOpacity="0.5" />
           <stop offset="55%" stopColor="#FF6B00" stopOpacity="0.12" />
-          <stop offset="100%" stopColor="#0E0A14" stopOpacity="0" />
+          <stop offset="100%" stopColor="#08060C" stopOpacity="0" />
         </radialGradient>
         <filter id="bawo-net-glow" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur in="SourceGraphic" stdDeviation="0.35" result="b" />

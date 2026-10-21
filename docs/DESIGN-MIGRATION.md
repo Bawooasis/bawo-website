@@ -14,7 +14,7 @@ See also: [`docs/globe-animation.md`](./globe-animation.md) for the WebGL partic
 | Light orange | `#FF8C42` |
 | Gold | `#FFBC42` |
 | Copper (accent only) | `#B87333` |
-| Background | `#0E0A14` |
+| Background | `#08060C` (near-black) |
 | Card | `#221525` |
 | Text | `#F4F4F5` |
 | Font | Montserrat |

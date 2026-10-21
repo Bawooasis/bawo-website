@@ -19,8 +19,9 @@ const VERT = `
     vColor = aColor;
     vAlpha = aAlpha;
     vec3 pos = position;
-    pos.x += sin(uTime * 0.35 + aPhase) * 0.08 * aDrift;
-    pos.y += sin(uTime * 0.7 + aPhase) * 0.045 * aDrift;
+    // Gentle drift — small amplitude so it never fights the sphere spin
+    pos.x += sin(uTime * 0.28 + aPhase) * 0.045 * aDrift;
+    pos.y += sin(uTime * 0.52 + aPhase) * 0.028 * aDrift;
     vec4 mv = modelViewMatrix * vec4(pos, 1.0);
     gl_PointSize = clamp(aSize * (260.0 / max(1.0, -mv.z)), 1.0, 220.0);
     gl_Position = projectionMatrix * mv;
@@ -50,24 +51,34 @@ const FLAG_GREEN_SOFT = new THREE.Color(palette.flagGreenSoft);
 const WHITE = new THREE.Color(palette.white);
 const WHITE_SOFT = new THREE.Color(palette.whiteSoft);
 
+/** Constant angular rates (rad/s) — buttery slow continuous spin */
+const SPIN_Y_RAD_PER_SEC = 0.055;
+const PITCH_AMP = 0.022;
+const PITCH_FREQ = 0.07;
+/** Smoothstep ease-in duration for spin start (seconds) */
+const SPIN_EASE_SEC = 1.35;
+/** Pointer influence (heavily damped; never overwrites base spin) */
+const POINTER_YAW_GAIN = 0.05;
+const POINTER_PITCH_GAIN = 0.02;
+const POINTER_SMOOTH = 3.2;
+const CAM_SMOOTH = 2.8;
+/** Cap dt so a long pause / background tab doesn't jump */
+const MAX_DT = 1 / 30;
+
 /**
  * ~50% warm (pumpkin/peach/gold), ~30% Nigerian green, ~20% soft white.
- * Pumpkin is the brand anchor; green/white are accents, not stripes.
  */
 function pickColor(_x: number, _bias: number) {
   const roll = Math.random();
   if (roll < 0.5) {
-    // Warm brand family
     const warm = Math.random();
     if (warm < 0.58) return PUMPKIN;
     if (warm < 0.84) return PEACH;
     return GOLD;
   }
   if (roll < 0.8) {
-    // Nigerian green — prefer the brighter soft twin for additive readability
     return Math.random() > 0.28 ? FLAG_GREEN_SOFT : FLAG_GREEN;
   }
-  // Soft white (mostly whiteSoft; rare pure white sparkles)
   return Math.random() > 0.78 ? WHITE : WHITE_SOFT;
 }
 
@@ -128,6 +139,16 @@ function fillAttributes(count: number, place: (i: number) => ParticlePoint) {
   return geometry;
 }
 
+function smoothstep01(t: number) {
+  const x = Math.min(1, Math.max(0, t));
+  return x * x * (3 - 2 * x);
+}
+
+/** Exponential decay toward target — frame-rate independent */
+function damp(current: number, target: number, lambda: number, dt: number) {
+  return current + (target - current) * (1 - Math.exp(-lambda * dt));
+}
+
 export default function HeroParticleField({ className = "" }: HeroParticleFieldProps) {
   const hostRef = useRef<HTMLDivElement>(null);
 
@@ -138,7 +159,7 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const mobile = window.matchMedia("(max-width: 767px)").matches;
 
-    // Mobile: fewer, slightly larger dots for ~60fps on mid phones (~390px).
+    // Keep prior mobile caps unless mid-phone stutter warrants a drop.
     const sphereCount = mobile ? 2800 : 10400;
     const waveCount = mobile ? 1600 : 8200;
     const sizeBoost = mobile ? 1.35 : 1;
@@ -155,7 +176,6 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
     host.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
-    // Wider FOV + centered framing so the sphere sits behind hero copy on phones.
     const camera = new THREE.PerspectiveCamera(mobile ? 42 : 36, 1, 0.1, 40);
     camera.position.set(0, mobile ? 0.08 : 0.15, mobile ? 8.2 : 7.6);
 
@@ -174,12 +194,10 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
         const z = Math.sin(theta) * ring * radius;
         const py = y * radius * (0.92 + Math.random() * 0.1);
 
-        // Green dots slightly softer so white/pumpkin stay the bright accents.
         const color = pickColor(x, band < 0.34 ? 0.08 : 0);
         const isGreen = color === FLAG_GREEN || color === FLAG_GREEN_SOFT;
         const isWhite = color === WHITE || color === WHITE_SOFT;
         const baseAlpha = band < 0.34 ? 0.38 + Math.random() * 0.28 : 0.48 + Math.random() * 0.4;
-        // Greens: full alpha + slight size bump so they don't dissolve into pumpkin under additive blend.
         const alpha = isWhite ? baseAlpha * 0.72 : isGreen ? Math.min(1, baseAlpha * 1.08) : baseAlpha;
         const baseSize = band < 0.34 ? 0.2 + Math.random() * 0.08 : 0.13 + Math.random() * 0.09;
 
@@ -194,7 +212,6 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
       }),
       makeMaterial(),
     );
-    // Mobile: center sphere behind stacked title/phone; desktop keeps slight offset.
     sphere.position.set(mobile ? 0 : 0.2, mobile ? 0.28 : 0.72, 0);
     scene.add(sphere);
 
@@ -230,12 +247,13 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
     wave.position.set(0, mobile ? -0.55 : -0.42, 0);
     scene.add(wave);
 
-    const pointer = { x: 0, y: 0 };
+    const pointerTarget = { x: 0, y: 0 };
+    const pointerSmooth = { x: 0, y: 0 };
     const onPointer = (event: PointerEvent) => {
-      // Skip continuous pointer coupling on touch — saves CPU, avoids jumpiness.
-      if (mobile && event.pointerType === "touch") return;
-      pointer.x = (event.clientX / window.innerWidth - 0.5) * 2;
-      pointer.y = (event.clientY / window.innerHeight - 0.5) * 2;
+      // No touch coupling — avoids scroll/gesture fighting the spin on phones.
+      if (mobile || event.pointerType === "touch") return;
+      pointerTarget.x = (event.clientX / window.innerWidth - 0.5) * 2;
+      pointerTarget.y = (event.clientY / window.innerHeight - 0.5) * 2;
     };
     window.addEventListener("pointermove", onPointer, { passive: true });
 
@@ -252,32 +270,27 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
 
     let frame = 0;
     let pageVisible = !document.hidden;
-    /**
-     * Animate while any of the hero is on screen. Pause only when fully off
-     * (avoids annoying pause on mobile chrome show/hide / small scrolls).
-     */
     let heroVisible = true;
-    const started = performance.now();
+    let simTime = 0;
+    let easeT = 0;
+    let lastNow = performance.now();
     const materials = [sphere.material, wave.material] as THREE.ShaderMaterial[];
     const lookY = mobile ? 0.12 : 0.2;
     const camRestY = mobile ? 0.08 : 0.15;
+    const camRestX = 0;
 
-    const draw = (now: number) => {
-      const t = (now - started) / 1000;
+    const renderFrame = () => {
+      const ease = smoothstep01(easeT / SPIN_EASE_SEC);
       if (!reduced) {
-        for (const material of materials) material.uniforms.uTime.value = t;
+        for (const material of materials) material.uniforms.uTime.value = simTime;
       }
-      sphere.rotation.y = t * 0.07;
-      sphere.rotation.x = Math.sin(t * 0.15) * 0.04;
-      if (!mobile) {
-        sphere.rotation.y += pointer.x * 0.12;
-        sphere.rotation.x += pointer.y * -0.05;
-        camera.position.x += (pointer.x * 0.28 - camera.position.x) * 0.04;
-        camera.position.y += (camRestY - pointer.y * 0.18 - camera.position.y) * 0.04;
-      } else {
-        camera.position.x *= 0.96;
-        camera.position.y += (camRestY - camera.position.y) * 0.06;
-      }
+      // Continuous spin from accumulated simTime — no loop resets / wrap jumps.
+      sphere.rotation.y =
+        simTime * SPIN_Y_RAD_PER_SEC * ease + pointerSmooth.x * POINTER_YAW_GAIN * ease;
+      sphere.rotation.x =
+        Math.sin(simTime * PITCH_FREQ) * PITCH_AMP * ease +
+        pointerSmooth.y * -POINTER_PITCH_GAIN * ease;
+
       camera.lookAt(0, lookY, 0);
       renderer.render(scene, camera);
     };
@@ -286,15 +299,54 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
 
     const loop = (now: number) => {
       frame = window.requestAnimationFrame(loop);
-      if (!shouldAnimate()) return;
-      draw(now);
+
+      // Always refresh lastNow when paused so resume doesn't get a huge dt spike.
+      if (!shouldAnimate()) {
+        lastNow = now;
+        return;
+      }
+
+      let dt = (now - lastNow) / 1000;
+      lastNow = now;
+      if (dt < 0) dt = 0;
+      if (dt > MAX_DT) dt = MAX_DT;
+
+      simTime += dt;
+      easeT = Math.min(SPIN_EASE_SEC, easeT + dt);
+
+      if (!mobile) {
+        pointerSmooth.x = damp(pointerSmooth.x, pointerTarget.x, POINTER_SMOOTH, dt);
+        pointerSmooth.y = damp(pointerSmooth.y, pointerTarget.y, POINTER_SMOOTH, dt);
+        camera.position.x = damp(
+          camera.position.x,
+          camRestX + pointerSmooth.x * 0.18,
+          CAM_SMOOTH,
+          dt,
+        );
+        camera.position.y = damp(
+          camera.position.y,
+          camRestY - pointerSmooth.y * 0.1,
+          CAM_SMOOTH,
+          dt,
+        );
+      } else {
+        pointerSmooth.x = damp(pointerSmooth.x, 0, POINTER_SMOOTH, dt);
+        pointerSmooth.y = damp(pointerSmooth.y, 0, POINTER_SMOOTH, dt);
+        camera.position.x = damp(camera.position.x, camRestX, CAM_SMOOTH, dt);
+        camera.position.y = damp(camera.position.y, camRestY, CAM_SMOOTH, dt);
+      }
+
+      renderFrame();
     };
 
-    draw(started);
+    // Static first paint (also final state for reduced motion).
+    renderFrame();
     if (!reduced) frame = window.requestAnimationFrame(loop);
 
     const onVisibility = () => {
       pageVisible = !document.hidden;
+      // Reset clock baseline on return so the next frame's dt is small.
+      lastNow = performance.now();
     };
     document.addEventListener("visibilitychange", onVisibility);
 
@@ -303,12 +355,12 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
       document.querySelector<HTMLElement>("#root");
     const intersectObs = new IntersectionObserver(
       ([entry]) => {
-        // Any visible pixels keep animation running (esp. mobile URL-bar resize).
-        heroVisible = (entry?.intersectionRatio ?? 0) > 0;
+        const next = (entry?.intersectionRatio ?? 0) > 0;
+        if (next && !heroVisible) lastNow = performance.now();
+        heroVisible = next;
       },
       {
         threshold: [0, 0.01, 0.05],
-        // Generous margin so tiny viewport chrome changes don't flip visibility.
         rootMargin: mobile ? "120px 0px 120px 0px" : "40px 0px 40px 0px",
       },
     );

@@ -4,7 +4,7 @@
  *
  * Brand system (app build 165):
  *   pumpkin #FF6B00 (primary), light orange #FF8C42, gold #FFBC42,
- *   copper #B87333 (accent only), background #0E0A14, card #221525, text #F4F4F5
+ *   copper #B87333 (accent only), background #08060C (near-black), card #221525, text #F4F4F5
  */
 const BRAND_CTA_ORANGE = "#FF6B00";
 
@@ -13,19 +13,19 @@ export const contentPalette = {
   pumpkin: "#FF6B00",
   peach: "#FF8C42",
   gold: "#FFBC42",
-  ink: "#0E0A14",
-  navy: "#1A0A28",
-  eggplant: "#2A1438",
-  eggplantLight: "#3A1D48",
+  ink: "#08060C",
+  navy: "#14081C",
+  eggplant: "#24122E",
+  eggplantLight: "#32183C",
 };
 
 export const palette = {
   obsidian: {
-    /** App / site canvas — warm near-black from build 165 */
-    canvas: "#0E0A14",
-    /** Cards, panels, elevated surfaces */
+    /** Near-black canvas (#07050B–#0A0710 range; deeper than prior #0E0A14) */
+    canvas: "#08060C",
+    /** Cards, panels, elevated surfaces — keep readable lift off canvas */
     elevated: "#221525",
-    depth: "#1A0A28",
+    depth: "#120A18",
   },
   content: contentPalette,
   copper: {
@@ -40,7 +40,7 @@ export const palette = {
   heritageGold: contentPalette.gold,
   sectionTitleAccent: contentPalette.pumpkin,
   /** Text on solid pumpkin / copper fills */
-  textOnCta: "#0E0A14",
+  textOnCta: "#08060C",
   glass: {
     fill: "rgba(34, 21, 37, 0.72)",
     fillRaised: "rgba(42, 20, 56, 0.78)",
@@ -59,7 +59,7 @@ export const palette = {
       "rgba(255, 107, 0, 0.88) 0%",
       "rgba(255, 140, 66, 0.92) 38%",
       "rgba(58, 29, 72, 0.75) 62%",
-      "rgba(14, 10, 20, 0.92) 100%",
+      "rgba(8, 6, 12, 0.92) 100%",
     ],
   },
   liquidGlass: {

@@ -107,8 +107,8 @@ export const TAILWIND_COLORS = {
     primary: "bg-gradient-to-r from-bawo-navy via-bawo-eggplant to-bawo-pumpkin",
     primaryHover: "hover:from-bawo-eggplant hover:to-bawo-peach",
     background:
-      "bg-gradient-to-b from-[#0E0A14] via-[#221525] to-[#0E0A14]",
-    subtle: "bg-gradient-to-b from-[#0E0A14] to-[#221525]",
+      "bg-gradient-to-b from-[#08060C] via-[#221525] to-[#08060C]",
+    subtle: "bg-gradient-to-b from-[#08060C] to-[#221525]",
   },
   text: {
     primary: "text-[var(--bawo-text-primary,#F4F4F5)]",
@@ -116,9 +116,9 @@ export const TAILWIND_COLORS = {
     muted: "text-white/60",
   },
   bg: {
-    obsidian: "bg-[#0E0A14]",
-    deepest: "bg-[#0E0A14]",
-    main: "bg-[#0E0A14]",
+    obsidian: "bg-[#08060C]",
+    deepest: "bg-[#08060C]",
+    main: "bg-[#08060C]",
     surface: "bg-[#221525]",
     card: "bg-[var(--bawo-card,#221525)]",
     overlay: {
