@@ -169,7 +169,7 @@ From `heroParticlePalette.ts`:
 | pumpkin | `#FF6B00` | Dominant brand dots |
 | peach | `#FF8C42` | Secondary warm |
 | gold | `#FFBC42` | Warm accent within the 50% warm bucket |
-| flagGreen / soft | `#1FAE66` / `#4FD68A` | Nigerian green (~30%); lifted from `#008751` so additive blend reads on dark canvas |
+| flagGreen / soft | `#2ECC71` / `#5CFF9A` | Nigerian green (~30%); lifted from `#008751` so additive blend reads on dark canvas |
 | white / whiteSoft | `#FFFFFF` / `#E8E6E3` | Soft whites (~20%); prefer soft |
 | canvas | `#0E0A14` | Clear color / page bg |
 
