@@ -176,18 +176,18 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
 
         // Green dots slightly softer so white/pumpkin stay the bright accents.
         const color = pickColor(x, band < 0.34 ? 0.08 : 0);
+        const isGreen = color === FLAG_GREEN || color === FLAG_GREEN_SOFT;
         const isWhite = color === WHITE || color === WHITE_SOFT;
         const baseAlpha = band < 0.34 ? 0.38 + Math.random() * 0.28 : 0.48 + Math.random() * 0.4;
-        // Keep green at full alpha so flag greens punch through additive warm neighbors.
-        const alpha = isWhite ? baseAlpha * 0.72 : baseAlpha;
+        // Greens: full alpha + slight size bump so they don't dissolve into pumpkin under additive blend.
+        const alpha = isWhite ? baseAlpha * 0.72 : isGreen ? Math.min(1, baseAlpha * 1.08) : baseAlpha;
+        const baseSize = band < 0.34 ? 0.2 + Math.random() * 0.08 : 0.13 + Math.random() * 0.09;
 
         return {
           x,
           y: py,
           z,
-          size:
-            (band < 0.34 ? 0.2 + Math.random() * 0.08 : 0.13 + Math.random() * 0.09) *
-            sizeBoost,
+          size: baseSize * sizeBoost * (isGreen ? 1.22 : 1),
           alpha,
           color,
         };

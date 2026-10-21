@@ -10,12 +10,12 @@ export const heroParticlePalette = {
   peach: "#FF8C42",
   gold: "#FFBC42",
   /**
-   * Nigerian flag green `#008751` projected brighter for additive WebGL points
-   * (raw flag green is too dark to read on #0E0A14 with AdditiveBlending).
+   * Nigerian flag green `#008751` projected for additive WebGL points.
+   * Must stay clearly green (not yellow) when mixed with pumpkin under AdditiveBlending.
    */
-  flagGreen: "#2ECC71",
-  /** Brighter twin for variety in the ~30% green bucket (still flag-adjacent) */
-  flagGreenSoft: "#5CFF9A",
+  flagGreen: "#00C853",
+  /** High-luma emerald so greens read as distinct dots on phone screens */
+  flagGreenSoft: "#69FFA0",
   copper: "#B87333",
   white: "#FFFFFF",
   /** Soft white — preferred over pure #FFF for most “white” dots */
