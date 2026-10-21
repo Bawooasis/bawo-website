@@ -13,9 +13,9 @@ export const heroParticlePalette = {
    * Nigerian flag green `#008751` projected brighter for additive WebGL points
    * (raw flag green is too dark to read on #0E0A14 with AdditiveBlending).
    */
-  flagGreen: "#1FAE66",
-  /** Softer / brighter twin for variety in the ~30% green bucket */
-  flagGreenSoft: "#4FD68A",
+  flagGreen: "#2ECC71",
+  /** Brighter twin for variety in the ~30% green bucket (still flag-adjacent) */
+  flagGreenSoft: "#5CFF9A",
   copper: "#B87333",
   white: "#FFFFFF",
   /** Soft white — preferred over pure #FFF for most “white” dots */

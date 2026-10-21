@@ -59,13 +59,13 @@ function pickColor(_x: number, _bias: number) {
   if (roll < 0.5) {
     // Warm brand family
     const warm = Math.random();
-    if (warm < 0.55) return PUMPKIN;
-    if (warm < 0.82) return PEACH;
+    if (warm < 0.58) return PUMPKIN;
+    if (warm < 0.84) return PEACH;
     return GOLD;
   }
   if (roll < 0.8) {
-    // Nigerian green — soft lift so additive blend isn't muddy
-    return Math.random() > 0.35 ? FLAG_GREEN_SOFT : FLAG_GREEN;
+    // Nigerian green — prefer the brighter soft twin for additive readability
+    return Math.random() > 0.28 ? FLAG_GREEN_SOFT : FLAG_GREEN;
   }
   // Soft white (mostly whiteSoft; rare pure white sparkles)
   return Math.random() > 0.78 ? WHITE : WHITE_SOFT;
@@ -176,15 +176,10 @@ export default function HeroParticleField({ className = "" }: HeroParticleFieldP
 
         // Green dots slightly softer so white/pumpkin stay the bright accents.
         const color = pickColor(x, band < 0.34 ? 0.08 : 0);
-        const isGreen =
-          color === FLAG_GREEN || color === FLAG_GREEN_SOFT;
         const isWhite = color === WHITE || color === WHITE_SOFT;
         const baseAlpha = band < 0.34 ? 0.38 + Math.random() * 0.28 : 0.48 + Math.random() * 0.4;
-        const alpha = isGreen
-          ? baseAlpha * 0.82
-          : isWhite
-            ? baseAlpha * 0.72
-            : baseAlpha;
+        // Keep green at full alpha so flag greens punch through additive warm neighbors.
+        const alpha = isWhite ? baseAlpha * 0.72 : baseAlpha;
 
         return {
           x,
