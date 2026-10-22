@@ -1,6 +1,6 @@
 :root {
   /* Build 165 brand tokens — aligned with marketing site */
-  --portal-bg: #0E0A14;
+  --portal-bg: #08060C;
   --portal-bg-soft: #221525;
   --portal-panel: #221525;
   --portal-panel-2: #2A1438;
@@ -242,7 +242,7 @@
 .portal-row-actions button { min-height: 38px; display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.5rem 0.7rem; border: 1px solid var(--portal-border); border-radius: 10px; color: var(--portal-text); background: rgba(184, 115, 51, 0.08); cursor: pointer; font-size: 0.71rem; }
 .portal-row-actions button:hover { border-color: rgba(242, 179, 126, 0.35); background: rgba(184, 115, 51, 0.14); }
 .portal-row-actions button.is-danger { color: #ffc2c2; border-color: rgba(255, 119, 119, 0.25); }
-.portal-row-actions button.is-primary { color: #0E0A14; border-color: rgba(255, 205, 163, 0.35); background: linear-gradient(135deg, #FF8C42, #FF6B00); font-weight: 800; }
+.portal-row-actions button.is-primary { color: #08060C; border-color: rgba(255, 205, 163, 0.35); background: linear-gradient(135deg, #FF8C42, #FF6B00); font-weight: 800; }
 .portal-row-actions button:disabled,
 .portal-primary-button:disabled { opacity: 0.55; cursor: wait; }
 .portal-row-actions svg { width: 13px; height: 13px; }
@@ -264,7 +264,7 @@
 .portal-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 .portal-form textarea { resize: vertical; }
 .portal-form-note { margin: 0; color: var(--portal-muted); font-size: 0.69rem; line-height: 1.5; }
-.portal-primary-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; border: 1px solid rgba(255, 205, 163, 0.35); border-radius: 999px; padding: 0.75rem 1.2rem; color: #0E0A14; background: linear-gradient(135deg, #FF8C42, #FF6B00); box-shadow: 0 12px 30px rgba(255, 107, 0, 0.22); font-weight: 800; text-decoration: none; cursor: pointer; }
+.portal-primary-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; border: 1px solid rgba(255, 205, 163, 0.35); border-radius: 999px; padding: 0.75rem 1.2rem; color: #08060C; background: linear-gradient(135deg, #FF8C42, #FF6B00); box-shadow: 0 12px 30px rgba(255, 107, 0, 0.22); font-weight: 800; text-decoration: none; cursor: pointer; }
 .portal-primary-button svg { width: 16px; height: 16px; margin-right: 0.45rem; }
 
 .social-ops-hero { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 2rem; overflow: hidden; padding: clamp(1.3rem, 3vw, 2.2rem); border: 1px solid rgba(242, 179, 126, 0.28); border-radius: 24px; background: radial-gradient(circle at 78% 20%, rgba(255, 104, 166, 0.16), transparent 16rem), radial-gradient(circle at 100% 100%, rgba(68, 197, 255, 0.13), transparent 17rem), linear-gradient(135deg, rgba(44, 17, 49, 0.97), rgba(14, 7, 21, 0.98)); box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22); }
@@ -323,7 +323,7 @@
 .social-schedule-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 0.4rem; }
 .social-schedule-row input,
 .social-schedule-row button { min-width: 0; min-height: 38px; border: 1px solid var(--portal-border); border-radius: 9px; padding: 0.45rem 0.55rem; color: var(--portal-text); background: rgba(6, 3, 12, 0.7); font-size: 0.66rem; }
-.social-schedule-row button { color: #0E0A14; background: linear-gradient(135deg, #FF8C42, #FF6B00); font-weight: 800; cursor: pointer; }
+.social-schedule-row button { color: #08060C; background: linear-gradient(135deg, #FF8C42, #FF6B00); font-weight: 800; cursor: pointer; }
 .social-tiktok-controls p { margin: 0; min-height: 0; color: var(--portal-muted); font-size: 0.67rem; line-height: 1.5; }
 .social-tiktok-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
 .social-tiktok-actions button,
@@ -364,7 +364,7 @@
 .crm-lead-controls svg { width: 14px; height: 14px; }
 .crm-activity-composer { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr auto; gap: 0.55rem; }
 .crm-activity-composer textarea { min-height: 70px; border: 1px solid var(--portal-border); border-radius: 11px; padding: 0.7rem; color: var(--portal-text); background: rgba(6, 3, 12, 0.65); resize: vertical; }
-.crm-activity-composer button { align-self: stretch; color: #0E0A14; background: linear-gradient(135deg, #FF8C42, #FF6B00); font-weight: 800; cursor: pointer; }
+.crm-activity-composer button { align-self: stretch; color: #08060C; background: linear-gradient(135deg, #FF8C42, #FF6B00); font-weight: 800; cursor: pointer; }
 
 .portal-callout { display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
 .portal-callout h2 { max-width: 700px; font-size: clamp(1.45rem, 3vw, 2rem); }

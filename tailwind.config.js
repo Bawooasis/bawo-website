@@ -38,7 +38,7 @@ export default {
           peach: "var(--bawo-peach, #FF8C42)",
           gold: "var(--bawo-gold, #FFBC42)",
           copper: "var(--bawo-copper, #B87333)",
-          ink: "var(--bawo-ink, #0E0A14)",
+          ink: "var(--bawo-ink, #08060C)",
           card: "var(--bawo-card, #221525)",
           navy: "var(--bawo-navy, #1a0a28)",
           eggplant: "var(--bawo-eggplant, #2a1438)",
