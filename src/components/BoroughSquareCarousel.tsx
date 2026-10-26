@@ -17,7 +17,7 @@ export default function BoroughSquareCarousel({
   rotationStaggerMs = 0,
 }: BoroughSquareCarouselProps) {
   const rootRef = useRef<HTMLDivElement>(null);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const intervalRef = useRef<number | null>(null);
   const [visible, setVisible] = useState(false);
   const [index, setIndex] = useState(0);
   const safeImages = images.length > 0 ? images : [];

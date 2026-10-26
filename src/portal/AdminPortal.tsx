@@ -1,6 +1,7 @@
 import {
   Activity,
   Building2,
+  Calendar,
   Check,
   AlertCircle,
   FileWarning,
@@ -120,6 +121,13 @@ export default function AdminPortal({
         tone: data.metrics.pendingGroupRequests > 0 ? "warning" as const : "neutral" as const,
       },
       {
+        label: "Pending events",
+        value: data.metrics.pendingEvents ?? 0,
+        detail: "Community & organizer events to review",
+        icon: Calendar,
+        tone: (data.metrics.pendingEvents ?? 0) > 0 ? "warning" as const : "neutral" as const,
+      },
+      {
         label: "Business claims",
         value: data.metrics.pendingBusinessClaims,
         detail: "Ownership requests to verify",
@@ -163,6 +171,7 @@ export default function AdminPortal({
             </div>
           </div>
           <div className="portal-queue-grid">
+            <div className={(data.metrics.pendingEvents ?? 0) > 0 ? "has-work" : ""}><strong>{data.metrics.pendingEvents ?? 0}</strong><span>pending events</span></div>
             <div className={data.metrics.pendingGroupRequests > 0 ? "has-work" : ""}><strong>{data.metrics.pendingGroupRequests}</strong><span>group requests</span></div>
             <div className={data.metrics.pendingBusinessClaims > 0 ? "has-work" : ""}><strong>{data.metrics.pendingBusinessClaims}</strong><span>business claims</span></div>
             <div className={data.metrics.pendingReports > 0 ? "has-work" : ""}><strong>{data.metrics.pendingReports}</strong><span>member reports</span></div>
@@ -334,6 +343,73 @@ export default function AdminPortal({
     );
   }
 
+  if (activeTab === "events") {
+    const submissions = data.eventSubmissions || [];
+    return (
+      <section className="portal-panel">
+        <div className="portal-panel-heading">
+          <div>
+            <span className="portal-kicker">Culture Hub moderation</span>
+            <h2>Submitted &amp; created events</h2>
+          </div>
+        </div>
+        <div className="portal-list">
+          {submissions.length === 0 && (
+            <EmptyState
+              icon={Calendar}
+              title="No submitted events waiting"
+              body="Community submissions and custom organizer events from the BawoSocial mobile app will appear here for review."
+            />
+          )}
+          {submissions.map((ev) => (
+            <article className="portal-list-row" key={ev.id}>
+              <div className="portal-list-main">
+                <strong>{ev.title}</strong>
+                <span>
+                  {(ev.provider === "bawosocial" ? "Created Event" : "Community Tip")} · {ev.venue_name || ev.location || ev.city || "NYC"} · {formatDate(ev.starts_at)}
+                </span>
+              </div>
+              <span className={`portal-status ${ev.moderation_status === "approved" ? "is-success" : ev.moderation_status === "rejected" ? "is-danger" : "is-warning"}`}>
+                {ev.moderation_status}
+              </span>
+              <div className="portal-row-actions">
+                {ev.moderation_status !== "approved" && (
+                  <button
+                    disabled={busy}
+                    onClick={() =>
+                      confirmAction(
+                        `Approve and publish "${ev.title}" to the BawoSocial NYC Events feed?`,
+                        { action: "review_event_submission", targetId: ev.id, decision: "approved" },
+                        "Event approved and published to the NYC feed.",
+                      )
+                    }
+                  >
+                    <Check aria-hidden /> Approve
+                  </button>
+                )}
+                {ev.moderation_status !== "rejected" && (
+                  <button
+                    className="is-danger"
+                    disabled={busy}
+                    onClick={() =>
+                      confirmAction(
+                        `Reject "${ev.title}"?`,
+                        { action: "review_event_submission", targetId: ev.id, decision: "rejected" },
+                        "Event rejected.",
+                      )
+                    }
+                  >
+                    <X aria-hidden /> Reject
+                  </button>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
   if (activeTab === "businesses") {
     return (
       <section className="portal-panel">
@@ -415,7 +491,7 @@ export default function AdminPortal({
           )}
           {data.auditLog.map((entry) => (
             <article className="portal-list-row" key={entry.id}>
-              <div className="portal-list-main"><strong>{entry.action.replaceAll("_", " ")}</strong><span>{entry.target_type} · {formatDate(entry.created_at)}{entry.reason ? ` · ${entry.reason}` : ""}</span></div>
+              <div className="portal-list-main"><strong>{entry.action.split("_").join(" ")}</strong><span>{entry.target_type} · {formatDate(entry.created_at)}{entry.reason ? ` · ${entry.reason}` : ""}</span></div>
               <span className={`portal-status ${entry.outcome === "success" ? "is-success" : "is-danger"}`}>{entry.outcome}</span>
             </article>
           ))}

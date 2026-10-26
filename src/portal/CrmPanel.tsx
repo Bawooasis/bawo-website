@@ -46,7 +46,7 @@ const draftFromLead = (lead: CrmLead): LeadDraft => ({
   ownerName: lead.owner_name || "", offer: lead.offer || "", nextAction: lead.next_action || "",
   nextActionAt: localDate(lead.next_action_at), notes: lead.notes || "",
 });
-const pretty = (value: string) => value.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+const pretty = (value: string) => value.split("_").join(" ").replace(/\b\w/g, (letter: string) => letter.toUpperCase());
 
 export default function CrmPanel({ leads, activities, busy, onAction }: CrmPanelProps) {
   const [query, setQuery] = useState("");

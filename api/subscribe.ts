@@ -46,7 +46,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }),
     });
 
-    const data = await response.json();
+    const data = (await response.json()) as { id?: string; message?: string; title?: string; status?: number | string };
 
     if (!response.ok) {
       console.error("Mailchimp API error:", data);

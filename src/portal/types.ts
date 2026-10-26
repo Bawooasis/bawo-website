@@ -19,6 +19,7 @@ export type PlatformMetrics = {
   activeGroups: number;
   pendingGroupRequests: number;
   pendingBusinessClaims: number;
+  pendingEvents?: number;
   pendingReports: number;
 };
 
@@ -64,6 +65,28 @@ export type GroupRequest = {
   status: string;
   votes: number;
   created_at: string;
+};
+
+export type EventSubmission = {
+  id: string;
+  provider: string;
+  provider_id: string;
+  title: string;
+  description: string | null;
+  starts_at: string;
+  ends_at: string | null;
+  venue_name: string | null;
+  city: string | null;
+  location: string | null;
+  image_url: string | null;
+  url: string | null;
+  source: string | null;
+  category: string | null;
+  status: string | null;
+  moderation_status: string;
+  is_featured: boolean;
+  submitted_by: string | null;
+  created_at: string | null;
 };
 
 export type BusinessClaim = {
@@ -207,6 +230,7 @@ export type AdminOverview = {
   groups: PlatformGroup[];
   groupRequests: GroupRequest[];
   businessClaims: BusinessClaim[];
+  eventSubmissions?: EventSubmission[];
   socialContent: SocialContentItem[];
   socialConnections: SocialConnection[];
   socialPublishJobs: SocialPublishJob[];
@@ -248,6 +272,7 @@ export type AdminAction = {
     | "set_group_state"
     | "review_group_request"
     | "review_business_claim"
+    | "review_event_submission"
     | "save_social_content"
     | "archive_social_content"
     | "start_instagram_connection"
