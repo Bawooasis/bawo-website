@@ -1,10 +1,11 @@
-import { Handshake, Home, Package, Scale } from "lucide-react";
+import { Building2, Handshake, Home, Package, Scale, Store } from "lucide-react";
 import { CONTENT } from "../constants/content";
 
 const audiences = [
-  { label: "Community restaurants & shops", Icon: Home },
-  { label: "Immigration & legal support", Icon: Scale },
-  { label: "Shipping & logistics partners", Icon: Package },
+  { label: "Nigerian restaurants, bukas & suya lounges", Icon: Home },
+  { label: "Braiding salons, barbers, gele & fashion", Icon: Store },
+  { label: "Immigration, legal, tax & healthcare pros", Icon: Scale },
+  { label: "African food markets & Lagos/Abuja cargo", Icon: Package },
 ] as const;
 
 export default function PartnerWithUsSection() {
@@ -18,45 +19,46 @@ export default function PartnerWithUsSection() {
       className="relative py-10 md:py-14 bg-transparent"
       aria-labelledby="partner-with-us-heading"
     >
-      <div className="relative z-10 container mx-auto px-6 max-w-3xl">
-        <div className="animate-on-scroll glass-card rounded-2xl p-6 sm:p-8 border border-bawo-eggplant-light/40">
+      <div className="relative z-10 container mx-auto px-6 max-w-5xl">
+        <div className="animate-on-scroll glass-card rounded-3xl p-7 sm:p-10">
           <div className="space-y-5 text-center sm:text-left">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-museo-bold uppercase tracking-wider text-[#FFBC42]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#E8B959]/40 bg-[#E8B959]/12 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#E8B959]">
               <Handshake className="w-3.5 h-3.5" aria-hidden />
-              For local businesses
+              BawoSocial for Nigerian Businesses in NYC
             </div>
             <h2
               id="partner-with-us-heading"
-              className="font-display text-2xl sm:text-3xl font-bold text-white leading-snug"
+              className="font-display text-3xl sm:text-4xl md:text-[2.6rem] font-bold text-[#F7F3FA] leading-tight"
             >
               {headline}
             </h2>
-            <p className="text-sm sm:text-base text-white/75 font-museo-medium leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg text-[#F7F3FA]/80 leading-relaxed">
               {body}
             </p>
 
-            <ul className="flex flex-wrap justify-center sm:justify-start gap-2 pt-1">
+            <ul className="flex flex-wrap justify-center sm:justify-start gap-2.5 pt-1">
               {audiences.map(({ label, Icon }) => (
                 <li
                   key={label}
-                  className="glass-pill inline-flex items-center gap-2 px-3 py-1.5 text-xs text-white/85 font-museo-medium"
+                  className="glass-pill inline-flex items-center gap-2 px-3.5 py-1.5 text-xs text-[#FFE8B3] font-semibold"
                 >
-                  <Icon className="w-3.5 h-3.5 bawo-accent-soft shrink-0" aria-hidden />
+                  <Icon className="w-3.5 h-3.5 text-[#E8B959] shrink-0" aria-hidden />
                   {label}
                 </li>
               ))}
             </ul>
 
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-3.5 pt-2">
               <a
-                href="/business"
-                className="inline-flex w-full sm:w-auto items-center justify-center rounded-[var(--bawo-radius-pill)] min-h-11 px-6 text-sm font-museo-bold text-bawo-eggplant border border-bawo-peach/45 bg-bawo-pumpkin transition-colors hover:bg-bawo-peach"
+                href="/businesses"
+                className="bawo-cta-premium inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full min-h-12 px-7 text-sm font-bold no-underline transition-transform hover:-translate-y-0.5"
               >
-                {ctaLabel}
+                <Building2 className="w-4 h-4 shrink-0 text-[#0E0A14]" aria-hidden />
+                <span>{ctaLabel}</span>
               </a>
               <a
                 href={mailHref}
-                className="inline-flex w-full sm:w-auto items-center justify-center rounded-[var(--bawo-radius-pill)] min-h-11 px-6 text-sm font-museo-bold text-white border border-bawo-pumpkin/30 bg-bawo-eggplant/25 transition-colors hover:bg-bawo-eggplant-light/45"
+                className="bawo-cta-outline inline-flex w-full sm:w-auto items-center justify-center rounded-full min-h-12 px-7 text-sm font-bold text-[#F7F3FA] no-underline transition-transform hover:-translate-y-0.5"
               >
                 Contact partnerships
               </a>

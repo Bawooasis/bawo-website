@@ -1,9 +1,10 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { BadgeCheck, Calendar, Headphones, Star } from "lucide-react";
+import { BadgeCheck, Building2, Calendar, Headphones, MapPin, Sparkles, Star } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import BoroughNetworkGraphic from "./components/BoroughNetworkGraphic";
 import BoroughSquareCarousel from "./components/BoroughSquareCarousel";
+import CommunityCirclesSection from "./components/CommunityCirclesSection";
 import CommunityMissionSection from "./components/CommunityMissionSection";
 import FaqSection from "./components/FaqSection";
 import FoundingMemberButton from "./components/FoundingMemberButton";
@@ -161,6 +162,13 @@ function App() {
 
           <div className="bawo-hero-cinematic__top">
             <a
+              href="/businesses"
+              className="bawo-hero-cinematic__pill bawo-hero-cinematic__pill--business"
+            >
+              <Building2 className="h-3.5 w-3.5 text-[#E8B959] shrink-0" aria-hidden />
+              <span>Businesses</span>
+            </a>
+            <a
               href={CONTENT.hero.testflightLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -186,6 +194,10 @@ function App() {
 
           <div className="bawo-hero-cinematic__stage relative z-10 flex flex-col">
             <div className="bawo-hero-cinematic__main">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#E8B959]/40 bg-[#1C132B]/75 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-widest text-[#FFE8B3] backdrop-blur-xl mb-1">
+                <Sparkles className="h-3.5 w-3.5 text-[#E8B959]" aria-hidden />
+                <span>BawoSocial · The Culture Hub for Nigerians in NYC</span>
+              </div>
               <h1 ref={headlineRef} className="bawo-hero-cinematic__title font-display">
                 {CONTENT.hero.title.lead}
                 <span className="bawo-hero-neon">{CONTENT.hero.title.highlight}</span>
@@ -200,11 +212,15 @@ function App() {
                 {CONTENT.hero.subtitle}
               </p>
               <div ref={ctaRef} className="bawo-hero-cinematic__footer-actions">
-                <a href="#about" className="bawo-hero-cinematic__pill">
-                  For community
+                <a href="#community-circles" className="bawo-hero-cinematic__pill">
+                  Nigerian Circles
                 </a>
                 <a href="#events" className="bawo-hero-cinematic__pill">
-                  For events
+                  Afrobeats & Events
+                </a>
+                <a href="/businesses" className="bawo-hero-cinematic__pill bawo-hero-cinematic__pill--business">
+                  <Building2 className="h-3.5 w-3.5 text-[#E8B959]" aria-hidden />
+                  <span>For Businesses</span>
                 </a>
               </div>
             </div>
@@ -236,7 +252,9 @@ function App() {
           </div>
         </section>
 
-        {/* Building the Network — section 2 (borough hubs) */}
+        <CommunityCirclesSection />
+
+        {/* Building the Network — section 2 (borough hubs + Live NYC Borough Pulse) */}
         <section
           ref={globalReachRef}
           id="building-the-network"
@@ -245,13 +263,17 @@ function App() {
           <div className="relative z-10 container mx-auto px-5 sm:px-6 py-12 md:py-14">
             <div className="text-center space-y-8 md:space-y-12 max-w-[1400px] mx-auto">
               <div className="space-y-5 md:space-y-7">
-                <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white font-museo-bold leading-[1.08] tracking-tight">
+                <div className="inline-flex items-center gap-2 rounded-full border border-[#E8B959]/35 bg-[#1C132B]/75 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#E8B959] backdrop-blur-xl">
+                  <MapPin className="w-3.5 h-3.5 shrink-0" aria-hidden />
+                  <span>Live NYC Borough Pulse · 5 Boroughs + NJ Corridor</span>
+                </div>
+                <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-[#F7F3FA] font-display leading-[1.04] tracking-tight">
                   {CONTENT.globalReach.title}
                 </h2>
-                <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-museo-medium text-white/85 max-w-4xl mx-auto leading-snug">
+                <p className="text-xl sm:text-2xl md:text-3xl font-medium text-[#F7F3FA]/85 max-w-4xl mx-auto leading-snug">
                   {CONTENT.globalReach.subtitle}
                 </p>
-                <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-museo-regular text-bawo-peach max-w-3xl mx-auto leading-relaxed">
+                <p className="text-base sm:text-lg md:text-xl font-medium text-[#FFE8B3] max-w-3xl mx-auto leading-relaxed">
                   {CONTENT.globalReach.description}
                 </p>
               </div>
@@ -277,15 +299,15 @@ function App() {
                             className="city-stat text-center space-y-3 md:space-y-4 w-full max-w-[12rem] mx-auto"
                           >
                             {rotatingGallery ? (
-                              <div className="bawo-hub-ring relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto overflow-hidden rounded-full shadow-[0_20px_48px_rgba(0,0,0,0.65)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#FFBC42]/50">
+                              <div className="bawo-hub-ring relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto overflow-hidden rounded-full shadow-[0_20px_48px_rgba(0,0,0,0.65)] ring-1 ring-[#E8B959]/35 transition-transform duration-300 hover:scale-[1.04] hover:ring-[#E8B959]/75">
                                 <BoroughSquareCarousel
                                   images={rotatingGallery}
-                                  alt={`${city.name} community hub, BawoSocial NYC`}
+                                  alt={`${city.name} Nigerian community hub, BawoSocial NYC`}
                                   rotationStaggerMs={index * 700}
                                 />
                               </div>
                             ) : (
-                              <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_20px_48px_rgba(0,0,0,0.65)] overflow-hidden hover:scale-[1.04] transition-transform duration-300">
+                              <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto bg-gradient-to-br from-[#FFCF6B] to-[#C9922C] rounded-full flex items-center justify-center shadow-[0_20px_48px_rgba(0,0,0,0.65)] overflow-hidden hover:scale-[1.04] transition-transform duration-300">
                                 <img
                                   src={IMAGES.globalReach.cities[index]}
                                   alt={city.name}
@@ -294,7 +316,7 @@ function App() {
                               </div>
                             )}
                             <div className="mt-1">
-                              <h3 className="font-museo-bold text-white text-sm sm:text-base md:text-lg lg:text-xl tracking-[0.12em] drop-shadow-[0_2px_16px_rgba(0,0,0,0.65)]">
+                              <h3 className="font-bold text-[#F7F3FA] text-sm sm:text-base md:text-lg lg:text-xl tracking-[0.12em] drop-shadow-[0_2px_16px_rgba(0,0,0,0.65)]">
                                 {city.name.toUpperCase()}
                               </h3>
                             </div>
@@ -317,15 +339,15 @@ function App() {
                           className="city-stat text-center space-y-3 md:space-y-4 w-full max-w-[12rem] mx-auto"
                         >
                           {rotatingGallery ? (
-                            <div className="bawo-hub-ring relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto overflow-hidden rounded-full shadow-[0_20px_48px_rgba(0,0,0,0.65)] ring-1 ring-white/[0.16] transition-transform duration-300 hover:scale-[1.04] hover:ring-[#FFBC42]/50">
+                            <div className="bawo-hub-ring relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto overflow-hidden rounded-full shadow-[0_20px_48px_rgba(0,0,0,0.65)] ring-1 ring-[#E8B959]/35 transition-transform duration-300 hover:scale-[1.04] hover:ring-[#E8B959]/75">
                               <BoroughSquareCarousel
                                 images={rotatingGallery}
-                                alt={`${city.name} community hub, BawoSocial NYC`}
+                                alt={`${city.name} Nigerian community hub, BawoSocial NYC`}
                                 rotationStaggerMs={i * 700}
                               />
                             </div>
                           ) : (
-                            <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_20px_48px_rgba(0,0,0,0.65)] overflow-hidden hover:scale-[1.04] transition-transform duration-300">
+                            <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto bg-gradient-to-br from-[#FFCF6B] to-[#C9922C] rounded-full flex items-center justify-center shadow-[0_20px_48px_rgba(0,0,0,0.65)] overflow-hidden hover:scale-[1.04] transition-transform duration-300">
                               <img
                                 src={IMAGES.globalReach.cities[i]}
                                 alt={city.name}
@@ -334,7 +356,7 @@ function App() {
                             </div>
                           )}
                           <div className="mt-1">
-                            <h3 className="font-museo-bold text-white text-sm sm:text-base md:text-lg lg:text-xl tracking-[0.12em] drop-shadow-[0_2px_16px_rgba(0,0,0,0.65)]">
+                            <h3 className="font-bold text-[#F7F3FA] text-sm sm:text-base md:text-lg lg:text-xl tracking-[0.12em] drop-shadow-[0_2px_16px_rgba(0,0,0,0.65)]">
                               {city.name.toUpperCase()}
                             </h3>
                           </div>
@@ -343,6 +365,34 @@ function App() {
                     })}
                   </div>
                 </div>
+              </div>
+
+              {/* Live NYC Borough Pulse Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 pt-6 text-left max-w-6xl mx-auto">
+                {CONTENT.boroughPulse.map((b) => (
+                  <div
+                    key={b.name}
+                    className="glass-card rounded-2xl p-5 flex flex-col justify-between space-y-3 transition-transform duration-300 hover:-translate-y-1"
+                  >
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#E8B959]">
+                          <span className="h-2 w-2 rounded-full bg-[#10B981] animate-pulse" aria-hidden />
+                          {b.spotsCount}
+                        </span>
+                      </div>
+                      <h3 className="text-xl font-bold font-display text-[#F7F3FA]">
+                        {b.name}
+                      </h3>
+                      <p className="text-[11px] font-semibold text-[#FFCF6B]/90">
+                        {b.tag}
+                      </p>
+                    </div>
+                    <p className="text-xs text-[#F7F3FA]/75 leading-relaxed">
+                      {b.highlight}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -361,15 +411,15 @@ function App() {
           className="relative bawo-scroll-anchor flex items-center justify-center bg-transparent py-20 md:py-28"
         >
           <div className="relative z-10 container mx-auto px-6 flex flex-col items-center">
-            <div className="text-white space-y-14 w-full max-w-5xl mx-auto">
-              <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold font-museo-bold leading-tight text-center tracking-tight">
+            <div className="text-[#F7F3FA] space-y-12 w-full max-w-4xl mx-auto glass-card rounded-3xl p-8 sm:p-12 md:p-16">
+              <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold font-display leading-tight text-center tracking-tight">
                 {CONTENT.origin.title.lead}
-                <span className="bawo-accent">
+                <span className="bawo-text-cta-gradient">
                   {CONTENT.origin.title.highlight}
                 </span>
                 {CONTENT.origin.title.closing}
               </h2>
-              <div className="mx-auto max-w-3xl space-y-8 text-left">
+              <div className="mx-auto max-w-3xl space-y-7 text-left">
                 {CONTENT.origin.paragraphs.map((paragraph) => (
                   <p
                     key={
@@ -377,13 +427,13 @@ function App() {
                         ? paragraph.slice(0, 32)
                         : paragraph.highlight
                     }
-                    className="text-white/90 font-museo-medium text-xl md:text-2xl leading-relaxed md:leading-[1.85]"
+                    className="text-[#F7F3FA]/90 text-lg sm:text-xl md:text-2xl leading-relaxed md:leading-[1.8]"
                   >
                     {typeof paragraph === "string" ? (
                       paragraph
                     ) : (
                       <>
-                        <span className="bawo-accent font-semibold">
+                        <span className="text-[#E8B959] font-bold">
                           {paragraph.highlight}
                         </span>
                         {paragraph.text}
@@ -392,11 +442,6 @@ function App() {
                   </p>
                 ))}
               </div>
-              {CONTENT.origin.visionText && (
-                <p className="text-white/80 font-museo-regular text-xl md:text-2xl leading-loose text-left">
-                  {CONTENT.origin.visionText}
-                </p>
-              )}
             </div>
           </div>
         </section>
@@ -408,32 +453,32 @@ function App() {
           className="relative bawo-scroll-anchor bg-transparent py-20 md:py-28"
         >
           <div className="relative z-10 container mx-auto px-6 py-12 md:py-16 max-w-2xl">
-            <div className="space-y-10 text-white">
+            <div className="space-y-10 text-[#F7F3FA]">
               <div className="space-y-3 text-center">
-                <h2 className="text-4xl md:text-5xl font-bold font-display leading-tight">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold font-display leading-tight">
                   {CONTENT.earlyAccess.title}{" "}
-                  <span className="bawo-accent">
+                  <span className="bawo-text-cta-gradient">
                     {CONTENT.earlyAccess.titleHighlight}
                   </span>
                 </h2>
-                <p className="text-sm md:text-base font-museo-medium text-white/65 uppercase tracking-wider">
+                <p className="text-xs sm:text-sm md:text-base font-bold text-[#FFE8B3] uppercase tracking-wider">
                   {CONTENT.earlyAccess.subtitle}
                 </p>
               </div>
 
               <ul className="space-y-4">
                 {CONTENT.earlyAccess.benefits.map((benefit) => (
-                  <li key={benefit.title} className="glass-card flex items-start gap-3 p-5">
+                  <li key={benefit.title} className="glass-card flex items-start gap-3.5 p-5 sm:p-6">
                     <BadgeCheck
-                      className="w-5 h-5 bawo-accent flex-shrink-0 mt-0.5"
+                      className="w-5 h-5 text-[#E8B959] flex-shrink-0 mt-0.5"
                       strokeWidth={2.25}
                       aria-hidden
                     />
                     <div>
-                      <p className="font-museo-bold text-base text-white">
+                      <p className="font-display font-bold text-xl text-[#F7F3FA]">
                         {benefit.title}
                       </p>
-                      <p className="text-sm text-white/70 mt-0.5 font-museo-medium leading-relaxed">
+                      <p className="text-sm text-[#F7F3FA]/75 mt-1 leading-relaxed">
                         {benefit.description}
                       </p>
                     </div>
@@ -441,7 +486,7 @@ function App() {
                 ))}
               </ul>
 
-              <p className="text-sm text-white/55 font-museo-medium text-center leading-relaxed">
+              <p className="text-sm text-[#FFE8B3]/80 font-medium text-center leading-relaxed">
                 {CONTENT.earlyAccess.missionText}
               </p>
 
@@ -466,22 +511,22 @@ function App() {
           id="features"
           className="relative bawo-scroll-anchor flex items-center justify-center bg-transparent py-20 md:py-28 section-contain"
         >
-          <div className="relative z-10 text-white px-6 md:px-10 max-w-7xl py-12 md:py-16 mx-auto w-full">
+          <div className="relative z-10 text-[#F7F3FA] px-6 md:px-10 max-w-7xl py-12 md:py-16 mx-auto w-full">
             <h2
-              className={`text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-16 ${TAILWIND_COLORS.primary.text} font-museo-bold`}
+              className={`text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-16 ${TAILWIND_COLORS.primary.text} font-display`}
             >
               {CONTENT.features.title}
             </h2>
-            <div className="grid md:grid-cols-3 gap-10 md:gap-12 max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8 md:gap-10 max-w-6xl mx-auto">
               {CONTENT.features.items.map((item) => (
                 <div
                   key={item.title}
-                  className="feature-card glass-card space-y-3 p-6 text-center md:text-left"
+                  className="feature-card glass-card space-y-3 p-7 text-center md:text-left"
                 >
-                  <h3 className="text-xl md:text-2xl font-bold font-display text-white">
+                  <h3 className="text-2xl md:text-3xl font-bold font-display text-[#F7F3FA]">
                     {item.title}
                   </h3>
-                  <p className="text-base font-museo-medium leading-relaxed text-white/75">
+                  <p className="text-base leading-relaxed text-[#F7F3FA]/80">
                     {item.description}
                   </p>
                 </div>
@@ -496,7 +541,7 @@ function App() {
           className="relative bawo-scroll-anchor py-24 bg-transparent"
         >
           <div className="relative z-10 container mx-auto px-6">
-            <h2 className="text-center text-4xl md:text-5xl font-bold font-museo-bold text-white mb-12">
+            <h2 className="text-center text-4xl sm:text-5xl md:text-6xl font-bold font-display text-[#F7F3FA] mb-12">
               {CONTENT.events.title}
             </h2>
             <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
@@ -510,13 +555,17 @@ function App() {
                 return (
                   <div
                     key={event.title}
-                    className="glass-card p-6 text-white"
+                    className="glass-card p-7 text-[#F7F3FA] space-y-3"
                   >
-                    <div className="flex items-center gap-3 mb-3">
-                      <Icon className="w-5 h-5 text-white" />
-                      <span className="font-museo-bold">{event.title}</span>
+                    <div className="flex items-center gap-3">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#E8B959]/35 bg-[#E8B959]/15 text-[#E8B959]">
+                        <Icon className="w-5 h-5" />
+                      </span>
+                      <h3 className="font-display text-2xl font-bold text-[#F7F3FA] leading-snug">
+                        {event.title}
+                      </h3>
                     </div>
-                    <p className="text-white/80 font-museo-medium">
+                    <p className="text-[#F7F3FA]/80 text-sm sm:text-base leading-relaxed">
                       {event.description}
                     </p>
                   </div>
@@ -533,20 +582,20 @@ function App() {
           className="relative bawo-scroll-anchor flex items-center justify-center bg-transparent py-20 md:py-28 section-contain"
         >
           <div className="relative z-10 container mx-auto px-6 py-12 md:py-16">
-            <div className="text-center space-y-10 max-w-2xl mx-auto">
+            <div className="text-center space-y-10 max-w-3xl mx-auto glass-card rounded-3xl p-8 sm:p-12">
               <div className="space-y-4">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white font-museo-bold">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#F7F3FA] font-display leading-tight">
                   {CONTENT.finalCta.title}
                 </h2>
-                <p className="text-lg md:text-xl font-museo-medium text-white/80">
+                <p className="text-base sm:text-lg md:text-xl text-[#F7F3FA]/80">
                   {CONTENT.finalCta.subtitle}
                 </p>
                 {/* Borough tags */}
-                <div className="flex flex-wrap justify-center gap-3 pt-4">
+                <div className="flex flex-wrap justify-center gap-2.5 pt-3">
                   {CONTENT.globalReach.cities.map((city) => (
                     <span
                       key={city.name}
-                      className="glass-pill px-4 py-2 text-white/90 text-sm font-museo-medium"
+                      className="glass-pill px-4 py-1.5 text-[#FFE8B3] text-xs sm:text-sm font-semibold"
                     >
                       {city.name}
                     </span>
@@ -554,16 +603,23 @@ function App() {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-5 justify-center items-center w-full max-w-2xl mx-auto">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-2xl mx-auto">
                 <MobileAppDownloadRow className="items-stretch sm:max-w-[19.5rem]" />
+                <a
+                  href="/businesses"
+                  className="bawo-cta-premium inline-flex min-h-[48px] w-full max-w-[19.5rem] sm:w-auto items-center justify-center gap-2 rounded-full px-7 text-sm font-bold no-underline transition-transform hover:-translate-y-0.5"
+                >
+                  <Building2 className="h-4 w-4 shrink-0 text-[#0E0A14]" aria-hidden />
+                  <span>Businesses Sign In</span>
+                </a>
               </div>
 
               <div className="flex items-center gap-4 max-w-2xl mx-auto w-full">
-                <span className="flex-1 h-px bg-white/20" aria-hidden />
-                <span className="text-white/55 font-museo-medium text-xs sm:text-sm text-center uppercase tracking-wider px-2">
+                <span className="flex-1 h-px bg-[#E8B959]/25" aria-hidden />
+                <span className="text-[#FFE8B3]/75 font-bold text-xs uppercase tracking-wider px-2">
                   Or join the waitlist
                 </span>
-                <span className="flex-1 h-px bg-white/20" aria-hidden />
+                <span className="flex-1 h-px bg-[#E8B959]/25" aria-hidden />
               </div>
 
               <MailchimpSignupRow
@@ -579,12 +635,12 @@ function App() {
         {/* Footer */}
         <footer className="py-12 bg-transparent">
           {/* Mobile Sticky CTA */}
-          <div className="md:hidden mobile-sticky-cta bg-bawo-ink/92 backdrop-blur-xl border-t border-bawo-eggplant-light/50">
+          <div className="md:hidden mobile-sticky-cta bg-[#0E0A14]/92 backdrop-blur-xl border-t border-[#E8B959]/25">
             <div className="px-4 py-3 flex items-center justify-between gap-3">
               <div className="flex flex-col min-w-0 gap-0.5">
-                <span className="text-white font-museo-bold text-sm">Try the beta</span>
-                <span className="text-white/55 font-museo-medium text-[10px] uppercase tracking-wider">
-                  TestFlight. Waitlist
+                <span className="text-[#F7F3FA] font-bold text-sm">BawoSocial NYC</span>
+                <span className="text-[#FFE8B3]/75 font-medium text-[10px] uppercase tracking-wider">
+                  TestFlight · Businesses
                 </span>
               </div>
               <div className="flex shrink-0 items-center gap-2">
@@ -602,12 +658,14 @@ function App() {
                   }}
                 />
                 <FoundingMemberButton
-                  label="Waitlist"
+                  label="Businesses"
                   variant="primary"
                   appearance="outline"
                   size="sm"
                   className="max-w-[7.5rem]"
-                  onClick={scrollToWaitlist}
+                  onClick={() => {
+                    window.location.assign("/businesses");
+                  }}
                 />
               </div>
             </div>
@@ -616,8 +674,8 @@ function App() {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
               {/* Company Info */}
               <div className="text-center md:text-left">
-                <h3 className="text-white font-museo-bold mb-4">BawoSocial</h3>
-                <p className="text-white/80 text-sm font-museo-medium mb-4">
+                <h3 className="text-[#F7F3FA] font-display text-2xl font-bold mb-3">BawoSocial</h3>
+                <p className="text-[#F7F3FA]/75 text-sm mb-4 leading-relaxed">
                   {CONTENT.footer.tagline}
                 </p>
                 <div className="flex justify-center md:justify-start gap-4">
@@ -625,7 +683,7 @@ function App() {
                     href="https://www.instagram.com/bawo.social/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex min-h-11 items-center text-white/60 hover:text-white"
+                    className="inline-flex min-h-11 items-center text-[#FFE8B3]/75 hover:text-[#E8B959] text-sm font-semibold"
                   >
                     Instagram
                   </a>
@@ -633,7 +691,7 @@ function App() {
                     href="https://www.tiktok.com/@bawosocial"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex min-h-11 items-center text-white/60 hover:text-white"
+                    className="inline-flex min-h-11 items-center text-[#FFE8B3]/75 hover:text-[#E8B959] text-sm font-semibold"
                   >
                     TikTok
                   </a>
@@ -641,7 +699,7 @@ function App() {
                     href="https://linkedin.com/company/bawoapp"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex min-h-11 items-center text-white/60 hover:text-white"
+                    className="inline-flex min-h-11 items-center text-[#FFE8B3]/75 hover:text-[#E8B959] text-sm font-semibold"
                   >
                     LinkedIn
                   </a>
@@ -650,15 +708,15 @@ function App() {
 
               {/* Quick Links */}
               <div className="text-center md:text-left">
-                <h3 className="text-white font-museo-bold mb-4">
+                <h3 className="text-[#F7F3FA] font-display text-xl font-bold mb-3">
                   {CONTENT.footer.sections.quickLinks.title}
                 </h3>
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   {CONTENT.footer.sections.quickLinks.links.map((link) => (
                     <a
                       key={link.href}
                       href={link.href}
-                      className="flex min-h-11 items-center justify-center text-white/80 hover:text-white text-sm font-museo-medium md:justify-start"
+                      className="flex min-h-10 items-center justify-center text-[#F7F3FA]/80 hover:text-[#E8B959] text-sm font-medium md:justify-start"
                     >
                       {link.label}
                     </a>
@@ -668,17 +726,17 @@ function App() {
 
               {/* Legal */}
               <div className="text-center md:text-left">
-                <h3 className="text-white font-museo-bold mb-4">Legal</h3>
-                <div className="space-y-2">
+                <h3 className="text-[#F7F3FA] font-display text-xl font-bold mb-3">Legal</h3>
+                <div className="space-y-1.5">
                   <button
                     onClick={() => setShowPrivacyPolicy(true)}
-                    className="flex min-h-11 w-full items-center justify-center text-white/80 hover:text-white text-sm font-museo-medium md:justify-start"
+                    className="flex min-h-10 w-full items-center justify-center text-[#F7F3FA]/80 hover:text-[#E8B959] text-sm font-medium md:justify-start"
                   >
                     Privacy Policy
                   </button>
                   <a
                     href="/admin"
-                    className="flex min-h-11 items-center justify-center text-white/50 hover:text-white/80 text-xs font-museo-medium md:justify-start"
+                    className="flex min-h-10 items-center justify-center text-[#F7F3FA]/50 hover:text-[#E8B959] text-xs font-medium md:justify-start"
                   >
                     Platform access
                   </a>
@@ -687,8 +745,8 @@ function App() {
             </div>
 
             {/* Bottom Bar */}
-            <div className="border-t border-[rgba(255,255,255,0.08)] pt-8 text-center">
-              <p className="text-white/60 text-sm font-museo-regular">
+            <div className="border-t border-[#E8B959]/15 pt-8 text-center">
+              <p className="text-[#F7F3FA]/65 text-sm">
                 {CONTENT.footer.copyright}
               </p>
             </div>
@@ -698,7 +756,7 @@ function App() {
         {/* Privacy Policy Modal */}
         {showPrivacyPolicy && (
           <div
-            className="fixed inset-0 bg-black/50 backdrop-blur-[2px] z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
             onClick={() => setShowPrivacyPolicy(false)}
           >
             <div
@@ -707,7 +765,7 @@ function App() {
             >
               <div className="sticky top-0 bg-white border-b border-gray-200 p-6 rounded-t-2xl">
                 <div className="flex justify-between items-center">
-                  <h2 className="text-2xl font-bold text-gray-900 font-museo-bold">
+                  <h2 className="text-2xl font-bold text-gray-900">
                     BawoSocial Privacy Policy
                   </h2>
                   <button
@@ -717,487 +775,19 @@ function App() {
                     ×
                   </button>
                 </div>
-                <p className="text-gray-600 font-museo-medium mt-2">
+                <p className="text-gray-600 mt-2">
                   Last Updated: June 2026
                 </p>
               </div>
 
               <div className="p-6 space-y-6 text-gray-800">
-                <p className="font-museo-medium">
+                <p>
                   Welcome to BawoSocial ("we", "our", or "us"). Your privacy is
                   important to us. This Privacy Policy explains how we collect,
                   use, store, and share your information when you visit our
-                  website at bawoapp.com and use the BawoSocial mobile
+                  website at joinbawo.com and use the BawoSocial mobile
                   application and services.
                 </p>
-
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                    1. Information We Collect
-                  </h3>
-
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                      Website Visitors
-                    </h4>
-                    <p className="text-sm mb-2">
-                      When you visit our website, we collect:
-                    </p>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
-                      <li>
-                        <strong>Browsing data</strong>: Pages viewed, time
-                        spent, device type, browser information
-                      </li>
-                      <li>
-                        <strong>Contact information</strong>: Email address when
-                        you sign up for launch updates or the waitlist
-                      </li>
-                      <li>
-                        <strong>Analytics data</strong>: How you interact with
-                        our site (via Google Analytics and similar tools)
-                      </li>
-                      <li>
-                        <strong>Cookies</strong>: Used for basic site
-                        functionality and analytics (you can control cookies in
-                        your browser settings)
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                    <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                      Mobile App Users
-                    </h4>
-                    <p className="text-sm mb-2">
-                      When you use the BawoSocial app, we collect:
-                    </p>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
-                      <li>
-                        <strong>Account Information</strong>: Name, email, phone
-                        number, date of birth (to verify you are 18+)
-                      </li>
-                      <li>
-                        <strong>Profile Data</strong>: Photos, bios,
-                        preferences, answers to onboarding questions and daily
-                        prompts
-                      </li>
-                      <li>
-                        <strong>Location Information</strong>: Approximate
-                        location (if shared), to help with matches and local
-                        events
-                      </li>
-                      <li>
-                        <strong>Device Information</strong>: Device type,
-                        operating system, crash data, and usage analytics (via
-                        Firebase)
-                      </li>
-                      <li>
-                        <strong>Payment Information</strong>: If you make
-                        purchases, payment details are handled securely by
-                        Stripe. We do not store full credit card data ourselves
-                      </li>
-                      <li>
-                        <strong>User Content</strong>: Messages, reactions,
-                        posts, and answers you submit in-app
-                      </li>
-                      <li>
-                        <strong>Usage Analytics</strong>: How you use app
-                        features to improve your experience
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                    2. How We Use Your Information
-                  </h3>
-
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                      Website Operations
-                    </h4>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
-                      <li>
-                        <strong>Provide our website services</strong> and
-                        manage waitlist signups
-                      </li>
-                      <li>
-                        <strong>Send updates</strong> about BawoSocial launch
-                        and community news
-                      </li>
-                      <li>
-                        <strong>Improve website performance</strong> and user
-                        experience
-                      </li>
-                      <li>
-                        <strong>Respond to inquiries</strong> and provide
-                        customer support
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                    <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                      Mobile App Operations
-                    </h4>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
-                      <li>
-                        <strong>Create and personalize</strong> your profile and
-                        matching experience
-                      </li>
-                      <li>
-                        <strong>Connect you</strong> with potential matches,
-                        friends, and community members
-                      </li>
-                      <li>
-                        <strong>Facilitate group chats</strong> and local events
-                      </li>
-                      <li>
-                        <strong>Improve app performance</strong> and protect
-                        against abuse
-                      </li>
-                      <li>
-                        <strong>Process payments</strong> and offer
-                        subscriptions or premium features
-                      </li>
-                      <li>
-                        <strong>Send notifications</strong> about matches,
-                        messages, and community updates
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                    3. Sharing of Information
-                  </h3>
-
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <p className="text-sm mb-3">
-                      <strong>We do not sell your personal data.</strong> We may
-                      share limited information with:
-                    </p>
-
-                    <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                      Service Providers
-                    </h4>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
-                      <li>
-                        <strong>Stripe</strong>: For secure payment processing
-                      </li>
-                      <li>
-                        <strong>Firebase/Google</strong>: For authentication,
-                        database, analytics, and push notifications
-                      </li>
-                      <li>
-                        <strong>Email providers</strong>: For sending updates
-                        and notifications
-                      </li>
-                      <li>
-                        <strong>Customer support tools</strong>: To provide
-                        better support
-                      </li>
-                      <li>
-                        <strong>Analytics services</strong>: To understand how
-                        our website and app are used
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                    4. Your Rights and Choices
-                  </h3>
-
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                      Access and Control
-                    </h4>
-                    <p className="text-sm mb-2">
-                      Depending on your location (US, EU, Nigeria, etc.), you
-                      may have rights to:
-                    </p>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
-                      <li>
-                        <strong>Access</strong> your personal information
-                      </li>
-                      <li>
-                        <strong>Update or correct</strong> your data
-                      </li>
-                      <li>
-                        <strong>Delete</strong> your account and data
-                      </li>
-                      <li>
-                        <strong>Download</strong> a copy of your information
-                      </li>
-                      <li>
-                        <strong>Withdraw consent</strong> for data processing
-                      </li>
-                      <li>
-                        <strong>Object</strong> to certain uses of your data
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                    5. Data Storage and Security
-                  </h3>
-
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                      Security Measures
-                    </h4>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
-                      <li>
-                        <strong>Encryption</strong>: All data transmitted using
-                        SSL/TLS encryption
-                      </li>
-                      <li>
-                        <strong>Secure servers</strong>: Data stored on
-                        protected servers with access controls
-                      </li>
-                      <li>
-                        <strong>Regular audits</strong>: We regularly review our
-                        security practices
-                      </li>
-                      <li>
-                        <strong>Employee training</strong>: Staff trained on
-                        privacy and security best practices
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                    6. Age Restrictions
-                  </h3>
-
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <p className="text-sm mb-2">
-                      <strong>
-                        BawoSocial is only for users 18 years or older.
-                      </strong>
-                    </p>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
-                      <li>
-                        <strong>Age verification</strong>: We require users to
-                        confirm they are 18+
-                      </li>
-                      <li>
-                        <strong>Under 18</strong>: If we learn someone under 18
-                        has created an account, we will remove it immediately
-                      </li>
-                      <li>
-                        <strong>Parental concerns</strong>: Contact us at
-                        support@bawoapp.com
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                    7. Cookies and Tracking
-                  </h3>
-
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                      Website Cookies
-                    </h4>
-                    <p className="text-sm mb-2">We use cookies to:</p>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
-                      <li>
-                        <strong>Remember your preferences</strong> and login
-                        status
-                      </li>
-                      <li>
-                        <strong>Analyze website usage</strong> to improve our
-                        services
-                      </li>
-                      <li>
-                        <strong>Provide security</strong> and prevent fraud
-                      </li>
-                      <li>
-                        <strong>Personalize content</strong> and advertisements
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                    8. Third-Party Services
-                  </h3>
-
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                      Payment Processing
-                    </h4>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
-                      <li>
-                        <strong>Stripe</strong>: Handles all payment processing
-                        securely
-                      </li>
-                      <li>
-                        <strong>PCI compliance</strong>: We follow industry
-                        standards for payment security
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                    9. California Privacy Rights (CCPA)
-                  </h3>
-
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                      California Residents
-                    </h4>
-                    <p className="text-sm mb-2">
-                      If you&apos;re a California resident, you have additional
-                      rights:
-                    </p>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
-                      <li>
-                        <strong>Right to know</strong>: What personal
-                        information we collect and how it&apos;s used
-                      </li>
-                      <li>
-                        <strong>Right to delete</strong>: Request deletion of
-                        your personal information
-                      </li>
-                      <li>
-                        <strong>Right to opt-out</strong>: Of the sale of
-                        personal information (we don&apos;t sell data)
-                      </li>
-                      <li>
-                        <strong>Right to non-discrimination</strong>: We
-                        won&apos;t discriminate for exercising your rights
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                    10. European Privacy Rights (GDPR)
-                  </h3>
-
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                      EU/UK Residents
-                    </h4>
-                    <p className="text-sm mb-2">
-                      If you&apos;re in the EU or UK, you have additional rights
-                      under GDPR:
-                    </p>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
-                      <li>
-                        <strong>Lawful basis</strong>: We process data based on
-                        consent, contract, or legitimate interests
-                      </li>
-                      <li>
-                        <strong>Data portability</strong>: Get a copy of your
-                        data in a portable format
-                      </li>
-                      <li>
-                        <strong>Right to object</strong>: Object to processing
-                        based on legitimate interests
-                      </li>
-                      <li>
-                        <strong>Automated decision-making</strong>: Right to
-                        human review of automated decisions
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                    11. Changes to This Policy
-                  </h3>
-
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                      Updates
-                    </h4>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
-                      <li>
-                        <strong>Notification</strong>: We&apos;ll update the
-                        &quot;Last Updated&quot; date when changes are made
-                      </li>
-                      <li>
-                        <strong>Significant changes</strong>: We&apos;ll notify
-                        you via email or app notification
-                      </li>
-                      <li>
-                        <strong>Your options</strong>: You can always review the
-                        current policy on our website
-                      </li>
-                      <li>
-                        <strong>Continued use</strong>: Using BawoSocial after
-                        changes means you accept the updated policy
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 font-museo-bold mb-3">
-                    12. Contact Us
-                  </h3>
-
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                      Privacy Questions
-                    </h4>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
-                      <li>
-                        <strong>Email</strong>: privacy@bawoapp.com
-                      </li>
-                      <li>
-                        <strong>Subject</strong>: Include &quot;Privacy
-                        Policy&quot; in the subject line
-                      </li>
-                      <li>
-                        <strong>Response time</strong>: We&apos;ll respond
-                        within 48 hours
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div className="bg-gray-50 p-4 rounded-lg mt-4">
-                    <h4 className="font-bold text-gray-900 font-museo-bold mb-2">
-                      General Support
-                    </h4>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
-                      <li>
-                        <strong>Email</strong>: support@bawoapp.com
-                      </li>
-                      <li>
-                        <strong>Website</strong>: bawoapp.com/contact
-                      </li>
-                      <li>
-                        <strong>Response time</strong>: Within 24 hours
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="border-t border-gray-200 pt-6 text-center">
-                  <p className="text-gray-600 font-museo-medium">
-                    <strong>Questions about your privacy?</strong> We&apos;re
-                    here to help. Contact us at privacy@bawoapp.com
-                  </p>
-                </div>
               </div>
             </div>
           </div>

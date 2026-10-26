@@ -1,4 +1,4 @@
-import { Expand, X } from "lucide-react";
+import { CheckCircle2, Expand, MapPin, Sparkles, X } from "lucide-react";
 import { memo, useRef, useState } from "react";
 import { CONTENT } from "../constants/content";
 
@@ -18,8 +18,19 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
   return (
     <div
       className={`bawo-next-preview ${className}`.trim()}
-      aria-label="What's next on BawoSocial"
+      aria-label="Interactive BawoSocial App Showcase"
     >
+      <div className="mb-6 flex flex-col items-center justify-between gap-3 sm:flex-row">
+        <div className="inline-flex items-center gap-2 rounded-full border border-[#E8B959]/35 bg-[#1C132B]/75 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#E8B959] backdrop-blur-xl">
+          <Sparkles className="h-3.5 w-3.5 shrink-0" aria-hidden />
+          <span>Interactive iPhone 17 Pro App Showcase · Live NYC Beta</span>
+        </div>
+        <div className="inline-flex items-center gap-2 text-xs font-medium text-[#F7F3FA]/70">
+          <MapPin className="h-3.5 w-3.5 text-[#E8B959]" aria-hidden />
+          <span>{current.liveMetric}</span>
+        </div>
+      </div>
+
       <div
         className="bawo-next-preview__visual"
         data-layout={current.layout}
@@ -59,19 +70,7 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
               </button>
             </div>
           </>
-        ) : (
-          <div className="bawo-next-preview__placeholder">
-            <span className="bawo-next-preview__placeholder-kicker">
-              {current.kicker}
-            </span>
-            <span className="bawo-next-preview__placeholder-title">
-              {current.title}
-            </span>
-            <span className="bawo-next-preview__placeholder-hint">
-              Image coming soon
-            </span>
-          </div>
-        )}
+        ) : null}
       </div>
 
       <ul className="bawo-next-preview__list" role="tablist">
@@ -89,11 +88,31 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
                 onClick={() => setActive(index)}
                 onMouseEnter={() => setActive(index)}
               >
-                <span className="bawo-next-preview__tab-title">{item.title}</span>
-                {isActive ? (
-                  <span className="bawo-next-preview__tab-body">
-                    {item.description}
+                <div className="flex items-center justify-between gap-2 w-full">
+                  <span className="bawo-next-preview__tab-title font-display text-lg sm:text-xl font-bold">
+                    {item.title}
                   </span>
+                  <span className="rounded-full border border-[#E8B959]/30 bg-[#E8B959]/12 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#FFCF6B]">
+                    {item.badge}
+                  </span>
+                </div>
+                {isActive ? (
+                  <div className="mt-2 space-y-2.5 text-left">
+                    <span className="bawo-next-preview__tab-body block text-sm text-[#F7F3FA]/85 leading-relaxed">
+                      {item.description}
+                    </span>
+                    <ul className="space-y-1.5 pt-1">
+                      {item.highlights.map((hl) => (
+                        <li
+                          key={hl}
+                          className="flex items-center gap-2 text-xs font-medium text-[#FFE8B3]"
+                        >
+                          <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-[#E8B959]" aria-hidden />
+                          <span>{hl}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 ) : null}
               </button>
             </li>

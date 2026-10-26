@@ -1,149 +1,138 @@
+import type { ReactNode } from "react";
 import {
+  BadgeCheck,
+  BarChart3,
   Building2,
-  LayoutDashboard,
+  ClipboardCheck,
+  FileWarning,
+  Flag,
+  Layers,
   LogOut,
   Megaphone,
   RefreshCw,
   ShieldCheck,
-  TrendingUp,
-  Target,
-  UserRound,
-  UsersRound,
+  Sparkles,
+  Store,
+  Users,
 } from "lucide-react";
-import type { ReactNode } from "react";
-import type { PortalMode } from "./types";
+import type { AdminTab, BusinessTab, PortalMode, PortalSession } from "./types";
 
-export type PortalTab =
-  | "overview"
-  | "users"
-  | "groups"
-  | "businesses"
-  | "social"
-  | "crm"
-  | "access"
-  | "dashboard"
-  | "listings"
-  | "growth";
+interface NavItem<T extends string> {
+  id: T;
+  label: string;
+  icon: typeof ShieldCheck;
+  badge?: number;
+}
 
-type PortalLayoutProps = {
+interface PortalLayoutProps<T extends string> {
   mode: PortalMode;
-  activeTab: PortalTab;
-  email: string;
+  session: PortalSession;
   title: string;
-  description: string;
-  notice: string;
-  error: string;
-  children: ReactNode;
-  onTabChange: (tab: PortalTab) => void;
+  subtitle: string;
+  activeTab: T;
+  onTabChange: (tab: T) => void;
   onRefresh: () => void;
   onSignOut: () => void;
-};
+  isBusy?: boolean;
+  badges?: Partial<Record<T, number>>;
+  children: ReactNode;
+}
 
-const icons = {
-  overview: LayoutDashboard,
-  users: UserRound,
-  groups: UsersRound,
-  businesses: Building2,
-  social: Megaphone,
-  crm: Target,
-  access: ShieldCheck,
-  dashboard: LayoutDashboard,
-  listings: Building2,
-  growth: TrendingUp,
-};
+const ADMIN_ITEMS: Array<NavItem<AdminTab>> = [
+  { id: "overview", label: "Overview", icon: BarChart3 },
+  { id: "events", label: "Event Approval", icon: ClipboardCheck },
+  { id: "businesses", label: "Business Claims", icon: BadgeCheck },
+  { id: "reports", label: "Safety Reports", icon: Flag },
+  { id: "groups", label: "Community Spaces", icon: Layers },
+  { id: "users", label: "Directory & Roles", icon: Users },
+  { id: "waitlist", label: "Waitlist Leads", icon: FileWarning },
+  { id: "social", label: "Social Media", icon: Megaphone },
+];
 
-export default function PortalLayout({
+const BUSINESS_ITEMS: Array<NavItem<BusinessTab>> = [
+  { id: "dashboard", label: "Business Overview", icon: Building2 },
+  { id: "claim", label: "Claim a Listing", icon: Store },
+  { id: "profile", label: "Edit Listing", icon: Sparkles },
+];
+
+export default function PortalLayout<T extends string>({
   mode,
-  activeTab,
-  email,
+  session,
   title,
-  description,
-  notice,
-  error,
-  children,
+  subtitle,
+  activeTab,
   onTabChange,
   onRefresh,
   onSignOut,
-}: PortalLayoutProps) {
-  const tabs: Array<{ id: PortalTab; label: string }> =
-    mode === "admin"
-      ? [
-          { id: "overview", label: "Overview" },
-          { id: "users", label: "Consumers" },
-          { id: "groups", label: "Groups" },
-          { id: "businesses", label: "Businesses" },
-          { id: "social", label: "Social Media" },
-          { id: "crm", label: "Outreach CRM" },
-          { id: "access", label: "Access & Audit" },
-        ]
-      : [
-          { id: "dashboard", label: "Dashboard" },
-          { id: "listings", label: "Listings & Claims" },
-          { id: "growth", label: "Growth" },
-        ];
+  isBusy,
+  badges,
+  children,
+}: PortalLayoutProps<T>) {
+  const navItems = (mode === "admin" ? ADMIN_ITEMS : BUSINESS_ITEMS) as Array<NavItem<T>>;
 
   return (
     <div className="portal-shell">
       <aside className="portal-sidebar">
         <a href="/" className="portal-brand" aria-label="BawoSocial home">
-          <img src="/bawo-logo.png" alt="" />
-          <span>
+          <img src="/bawo-logo.png" alt="BawoSocial" />
+          <div>
             <strong>BawoSocial</strong>
-            <small>{mode === "admin" ? "Control Center" : "Business"}</small>
-          </span>
+            <span>{mode === "admin" ? "Control Center" : "Business Portal"}</span>
+          </div>
         </a>
-        <div className="portal-sidebar-context"><span aria-hidden />NYC launch workspace</div>
-        <nav aria-label={`${mode} portal`}>
-          {tabs.map(({ id, label }) => {
-            const Icon = icons[id];
+
+        <nav aria-label={mode === "admin" ? "admin portal" : "business portal"}>
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const badge = badges?.[item.id];
             return (
               <button
-                key={id}
+                key={item.id}
                 type="button"
-                className={`portal-nav-item ${activeTab === id ? "is-active" : ""}`}
-                onClick={() => onTabChange(id)}
+                className={activeTab === item.id ? "portal-nav-item is-active" : "portal-nav-item"}
+                onClick={() => onTabChange(item.id)}
               >
-                <Icon aria-hidden />
-                <span>{label}</span>
+                <Icon size={17} />
+                <span>{item.label}</span>
+                {typeof badge === "number" && badge > 0 ? <em>{badge}</em> : null}
               </button>
             );
           })}
         </nav>
+
         <div className="portal-sidebar-footer">
-          <a href="/">View JoinBawo.com</a>
-          <button type="button" className="portal-nav-item" onClick={onSignOut}>
-            <LogOut aria-hidden />
-            <span>Sign out</span>
-          </button>
+          <a href="/">← Back to BawoSocial</a>
+          <p>Zero service keys in browser code. Actions run through authenticated Edge Functions.</p>
         </div>
       </aside>
 
-      <main className="portal-workspace">
+      <div className="portal-main">
         <header className="portal-topbar">
           <div className="portal-topbar-copy">
-            <span className="portal-eyebrow">
-              {mode === "admin" ? "NYC launch operations" : "Business workspace"}
+            <span className="portal-kicker">
+              {mode === "admin" ? "Platform Administration" : "BawoSocial for Businesses"}
             </span>
             <h1>{title}</h1>
-            <p>{description}</p>
+            <p>{subtitle}</p>
           </div>
           <div className="portal-topbar-actions">
-            <div className="portal-account">
-              <span className="portal-live-indicator"><span aria-hidden />Live</span>
-              <span className="portal-account-email">{email}</span>
+            <div className="portal-account" title={session.user.email || session.user.id}>
+              <ShieldCheck size={16} />
+              <span>{session.user.email || "Authenticated user"}</span>
             </div>
-            <button type="button" onClick={onRefresh} aria-label="Refresh portal">
-              <RefreshCw aria-hidden />
+            <button type="button" className="portal-ghost-button" onClick={onRefresh} disabled={isBusy}>
+              <RefreshCw size={16} className={isBusy ? "is-spinning" : ""} />
+              <span>Refresh</span>
             </button>
-            <button type="button" className="portal-topbar-signout" onClick={onSignOut} aria-label="Sign out">
-              <LogOut aria-hidden />
+            <button type="button" className="portal-ghost-button" onClick={onSignOut}>
+              <LogOut size={16} />
+              <span>Sign out</span>
             </button>
           </div>
         </header>
-        {error && <div className="portal-alert is-error">{error}</div>}
-        {notice && <div className="portal-alert is-success">{notice}</div>}
-        <div className="portal-page">{children}</div>
-      </main>
+
+        <main className="portal-content">{children}</main>
+      </div>
     </div>
   );
 }

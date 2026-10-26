@@ -10,7 +10,7 @@ const {
   pathwayPillGradient,
 } = palette;
 
-/** Tier-2 semantic tokens (dark / app shell) — build 165 aligned */
+/** Tier-2 semantic tokens (Deep Eggplant + Signature Gold + Liquid Glass) */
 export const semanticTokens = {
   dark: {
     surface: {
@@ -22,9 +22,7 @@ export const semanticTokens = {
       card: obsidian.elevated,
     },
     signal: {
-      /** Primary action = pumpkin */
-      action: palette.content.pumpkin,
-      /** Hover / pressed */
+      action: palette.content.gold,
       actionPressed: palette.content.peach,
       actionMuted: copper.muted,
     },
@@ -40,9 +38,9 @@ export const semanticTokens = {
       ink: palette.content.ink,
     },
     text: {
-      primary: "#F4F4F5",
-      secondary: "rgba(244, 244, 245, 0.9)",
-      muted: "rgba(244, 244, 245, 0.6)",
+      primary: "#F7F3FA",
+      secondary: "rgba(247, 243, 250, 0.9)",
+      muted: "rgba(231, 221, 240, 0.68)",
       onAction: textOnCta,
     },
     border: {
@@ -52,9 +50,6 @@ export const semanticTokens = {
   },
 };
 
-/**
- * Canonical 4pt ladder — aligned with native `spacing` (md=16, lg=24, xxl=48).
- */
 export const spacing = {
   xs: 4,
   sm: 8,
@@ -64,10 +59,6 @@ export const spacing = {
   xxl: 48,
 };
 
-/**
- * Typography scale — rem equivalents of native `typography.fontSize`.
- * Font family: Montserrat everywhere (build 165).
- */
 export const fontSize = {
   xs: "0.75rem",
   sm: "0.875rem",
@@ -84,7 +75,6 @@ export const fontSize = {
   "8xl": "6rem",
 };
 
-/** Border radii — align with native `borderRadius` (xl ≈ 24px). */
 export const radii = {
   xs: "0.25rem",
   sm: "0.5rem",
@@ -96,16 +86,11 @@ export const radii = {
 
 const sem = semanticTokens.dark;
 
-/** Primary CTA shadow — pumpkin-tinted */
-const PRIMARY_CTA_SHADOW = `0 8px 18px rgba(255, 107, 0, 0.28)`;
+const PRIMARY_CTA_SHADOW = `0 10px 26px rgba(232, 185, 89, 0.28)`;
 
-/**
- * Tier-3 recipes — web/CSS projection of native theme shapes.
- * Primary CTAs use pumpkin; copper is accent-only (borders / edge).
- */
 export const recipes = {
   liquidGlassCTA: {
-    backgroundColor: palette.content.pumpkin,
+    backgroundColor: palette.content.gold,
     border: `1px solid ${liquidGlass.borderOuter}`,
     borderTop: `1px solid ${liquidGlass.edgeTop}`,
     borderRadius: radii.xl,
@@ -123,8 +108,8 @@ export const recipes = {
   },
   liquidGlassCTAText: {
     color: sem.text.onAction,
-    fontFamily: '"Montserrat", sans-serif',
-    fontWeight: 600,
+    fontFamily: '"Plus Jakarta Sans", sans-serif',
+    fontWeight: 700,
     fontSize: fontSize.md,
     letterSpacing: "0.2px",
   },
@@ -132,14 +117,14 @@ export const recipes = {
     background: sem.surface.glass,
     border: `1px solid ${sem.border.subtle}`,
     borderRadius: radii.lg,
-    backdropFilter: "blur(20px)",
-    WebkitBackdropFilter: "blur(20px)",
-    boxShadow: "0 0 12px rgba(255, 188, 66, 0.06)",
+    backdropFilter: "blur(28px) saturate(165%)",
+    WebkitBackdropFilter: "blur(28px) saturate(165%)",
+    boxShadow: "0 18px 44px rgba(5, 2, 10, 0.55), inset 0 1px 0 rgba(255, 236, 190, 0.28)",
   },
   pillActiveGradient: {
     angle: pathwayPillGradient.angle,
     stops: pathwayPillGradient.stops,
-    border: "1px solid rgba(255, 255, 255, 0.1)",
+    border: "1px solid rgba(255, 236, 190, 0.35)",
   },
 };
 

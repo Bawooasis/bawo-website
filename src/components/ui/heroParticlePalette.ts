@@ -1,25 +1,16 @@
+import { palette } from "../../assets/colors.js";
+
 /**
- * Globe / particle-hero colors — build 165 brand + Nigerian flag accents.
- * Pumpkin stays dominant; flag green (#008751) and soft white sit in the mix
- * so the field reads premium on near-black #08060C, not like a literal flag.
- *
- * Target mix (~): 50% pumpkin/peach/gold · 30% Nigerian green · 20% soft white
+ * BawoSocial WebGL 3D Particle Globe + Wave Palette
+ * Deep Eggplant canvas (#0E0A14) + Warm Signature Gold (#E8B959 / #FFCF6B) + Eggplant Plum & Naija Emerald accents
  */
-export const heroParticlePalette = {
-  pumpkin: "#FF6B00",
-  peach: "#FF8C42",
-  gold: "#FFBC42",
-  /**
-   * Nigerian flag green `#008751` projected for additive WebGL points.
-   * Must stay clearly green (not yellow) when mixed with pumpkin under AdditiveBlending.
-   */
-  flagGreen: "#00C853",
-  /** High-luma emerald so greens read as distinct dots on phone screens */
-  flagGreenSoft: "#69FFA0",
-  copper: "#B87333",
-  white: "#FFFFFF",
-  /** Soft white — preferred over pure #FFF for most “white” dots */
-  whiteSoft: "#E8E6E3",
-  canvas: "#08060C",
-  depth: "#221525",
+export const HERO_PARTICLE_HEX = {
+  canvas: palette.obsidian.canvas,
+  pumpkin: "#E8B959",
+  peach: "#FFCF6B",
+  gold: "#FFE29A",
+  copper: "#C9922C",
+  plum: "#A82A88",
+  emerald: "#10B981",
+  pearl: "#F7F3FA",
 } as const;

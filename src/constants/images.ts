@@ -1,13 +1,18 @@
 // Website Images Constants - Organized by Usage
 
-// Local asset imports
-// import globeImage from "../assets/images/GLOBE.png"; // File removed
 import adoraImage from "../assets/images/ADORA.jpg";
 import bawoLogo from "../assets/images/bawo-logo.png";
 import bawoMark from "../assets/images/bawo-mark.png";
 import bawoSocialWordmark from "../assets/images/bawosocial-logo.png";
 import emekaImage from "../assets/images/Emeka.jpg";
 import fatimaImage from "../assets/images/Fatima.jpg";
+import newSplashScreen from "../assets/images/new-splash-screen.jpg";
+
+// Community Circles cover images
+import groupWellnessGoldenHour from "../assets/images/groups/wellness-golden-hour.jpg";
+import groupNewToNyc from "../assets/images/groups/new-to-nyc.jpg";
+import groupSafeSpaceSisterhood from "../assets/images/groups/safe-space-sisterhood.jpg";
+import groupAfroFoodChop from "../assets/images/groups/afro-food-chop.jpg";
 
 // Borough images - NYC specific
 import bx01 from "../assets/images/bronx/bx-01.png";
@@ -72,21 +77,29 @@ const appFeatureScreens = [
 ] as const;
 
 export const IMAGES = {
+  newSplashScreen,
+
+  groups: {
+    newToNyc: groupNewToNyc,
+    safeSpaceSisterhood: groupSafeSpaceSisterhood,
+    afroFoodChop: groupAfroFoodChop,
+    wellnessGoldenHour: groupWellnessGoldenHour,
+  },
+
   // Local Assets
   assets: {
-    globe:
-      "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=400&q=80&auto=format&fit=crop", // Placeholder globe image
-    /** Vite-bundled wordmark — avoids /public path 404s that show as a white broken-image box */
+    globe: newSplashScreen,
+    /** Vite-bundled wordmark */
     logo: bawoSocialWordmark,
-    /** Mark only — orange→eggplant bean, transparent cutout for header */
+    /** New BawoSocial cowrie-flame app icon */
     mark: bawoMark,
     logoOld: bawoLogo,
-    // Add more local images here as needed
   },
 
   // App Preview/Demo Images
   previews: {
     main: heroAppCommunityMockup,
+    splash: newSplashScreen,
   },
 
   showcase: {
@@ -125,7 +138,6 @@ export const IMAGES = {
 
   // Global Reach/City Images - NYC Boroughs
   globalReach: {
-    /** Brooklyn: multi-image square carousel (hero set). First slide fills index 0 for fallbacks. */
     brooklynGallery: [
       bkBrooklyn01,
       bkBrooklyn02,
@@ -133,9 +145,7 @@ export const IMAGES = {
       bkBrooklyn04,
       bkBrooklyn05,
     ] as const,
-    /** Queens: multi-image square carousel */
     queensGallery: [qn01, qn02, qn03, qn04, qn05, qn06, qn07] as const,
-    /** The Bronx: multi-image square carousel */
     bronxGallery: [
       bx01,
       bx02,
@@ -147,7 +157,6 @@ export const IMAGES = {
       bx08,
       bx09,
     ] as const,
-    /** Harlem (Manhattan hub): multi-image square carousel */
     harlemGallery: [
       hm01,
       hm02,
@@ -163,7 +172,6 @@ export const IMAGES = {
       hm12,
       hm13,
     ] as const,
-    /** Staten Island: multi-image square carousel */
     statenIslandGallery: [si01, si02, si03, si04, si05] as const,
     cities: [bkBrooklyn01, hm01, qn01, bx01, si01],
     cityMeta: [
@@ -187,14 +195,13 @@ export const IMAGES = {
 
   // Public assets (from public folder)
   public: {
-    favicon: "/favicon.png?v=6",
+    favicon: "/favicon.png?v=11",
     foundingMemberBg: "/founding-member-background.png",
     heroSection: "/hero-section.png",
     phoneMockup: "/phone-mockup.png",
   },
 } as const;
 
-// Helper functions for image management
 export const getTestimonialAvatar = (name: "adaora" | "emeka" | "fatima") => {
   return IMAGES.testimonials[name];
 };

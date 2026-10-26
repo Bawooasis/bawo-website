@@ -5,7 +5,6 @@ const d = semanticTokens.dark;
 const c = palette.copper;
 const g = d.accent.heritageGold;
 
-/** @deprecated Prefer CSS variables (`--bawo-*`) or import `palette` / `semanticTokens` from assets. */
 export const COLORS = {
   primary: {
     copper: c.base,
@@ -13,13 +12,13 @@ export const COLORS = {
     copperDark: c.deep,
     pumpkin: palette.content.pumpkin,
     gold: g,
-    goldLight: "#FFD078",
-    goldDark: "#C49220",
+    goldLight: "#FFCF6B",
+    goldDark: "#C9922C",
   },
   background: {
     obsidian: palette.obsidian.canvas,
     obsidianLight: palette.obsidian.elevated,
-    deepest: palette.obsidian.canvas,
+    deepest: "#07050B",
     main: palette.obsidian.canvas,
     surface: palette.obsidian.elevated,
     card: palette.obsidian.elevated,
@@ -29,9 +28,9 @@ export const COLORS = {
       tertiary: palette.obsidian.depth,
     },
     overlay: {
-      light: "rgba(255, 255, 255, 0.08)",
-      medium: "rgba(255, 255, 255, 0.12)",
-      subtle: "rgba(255, 255, 255, 0.04)",
+      light: "rgba(232, 185, 89, 0.08)",
+      medium: "rgba(232, 185, 89, 0.14)",
+      subtle: "rgba(168, 42, 136, 0.08)",
     },
   },
   text: {
@@ -42,7 +41,7 @@ export const COLORS = {
   },
   border: {
     default: d.border.subtle,
-    light: "rgba(255, 255, 255, 0.06)",
+    light: "rgba(232, 185, 89, 0.16)",
     copper: c.base,
     copperLight: c.bright,
   },
@@ -54,82 +53,80 @@ export const COLORS = {
   },
   gradients: {
     background: {
-      from: palette.obsidian.canvas,
-      via: palette.obsidian.elevated,
-      to: palette.obsidian.canvas,
-      end: palette.obsidian.canvas,
+      from: "#07050B",
+      via: "#0E0A14",
+      to: "#160F24",
+      end: "#0E0A14",
     },
     subtle: {
-      from: palette.obsidian.canvas,
-      to: palette.obsidian.elevated,
+      from: "#0E0A14",
+      to: "#1C132B",
     },
     copper: {
-      from: c.base,
-      to: c.bright,
+      from: "#FFCF6B",
+      to: "#C9922C",
     },
   },
   shadows: {
-    default: "rgba(0, 0, 0, 0.3)",
-    hover: "rgba(0, 0, 0, 0.4)",
-    subtle: "rgba(0, 0, 0, 0.2)",
-    glow: "rgba(255, 107, 0, 0.5)",
+    default: "rgba(5, 2, 10, 0.45)",
+    hover: "rgba(5, 2, 10, 0.6)",
+    subtle: "rgba(5, 2, 10, 0.3)",
+    glow: "rgba(232, 185, 89, 0.42)",
   },
   utility: {
     transparent: "transparent",
-    backdrop: "rgba(0, 0, 0, 0.6)",
+    backdrop: "rgba(14, 10, 20, 0.72)",
     red: "#ef4444",
     redPulse: "#ef4444",
   },
 } as const;
 
-/** Literal Tailwind arbitrary values — must stay in sync with `src/assets/colors.js`. */
 export const TAILWIND_COLORS = {
   primary: {
-    /** Gradient fill — matches `.bawo-pill-cta-surface` / founding CTA ramp. */
     text: "bawo-text-cta-gradient",
-    bg: "bg-[var(--bawo-brand-cta-orange)]",
-    border: "border-[rgba(255,107,0,0.45)]",
+    bg: "bg-[#E8B959]",
+    border: "border-[rgba(232,185,89,0.42)]",
     hover: {
-      bg: "hover:bg-[#FF6B00]",
-      text: "hover:text-[#FF8C42]",
-      border: "hover:border-[#FF8C42]",
+      bg: "hover:bg-[#FFCF6B]",
+      text: "hover:text-[#FFCF6B]",
+      border: "hover:border-[#FFCF6B]",
     },
     focus: {
-      border: "focus:border-[var(--bawo-brand-cta-orange)]",
+      border: "focus:border-[#E8B959]",
     },
   },
   gold: {
-    text: "text-[var(--bawo-gold,#FFBC42)]",
-    bg: "bg-[var(--bawo-gold,#FFBC42)]",
-    border: "border-[var(--bawo-gold,#FFBC42)]",
+    text: "text-[#E8B959]",
+    bg: "bg-[#E8B959]",
+    border: "border-[#E8B959]",
   },
   gradients: {
-    primary: "bg-gradient-to-r from-bawo-navy via-bawo-eggplant to-bawo-pumpkin",
-    primaryHover: "hover:from-bawo-eggplant hover:to-bawo-peach",
+    primary: "bg-gradient-to-r from-[#FFCF6B] via-[#E8B959] to-[#C9922C]",
+    primaryHover: "hover:from-[#FFE094] hover:to-[#E8B959]",
     background:
-      "bg-gradient-to-b from-[#08060C] via-[#221525] to-[#08060C]",
-    subtle: "bg-gradient-to-b from-[#08060C] to-[#221525]",
+      "bg-gradient-to-b from-[#07050B] via-[#0E0A14] to-[#160F24]",
+    subtle: "bg-gradient-to-b from-[#0E0A14] to-[#1C132B]",
   },
   text: {
-    primary: "text-[var(--bawo-text-primary,#F4F4F5)]",
-    secondary: "text-white/90",
-    muted: "text-white/60",
+    primary: "text-[#F7F3FA]",
+    secondary: "text-[#F7F3FA]/90",
+    muted: "text-[#E6DCF2]/65",
   },
   bg: {
-    obsidian: "bg-[#08060C]",
-    deepest: "bg-[#08060C]",
-    main: "bg-[#08060C]",
-    surface: "bg-[#221525]",
-    card: "bg-[var(--bawo-card,#221525)]",
+    obsidian: "bg-[#0E0A14]",
+    deepest: "bg-[#07050B]",
+    main: "bg-[#0E0A14]",
+    surface: "bg-[#1C132B]",
+    card: "bg-[#1C132B]/75",
     overlay: {
-      light: "bg-white/8",
-      medium: "bg-white/12",
-      subtle: "bg-white/4",
+      light: "bg-[#E8B959]/10",
+      medium: "bg-[#E8B959]/15",
+      subtle: "bg-[#2A193D]/40",
     },
   },
   border: {
-    default: "border-white/8",
-    light: "border-white/6",
-    glass: "border-[rgba(255,255,255,0.08)]",
+    default: "border-[rgba(232,185,89,0.22)]",
+    light: "border-[rgba(232,185,89,0.14)]",
+    glass: "border-[rgba(232,185,89,0.24)]",
   },
 } as const;

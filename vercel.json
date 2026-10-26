@@ -4,6 +4,8 @@
     { "source": "/admin", "destination": "/index.html" },
     { "source": "/admin/:path*", "destination": "/index.html" },
     { "source": "/business", "destination": "/index.html" },
-    { "source": "/business/:path*", "destination": "/index.html" }
+    { "source": "/business/:path*", "destination": "/index.html" },
+    { "source": "/businesses", "destination": "/index.html" },
+    { "source": "/businesses/:path*", "destination": "/index.html" }
   ]
 }

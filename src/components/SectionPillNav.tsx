@@ -1,10 +1,12 @@
 import { memo } from "react";
 
 const LINKS = [
+  { label: "Circles", href: "#community-circles" },
   { label: "Network", href: "#building-the-network" },
   { label: "About", href: "#about" },
   { label: "Features", href: "#features" },
   { label: "Events", href: "#events" },
+  { label: "Businesses", href: "/businesses" },
   { label: "FAQ", href: "#faq" },
 ] as const;
 

@@ -493,3 +493,441 @@
   .portal-metrics,
   .portal-metrics-admin { grid-template-columns: 1fr; }
 }
+
+/* BawoSocial for Businesses Auth Page */
+.portal-business-auth-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255, 118, 38, 0.16), transparent 34%),
+    radial-gradient(circle at 86% 20%, rgba(168, 85, 247, 0.15), transparent 36%),
+    linear-gradient(160deg, #07050c 0%, #0d0815 52%, #050308 100%);
+  color: #f6f2ea;
+  font-family: "MuseoSans", "Inter", system-ui, -apple-system, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.portal-business-auth-header {
+  width: min(1240px, 100%);
+  margin: 0 auto;
+  padding: 1.35rem 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.portal-business-auth-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.78rem;
+  color: #f6f2ea;
+  text-decoration: none;
+}
+
+.portal-business-auth-logo img {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 148, 72, 0.45);
+  box-shadow: 0 8px 24px rgba(255, 107, 44, 0.25);
+}
+
+.portal-business-auth-logo div {
+  display: grid;
+  line-height: 1.15;
+}
+
+.portal-business-auth-logo strong {
+  font-size: 1.12rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.portal-business-auth-logo span {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #ffb178;
+  font-weight: 700;
+}
+
+.portal-business-auth-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.portal-business-auth-grid {
+  width: min(1240px, 100%);
+  margin: 0 auto;
+  padding: 2.6rem 1.75rem 3.5rem;
+  display: grid;
+  grid-template-columns: 1.12fr 0.88fr;
+  gap: 2.75rem;
+  align-items: start;
+  flex: 1;
+}
+
+.portal-business-showcase {
+  display: grid;
+  gap: 1.45rem;
+  padding-top: 0.5rem;
+}
+
+.portal-business-badge-row .portal-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.42rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 126, 45, 0.14);
+  border: 1px solid rgba(255, 152, 79, 0.34);
+  color: #ffbe8f;
+}
+
+.portal-business-showcase h1 {
+  margin: 0;
+  font-size: clamp(2.05rem, 3.6vw, 3.1rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+}
+
+.portal-business-lead {
+  margin: 0;
+  color: rgba(240, 234, 246, 0.8);
+  font-size: 1.03rem;
+  line-height: 1.62;
+  max-width: 40rem;
+}
+
+.portal-business-highlights {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+.portal-business-highlight-card {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 0.95rem;
+  align-items: start;
+  padding: 1.05rem 1.15rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(14px);
+}
+
+.portal-business-highlight-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(255, 118, 38, 0.22), rgba(168, 85, 247, 0.2));
+  border: 1px solid rgba(255, 148, 72, 0.35);
+  color: #ff9c59;
+}
+
+.portal-business-highlight-card h3 {
+  margin: 0 0 0.28rem;
+  font-size: 0.98rem;
+  color: #ffffff;
+}
+
+.portal-business-highlight-card p {
+  margin: 0;
+  font-size: 0.87rem;
+  line-height: 1.5;
+  color: rgba(235, 228, 244, 0.72);
+}
+
+.portal-business-categories {
+  display: grid;
+  gap: 0.7rem;
+  padding-top: 0.25rem;
+}
+
+.portal-business-categories-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(246, 242, 234, 0.72);
+  font-weight: 700;
+}
+
+.portal-business-category-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.portal-business-category-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  padding: 0.42rem 0.78rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  color: rgba(246, 242, 234, 0.88);
+}
+
+.portal-business-category-pill svg {
+  color: #ff9c59;
+}
+
+.portal-business-auth-column {
+  display: flex;
+  justify-content: center;
+}
+
+.portal-business-auth-card {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 24px;
+  padding: 1.65rem;
+  background: rgba(18, 12, 28, 0.84);
+  border: 1px solid rgba(255, 152, 79, 0.26);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+}
+
+.portal-business-auth-card h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+.portal-auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+  padding: 0.32rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  margin-bottom: 0.35rem;
+}
+
+.portal-auth-tab {
+  min-height: 40px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: rgba(246, 242, 234, 0.72);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.42rem;
+  cursor: pointer;
+  transition: all 160ms ease;
+}
+
+.portal-auth-tab:hover {
+  color: #ffffff;
+}
+
+.portal-auth-tab.is-active {
+  background: linear-gradient(135deg, rgba(255, 118, 38, 0.28), rgba(168, 85, 247, 0.24));
+  border: 1px solid rgba(255, 152, 79, 0.44);
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
+}
+
+.portal-auth-footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 0.15rem;
+}
+
+.portal-text-link {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: #ffb178;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.portal-text-link:hover {
+  color: #ffd4b0;
+  text-decoration: underline;
+}
+
+.portal-business-auth-card small a {
+  color: #ffb178;
+}
+
+@media (max-width: 960px) {
+  .portal-business-auth-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1.75rem 1.15rem 2.75rem;
+  }
+
+  .portal-business-auth-column {
+    order: -1;
+  }
+
+  .portal-business-auth-card {
+    max-width: 100%;
+  }
+
+  .portal-business-auth-header {
+    padding: 1rem 1.15rem;
+  }
+}
+
+/* ============================================================================
+ * BAWOSOCIAL BUSINESS PORTAL — DEEP EGGPLANT + SIGNATURE GOLD + LIQUID GLASS
+ * ============================================================================ */
+:root {
+  --portal-bg: #0E0A14;
+  --portal-bg-soft: #1C132B;
+  --portal-panel: #1C132B;
+  --portal-panel-2: #2A193D;
+  --portal-copper: #C9922C;
+  --portal-copper-soft: #FFCF6B;
+  --portal-pumpkin: #E8B959;
+  --portal-gold: #E8B959;
+  --portal-text: #F7F3FA;
+  --portal-muted: rgba(247, 243, 250, 0.72);
+  --portal-border: rgba(232, 185, 89, 0.26);
+  --portal-border-soft: rgba(232, 185, 89, 0.14);
+  --portal-success: #E8B959;
+  --portal-warning: #FFCF6B;
+}
+
+.portal-shell,
+.portal-auth-shell,
+.portal-business-auth-page {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  background:
+    radial-gradient(ellipse 60% 42% at 14% 16%, rgba(168, 42, 136, 0.16), transparent 68%),
+    radial-gradient(ellipse 55% 38% at 86% 20%, rgba(232, 185, 89, 0.14), transparent 65%),
+    linear-gradient(180deg, #07050B 0%, #0E0A14 50%, #160F24 100%) !important;
+  color: #F7F3FA;
+}
+
+.portal-topbar h1,
+.portal-panel h2,
+.portal-auth-card h1,
+.portal-business-showcase h1,
+.portal-business-auth-card h2 {
+  font-family: "Cormorant Garamond", Georgia, serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em;
+}
+
+.portal-primary-button,
+.portal-row-actions button.is-primary,
+.social-schedule-row button,
+.crm-activity-composer button {
+  background: linear-gradient(135deg, #FFCF6B 0%, #E8B959 55%, #C9922C 100%) !important;
+  color: #0E0A14 !important;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif !important;
+  font-weight: 700 !important;
+  border: 1px solid rgba(255, 236, 190, 0.58) !important;
+  box-shadow:
+    0 12px 30px rgba(232, 185, 89, 0.28),
+    inset 0 1px 0 rgba(255, 250, 230, 0.65) !important;
+}
+
+.portal-primary-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #FFE094 0%, #F2C567 55%, #D9A136 100%) !important;
+  color: #0E0A14 !important;
+}
+
+.portal-ghost-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 42px;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  background: linear-gradient(160deg, rgba(28, 19, 43, 0.72) 0%, rgba(14, 10, 22, 0.84) 100%);
+  border: 1px solid rgba(232, 185, 89, 0.32);
+  color: #FFE8B3;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  backdrop-filter: blur(20px);
+}
+
+.portal-ghost-button:hover {
+  border-color: rgba(232, 185, 89, 0.65);
+  color: #F7F3FA;
+}
+
+.portal-business-highlight-card,
+.portal-business-auth-card,
+.portal-auth-card,
+.portal-panel,
+.portal-metric {
+  background: linear-gradient(
+    160deg,
+    rgba(28, 19, 43, 0.74) 0%,
+    rgba(14, 10, 22, 0.86) 100%
+  ) !important;
+  border: 1px solid rgba(232, 185, 89, 0.24) !important;
+  backdrop-filter: blur(28px) saturate(165%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(165%) !important;
+  box-shadow:
+    0 22px 54px rgba(5, 2, 10, 0.58),
+    inset 0 1px 0 rgba(255, 236, 190, 0.28) !important;
+}
+
+.portal-business-badge-row .portal-kicker {
+  background: rgba(232, 185, 89, 0.14) !important;
+  border: 1px solid rgba(232, 185, 89, 0.4) !important;
+  color: #FFCF6B !important;
+}
+
+.portal-business-highlight-icon {
+  background: linear-gradient(135deg, rgba(255, 207, 107, 0.22), rgba(168, 42, 136, 0.2)) !important;
+  border: 1px solid rgba(232, 185, 89, 0.4) !important;
+  color: #E8B959 !important;
+}
+
+.portal-business-category-pill {
+  background: rgba(28, 19, 43, 0.68) !important;
+  border: 1px solid rgba(232, 185, 89, 0.24) !important;
+  color: #FFE8B3 !important;
+}
+
+.portal-business-category-pill svg {
+  color: #E8B959 !important;
+}
+
+.portal-auth-tab.is-active {
+  background: linear-gradient(135deg, #FFCF6B 0%, #E8B959 55%, #C9922C 100%) !important;
+  border: 1px solid rgba(255, 236, 190, 0.6) !important;
+  color: #0E0A14 !important;
+  font-weight: 700 !important;
+}
+
+.portal-text-link,
+.portal-business-auth-card small a,
+.portal-business-auth-logo span {
+  color: #E8B959 !important;
+}

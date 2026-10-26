@@ -1,16 +1,17 @@
-import { ChevronRight, Menu, X } from "lucide-react";
+import { Building2, ChevronRight, Menu, X } from "lucide-react";
 import { memo, useEffect, useState, type MouseEvent } from "react";
 import BawoPillButton from "./BawoPillButton";
 import SiteLogo from "./SiteLogo";
 import { CONTENT } from "../constants/content";
 
 const NAV_LINKS = [
+  { label: "Businesses", href: "/businesses", isBusiness: true },
+  { label: "Circles", href: "#community-circles" },
   { label: "Network", href: "#building-the-network" },
   { label: "About", href: "#about" },
   { label: "Features", href: "#features" },
   { label: "Events", href: "#events" },
   { label: "Try the App", href: "#early-access" },
-  { label: "Business", href: "/business" },
   { label: "FAQ", href: "#faq" },
 ] as const;
 
@@ -45,8 +46,21 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
 
             <nav className="bawo-site-header__nav" aria-label="Main">
               {NAV_LINKS.map((link) => (
-                <a key={link.href} href={link.href} className="bawo-site-header__nav-link">
-                  <span>{link.label}</span>
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={
+                    "isBusiness" in link && link.isBusiness
+                      ? "bawo-site-header__nav-link bawo-site-header__nav-link--business"
+                      : "bawo-site-header__nav-link"
+                  }
+                >
+                  <span className="inline-flex items-center gap-1.5">
+                    {"isBusiness" in link && link.isBusiness ? (
+                      <Building2 className="h-3.5 w-3.5 text-[#FFBC42] shrink-0" aria-hidden />
+                    ) : null}
+                    <span>{link.label}</span>
+                  </span>
                   <ChevronRight className="bawo-site-header__chevron" aria-hidden strokeWidth={1.75} />
                 </a>
               ))}
@@ -54,6 +68,15 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
           </div>
 
           <div className="bawo-site-header__actions">
+            <a
+              href="/businesses"
+              className="bawo-site-header__businesses-chip"
+              aria-label="Businesses Log In and Sign In"
+            >
+              <Building2 className="h-3.5 w-3.5 text-[#FFBC42] shrink-0" aria-hidden />
+              <span>Businesses</span>
+            </a>
+
             <a
               href={CONTENT.hero.testflightLink}
               target="_blank"
@@ -104,6 +127,18 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
               </a>
             ))}
             <div className="px-2 pt-3 flex flex-col gap-2">
+              <BawoPillButton
+                label="Businesses Log In / Sign In"
+                variant="primary"
+                appearance="outline"
+                size="md"
+                polished
+                fullWidth
+                onClick={() => {
+                  setMobileOpen(false);
+                  window.location.assign("/businesses");
+                }}
+              />
               <BawoPillButton
                 label={CONTENT.hero.ctaTestFlight}
                 variant="primary"

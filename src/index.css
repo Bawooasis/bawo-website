@@ -3030,3 +3030,336 @@ a.bawo-cta-quiet:active {
   animation-delay: 0.3s;
   opacity: 0;
 }
+
+/* Prominent Businesses Top Navigation Links */
+.bawo-site-header__businesses-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  min-height: 2.15rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 9999px;
+  font-family: "MuseoSans", system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.015em;
+  color: #fff6ea;
+  text-decoration: none;
+  background: linear-gradient(135deg, rgba(255, 188, 66, 0.18), rgba(255, 118, 38, 0.14));
+  border: 1px solid rgba(255, 188, 66, 0.45);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
+  transition: transform 0.16s ease, border-color 0.16s ease, background-color 0.16s ease;
+}
+
+.bawo-site-header__businesses-chip:hover {
+  border-color: rgba(255, 188, 66, 0.8);
+  background: linear-gradient(135deg, rgba(255, 188, 66, 0.28), rgba(255, 118, 38, 0.22));
+  transform: translateY(-1px);
+}
+
+.bawo-site-header__nav-link--business {
+  color: #ffe3b3 !important;
+  background: rgba(255, 188, 66, 0.08);
+  border: 1px solid rgba(255, 188, 66, 0.26);
+}
+
+.bawo-site-header__nav-link--business:hover {
+  background: rgba(255, 188, 66, 0.16) !important;
+  border-color: rgba(255, 188, 66, 0.52);
+}
+
+.bawo-hero-cinematic__pill--business {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  border-color: rgba(255, 188, 66, 0.5) !important;
+  background: linear-gradient(135deg, rgba(255, 188, 66, 0.2), rgba(255, 118, 38, 0.14)) !important;
+  color: #fff8ee !important;
+}
+
+.bawo-hero-cinematic__pill--business:hover {
+  border-color: rgba(255, 188, 66, 0.85) !important;
+  background: linear-gradient(135deg, rgba(255, 188, 66, 0.3), rgba(255, 118, 38, 0.24)) !important;
+}
+
+/* ============================================================================
+ * BAWOSOCIAL $50,000 FLAGSHIP THEME OVERRIDES
+ * Deep Eggplant (#07050B -> #0E0A14 -> #160F24) + Signature Warm Gold (#E8B959)
+ * + True Liquid Glass + Cormorant Garamond Bold Display + Plus Jakarta Sans UI
+ * ============================================================================ */
+
+:root {
+  --bawo-canvas: #0E0A14;
+  --bawo-ink: #07050B;
+  --bawo-navy: #0E0A14;
+  --bawo-eggplant: #160F24;
+  --bawo-eggplant-light: #2A193D;
+  --bawo-card: #1C132B;
+  --bawo-glass-card-bg: rgba(28, 19, 43, 0.72);
+  --bawo-pumpkin: #E8B959;
+  --bawo-peach: #FFCF6B;
+  --bawo-gold: #E8B959;
+  --bawo-copper: #C9922C;
+  --bawo-brand-cta-orange: #E8B959;
+  --bawo-text-primary: #F7F3FA;
+  --bawo-cta-text: #0E0A14;
+  --bawo-liquid-glass-fill: #E8B959;
+  --bawo-liquid-glass-hover-bg: #FFCF6B;
+  --bawo-pill-gradient: linear-gradient(135deg, #FFCF6B 0%, #E8B959 55%, #C9922C 100%);
+}
+
+html,
+body {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  background-color: #0E0A14;
+  color: #F7F3FA;
+}
+
+.bawo-page-bg-base {
+  background:
+    radial-gradient(ellipse 65% 45% at 18% 12%, rgba(168, 42, 136, 0.16) 0%, transparent 68%),
+    radial-gradient(ellipse 55% 40% at 84% 24%, rgba(232, 185, 89, 0.13) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 50% at 50% 62%, rgba(114, 34, 130, 0.14) 0%, transparent 72%),
+    linear-gradient(180deg, #07050B 0%, #0E0A14 48%, #160F24 100%);
+}
+
+/* Keep the full-page WebGL particle canvas fixed across the entire viewport */
+.bawo-particle-field {
+  background:
+    radial-gradient(ellipse 68% 48% at 50% 42%, rgba(168, 42, 136, 0.15) 0%, transparent 72%),
+    radial-gradient(ellipse 52% 38% at 76% 18%, rgba(232, 185, 89, 0.12) 0%, transparent 68%),
+    linear-gradient(180deg, #07050B 0%, #0E0A14 50%, #160F24 100%) !important;
+}
+
+.bawo-particle-field--site {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  pointer-events: none !important;
+}
+
+/* Cormorant Garamond Bold Editorial Display Typography */
+h1,
+h2,
+.font-display,
+.bawo-hero-cinematic__title,
+.bawo-editorial-heading {
+  font-family: "Cormorant Garamond", Georgia, serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em;
+}
+
+.bawo-hero-cinematic__title {
+  max-width: 14ch;
+  font-size: clamp(2.75rem, 6.6vw, 5.25rem);
+  line-height: 0.98;
+  color: #F7F3FA;
+  text-shadow: 0 12px 38px rgba(7, 5, 11, 0.72);
+}
+
+.bawo-hero-neon,
+.bawo-text-cta-gradient {
+  background: linear-gradient(135deg, #FFE29A 0%, #E8B959 52%, #C9922C 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 32px rgba(232, 185, 89, 0.24);
+}
+
+/* Signature Warm Gold Primary CTAs with Dark Eggplant #0E0A14 Bold Text */
+.bawo-cta-quiet,
+.bawo-cta-premium,
+.bawo-pill-cta-surface,
+.bawo-cta-glass-primary,
+.liquid-glass-cta {
+  background: linear-gradient(135deg, #FFCF6B 0%, #E8B959 55%, #C9922C 100%) !important;
+  color: #0E0A14 !important;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif !important;
+  font-weight: 700 !important;
+  border: 1px solid rgba(255, 236, 190, 0.55) !important;
+  box-shadow:
+    0 12px 32px rgba(232, 185, 89, 0.28),
+    0 4px 12px rgba(7, 5, 11, 0.45),
+    inset 0 1px 0 rgba(255, 250, 230, 0.65) !important;
+}
+
+.bawo-cta-quiet:hover,
+.bawo-cta-premium:hover,
+.bawo-pill-cta-surface:hover,
+.bawo-cta-glass-primary:hover,
+.liquid-glass-cta:hover:not(:disabled) {
+  background: linear-gradient(135deg, #FFE094 0%, #F2C567 55%, #D9A136 100%) !important;
+  color: #0E0A14 !important;
+  border-color: rgba(255, 244, 214, 0.8) !important;
+  box-shadow:
+    0 16px 38px rgba(232, 185, 89, 0.38),
+    0 6px 16px rgba(7, 5, 11, 0.5),
+    inset 0 1px 0 rgba(255, 253, 242, 0.8) !important;
+}
+
+.bawo-cta-quiet span,
+.bawo-cta-premium span,
+.bawo-pill-cta-surface span,
+.liquid-glass-cta span {
+  color: #0E0A14 !important;
+  text-shadow: none !important;
+  font-weight: 700 !important;
+}
+
+/* Secondary / Outline Liquid Glass Pill Buttons */
+.bawo-cta-outline,
+.bawo-cta-secondary,
+.bawo-cta-glass-secondary {
+  background: linear-gradient(160deg, rgba(34, 22, 52, 0.76) 0%, rgba(16, 10, 26, 0.88) 100%) !important;
+  color: #F7F3FA !important;
+  border: 1px solid rgba(232, 185, 89, 0.34) !important;
+  backdrop-filter: blur(24px) saturate(165%);
+  -webkit-backdrop-filter: blur(24px) saturate(165%);
+  box-shadow:
+    0 10px 28px rgba(5, 2, 10, 0.48),
+    inset 0 1px 0 rgba(255, 236, 190, 0.24) !important;
+}
+
+.bawo-cta-outline:hover,
+.bawo-cta-secondary:hover,
+.bawo-cta-glass-secondary:hover {
+  border-color: rgba(232, 185, 89, 0.65) !important;
+  background: linear-gradient(160deg, rgba(44, 28, 66, 0.84) 0%, rgba(22, 14, 36, 0.92) 100%) !important;
+}
+
+/* True Liquid Glass Surfaces across Cards, Header, Showcase Panels & FAQ */
+.glass-card,
+.bawo-faq-panel {
+  background: linear-gradient(
+    160deg,
+    rgba(28, 19, 43, 0.72) 0%,
+    rgba(14, 10, 22, 0.84) 100%
+  ) !important;
+  border: 1px solid rgba(232, 185, 89, 0.24) !important;
+  backdrop-filter: blur(28px) saturate(165%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(165%) !important;
+  box-shadow:
+    0 20px 48px rgba(5, 2, 10, 0.56),
+    inset 0 1px 0 rgba(255, 236, 190, 0.28) !important;
+}
+
+@media (hover: hover) {
+  .glass-card:hover,
+  .bawo-faq-panel:hover {
+    border-color: rgba(232, 185, 89, 0.48) !important;
+    background: linear-gradient(
+      160deg,
+      rgba(36, 24, 56, 0.78) 0%,
+      rgba(18, 12, 28, 0.88) 100%
+    ) !important;
+    box-shadow:
+      0 24px 56px rgba(5, 2, 10, 0.64),
+      0 0 28px rgba(232, 185, 89, 0.1),
+      inset 0 1px 0 rgba(255, 236, 190, 0.36) !important;
+  }
+}
+
+.glass-pill {
+  background: linear-gradient(
+    145deg,
+    rgba(32, 20, 48, 0.74) 0%,
+    rgba(16, 10, 26, 0.84) 100%
+  ) !important;
+  border: 1px solid rgba(232, 185, 89, 0.26) !important;
+  backdrop-filter: blur(20px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 236, 190, 0.22);
+}
+
+/* Floating Liquid Glass Top Navigation Header */
+.bawo-site-header {
+  background: linear-gradient(
+    180deg,
+    rgba(14, 10, 20, 0.84) 0%,
+    rgba(22, 15, 36, 0.72) 100%
+  ) !important;
+  backdrop-filter: blur(28px) saturate(165%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(165%) !important;
+  border-bottom: 1px solid rgba(232, 185, 89, 0.18) !important;
+  box-shadow: 0 12px 36px rgba(5, 2, 10, 0.45) !important;
+}
+
+.bawo-site-header__glow {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(232, 185, 89, 0.38) 22%,
+    rgba(255, 207, 107, 0.55) 50%,
+    rgba(232, 185, 89, 0.38) 78%,
+    transparent 100%
+  ) !important;
+}
+
+.bawo-site-header__nav-link,
+.bawo-site-header__mobile-link,
+.bawo-faq-panel__question,
+.bawo-faq-panel__answer {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif !important;
+}
+
+/* Prominent Gold Businesses Chip in Top Bar */
+.bawo-site-header__businesses-chip {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  background: linear-gradient(135deg, rgba(255, 207, 107, 0.2), rgba(232, 185, 89, 0.12));
+  border: 1px solid rgba(232, 185, 89, 0.48);
+  color: #FFE8B3;
+  box-shadow:
+    0 6px 20px rgba(5, 2, 10, 0.38),
+    inset 0 1px 0 rgba(255, 236, 190, 0.28);
+}
+
+.bawo-site-header__businesses-chip:hover {
+  background: linear-gradient(135deg, #FFCF6B 0%, #E8B959 55%, #C9922C 100%);
+  color: #0E0A14;
+  border-color: rgba(255, 236, 190, 0.85);
+}
+
+/* Hero Cinematic Stage — keep transparent so particle globe shines through */
+.bawo-hero-cinematic__shade {
+  background:
+    radial-gradient(ellipse 42% 24% at 50% 50%, rgba(14, 10, 20, 0.28) 0%, transparent 74%),
+    linear-gradient(to top, rgba(14, 10, 20, 0.52) 0%, transparent 28%) !important;
+}
+
+.bawo-hero-cinematic__pill {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif !important;
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  background: rgba(24, 15, 38, 0.68) !important;
+  border: 1px solid rgba(232, 185, 89, 0.24) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 236, 190, 0.18);
+}
+
+.bawo-hero-cinematic__pill:hover {
+  border-color: rgba(232, 185, 89, 0.55) !important;
+  background: rgba(36, 22, 56, 0.82) !important;
+}
+
+.bawo-hero-cinematic__pill--business {
+  background: linear-gradient(135deg, rgba(255, 207, 107, 0.22), rgba(232, 185, 89, 0.14)) !important;
+  border-color: rgba(232, 185, 89, 0.55) !important;
+  color: #FFE8B3 !important;
+}
+
+/* Founding Member Checkout Modal in Deep Eggplant + Gold */
+.bawo-modal-panel {
+  border: 1px solid rgba(232, 185, 89, 0.32) !important;
+  background: linear-gradient(
+    165deg,
+    rgba(32, 20, 48, 0.96) 0%,
+    rgba(18, 11, 28, 0.98) 55%,
+    rgba(10, 7, 16, 0.99) 100%
+  ) !important;
+  box-shadow:
+    0 28px 72px rgba(5, 2, 10, 0.72),
+    0 0 44px rgba(232, 185, 89, 0.12),
+    inset 0 1px 0 rgba(255, 236, 190, 0.28) !important;
+}

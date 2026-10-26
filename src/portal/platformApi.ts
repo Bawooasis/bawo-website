@@ -1,235 +1,328 @@
-import type { PortalSession } from "./types";
+import type {
+  AdminBootstrapResponse,
+  BusinessProfilePatch,
+  DirectoryListing,
+  ModerationAction,
+  PortalConfig,
+  PortalSession,
+  SocialPostDraft,
+  VendorClaimSubmission,
+  VendorPortalBootstrapResponse,
+} from "./types";
 
-const SESSION_KEY = "bawo-platform-session";
-const GROUP_IMAGE_BUCKET = "group-images";
-const GROUP_IMAGE_TYPES = new Set([
-  "image/jpeg",
-  "image/png",
-  "image/gif",
-  "image/webp",
-]);
-const MAX_GROUP_IMAGE_BYTES = 5 * 1024 * 1024;
-const SOCIAL_MEDIA_TYPES = new Set([
-  "image/jpeg",
-  "image/png",
-  "image/webp",
-  "video/mp4",
-  "video/quicktime",
-]);
-const MAX_SOCIAL_MEDIA_BYTES = 100 * 1024 * 1024;
-const DEFAULT_SUPABASE_URL = "https://wyarfsymnyrraowwluhf.supabase.co";
-const DEFAULT_SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5YXJmc3ltbnlycmFvd3dsdWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NTY3MTYsImV4cCI6MjA4NzMxNjcxNn0.wmET17KAduP60VHCSmKeVADKfHcpM3-m53EzeGnQy2I";
+const SESSION_KEY = "bawo.portal.session.v1";
+const PROD_SUPABASE_URL = "https://wyarfsymnyrraowwluhf.supabase.co";
+const PROD_SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5YXJmc3ltbnlycmFvd3dsdWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc0NjkyNDksImV4cCI6MjA4MzA0NTI0OX0.c9c43u8c2v2l-t3cW2h8z-xT8B0s2N9mG7qR5vY1wE0";
 
-type ApiEnvelope<T> = {
-  success?: boolean;
-  data?: T;
-  error?: string;
-  error_description?: string;
-  msg?: string;
-};
+export function readPortalConfig(): PortalConfig {
+  const env = import.meta.env as Record<string, string | undefined>;
+  const supabaseUrl = (env.VITE_SUPABASE_URL || PROD_SUPABASE_URL).replace(/\/+$/, "");
+  const supabaseAnonKey = env.VITE_SUPABASE_ANON_KEY || PROD_SUPABASE_ANON_KEY;
 
-export type PortalConfig = {
-  supabaseUrl: string;
-  publishableKey: string;
-};
-
-export function getPortalConfig(): PortalConfig {
   return {
-    supabaseUrl: String(
-      import.meta.env.VITE_SUPABASE_URL || DEFAULT_SUPABASE_URL,
-    )
-      .trim()
-      .replace(/\/+$/, ""),
-    publishableKey: String(
-      import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
-        DEFAULT_SUPABASE_PUBLISHABLE_KEY,
-    ).trim(),
+    supabaseUrl,
+    supabaseAnonKey,
+    adminPortalUrl: env.VITE_ADMIN_PORTAL_URL || `${supabaseUrl}/functions/v1/admin-portal`,
+    vendorPortalUrl: env.VITE_VENDOR_PORTAL_URL || `${supabaseUrl}/functions/v1/vendor-portal`,
   };
 }
 
-export function isPortalConfigured(config: PortalConfig): boolean {
-  return (
-    config.supabaseUrl.startsWith("https://") &&
-    config.publishableKey.length > 20
-  );
-}
-
-async function parseResponse<T>(response: Response): Promise<T> {
-  const body = (await response.json().catch(() => ({}))) as ApiEnvelope<T>;
-  if (!response.ok || body.success === false) {
-    throw new Error(
-      body.error_description ||
-        body.msg ||
-        body.error ||
-        `Request failed (${response.status})`,
-    );
-  }
-  return (body.data ?? body) as T;
-}
-
 export class PlatformApi {
-  private readonly config: PortalConfig;
+  readonly config: PortalConfig;
 
-  constructor(config = getPortalConfig()) {
+  constructor(config = readPortalConfig()) {
     this.config = config;
   }
 
-  getSession(): PortalSession | null {
+  get isConfigured(): boolean {
+    return Boolean(this.config.supabaseUrl && this.config.supabaseAnonKey);
+  }
+
+  getStoredSession(): PortalSession | null {
     try {
-      const stored = window.localStorage.getItem(SESSION_KEY);
-      return stored ? (JSON.parse(stored) as PortalSession) : null;
+      const raw = window.localStorage.getItem(SESSION_KEY);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw) as PortalSession;
+      if (!parsed?.accessToken || !parsed?.user?.id) return null;
+      return parsed;
     } catch {
-      window.localStorage.removeItem(SESSION_KEY);
       return null;
     }
   }
 
-  private saveSession(session: PortalSession): PortalSession {
-    const expiresAt =
-      session.expires_at ||
-      Math.floor(Date.now() / 1000) + Number(session.expires_in || 3600);
-    const stored = { ...session, expires_at: expiresAt };
-    window.localStorage.setItem(SESSION_KEY, JSON.stringify(stored));
-    return stored;
+  clearSession(): void {
+    try {
+      window.localStorage.removeItem(SESSION_KEY);
+    } catch {
+      // Ignore storage failures in restricted browser modes.
+    }
   }
 
   async signIn(email: string, password: string): Promise<PortalSession> {
-    const response = await fetch(
-      `${this.config.supabaseUrl}/auth/v1/token?grant_type=password`,
-      {
-        method: "POST",
-        headers: {
-          apikey: this.config.publishableKey,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      },
-    );
-    return this.saveSession(await parseResponse<PortalSession>(response));
-  }
-
-  private async refreshSession(): Promise<PortalSession> {
-    const session = this.getSession();
-    if (!session?.refresh_token) {
-      throw new Error("Your session expired. Sign in again.");
+    if (!this.isConfigured) {
+      throw new Error("Portal backend is not configured. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.");
     }
-    const response = await fetch(
-      `${this.config.supabaseUrl}/auth/v1/token?grant_type=refresh_token`,
-      {
-        method: "POST",
-        headers: {
-          apikey: this.config.publishableKey,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ refresh_token: session.refresh_token }),
-      },
-    );
-    return this.saveSession(await parseResponse<PortalSession>(response));
-  }
 
-  private async activeSession(): Promise<PortalSession> {
-    const session = this.getSession();
-    if (!session?.access_token) throw new Error("Sign in to continue.");
-    const now = Math.floor(Date.now() / 1000);
-    if (session.expires_at <= now + 60) return this.refreshSession();
+    const response = await fetch(`${this.config.supabaseUrl}/auth/v1/token?grant_type=password`, {
+      method: "POST",
+      headers: {
+        apikey: this.config.supabaseAnonKey,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: email.trim(), password }),
+    });
+
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok || !payload?.access_token || !payload?.user?.id) {
+      throw new Error(payload?.error_description || payload?.msg || "Unable to sign in with those credentials.");
+    }
+
+    const session: PortalSession = {
+      accessToken: payload.access_token,
+      refreshToken: payload.refresh_token,
+      expiresAt: payload.expires_at,
+      user: {
+        id: payload.user.id,
+        email: payload.user.email,
+      },
+    };
+
+    try {
+      window.localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+    } catch {
+      // Session still works in-memory for the active tab.
+    }
+
     return session;
   }
 
-  async invoke<T>(
-    functionName: "platform-control-center" | "vendor-portal",
-    payload: object,
-    retry = true,
+  async signUpBusiness(
+    email: string,
+    password: string,
+    contactName: string,
+    businessName: string
+  ): Promise<{ session: PortalSession | null; confirmationRequired: boolean }> {
+    if (!this.isConfigured) {
+      throw new Error("Portal backend is not configured.");
+    }
+
+    const response = await fetch(`${this.config.supabaseUrl}/auth/v1/signup`, {
+      method: "POST",
+      headers: {
+        apikey: this.config.supabaseAnonKey,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email.trim(),
+        password,
+        data: {
+          full_name: contactName.trim(),
+          business_name: businessName.trim(),
+          account_type: "business",
+        },
+      }),
+    });
+
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(
+        payload?.error_description || payload?.msg || payload?.message || "Unable to create your BawoSocial business account."
+      );
+    }
+
+    if (payload?.access_token && payload?.user?.id) {
+      const session: PortalSession = {
+        accessToken: payload.access_token,
+        refreshToken: payload.refresh_token,
+        expiresAt: payload.expires_at,
+        user: {
+          id: payload.user.id,
+          email: payload.user.email,
+        },
+      };
+      try {
+        window.localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+      } catch {
+        // Ignore storage failures
+      }
+      return { session, confirmationRequired: false };
+    }
+
+    return { session: null, confirmationRequired: true };
+  }
+
+  async requestPasswordReset(email: string): Promise<void> {
+    if (!this.isConfigured) {
+      throw new Error("Portal backend is not configured.");
+    }
+
+    const response = await fetch(`${this.config.supabaseUrl}/auth/v1/recover`, {
+      method: "POST",
+      headers: {
+        apikey: this.config.supabaseAnonKey,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: email.trim() }),
+    });
+
+    if (!response.ok) {
+      const payload = await response.json().catch(() => ({}));
+      throw new Error(payload?.error_description || payload?.msg || "Unable to send password reset email.");
+    }
+  }
+
+  async fetchAdminBootstrap(session: PortalSession): Promise<AdminBootstrapResponse> {
+    return this.callFunction<AdminBootstrapResponse>(this.config.adminPortalUrl, session, {
+      action: "bootstrap",
+    });
+  }
+
+  async runModerationAction(
+    session: PortalSession,
+    action: ModerationAction,
+    targetId: string,
+    notes?: string
+  ): Promise<void> {
+    await this.callFunction(this.config.adminPortalUrl, session, {
+      action,
+      targetId,
+      notes,
+    });
+  }
+
+  async createSocialDraft(session: PortalSession, draft: SocialPostDraft): Promise<void> {
+    await this.callFunction(this.config.adminPortalUrl, session, {
+      action: "create_social_draft",
+      draft,
+    });
+  }
+
+  async startInstagramOAuth(session: PortalSession, returnTo = window.location.origin + "/admin"): Promise<string> {
+    const result = await this.callFunction<{ authUrl: string }>(this.config.adminPortalUrl, session, {
+      action: "start_instagram_oauth",
+      returnTo,
+    });
+    if (!result?.authUrl) throw new Error("Instagram OAuth did not return a redirect URL.");
+    return result.authUrl;
+  }
+
+  async disconnectInstagram(session: PortalSession, connectionId?: string): Promise<void> {
+    await this.callFunction(this.config.adminPortalUrl, session, {
+      action: "disconnect_instagram",
+      connectionId,
+    });
+  }
+
+  async uploadSocialMedia(session: PortalSession, file: File): Promise<string> {
+    if (!file.type.startsWith("image/") && !file.type.startsWith("video/")) {
+      throw new Error("Choose an image or video file.");
+    }
+    if (file.size > 8 * 1024 * 1024) {
+      throw new Error("Keep uploads under 8 MB for direct portal publishing.");
+    }
+
+    const base64Data = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error("Could not read that media file."));
+      reader.onload = () => {
+        const value = String(reader.result || "");
+        resolve(value.includes(",") ? value.split(",")[1] : value);
+      };
+      reader.readAsDataURL(file);
+    });
+
+    const result = await this.callFunction<{ mediaUrl: string }>(this.config.adminPortalUrl, session, {
+      action: "upload_social_media",
+      fileName: file.name,
+      contentType: file.type,
+      base64Data,
+    });
+    if (!result?.mediaUrl) throw new Error("Upload completed without a public media URL.");
+    return result.mediaUrl;
+  }
+
+  async publishInstagramPost(
+    session: PortalSession,
+    draft: SocialPostDraft & { postId?: string; mode: "publish_now" | "schedule" }
+  ): Promise<{ status: string; externalPostId?: string | null }> {
+    return this.callFunction(this.config.adminPortalUrl, session, {
+      action: "publish_instagram_post",
+      draft,
+    });
+  }
+
+  async updateSocialPostStatus(
+    session: PortalSession,
+    postId: string,
+    status: "draft" | "scheduled" | "published" | "archived",
+    postUrl?: string
+  ): Promise<void> {
+    await this.callFunction(this.config.adminPortalUrl, session, {
+      action: "update_social_post_status",
+      postId,
+      status,
+      postUrl,
+    });
+  }
+
+  async fetchVendorBootstrap(session: PortalSession): Promise<VendorPortalBootstrapResponse> {
+    return this.callFunction<VendorPortalBootstrapResponse>(this.config.vendorPortalUrl, session, {
+      action: "bootstrap",
+    });
+  }
+
+  async searchClaimableListings(session: PortalSession, query: string): Promise<DirectoryListing[]> {
+    const result = await this.callFunction<{ listings: DirectoryListing[] }>(
+      this.config.vendorPortalUrl,
+      session,
+      { action: "search_listings", query }
+    );
+    return result.listings || [];
+  }
+
+  async submitVendorClaim(session: PortalSession, claim: VendorClaimSubmission): Promise<void> {
+    await this.callFunction(this.config.vendorPortalUrl, session, {
+      action: "submit_claim",
+      claim,
+    });
+  }
+
+  async updateVendorListing(session: PortalSession, patch: BusinessProfilePatch): Promise<void> {
+    await this.callFunction(this.config.vendorPortalUrl, session, {
+      action: "update_listing",
+      patch,
+    });
+  }
+
+  private async callFunction<T = Record<string, unknown>>(
+    url: string,
+    session: PortalSession,
+    body: Record<string, unknown>
   ): Promise<T> {
-    const session = await this.activeSession();
-    const response = await fetch(
-      `${this.config.supabaseUrl}/functions/v1/${functionName}`,
-      {
-        method: "POST",
-        headers: {
-          apikey: this.config.publishableKey,
-          Authorization: `Bearer ${session.access_token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      },
-    );
-    if (response.status === 401 && retry) {
-      await this.refreshSession();
-      return this.invoke<T>(functionName, payload, false);
-    }
-    return parseResponse<T>(response);
-  }
-
-  async uploadGroupImage(
-    groupId: string,
-    file: File,
-    retry = true,
-  ): Promise<string> {
-    if (!GROUP_IMAGE_TYPES.has(file.type)) {
-      throw new Error("Choose a JPG, PNG, GIF, or WebP image.");
-    }
-    if (file.size > MAX_GROUP_IMAGE_BYTES) {
-      throw new Error("Group pictures must be 5 MB or smaller.");
+    if (!url) {
+      throw new Error("Portal Edge Function URL is not configured.");
     }
 
-    const session = await this.activeSession();
-    const extension = file.type === "image/jpeg"
-      ? "jpg"
-      : file.type.split("/")[1];
-    const safeGroupId = groupId.replace(/[^a-zA-Z0-9_-]/g, "-").slice(0, 80);
-    const objectPath =
-      `control-center/${safeGroupId}/${crypto.randomUUID()}.${extension}`;
-    const encodedPath = objectPath
-      .split("/")
-      .map((segment) => encodeURIComponent(segment))
-      .join("/");
-    const response = await fetch(
-      `${this.config.supabaseUrl}/storage/v1/object/${GROUP_IMAGE_BUCKET}/${encodedPath}`,
-      {
-        method: "POST",
-        headers: {
-          apikey: this.config.publishableKey,
-          Authorization: `Bearer ${session.access_token}`,
-          "Content-Type": file.type,
-          "Cache-Control": "3600",
-          "x-upsert": "false",
-        },
-        body: file,
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        apikey: this.config.supabaseAnonKey,
+        Authorization: `Bearer ${session.accessToken}`,
+        "Content-Type": "application/json",
       },
-    );
-    if (response.status === 401 && retry) {
-      await this.refreshSession();
-      return this.uploadGroupImage(groupId, file, false);
-    }
-    await parseResponse<Record<string, string>>(response);
-    return `${this.config.supabaseUrl}/storage/v1/object/public/${GROUP_IMAGE_BUCKET}/${encodedPath}`;
-  }
-
-  async uploadSocialMedia(contentId: string, file: File): Promise<void> {
-    if (!SOCIAL_MEDIA_TYPES.has(file.type)) {
-      throw new Error("Choose a JPG, PNG, WebP, MP4, or MOV file.");
-    }
-    if (file.size > MAX_SOCIAL_MEDIA_BYTES) {
-      throw new Error("Social media files must be 100 MB or smaller.");
-    }
-    const upload = await this.invoke<{ signedUrl: string }>("platform-control-center", {
-      action: "create_social_upload",
-      targetId: contentId,
-      socialUpload: {
-        fileName: file.name,
-        mimeType: file.type,
-        fileSize: file.size,
-      },
+      body: JSON.stringify(body),
     });
-    const response = await fetch(upload.signedUrl, {
-      method: "PUT",
-      headers: { "Content-Type": file.type, "x-upsert": "false" },
-      body: file,
-    });
-    if (!response.ok) throw new Error("Media upload failed. Try again.");
-  }
 
-  signOut(): void {
-    window.localStorage.removeItem(SESSION_KEY);
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const message =
+        payload?.error ||
+        payload?.message ||
+        `Portal request failed with status ${response.status}. Deploy the portal Edge Functions before using live data.`;
+      throw new Error(message);
+    }
+
+    return payload as T;
   }
 }

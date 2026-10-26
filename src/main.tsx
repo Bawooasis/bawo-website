@@ -1,23 +1,24 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
-import './index.css';
 import PortalApp from './portal/PortalApp.tsx';
-import './portal/portal.css';
-import { injectDesignTokens } from './theme/injectCssVars';
-import { initGa4 } from './utils/analytics';
+import './index.css';
 
 const path = window.location.pathname.replace(/\/+$/, '') || '/';
 const hostname = window.location.hostname.toLowerCase();
+const isBusinessPath =
+  path === '/business' ||
+  path.startsWith('/business/') ||
+  path === '/businesses' ||
+  path.startsWith('/businesses/') ||
+  hostname.startsWith('business.') ||
+  hostname.startsWith('businesses.');
 const portalMode =
   path === '/admin' || path.startsWith('/admin/') || hostname.startsWith('admin.')
     ? 'admin'
-    : path === '/business' || path.startsWith('/business/') || hostname.startsWith('business.')
+    : isBusinessPath
       ? 'business'
       : null;
-
-injectDesignTokens();
-if (!portalMode) initGa4();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
