@@ -275,8 +275,8 @@ export default function PortalApp({ mode }: PortalAppProps) {
         await api.requestPasswordReset(resolved.email, redirectPath);
         setNotice(
           mode === "admin"
-            ? `Recovery email sent. Do not rely on clicking the link if it opens localhost — right-click "Reset Password" → Copy Link Address, then paste it in the box below.`
-            : "Password reset instructions have been sent. Paste the Reset Password link below if clicking it opens a broken localhost page.",
+            ? `Reset email sent to ${resolved.email}! Click "Open Control Center & Set Password" in that email (it opens joinbawo.com/admin directly), or enter the 6-digit recovery code from the email below.`
+            : `Reset email sent to ${resolved.email}! Click the button in that email (it opens joinbawo.com/businesses directly), or enter the 6-digit recovery code below.`,
         );
         return;
       }
@@ -1133,9 +1133,9 @@ export default function PortalApp({ mode }: PortalAppProps) {
               onSubmit={verifyRecoveryCode}
             >
               <p className="portal-recovery-hint">
-                Supabase’s default email only has a “Reset Password” link (and
-                may redirect to <code>localhost:3000</code>). Paste that link
-                here instead of clicking it — 100% free, no SMS.
+                Your recovery email opens <code>joinbawo.com/admin</code>{" "}
+                directly (no localhost). You can also paste a link or enter the
+                6-digit code below — 100% free, no SMS.
               </p>
               <ol className="portal-recovery-steps">
                 <li>
@@ -1143,14 +1143,10 @@ export default function PortalApp({ mode }: PortalAppProps) {
                   {OWNER_ADMIN_PHONE_DISPLAY}).
                 </li>
                 <li>
-                  In the email from Supabase Auth,{" "}
-                  <strong>
-                    right-click (or long-press) “Reset Password” → Copy Link
-                    Address
-                  </strong>{" "}
-                  and paste it below — OR if you already clicked it and landed
-                  on <code>localhost:3000/#access_token=…</code>, copy that full
-                  URL from your browser address bar and paste it below.
+                  In the email, click{" "}
+                  <strong>Open Control Center &amp; Set Password</strong> — or
+                  enter the <strong>6-digit recovery code</strong> below. If you
+                  still have an old localhost link, paste that URL here too.
                 </li>
               </ol>
               <label>

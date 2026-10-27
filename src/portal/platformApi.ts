@@ -414,17 +414,84 @@ export class PlatformApi {
     return { session: null };
   }
 
+  /**
+   * Prefer the branded `portal-auth-recovery` Edge Function (direct
+   * joinbawo.com/admin?token_hash=… email + 6-digit OTP). Only fall back to
+   * GoTrue `/auth/v1/recover` when the edge function itself is unreachable,
+   * because hosted recover rewrites redirect_to to SITE_URL (localhost:3000).
+   */
   async requestPasswordReset(
     email: string,
-    redirectPath: "/admin" | "/businesses" = "/businesses",
+    redirectTo: string = "/businesses",
   ): Promise<void> {
-    // Prefer production path; also pass origin so allowlisted SITE_URL variants can match.
-    const redirectUrl = `${window.location.origin}${redirectPath}`;
-    const redirectCandidates = Array.from(
-      new Set([redirectUrl, window.location.origin, "https://www.joinbawo.com/admin", "https://www.joinbawo.com/businesses"]),
-    );
-    const primaryRedirect = redirectCandidates[0];
-    const query = new URLSearchParams({ redirect_to: primaryRedirect });
+    const trimmedEmail = email.trim();
+    const mode = redirectTo.includes("/admin") ? "admin" : "business";
+    const redirectPath = mode === "admin" ? "/admin" : "/businesses";
+    const redirectUrl = redirectTo.startsWith("http")
+      ? redirectTo
+      : `${typeof window !== "undefined" ? window.location.origin : "https://www.joinbawo.com"}${redirectPath}`;
+
+    let edgeUnreachable = false;
+    try {
+      const edgeResponse = await fetch(
+        `${this.config.supabaseUrl}/functions/v1/portal-auth-recovery`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: this.config.publishableKey,
+            Authorization: `Bearer ${this.config.publishableKey}`,
+          },
+          body: JSON.stringify({
+            identifier: trimmedEmail,
+            mode,
+          }),
+        },
+      );
+
+      const payload = (await edgeResponse.json().catch(() => ({}))) as {
+        success?: boolean;
+        error?: string;
+      };
+
+      if (edgeResponse.ok && payload.success === true) {
+        // Clean branded email already sent — do NOT also call /auth/v1/recover.
+        return;
+      }
+
+      if (edgeResponse.status === 400 || edgeResponse.status === 403) {
+        throw new Error(
+          payload.error ||
+            `Unable to send recovery email (${edgeResponse.status}).`,
+        );
+      }
+
+      if (edgeResponse.status >= 500) {
+        edgeUnreachable = true;
+      } else {
+        throw new Error(
+          payload.error ||
+            `Unable to send recovery email (${edgeResponse.status}).`,
+        );
+      }
+    } catch (error) {
+      if (!edgeUnreachable) {
+        // Network / DNS / CORS failures from fetch()
+        const isNetwork =
+          error instanceof TypeError ||
+          (error instanceof Error &&
+            (/Failed to fetch|NetworkError|Load failed|network/i.test(
+              error.message,
+            ) ||
+              error.message.includes("fetch")));
+        if (!isNetwork) throw error;
+        edgeUnreachable = true;
+      }
+    }
+
+    if (!edgeUnreachable) return;
+
+    const query = new URLSearchParams({ redirect_to: redirectUrl });
     const response = await fetch(
       `${this.config.supabaseUrl}/auth/v1/recover?${query.toString()}`,
       {
@@ -434,9 +501,8 @@ export class PlatformApi {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email,
-          // GoTrue reads redirect_to from query and/or body; send both.
-          redirect_to: primaryRedirect,
+          email: trimmedEmail,
+          redirect_to: redirectUrl,
         }),
       },
     );
