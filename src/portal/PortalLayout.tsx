@@ -1,6 +1,7 @@
 import {
   Building2,
   Calendar,
+  KeyRound,
   LayoutDashboard,
   LogOut,
   Megaphone,
@@ -39,6 +40,7 @@ type PortalLayoutProps = {
   onTabChange: (tab: PortalTab) => void;
   onRefresh: () => void;
   onSignOut: () => void;
+  onChangePassword?: () => void;
 };
 
 const icons = {
@@ -67,6 +69,7 @@ export default function PortalLayout({
   onTabChange,
   onRefresh,
   onSignOut,
+  onChangePassword,
 }: PortalLayoutProps) {
   const tabs: Array<{ id: PortalTab; label: string }> =
     mode === "admin"
@@ -136,6 +139,18 @@ export default function PortalLayout({
               <span className="portal-live-indicator"><span aria-hidden />Live</span>
               <span className="portal-account-email">{email}</span>
             </div>
+            {onChangePassword ? (
+              <button
+                type="button"
+                className="portal-topbar-change-password"
+                onClick={onChangePassword}
+                aria-label="Change password"
+                title="Change password"
+              >
+                <KeyRound aria-hidden />
+                <span>Change Password</span>
+              </button>
+            ) : null}
             <button type="button" onClick={onRefresh} aria-label="Refresh portal">
               <RefreshCw aria-hidden />
             </button>
