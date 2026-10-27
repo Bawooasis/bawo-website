@@ -65,6 +65,7 @@ import heroAppCommunityMockup from "../assets/images/hero-app-community-mockup.w
 import showcaseCommunity from "../assets/images/showcase-community.jpg";
 import showcaseConcierge from "../assets/images/showcase-concierge.jpg";
 import showcaseEvents from "../assets/images/showcase-events.jpg";
+import showcaseCircleFeed from "../assets/images/showcase-circle-feed.jpg";
 import showcaseExplore from "../assets/images/showcase-explore.jpg";
 
 /** Lower “In-App Preview” grid — individual screens. */
@@ -105,6 +106,7 @@ export const IMAGES = {
   showcase: {
     explore: showcaseExplore,
     community: showcaseCommunity,
+    circleFeed: showcaseCircleFeed,
     events: showcaseEvents,
     concierge: showcaseConcierge,
   },

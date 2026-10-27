@@ -109,6 +109,77 @@ export default function CommunityCirclesSection() {
           ))}
         </div>
 
+        {/* Live Build 182 iOS App Screens Showcase (Explore Map, Community Spaces & Circle Daily Vibe) */}
+        <div className="mb-12 md:mb-16">
+          <div className="text-center max-w-2xl mx-auto space-y-2.5 mb-8">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#E8B959]/35 bg-[#1C132B]/75 px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#E8B959]">
+              <Sparkles className="w-3.5 h-3.5 shrink-0" aria-hidden />
+              <span>Live on iOS TestFlight · Inside BawoSocial</span>
+            </div>
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-[#F7F3FA]">
+              Explore Spots, Join Spaces & Drop Your Take Live
+            </h3>
+            <p className="text-sm sm:text-base text-[#F7F3FA]/75">
+              From verified Nigerian kitchens like Brooklyn Suya Spot to Trending NYC Spaces and live Daily Vibe rooms inside Men&apos;s Accountability Circle NYC.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            {[
+              {
+                badge: "Explore Map · Verified NYC Spots",
+                title: "Brooklyn Suya Spot & 140+ Spots",
+                caption:
+                  "Filter by Food, Shop, Resources & Services across NYC with golden photo pins, ratings, and one-tap directions.",
+                image: IMAGES.showcase.explore,
+                alt: "BawoSocial Explore Map screen showing Brooklyn Suya Spot and NYC map pins",
+              },
+              {
+                badge: "Community Spaces · Trending",
+                title: "Safe Space, Gen Z & New to NYC",
+                caption:
+                  "Switch between My Spaces, Discover, and Trending to join Safe Space for the Girls, Gen Z NYC, Queer & Proud NYC, and New to NYC.",
+                image: IMAGES.showcase.community,
+                alt: "BawoSocial Community Spaces screen showing Good evening, Teg and NYC community cards",
+              },
+              {
+                badge: "Circle Hub · Daily Vibe Live",
+                title: "Men's Accountability Circle NYC",
+                caption:
+                  "Jump into live Daily Vibe prompts on Year 1 of Japa finance (12 in the room right now), Friday Wins & Check-In posts, or Go Live.",
+                image: IMAGES.showcase.circleFeed,
+                alt: "BawoSocial Men's Accountability Circle NYC screen with Daily Vibe live prompt and feed",
+              },
+            ].map((screen) => (
+              <figure
+                key={screen.title}
+                className="glass-card rounded-3xl p-4 sm:p-5 flex flex-col justify-between border border-[#E8B959]/25 transition-all duration-300 hover:-translate-y-1.5"
+              >
+                <div className="relative mx-auto w-full max-w-[17.5rem] overflow-hidden rounded-[1.75rem] border border-white/15 bg-[#0A0710] shadow-[0_20px_50px_rgba(0,0,0,0.65)]">
+                  <img
+                    src={screen.image}
+                    alt={screen.alt}
+                    className="w-full h-auto block object-contain"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <figcaption className="pt-4 space-y-1.5 text-center sm:text-left">
+                  <span className="inline-block rounded-full border border-[#E8B959]/30 bg-[#E8B959]/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#FFCF6B]">
+                    {screen.badge}
+                  </span>
+                  <h4 className="text-xl font-bold font-display text-[#F7F3FA]">
+                    {screen.title}
+                  </h4>
+                  <p className="text-xs sm:text-sm text-[#F7F3FA]/75 leading-relaxed">
+                    {screen.caption}
+                  </p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+
         {/* Nigerian Diaspora × NYC Brand Showcase Card with New Splash Artwork */}
         <div className="glass-card rounded-3xl p-6 sm:p-8 md:p-10 overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">

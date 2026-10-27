@@ -67,33 +67,50 @@ export const CONTENT = {
         badge: "140+ Verified NYC Spots",
         liveMetric: "Brooklyn · Harlem · Queens · Bronx · Staten Island",
         highlights: [
-          "BUKA, Lagos TSQ,uya spots & Nigerian kitchens",
-          "African grocery plugs for ugwu, garri & Agege bread",
-          "Business owners can claim & verify their listing",
+          "Brooklyn Suya Spot (Nigerian · 4.3 · Directions · 3.3 mi), BUKA & Lagos TSQ",
+          "Filter by Food, Shop, Resources & Services with golden NYC map pins",
+          "Business owners can sign in to claim & verify their listing",
         ],
         description:
-          "Find verified Nigerian restaurants, bukas, suya spots, lounges, African food markets, salons, and community services across NYC — or sign in to claim your business listing.",
+          "Search food, events, faith, and culture across an interactive NYC map of verified Nigerian restaurants, bukas, suya spots, African food markets, salons, and community services — or sign in to claim your business listing.",
         image: IMAGES.showcase.explore,
         imageAlt:
-          "BawoSocial Explore screen showing verified Nigerian restaurants and businesses across the New York City map",
-        layout: "map-crop" as const,
+          "BawoSocial Explore Map screen showing verified Nigerian spots across NYC with Brooklyn Suya Spot venue card",
+        layout: "full-screen" as const,
       },
       {
-        kicker: "Live in BawoSocial · Community Circles",
-        title: "Join Naija NYC Circles",
-        badge: "Voice Notes & Daily Gist",
-        liveMetric: "7 Active Circles · Real-Time Feeds",
+        kicker: "Live in BawoSocial · Community Spaces",
+        title: "Discover Naija NYC Spaces",
+        badge: "My Spaces · Discover · Trending",
+        liveMetric: "Active Spaces Across All 5 Boroughs",
         highlights: [
-          "New to NYC — Japa & newcomer survival guide",
-          "Safe Space for the Girls — Nigerian women's circle",
-          "Nigerian Food & Chop NYC — Jollof, swallow & plugs",
+          "Safe Space for the Girls — Sisterhood, soft life & real talk",
+          "Gen Z NYC, Queer & Proud NYC, and New to NYC newcomer hub",
+          "Browse My Spaces, Discover & Trending circles in one tap",
         ],
         description:
-          "New to NYC, Safe Space for the Girls, Nigerian Food & Chop NYC, Mental Wellness & Support, and Faith & Reflection — active circles with feeds, voice notes, and daily prompts.",
+          "Find your people in curated Nigerian diaspora spaces — from Safe Space for the Girls and New to NYC to Gen Z NYC, Nigerian Food & Chop NYC, and Faith & Reflection.",
         image: IMAGES.showcase.community,
         imageAlt:
-          "BawoSocial Community screen showing Nigerian diaspora circles in New York City",
-        layout: "screen-crop" as const,
+          "BawoSocial Community Spaces screen showing Good evening, Teg with Safe Space for the Girls, Gen Z NYC, Queer & Proud NYC, and New to NYC",
+        layout: "full-screen" as const,
+      },
+      {
+        kicker: "Live in BawoSocial · Circle Hub & Daily Vibe",
+        title: "Daily Vibe, Live Rooms & Feeds",
+        badge: "Live Audio · Feed · Chats · Events",
+        liveMetric: "12 in the Room Right Now · Drop Your Take",
+        highlights: [
+          "Men's Accountability Circle NYC — Feed, Chats, Events & Media",
+          "Daily Vibe Live Prompt: 'Year 1 of Japa financial mistakes' (Drop Your Take)",
+          "Friday Wins & Check-In posts with Discuss, Share, Endorse & Go Live",
+        ],
+        description:
+          "Step inside active circles like Men's Accountability Circle NYC to jump into Live Daily Vibe rooms, drop your take on Japa & diaspora finance, celebrate Friday Wins, or Go Live.",
+        image: IMAGES.showcase.circleFeed,
+        imageAlt:
+          "BawoSocial Men's Accountability Circle NYC screen showing Live Daily Vibe prompt on Year 1 of Japa finance, Friday Wins post, and Go Live / Post actions",
+        layout: "full-screen" as const,
       },
       {
         kicker: "Live in BawoSocial · Events & Nightlife",
@@ -110,7 +127,7 @@ export const CONTENT = {
         image: IMAGES.showcase.events,
         imageAlt:
           "BawoSocial Events screen showing Nigerian nightlife and cultural gatherings in New York City",
-        layout: "screen-crop" as const,
+        layout: "full-screen" as const,
       },
       {
         kicker: "Live in BawoSocial · AI Concierge",
@@ -127,7 +144,7 @@ export const CONTENT = {
         image: IMAGES.showcase.concierge,
         imageAlt:
           "BawoSocial Concierge screen offering culturally relevant recommendations for Nigerians in NYC",
-        layout: "screen-crop" as const,
+        layout: "full-screen" as const,
       },
     ],
   },

@@ -18,7 +18,7 @@ export default function HeroAppPreview({
       <div className="bawo-hero-mockup__stage">
         <img
           src={IMAGES.previews.main}
-          alt="BawoSocial Community app on iPhone. Soft Life NYC and No Wahala Lounge"
+          alt="BawoSocial Community Spaces screen on iPhone showing Good evening, Teg, Safe Space for the Girls, Gen Z NYC, Queer & Proud NYC, and New to NYC"
           className="bawo-hero-mockup__image animate-subtle-float is-active"
           width={HERO_MOCKUP_WIDTH}
           height={HERO_MOCKUP_HEIGHT}

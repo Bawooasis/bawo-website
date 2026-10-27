@@ -20,7 +20,7 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
       className={`bawo-next-preview ${className}`.trim()}
       aria-label="Interactive BawoSocial App Showcase"
     >
-      <div className="mb-6 flex flex-col items-center justify-between gap-3 sm:flex-row">
+      <div className="bawo-next-preview__header mb-2 flex flex-col items-center justify-between gap-3 sm:flex-row">
         <div className="inline-flex items-center gap-2 rounded-full border border-[#E8B959]/35 bg-[#1C132B]/75 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#E8B959] backdrop-blur-xl">
           <Sparkles className="h-3.5 w-3.5 shrink-0" aria-hidden />
           <span>Interactive iPhone 17 Pro App Showcase · Live NYC Beta</span>
