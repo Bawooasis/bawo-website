@@ -1,10 +1,11 @@
-import { BadgeCheck, Building2, LockKeyhole, ShieldCheck, Sparkles, Store, TrendingUp } from "lucide-react";
+import { ArrowLeft, BadgeCheck, Building2, CheckCircle2, Compass, KeyRound, LockKeyhole, MapPin, Sparkles, Store, TrendingUp } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
 import AdminPortal from "./AdminPortal";
 import BusinessPortal from "./BusinessPortal";
 import PortalLayout, { type PortalTab } from "./PortalLayout";
 import { getPortalConfig, isPortalConfigured, PlatformApi } from "./platformApi";
 import type { AdminAction, AdminOverview, PortalMode, PortalSession, VendorClaimInput, VendorOverview } from "./types";
+import "./portal.css";
 
 type PortalAppProps = { mode: PortalMode };
 
@@ -35,6 +36,33 @@ const descriptions: Record<PortalTab, string> = {
   listings: "Review owned listings and submit new businesses for administrator approval.",
   growth: "Follow the path from verified presence to measurable customer outcomes.",
 };
+
+const BUSINESS_HIGHLIGHTS = [
+  {
+    icon: MapPin,
+    title: "Put your business on the BawoSocial Explore Map",
+    body: "Help thousands of Nigerians across all five boroughs of NYC find your restaurant, buka, suya spot, lounge, salon, African market, or service.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "Claim & verify your official listing",
+    body: "Take ownership of your storefront profile, earn a verified badge, and keep your hours, menu links, and contact details accurate.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Turn cultural discovery into real foot traffic",
+    body: "Connect directly with members searching for authentic Nigerian food, beauty, nightlife, faith spaces, and community services in NYC.",
+  },
+];
+
+const BUSINESS_CATEGORIES = [
+  "Nigerian Restaurants, Bukas & Suya",
+  "Afrobeats Lounges & Event Spaces",
+  "Salons, Barbers, Gele & Fashion",
+  "African Food Markets & Groceries",
+  "Churches, Mosques & Associations",
+  "Legal, Immigration, Tax & Cargo",
+];
 
 export default function PortalApp({ mode }: PortalAppProps) {
   const config = useMemo(() => getPortalConfig(), []);
@@ -222,110 +250,129 @@ export default function PortalApp({ mode }: PortalAppProps) {
   if (!session) {
     if (mode === "business") {
       return (
-        <div className="portal-business-landing">
-          <header className="portal-business-topbar">
-            <a className="portal-auth-brand" href="/">
+        <div className="portal-business-auth-page">
+          <header className="portal-business-auth-header">
+            <a className="portal-business-auth-logo" href="/" aria-label="BawoSocial home">
               <img src="/bawo-logo.png" alt="BawoSocial" />
-              <span>BawoSocial</span>
-              <em className="portal-brand-pill">for Businesses</em>
+              <div>
+                <strong>BawoSocial</strong>
+                <span>For Nigerian Businesses</span>
+              </div>
             </a>
-            <a className="portal-back-home" href="/">
-              ← Back to BawoSocial
-            </a>
+            <div className="portal-business-auth-header-actions">
+              <a className="portal-ghost-button" href="/">
+                <ArrowLeft size={16} />
+                <span>Back to BawoSocial</span>
+              </a>
+            </div>
           </header>
 
-          <div className="portal-business-split">
-            <section className="portal-business-pitch" aria-label="BawoSocial for Businesses">
-              <span className="portal-kicker">Verified Nigerian &amp; Diaspora Directory · NYC</span>
-              <h1>Put your Nigerian business at the center of the community in NYC.</h1>
+          <div className="portal-business-auth-grid">
+            <section className="portal-business-showcase" aria-label="BawoSocial for Businesses">
+              <div className="portal-business-badge-row">
+                <span className="portal-kicker">
+                  <Compass size={14} /> Nigerian Community in the Diaspora · NYC
+                </span>
+              </div>
+              <h1>Put your Nigerian business on the map with BawoSocial.</h1>
               <p className="portal-business-lead">
-                From Nigerian restaurants, suya spots, and lounges to fashion houses, salons, and
-                professional services across the five boroughs — claim your verified BawoSocial
-                profile, showcase your offerings, and connect directly with Nigerians in New York.
+                From Nigerian restaurants, bukas, suya spots, and Afrobeats lounges to African food
+                markets, salons, churches, mosques, and professional services across all five
+                boroughs of NYC — sign in or create a business account to claim and manage your
+                official listing on <strong>BawoSocial</strong>.
               </p>
 
-              <div className="portal-business-benefits">
-                <div className="portal-benefit-row">
-                  <div className="portal-benefit-icon"><BadgeCheck size={18} /></div>
-                  <div>
-                    <strong>Verified Ownership Badge</strong>
-                    <span>Stand out in the Explore map and directory with an official verified partner badge.</span>
-                  </div>
-                </div>
-                <div className="portal-benefit-row">
-                  <div className="portal-benefit-icon"><Sparkles size={18} /></div>
-                  <div>
-                    <strong>Direct Bookings, Orders &amp; Inquiries</strong>
-                    <span>Add your website, reservation link, WhatsApp, or phone number so members act in one tap.</span>
-                  </div>
-                </div>
-                <div className="portal-benefit-row">
-                  <div className="portal-benefit-icon"><TrendingUp size={18} /></div>
-                  <div>
-                    <strong>Cultural Events &amp; Community Spotlights</strong>
-                    <span>Get featured in curated city guides, weekend event roundups, and neighborhood circles.</span>
-                  </div>
-                </div>
+              <div className="portal-business-highlights">
+                {BUSINESS_HIGHLIGHTS.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={item.title} className="portal-business-highlight-card">
+                      <div className="portal-business-highlight-icon">
+                        <Icon size={20} />
+                      </div>
+                      <div>
+                        <h3>{item.title}</h3>
+                        <p>{item.body}</p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
 
-              <div className="portal-business-steps">
-                <span><Store size={14} /> 1. Sign in or create account</span>
-                <span>→</span>
-                <span><Building2 size={14} /> 2. Claim or add your business</span>
-                <span>→</span>
-                <span><ShieldCheck size={14} /> 3. Verified &amp; live in app</span>
+              <div className="portal-business-categories">
+                <span className="portal-business-categories-label">
+                  <Sparkles size={14} /> Who BawoSocial for Businesses is built for:
+                </span>
+                <div className="portal-business-category-pills">
+                  {BUSINESS_CATEGORIES.map((category) => (
+                    <span key={category} className="portal-business-category-pill">
+                      <CheckCircle2 size={13} />
+                      {category}
+                    </span>
+                  ))}
+                </div>
               </div>
             </section>
 
-            <section className="portal-business-auth-col">
-              <form className="portal-auth-card portal-auth-card--business" onSubmit={signIn}>
-                <div className="portal-auth-tabs" role="tablist" aria-label="Business portal authentication">
+            <section className="portal-business-auth-column">
+              <form className="portal-auth-card portal-business-auth-card" onSubmit={signIn}>
+                <div className="portal-auth-tabs" role="tablist" aria-label="Business account access">
                   <button
                     type="button"
                     role="tab"
                     aria-selected={authSubMode === "signin"}
                     className={authSubMode === "signin" ? "portal-auth-tab is-active" : "portal-auth-tab"}
-                    onClick={() => { setAuthSubMode("signin"); setError(""); setNotice(""); }}
+                    onClick={() => {
+                      setAuthSubMode("signin");
+                      setError("");
+                      setNotice("");
+                    }}
                   >
-                    Sign In
+                    <KeyRound size={15} />
+                    <span>Log In / Sign In</span>
                   </button>
                   <button
                     type="button"
                     role="tab"
                     aria-selected={authSubMode === "signup"}
                     className={authSubMode === "signup" ? "portal-auth-tab is-active" : "portal-auth-tab"}
-                    onClick={() => { setAuthSubMode("signup"); setError(""); setNotice(""); }}
+                    onClick={() => {
+                      setAuthSubMode("signup");
+                      setError("");
+                      setNotice("");
+                    }}
                   >
-                    Create Business Account
+                    <Store size={15} />
+                    <span>Create Business Account</span>
                   </button>
                 </div>
 
                 <span className="portal-kicker">
-                  {authSubMode === "signup"
-                    ? "New business partner"
-                    : authSubMode === "reset"
-                      ? "Account recovery"
-                      : "Verified business access"}
+                  {authSubMode === "signin"
+                    ? "Verified Business Access"
+                    : authSubMode === "signup"
+                      ? "New Business Partner"
+                      : "Account Recovery"}
                 </span>
                 <h2>
-                  {authSubMode === "signup"
-                    ? "Claim your business on BawoSocial"
-                    : authSubMode === "reset"
-                      ? "Reset your password"
-                      : "Sign in to Business Portal"}
+                  {authSubMode === "signin"
+                    ? "Sign in to BawoSocial Businesses"
+                    : authSubMode === "signup"
+                      ? "Create your BawoSocial Business Account"
+                      : "Reset your BawoSocial password"}
                 </h2>
                 <p>
-                  {authSubMode === "signup"
-                    ? "Create your BawoSocial account in seconds, then submit or claim your Nigerian restaurant, lounge, shop, or service."
-                    : authSubMode === "reset"
-                      ? "Enter the email associated with your BawoSocial account and we will send you a password reset link."
-                      : "Use your BawoSocial account credentials to manage your verified listing, update hours, and track engagement."}
+                  {authSubMode === "signin"
+                    ? "Sign in with your BawoSocial account to manage your claimed listings, submit a new business claim, or update your storefront details."
+                    : authSubMode === "signup"
+                      ? "Create your BawoSocial account in seconds, then search the Explore directory to claim your Nigerian restaurant, lounge, shop, or service."
+                      : "Enter the email associated with your BawoSocial account and we will send you a password reset link."}
                 </p>
 
-                {error && <div className="portal-alert is-error">{error}</div>}
-                {notice && <div className="portal-alert is-success">{notice}</div>}
+                {error ? <div className="portal-alert is-error">{error}</div> : null}
+                {notice ? <div className="portal-alert is-success">{notice}</div> : null}
 
-                {authSubMode === "signup" && (
+                {authSubMode === "signup" ? (
                   <>
                     <label>
                       Business or venue name
@@ -348,47 +395,50 @@ export default function PortalApp({ mode }: PortalAppProps) {
                       />
                     </label>
                   </>
-                )}
+                ) : null}
 
                 <label>
                   Work or account email
                   <input
                     type="email"
                     autoComplete="email"
-                    required
                     value={email}
-                    onChange={(event) => setEmail(event.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@yourbusiness.com"
+                    required
                   />
                 </label>
 
-                {authSubMode !== "reset" && (
+                {authSubMode !== "reset" ? (
                   <label>
                     Password
                     <input
                       type="password"
                       autoComplete={authSubMode === "signup" ? "new-password" : "current-password"}
-                      required
-                      minLength={6}
                       value={password}
-                      onChange={(event) => setPassword(event.target.value)}
+                      onChange={(e) => setPassword(e.target.value)}
                       placeholder={authSubMode === "signup" ? "Create a password (min. 6 characters)" : "Enter your password"}
+                      minLength={6}
+                      required
                     />
                   </label>
-                )}
+                ) : null}
 
-                <button className="portal-primary-button" disabled={busy}>
-                  {busy
-                    ? authSubMode === "signup"
-                      ? "Creating account…"
-                      : authSubMode === "reset"
-                        ? "Sending reset link…"
-                        : "Signing in…"
-                    : authSubMode === "signup"
-                      ? "Create Business Account"
-                      : authSubMode === "reset"
-                        ? "Send Password Reset Link"
-                        : "Sign In to Business Portal"}
+                <button type="submit" className="portal-primary-button" disabled={busy}>
+                  <Building2 size={16} />
+                  <span>
+                    {busy
+                      ? authSubMode === "signup"
+                        ? "Creating account..."
+                        : authSubMode === "reset"
+                          ? "Sending reset link..."
+                          : "Signing in..."
+                      : authSubMode === "signup"
+                        ? "Create Business Account"
+                        : authSubMode === "reset"
+                          ? "Send Password Reset Link"
+                          : "Sign In to Business Portal"}
+                  </span>
                 </button>
 
                 <div className="portal-auth-footer-links">
@@ -397,14 +447,22 @@ export default function PortalApp({ mode }: PortalAppProps) {
                       <button
                         type="button"
                         className="portal-text-link"
-                        onClick={() => { setAuthSubMode("reset"); setError(""); setNotice(""); }}
+                        onClick={() => {
+                          setAuthSubMode("reset");
+                          setError("");
+                          setNotice("");
+                        }}
                       >
                         Forgot your password?
                       </button>
                       <button
                         type="button"
                         className="portal-text-link"
-                        onClick={() => { setAuthSubMode("signup"); setError(""); setNotice(""); }}
+                        onClick={() => {
+                          setAuthSubMode("signup");
+                          setError("");
+                          setNotice("");
+                        }}
                       >
                         Need an account? Claim your business →
                       </button>
@@ -413,12 +471,25 @@ export default function PortalApp({ mode }: PortalAppProps) {
                     <button
                       type="button"
                       className="portal-text-link"
-                      onClick={() => { setAuthSubMode("signin"); setError(""); setNotice(""); }}
+                      onClick={() => {
+                        setAuthSubMode("signin");
+                        setError("");
+                        setNotice("");
+                      }}
                     >
                       ← Back to Sign In
                     </button>
                   )}
                 </div>
+
+                <small>
+                  Already using the BawoSocial mobile app? Sign in with the exact same email and
+                  password. Need partner support? Email{" "}
+                  <a href="mailto:Hello@joinbawo.com?subject=BawoSocial%20Business%20Portal%20Support">
+                    Hello@joinbawo.com
+                  </a>
+                  .
+                </small>
               </form>
             </section>
           </div>
