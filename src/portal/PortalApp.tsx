@@ -275,8 +275,8 @@ export default function PortalApp({ mode }: PortalAppProps) {
         await api.requestPasswordReset(resolved.email, redirectPath);
         setNotice(
           mode === "admin"
-            ? `Recovery email sent to your Control Center inbox. Check your email for a reset link, or enter the 6-digit code below.`
-            : "Password reset instructions have been sent to your email.",
+            ? `Recovery email sent. Do not rely on clicking the link if it opens localhost — right-click "Reset Password" → Copy Link Address, then paste it in the box below.`
+            : "Password reset instructions have been sent. Paste the Reset Password link below if clicking it opens a broken localhost page.",
         );
         return;
       }
@@ -328,39 +328,29 @@ export default function PortalApp({ mode }: PortalAppProps) {
     setError("");
     setNotice("");
     try {
-      const resolved = resolveIdentifier(email);
+      const resolved = resolveIdentifier(email || "");
       if (resolved.matchedPhone) {
         setPhoneMatchNote(
-          `Matched owner phone ${OWNER_ADMIN_PHONE_DISPLAY} → verifying code for your linked admin email`,
+          `Matched owner phone ${OWNER_ADMIN_PHONE_DISPLAY} → verifying recovery for your linked admin email`,
         );
       }
-      let nextSession: PortalSession;
-      try {
-        nextSession = await api.verifyEmailCode(
-          resolved.email,
-          recoveryCode,
-          "recovery",
-        );
-      } catch {
-        nextSession = await api.verifyEmailCode(
-          resolved.email,
-          recoveryCode,
-          "email",
-        );
-      }
+      const nextSession = await api.redeemRecoveryPaste(
+        recoveryCode,
+        resolved.email || undefined,
+      );
       setSession(nextSession);
       setAuthSubMode("set-password");
       setRecoveryCode("");
       setNotice(
         mode === "admin"
-          ? "Recovery code verified. Set your new Control Center password."
-          : "Recovery code verified. Set your new password.",
+          ? "Recovery verified. Set your new Control Center password — no localhost needed."
+          : "Recovery verified. Set your new password.",
       );
     } catch (verifyError) {
       setError(
         verifyError instanceof Error
           ? verifyError.message
-          : "Invalid or expired recovery code.",
+          : "Invalid or expired recovery link/code.",
       );
     } finally {
       setBusy(false);
@@ -970,17 +960,29 @@ export default function PortalApp({ mode }: PortalAppProps) {
                   className="portal-auth-card portal-business-auth-card portal-recovery-code-block"
                   onSubmit={verifyRecoveryCode}
                 >
+                  <ol className="portal-recovery-steps">
+                    <li>
+                      Click <strong>Send Password Reset Link</strong> above.
+                    </li>
+                    <li>
+                      In the email, <strong>right-click (or long-press) “Reset
+                      Password” → Copy Link Address</strong> and paste it below
+                      — or if your browser opened{" "}
+                      <code>localhost:3000/#access_token=…</code>, copy that
+                      full URL from the address bar and paste it here.
+                    </li>
+                  </ol>
                   <label>
-                    6-digit recovery code
-                    <input
-                      type="text"
-                      inputMode="numeric"
-                      autoComplete="one-time-code"
-                      pattern="[0-9]{6}"
-                      maxLength={8}
+                    Paste the Reset Password link from your email (or the
+                    localhost URL it opened, or a code)
+                    <textarea
+                      className="portal-recovery-paste"
+                      rows={3}
+                      autoComplete="off"
                       value={recoveryCode}
                       onChange={(e) => setRecoveryCode(e.target.value)}
-                      placeholder="123456"
+                      placeholder="https://….supabase.co/auth/v1/verify?token=…&type=recovery   or   http://localhost:3000/#access_token=…"
+                      required
                     />
                   </label>
                   <button
@@ -988,7 +990,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
                     className="portal-ghost-button portal-recovery-verify"
                     disabled={busy || recoveryCode.trim().length < 6}
                   >
-                    Verify code & set password
+                    Verify link / code & set password
                   </button>
                 </form>
               ) : null}
@@ -1131,20 +1133,37 @@ export default function PortalApp({ mode }: PortalAppProps) {
               onSubmit={verifyRecoveryCode}
             >
               <p className="portal-recovery-hint">
-                Already have a 6-digit code from your email? Enter it here (free
-                Supabase OTP — no Twilio).
+                Supabase’s default email only has a “Reset Password” link (and
+                may redirect to <code>localhost:3000</code>). Paste that link
+                here instead of clicking it — 100% free, no SMS.
               </p>
+              <ol className="portal-recovery-steps">
+                <li>
+                  Click <strong>Send recovery email</strong> above (email or{" "}
+                  {OWNER_ADMIN_PHONE_DISPLAY}).
+                </li>
+                <li>
+                  In the email from Supabase Auth,{" "}
+                  <strong>
+                    right-click (or long-press) “Reset Password” → Copy Link
+                    Address
+                  </strong>{" "}
+                  and paste it below — OR if you already clicked it and landed
+                  on <code>localhost:3000/#access_token=…</code>, copy that full
+                  URL from your browser address bar and paste it below.
+                </li>
+              </ol>
               <label>
-                6-digit recovery code
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  autoComplete="one-time-code"
-                  pattern="[0-9]{6,8}"
-                  maxLength={8}
+                Paste the Reset Password link from your email (or the localhost
+                URL it opened, or a code)
+                <textarea
+                  className="portal-recovery-paste"
+                  rows={4}
+                  autoComplete="off"
                   value={recoveryCode}
                   onChange={(event) => setRecoveryCode(event.target.value)}
-                  placeholder="123456"
+                  placeholder="https://wyarfsymnyrraowwluhf.supabase.co/auth/v1/verify?token=…&type=recovery&#10;or&#10;http://localhost:3000/#access_token=…&refresh_token=…&type=recovery"
+                  required
                 />
               </label>
               <button
@@ -1152,7 +1171,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
                 className="portal-ghost-button portal-recovery-verify"
                 disabled={busy || recoveryCode.trim().length < 6}
               >
-                Verify code & set new password
+                Verify link / code & set new password
               </button>
             </form>
           ) : null}

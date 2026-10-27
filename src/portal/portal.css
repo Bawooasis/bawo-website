@@ -1038,3 +1038,40 @@
     display: none;
   }
 }
+
+.portal-recovery-steps {
+  margin: 0;
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 0.45rem;
+  color: rgba(246, 242, 234, 0.78);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.portal-recovery-steps code {
+  font-size: 0.78rem;
+  color: #ffe8b3;
+  word-break: break-all;
+}
+
+.portal-recovery-paste {
+  width: 100%;
+  min-height: 88px;
+  border: 1px solid var(--portal-border);
+  border-radius: 12px;
+  padding: 0.78rem 0.82rem;
+  color: var(--portal-text);
+  background: rgba(6, 3, 12, 0.72);
+  outline: none;
+  resize: vertical;
+  font: inherit;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  word-break: break-all;
+}
+
+.portal-recovery-paste:focus {
+  border-color: rgba(242, 179, 126, 0.65);
+  box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.12);
+}
