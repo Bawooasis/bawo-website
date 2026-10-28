@@ -55,6 +55,8 @@ const titles: Record<PortalTab, string> = {
   crm: "Outreach and revenue pipeline",
   access: "Access and audit",
   dashboard: "Business dashboard",
+  products: "Products and prices",
+  payouts: "Payouts and revenue split",
   listings: "Listings and claims",
   growth: "Growth and billing",
 };
@@ -71,6 +73,10 @@ const descriptions: Record<PortalTab, string> = {
   crm: "Track potential customers from research through outreach, replies, proposals, and verified partnerships.",
   access: "Manage privileged access and review the record of administrative actions.",
   dashboard: "See your BawoSocial presence and the systems being prepared for growth.",
+  products:
+    "Manage dishes, products, and services with live prices for your NYC Nigerian storefront.",
+  payouts:
+    "Review the 90/10 revenue split, fulfillment options, and activate direct Stripe Connect payouts.",
   listings: "Review owned listings and submit new businesses for administrator approval.",
   growth: "Follow the path from verified presence to measurable customer outcomes.",
 };
@@ -1237,7 +1243,10 @@ export default function PortalApp({ mode }: PortalAppProps) {
           data={vendorData}
           activeTab={activeTab}
           busy={busy}
+          api={api}
           onSubmit={submitClaim}
+          onNotice={(message) => setNotice(message)}
+          onError={(message) => setError(message)}
         />
       )}
     </PortalLayout>

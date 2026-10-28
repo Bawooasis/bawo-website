@@ -1,4 +1,48 @@
-import type { PortalSession } from "./types";
+import {
+  DEFAULT_PAYOUT_SETTINGS,
+  FOUNDING_STOREFRONTS,
+  seedCatalogFromFounding,
+} from "./foundingStorefronts";
+import type {
+  PortalSession,
+  StorefrontCatalog,
+  StorefrontItem,
+  StorefrontItemInput,
+  StorefrontPayoutSettings,
+} from "./types";
+
+const STOREFRONT_STORAGE_PREFIX = "bawo-storefront-catalog:";
+const UUID_RE =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+function isRestaurantUuid(id: string): boolean {
+  return UUID_RE.test(id);
+}
+
+function readLocalCatalog(restaurantId: string): StorefrontCatalog | null {
+  try {
+    const raw = window.localStorage.getItem(
+      `${STOREFRONT_STORAGE_PREFIX}${restaurantId}`,
+    );
+    return raw ? (JSON.parse(raw) as StorefrontCatalog) : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeLocalCatalog(catalog: StorefrontCatalog): StorefrontCatalog {
+  const stored = { ...catalog, source: "local" as const };
+  window.localStorage.setItem(
+    `${STOREFRONT_STORAGE_PREFIX}${catalog.restaurantId}`,
+    JSON.stringify(stored),
+  );
+  return stored;
+}
+
+function foundingSeed(restaurantId: string): StorefrontCatalog | null {
+  const founding = FOUNDING_STOREFRONTS.find((entry) => entry.id === restaurantId);
+  return founding ? seedCatalogFromFounding(founding) : null;
+}
 
 const SESSION_KEY = "bawo-platform-session";
 const GROUP_IMAGE_BUCKET = "group-images";
@@ -817,6 +861,325 @@ export class PlatformApi {
       body: file,
     });
     if (!response.ok) throw new Error("Media upload failed. Try again.");
+  }
+
+  private restHeaders(includeAuth = true): HeadersInit {
+    const headers: Record<string, string> = {
+      apikey: this.config.publishableKey,
+      "Content-Type": "application/json",
+      Prefer: "return=representation",
+    };
+    if (includeAuth) {
+      const session = this.getSession();
+      if (session?.access_token) {
+        headers.Authorization = `Bearer ${session.access_token}`;
+      } else {
+        headers.Authorization = `Bearer ${this.config.publishableKey}`;
+      }
+    }
+    return headers;
+  }
+
+  private emptyCatalog(restaurantId: string): StorefrontCatalog {
+    return {
+      restaurantId,
+      source: "local",
+      categories: [],
+      items: [],
+      payouts: { ...DEFAULT_PAYOUT_SETTINGS },
+    };
+  }
+
+  private async fetchRemoteCatalog(
+    restaurantId: string,
+  ): Promise<StorefrontCatalog | null> {
+    if (!isRestaurantUuid(restaurantId)) return null;
+    try {
+      const [categoriesRes, itemsRes, restaurantRes] = await Promise.all([
+        fetch(
+          `${this.config.supabaseUrl}/rest/v1/menu_categories?restaurant_id=eq.${encodeURIComponent(restaurantId)}&select=*&order=sort_order.asc`,
+          { headers: this.restHeaders() },
+        ),
+        fetch(
+          `${this.config.supabaseUrl}/rest/v1/menu_items?restaurant_id=eq.${encodeURIComponent(restaurantId)}&select=*&order=sort_order.asc`,
+          { headers: this.restHeaders() },
+        ),
+        fetch(
+          `${this.config.supabaseUrl}/rest/v1/nigerian_restaurants?id=eq.${encodeURIComponent(restaurantId)}&select=platform_fee_pct,accepts_pickup,accepts_delivery,delivery_fee,min_order_amount`,
+          { headers: this.restHeaders() },
+        ),
+      ]);
+
+      if (!categoriesRes.ok || !itemsRes.ok) return null;
+
+      const categoriesJson = (await categoriesRes.json()) as Array<{
+        id: string;
+        name: string;
+        sort_order?: number;
+      }>;
+      const itemsJson = (await itemsRes.json()) as Array<{
+        id: string;
+        restaurant_id: string;
+        category_id: string | null;
+        name: string;
+        description?: string | null;
+        price: number | string;
+        image_url?: string | null;
+        is_popular?: boolean;
+        is_available?: boolean;
+        available?: boolean;
+        sort_order?: number;
+      }>;
+      const restaurantJson = restaurantRes.ok
+        ? ((await restaurantRes.json()) as Array<Record<string, unknown>>)
+        : [];
+      const restaurantRow = restaurantJson[0] || {};
+
+      const categories = categoriesJson.map((row, index) => ({
+        id: row.id,
+        name: row.name,
+        sort_order: row.sort_order ?? index,
+      }));
+      const categoryNameById = new Map(
+        categories.map((category) => [category.id, category.name]),
+      );
+
+      const items: StorefrontItem[] = itemsJson.map((row, index) => ({
+        id: row.id,
+        restaurant_id: row.restaurant_id || restaurantId,
+        category_id: row.category_id,
+        category_name:
+          (row.category_id && categoryNameById.get(row.category_id)) ||
+          "General",
+        name: row.name,
+        description: row.description || null,
+        price: Number(row.price) || 0,
+        image_url: row.image_url || null,
+        is_popular: Boolean(row.is_popular),
+        is_available:
+          row.is_available !== undefined
+            ? Boolean(row.is_available)
+            : row.available !== undefined
+              ? Boolean(row.available)
+              : true,
+        sort_order: row.sort_order ?? index,
+      }));
+
+      const payouts: StorefrontPayoutSettings = {
+        ...DEFAULT_PAYOUT_SETTINGS,
+        platform_fee_pct: Number(
+          restaurantRow.platform_fee_pct ?? DEFAULT_PAYOUT_SETTINGS.platform_fee_pct,
+        ),
+        accepts_pickup:
+          restaurantRow.accepts_pickup === undefined
+            ? DEFAULT_PAYOUT_SETTINGS.accepts_pickup
+            : Boolean(restaurantRow.accepts_pickup),
+        accepts_delivery:
+          restaurantRow.accepts_delivery === undefined
+            ? DEFAULT_PAYOUT_SETTINGS.accepts_delivery
+            : Boolean(restaurantRow.accepts_delivery),
+        delivery_fee: Number(
+          restaurantRow.delivery_fee ?? DEFAULT_PAYOUT_SETTINGS.delivery_fee,
+        ),
+        min_order_amount: Number(
+          restaurantRow.min_order_amount ??
+            DEFAULT_PAYOUT_SETTINGS.min_order_amount,
+        ),
+      };
+
+      return {
+        restaurantId,
+        source: "supabase",
+        categories,
+        items,
+        payouts,
+      };
+    } catch {
+      return null;
+    }
+  }
+
+  async fetchStorefrontCatalog(
+    restaurantId: string,
+  ): Promise<StorefrontCatalog> {
+    const local = readLocalCatalog(restaurantId);
+    const remote = await this.fetchRemoteCatalog(restaurantId);
+    if (remote && remote.items.length > 0) {
+      // Keep any locally staged edits as overlay when present.
+      if (local && local.items.length > 0 && local.source === "local") {
+        return writeLocalCatalog({
+          ...remote,
+          items: local.items,
+          categories: local.categories.length
+            ? local.categories
+            : remote.categories,
+          payouts: local.payouts || remote.payouts,
+          source: "local",
+        });
+      }
+      return remote;
+    }
+    if (local) return local;
+    const seed = foundingSeed(restaurantId);
+    if (seed) return writeLocalCatalog(seed);
+    return this.emptyCatalog(restaurantId);
+  }
+
+  async upsertStorefrontItem(
+    restaurantId: string,
+    input: StorefrontItemInput,
+  ): Promise<StorefrontItem> {
+    const catalog = await this.fetchStorefrontCatalog(restaurantId);
+    let category = catalog.categories.find(
+      (entry) =>
+        entry.name.toLowerCase() === input.categoryName.trim().toLowerCase(),
+    );
+    if (!category) {
+      category = {
+        id: `${restaurantId}-cat-${crypto.randomUUID()}`,
+        name: input.categoryName.trim() || "General",
+        sort_order: catalog.categories.length,
+      };
+      catalog.categories = [...catalog.categories, category];
+    }
+
+    const existingIndex = input.id
+      ? catalog.items.findIndex((item) => item.id === input.id)
+      : -1;
+    const nextItem: StorefrontItem = {
+      id: input.id || `${restaurantId}-item-${crypto.randomUUID()}`,
+      restaurant_id: restaurantId,
+      category_id: category.id,
+      category_name: category.name,
+      name: input.name.trim(),
+      description: input.description?.trim() || null,
+      price: Number(input.price) || 0,
+      image_url: input.imageUrl?.trim() || null,
+      is_popular: Boolean(input.isPopular),
+      is_available: input.isAvailable !== false,
+      sort_order:
+        input.sortOrder ??
+        (existingIndex >= 0
+          ? catalog.items[existingIndex].sort_order
+          : catalog.items.length),
+    };
+
+    if (existingIndex >= 0) {
+      catalog.items = catalog.items.map((item, index) =>
+        index === existingIndex ? nextItem : item,
+      );
+    } else {
+      catalog.items = [...catalog.items, nextItem];
+    }
+
+    // Best-effort remote write for claimed UUID listings.
+    if (isRestaurantUuid(restaurantId)) {
+      try {
+        const session = await this.activeSession().catch(() => null);
+        if (session) {
+          // Ensure category row exists remotely when possible.
+          await fetch(
+            `${this.config.supabaseUrl}/rest/v1/menu_categories?on_conflict=id`,
+            {
+              method: "POST",
+              headers: {
+                ...this.restHeaders(),
+                Prefer: "resolution=merge-duplicates,return=minimal",
+              },
+              body: JSON.stringify({
+                id: category.id,
+                restaurant_id: restaurantId,
+                name: category.name,
+                sort_order: category.sort_order,
+              }),
+            },
+          ).catch(() => undefined);
+
+          const body = {
+            id: nextItem.id,
+            restaurant_id: restaurantId,
+            category_id: nextItem.category_id,
+            name: nextItem.name,
+            description: nextItem.description,
+            price: nextItem.price,
+            image_url: nextItem.image_url,
+            is_popular: nextItem.is_popular,
+            is_available: nextItem.is_available,
+            sort_order: nextItem.sort_order,
+          };
+          await fetch(
+            `${this.config.supabaseUrl}/rest/v1/menu_items?on_conflict=id`,
+            {
+              method: "POST",
+              headers: {
+                ...this.restHeaders(),
+                Prefer: "resolution=merge-duplicates,return=minimal",
+              },
+              body: JSON.stringify(body),
+            },
+          ).catch(() => undefined);
+        }
+      } catch {
+        /* local persistence still succeeds */
+      }
+    }
+
+    writeLocalCatalog(catalog);
+    return nextItem;
+  }
+
+  async deleteStorefrontItem(
+    restaurantId: string,
+    itemId: string,
+  ): Promise<void> {
+    const catalog = await this.fetchStorefrontCatalog(restaurantId);
+    catalog.items = catalog.items.filter((item) => item.id !== itemId);
+    writeLocalCatalog(catalog);
+
+    if (isRestaurantUuid(restaurantId)) {
+      try {
+        await this.activeSession();
+        await fetch(
+          `${this.config.supabaseUrl}/rest/v1/menu_items?id=eq.${encodeURIComponent(itemId)}`,
+          { method: "DELETE", headers: this.restHeaders() },
+        );
+      } catch {
+        /* local delete already applied */
+      }
+    }
+  }
+
+  async savePayoutSettings(
+    restaurantId: string,
+    settings: StorefrontPayoutSettings,
+  ): Promise<StorefrontPayoutSettings> {
+    const catalog = await this.fetchStorefrontCatalog(restaurantId);
+    catalog.payouts = { ...settings };
+    writeLocalCatalog(catalog);
+
+    if (isRestaurantUuid(restaurantId)) {
+      try {
+        await this.activeSession();
+        await fetch(
+          `${this.config.supabaseUrl}/rest/v1/nigerian_restaurants?id=eq.${encodeURIComponent(restaurantId)}`,
+          {
+            method: "PATCH",
+            headers: this.restHeaders(),
+            body: JSON.stringify({
+              platform_fee_pct: settings.platform_fee_pct,
+              accepts_pickup: settings.accepts_pickup,
+              accepts_delivery: settings.accepts_delivery,
+              delivery_fee: settings.delivery_fee,
+              min_order_amount: settings.min_order_amount,
+            }),
+          },
+        );
+      } catch {
+        /* local settings already saved */
+      }
+    }
+
+    return catalog.payouts;
   }
 
   signOut(): void {

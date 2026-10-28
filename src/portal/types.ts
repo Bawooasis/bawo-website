@@ -262,6 +262,58 @@ export type VendorOverview = {
   }>;
 };
 
+/** Business Portal storefront catalog (menu_categories / menu_items). */
+export type StorefrontCategory = {
+  id: string;
+  name: string;
+  sort_order: number;
+};
+
+export type StorefrontItem = {
+  id: string;
+  restaurant_id: string;
+  category_id: string | null;
+  category_name: string;
+  name: string;
+  description: string | null;
+  price: number;
+  image_url: string | null;
+  is_popular: boolean;
+  is_available: boolean;
+  sort_order: number;
+};
+
+export type StorefrontItemInput = {
+  id?: string;
+  categoryName: string;
+  name: string;
+  description?: string | null;
+  price: number;
+  imageUrl?: string | null;
+  isPopular?: boolean;
+  isAvailable?: boolean;
+  sortOrder?: number;
+};
+
+export type StorefrontPayoutSettings = {
+  platform_fee_pct: number;
+  accepts_pickup: boolean;
+  accepts_delivery: boolean;
+  accepts_instore_booking: boolean;
+  delivery_fee: number;
+  min_order_amount: number;
+  payouts_requested: boolean;
+  stripe_connect_status: "not_started" | "pending" | "active";
+};
+
+export type StorefrontCatalog = {
+  restaurantId: string;
+  source: "supabase" | "local";
+  categories: StorefrontCategory[];
+  items: StorefrontItem[];
+  payouts: StorefrontPayoutSettings;
+};
+
 export type AdminAction = {
   action:
     | "overview"

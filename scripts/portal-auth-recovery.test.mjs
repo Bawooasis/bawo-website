@@ -63,10 +63,46 @@ async function testSourceWiresEdgeFunctionFirst() {
   assert.ok(edgeIdx > -1 && recoverIdx > edgeIdx);
 }
 
+async function testFoundingStorefrontSeeds() {
+  const { FOUNDING_STOREFRONTS, seedCatalogFromFounding } = await import(
+    "../src/portal/foundingStorefronts.ts"
+  );
+  assert.equal(FOUNDING_STOREFRONTS.length, 6);
+  const buka = FOUNDING_STOREFRONTS.find((store) =>
+    store.name.includes("BUKA"),
+  );
+  assert.ok(buka);
+  const catalog = seedCatalogFromFounding(buka);
+  assert.ok(catalog.items.length >= 10);
+  assert.equal(catalog.payouts.platform_fee_pct, 10);
+  const suya = catalog.items.find((item) => /Suya \(Spiced/.test(item.name));
+  assert.ok(suya);
+  assert.equal(suya.price, 5.6);
+}
+
+async function testBusinessPortalTabsWired() {
+  const { readFileSync } = await import("node:fs");
+  const layout = readFileSync(
+    new URL("../src/portal/PortalLayout.tsx", import.meta.url),
+    "utf8",
+  );
+  assert.match(layout, /Products & Prices/);
+  assert.match(layout, /Payouts & Split/);
+  const api = readFileSync(
+    new URL("../src/portal/platformApi.ts", import.meta.url),
+    "utf8",
+  );
+  assert.match(api, /fetchStorefrontCatalog/);
+  assert.match(api, /upsertStorefrontItem/);
+  assert.match(api, /savePayoutSettings/);
+}
+
 const tests = [
   ["edge function validates empty body", testEdgeFunctionValidation],
   ["edge function rejects non-admin", testEdgeFunctionRejectsNonAdmin],
   ["platformApi prefers edge function", testSourceWiresEdgeFunctionFirst],
+  ["founding storefront seeds include 6 partners", testFoundingStorefrontSeeds],
+  ["business portal products/payouts wired", testBusinessPortalTabsWired],
 ];
 
 let failed = 0;
