@@ -97,12 +97,42 @@ async function testBusinessPortalTabsWired() {
   assert.match(api, /savePayoutSettings/);
 }
 
+async function testModerationSeedsAndWiring() {
+  const { SEED_GROUP_CHAT_ALERTS, SEED_LISTING_ISSUE_REPORTS } = await import(
+    "../src/portal/moderationSeeds.ts"
+  );
+  assert.ok(SEED_GROUP_CHAT_ALERTS.length >= 5);
+  assert.equal(SEED_LISTING_ISSUE_REPORTS.length, 6);
+  assert.ok(
+    SEED_LISTING_ISSUE_REPORTS.some((item) => item.listing_name.includes("BUKA")),
+  );
+  assert.ok(
+    SEED_GROUP_CHAT_ALERTS.some((item) => item.alert_type === "spam"),
+  );
+  const { readFileSync } = await import("node:fs");
+  const admin = readFileSync(
+    new URL("../src/portal/AdminPortal.tsx", import.meta.url),
+    "utf8",
+  );
+  assert.match(admin, /ModerationSafetyPanel/);
+  assert.doesNotMatch(admin, /social_content_items/);
+  const api = readFileSync(
+    new URL("../src/portal/platformApi.ts", import.meta.url),
+    "utf8",
+  );
+  assert.match(api, /fetchModerationQueues/);
+  assert.match(api, /applyGroupChatModeration/);
+  assert.match(api, /applyListingIssueModeration/);
+  assert.doesNotMatch(api, /social_content_items/);
+}
+
 const tests = [
   ["edge function validates empty body", testEdgeFunctionValidation],
   ["edge function rejects non-admin", testEdgeFunctionRejectsNonAdmin],
   ["platformApi prefers edge function", testSourceWiresEdgeFunctionFirst],
   ["founding storefront seeds include 6 partners", testFoundingStorefrontSeeds],
   ["business portal products/payouts wired", testBusinessPortalTabsWired],
+  ["moderation queues seeded and wired", testModerationSeedsAndWiring],
 ];
 
 let failed = 0;

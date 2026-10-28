@@ -62,16 +62,19 @@ const titles: Record<PortalTab, string> = {
 };
 
 const descriptions: Record<PortalTab, string> = {
-  overview: "Monitor the launch queue and the health of BawoSocial's core operations.",
+  overview:
+    "Monitor the launch queue, group-chat safety alerts, listing issues, and BawoSocial operations health.",
   users: "Review member access, account standing, and trusted operations roles.",
   events:
     "Review community-submitted and organizer-created events before they appear in the NYC Culture Hub feed.",
-  groups: "Shape community spaces, review requests, and keep group presentation current.",
+  groups:
+    "Shape community spaces, review requests, and monitor group-chat moderation alerts.",
   businesses: "Review submitted businesses before they appear in the community directory.",
   social:
     "Plan, publish, and measure TikTok and Instagram content from one accountable pipeline.",
   crm: "Track potential customers from research through outreach, replies, proposals, and verified partnerships.",
-  access: "Manage privileged access and review the record of administrative actions.",
+  access:
+    "Manage privileged access, review the audit trail, and work the BawoSocial safety / listing queues.",
   dashboard: "See your BawoSocial presence and the systems being prepared for growth.",
   products:
     "Manage dishes, products, and services with live prices for your NYC Nigerian storefront.",
@@ -1230,12 +1233,15 @@ export default function PortalApp({ mode }: PortalAppProps) {
           data={adminData}
           activeTab={activeTab}
           busy={busy}
+          api={api}
           onAction={runAdminAction}
           onUploadGroupImage={uploadGroupImage}
           onConnectInstagram={connectInstagram}
           onUploadSocialMedia={uploadSocialMedia}
           onQueueSocialPublish={queueSocialPublish}
           onScheduleTikTok={scheduleTikTok}
+          onNotice={(message) => setNotice(message)}
+          onError={(message) => setError(message)}
         />
       )}
       {mode === "business" && vendorData && (

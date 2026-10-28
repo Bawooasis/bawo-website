@@ -1288,3 +1288,105 @@
   .storefront-grid { grid-template-columns: 1fr; }
   .storefront-preview { position: static; }
 }
+
+/* —— Control Center moderation / listing issue queues —— */
+.moderation-panel {
+  border-color: rgba(244, 189, 92, 0.2);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(244, 189, 92, 0.08), transparent 16rem),
+    rgba(19, 9, 28, 0.96);
+}
+
+.moderation-lead {
+  margin: 0.45rem 0 0;
+  max-width: 760px;
+  color: var(--portal-muted);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.moderation-count-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-self: flex-start;
+}
+
+.moderation-count-pills span {
+  padding: 0.28rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(232, 185, 89, 0.28);
+  background: rgba(232, 185, 89, 0.1);
+  color: #ffe8b3;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.moderation-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0.85rem 0 1rem;
+}
+
+.moderation-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 36px;
+  border: 1px solid var(--portal-border);
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+  color: rgba(246, 242, 234, 0.78);
+  background: rgba(255, 255, 255, 0.035);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.moderation-filter em {
+  font-style: normal;
+  min-width: 1.35rem;
+  padding: 0.08rem 0.4rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  text-align: center;
+  font-size: 0.7rem;
+}
+
+.moderation-filter.is-active {
+  color: #0E0A14;
+  border-color: rgba(255, 236, 190, 0.55);
+  background: linear-gradient(135deg, #FFCF6B 0%, #E8B959 55%, #C9922C 100%);
+}
+
+.moderation-filter.is-active em {
+  background: rgba(14, 10, 20, 0.16);
+  color: #0E0A14;
+}
+
+.moderation-row {
+  align-items: flex-start;
+}
+
+.moderation-row .portal-list-main strong {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.moderation-resolution {
+  color: #7ee0ad !important;
+  font-size: 0.72rem !important;
+  font-weight: 600;
+}
+
+.portal-alert.is-info {
+  border-color: rgba(232, 185, 89, 0.35);
+  background: rgba(232, 185, 89, 0.12);
+  color: #ffe8b3;
+  margin-bottom: 0.85rem;
+}

@@ -3,7 +3,16 @@ import {
   FOUNDING_STOREFRONTS,
   seedCatalogFromFounding,
 } from "./foundingStorefronts";
+import {
+  SEED_GROUP_CHAT_ALERTS,
+  SEED_LISTING_ISSUE_REPORTS,
+} from "./moderationSeeds";
 import type {
+  GroupChatModerationAction,
+  GroupChatModerationItem,
+  ListingIssueModerationAction,
+  ListingIssueReportItem,
+  ModerationQueues,
   PortalSession,
   StorefrontCatalog,
   StorefrontItem,
@@ -12,6 +21,7 @@ import type {
 } from "./types";
 
 const STOREFRONT_STORAGE_PREFIX = "bawo-storefront-catalog:";
+const MODERATION_STORAGE_KEY = "bawo-control-center-moderation-queues";
 const UUID_RE =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
@@ -1180,6 +1190,306 @@ export class PlatformApi {
     }
 
     return catalog.payouts;
+  }
+
+  private readModerationOverlay(): ModerationQueues | null {
+    try {
+      const raw = window.localStorage.getItem(MODERATION_STORAGE_KEY);
+      return raw ? (JSON.parse(raw) as ModerationQueues) : null;
+    } catch {
+      return null;
+    }
+  }
+
+  private writeModerationOverlay(queues: ModerationQueues): ModerationQueues {
+    window.localStorage.setItem(MODERATION_STORAGE_KEY, JSON.stringify(queues));
+    return queues;
+  }
+
+  private mapRemoteGroupAlert(row: Record<string, unknown>): GroupChatModerationItem {
+    const reason = String(row.reason || row.report_reason || row.alert_type || "other");
+    const statusRaw = String(row.status || "pending").toLowerCase();
+    const status =
+      statusRaw.includes("resolv") || statusRaw === "dismissed"
+        ? "resolved"
+        : statusRaw.includes("safety") || statusRaw.includes("alert")
+          ? "safety_alert"
+          : "pending_review";
+    const alertType = /spam|harassment|inappropriate|scam|off[_\s-]?topic|keyword/i.test(
+      reason,
+    )
+      ? (reason.toLowerCase().replace(/\s+/g, "_") as GroupChatModerationItem["alert_type"])
+      : "other";
+    return {
+      id: String(row.id),
+      source: "supabase",
+      status,
+      alert_type: [
+        "spam",
+        "harassment",
+        "inappropriate",
+        "scam",
+        "off_topic",
+        "keyword",
+      ].includes(alertType)
+        ? alertType
+        : "other",
+      group_id: String(row.group_id || row.target_group_id || "unknown"),
+      group_name: String(
+        row.group_name ||
+          (typeof row.group === "object" &&
+          row.group &&
+          "name" in row.group
+            ? String((row.group as { name?: unknown }).name || "")
+            : "") ||
+          "Community group",
+      ),
+      message_id: row.message_id ? String(row.message_id) : null,
+      message_preview: String(
+        row.message_preview || row.message_body || row.content || "Reported group message",
+      ),
+      reporter_name: String(row.reporter_name || row.reporter_email || "Member"),
+      reported_user_name: String(
+        row.reported_user_name || row.accused_name || "Reported member",
+      ),
+      reported_user_id: row.reported_user_id
+        ? String(row.reported_user_id)
+        : row.user_id
+          ? String(row.user_id)
+          : null,
+      reason,
+      keyword_hit: row.keyword_hit ? String(row.keyword_hit) : null,
+      created_at: String(row.created_at || new Date().toISOString()),
+      resolved_at: row.resolved_at ? String(row.resolved_at) : null,
+      resolution: null,
+    };
+  }
+
+  private mapRemoteListingIssue(
+    row: Record<string, unknown>,
+  ): ListingIssueReportItem {
+    const issueType = String(
+      row.issue_type || row.reason || "other",
+    ).toLowerCase() as ListingIssueReportItem["issue_type"];
+    const allowed: ListingIssueReportItem["issue_type"][] = [
+      "wrong_hours",
+      "permanently_closed",
+      "wrong_address_pin",
+      "wrong_phone_link",
+      "claim_dispute",
+      "other",
+    ];
+    return {
+      id: String(row.id),
+      source: "supabase",
+      status:
+        String(row.status || "").toLowerCase().includes("resolv") ||
+        String(row.status || "").toLowerCase() === "dismissed"
+          ? "resolved"
+          : "pending",
+      issue_type: allowed.includes(issueType) ? issueType : "other",
+      listing_id: String(
+        row.listing_id || row.restaurant_id || row.resource_id || "unknown",
+      ),
+      listing_name: String(row.listing_name || row.business_name || "Explore listing"),
+      listing_handle: row.listing_handle ? String(row.listing_handle) : null,
+      listing_address: row.listing_address ? String(row.listing_address) : null,
+      reporter_name: String(row.reporter_name || row.reporter_email || "Member"),
+      details: String(row.details || row.description || row.notes || "Listing issue report"),
+      created_at: String(row.created_at || new Date().toISOString()),
+      resolved_at: row.resolved_at ? String(row.resolved_at) : null,
+      resolution: null,
+    };
+  }
+
+  async fetchModerationQueues(): Promise<ModerationQueues> {
+    const overlay = this.readModerationOverlay();
+    let remoteGroup: GroupChatModerationItem[] = [];
+    let remoteListing: ListingIssueReportItem[] = [];
+    let usedSeedFallback = true;
+
+    try {
+      const [messageReports, moderationActions, groupLogs, listingIssues, genericReports] =
+        await Promise.all([
+          fetch(
+            `${this.config.supabaseUrl}/rest/v1/message_reports?select=*&order=created_at.desc&limit=50`,
+            { headers: this.restHeaders() },
+          ),
+          fetch(
+            `${this.config.supabaseUrl}/rest/v1/moderation_actions?select=*&order=created_at.desc&limit=50`,
+            { headers: this.restHeaders() },
+          ),
+          fetch(
+            `${this.config.supabaseUrl}/rest/v1/group_moderation_logs?select=*&order=created_at.desc&limit=50`,
+            { headers: this.restHeaders() },
+          ),
+          fetch(
+            `${this.config.supabaseUrl}/rest/v1/listing_issue_reports?select=*&order=created_at.desc&limit=50`,
+            { headers: this.restHeaders() },
+          ),
+          fetch(
+            `${this.config.supabaseUrl}/rest/v1/reports?select=*&order=created_at.desc&limit=50`,
+            { headers: this.restHeaders() },
+          ),
+        ]);
+
+      const parseRows = async (response: Response) =>
+        response.ok ? ((await response.json()) as Record<string, unknown>[]) : [];
+
+      const messageRows = await parseRows(messageReports);
+      const actionRows = await parseRows(moderationActions);
+      const logRows = await parseRows(groupLogs);
+      const listingRows = await parseRows(listingIssues);
+      const reportRows = await parseRows(genericReports);
+
+      remoteGroup = [...messageRows, ...actionRows, ...logRows, ...reportRows]
+        .filter((row) => {
+          const blob = JSON.stringify(row).toLowerCase();
+          return (
+            blob.includes("message") ||
+            blob.includes("group") ||
+            blob.includes("spam") ||
+            blob.includes("harass") ||
+            blob.includes("moderation")
+          );
+        })
+        .map((row) => this.mapRemoteGroupAlert(row));
+
+      remoteListing = listingRows.map((row) => this.mapRemoteListingIssue(row));
+      if (remoteGroup.length > 0 || remoteListing.length > 0) {
+        usedSeedFallback = false;
+      }
+    } catch {
+      usedSeedFallback = true;
+    }
+
+    const seeded: ModerationQueues = {
+      groupChatAlerts:
+        remoteGroup.length > 0 ? remoteGroup : [...SEED_GROUP_CHAT_ALERTS],
+      listingIssues:
+        remoteListing.length > 0 ? remoteListing : [...SEED_LISTING_ISSUE_REPORTS],
+      fetchedAt: new Date().toISOString(),
+      usedSeedFallback,
+    };
+
+    if (!overlay) return seeded;
+
+    // Apply local operator decisions on top of seed/remote rows.
+    const groupById = new Map(
+      overlay.groupChatAlerts.map((item) => [item.id, item]),
+    );
+    const listingById = new Map(
+      overlay.listingIssues.map((item) => [item.id, item]),
+    );
+    return {
+      groupChatAlerts: seeded.groupChatAlerts.map(
+        (item) => groupById.get(item.id) || item,
+      ),
+      listingIssues: seeded.listingIssues.map(
+        (item) => listingById.get(item.id) || item,
+      ),
+      fetchedAt: seeded.fetchedAt,
+      usedSeedFallback: seeded.usedSeedFallback,
+    };
+  }
+
+  async applyGroupChatModeration(
+    itemId: string,
+    action: GroupChatModerationAction,
+  ): Promise<ModerationQueues> {
+    const queues = await this.fetchModerationQueues();
+    const now = new Date().toISOString();
+    const resolutionMap: Record<
+      GroupChatModerationAction,
+      NonNullable<GroupChatModerationItem["resolution"]>
+    > = {
+      dismiss_report: "dismissed",
+      delete_message: "message_deleted",
+      mute_user_24h: "user_muted_24h",
+      ban_from_group: "user_banned",
+    };
+    const nextAlerts = queues.groupChatAlerts.map((item) =>
+      item.id === itemId
+        ? {
+            ...item,
+            status: "resolved" as const,
+            resolved_at: now,
+            resolution: resolutionMap[action],
+            source: item.source === "supabase" ? item.source : ("local" as const),
+          }
+        : item,
+    );
+    // Best-effort remote write when tables exist; never blocks Control Center UX.
+    try {
+      await fetch(`${this.config.supabaseUrl}/rest/v1/moderation_actions`, {
+        method: "POST",
+        headers: {
+          ...this.restHeaders(),
+          Prefer: "return=minimal",
+        },
+        body: JSON.stringify({
+          report_id: itemId,
+          action,
+          outcome: "success",
+          created_at: now,
+        }),
+      });
+    } catch {
+      /* local overlay is source of truth in preview */
+    }
+    return this.writeModerationOverlay({
+      ...queues,
+      groupChatAlerts: nextAlerts,
+      fetchedAt: now,
+    });
+  }
+
+  async applyListingIssueModeration(
+    itemId: string,
+    action: ListingIssueModerationAction,
+  ): Promise<ModerationQueues> {
+    const queues = await this.fetchModerationQueues();
+    const now = new Date().toISOString();
+    const resolutionMap: Record<
+      ListingIssueModerationAction,
+      NonNullable<ListingIssueReportItem["resolution"]>
+    > = {
+      verified_updated: "verified_updated",
+      dismissed: "dismissed",
+      approve_claim_dispute: "claim_approved",
+    };
+    const nextIssues = queues.listingIssues.map((item) =>
+      item.id === itemId
+        ? {
+            ...item,
+            status: "resolved" as const,
+            resolved_at: now,
+            resolution: resolutionMap[action],
+            source: item.source === "supabase" ? item.source : ("local" as const),
+          }
+        : item,
+    );
+    try {
+      await fetch(
+        `${this.config.supabaseUrl}/rest/v1/listing_issue_reports?id=eq.${encodeURIComponent(itemId)}`,
+        {
+          method: "PATCH",
+          headers: this.restHeaders(),
+          body: JSON.stringify({
+            status: "resolved",
+            resolution: resolutionMap[action],
+            resolved_at: now,
+          }),
+        },
+      );
+    } catch {
+      /* local overlay still applies */
+    }
+    return this.writeModerationOverlay({
+      ...queues,
+      listingIssues: nextIssues,
+      fetchedAt: now,
+    });
   }
 
   signOut(): void {

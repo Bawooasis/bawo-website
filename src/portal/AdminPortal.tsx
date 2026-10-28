@@ -15,8 +15,10 @@ import {
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import GroupEditor, { type GroupEditorInput } from "./GroupEditor";
+import ModerationSafetyPanel from "./ModerationSafetyPanel";
 import SocialMediaPanel from "./SocialMediaPanel";
 import CrmPanel from "./CrmPanel";
+import type { PlatformApi } from "./platformApi";
 import type { PortalTab } from "./PortalLayout";
 import { EmptyState, MetricCard } from "./PortalUi";
 import type { AdminAction, AdminOverview, PlatformUser } from "./types";
@@ -25,12 +27,15 @@ type AdminPortalProps = {
   data: AdminOverview;
   activeTab: PortalTab;
   busy: boolean;
+  api: PlatformApi;
   onAction: (action: AdminAction, successMessage: string) => Promise<boolean>;
   onUploadGroupImage: (groupId: string, file: File) => Promise<string>;
   onConnectInstagram: () => Promise<void>;
   onUploadSocialMedia: (contentId: string, file: File) => Promise<void>;
   onQueueSocialPublish: (contentId: string, scheduledFor: string) => Promise<boolean>;
   onScheduleTikTok: (contentId: string, scheduledFor: string) => Promise<boolean>;
+  onNotice?: (message: string) => void;
+  onError?: (message: string) => void;
 };
 
 const formatDate = (value: string | null) =>
@@ -52,12 +57,15 @@ export default function AdminPortal({
   data,
   activeTab,
   busy,
+  api,
   onAction,
   onUploadGroupImage,
   onConnectInstagram,
   onUploadSocialMedia,
   onQueueSocialPublish,
   onScheduleTikTok,
+  onNotice,
+  onError,
 }: AdminPortalProps) {
   const [query, setQuery] = useState("");
   const [editingGroupId, setEditingGroupId] = useState<string | null>(null);
@@ -150,7 +158,7 @@ export default function AdminPortal({
       },
     ];
     return (
-      <>
+      <div className="portal-stack">
         <section className="portal-metrics portal-metrics-admin" aria-label="Platform metrics">
           {metrics.map((metric) => (
             <MetricCard
@@ -177,7 +185,13 @@ export default function AdminPortal({
             <div className={data.metrics.pendingReports > 0 ? "has-work" : ""}><strong>{data.metrics.pendingReports}</strong><span>member reports</span></div>
           </div>
         </section>
-      </>
+        <ModerationSafetyPanel
+          api={api}
+          busy={busy}
+          onNotice={onNotice}
+          onError={onError}
+        />
+      </div>
     );
   }
 
@@ -255,6 +269,13 @@ export default function AdminPortal({
   if (activeTab === "groups") {
     return (
       <div className="portal-stack">
+        <ModerationSafetyPanel
+          api={api}
+          busy={busy}
+          compact
+          onNotice={onNotice}
+          onError={onError}
+        />
         <section className="portal-panel">
           <div className="portal-panel-heading"><div><span className="portal-kicker">Community</span><h2>Groups</h2></div></div>
           <div className="portal-list">
@@ -460,6 +481,12 @@ export default function AdminPortal({
   const admins = data.users.filter((user) => user.is_admin || user.role === "admin");
   return (
     <div className="portal-stack">
+      <ModerationSafetyPanel
+        api={api}
+        busy={busy}
+        onNotice={onNotice}
+        onError={onError}
+      />
       <section className="portal-panel">
         <div className="portal-panel-heading"><div><span className="portal-kicker">Privileged accounts</span><h2>Administrators</h2></div></div>
         <div className="portal-list">

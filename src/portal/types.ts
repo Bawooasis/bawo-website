@@ -111,6 +111,103 @@ export type AuditEntry = {
   created_at: string;
 };
 
+/** Control Center group-chat moderation queue (Build 183 aligned). */
+export type GroupChatAlertStatus =
+  | "pending_review"
+  | "safety_alert"
+  | "resolved";
+
+export type GroupChatAlertType =
+  | "spam"
+  | "harassment"
+  | "inappropriate"
+  | "scam"
+  | "off_topic"
+  | "keyword"
+  | "other";
+
+export type GroupChatModerationResolution =
+  | "dismissed"
+  | "message_deleted"
+  | "user_muted_24h"
+  | "user_banned"
+  | null;
+
+export type GroupChatModerationItem = {
+  id: string;
+  source: "supabase" | "seed" | "local";
+  status: GroupChatAlertStatus;
+  alert_type: GroupChatAlertType;
+  group_id: string;
+  group_name: string;
+  message_id: string | null;
+  message_preview: string;
+  reporter_name: string;
+  reported_user_name: string;
+  reported_user_id: string | null;
+  reason: string;
+  keyword_hit: string | null;
+  created_at: string;
+  resolved_at: string | null;
+  resolution: GroupChatModerationResolution;
+};
+
+export type ListingIssueType =
+  | "wrong_hours"
+  | "permanently_closed"
+  | "wrong_address_pin"
+  | "wrong_phone_link"
+  | "claim_dispute"
+  | "other";
+
+export type ListingIssueStatus = "pending" | "resolved";
+
+export type ListingIssueResolution =
+  | "verified_updated"
+  | "dismissed"
+  | "claim_approved"
+  | null;
+
+export type ListingIssueReportItem = {
+  id: string;
+  source: "supabase" | "seed" | "local";
+  status: ListingIssueStatus;
+  issue_type: ListingIssueType;
+  listing_id: string;
+  listing_name: string;
+  listing_handle: string | null;
+  listing_address: string | null;
+  reporter_name: string;
+  details: string;
+  created_at: string;
+  resolved_at: string | null;
+  resolution: ListingIssueResolution;
+};
+
+export type ModerationQueues = {
+  groupChatAlerts: GroupChatModerationItem[];
+  listingIssues: ListingIssueReportItem[];
+  fetchedAt: string;
+  usedSeedFallback: boolean;
+};
+
+export type GroupChatModerationAction =
+  | "dismiss_report"
+  | "delete_message"
+  | "mute_user_24h"
+  | "ban_from_group";
+
+export type ListingIssueModerationAction =
+  | "verified_updated"
+  | "dismissed"
+  | "approve_claim_dispute";
+
+export type GroupChatAlertFilter =
+  | "pending_review"
+  | "safety_alert"
+  | "resolved"
+  | "all";
+
 export type SocialPlatform = "tiktok" | "instagram";
 export type SocialContentStatus = "idea" | "scripted" | "ready" | "scheduled" | "published";
 
