@@ -7,10 +7,12 @@ import {
   Megaphone,
   RefreshCw,
   ShieldCheck,
+  ShoppingBag,
   TrendingUp,
   Target,
   UserRound,
   UsersRound,
+  Wallet,
 } from "lucide-react";
 import type { ReactNode } from "react";
 import type { PortalMode } from "./types";
@@ -25,6 +27,8 @@ export type PortalTab =
   | "crm"
   | "access"
   | "dashboard"
+  | "products"
+  | "payouts"
   | "listings"
   | "growth";
 
@@ -53,6 +57,8 @@ const icons = {
   crm: Target,
   access: ShieldCheck,
   dashboard: LayoutDashboard,
+  products: ShoppingBag,
+  payouts: Wallet,
   listings: Building2,
   growth: TrendingUp,
 };
@@ -85,6 +91,8 @@ export default function PortalLayout({
         ]
       : [
           { id: "dashboard", label: "Dashboard" },
+          { id: "products", label: "Products & Prices" },
+          { id: "payouts", label: "Payouts & Split" },
           { id: "listings", label: "Listings & Claims" },
           { id: "growth", label: "Growth" },
         ];
