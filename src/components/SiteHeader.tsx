@@ -57,7 +57,7 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
                 >
                   <span className="inline-flex items-center gap-1.5">
                     {"isBusiness" in link && link.isBusiness ? (
-                      <Building2 className="h-3.5 w-3.5 text-[#FFBC42] shrink-0" aria-hidden />
+                      <Building2 className="h-3.5 w-3.5 text-[#E8B959] shrink-0" aria-hidden />
                     ) : null}
                     <span>{link.label}</span>
                   </span>
@@ -73,7 +73,7 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
               className="bawo-site-header__businesses-chip"
               aria-label="Businesses Log In and Sign In"
             >
-              <Building2 className="h-3.5 w-3.5 text-[#FFBC42] shrink-0" aria-hidden />
+              <Building2 className="h-3.5 w-3.5 text-[#E8B959] shrink-0" aria-hidden />
               <span>Businesses</span>
             </a>
 

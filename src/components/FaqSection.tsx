@@ -14,13 +14,13 @@ export default function FaqSection() {
   return (
     <section
       id="faq"
-      className="relative bawo-scroll-anchor py-16 md:py-24 bg-transparent"
+      className="relative bawo-scroll-anchor bawo-section--loose bg-transparent"
       aria-labelledby="faq-heading"
     >
-      <div className="relative z-10 container mx-auto px-6 md:px-10 max-w-3xl">
+      <div className="relative z-10 container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
         <h2
           id="faq-heading"
-          className="text-3xl md:text-[2.125rem] font-bold tracking-tight mb-8 md:mb-10 text-left text-[var(--bawo-text-primary,#F4F4F5)] font-sans"
+          className="bawo-section-title text-3xl sm:text-4xl md:text-[2.5rem] mb-8 md:mb-10 text-left"
         >
           {title}
         </h2>

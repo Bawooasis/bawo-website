@@ -6,31 +6,29 @@ export default function CommunityMissionSection() {
   return (
     <section
       id="community-mission"
-      className="relative z-10 bawo-scroll-anchor px-6"
+      className="relative z-10 bawo-scroll-anchor bawo-section--tight px-5 sm:px-6"
       aria-labelledby="community-mission-heading"
     >
       <div className="mx-auto max-w-3xl text-center space-y-4">
-        <p className="text-xs font-museo-bold uppercase tracking-[0.18em] bawo-eyebrow">
-          Why we built this
-        </p>
+        <p className="bawo-section-eyebrow mx-auto">Why we built this</p>
         <h2
           id="community-mission-heading"
-          className="font-display text-3xl sm:text-4xl md:text-[2.75rem] font-bold text-white leading-tight"
+          className="bawo-section-title text-3xl sm:text-4xl md:text-[2.75rem]"
         >
           {title}
         </h2>
-        <p className="text-base sm:text-lg text-white/72 font-museo-medium leading-relaxed max-w-2xl mx-auto">
+        <p className="bawo-section-lead mx-auto">
           {subtitle}
         </p>
       </div>
 
-      <ul className="mx-auto mt-10 md:mt-12 grid max-w-5xl gap-10 md:gap-12 sm:grid-cols-3">
+      <ul className="mx-auto mt-10 md:mt-12 grid max-w-5xl gap-5 md:gap-6 sm:grid-cols-3">
         {pillars.map(({ title: pillarTitle, description }) => (
-          <li key={pillarTitle} className="glass-card space-y-2 p-6 text-center sm:text-left">
-            <h3 className="font-display text-lg md:text-xl font-bold text-white">
+          <li key={pillarTitle} className="glass-card space-y-2.5 p-6 text-center sm:text-left">
+            <h3 className="font-display text-lg md:text-xl font-bold text-[#F7F3FA]">
               {pillarTitle}
             </h3>
-            <p className="text-sm text-white/65 font-museo-medium leading-relaxed">
+            <p className="bawo-body-copy text-sm">
               {description}
             </p>
           </li>

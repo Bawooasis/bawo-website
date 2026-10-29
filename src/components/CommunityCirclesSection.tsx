@@ -8,28 +8,28 @@ export default function CommunityCirclesSection() {
   return (
     <section
       id="community-circles"
-      className="relative bawo-scroll-anchor py-16 md:py-24 bg-transparent section-contain"
+      className="relative bawo-scroll-anchor bawo-section--loose bg-transparent section-contain"
       aria-labelledby="community-circles-heading"
     >
       <div className="relative z-10 container mx-auto px-5 sm:px-6 max-w-6xl">
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-12 md:mb-16">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#E8B959]/35 bg-[#1C132B]/75 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#E8B959] backdrop-blur-xl">
+        <div className="text-center max-w-3xl mx-auto space-y-4 mb-10 md:mb-14">
+          <div className="bawo-section-eyebrow mx-auto">
             <Users className="w-3.5 h-3.5 shrink-0" aria-hidden />
             <span>{eyebrow}</span>
           </div>
           <h2
             id="community-circles-heading"
-            className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#F7F3FA] font-display leading-tight tracking-tight"
+            className="bawo-section-title text-4xl sm:text-5xl md:text-6xl"
           >
             {title}
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-[#F7F3FA]/80 leading-relaxed">
+          <p className="bawo-section-lead mx-auto">
             {subtitle}
           </p>
         </div>
 
         {/* 4 Community Circles Grid with Voice Note Waveforms & Daily Gist Prompts */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 md:mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 mb-10 md:mb-14">
           {items.map((circle) => (
             <article
               key={circle.id}
@@ -38,7 +38,7 @@ export default function CommunityCirclesSection() {
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#0E0A14]">
                 <img
                   src={circle.image}
-                  alt={`${circle.title} — BawoSocial Nigerian Community Circle`}
+                  alt={`${circle.title}, BawoSocial Nigerian Community Circle`}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                   decoding="async"
@@ -100,7 +100,7 @@ export default function CommunityCirclesSection() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-xs font-bold text-[#E8B959] hover:text-[#FFCF6B] transition-colors"
                     >
-                      <span>Join circle in BawoSocial app →</span>
+                      <span>Join circle in BawoSocial app</span>
                     </a>
                   </div>
                 </div>
@@ -155,7 +155,7 @@ export default function CommunityCirclesSection() {
                 key={screen.title}
                 className="glass-card rounded-3xl p-4 sm:p-5 flex flex-col justify-between border border-[#E8B959]/25 transition-all duration-300 hover:-translate-y-1.5"
               >
-                <div className="relative mx-auto w-full max-w-[17.5rem] overflow-hidden rounded-[1.75rem] border border-white/15 bg-[#0A0710] shadow-[0_20px_50px_rgba(0,0,0,0.65)]">
+                <div className="bawo-media-frame relative mx-auto w-full max-w-[17.5rem] rounded-[1.75rem] shadow-[0_20px_50px_rgba(0,0,0,0.65)]">
                   <img
                     src={screen.image}
                     alt={screen.alt}

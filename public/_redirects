@@ -1,0 +1,8 @@
+# SPA fallback so /businesses and /admin resolve on Netlify previews/production
+/admin    /index.html   200
+/admin/*  /index.html   200
+/businesses    /index.html   200
+/businesses/*  /index.html   200
+/business    /index.html   200
+/business/*  /index.html   200
+/*    /index.html   200
