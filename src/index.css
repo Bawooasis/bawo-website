@@ -7,23 +7,23 @@
 /* Content palette utilities — background mesh unchanged */
 @layer utilities {
   .bawo-accent {
-    color: var(--bawo-pumpkin, #ff6b00);
+    color: var(--bawo-pumpkin, #E8B959);
   }
 
   .bawo-accent-soft {
-    color: var(--bawo-peach, #ff8c42);
+    color: var(--bawo-peach, #FFCF6B);
   }
 
   .bawo-forest-text {
-    color: var(--bawo-gold, #FFBC42);
+    color: var(--bawo-gold, #E8B959);
   }
 
   .bawo-gold-text {
-    color: var(--bawo-gold, #FFBC42);
+    color: var(--bawo-gold, #E8B959);
   }
 
   .bawo-eyebrow {
-    color: var(--bawo-peach, #ff8c42);
+    color: var(--bawo-peach, #FFCF6B);
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -35,8 +35,8 @@
 
   @media (hover: hover) {
     .bawo-hub-ring:hover {
-      --tw-ring-color: rgba(255, 188, 66, 0.5);
-      box-shadow: 0 32px 90px rgba(255, 188, 66, 0.16);
+      --tw-ring-color: rgba(232, 185, 89, 0.5);
+      box-shadow: 0 28px 72px rgba(232, 185, 89, 0.14);
     }
   }
 }
@@ -3052,51 +3052,51 @@ a.bawo-cta-quiet:active {
   min-height: 2.15rem;
   padding: 0.35rem 0.8rem;
   border-radius: 9999px;
-  font-family: "MuseoSans", system-ui, sans-serif;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.015em;
-  color: #fff6ea;
+  color: #ffe8b3;
   text-decoration: none;
-  background: linear-gradient(135deg, rgba(255, 188, 66, 0.18), rgba(255, 118, 38, 0.14));
-  border: 1px solid rgba(255, 188, 66, 0.45);
+  background: linear-gradient(135deg, rgba(255, 207, 107, 0.2), rgba(232, 185, 89, 0.12));
+  border: 1px solid rgba(232, 185, 89, 0.48);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
   transition: transform 0.16s ease, border-color 0.16s ease, background-color 0.16s ease;
 }
 
 .bawo-site-header__businesses-chip:hover {
-  border-color: rgba(255, 188, 66, 0.8);
-  background: linear-gradient(135deg, rgba(255, 188, 66, 0.28), rgba(255, 118, 38, 0.22));
+  border-color: rgba(232, 185, 89, 0.85);
+  background: linear-gradient(135deg, rgba(255, 207, 107, 0.28), rgba(232, 185, 89, 0.2));
   transform: translateY(-1px);
 }
 
 .bawo-site-header__nav-link--business {
-  color: #ffe3b3 !important;
-  background: rgba(255, 188, 66, 0.08);
-  border: 1px solid rgba(255, 188, 66, 0.26);
+  color: #ffe8b3 !important;
+  background: rgba(232, 185, 89, 0.1);
+  border: 1px solid rgba(232, 185, 89, 0.32);
 }
 
 .bawo-site-header__nav-link--business:hover {
-  background: rgba(255, 188, 66, 0.16) !important;
-  border-color: rgba(255, 188, 66, 0.52);
+  background: rgba(232, 185, 89, 0.16) !important;
+  border-color: rgba(232, 185, 89, 0.52);
 }
 
 .bawo-hero-cinematic__pill--business {
   display: inline-flex;
   align-items: center;
   gap: 0.42rem;
-  border-color: rgba(255, 188, 66, 0.5) !important;
-  background: linear-gradient(135deg, rgba(255, 188, 66, 0.2), rgba(255, 118, 38, 0.14)) !important;
-  color: #fff8ee !important;
+  border-color: rgba(232, 185, 89, 0.5) !important;
+  background: linear-gradient(135deg, rgba(255, 207, 107, 0.2), rgba(232, 185, 89, 0.14)) !important;
+  color: #ffe8b3 !important;
 }
 
 .bawo-hero-cinematic__pill--business:hover {
-  border-color: rgba(255, 188, 66, 0.85) !important;
-  background: linear-gradient(135deg, rgba(255, 188, 66, 0.3), rgba(255, 118, 38, 0.24)) !important;
+  border-color: rgba(232, 185, 89, 0.85) !important;
+  background: linear-gradient(135deg, rgba(255, 207, 107, 0.3), rgba(232, 185, 89, 0.22)) !important;
 }
 
 /* ============================================================================
- * BAWOSOCIAL $50,000 FLAGSHIP THEME OVERRIDES
+ * BAWOSOCIAL FLAGSHIP THEME + MARKETING AESTHETIC POLISH
  * Deep Eggplant (#07050B -> #0E0A14 -> #160F24) + Signature Warm Gold (#E8B959)
  * + True Liquid Glass + Cormorant Garamond Bold Display + Plus Jakarta Sans UI
  * ============================================================================ */
@@ -3115,10 +3115,18 @@ a.bawo-cta-quiet:active {
   --bawo-copper: #C9922C;
   --bawo-brand-cta-orange: #E8B959;
   --bawo-text-primary: #F7F3FA;
+  --bawo-text-secondary: rgba(247, 243, 250, 0.88);
+  --bawo-text-muted: rgba(231, 221, 240, 0.68);
   --bawo-cta-text: #0E0A14;
   --bawo-liquid-glass-fill: #E8B959;
   --bawo-liquid-glass-hover-bg: #FFCF6B;
   --bawo-pill-gradient: linear-gradient(135deg, #FFCF6B 0%, #E8B959 55%, #C9922C 100%);
+  --bawo-section-y: clamp(4.5rem, 8vw, 7rem);
+  --bawo-section-y-tight: clamp(3.25rem, 5.5vw, 5rem);
+  --bawo-content-gap: clamp(1rem, 2.2vw, 1.5rem);
+  --bawo-heading-tracking: -0.022em;
+  --bawo-body-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.0625rem);
+  --bawo-lead-size: clamp(1.05rem, 0.95rem + 0.45vw, 1.25rem);
 }
 
 html,
@@ -3126,21 +3134,24 @@ body {
   font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
   background-color: #0E0A14;
   color: #F7F3FA;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .bawo-page-bg-base {
   background:
-    radial-gradient(ellipse 65% 45% at 18% 12%, rgba(168, 42, 136, 0.16) 0%, transparent 68%),
-    radial-gradient(ellipse 55% 40% at 84% 24%, rgba(232, 185, 89, 0.13) 0%, transparent 65%),
-    radial-gradient(ellipse 70% 50% at 50% 62%, rgba(114, 34, 130, 0.14) 0%, transparent 72%),
+    radial-gradient(ellipse 62% 42% at 14% 10%, rgba(42, 25, 61, 0.55) 0%, transparent 70%),
+    radial-gradient(ellipse 52% 38% at 86% 18%, rgba(232, 185, 89, 0.12) 0%, transparent 68%),
+    radial-gradient(ellipse 68% 48% at 48% 72%, rgba(22, 15, 36, 0.72) 0%, transparent 74%),
     linear-gradient(180deg, #07050B 0%, #0E0A14 48%, #160F24 100%);
 }
 
 /* Keep the full-page WebGL particle canvas fixed across the entire viewport */
 .bawo-particle-field {
   background:
-    radial-gradient(ellipse 68% 48% at 50% 42%, rgba(168, 42, 136, 0.15) 0%, transparent 72%),
-    radial-gradient(ellipse 52% 38% at 76% 18%, rgba(232, 185, 89, 0.12) 0%, transparent 68%),
+    radial-gradient(ellipse 68% 48% at 50% 42%, rgba(38, 24, 58, 0.28) 0%, transparent 72%),
+    radial-gradient(ellipse 52% 38% at 76% 18%, rgba(232, 185, 89, 0.11) 0%, transparent 68%),
     linear-gradient(180deg, #07050B 0%, #0E0A14 50%, #160F24 100%) !important;
 }
 
@@ -3156,20 +3167,29 @@ body {
 /* Cormorant Garamond Bold Editorial Display Typography */
 h1,
 h2,
+h3.font-display,
 .font-display,
 .bawo-hero-cinematic__title,
 .bawo-editorial-heading {
   font-family: "Cormorant Garamond", Georgia, serif !important;
   font-weight: 700 !important;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--bawo-heading-tracking);
+  text-wrap: balance;
 }
 
 .bawo-hero-cinematic__title {
   max-width: 14ch;
-  font-size: clamp(2.75rem, 6.6vw, 5.25rem);
+  font-size: clamp(2.65rem, 6.4vw, 5.1rem);
   line-height: 0.98;
   color: #F7F3FA;
   text-shadow: 0 12px 38px rgba(7, 5, 11, 0.72);
+}
+
+.bawo-hero-cinematic__copy {
+  color: rgba(247, 243, 250, 0.84) !important;
+  font-size: var(--bawo-lead-size) !important;
+  line-height: 1.55 !important;
+  letter-spacing: 0.01em;
 }
 
 .bawo-hero-neon,
@@ -3179,7 +3199,65 @@ h2,
   background-clip: text;
   color: transparent !important;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 32px rgba(232, 185, 89, 0.24);
+  text-shadow: 0 0 28px rgba(232, 185, 89, 0.2);
+}
+
+/* Section rhythm: consistent vertical padding + readable measure */
+.bawo-section,
+.bawo-scroll-anchor {
+  scroll-margin-top: calc(var(--bawo-header-offset) + 0.75rem);
+}
+
+.bawo-section--loose {
+  padding-block: var(--bawo-section-y);
+}
+
+.bawo-section--tight {
+  padding-block: var(--bawo-section-y-tight);
+}
+
+.bawo-section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(232, 185, 89, 0.35);
+  background: rgba(28, 19, 43, 0.75);
+  padding: 0.4rem 0.95rem;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #E8B959;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.bawo-section-title {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 700;
+  letter-spacing: var(--bawo-heading-tracking);
+  line-height: 1.05;
+  color: #F7F3FA;
+  text-wrap: balance;
+}
+
+.bawo-section-lead {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: var(--bawo-lead-size);
+  font-weight: 500;
+  line-height: 1.55;
+  color: rgba(247, 243, 250, 0.82);
+  max-width: 42rem;
+  text-wrap: pretty;
+}
+
+.bawo-body-copy {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: var(--bawo-body-size);
+  line-height: 1.65;
+  color: rgba(247, 243, 250, 0.8);
 }
 
 /* Signature Warm Gold Primary CTAs with Dark Eggplant #0E0A14 Bold Text */
@@ -3192,11 +3270,19 @@ h2,
   color: #0E0A14 !important;
   font-family: "Plus Jakarta Sans", system-ui, sans-serif !important;
   font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
   border: 1px solid rgba(255, 236, 190, 0.55) !important;
+  border-radius: 9999px !important;
+  min-height: 2.75rem;
   box-shadow:
-    0 12px 32px rgba(232, 185, 89, 0.28),
-    0 4px 12px rgba(7, 5, 11, 0.45),
+    0 12px 32px rgba(232, 185, 89, 0.26),
+    0 4px 12px rgba(7, 5, 11, 0.42),
     inset 0 1px 0 rgba(255, 250, 230, 0.65) !important;
+  transition:
+    transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    filter 0.18s ease !important;
 }
 
 .bawo-cta-quiet:hover,
@@ -3207,9 +3293,10 @@ h2,
   background: linear-gradient(135deg, #FFE094 0%, #F2C567 55%, #D9A136 100%) !important;
   color: #0E0A14 !important;
   border-color: rgba(255, 244, 214, 0.8) !important;
+  transform: translateY(-1px);
   box-shadow:
-    0 16px 38px rgba(232, 185, 89, 0.38),
-    0 6px 16px rgba(7, 5, 11, 0.5),
+    0 16px 38px rgba(232, 185, 89, 0.36),
+    0 6px 16px rgba(7, 5, 11, 0.48),
     inset 0 1px 0 rgba(255, 253, 242, 0.8) !important;
 }
 
@@ -3229,11 +3316,17 @@ h2,
   background: linear-gradient(160deg, rgba(34, 22, 52, 0.76) 0%, rgba(16, 10, 26, 0.88) 100%) !important;
   color: #F7F3FA !important;
   border: 1px solid rgba(232, 185, 89, 0.34) !important;
+  border-radius: 9999px !important;
+  min-height: 2.75rem;
   backdrop-filter: blur(24px) saturate(165%);
   -webkit-backdrop-filter: blur(24px) saturate(165%);
   box-shadow:
     0 10px 28px rgba(5, 2, 10, 0.48),
     inset 0 1px 0 rgba(255, 236, 190, 0.24) !important;
+  transition:
+    transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.2s ease,
+    background 0.2s ease !important;
 }
 
 .bawo-cta-outline:hover,
@@ -3241,6 +3334,7 @@ h2,
 .bawo-cta-glass-secondary:hover {
   border-color: rgba(232, 185, 89, 0.65) !important;
   background: linear-gradient(160deg, rgba(44, 28, 66, 0.84) 0%, rgba(22, 14, 36, 0.92) 100%) !important;
+  transform: translateY(-1px);
 }
 
 /* True Liquid Glass Surfaces across Cards, Header, Showcase Panels & FAQ */
@@ -3251,27 +3345,33 @@ h2,
     rgba(28, 19, 43, 0.72) 0%,
     rgba(14, 10, 22, 0.84) 100%
   ) !important;
-  border: 1px solid rgba(232, 185, 89, 0.24) !important;
+  border: 1px solid rgba(232, 185, 89, 0.22) !important;
+  border-radius: 1.25rem !important;
   backdrop-filter: blur(28px) saturate(165%) !important;
   -webkit-backdrop-filter: blur(28px) saturate(165%) !important;
   box-shadow:
-    0 20px 48px rgba(5, 2, 10, 0.56),
-    inset 0 1px 0 rgba(255, 236, 190, 0.28) !important;
+    0 18px 44px rgba(5, 2, 10, 0.52),
+    inset 0 1px 0 rgba(255, 236, 190, 0.24) !important;
+  transition:
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    background 0.22s ease;
 }
 
 @media (hover: hover) {
   .glass-card:hover,
   .bawo-faq-panel:hover {
-    border-color: rgba(232, 185, 89, 0.48) !important;
+    border-color: rgba(232, 185, 89, 0.42) !important;
     background: linear-gradient(
       160deg,
       rgba(36, 24, 56, 0.78) 0%,
       rgba(18, 12, 28, 0.88) 100%
     ) !important;
     box-shadow:
-      0 24px 56px rgba(5, 2, 10, 0.64),
-      0 0 28px rgba(232, 185, 89, 0.1),
-      inset 0 1px 0 rgba(255, 236, 190, 0.36) !important;
+      0 22px 52px rgba(5, 2, 10, 0.6),
+      0 0 24px rgba(232, 185, 89, 0.08),
+      inset 0 1px 0 rgba(255, 236, 190, 0.32) !important;
   }
 }
 
@@ -3287,26 +3387,48 @@ h2,
   box-shadow: inset 0 1px 0 rgba(255, 236, 190, 0.22);
 }
 
+/* Image treatment: borough hubs + phone / showcase frames */
+.bawo-hub-ring,
+.bawo-media-frame {
+  box-shadow:
+    0 18px 42px rgba(5, 2, 10, 0.55),
+    0 0 0 1px rgba(232, 185, 89, 0.28) !important;
+}
+
+.bawo-media-frame {
+  overflow: hidden;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #0A0710;
+}
+
+.bawo-media-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
 /* Floating Liquid Glass Top Navigation Header */
 .bawo-site-header {
   background: linear-gradient(
     180deg,
-    rgba(14, 10, 20, 0.84) 0%,
-    rgba(22, 15, 36, 0.72) 100%
+    rgba(14, 10, 20, 0.88) 0%,
+    rgba(22, 15, 36, 0.74) 100%
   ) !important;
   backdrop-filter: blur(28px) saturate(165%) !important;
   -webkit-backdrop-filter: blur(28px) saturate(165%) !important;
-  border-bottom: 1px solid rgba(232, 185, 89, 0.18) !important;
-  box-shadow: 0 12px 36px rgba(5, 2, 10, 0.45) !important;
+  border-bottom: 1px solid rgba(232, 185, 89, 0.16) !important;
+  box-shadow: 0 10px 32px rgba(5, 2, 10, 0.4) !important;
 }
 
 .bawo-site-header__glow {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(232, 185, 89, 0.38) 22%,
-    rgba(255, 207, 107, 0.55) 50%,
-    rgba(232, 185, 89, 0.38) 78%,
+    rgba(232, 185, 89, 0.32) 22%,
+    rgba(255, 207, 107, 0.48) 50%,
+    rgba(232, 185, 89, 0.32) 78%,
     transparent 100%
   ) !important;
 }
@@ -3318,21 +3440,51 @@ h2,
   font-family: "Plus Jakarta Sans", system-ui, sans-serif !important;
 }
 
+.bawo-site-header__nav-link {
+  color: rgba(247, 243, 250, 0.78) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em;
+}
+
+.bawo-site-header__nav-link:hover {
+  color: #FFE8B3 !important;
+}
+
+.bawo-site-header__nav-link--business {
+  color: #FFE8B3 !important;
+  background: rgba(232, 185, 89, 0.1) !important;
+  border: 1px solid rgba(232, 185, 89, 0.32) !important;
+}
+
+.bawo-site-header__mobile-link {
+  border-radius: 0.85rem;
+  padding: 0.85rem 1rem !important;
+  color: rgba(247, 243, 250, 0.9) !important;
+  font-weight: 600 !important;
+}
+
+.bawo-site-header__mobile-link:hover {
+  background: rgba(232, 185, 89, 0.1);
+  color: #FFE8B3 !important;
+}
+
 /* Prominent Gold Businesses Chip in Top Bar */
 .bawo-site-header__businesses-chip {
-  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif !important;
   background: linear-gradient(135deg, rgba(255, 207, 107, 0.2), rgba(232, 185, 89, 0.12));
   border: 1px solid rgba(232, 185, 89, 0.48);
   color: #FFE8B3;
   box-shadow:
     0 6px 20px rgba(5, 2, 10, 0.38),
     inset 0 1px 0 rgba(255, 236, 190, 0.28);
+  transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease, color 0.16s ease;
 }
 
 .bawo-site-header__businesses-chip:hover {
   background: linear-gradient(135deg, #FFCF6B 0%, #E8B959 55%, #C9922C 100%);
   color: #0E0A14;
   border-color: rgba(255, 236, 190, 0.85);
+  transform: translateY(-1px);
 }
 
 /* Hero Cinematic Stage — keep transparent so particle globe shines through */
@@ -3342,24 +3494,111 @@ h2,
     linear-gradient(to top, rgba(14, 10, 20, 0.52) 0%, transparent 28%) !important;
 }
 
+.bawo-hero-cinematic__main {
+  gap: 1rem !important;
+  padding-inline: clamp(1rem, 3vw, 2.5rem) !important;
+}
+
 .bawo-hero-cinematic__pill {
   font-family: "Plus Jakarta Sans", system-ui, sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em;
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   background: rgba(24, 15, 38, 0.68) !important;
   border: 1px solid rgba(232, 185, 89, 0.24) !important;
   box-shadow: inset 0 1px 0 rgba(255, 236, 190, 0.18);
+  transition: border-color 0.16s ease, background-color 0.16s ease, transform 0.16s ease;
 }
 
 .bawo-hero-cinematic__pill:hover {
   border-color: rgba(232, 185, 89, 0.55) !important;
   background: rgba(36, 22, 56, 0.82) !important;
+  transform: translateY(-1px);
 }
 
 .bawo-hero-cinematic__pill--business {
   background: linear-gradient(135deg, rgba(255, 207, 107, 0.22), rgba(232, 185, 89, 0.14)) !important;
   border-color: rgba(232, 185, 89, 0.55) !important;
   color: #FFE8B3 !important;
+}
+
+.bawo-hero-cinematic__pill--solid {
+  background: linear-gradient(135deg, #FFCF6B 0%, #E8B959 55%, #C9922C 100%) !important;
+  color: #0E0A14 !important;
+  border-color: rgba(255, 236, 190, 0.55) !important;
+  font-weight: 700 !important;
+}
+
+.bawo-hero-cinematic__pill--solid:hover {
+  background: linear-gradient(135deg, #FFE094 0%, #F2C567 55%, #D9A136 100%) !important;
+  color: #0E0A14 !important;
+}
+
+.bawo-hero-cinematic__textlink:hover {
+  color: #FFE8B3 !important;
+}
+
+/* FAQ hierarchy polish */
+.bawo-faq-panel__question {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.005em;
+  color: #F7F3FA !important;
+}
+
+.bawo-faq-panel__answer {
+  font-size: 0.95rem !important;
+  line-height: 1.65 !important;
+  color: rgba(247, 243, 250, 0.78) !important;
+}
+
+/* Mobile sticky CTA + footer rhythm */
+.mobile-sticky-cta {
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: 0 -10px 28px rgba(5, 2, 10, 0.45);
+}
+
+@media (max-width: 767px) {
+  .bawo-hero-cinematic__footer {
+    gap: 0.85rem !important;
+    padding-inline: 1rem !important;
+  }
+
+  .bawo-hero-cinematic__footer-actions {
+    width: 100%;
+  }
+
+  .bawo-hero-cinematic__pill {
+    min-height: 2.5rem;
+    font-size: 0.875rem !important;
+  }
+
+  .glass-card {
+    border-radius: 1.1rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bawo-site-header {
+    border-bottom: none !important;
+    border-right: 1px solid rgba(232, 185, 89, 0.14) !important;
+    background: linear-gradient(
+      180deg,
+      rgba(14, 10, 20, 0.94) 0%,
+      rgba(22, 15, 36, 0.82) 100%
+    ) !important;
+  }
+
+  .bawo-site-header__nav-link {
+    padding-block: 0.78rem !important;
+    font-size: 0.95rem !important;
+  }
+
+  .bawo-site-header__nav-link:hover {
+    color: #FFE8B3 !important;
+  }
 }
 
 /* Founding Member Checkout Modal in Deep Eggplant + Gold */

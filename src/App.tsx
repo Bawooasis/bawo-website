@@ -18,7 +18,6 @@ import PartnerWithUsSection from "./components/PartnerWithUsSection";
 import SectionPillNav from "./components/SectionPillNav";
 import HeroParticleField from "./components/ui/HeroParticleField";
 import SiteHeader from "./components/SiteHeader";
-import { TAILWIND_COLORS } from "./constants/colors";
 import { CONTENT } from "./constants/content";
 import { IMAGES } from "./constants/images";
 import { scrollToWaitlist } from "./utils/scrollToWaitlist";
@@ -194,7 +193,7 @@ function App() {
 
           <div className="bawo-hero-cinematic__stage relative z-10 flex flex-col">
             <div className="bawo-hero-cinematic__main">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#E8B959]/40 bg-[#1C132B]/75 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-widest text-[#FFE8B3] backdrop-blur-xl mb-1">
+              <div className="bawo-section-eyebrow mb-1 text-[#FFE8B3]">
                 <Sparkles className="h-3.5 w-3.5 text-[#E8B959]" aria-hidden />
                 <span>BawoSocial · The Culture Hub for Nigerians in NYC</span>
               </div>
@@ -227,13 +226,13 @@ function App() {
           </div>
         </section>
 
-        <section className="relative bg-transparent py-16 md:py-24 overflow-x-clip">
+        <section className="relative bg-transparent bawo-section--tight overflow-x-clip">
           <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-2xl w-full">
             <div className="flex flex-col items-center justify-center gap-3 w-full">
               <MobileAppDownloadRow className="self-center" />
             </div>
 
-            <div className="mt-10 w-full space-y-5 sm:space-y-6">
+            <div className="mt-8 md:mt-10 w-full space-y-5 sm:space-y-6">
               <div className="bawo-hero-cta-block">
                 <HeroActionStack onJoinClick={scrollToWaitlist} />
               </div>
@@ -258,22 +257,22 @@ function App() {
         <section
           ref={globalReachRef}
           id="building-the-network"
-          className="relative bawo-scroll-anchor bg-transparent py-20 md:py-[5rem] overflow-x-hidden section-contain"
+          className="relative bawo-scroll-anchor bawo-section--loose bg-transparent overflow-x-hidden section-contain"
         >
-          <div className="relative z-10 container mx-auto px-5 sm:px-6 py-12 md:py-14">
+          <div className="relative z-10 container mx-auto px-5 sm:px-6">
             <div className="text-center space-y-8 md:space-y-12 max-w-[1400px] mx-auto">
-              <div className="space-y-5 md:space-y-7">
-                <div className="inline-flex items-center gap-2 rounded-full border border-[#E8B959]/35 bg-[#1C132B]/75 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#E8B959] backdrop-blur-xl">
+              <div className="space-y-4 md:space-y-6">
+                <div className="bawo-section-eyebrow mx-auto">
                   <MapPin className="w-3.5 h-3.5 shrink-0" aria-hidden />
                   <span>Live NYC Borough Pulse · 5 Boroughs + NJ Corridor</span>
                 </div>
-                <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-[#F7F3FA] font-display leading-[1.04] tracking-tight">
+                <h2 className="bawo-section-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
                   {CONTENT.globalReach.title}
                 </h2>
-                <p className="text-xl sm:text-2xl md:text-3xl font-medium text-[#F7F3FA]/85 max-w-4xl mx-auto leading-snug">
+                <p className="bawo-section-lead mx-auto text-lg sm:text-xl md:text-2xl max-w-4xl text-[#F7F3FA]/90">
                   {CONTENT.globalReach.subtitle}
                 </p>
-                <p className="text-base sm:text-lg md:text-xl font-medium text-[#FFE8B3] max-w-3xl mx-auto leading-relaxed">
+                <p className="text-base sm:text-lg font-medium text-[#FFE8B3] max-w-3xl mx-auto leading-relaxed">
                   {CONTENT.globalReach.description}
                 </p>
               </div>
@@ -398,7 +397,7 @@ function App() {
           </div>
         </section>
 
-        <div className="relative bg-transparent space-y-16 md:space-y-20 pt-12 md:pt-16 pb-6 md:pb-10 section-contain">
+        <div className="relative bg-transparent space-y-12 md:space-y-16 pt-8 md:pt-12 pb-4 md:pb-8 section-contain">
           <CommunityMissionSection />
           <div className="relative z-10">
             <PartnerWithUsSection />
@@ -408,18 +407,18 @@ function App() {
         {/* Origin Story Section – structured block with clear hierarchy */}
         <section
           id="about"
-          className="relative bawo-scroll-anchor flex items-center justify-center bg-transparent py-20 md:py-28"
+          className="relative bawo-scroll-anchor flex items-center justify-center bg-transparent bawo-section--loose"
         >
-          <div className="relative z-10 container mx-auto px-6 flex flex-col items-center">
-            <div className="text-[#F7F3FA] space-y-12 w-full max-w-4xl mx-auto glass-card rounded-3xl p-8 sm:p-12 md:p-16">
-              <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold font-display leading-tight text-center tracking-tight">
+          <div className="relative z-10 container mx-auto px-5 sm:px-6 flex flex-col items-center">
+            <div className="text-[#F7F3FA] space-y-8 md:space-y-10 w-full max-w-4xl mx-auto glass-card rounded-3xl p-7 sm:p-10 md:p-14">
+              <h2 className="bawo-section-title text-4xl sm:text-5xl md:text-6xl text-center">
                 {CONTENT.origin.title.lead}
                 <span className="bawo-text-cta-gradient">
                   {CONTENT.origin.title.highlight}
                 </span>
                 {CONTENT.origin.title.closing}
               </h2>
-              <div className="mx-auto max-w-3xl space-y-7 text-left">
+              <div className="mx-auto max-w-3xl space-y-6 text-left">
                 {CONTENT.origin.paragraphs.map((paragraph) => (
                   <p
                     key={
@@ -427,7 +426,7 @@ function App() {
                         ? paragraph.slice(0, 32)
                         : paragraph.highlight
                     }
-                    className="text-[#F7F3FA]/90 text-lg sm:text-xl md:text-2xl leading-relaxed md:leading-[1.8]"
+                    className="bawo-body-copy text-base sm:text-lg md:text-xl leading-relaxed md:leading-[1.75]"
                   >
                     {typeof paragraph === "string" ? (
                       paragraph
@@ -450,18 +449,18 @@ function App() {
         <section
           ref={earlyAccessRef}
           id="early-access"
-          className="relative bawo-scroll-anchor bg-transparent py-20 md:py-28"
+          className="relative bawo-scroll-anchor bg-transparent bawo-section--loose"
         >
-          <div className="relative z-10 container mx-auto px-6 py-12 md:py-16 max-w-2xl">
-            <div className="space-y-10 text-[#F7F3FA]">
+          <div className="relative z-10 container mx-auto px-5 sm:px-6 max-w-2xl">
+            <div className="space-y-8 md:space-y-10 text-[#F7F3FA]">
               <div className="space-y-3 text-center">
-                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold font-display leading-tight">
+                <h2 className="bawo-section-title text-4xl sm:text-5xl md:text-6xl">
                   {CONTENT.earlyAccess.title}{" "}
                   <span className="bawo-text-cta-gradient">
                     {CONTENT.earlyAccess.titleHighlight}
                   </span>
                 </h2>
-                <p className="text-xs sm:text-sm md:text-base font-bold text-[#FFE8B3] uppercase tracking-wider">
+                <p className="text-xs sm:text-sm font-bold text-[#FFE8B3] uppercase tracking-wider">
                   {CONTENT.earlyAccess.subtitle}
                 </p>
               </div>
@@ -509,24 +508,22 @@ function App() {
         <section
           ref={featuresRef}
           id="features"
-          className="relative bawo-scroll-anchor flex items-center justify-center bg-transparent py-20 md:py-28 section-contain"
+          className="relative bawo-scroll-anchor flex items-center justify-center bg-transparent bawo-section--loose section-contain"
         >
-          <div className="relative z-10 text-[#F7F3FA] px-6 md:px-10 max-w-7xl py-12 md:py-16 mx-auto w-full">
-            <h2
-              className={`text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-16 ${TAILWIND_COLORS.primary.text} font-display`}
-            >
+          <div className="relative z-10 text-[#F7F3FA] px-5 sm:px-6 md:px-10 max-w-7xl mx-auto w-full">
+            <h2 className="bawo-section-title text-4xl sm:text-5xl md:text-6xl text-center mb-10 md:mb-14">
               {CONTENT.features.title}
             </h2>
-            <div className="grid md:grid-cols-3 gap-8 md:gap-10 max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-5 md:gap-7 max-w-6xl mx-auto">
               {CONTENT.features.items.map((item) => (
                 <div
                   key={item.title}
-                  className="feature-card glass-card space-y-3 p-7 text-center md:text-left"
+                  className="feature-card glass-card space-y-3 p-6 sm:p-7 text-center md:text-left"
                 >
-                  <h3 className="text-2xl md:text-3xl font-bold font-display text-[#F7F3FA]">
+                  <h3 className="text-2xl md:text-[1.75rem] font-bold font-display text-[#F7F3FA]">
                     {item.title}
                   </h3>
-                  <p className="text-base leading-relaxed text-[#F7F3FA]/80">
+                  <p className="bawo-body-copy">
                     {item.description}
                   </p>
                 </div>
@@ -538,13 +535,13 @@ function App() {
         {/* Event Highlights Section */}
         <section
           id="events"
-          className="relative bawo-scroll-anchor py-24 bg-transparent"
+          className="relative bawo-scroll-anchor bawo-section--loose bg-transparent"
         >
-          <div className="relative z-10 container mx-auto px-6">
-            <h2 className="text-center text-4xl sm:text-5xl md:text-6xl font-bold font-display text-[#F7F3FA] mb-12">
+          <div className="relative z-10 container mx-auto px-5 sm:px-6">
+            <h2 className="bawo-section-title text-center text-4xl sm:text-5xl md:text-6xl mb-10 md:mb-12">
               {CONTENT.events.title}
             </h2>
-            <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-5 md:gap-6 max-w-6xl mx-auto">
               {CONTENT.events.items.map((event) => {
                 const Icon =
                   event.icon === "calendar"
@@ -555,17 +552,17 @@ function App() {
                 return (
                   <div
                     key={event.title}
-                    className="glass-card p-7 text-[#F7F3FA] space-y-3"
+                    className="glass-card p-6 sm:p-7 text-[#F7F3FA] space-y-3"
                   >
                     <div className="flex items-center gap-3">
                       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#E8B959]/35 bg-[#E8B959]/15 text-[#E8B959]">
                         <Icon className="w-5 h-5" />
                       </span>
-                      <h3 className="font-display text-2xl font-bold text-[#F7F3FA] leading-snug">
+                      <h3 className="font-display text-xl sm:text-2xl font-bold text-[#F7F3FA] leading-snug">
                         {event.title}
                       </h3>
                     </div>
-                    <p className="text-[#F7F3FA]/80 text-sm sm:text-base leading-relaxed">
+                    <p className="bawo-body-copy text-sm sm:text-base">
                       {event.description}
                     </p>
                   </div>
@@ -579,15 +576,15 @@ function App() {
         <section
           ref={finalCtaRef}
           id="email-section"
-          className="relative bawo-scroll-anchor flex items-center justify-center bg-transparent py-20 md:py-28 section-contain"
+          className="relative bawo-scroll-anchor flex items-center justify-center bg-transparent bawo-section--loose section-contain"
         >
-          <div className="relative z-10 container mx-auto px-6 py-12 md:py-16">
-            <div className="text-center space-y-10 max-w-3xl mx-auto glass-card rounded-3xl p-8 sm:p-12">
+          <div className="relative z-10 container mx-auto px-5 sm:px-6">
+            <div className="text-center space-y-8 md:space-y-10 max-w-3xl mx-auto glass-card rounded-3xl p-7 sm:p-10 md:p-12">
               <div className="space-y-4">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#F7F3FA] font-display leading-tight">
+                <h2 className="bawo-section-title text-4xl md:text-5xl lg:text-6xl">
                   {CONTENT.finalCta.title}
                 </h2>
-                <p className="text-base sm:text-lg md:text-xl text-[#F7F3FA]/80">
+                <p className="bawo-section-lead mx-auto">
                   {CONTENT.finalCta.subtitle}
                 </p>
                 {/* Borough tags */}
@@ -633,9 +630,9 @@ function App() {
         <FaqSection />
 
         {/* Footer */}
-        <footer className="py-12 bg-transparent">
+        <footer className="py-10 md:py-14 bg-transparent">
           {/* Mobile Sticky CTA */}
-          <div className="md:hidden mobile-sticky-cta bg-[#0E0A14]/92 backdrop-blur-xl border-t border-[#E8B959]/25">
+          <div className="md:hidden mobile-sticky-cta bg-[#0E0A14]/92 border-t border-[#E8B959]/25">
             <div className="px-4 py-3 flex items-center justify-between gap-3">
               <div className="flex flex-col min-w-0 gap-0.5">
                 <span className="text-[#F7F3FA] font-bold text-sm">BawoSocial NYC</span>
