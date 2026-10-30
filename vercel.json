@@ -6,6 +6,9 @@
     { "source": "/business", "destination": "/index.html" },
     { "source": "/business/:path*", "destination": "/index.html" },
     { "source": "/businesses", "destination": "/index.html" },
-    { "source": "/businesses/:path*", "destination": "/index.html" }
+    { "source": "/businesses/:path*", "destination": "/index.html" },
+    { "source": "/privacy", "destination": "/index.html" },
+    { "source": "/terms", "destination": "/index.html" },
+    { "source": "/support", "destination": "/index.html" }
   ]
 }

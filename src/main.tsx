@@ -1,11 +1,13 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
+import LegalApp, { resolveLegalPath } from './pages/LegalApp.tsx';
 import PortalApp from './portal/PortalApp.tsx';
 import './index.css';
 
 const path = window.location.pathname.replace(/\/+$/, '') || '/';
 const hostname = window.location.hostname.toLowerCase();
+const legalPath = resolveLegalPath(path);
 const isBusinessPath =
   path === '/business' ||
   path.startsWith('/business/') ||
@@ -22,6 +24,12 @@ const portalMode =
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    {portalMode ? <PortalApp mode={portalMode} /> : <App />}
+    {legalPath ? (
+      <LegalApp path={legalPath} />
+    ) : portalMode ? (
+      <PortalApp mode={portalMode} />
+    ) : (
+      <App />
+    )}
   </StrictMode>
 );
