@@ -35,7 +35,7 @@ export default function SiteLogo({
           onError={() => setMarkOk(false)}
         />
       ) : null}
-      {/* Live MuseoModerno SemiBold wordmark — Direction C (gold / deep) */}
+      {/* Live Cormorant Garamond SemiBold wordmark — Direction B champagne gradient / deep solid */}
       <span className="bawo-site-logo__wordmark" aria-hidden>
         BawoSocial
       </span>

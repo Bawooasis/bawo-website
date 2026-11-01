@@ -1,12 +1,4 @@
-/* Typography: Plus Jakarta / Cormorant via Google Fonts; MuseoModerno local for wordmark. */
-
-@font-face {
-  font-family: "MuseoModerno";
-  src: url("./assets/fonts/MuseoModerno/MuseoModerno-SemiBold.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
+/* Typography: Plus Jakarta / Cormorant via Google Fonts (wordmark = Cormorant Garamond SemiBold). */
 
 @tailwind base;
 @tailwind components;
@@ -1446,22 +1438,37 @@ a.bawo-cta-quiet:active {
   object-position: center;
 }
 
+/* Direction B — Cormorant Garamond SemiBold + app champagneGradient */
 .bawo-site-logo__wordmark {
   display: block;
-  font-family: "MuseoModerno", "Plus Jakarta Sans", system-ui, sans-serif;
+  font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 600;
-  font-size: 1.05rem;
+  font-size: 1.2rem;
   line-height: 1;
   letter-spacing: -0.01em;
-  color: #D6B26A;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: clip;
   max-width: 100%;
+  background-image: linear-gradient(
+    90deg,
+    #F7E7C4 0%,
+    #E9CF94 33%,
+    #D6B26A 66%,
+    #A07636 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
 .bawo-site-logo--deep .bawo-site-logo__wordmark {
+  background-image: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
   color: #A07636;
+  -webkit-text-fill-color: #A07636;
 }
 
 /* Image fallback stays for no-CSS / crawlers; hide once text wordmark is available */
@@ -1488,7 +1495,7 @@ a.bawo-cta-quiet:active {
   }
 
   .bawo-site-logo__wordmark {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 }
 
@@ -1505,7 +1512,7 @@ a.bawo-cta-quiet:active {
   }
 
   .bawo-site-logo__wordmark {
-    font-size: 1.35rem;
+    font-size: 1.55rem;
   }
 }
 
@@ -1515,7 +1522,7 @@ a.bawo-cta-quiet:active {
   }
 
   .bawo-site-logo__wordmark {
-    font-size: 1.45rem;
+    font-size: 1.7rem;
   }
 }
 
@@ -1711,7 +1718,7 @@ a.bawo-cta-quiet:active {
   }
 
   .bawo-site-logo__wordmark {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
   }
 
   .bawo-site-logo__mark {
@@ -2093,7 +2100,7 @@ a.bawo-cta-quiet:active {
   }
 
   .bawo-site-logo__wordmark {
-    font-size: 1.25rem;
+    font-size: 1.45rem;
   }
 
   .bawo-scroll-anchor {
@@ -3329,11 +3336,42 @@ h2,
     inset 0 1px 0 rgba(247, 231, 196, 0.24) !important;
 }
 
+.bawo-cta-outline span,
+.bawo-cta-secondary span,
+.bawo-cta-glass-secondary span {
+  color: #F7F3FA !important;
+}
+
+.bawo-cta-outline svg,
+.bawo-cta-secondary svg,
+.bawo-cta-glass-secondary svg {
+  color: #E9CF94 !important;
+}
+
 .bawo-cta-outline:hover,
 .bawo-cta-secondary:hover,
 .bawo-cta-glass-secondary:hover {
   border-color: rgba(214, 178, 106, 0.65) !important;
   background: linear-gradient(160deg, rgba(44, 28, 66, 0.84) 0%, rgba(22, 14, 36, 0.92) 100%) !important;
+}
+
+/* Sticky mobile Businesses outline: high-contrast label on dark bar */
+.mobile-sticky-cta .bawo-cta-outline {
+  border-color: rgba(233, 207, 148, 0.72) !important;
+  color: #F7E7C4 !important;
+  background: linear-gradient(
+    160deg,
+    rgba(42, 28, 62, 0.92) 0%,
+    rgba(18, 12, 28, 0.96) 100%
+  ) !important;
+}
+
+.mobile-sticky-cta .bawo-cta-outline span {
+  color: #F7E7C4 !important;
+}
+
+.mobile-sticky-cta .bawo-cta-outline svg {
+  color: #E9CF94 !important;
 }
 
 /* True Liquid Glass Surfaces across Cards, Header, Showcase Panels & FAQ */
