@@ -4,6 +4,7 @@ import adoraImage from "../assets/images/ADORA.jpg";
 import bawoLogo from "../assets/images/bawo-logo.png";
 import bawoMark from "../assets/images/bawo-mark.png";
 import bawoSocialWordmark from "../assets/images/bawosocial-logo.png";
+import bawoSocialWordmarkDeep from "../assets/images/bawosocial-logo-deep.png";
 import emekaImage from "../assets/images/Emeka.jpg";
 import fatimaImage from "../assets/images/Fatima.jpg";
 import newSplashScreen from "../assets/images/new-splash-screen.jpg";
@@ -90,8 +91,10 @@ export const IMAGES = {
   // Local Assets
   assets: {
     globe: newSplashScreen,
-    /** Vite-bundled wordmark */
+    /** Vite-bundled wordmark (app gold #D6B26A for dark surfaces) */
     logo: bawoSocialWordmark,
+    /** Wordmark for light/ivory surfaces (#A07636) */
+    logoDeep: bawoSocialWordmarkDeep,
     /** New BawoSocial cowrie-flame app icon */
     mark: bawoMark,
     logoOld: bawoLogo,

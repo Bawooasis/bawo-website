@@ -32,6 +32,8 @@ export function injectDesignTokens() {
   r.setProperty("--bawo-copper-muted", palette.copper.muted);
   r.setProperty("--bawo-heritage-gold", palette.heritageGold);
   r.setProperty("--bawo-gold", palette.content.gold);
+  r.setProperty("--bawo-gold-glow", palette.content.goldGlow);
+  r.setProperty("--bawo-gold-deep", palette.content.goldDeep);
   r.setProperty("--bawo-section-title-accent", palette.sectionTitleAccent);
 
   r.setProperty("--bawo-text-primary", d.text.primary);

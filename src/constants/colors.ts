@@ -12,8 +12,9 @@ export const COLORS = {
     copperDark: c.deep,
     pumpkin: palette.content.pumpkin,
     gold: g,
-    goldLight: "#FFCF6B",
-    goldDark: "#C9922C",
+    goldLight: "#F7E7C4",
+    goldGlow: "#E9CF94",
+    goldDark: "#A07636",
   },
   background: {
     obsidian: palette.obsidian.canvas,
@@ -28,8 +29,8 @@ export const COLORS = {
       tertiary: palette.obsidian.depth,
     },
     overlay: {
-      light: "rgba(232, 185, 89, 0.08)",
-      medium: "rgba(232, 185, 89, 0.14)",
+      light: "rgba(214, 178, 106, 0.08)",
+      medium: "rgba(214, 178, 106, 0.14)",
       subtle: "rgba(168, 42, 136, 0.08)",
     },
   },
@@ -41,7 +42,7 @@ export const COLORS = {
   },
   border: {
     default: d.border.subtle,
-    light: "rgba(232, 185, 89, 0.16)",
+    light: "rgba(214, 178, 106, 0.16)",
     copper: c.base,
     copperLight: c.bright,
   },
@@ -63,15 +64,15 @@ export const COLORS = {
       to: "#1C132B",
     },
     copper: {
-      from: "#FFCF6B",
-      to: "#C9922C",
+      from: "#F7E7C4",
+      to: "#A07636",
     },
   },
   shadows: {
     default: "rgba(5, 2, 10, 0.45)",
     hover: "rgba(5, 2, 10, 0.6)",
     subtle: "rgba(5, 2, 10, 0.3)",
-    glow: "rgba(232, 185, 89, 0.42)",
+    glow: "rgba(214, 178, 106, 0.42)",
   },
   utility: {
     transparent: "transparent",
@@ -84,25 +85,25 @@ export const COLORS = {
 export const TAILWIND_COLORS = {
   primary: {
     text: "bawo-text-cta-gradient",
-    bg: "bg-[#E8B959]",
-    border: "border-[rgba(232,185,89,0.42)]",
+    bg: "bg-[#D6B26A]",
+    border: "border-[rgba(214,178,106,0.42)]",
     hover: {
-      bg: "hover:bg-[#FFCF6B]",
-      text: "hover:text-[#FFCF6B]",
-      border: "hover:border-[#FFCF6B]",
+      bg: "hover:bg-[#E9CF94]",
+      text: "hover:text-[#E9CF94]",
+      border: "hover:border-[#E9CF94]",
     },
     focus: {
-      border: "focus:border-[#E8B959]",
+      border: "focus:border-[#D6B26A]",
     },
   },
   gold: {
-    text: "text-[#E8B959]",
-    bg: "bg-[#E8B959]",
-    border: "border-[#E8B959]",
+    text: "text-[#D6B26A]",
+    bg: "bg-[#D6B26A]",
+    border: "border-[#D6B26A]",
   },
   gradients: {
-    primary: "bg-gradient-to-r from-[#FFCF6B] via-[#E8B959] to-[#C9922C]",
-    primaryHover: "hover:from-[#FFE094] hover:to-[#E8B959]",
+    primary: "bg-gradient-to-r from-[#F7E7C4] via-[#D6B26A] to-[#A07636]",
+    primaryHover: "hover:from-[#F7E7C4] hover:to-[#D6B26A]",
     background:
       "bg-gradient-to-b from-[#07050B] via-[#0E0A14] to-[#160F24]",
     subtle: "bg-gradient-to-b from-[#0E0A14] to-[#1C132B]",
@@ -119,14 +120,14 @@ export const TAILWIND_COLORS = {
     surface: "bg-[#1C132B]",
     card: "bg-[#1C132B]/75",
     overlay: {
-      light: "bg-[#E8B959]/10",
-      medium: "bg-[#E8B959]/15",
+      light: "bg-[#D6B26A]/10",
+      medium: "bg-[#D6B26A]/15",
       subtle: "bg-[#2A193D]/40",
     },
   },
   border: {
-    default: "border-[rgba(232,185,89,0.22)]",
-    light: "border-[rgba(232,185,89,0.14)]",
-    glass: "border-[rgba(232,185,89,0.24)]",
+    default: "border-[rgba(214,178,106,0.22)]",
+    light: "border-[rgba(214,178,106,0.14)]",
+    glass: "border-[rgba(214,178,106,0.24)]",
   },
 } as const;

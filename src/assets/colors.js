@@ -1,17 +1,22 @@
 /**
- * Tier-1 palette — Deep Eggplant + Warm Signature Gold + Liquid Glass
- * Mirrors the current BawoSocial mobile app theme:
- *   Primary Gold: #E8B959 / #FFCF6B / #C9922C
+ * Tier-1 palette — Deep Eggplant + App Gold + Liquid Glass
+ * Mirrors the BawoSocial mobile app gold:
+ *   Primary Gold: #D6B26A / light #F7E7C4 / glow #E9CF94 / deep #A07636
  *   Deep Eggplant Canvas: #07050B -> #0E0A14 -> #160F24
  *   Gold CTA Button Text: #0E0A14 (Dark Eggplant Bold)
  */
-const BRAND_CTA_GOLD = "#E8B959";
+const BRAND_CTA_GOLD = "#D6B26A";
+const GOLD_LIGHT = "#F7E7C4";
+const GOLD_GLOW = "#E9CF94";
+const GOLD_DEEP = "#A07636";
 
 /** Content palette — UI accents & surfaces */
 export const contentPalette = {
-  pumpkin: "#E8B959",
-  peach: "#FFCF6B",
-  gold: "#E8B959",
+  pumpkin: BRAND_CTA_GOLD,
+  peach: GOLD_LIGHT,
+  gold: BRAND_CTA_GOLD,
+  goldGlow: GOLD_GLOW,
+  goldDeep: GOLD_DEEP,
   ink: "#07050B",
   navy: "#0E0A14",
   eggplant: "#160F24",
@@ -28,11 +33,11 @@ export const palette = {
   },
   content: contentPalette,
   copper: {
-    base: "#C9922C",
+    base: GOLD_DEEP,
     bright: BRAND_CTA_GOLD,
-    deep: "#9A6B1A",
-    muted: "#6B4B16",
-    highlight: "#FFE29A",
+    deep: "#7A5A28",
+    muted: "#5C4420",
+    highlight: GOLD_LIGHT,
   },
   heritageGold: contentPalette.gold,
   sectionTitleAccent: contentPalette.gold,
@@ -41,22 +46,22 @@ export const palette = {
   glass: {
     fill: "rgba(28, 19, 43, 0.72)",
     fillRaised: "rgba(38, 24, 58, 0.80)",
-    border: "rgba(232, 185, 89, 0.24)",
-    borderHairline: "rgba(255, 207, 107, 0.28)",
+    border: "rgba(214, 178, 106, 0.24)",
+    borderHairline: "rgba(233, 207, 148, 0.28)",
   },
   brandCtaOrange: BRAND_CTA_GOLD,
 
   pathwayPillGradient: {
     angle: "135deg",
     stops: [
-      "rgba(255, 207, 107, 0.96) 0%",
-      "rgba(232, 185, 89, 0.96) 55%",
-      "rgba(201, 146, 44, 0.94) 100%",
+      "rgba(247, 231, 196, 0.96) 0%",
+      "rgba(214, 178, 106, 0.96) 55%",
+      "rgba(160, 118, 54, 0.94) 100%",
     ],
   },
   liquidGlass: {
-    borderOuter: "rgba(232, 185, 89, 0.36)",
-    edgeTop: "rgba(255, 236, 190, 0.34)",
-    edgeTopDisabled: "rgba(255, 236, 190, 0.14)",
+    borderOuter: "rgba(214, 178, 106, 0.36)",
+    edgeTop: "rgba(247, 231, 196, 0.34)",
+    edgeTopDisabled: "rgba(247, 231, 196, 0.14)",
   },
 };
