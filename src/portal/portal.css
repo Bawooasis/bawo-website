@@ -5,15 +5,15 @@
   --portal-panel: #221525;
   --portal-panel-2: #2A1438;
   --portal-copper: #B87333;
-  --portal-copper-soft: #FF8C42;
-  --portal-pumpkin: #FF6B00;
-  --portal-gold: #FFBC42;
+  --portal-copper-soft: #E9CF94;
+  --portal-pumpkin: #D6B26A;
+  --portal-gold: #D6B26A;
   --portal-text: #F4F4F5;
   --portal-muted: rgba(244, 244, 245, 0.62);
-  --portal-border: rgba(255, 188, 66, 0.2);
+  --portal-border: rgba(214, 178, 106, 0.2);
   --portal-border-soft: rgba(255, 255, 255, 0.075);
-  --portal-success: #FFBC42;
-  --portal-warning: #FF8C42;
+  --portal-success: #D6B26A;
+  --portal-warning: #E9CF94;
   --portal-danger: #ff7777;
 }
 
@@ -242,7 +242,7 @@
 .portal-row-actions button { min-height: 38px; display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.5rem 0.7rem; border: 1px solid var(--portal-border); border-radius: 10px; color: var(--portal-text); background: rgba(184, 115, 51, 0.08); cursor: pointer; font-size: 0.71rem; }
 .portal-row-actions button:hover { border-color: rgba(242, 179, 126, 0.35); background: rgba(184, 115, 51, 0.14); }
 .portal-row-actions button.is-danger { color: #ffc2c2; border-color: rgba(255, 119, 119, 0.25); }
-.portal-row-actions button.is-primary { color: #08060C; border-color: rgba(255, 205, 163, 0.35); background: linear-gradient(135deg, #FF8C42, #FF6B00); font-weight: 800; }
+.portal-row-actions button.is-primary { color: #08060C; border-color: rgba(255, 205, 163, 0.35); background: linear-gradient(135deg, #F7E7C4, #D6B26A); font-weight: 800; }
 .portal-row-actions button:disabled,
 .portal-primary-button:disabled { opacity: 0.55; cursor: wait; }
 .portal-row-actions svg { width: 13px; height: 13px; }
@@ -264,7 +264,7 @@
 .portal-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 .portal-form textarea { resize: vertical; }
 .portal-form-note { margin: 0; color: var(--portal-muted); font-size: 0.69rem; line-height: 1.5; }
-.portal-primary-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; border: 1px solid rgba(255, 205, 163, 0.35); border-radius: 999px; padding: 0.75rem 1.2rem; color: #08060C; background: linear-gradient(135deg, #FF8C42, #FF6B00); box-shadow: 0 12px 30px rgba(255, 107, 0, 0.22); font-weight: 800; text-decoration: none; cursor: pointer; }
+.portal-primary-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; border: 1px solid rgba(255, 205, 163, 0.35); border-radius: 999px; padding: 0.75rem 1.2rem; color: #08060C; background: linear-gradient(135deg, #F7E7C4, #D6B26A); box-shadow: 0 12px 30px rgba(214, 178, 106, 0.22); font-weight: 800; text-decoration: none; cursor: pointer; }
 .portal-primary-button svg { width: 16px; height: 16px; margin-right: 0.45rem; }
 
 .social-ops-hero { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 2rem; overflow: hidden; padding: clamp(1.3rem, 3vw, 2.2rem); border: 1px solid rgba(242, 179, 126, 0.28); border-radius: 24px; background: radial-gradient(circle at 78% 20%, rgba(255, 104, 166, 0.16), transparent 16rem), radial-gradient(circle at 100% 100%, rgba(68, 197, 255, 0.13), transparent 17rem), linear-gradient(135deg, rgba(44, 17, 49, 0.97), rgba(14, 7, 21, 0.98)); box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22); }
@@ -323,7 +323,7 @@
 .social-schedule-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 0.4rem; }
 .social-schedule-row input,
 .social-schedule-row button { min-width: 0; min-height: 38px; border: 1px solid var(--portal-border); border-radius: 9px; padding: 0.45rem 0.55rem; color: var(--portal-text); background: rgba(6, 3, 12, 0.7); font-size: 0.66rem; }
-.social-schedule-row button { color: #08060C; background: linear-gradient(135deg, #FF8C42, #FF6B00); font-weight: 800; cursor: pointer; }
+.social-schedule-row button { color: #08060C; background: linear-gradient(135deg, #F7E7C4, #D6B26A); font-weight: 800; cursor: pointer; }
 .social-tiktok-controls p { margin: 0; min-height: 0; color: var(--portal-muted); font-size: 0.67rem; line-height: 1.5; }
 .social-tiktok-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
 .social-tiktok-actions button,
@@ -364,7 +364,7 @@
 .crm-lead-controls svg { width: 14px; height: 14px; }
 .crm-activity-composer { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr auto; gap: 0.55rem; }
 .crm-activity-composer textarea { min-height: 70px; border: 1px solid var(--portal-border); border-radius: 11px; padding: 0.7rem; color: var(--portal-text); background: rgba(6, 3, 12, 0.65); resize: vertical; }
-.crm-activity-composer button { align-self: stretch; color: #08060C; background: linear-gradient(135deg, #FF8C42, #FF6B00); font-weight: 800; cursor: pointer; }
+.crm-activity-composer button { align-self: stretch; color: #08060C; background: linear-gradient(135deg, #F7E7C4, #D6B26A); font-weight: 800; cursor: pointer; }
 
 .portal-callout { display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
 .portal-callout h2 { max-width: 700px; font-size: clamp(1.45rem, 3vw, 2rem); }
@@ -806,16 +806,16 @@
   --portal-bg-soft: #1C132B;
   --portal-panel: #1C132B;
   --portal-panel-2: #2A193D;
-  --portal-copper: #C9922C;
-  --portal-copper-soft: #FFCF6B;
-  --portal-pumpkin: #E8B959;
-  --portal-gold: #E8B959;
+  --portal-copper: #A07636;
+  --portal-copper-soft: #F7E7C4;
+  --portal-pumpkin: #D6B26A;
+  --portal-gold: #D6B26A;
   --portal-text: #F7F3FA;
   --portal-muted: rgba(247, 243, 250, 0.72);
-  --portal-border: rgba(232, 185, 89, 0.26);
-  --portal-border-soft: rgba(232, 185, 89, 0.14);
-  --portal-success: #E8B959;
-  --portal-warning: #FFCF6B;
+  --portal-border: rgba(214, 178, 106, 0.26);
+  --portal-border-soft: rgba(214, 178, 106, 0.14);
+  --portal-success: #D6B26A;
+  --portal-warning: #F7E7C4;
 }
 
 .portal-shell,
@@ -824,7 +824,7 @@
   font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
   background:
     radial-gradient(ellipse 60% 42% at 14% 16%, rgba(168, 42, 136, 0.16), transparent 68%),
-    radial-gradient(ellipse 55% 38% at 86% 20%, rgba(232, 185, 89, 0.14), transparent 65%),
+    radial-gradient(ellipse 55% 38% at 86% 20%, rgba(214, 178, 106, 0.14), transparent 65%),
     linear-gradient(180deg, #07050B 0%, #0E0A14 50%, #160F24 100%) !important;
   color: #F7F3FA;
 }
@@ -843,18 +843,18 @@
 .portal-row-actions button.is-primary,
 .social-schedule-row button,
 .crm-activity-composer button {
-  background: linear-gradient(135deg, #FFCF6B 0%, #E8B959 55%, #C9922C 100%) !important;
+  background: linear-gradient(135deg, #F7E7C4 0%, #D6B26A 55%, #A07636 100%) !important;
   color: #0E0A14 !important;
   font-family: "Plus Jakarta Sans", system-ui, sans-serif !important;
   font-weight: 700 !important;
-  border: 1px solid rgba(255, 236, 190, 0.58) !important;
+  border: 1px solid rgba(247, 231, 196, 0.58) !important;
   box-shadow:
-    0 12px 30px rgba(232, 185, 89, 0.28),
-    inset 0 1px 0 rgba(255, 250, 230, 0.65) !important;
+    0 12px 30px rgba(214, 178, 106, 0.28),
+    inset 0 1px 0 rgba(247, 231, 196, 0.65) !important;
 }
 
 .portal-primary-button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #FFE094 0%, #F2C567 55%, #D9A136 100%) !important;
+  background: linear-gradient(135deg, #E9CF94 0%, #E9CF94 55%, #A07636 100%) !important;
   color: #0E0A14 !important;
 }
 
@@ -866,8 +866,8 @@
   padding: 0.55rem 1rem;
   border-radius: 999px;
   background: linear-gradient(160deg, rgba(28, 19, 43, 0.72) 0%, rgba(14, 10, 22, 0.84) 100%);
-  border: 1px solid rgba(232, 185, 89, 0.32);
-  color: #FFE8B3;
+  border: 1px solid rgba(214, 178, 106, 0.32);
+  color: #F7E7C4;
   font-size: 0.82rem;
   font-weight: 700;
   text-decoration: none;
@@ -875,7 +875,7 @@
 }
 
 .portal-ghost-button:hover {
-  border-color: rgba(232, 185, 89, 0.65);
+  border-color: rgba(214, 178, 106, 0.65);
   color: #F7F3FA;
 }
 
@@ -889,39 +889,39 @@
     rgba(28, 19, 43, 0.74) 0%,
     rgba(14, 10, 22, 0.86) 100%
   ) !important;
-  border: 1px solid rgba(232, 185, 89, 0.24) !important;
+  border: 1px solid rgba(214, 178, 106, 0.24) !important;
   backdrop-filter: blur(28px) saturate(165%) !important;
   -webkit-backdrop-filter: blur(28px) saturate(165%) !important;
   box-shadow:
     0 22px 54px rgba(5, 2, 10, 0.58),
-    inset 0 1px 0 rgba(255, 236, 190, 0.28) !important;
+    inset 0 1px 0 rgba(247, 231, 196, 0.28) !important;
 }
 
 .portal-business-badge-row .portal-kicker {
-  background: rgba(232, 185, 89, 0.14) !important;
-  border: 1px solid rgba(232, 185, 89, 0.4) !important;
-  color: #FFCF6B !important;
+  background: rgba(214, 178, 106, 0.14) !important;
+  border: 1px solid rgba(214, 178, 106, 0.4) !important;
+  color: #F7E7C4 !important;
 }
 
 .portal-business-highlight-icon {
-  background: linear-gradient(135deg, rgba(255, 207, 107, 0.22), rgba(168, 42, 136, 0.2)) !important;
-  border: 1px solid rgba(232, 185, 89, 0.4) !important;
-  color: #E8B959 !important;
+  background: linear-gradient(135deg, rgba(247, 231, 196, 0.22), rgba(168, 42, 136, 0.2)) !important;
+  border: 1px solid rgba(214, 178, 106, 0.4) !important;
+  color: #D6B26A !important;
 }
 
 .portal-business-category-pill {
   background: rgba(28, 19, 43, 0.68) !important;
-  border: 1px solid rgba(232, 185, 89, 0.24) !important;
-  color: #FFE8B3 !important;
+  border: 1px solid rgba(214, 178, 106, 0.24) !important;
+  color: #F7E7C4 !important;
 }
 
 .portal-business-category-pill svg {
-  color: #E8B959 !important;
+  color: #D6B26A !important;
 }
 
 .portal-auth-tab.is-active {
-  background: linear-gradient(135deg, #FFCF6B 0%, #E8B959 55%, #C9922C 100%) !important;
-  border: 1px solid rgba(255, 236, 190, 0.6) !important;
+  background: linear-gradient(135deg, #F7E7C4 0%, #D6B26A 55%, #A07636 100%) !important;
+  border: 1px solid rgba(247, 231, 196, 0.6) !important;
   color: #0E0A14 !important;
   font-weight: 700 !important;
 }
@@ -929,7 +929,7 @@
 .portal-text-link,
 .portal-business-auth-card small a,
 .portal-business-auth-logo span {
-  color: #E8B959 !important;
+  color: #D6B26A !important;
 }
 
 /* —— Control Center / Business free auth recovery & OAuth —— */
@@ -985,8 +985,8 @@
 }
 
 .portal-oauth-button:hover {
-  border-color: rgba(232, 185, 89, 0.45);
-  background: rgba(232, 185, 89, 0.1);
+  border-color: rgba(214, 178, 106, 0.45);
+  background: rgba(214, 178, 106, 0.1);
   transform: translateY(-1px);
 }
 
@@ -995,8 +995,8 @@
   gap: 0.75rem;
   padding: 0.95rem 1rem;
   border-radius: 14px;
-  border: 1px solid rgba(232, 185, 89, 0.22);
-  background: rgba(232, 185, 89, 0.06);
+  border: 1px solid rgba(214, 178, 106, 0.22);
+  background: rgba(214, 178, 106, 0.06);
 }
 
 .portal-recovery-hint {
@@ -1012,9 +1012,9 @@
 }
 
 .portal-alert.is-info {
-  border-color: rgba(232, 185, 89, 0.35);
-  background: rgba(232, 185, 89, 0.12);
-  color: #ffe8b3;
+  border-color: rgba(214, 178, 106, 0.35);
+  background: rgba(214, 178, 106, 0.12);
+  color: #F7E7C4;
 }
 
 .portal-topbar-change-password {
@@ -1051,7 +1051,7 @@
 
 .portal-recovery-steps code {
   font-size: 0.78rem;
-  color: #ffe8b3;
+  color: #F7E7C4;
   word-break: break-all;
 }
 

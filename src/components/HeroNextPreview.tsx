@@ -21,12 +21,12 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
       aria-label="Interactive BawoSocial App Showcase"
     >
       <div className="bawo-next-preview__header mb-2 flex flex-col items-center justify-between gap-3 sm:flex-row">
-        <div className="inline-flex items-center gap-2 rounded-full border border-[#E8B959]/35 bg-[#1C132B]/75 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#E8B959] backdrop-blur-xl">
+        <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/35 bg-[#1C132B]/75 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#D6B26A] backdrop-blur-xl">
           <Sparkles className="h-3.5 w-3.5 shrink-0" aria-hidden />
           <span>Interactive iPhone 17 Pro App Showcase · Live NYC Beta</span>
         </div>
         <div className="inline-flex items-center gap-2 text-xs font-medium text-[#F7F3FA]/70">
-          <MapPin className="h-3.5 w-3.5 text-[#E8B959]" aria-hidden />
+          <MapPin className="h-3.5 w-3.5 text-[#D6B26A]" aria-hidden />
           <span>{current.liveMetric}</span>
         </div>
       </div>
@@ -92,7 +92,7 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
                   <span className="bawo-next-preview__tab-title font-display text-lg sm:text-xl font-bold">
                     {item.title}
                   </span>
-                  <span className="rounded-full border border-[#E8B959]/30 bg-[#E8B959]/12 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#FFCF6B]">
+                  <span className="rounded-full border border-[#D6B26A]/30 bg-[#D6B26A]/12 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#F7E7C4]">
                     {item.badge}
                   </span>
                 </div>
@@ -105,9 +105,9 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
                       {item.highlights.map((hl) => (
                         <li
                           key={hl}
-                          className="flex items-center gap-2 text-xs font-medium text-[#FFE8B3]"
+                          className="flex items-center gap-2 text-xs font-medium text-[#F7E7C4]"
                         >
-                          <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-[#E8B959]" aria-hidden />
+                          <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-[#D6B26A]" aria-hidden />
                           <span>{hl}</span>
                         </li>
                       ))}

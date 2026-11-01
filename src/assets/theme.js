@@ -86,7 +86,7 @@ export const radii = {
 
 const sem = semanticTokens.dark;
 
-const PRIMARY_CTA_SHADOW = `0 10px 26px rgba(232, 185, 89, 0.28)`;
+const PRIMARY_CTA_SHADOW = `0 10px 26px rgba(214, 178, 106, 0.28)`;
 
 export const recipes = {
   liquidGlassCTA: {
@@ -119,12 +119,12 @@ export const recipes = {
     borderRadius: radii.lg,
     backdropFilter: "blur(28px) saturate(165%)",
     WebkitBackdropFilter: "blur(28px) saturate(165%)",
-    boxShadow: "0 18px 44px rgba(5, 2, 10, 0.55), inset 0 1px 0 rgba(255, 236, 190, 0.28)",
+    boxShadow: "0 18px 44px rgba(5, 2, 10, 0.55), inset 0 1px 0 rgba(247, 231, 196, 0.28)",
   },
   pillActiveGradient: {
     angle: pathwayPillGradient.angle,
     stops: pathwayPillGradient.stops,
-    border: "1px solid rgba(255, 236, 190, 0.35)",
+    border: "1px solid rgba(247, 231, 196, 0.35)",
   },
 };
 

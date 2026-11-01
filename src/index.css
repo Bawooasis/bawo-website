@@ -1,4 +1,4 @@
-/* Typography: Montserrat only (build 165). Loaded via Google Fonts in index.html. */
+/* Typography: Plus Jakarta / Cormorant via Google Fonts (wordmark = Cormorant Garamond SemiBold). */
 
 @tailwind base;
 @tailwind components;
@@ -15,11 +15,11 @@
   }
 
   .bawo-forest-text {
-    color: var(--bawo-gold, #FFBC42);
+    color: var(--bawo-gold, #D6B26A);
   }
 
   .bawo-gold-text {
-    color: var(--bawo-gold, #FFBC42);
+    color: var(--bawo-gold, #D6B26A);
   }
 
   .bawo-eyebrow {
@@ -35,8 +35,8 @@
 
   @media (hover: hover) {
     .bawo-hub-ring:hover {
-      --tw-ring-color: rgba(255, 188, 66, 0.5);
-      box-shadow: 0 32px 90px rgba(255, 188, 66, 0.16);
+      --tw-ring-color: rgba(214, 178, 106, 0.5);
+      box-shadow: 0 32px 90px rgba(214, 178, 106, 0.16);
     }
   }
 }
@@ -1113,7 +1113,7 @@ a.bawo-cta-quiet:active {
 
 @media (hover: hover) {
   .glass-card:hover {
-    border-color: rgba(255, 188, 66, 0.45);
+    border-color: rgba(214, 178, 106, 0.45);
     background: var(--bawo-card, #221525);
   }
 }
@@ -1136,7 +1136,7 @@ a.bawo-cta-quiet:active {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, transparent 28%),
     rgba(34, 21, 37, 0.88);
-  border: 1px solid rgba(255, 188, 66, 0.16);
+  border: 1px solid rgba(214, 178, 106, 0.16);
   border-radius: var(--bawo-radius-lg, 1rem);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.07),
@@ -1243,7 +1243,7 @@ a.bawo-cta-quiet:active {
   background: linear-gradient(
     90deg,
     rgba(255, 107, 0, 0.55) 0%,
-    rgba(255, 188, 66, 0.22) 55%,
+    rgba(214, 178, 106, 0.22) 55%,
     transparent 100%
   );
   opacity: 0;
@@ -1419,17 +1419,18 @@ a.bawo-cta-quiet:active {
 .bawo-site-logo {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  flex-shrink: 0;
+  gap: 0.4rem;
+  flex-shrink: 1;
   min-width: 0;
-  overflow: visible;
+  max-width: min(100%, 11.5rem);
+  overflow: hidden;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
 }
 
 .bawo-site-logo__mark {
   display: block;
-  height: 1.65rem;
+  height: 1.45rem;
   width: auto;
   flex-shrink: 0;
   overflow: visible;
@@ -1437,27 +1438,81 @@ a.bawo-cta-quiet:active {
   object-position: center;
 }
 
-.bawo-site-logo__img {
+/* Direction B — Cormorant Garamond SemiBold + app champagneGradient */
+.bawo-site-logo__wordmark {
   display: block;
-  height: 1.875rem;
-  width: auto;
-  max-width: 8.75rem;
-  object-fit: contain;
-  object-position: left center;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  max-width: 100%;
+  background-image: linear-gradient(
+    90deg,
+    #F7E7C4 0%,
+    #E9CF94 33%,
+    #D6B26A 66%,
+    #A07636 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.bawo-site-logo--deep .bawo-site-logo__wordmark {
+  background-image: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: #A07636;
+  -webkit-text-fill-color: #A07636;
+}
+
+/* Image fallback stays for no-CSS / crawlers; hide once text wordmark is available */
+.bawo-site-logo__img {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (min-width: 480px) {
+  .bawo-site-logo {
+    gap: 0.5rem;
+    max-width: 13rem;
+  }
+
+  .bawo-site-logo__mark {
+    height: 1.65rem;
+  }
+
+  .bawo-site-logo__wordmark {
+    font-size: 1.4rem;
+  }
 }
 
 @media (min-width: 640px) {
   .bawo-site-logo {
     gap: 0.55rem;
+    max-width: none;
+    overflow: visible;
+    flex-shrink: 0;
   }
 
   .bawo-site-logo__mark {
     height: 1.85rem;
   }
 
-  .bawo-site-logo__img {
-    height: 2rem;
-    max-width: 9.75rem;
+  .bawo-site-logo__wordmark {
+    font-size: 1.55rem;
   }
 }
 
@@ -1466,9 +1521,8 @@ a.bawo-cta-quiet:active {
     height: 2rem;
   }
 
-  .bawo-site-logo__img {
-    height: 2.125rem;
-    max-width: 10.75rem;
+  .bawo-site-logo__wordmark {
+    font-size: 1.7rem;
   }
 }
 
@@ -1658,9 +1712,49 @@ a.bawo-cta-quiet:active {
   }
 }
 
-@media (max-width: 359px) {
-  .bawo-site-logo__img {
-    max-width: 5rem;
+@media (max-width: 479px) {
+  .bawo-site-logo {
+    max-width: 7.75rem;
+  }
+
+  .bawo-site-logo__wordmark {
+    font-size: 1.05rem;
+  }
+
+  .bawo-site-logo__mark {
+    height: 1.3rem;
+  }
+
+  /* Icon-only Businesses chip so wordmark does not collide at ~440px */
+  .bawo-site-header__businesses-chip {
+    min-width: 2.35rem;
+    width: 2.35rem;
+    height: 2.35rem;
+    min-height: 2.35rem;
+    padding: 0;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .bawo-site-header__businesses-chip-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .bawo-site-header__join-btn {
+    padding-inline: 0.65rem !important;
+    font-size: 0.7rem !important;
+  }
+
+  .bawo-site-header__actions {
+    gap: 0.3rem;
   }
 }
 
@@ -1788,7 +1882,7 @@ a.bawo-cta-quiet:active {
 .bawo-hero-neon {
   color: var(--bawo-peach, #FF8C42);
   text-shadow:
-    0 0 1px rgba(255, 188, 66, 0.55),
+    0 0 1px rgba(214, 178, 106, 0.55),
     0 0 18px rgba(255, 107, 0, 0.28),
     0 0 42px rgba(255, 107, 0, 0.14);
 }
@@ -1832,7 +1926,7 @@ a.bawo-cta-quiet:active {
 }
 
 .bawo-hero-cinematic__textlink:hover {
-  color: #FFBC42;
+  color: #D6B26A;
 }
 
 .bawo-hero-cinematic__pill {
@@ -1856,7 +1950,7 @@ a.bawo-cta-quiet:active {
 }
 
 .bawo-hero-cinematic__pill:hover {
-  border-color: rgba(255, 188, 66, 0.55);
+  border-color: rgba(214, 178, 106, 0.55);
   background: rgba(255, 107, 0, 0.12);
 }
 
@@ -1867,7 +1961,7 @@ a.bawo-cta-quiet:active {
 }
 
 .bawo-hero-cinematic__pill--solid:hover {
-  background: #FFBC42;
+  background: #D6B26A;
   color: #08060C;
   border-color: transparent;
 }
@@ -1960,7 +2054,7 @@ a.bawo-cta-quiet:active {
   }
 
   .bawo-site-header__nav-link:hover {
-    color: #FFBC42;
+    color: #D6B26A;
     background: transparent;
   }
 
@@ -2001,9 +2095,12 @@ a.bawo-cta-quiet:active {
     display: none;
   }
 
-  .bawo-site-logo__img {
-    height: 1.65rem;
-    max-width: 8.4rem;
+  .bawo-site-logo {
+    max-width: none;
+  }
+
+  .bawo-site-logo__wordmark {
+    font-size: 1.45rem;
   }
 
   .bawo-scroll-anchor {
@@ -2205,10 +2302,10 @@ a.bawo-cta-quiet:active {
   min-height: 35rem;
   border-radius: 1.5rem;
   overflow: hidden;
-  border: 1px solid rgba(232, 185, 89, 0.28);
+  border: 1px solid rgba(214, 178, 106, 0.28);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 32%),
-    radial-gradient(ellipse 70% 60% at 30% 20%, rgba(255, 188, 66, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 30% 20%, rgba(214, 178, 106, 0.12) 0%, transparent 55%),
     radial-gradient(ellipse 60% 50% at 80% 70%, rgba(255, 107, 0, 0.06) 0%, transparent 60%),
     rgba(8, 6, 12, 0.72);
   backdrop-filter: blur(18px) saturate(1.3);
@@ -2356,7 +2453,7 @@ a.bawo-cta-quiet:active {
 @media (hover: hover) {
   .bawo-next-preview__expand:hover {
     background: rgba(25, 13, 31, 0.94);
-    border-color: rgba(255, 188, 66, 0.62);
+    border-color: rgba(214, 178, 106, 0.62);
   }
 }
 
@@ -2434,7 +2531,7 @@ a.bawo-cta-quiet:active {
 
 .bawo-next-preview__tab.is-active {
   color: #fff;
-  border-left-color: #FFBC42;
+  border-left-color: #D6B26A;
 }
 
 .bawo-next-preview__tab-title {
@@ -3046,58 +3143,59 @@ a.bawo-cta-quiet:active {
 
 /* Prominent Businesses Top Navigation Links */
 .bawo-site-header__businesses-chip {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.38rem;
   min-height: 2.15rem;
   padding: 0.35rem 0.8rem;
   border-radius: 9999px;
-  font-family: "MuseoSans", system-ui, sans-serif;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.015em;
   color: #fff6ea;
   text-decoration: none;
-  background: linear-gradient(135deg, rgba(255, 188, 66, 0.18), rgba(255, 118, 38, 0.14));
-  border: 1px solid rgba(255, 188, 66, 0.45);
+  background: linear-gradient(135deg, rgba(214, 178, 106, 0.18), rgba(160, 118, 54, 0.14));
+  border: 1px solid rgba(214, 178, 106, 0.45);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
   transition: transform 0.16s ease, border-color 0.16s ease, background-color 0.16s ease;
 }
 
 .bawo-site-header__businesses-chip:hover {
-  border-color: rgba(255, 188, 66, 0.8);
-  background: linear-gradient(135deg, rgba(255, 188, 66, 0.28), rgba(255, 118, 38, 0.22));
+  border-color: rgba(214, 178, 106, 0.8);
+  background: linear-gradient(135deg, rgba(214, 178, 106, 0.28), rgba(160, 118, 54, 0.22));
   transform: translateY(-1px);
 }
 
 .bawo-site-header__nav-link--business {
-  color: #ffe3b3 !important;
-  background: rgba(255, 188, 66, 0.08);
-  border: 1px solid rgba(255, 188, 66, 0.26);
+  color: #F7E7C4 !important;
+  background: rgba(214, 178, 106, 0.08);
+  border: 1px solid rgba(214, 178, 106, 0.26);
 }
 
 .bawo-site-header__nav-link--business:hover {
-  background: rgba(255, 188, 66, 0.16) !important;
-  border-color: rgba(255, 188, 66, 0.52);
+  background: rgba(214, 178, 106, 0.16) !important;
+  border-color: rgba(214, 178, 106, 0.52);
 }
 
 .bawo-hero-cinematic__pill--business {
   display: inline-flex;
   align-items: center;
   gap: 0.42rem;
-  border-color: rgba(255, 188, 66, 0.5) !important;
-  background: linear-gradient(135deg, rgba(255, 188, 66, 0.2), rgba(255, 118, 38, 0.14)) !important;
+  border-color: rgba(214, 178, 106, 0.5) !important;
+  background: linear-gradient(135deg, rgba(214, 178, 106, 0.2), rgba(160, 118, 54, 0.14)) !important;
   color: #fff8ee !important;
 }
 
 .bawo-hero-cinematic__pill--business:hover {
-  border-color: rgba(255, 188, 66, 0.85) !important;
-  background: linear-gradient(135deg, rgba(255, 188, 66, 0.3), rgba(255, 118, 38, 0.24)) !important;
+  border-color: rgba(214, 178, 106, 0.85) !important;
+  background: linear-gradient(135deg, rgba(214, 178, 106, 0.3), rgba(160, 118, 54, 0.24)) !important;
 }
 
 /* ============================================================================
  * BAWOSOCIAL $50,000 FLAGSHIP THEME OVERRIDES
- * Deep Eggplant (#07050B -> #0E0A14 -> #160F24) + Signature Warm Gold (#E8B959)
+ * Deep Eggplant (#07050B -> #0E0A14 -> #160F24) + Signature Warm Gold (#D6B26A)
  * + True Liquid Glass + Cormorant Garamond Bold Display + Plus Jakarta Sans UI
  * ============================================================================ */
 
@@ -3109,16 +3207,18 @@ a.bawo-cta-quiet:active {
   --bawo-eggplant-light: #2A193D;
   --bawo-card: #1C132B;
   --bawo-glass-card-bg: rgba(28, 19, 43, 0.72);
-  --bawo-pumpkin: #E8B959;
-  --bawo-peach: #FFCF6B;
-  --bawo-gold: #E8B959;
-  --bawo-copper: #C9922C;
-  --bawo-brand-cta-orange: #E8B959;
+  --bawo-pumpkin: #D6B26A;
+  --bawo-peach: #F7E7C4;
+  --bawo-gold: #D6B26A;
+  --bawo-gold-glow: #E9CF94;
+  --bawo-gold-deep: #A07636;
+  --bawo-copper: #A07636;
+  --bawo-brand-cta-orange: #D6B26A;
   --bawo-text-primary: #F7F3FA;
   --bawo-cta-text: #0E0A14;
-  --bawo-liquid-glass-fill: #E8B959;
-  --bawo-liquid-glass-hover-bg: #FFCF6B;
-  --bawo-pill-gradient: linear-gradient(135deg, #FFCF6B 0%, #E8B959 55%, #C9922C 100%);
+  --bawo-liquid-glass-fill: #D6B26A;
+  --bawo-liquid-glass-hover-bg: #E9CF94;
+  --bawo-pill-gradient: linear-gradient(135deg, #F7E7C4 0%, #D6B26A 55%, #A07636 100%);
 }
 
 html,
@@ -3131,7 +3231,7 @@ body {
 .bawo-page-bg-base {
   background:
     radial-gradient(ellipse 65% 45% at 18% 12%, rgba(168, 42, 136, 0.16) 0%, transparent 68%),
-    radial-gradient(ellipse 55% 40% at 84% 24%, rgba(232, 185, 89, 0.13) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 40% at 84% 24%, rgba(214, 178, 106, 0.13) 0%, transparent 65%),
     radial-gradient(ellipse 70% 50% at 50% 62%, rgba(114, 34, 130, 0.14) 0%, transparent 72%),
     linear-gradient(180deg, #07050B 0%, #0E0A14 48%, #160F24 100%);
 }
@@ -3140,7 +3240,7 @@ body {
 .bawo-particle-field {
   background:
     radial-gradient(ellipse 68% 48% at 50% 42%, rgba(168, 42, 136, 0.15) 0%, transparent 72%),
-    radial-gradient(ellipse 52% 38% at 76% 18%, rgba(232, 185, 89, 0.12) 0%, transparent 68%),
+    radial-gradient(ellipse 52% 38% at 76% 18%, rgba(214, 178, 106, 0.12) 0%, transparent 68%),
     linear-gradient(180deg, #07050B 0%, #0E0A14 50%, #160F24 100%) !important;
 }
 
@@ -3174,12 +3274,12 @@ h2,
 
 .bawo-hero-neon,
 .bawo-text-cta-gradient {
-  background: linear-gradient(135deg, #FFE29A 0%, #E8B959 52%, #C9922C 100%);
+  background: linear-gradient(135deg, #F7E7C4 0%, #D6B26A 52%, #A07636 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent !important;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 32px rgba(232, 185, 89, 0.24);
+  text-shadow: 0 0 32px rgba(214, 178, 106, 0.24);
 }
 
 /* Signature Warm Gold Primary CTAs with Dark Eggplant #0E0A14 Bold Text */
@@ -3188,15 +3288,15 @@ h2,
 .bawo-pill-cta-surface,
 .bawo-cta-glass-primary,
 .liquid-glass-cta {
-  background: linear-gradient(135deg, #FFCF6B 0%, #E8B959 55%, #C9922C 100%) !important;
+  background: linear-gradient(135deg, #F7E7C4 0%, #D6B26A 55%, #A07636 100%) !important;
   color: #0E0A14 !important;
   font-family: "Plus Jakarta Sans", system-ui, sans-serif !important;
   font-weight: 700 !important;
-  border: 1px solid rgba(255, 236, 190, 0.55) !important;
+  border: 1px solid rgba(247, 231, 196, 0.55) !important;
   box-shadow:
-    0 12px 32px rgba(232, 185, 89, 0.28),
+    0 12px 32px rgba(214, 178, 106, 0.28),
     0 4px 12px rgba(7, 5, 11, 0.45),
-    inset 0 1px 0 rgba(255, 250, 230, 0.65) !important;
+    inset 0 1px 0 rgba(247, 231, 196, 0.65) !important;
 }
 
 .bawo-cta-quiet:hover,
@@ -3204,13 +3304,13 @@ h2,
 .bawo-pill-cta-surface:hover,
 .bawo-cta-glass-primary:hover,
 .liquid-glass-cta:hover:not(:disabled) {
-  background: linear-gradient(135deg, #FFE094 0%, #F2C567 55%, #D9A136 100%) !important;
+  background: linear-gradient(135deg, #F7E7C4 0%, #E9CF94 55%, #D6B26A 100%) !important;
   color: #0E0A14 !important;
-  border-color: rgba(255, 244, 214, 0.8) !important;
+  border-color: rgba(247, 231, 196, 0.8) !important;
   box-shadow:
-    0 16px 38px rgba(232, 185, 89, 0.38),
+    0 16px 38px rgba(214, 178, 106, 0.38),
     0 6px 16px rgba(7, 5, 11, 0.5),
-    inset 0 1px 0 rgba(255, 253, 242, 0.8) !important;
+    inset 0 1px 0 rgba(247, 231, 196, 0.8) !important;
 }
 
 .bawo-cta-quiet span,
@@ -3228,19 +3328,50 @@ h2,
 .bawo-cta-glass-secondary {
   background: linear-gradient(160deg, rgba(34, 22, 52, 0.76) 0%, rgba(16, 10, 26, 0.88) 100%) !important;
   color: #F7F3FA !important;
-  border: 1px solid rgba(232, 185, 89, 0.34) !important;
+  border: 1px solid rgba(214, 178, 106, 0.34) !important;
   backdrop-filter: blur(24px) saturate(165%);
   -webkit-backdrop-filter: blur(24px) saturate(165%);
   box-shadow:
     0 10px 28px rgba(5, 2, 10, 0.48),
-    inset 0 1px 0 rgba(255, 236, 190, 0.24) !important;
+    inset 0 1px 0 rgba(247, 231, 196, 0.24) !important;
+}
+
+.bawo-cta-outline span,
+.bawo-cta-secondary span,
+.bawo-cta-glass-secondary span {
+  color: #F7F3FA !important;
+}
+
+.bawo-cta-outline svg,
+.bawo-cta-secondary svg,
+.bawo-cta-glass-secondary svg {
+  color: #E9CF94 !important;
 }
 
 .bawo-cta-outline:hover,
 .bawo-cta-secondary:hover,
 .bawo-cta-glass-secondary:hover {
-  border-color: rgba(232, 185, 89, 0.65) !important;
+  border-color: rgba(214, 178, 106, 0.65) !important;
   background: linear-gradient(160deg, rgba(44, 28, 66, 0.84) 0%, rgba(22, 14, 36, 0.92) 100%) !important;
+}
+
+/* Sticky mobile Businesses outline: high-contrast label on dark bar */
+.mobile-sticky-cta .bawo-cta-outline {
+  border-color: rgba(233, 207, 148, 0.72) !important;
+  color: #F7E7C4 !important;
+  background: linear-gradient(
+    160deg,
+    rgba(42, 28, 62, 0.92) 0%,
+    rgba(18, 12, 28, 0.96) 100%
+  ) !important;
+}
+
+.mobile-sticky-cta .bawo-cta-outline span {
+  color: #F7E7C4 !important;
+}
+
+.mobile-sticky-cta .bawo-cta-outline svg {
+  color: #E9CF94 !important;
 }
 
 /* True Liquid Glass Surfaces across Cards, Header, Showcase Panels & FAQ */
@@ -3251,18 +3382,18 @@ h2,
     rgba(28, 19, 43, 0.72) 0%,
     rgba(14, 10, 22, 0.84) 100%
   ) !important;
-  border: 1px solid rgba(232, 185, 89, 0.24) !important;
+  border: 1px solid rgba(214, 178, 106, 0.24) !important;
   backdrop-filter: blur(28px) saturate(165%) !important;
   -webkit-backdrop-filter: blur(28px) saturate(165%) !important;
   box-shadow:
     0 20px 48px rgba(5, 2, 10, 0.56),
-    inset 0 1px 0 rgba(255, 236, 190, 0.28) !important;
+    inset 0 1px 0 rgba(247, 231, 196, 0.28) !important;
 }
 
 @media (hover: hover) {
   .glass-card:hover,
   .bawo-faq-panel:hover {
-    border-color: rgba(232, 185, 89, 0.48) !important;
+    border-color: rgba(214, 178, 106, 0.48) !important;
     background: linear-gradient(
       160deg,
       rgba(36, 24, 56, 0.78) 0%,
@@ -3270,8 +3401,8 @@ h2,
     ) !important;
     box-shadow:
       0 24px 56px rgba(5, 2, 10, 0.64),
-      0 0 28px rgba(232, 185, 89, 0.1),
-      inset 0 1px 0 rgba(255, 236, 190, 0.36) !important;
+      0 0 28px rgba(214, 178, 106, 0.1),
+      inset 0 1px 0 rgba(247, 231, 196, 0.36) !important;
   }
 }
 
@@ -3281,10 +3412,10 @@ h2,
     rgba(32, 20, 48, 0.74) 0%,
     rgba(16, 10, 26, 0.84) 100%
   ) !important;
-  border: 1px solid rgba(232, 185, 89, 0.26) !important;
+  border: 1px solid rgba(214, 178, 106, 0.26) !important;
   backdrop-filter: blur(20px) saturate(160%) !important;
   -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 236, 190, 0.22);
+  box-shadow: inset 0 1px 0 rgba(247, 231, 196, 0.22);
 }
 
 /* Floating Liquid Glass Top Navigation Header */
@@ -3296,7 +3427,7 @@ h2,
   ) !important;
   backdrop-filter: blur(28px) saturate(165%) !important;
   -webkit-backdrop-filter: blur(28px) saturate(165%) !important;
-  border-bottom: 1px solid rgba(232, 185, 89, 0.18) !important;
+  border-bottom: 1px solid rgba(214, 178, 106, 0.18) !important;
   box-shadow: 0 12px 36px rgba(5, 2, 10, 0.45) !important;
 }
 
@@ -3304,9 +3435,9 @@ h2,
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(232, 185, 89, 0.38) 22%,
-    rgba(255, 207, 107, 0.55) 50%,
-    rgba(232, 185, 89, 0.38) 78%,
+    rgba(214, 178, 106, 0.38) 22%,
+    rgba(247, 231, 196, 0.55) 50%,
+    rgba(214, 178, 106, 0.38) 78%,
     transparent 100%
   ) !important;
 }
@@ -3321,18 +3452,22 @@ h2,
 /* Prominent Gold Businesses Chip in Top Bar */
 .bawo-site-header__businesses-chip {
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
-  background: linear-gradient(135deg, rgba(255, 207, 107, 0.2), rgba(232, 185, 89, 0.12));
-  border: 1px solid rgba(232, 185, 89, 0.48);
-  color: #FFE8B3;
+  background: linear-gradient(135deg, rgba(247, 231, 196, 0.2), rgba(214, 178, 106, 0.12));
+  border: 1px solid rgba(214, 178, 106, 0.48);
+  color: #F7E7C4;
   box-shadow:
     0 6px 20px rgba(5, 2, 10, 0.38),
-    inset 0 1px 0 rgba(255, 236, 190, 0.28);
+    inset 0 1px 0 rgba(247, 231, 196, 0.28);
 }
 
 .bawo-site-header__businesses-chip:hover {
-  background: linear-gradient(135deg, #FFCF6B 0%, #E8B959 55%, #C9922C 100%);
+  background: linear-gradient(135deg, #F7E7C4 0%, #D6B26A 55%, #A07636 100%);
   color: #0E0A14;
-  border-color: rgba(255, 236, 190, 0.85);
+  border-color: rgba(247, 231, 196, 0.85);
+}
+
+.bawo-site-header__businesses-chip:hover svg {
+  color: #0E0A14 !important;
 }
 
 /* Hero Cinematic Stage — keep transparent so particle globe shines through */
@@ -3347,24 +3482,24 @@ h2,
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   background: rgba(24, 15, 38, 0.68) !important;
-  border: 1px solid rgba(232, 185, 89, 0.24) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 236, 190, 0.18);
+  border: 1px solid rgba(214, 178, 106, 0.24) !important;
+  box-shadow: inset 0 1px 0 rgba(247, 231, 196, 0.18);
 }
 
 .bawo-hero-cinematic__pill:hover {
-  border-color: rgba(232, 185, 89, 0.55) !important;
+  border-color: rgba(214, 178, 106, 0.55) !important;
   background: rgba(36, 22, 56, 0.82) !important;
 }
 
 .bawo-hero-cinematic__pill--business {
-  background: linear-gradient(135deg, rgba(255, 207, 107, 0.22), rgba(232, 185, 89, 0.14)) !important;
-  border-color: rgba(232, 185, 89, 0.55) !important;
-  color: #FFE8B3 !important;
+  background: linear-gradient(135deg, rgba(247, 231, 196, 0.22), rgba(214, 178, 106, 0.14)) !important;
+  border-color: rgba(214, 178, 106, 0.55) !important;
+  color: #F7E7C4 !important;
 }
 
 /* Founding Member Checkout Modal in Deep Eggplant + Gold */
 .bawo-modal-panel {
-  border: 1px solid rgba(232, 185, 89, 0.32) !important;
+  border: 1px solid rgba(214, 178, 106, 0.32) !important;
   background: linear-gradient(
     165deg,
     rgba(32, 20, 48, 0.96) 0%,
@@ -3373,6 +3508,6 @@ h2,
   ) !important;
   box-shadow:
     0 28px 72px rgba(5, 2, 10, 0.72),
-    0 0 44px rgba(232, 185, 89, 0.12),
-    inset 0 1px 0 rgba(255, 236, 190, 0.28) !important;
+    0 0 44px rgba(214, 178, 106, 0.12),
+    inset 0 1px 0 rgba(247, 231, 196, 0.28) !important;
 }

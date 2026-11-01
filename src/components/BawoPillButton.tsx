@@ -60,14 +60,14 @@ export default function BawoPillButton({
     "inline-flex flex-row items-center justify-center gap-2 rounded-full font-bold outline-none relative overflow-hidden " +
     "transition-[filter,transform,border-color,box-shadow] duration-200 ease-out " +
     "disabled:opacity-45 disabled:cursor-not-allowed disabled:hover:brightness-100 disabled:active:scale-100 " +
-    "focus-visible:ring-2 focus-visible:ring-[#E8B959]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bawo-canvas,#0E0A14)]";
+    "focus-visible:ring-2 focus-visible:ring-[#D6B26A]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bawo-canvas,#0E0A14)]";
 
   const basePremium =
     "inline-flex flex-row items-center justify-center gap-2.5 rounded-full font-bold outline-none overflow-hidden relative " +
     "transition-[transform,box-shadow,filter] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] " +
     "active:translate-y-0 active:scale-[0.98] " +
     "disabled:opacity-[0.55] disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:active:scale-100 " +
-    "focus-visible:ring-2 focus-visible:ring-[#E8B959]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bawo-canvas,#0E0A14)] " +
+    "focus-visible:ring-2 focus-visible:ring-[#D6B26A]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bawo-canvas,#0E0A14)] " +
     "before:absolute before:inset-0 before:rounded-full before:opacity-0 before:transition-opacity before:duration-300 " +
     "hover:before:opacity-100";
 
@@ -81,7 +81,7 @@ export default function BawoPillButton({
 
   const secondaryPremium =
     "bawo-cta-secondary text-[#F7F3FA] hover:-translate-y-0.5 " +
-    "before:bg-[radial-gradient(circle_at_50%_0%,rgba(232,185,89,0.2)_0%,transparent_55%)]";
+    "before:bg-[radial-gradient(circle_at_50%_0%,rgba(214,178,106,0.2)_0%,transparent_55%)]";
 
   const base =
     variant === "secondary"
@@ -115,7 +115,7 @@ export default function BawoPillButton({
           className={`relative z-[1] shrink-0 ${
             isGoldPrimary
               ? "text-[#0E0A14]"
-              : "text-[#E8B959] drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
+              : "text-[#D6B26A] drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
           }`}
           size={m.icon}
           strokeWidth={2.35}

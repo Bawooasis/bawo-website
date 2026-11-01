@@ -17,17 +17,17 @@ export default function BoroughNetworkGraphic({
     >
       <defs>
         <linearGradient id="bawo-net-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#FFBC42" stopOpacity="0.22" />
+          <stop offset="0%" stopColor="#D6B26A" stopOpacity="0.22" />
           <stop offset="40%" stopColor="#FF6B00" stopOpacity="0.45" />
           <stop offset="100%" stopColor="#3a1d48" stopOpacity="0.35" />
         </linearGradient>
         <linearGradient id="bawo-net-stroke-soft" x1="100%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#FFBC42" stopOpacity="0.14" />
+          <stop offset="0%" stopColor="#D6B26A" stopOpacity="0.14" />
           <stop offset="50%" stopColor="#2a1438" stopOpacity="0.4" />
           <stop offset="100%" stopColor="#FF8C42" stopOpacity="0.12" />
         </linearGradient>
         <radialGradient id="bawo-net-hub-glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#FFBC42" stopOpacity="0.5" />
+          <stop offset="0%" stopColor="#D6B26A" stopOpacity="0.5" />
           <stop offset="55%" stopColor="#FF6B00" stopOpacity="0.12" />
           <stop offset="100%" stopColor="#08060C" stopOpacity="0" />
         </radialGradient>
@@ -131,7 +131,7 @@ export default function BoroughNetworkGraphic({
         cx="50"
         cy="48"
         r="1.35"
-        fill="#FFBC42"
+        fill="#D6B26A"
         stroke="rgba(255,248,235,0.45)"
         strokeWidth="0.12"
         className="bawo-net-hub-core"

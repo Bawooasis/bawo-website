@@ -3,16 +3,22 @@ import { IMAGES } from "../constants/images";
 
 type SiteLogoProps = {
   className?: string;
+  /** Use deep gold (#A07636) on light/ivory surfaces; default is app gold on dark. */
+  tone?: "gold" | "deep";
   onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
 };
 
-export default function SiteLogo({ className = "", onClick }: SiteLogoProps) {
+export default function SiteLogo({
+  className = "",
+  tone = "gold",
+  onClick,
+}: SiteLogoProps) {
   const [markOk, setMarkOk] = useState(true);
 
   return (
     <a
       href="#"
-      className={`bawo-site-logo ${className}`.trim()}
+      className={`bawo-site-logo ${tone === "deep" ? "bawo-site-logo--deep" : ""} ${className}`.trim()}
       onClick={onClick}
       aria-label="BawoSocial home"
     >
@@ -29,14 +35,19 @@ export default function SiteLogo({ className = "", onClick }: SiteLogoProps) {
           onError={() => setMarkOk(false)}
         />
       ) : null}
+      {/* Live Cormorant Garamond SemiBold wordmark — Direction B champagne gradient / deep solid */}
+      <span className="bawo-site-logo__wordmark" aria-hidden>
+        BawoSocial
+      </span>
+      {/* Fallback image for crawlers / no-CSS; visually hidden when text wordmark paints */}
       <img
-        src={IMAGES.assets.logo}
-        alt="BawoSocial"
+        src={tone === "deep" ? IMAGES.assets.logoDeep : IMAGES.assets.logo}
+        alt=""
         className="bawo-site-logo__img"
         width={176}
         height={36}
         decoding="async"
-        fetchPriority="high"
+        aria-hidden
       />
     </a>
   );

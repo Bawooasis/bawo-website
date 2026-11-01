@@ -22,6 +22,7 @@ export default {
         'museo-bold': ['"Cormorant Garamond"', 'Georgia', 'serif'],
         'museo-extrabold': ['"Cormorant Garamond"', 'Georgia', 'serif'],
         'museo-black': ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        wordmark: ['"Cormorant Garamond"', 'Georgia', 'serif'],
       },
       spacing: {
         'bawo-xs': 'var(--bawo-space-xs)',
@@ -33,10 +34,12 @@ export default {
       },
       colors: {
         bawo: {
-          pumpkin: "var(--bawo-pumpkin, #E8B959)",
-          peach: "var(--bawo-peach, #FFCF6B)",
-          gold: "var(--bawo-gold, #E8B959)",
-          copper: "var(--bawo-copper, #C9922C)",
+          pumpkin: "var(--bawo-pumpkin, #D6B26A)",
+          peach: "var(--bawo-peach, #F7E7C4)",
+          gold: "var(--bawo-gold, #D6B26A)",
+          copper: "var(--bawo-copper, #A07636)",
+          "gold-glow": "var(--bawo-gold-glow, #E9CF94)",
+          "gold-deep": "var(--bawo-gold-deep, #A07636)",
           ink: "var(--bawo-ink, #07050B)",
           card: "var(--bawo-card, #1C132B)",
           navy: "var(--bawo-navy, #0E0A14)",

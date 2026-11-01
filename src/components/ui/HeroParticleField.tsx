@@ -19,7 +19,7 @@ function buildSpherePositions(count: number, radius: number): Float32Array {
   return out;
 }
 
-/** Vertex colors — Warm Signature Gold (#E8B959 / #FFCF6B), Rich Amber (#C9922C), Eggplant Magenta-Plum (#A82A88), Subtle Naija Emerald & Pearl. */
+/** Vertex colors — Warm Signature Gold (#D6B26A / #F7E7C4), Rich Amber (#A07636), Eggplant Magenta-Plum (#A82A88), Subtle Naija Emerald & Pearl. */
 function buildBrandColors(count: number): Float32Array {
   const cGold = new THREE.Color(HERO_PARTICLE_HEX.pumpkin);
   const cBrightGold = new THREE.Color(HERO_PARTICLE_HEX.peach);
