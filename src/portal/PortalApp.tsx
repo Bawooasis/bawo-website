@@ -35,6 +35,8 @@ import {
 import type {
   AdminAction,
   AdminOverview,
+  ManagedEvent,
+  ManagedEventInput,
   PortalMode,
   PortalSession,
   VendorClaimInput,
@@ -48,7 +50,7 @@ type AuthSubMode = "signin" | "signup" | "reset" | "set-password";
 const titles: Record<PortalTab, string> = {
   overview: "Platform overview",
   users: "Consumer accounts",
-  events: "Event submissions",
+  events: "Events Manager",
   groups: "Community groups",
   businesses: "Business approvals",
   social: "Social media growth",
@@ -63,7 +65,7 @@ const descriptions: Record<PortalTab, string> = {
   overview: "Monitor the launch queue and the health of BawoSocial's core operations.",
   users: "Review member access, account standing, and trusted operations roles.",
   events:
-    "Review community-submitted and organizer-created events before they appear in the NYC Culture Hub feed.",
+    "Create and edit NYC Culture Hub events, then review community submissions waiting for approval.",
   groups: "Shape community spaces, review requests, and keep group presentation current.",
   businesses: "Review submitted businesses before they appear in the community directory.",
   social:
@@ -114,6 +116,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
     mode === "admin" ? "overview" : "dashboard",
   );
   const [adminData, setAdminData] = useState<AdminOverview | null>(null);
+  const [managedEvents, setManagedEvents] = useState<ManagedEvent[]>([]);
   const [vendorData, setVendorData] = useState<VendorOverview | null>(null);
   const [authSubMode, setAuthSubMode] = useState<AuthSubMode>("signin");
   const [email, setEmail] = useState("");
@@ -216,6 +219,23 @@ export default function PortalApp({ mode }: PortalAppProps) {
     };
   }, [api, mode]);
 
+  const refreshManagedEvents = useCallback(async () => {
+    try {
+      const result = await api.listManagedEvents({
+        statusFilter: "all",
+        limit: 120,
+      });
+      setManagedEvents(result.events || []);
+    } catch (eventsError) {
+      // Keep Control Center usable before admin-events is deployed.
+      console.warn(
+        "[portal] managed events unavailable",
+        eventsError instanceof Error ? eventsError.message : eventsError,
+      );
+      setManagedEvents([]);
+    }
+  }, [api]);
+
   const load = useCallback(async () => {
     if (!session || authSubMode === "set-password") return;
     setBusy(true);
@@ -227,6 +247,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
             action: "overview",
           }),
         );
+        await refreshManagedEvents();
       } else {
         setVendorData(
           await api.invoke<VendorOverview>("vendor-portal", {
@@ -241,7 +262,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
     } finally {
       setBusy(false);
     }
-  }, [api, mode, session, authSubMode]);
+  }, [api, mode, session, authSubMode, refreshManagedEvents]);
 
   useEffect(() => {
     void load();
@@ -528,6 +549,70 @@ export default function PortalApp({ mode }: PortalAppProps) {
       },
       "TikTok manual post added to the schedule.",
     );
+
+  const saveManagedEvent = async (
+    input: ManagedEventInput,
+    eventId?: string,
+  ) => {
+    setBusy(true);
+    setError("");
+    setNotice("");
+    try {
+      await api.saveManagedEvent(input, eventId);
+      setNotice(eventId ? "Event saved." : "Event created.");
+      await refreshManagedEvents();
+      return true;
+    } catch (saveError) {
+      setError(
+        saveError instanceof Error
+          ? saveError.message
+          : "Unable to save event. Deploy admin-events and apply migrations first.",
+      );
+      return false;
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const duplicateManagedEvent = async (eventId: string) => {
+    setBusy(true);
+    setError("");
+    setNotice("");
+    try {
+      await api.duplicateManagedEvent(eventId);
+      setNotice("Event duplicated as a draft.");
+      await refreshManagedEvents();
+      return true;
+    } catch (duplicateError) {
+      setError(
+        duplicateError instanceof Error
+          ? duplicateError.message
+          : "Unable to duplicate event.",
+      );
+      return false;
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const uploadEventCover = async (eventId: string, file: File) => {
+    setBusy(true);
+    setError("");
+    try {
+      const publicUrl = await api.uploadEventCover(eventId, file);
+      setNotice("Cover uploaded. Save the event to attach it.");
+      return publicUrl;
+    } catch (uploadError) {
+      setError(
+        uploadError instanceof Error
+          ? uploadError.message
+          : "Unable to upload cover image.",
+      );
+      return null;
+    } finally {
+      setBusy(false);
+    }
+  };
 
   const submitClaim = async (input: VendorClaimInput) => {
     setBusy(true);
@@ -1224,12 +1309,17 @@ export default function PortalApp({ mode }: PortalAppProps) {
           data={adminData}
           activeTab={activeTab}
           busy={busy}
+          managedEvents={managedEvents}
           onAction={runAdminAction}
           onUploadGroupImage={uploadGroupImage}
           onConnectInstagram={connectInstagram}
           onUploadSocialMedia={uploadSocialMedia}
           onQueueSocialPublish={queueSocialPublish}
           onScheduleTikTok={scheduleTikTok}
+          onRefreshManagedEvents={refreshManagedEvents}
+          onSaveManagedEvent={saveManagedEvent}
+          onDuplicateManagedEvent={duplicateManagedEvent}
+          onUploadEventCover={uploadEventCover}
         />
       )}
       {mode === "business" && vendorData && (
