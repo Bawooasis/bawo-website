@@ -89,6 +89,60 @@ export type EventSubmission = {
   created_at: string | null;
 };
 
+export type PanelEventStatus = "draft" | "published" | "hidden" | "expired";
+
+export type ManagedEvent = {
+  id: string;
+  provider: string | null;
+  provider_id: string | null;
+  title: string;
+  description: string | null;
+  starts_at: string;
+  ends_at: string | null;
+  venue_name: string | null;
+  address: string | null;
+  location: string | null;
+  neighborhood: string | null;
+  borough: string | null;
+  city: string | null;
+  image_url: string | null;
+  url: string | null;
+  source_url: string | null;
+  organizer_name: string | null;
+  category: string | null;
+  tags: string[];
+  is_featured: boolean;
+  status: string | null;
+  moderation_status: string | null;
+  panel_status: PanelEventStatus;
+  region: string | null;
+  source: string | null;
+  submitted_by: string | null;
+  created_at: string | null;
+  updated_at: string | null;
+};
+
+export type ManagedEventInput = {
+  title: string;
+  description: string | null;
+  startsAt: string;
+  endsAt: string | null;
+  venueName: string | null;
+  address: string | null;
+  neighborhood: string | null;
+  borough: string | null;
+  city: string | null;
+  imageUrl: string | null;
+  ticketUrl: string | null;
+  organizerName: string | null;
+  category: string | null;
+  tags: string[];
+  isFeatured: boolean;
+  status: PanelEventStatus;
+  region?: string | null;
+  provider?: string | null;
+};
+
 export type BusinessClaim = {
   id: string;
   name: string;

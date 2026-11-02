@@ -1,4 +1,8 @@
-import type { PortalSession } from "./types";
+import type {
+  ManagedEvent,
+  ManagedEventInput,
+  PortalSession,
+} from "./types";
 
 const SESSION_KEY = "bawo-platform-session";
 const GROUP_IMAGE_BUCKET = "group-images";
@@ -725,7 +729,10 @@ export class PlatformApi {
   }
 
   async invoke<T>(
-    functionName: "platform-control-center" | "vendor-portal",
+    functionName:
+      | "platform-control-center"
+      | "vendor-portal"
+      | "admin-events",
     payload: object,
     retry = true,
   ): Promise<T> {
@@ -817,6 +824,73 @@ export class PlatformApi {
       body: file,
     });
     if (!response.ok) throw new Error("Media upload failed. Try again.");
+  }
+
+  async listManagedEvents(input?: {
+    query?: string;
+    statusFilter?: string;
+    limit?: number;
+  }): Promise<{ events: ManagedEvent[]; count: number }> {
+    return this.invoke("admin-events", {
+      action: "list",
+      query: input?.query,
+      statusFilter: input?.statusFilter || "all",
+      limit: input?.limit || 120,
+    });
+  }
+
+  async saveManagedEvent(
+    event: ManagedEventInput,
+    eventId?: string,
+  ): Promise<{ event: ManagedEvent }> {
+    return this.invoke("admin-events", {
+      action: "save",
+      targetId: eventId,
+      event,
+    });
+  }
+
+  async duplicateManagedEvent(
+    eventId: string,
+  ): Promise<{ event: ManagedEvent }> {
+    return this.invoke("admin-events", {
+      action: "duplicate",
+      targetId: eventId,
+    });
+  }
+
+  async uploadEventCover(eventId: string, file: File): Promise<string> {
+    const allowed = new Set([
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+      "image/gif",
+    ]);
+    if (!allowed.has(file.type)) {
+      throw new Error("Choose a JPG, PNG, WebP, or GIF cover image.");
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      throw new Error("Cover images must be 10 MB or smaller.");
+    }
+    const upload = await this.invoke<{
+      signedUrl: string;
+      publicUrl: string;
+    }>("admin-events", {
+      action: "create_cover_upload",
+      targetId: eventId,
+      coverUpload: {
+        fileName: file.name,
+        mimeType: file.type,
+        fileSize: file.size,
+      },
+    });
+    const response = await fetch(upload.signedUrl, {
+      method: "PUT",
+      headers: { "Content-Type": file.type, "x-upsert": "false" },
+      body: file,
+    });
+    if (!response.ok) throw new Error("Cover upload failed. Try again.");
+    return upload.publicUrl;
   }
 
   signOut(): void {

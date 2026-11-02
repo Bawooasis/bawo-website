@@ -17,20 +17,35 @@ import { useMemo, useState } from "react";
 import GroupEditor, { type GroupEditorInput } from "./GroupEditor";
 import SocialMediaPanel from "./SocialMediaPanel";
 import CrmPanel from "./CrmPanel";
+import EventsPanel from "./events/EventsPanel";
 import type { PortalTab } from "./PortalLayout";
 import { EmptyState, MetricCard } from "./PortalUi";
-import type { AdminAction, AdminOverview, PlatformUser } from "./types";
+import type {
+  AdminAction,
+  AdminOverview,
+  ManagedEvent,
+  ManagedEventInput,
+  PlatformUser,
+} from "./types";
 
 type AdminPortalProps = {
   data: AdminOverview;
   activeTab: PortalTab;
   busy: boolean;
+  managedEvents: ManagedEvent[];
   onAction: (action: AdminAction, successMessage: string) => Promise<boolean>;
   onUploadGroupImage: (groupId: string, file: File) => Promise<string>;
   onConnectInstagram: () => Promise<void>;
   onUploadSocialMedia: (contentId: string, file: File) => Promise<void>;
   onQueueSocialPublish: (contentId: string, scheduledFor: string) => Promise<boolean>;
   onScheduleTikTok: (contentId: string, scheduledFor: string) => Promise<boolean>;
+  onRefreshManagedEvents: () => Promise<void>;
+  onSaveManagedEvent: (
+    input: ManagedEventInput,
+    eventId?: string,
+  ) => Promise<boolean>;
+  onDuplicateManagedEvent: (eventId: string) => Promise<boolean>;
+  onUploadEventCover: (eventId: string, file: File) => Promise<string | null>;
 };
 
 const formatDate = (value: string | null) =>
@@ -52,12 +67,17 @@ export default function AdminPortal({
   data,
   activeTab,
   busy,
+  managedEvents,
   onAction,
   onUploadGroupImage,
   onConnectInstagram,
   onUploadSocialMedia,
   onQueueSocialPublish,
   onScheduleTikTok,
+  onRefreshManagedEvents,
+  onSaveManagedEvent,
+  onDuplicateManagedEvent,
+  onUploadEventCover,
 }: AdminPortalProps) {
   const [query, setQuery] = useState("");
   const [editingGroupId, setEditingGroupId] = useState<string | null>(null);
@@ -346,67 +366,77 @@ export default function AdminPortal({
   if (activeTab === "events") {
     const submissions = data.eventSubmissions || [];
     return (
-      <section className="portal-panel">
-        <div className="portal-panel-heading">
-          <div>
-            <span className="portal-kicker">Culture Hub moderation</span>
-            <h2>Submitted &amp; created events</h2>
+      <div className="events-tab-stack">
+        <EventsPanel
+          busy={busy}
+          events={managedEvents}
+          onRefresh={onRefreshManagedEvents}
+          onSave={onSaveManagedEvent}
+          onDuplicate={onDuplicateManagedEvent}
+          onUploadCover={onUploadEventCover}
+        />
+        <section className="portal-panel">
+          <div className="portal-panel-heading">
+            <div>
+              <span className="portal-kicker">Moderation queue</span>
+              <h2>Submitted &amp; created events</h2>
+            </div>
           </div>
-        </div>
-        <div className="portal-list">
-          {submissions.length === 0 && (
-            <EmptyState
-              icon={Calendar}
-              title="No submitted events waiting"
-              body="Community submissions and custom organizer events from the BawoSocial mobile app will appear here for review."
-            />
-          )}
-          {submissions.map((ev) => (
-            <article className="portal-list-row" key={ev.id}>
-              <div className="portal-list-main">
-                <strong>{ev.title}</strong>
-                <span>
-                  {(ev.provider === "bawosocial" ? "Created Event" : "Community Tip")} · {ev.venue_name || ev.location || ev.city || "NYC"} · {formatDate(ev.starts_at)}
+          <div className="portal-list">
+            {submissions.length === 0 && (
+              <EmptyState
+                icon={Calendar}
+                title="No submitted events waiting"
+                body="Community submissions and custom organizer events from the BawoSocial mobile app will appear here for review."
+              />
+            )}
+            {submissions.map((ev) => (
+              <article className="portal-list-row" key={ev.id}>
+                <div className="portal-list-main">
+                  <strong>{ev.title}</strong>
+                  <span>
+                    {(ev.provider === "bawosocial" ? "Created Event" : "Community Tip")} · {ev.venue_name || ev.location || ev.city || "NYC"} · {formatDate(ev.starts_at)}
+                  </span>
+                </div>
+                <span className={`portal-status ${ev.moderation_status === "approved" ? "is-success" : ev.moderation_status === "rejected" ? "is-danger" : "is-warning"}`}>
+                  {ev.moderation_status}
                 </span>
-              </div>
-              <span className={`portal-status ${ev.moderation_status === "approved" ? "is-success" : ev.moderation_status === "rejected" ? "is-danger" : "is-warning"}`}>
-                {ev.moderation_status}
-              </span>
-              <div className="portal-row-actions">
-                {ev.moderation_status !== "approved" && (
-                  <button
-                    disabled={busy}
-                    onClick={() =>
-                      confirmAction(
-                        `Approve and publish "${ev.title}" to the BawoSocial NYC Events feed?`,
-                        { action: "review_event_submission", targetId: ev.id, decision: "approved" },
-                        "Event approved and published to the NYC feed.",
-                      )
-                    }
-                  >
-                    <Check aria-hidden /> Approve
-                  </button>
-                )}
-                {ev.moderation_status !== "rejected" && (
-                  <button
-                    className="is-danger"
-                    disabled={busy}
-                    onClick={() =>
-                      confirmAction(
-                        `Reject "${ev.title}"?`,
-                        { action: "review_event_submission", targetId: ev.id, decision: "rejected" },
-                        "Event rejected.",
-                      )
-                    }
-                  >
-                    <X aria-hidden /> Reject
-                  </button>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+                <div className="portal-row-actions">
+                  {ev.moderation_status !== "approved" && (
+                    <button
+                      disabled={busy}
+                      onClick={() =>
+                        confirmAction(
+                          `Approve and publish "${ev.title}" to the BawoSocial NYC Events feed?`,
+                          { action: "review_event_submission", targetId: ev.id, decision: "approved" },
+                          "Event approved and published to the NYC feed.",
+                        )
+                      }
+                    >
+                      <Check aria-hidden /> Approve
+                    </button>
+                  )}
+                  {ev.moderation_status !== "rejected" && (
+                    <button
+                      className="is-danger"
+                      disabled={busy}
+                      onClick={() =>
+                        confirmAction(
+                          `Reject "${ev.title}"?`,
+                          { action: "review_event_submission", targetId: ev.id, decision: "rejected" },
+                          "Event rejected.",
+                        )
+                      }
+                    >
+                      <X aria-hidden /> Reject
+                    </button>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      </div>
     );
   }
 
