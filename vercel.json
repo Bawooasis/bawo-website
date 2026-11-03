@@ -1,4 +1,8 @@
 {
+  "redirects": [
+    { "source": "/contact", "destination": "/support", "permanent": true },
+    { "source": "/contact/:path*", "destination": "/support", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api/:path*" },
     { "source": "/admin", "destination": "/index.html" },
@@ -7,6 +11,12 @@
     { "source": "/business/:path*", "destination": "/index.html" },
     { "source": "/businesses", "destination": "/index.html" },
     { "source": "/businesses/:path*", "destination": "/index.html" },
+    { "source": "/privacy", "destination": "/index.html" },
+    { "source": "/privacy/:path*", "destination": "/index.html" },
+    { "source": "/terms", "destination": "/index.html" },
+    { "source": "/terms/:path*", "destination": "/index.html" },
+    { "source": "/support", "destination": "/index.html" },
+    { "source": "/support/:path*", "destination": "/index.html" },
     { "source": "/affiliate-disclosure", "destination": "/index.html" },
     { "source": "/affiliate-disclosure/:path*", "destination": "/index.html" }
   ]

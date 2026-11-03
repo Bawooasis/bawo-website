@@ -3,6 +3,56 @@
   publish = "dist"
 
 [[redirects]]
+  from = "/contact"
+  to = "/support"
+  status = 301
+
+[[redirects]]
+  from = "/contact/*"
+  to = "/support"
+  status = 301
+
+[[redirects]]
+  from = "/privacy"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/support"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/support/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/affiliate-disclosure"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/affiliate-disclosure/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
   from = "/admin"
   to = "/index.html"
   status = 200

@@ -1,7 +1,7 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BadgeCheck, Building2, Calendar, Headphones, MapPin, Sparkles, Star } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import BoroughNetworkGraphic from "./components/BoroughNetworkGraphic";
 import BoroughSquareCarousel from "./components/BoroughSquareCarousel";
 import CommunityCirclesSection from "./components/CommunityCirclesSection";
@@ -29,7 +29,6 @@ import { scrollToWaitlist } from "./utils/scrollToWaitlist";
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
-  const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
 
   // Animation refs
   const heroRef = useRef(null);
@@ -747,18 +746,20 @@ function App() {
               <div className="text-center md:text-left">
                 <h3 className="text-[#F7F3FA] font-display text-xl font-bold mb-3">Legal</h3>
                 <div className="space-y-1.5">
-                  <button
-                    onClick={() => setShowPrivacyPolicy(true)}
-                    className="flex min-h-10 w-full items-center justify-center text-[#F7F3FA]/80 hover:text-[#D6B26A] text-sm font-medium md:justify-start"
-                  >
-                    Privacy Policy
-                  </button>
-                  <a
-                    href="/affiliate-disclosure"
-                    className="flex min-h-10 items-center justify-center text-[#F7F3FA]/80 hover:text-[#D6B26A] text-sm font-medium md:justify-start"
-                  >
-                    Affiliate disclosure
-                  </a>
+                  {[
+                    { label: "Privacy Policy", href: "/privacy" },
+                    { label: "Terms of Service", href: "/terms" },
+                    { label: "Support", href: "/support" },
+                    { label: "Affiliate disclosure", href: "/affiliate-disclosure" },
+                  ].map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      className="flex min-h-10 items-center justify-center text-[#F7F3FA]/80 hover:text-[#D6B26A] text-sm font-medium md:justify-start"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
                   <a
                     href="/admin"
                     className="flex min-h-10 items-center justify-center text-[#F7F3FA]/50 hover:text-[#D6B26A] text-xs font-medium md:justify-start"
@@ -787,66 +788,6 @@ function App() {
           </div>
         </footer>
 
-        {/* Privacy Policy Modal */}
-        {showPrivacyPolicy && (
-          <div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            onClick={() => setShowPrivacyPolicy(false)}
-          >
-            <div
-              className="bg-white rounded-2xl max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="sticky top-0 bg-white border-b border-gray-200 p-6 rounded-t-2xl">
-                <div className="flex justify-between items-center">
-                  <h2 className="text-2xl font-bold text-gray-900">
-                    BawoSocial Privacy Policy
-                  </h2>
-                  <button
-                    onClick={() => setShowPrivacyPolicy(false)}
-                    className="text-gray-500 hover:text-gray-700 text-2xl font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
-                  >
-                    ×
-                  </button>
-                </div>
-                <p className="text-gray-600 mt-2">
-                  Last Updated: June 2026
-                </p>
-              </div>
-
-              <div className="p-6 space-y-6 text-gray-800">
-                <p>
-                  Welcome to BawoSocial ("we", "our", or "us"). Your privacy is
-                  important to us. This Privacy Policy explains how we collect,
-                  use, store, and share your information when you visit our
-                  website at joinbawo.com and use the BawoSocial mobile
-                  application and services.
-                </p>
-
-                <section className="space-y-3">
-                  <h3 className="text-xl font-bold text-gray-900">
-                    Affiliate disclosure
-                  </h3>
-                  <p>{AFFILIATE_DISCLOSURE_LINE}</p>
-                  <p>
-                    Some ticket and event links on BawoSocial include tracking
-                    or promoter codes from third party platforms. If you
-                    complete a purchase through those links, BawoSocial may
-                    receive a commission. This does not change the ticket price
-                    set by the organizer or platform. Read the full{" "}
-                    <a
-                      href="/affiliate-disclosure"
-                      className="font-semibold text-[#A07636] underline-offset-2 hover:underline"
-                    >
-                      Affiliate disclosure
-                    </a>
-                    .
-                  </p>
-                </section>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

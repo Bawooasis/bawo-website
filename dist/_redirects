@@ -1,8 +1,20 @@
-# SPA fallback so Control Center routes resolve on Netlify previews/production
-/admin    /index.html   200
-/admin/*  /index.html   200
-/businesses    /index.html   200
-/businesses/*  /index.html   200
-/business    /index.html   200
-/business/*  /index.html   200
-/*    /index.html   200
+# Contact aliases to Support
+/contact /support 301
+/contact/* /support 301
+
+# SPA routes
+/privacy /index.html 200
+/privacy/* /index.html 200
+/terms /index.html 200
+/terms/* /index.html 200
+/support /index.html 200
+/support/* /index.html 200
+/affiliate-disclosure /index.html 200
+/affiliate-disclosure/* /index.html 200
+/admin /index.html 200
+/admin/* /index.html 200
+/business /index.html 200
+/business/* /index.html 200
+/businesses /index.html 200
+/businesses/* /index.html 200
+/* /index.html 200
