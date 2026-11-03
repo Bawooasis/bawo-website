@@ -2,11 +2,13 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import PortalApp from './portal/PortalApp.tsx';
+import SocialSchedulerLab from './portal/social/SocialSchedulerLab.tsx';
 import AffiliateDisclosurePage from './pages/AffiliateDisclosurePage.tsx';
 import './index.css';
 
 const path = window.location.pathname.replace(/\/+$/, '') || '/';
 const hostname = window.location.hostname.toLowerCase();
+const isSocialLab = path === '/admin/social-lab';
 const isBusinessPath =
   path === '/business' ||
   path.startsWith('/business/') ||
@@ -15,7 +17,8 @@ const isBusinessPath =
   hostname.startsWith('business.') ||
   hostname.startsWith('businesses.');
 const portalMode =
-  path === '/admin' || path.startsWith('/admin/') || hostname.startsWith('admin.')
+  !isSocialLab &&
+  (path === '/admin' || path.startsWith('/admin/') || hostname.startsWith('admin.'))
     ? 'admin'
     : isBusinessPath
       ? 'business'
@@ -25,7 +28,9 @@ const isAffiliateDisclosure =
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    {portalMode ? (
+    {isSocialLab ? (
+      <SocialSchedulerLab />
+    ) : portalMode ? (
       <PortalApp mode={portalMode} />
     ) : isAffiliateDisclosure ? (
       <AffiliateDisclosurePage />
