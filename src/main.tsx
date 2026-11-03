@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import PortalApp from './portal/PortalApp.tsx';
+import SocialSchedulerLab from './portal/social/SocialSchedulerLab.tsx';
 import AffiliateDisclosurePage from './pages/AffiliateDisclosurePage.tsx';
 import PrivacyPage from './pages/PrivacyPage.tsx';
 import SupportPage from './pages/SupportPage.tsx';
@@ -15,6 +16,7 @@ if (path === '/contact' || path.startsWith('/contact/')) {
   window.location.replace('/support');
 }
 
+const isSocialLab = path === '/admin/social-lab';
 const isBusinessPath =
   path === '/business' ||
   path.startsWith('/business/') ||
@@ -23,7 +25,8 @@ const isBusinessPath =
   hostname.startsWith('business.') ||
   hostname.startsWith('businesses.');
 const portalMode =
-  path === '/admin' || path.startsWith('/admin/') || hostname.startsWith('admin.')
+  !isSocialLab &&
+  (path === '/admin' || path.startsWith('/admin/') || hostname.startsWith('admin.'))
     ? 'admin'
     : isBusinessPath
       ? 'business'
@@ -42,20 +45,21 @@ const staticPage =
             ? 'contact'
             : null;
 
-const page =
-  portalMode ? (
-    <PortalApp mode={portalMode} />
-  ) : staticPage === 'privacy' ? (
-    <PrivacyPage />
-  ) : staticPage === 'terms' ? (
-    <TermsPage />
-  ) : staticPage === 'support' || staticPage === 'contact' ? (
-    <SupportPage />
-  ) : staticPage === 'affiliate' ? (
-    <AffiliateDisclosurePage />
-  ) : (
-    <App />
-  );
+const page = isSocialLab ? (
+  <SocialSchedulerLab />
+) : portalMode ? (
+  <PortalApp mode={portalMode} />
+) : staticPage === 'privacy' ? (
+  <PrivacyPage />
+) : staticPage === 'terms' ? (
+  <TermsPage />
+) : staticPage === 'support' || staticPage === 'contact' ? (
+  <SupportPage />
+) : staticPage === 'affiliate' ? (
+  <AffiliateDisclosurePage />
+) : (
+  <App />
+);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>{page}</StrictMode>
