@@ -18,6 +18,7 @@ import PartnerWithUsSection from "./components/PartnerWithUsSection";
 import SectionPillNav from "./components/SectionPillNav";
 import HeroParticleField from "./components/ui/HeroParticleField";
 import SiteHeader from "./components/SiteHeader";
+import SiteLogo from "./components/SiteLogo";
 import { TAILWIND_COLORS } from "./constants/colors";
 import { CONTENT } from "./constants/content";
 import { IMAGES } from "./constants/images";
@@ -674,7 +675,15 @@ function App() {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
               {/* Company Info */}
               <div className="text-center md:text-left">
-                <h3 className="text-[#F7F3FA] font-display text-2xl font-bold mb-3">BawoSocial</h3>
+                <div className="mb-3 flex justify-center md:justify-start">
+                  <SiteLogo
+                    className="bawo-site-footer__logo"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                  />
+                </div>
                 <p className="text-[#F7F3FA]/75 text-sm mb-4 leading-relaxed">
                   {CONTENT.footer.tagline}
                 </p>

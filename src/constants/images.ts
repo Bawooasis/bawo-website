@@ -1,7 +1,6 @@
 // Website Images Constants - Organized by Usage
 
 import adoraImage from "../assets/images/ADORA.jpg";
-import bawoLogo from "../assets/images/bawo-logo.png";
 import bawoMark from "../assets/images/bawo-mark.png";
 import bawoSocialWordmark from "../assets/images/bawosocial-logo.png";
 import bawoSocialWordmarkDeep from "../assets/images/bawosocial-logo-deep.png";
@@ -95,9 +94,8 @@ export const IMAGES = {
     logo: bawoSocialWordmark,
     /** Wordmark for light/ivory surfaces (#A07636) */
     logoDeep: bawoSocialWordmarkDeep,
-    /** New BawoSocial cowrie-flame app icon */
+    /** Gold glass kola nut brand mark (Alexander-approved) */
     mark: bawoMark,
-    logoOld: bawoLogo,
   },
 
   // App Preview/Demo Images
@@ -200,7 +198,12 @@ export const IMAGES = {
 
   // Public assets (from public folder)
   public: {
-    favicon: "/favicon.png?v=11",
+    favicon: "/favicon.ico?v=13",
+    favicon32: "/favicon-32.png?v=13",
+    appleTouchIcon: "/apple-touch-icon.png?v=13",
+    icon512: "/favicon-512.png?v=13",
+    ogImage: "/og-image-1200x630.png?v=13",
+    mark: "/bawo-logo.png?v=13",
     foundingMemberBg: "/founding-member-background.png",
     heroSection: "/hero-section.png",
     phoneMockup: "/phone-mockup.png",

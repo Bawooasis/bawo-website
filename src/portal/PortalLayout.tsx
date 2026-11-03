@@ -93,7 +93,7 @@ export default function PortalLayout({
     <div className="portal-shell">
       <aside className="portal-sidebar">
         <a href="/" className="portal-brand" aria-label="BawoSocial home">
-          <img src="/bawo-logo.png" alt="" />
+          <img src="/bawo-logo.png?v=13" alt="" width={512} height={512} decoding="async" />
           <span>
             <strong>BawoSocial</strong>
             <small>{mode === "admin" ? "Control Center" : "Business"}</small>

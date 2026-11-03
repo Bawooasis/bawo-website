@@ -580,7 +580,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
     return (
       <div className="portal-auth-shell">
         <a className="portal-auth-brand" href="/">
-          <img src="/bawo-logo.png" alt="" />
+          <img src="/bawo-logo.png?v=13" alt="" width={512} height={512} decoding="async" />
           <span>BawoSocial</span>
         </a>
         <form className="portal-auth-card" onSubmit={submitNewPassword}>
@@ -655,7 +655,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
               href="/"
               aria-label="BawoSocial home"
             >
-              <img src="/bawo-logo.png" alt="BawoSocial" />
+              <img src="/bawo-logo.png?v=13" alt="" width={512} height={512} decoding="async" />
               <div>
                 <strong>BawoSocial</strong>
                 <span>For Nigerian Businesses</span>
@@ -1004,7 +1004,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
     return (
       <div className="portal-auth-shell">
         <a className="portal-auth-brand" href="/">
-          <img src="/bawo-logo.png" alt="" />
+          <img src="/bawo-logo.png?v=13" alt="" width={512} height={512} decoding="async" />
           <span>BawoSocial</span>
         </a>
         <div className="portal-auth-card portal-admin-auth-card">

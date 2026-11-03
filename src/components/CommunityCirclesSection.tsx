@@ -192,8 +192,11 @@ export default function CommunityCirclesSection() {
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5">
                 <img
                   src={IMAGES.assets.mark}
-                  alt="BawoSocial cowrie-flame icon"
-                  className="w-14 h-14 rounded-2xl border border-[#D6B26A]/40 shadow-lg object-cover shrink-0"
+                  alt="BawoSocial gold glass kola nut"
+                  className="w-14 h-14 object-contain shrink-0"
+                  width={256}
+                  height={256}
+                  decoding="async"
                 />
                 <h3 className="text-3xl sm:text-4xl md:text-[2.65rem] font-bold font-display text-[#F7F3FA] leading-tight">
                   From Lagos, Abuja & Enugu to All Five Boroughs of NYC
