@@ -1,0 +1,29 @@
+{
+  "name": "BawoSocial",
+  "short_name": "BawoSocial",
+  "description": "The home for Nigerians in the diaspora — starting in NYC.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0E0A14",
+  "theme_color": "#0E0A14",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png?v=13",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-512.png?v=13",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png?v=13",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
