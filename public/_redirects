@@ -1,0 +1,16 @@
+/contact /support 301
+/contact/* /support 301
+/privacy /index.html 200
+/privacy/* /index.html 200
+/terms /index.html 200
+/terms/* /index.html 200
+/support /index.html 200
+/support/* /index.html 200
+/affiliate-disclosure /index.html 200
+/affiliate-disclosure/* /index.html 200
+/admin /index.html 200
+/admin/* /index.html 200
+/business /index.html 200
+/business/* /index.html 200
+/businesses /index.html 200
+/businesses/* /index.html 200

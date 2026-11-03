@@ -443,7 +443,9 @@ export const CONTENT = {
       legal: {
         title: "Legal",
         links: [
-          { label: "Privacy Policy", action: "privacy" },
+          { label: "Privacy Policy", href: "/privacy" },
+          { label: "Terms of Service", href: "/terms" },
+          { label: "Support", href: "/support" },
           { label: "Affiliate disclosure", href: "/affiliate-disclosure" },
         ],
       },
