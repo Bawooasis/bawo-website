@@ -67,6 +67,21 @@ export type GroupRequest = {
   created_at: string;
 };
 
+export type EventAffiliateSource =
+  | "posh_kickback"
+  | "eventbrite_tracking"
+  | "shotgun_promoter"
+  | "tixr_promoter"
+  | "direct_deal"
+  | "";
+
+export type EventAffiliateFields = {
+  promoter_ticket_url: string | null;
+  promo_code: string | null;
+  promo_code_note: string | null;
+  affiliate_source: EventAffiliateSource | null;
+};
+
 export type EventSubmission = {
   id: string;
   provider: string;
@@ -87,6 +102,11 @@ export type EventSubmission = {
   is_featured: boolean;
   submitted_by: string | null;
   created_at: string | null;
+  /** Optional until the app-repo migration lands */
+  promoter_ticket_url?: string | null;
+  promo_code?: string | null;
+  promo_code_note?: string | null;
+  affiliate_source?: EventAffiliateSource | null;
 };
 
 export type BusinessClaim = {
@@ -273,6 +293,7 @@ export type AdminAction = {
     | "review_group_request"
     | "review_business_claim"
     | "review_event_submission"
+    | "save_event_affiliate"
     | "save_social_content"
     | "archive_social_content"
     | "start_instagram_connection"
@@ -295,6 +316,7 @@ export type AdminAction = {
     imageUrl?: string | null;
   };
   decision?: "approved" | "rejected";
+  eventAffiliate?: EventAffiliateFields;
   socialContent?: {
     platform: SocialPlatform;
     title: string;

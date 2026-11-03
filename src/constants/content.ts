@@ -442,7 +442,10 @@ export const CONTENT = {
       },
       legal: {
         title: "Legal",
-        links: [{ label: "Privacy Policy", action: "privacy" }],
+        links: [
+          { label: "Privacy Policy", action: "privacy" },
+          { label: "Affiliate disclosure", href: "/affiliate-disclosure" },
+        ],
       },
     },
     copyright: "2026 BawoSocial. Built for Nigerians in the Diaspora · Starting in NYC.",

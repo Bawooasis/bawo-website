@@ -432,7 +432,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
   const runAdminAction = async (
     action: AdminAction,
     successMessage: string,
-  ) => {
+  ): Promise<boolean> => {
     setBusy(true);
     setError("");
     setNotice("");
@@ -448,9 +448,14 @@ export default function PortalApp({ mode }: PortalAppProps) {
       }
       return true;
     } catch (actionError) {
-      setError(
-        actionError instanceof Error ? actionError.message : "Action failed.",
-      );
+      const message =
+        actionError instanceof Error ? actionError.message : "Action failed.";
+      setError(message);
+      // Re-throw so editors (e.g. event affiliate fields) can detect schema/migration gaps
+      // without breaking callers that only check the boolean return.
+      if (action.action === "save_event_affiliate") {
+        throw Object.assign(new Error(message), { handled: true });
+      }
       return false;
     } finally {
       setBusy(false);
