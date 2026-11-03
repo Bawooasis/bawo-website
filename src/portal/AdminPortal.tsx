@@ -420,7 +420,7 @@ export default function AdminPortal({
             <h2>Submitted &amp; created events</h2>
           </div>
         </div>
-        {!columnsReady && (
+        {showSchemaBanner && (
           <div className="portal-alert is-warning" role="status">
             Affiliate ticket fields are available here. Saving will activate once
             the BawoSocial app migration adds promoter_ticket_url, promo_code,
