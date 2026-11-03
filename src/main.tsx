@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import PortalApp from './portal/PortalApp.tsx';
 import SocialSchedulerLab from './portal/social/SocialSchedulerLab.tsx';
+import AffiliateDisclosurePage from './pages/AffiliateDisclosurePage.tsx';
 import './index.css';
 
 const path = window.location.pathname.replace(/\/+$/, '') || '/';
@@ -22,6 +23,8 @@ const portalMode =
     : isBusinessPath
       ? 'business'
       : null;
+const isAffiliateDisclosure =
+  path === '/affiliate-disclosure' || path.startsWith('/affiliate-disclosure/');
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -29,6 +32,8 @@ createRoot(document.getElementById('root')!).render(
       <SocialSchedulerLab />
     ) : portalMode ? (
       <PortalApp mode={portalMode} />
+    ) : isAffiliateDisclosure ? (
+      <AffiliateDisclosurePage />
     ) : (
       <App />
     )}
