@@ -1,27 +1,31 @@
 import {
-  Archive,
   BarChart3,
   CalendarClock,
-  Clipboard,
-  ExternalLink,
   Eye,
   FolderOpen,
-  Heart,
-  Instagram,
   Megaphone,
-  MessageCircle,
-  Pencil,
   Plus,
-  Send,
-  Share2,
-  Sparkles,
-  Upload,
   Link2,
-  RotateCcw,
 } from "lucide-react";
-import { useMemo, useState, type FormEvent } from "react";
+import { useMemo, useState } from "react";
 import { EmptyState, MetricCard } from "./PortalUi";
-import type { AdminAction, SocialConnection, SocialContentItem, SocialPlatform, SocialPublishJob } from "./types";
+import type {
+  AdminAction,
+  SocialConnection,
+  SocialContentItem,
+  SocialPlatform,
+  SocialPublishJob,
+} from "./types";
+import { PlatformBadge, PlatformPreview } from "./social/PlatformPreviews";
+import SocialPostDetail, {
+  type SocialDetailDraft,
+} from "./social/SocialPostDetail";
+import {
+  formatNyDateTime,
+  formatNyDayKey,
+  previewForItem,
+} from "./social/platformCopy";
+import { socialItemMediaUrl } from "./social/mediaUrl";
 
 type SocialMediaPanelProps = {
   items: SocialContentItem[];
@@ -35,252 +39,366 @@ type SocialMediaPanelProps = {
   onScheduleTikTok: (contentId: string, scheduledFor: string) => Promise<boolean>;
 };
 
-type Draft = {
-  platform: SocialPlatform;
-  title: string;
-  contentType: SocialContentItem["content_type"];
-  status: SocialContentItem["status"];
-  goal: SocialContentItem["goal"];
-  hook: string;
-  caption: string;
-  callToAction: string;
-  ownerName: string;
-  scheduledFor: string;
-  publishedAt: string;
-  postUrl: string;
-  driveAssetUrl: string;
-  views: string;
-  likes: string;
-  comments: string;
-  shares: string;
-  saves: string;
-  follows: string;
-  linkClicks: string;
-};
+const driveLibraryUrl =
+  import.meta.env.VITE_SOCIAL_DRIVE_FOLDER_URL ||
+  "https://drive.google.com/drive/folders/1eL45S1A5pqs8-bDBeANPR8-V8D5mjiz9";
 
-const emptyDraft = (): Draft => ({
-  platform: "tiktok",
-  title: "",
-  contentType: "short_video",
-  status: "idea",
-  goal: "awareness",
-  hook: "",
-  caption: "",
-  callToAction: "Download BawoSocial and explore NYC.",
-  ownerName: "",
-  scheduledFor: "",
-  publishedAt: "",
-  postUrl: "",
-  driveAssetUrl: "",
-  views: "0",
-  likes: "0",
-  comments: "0",
-  shares: "0",
-  saves: "0",
-  follows: "0",
-  linkClicks: "0",
-});
-
-const toLocalDate = (value: string | null) => value ? new Date(value).toISOString().slice(0, 16) : "";
-const fromItem = (item: SocialContentItem): Draft => ({
-  platform: item.platform,
-  title: item.title,
-  contentType: item.content_type,
-  status: item.status,
-  goal: item.goal,
-  hook: item.hook,
-  caption: item.caption,
-  callToAction: item.call_to_action,
-  ownerName: item.owner_name,
-  scheduledFor: toLocalDate(item.scheduled_for),
-  publishedAt: toLocalDate(item.published_at),
-  postUrl: item.post_url || "",
-  driveAssetUrl: item.drive_asset_url || "",
-  views: String(item.views),
-  likes: String(item.likes),
-  comments: String(item.comments),
-  shares: String(item.shares),
-  saves: String(item.saves),
-  follows: String(item.follows),
-  linkClicks: String(item.link_clicks),
-});
-
-const formatDate = (value: string | null) => value
-  ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }).format(new Date(value))
-  : "Not scheduled";
-
-const driveLibraryUrl = import.meta.env.VITE_SOCIAL_DRIVE_FOLDER_URL || "https://drive.google.com/drive/folders/1eL45S1A5pqs8-bDBeANPR8-V8D5mjiz9";
-
-export default function SocialMediaPanel({ items, connections, publishJobs, busy, onAction, onConnectInstagram, onUploadMedia, onQueuePublish, onScheduleTikTok }: SocialMediaPanelProps) {
+export default function SocialMediaPanel({
+  items,
+  connections,
+  publishJobs,
+  busy,
+  onAction,
+  onConnectInstagram,
+  onUploadMedia,
+  onQueuePublish,
+  onScheduleTikTok,
+}: SocialMediaPanelProps) {
   const [platform, setPlatform] = useState<"all" | SocialPlatform>("all");
-  const [editingId, setEditingId] = useState<string | null>(null);
-  const [draft, setDraft] = useState<Draft>(emptyDraft);
-  const [scheduleTimes, setScheduleTimes] = useState<Record<string, string>>({});
-  const [copiedId, setCopiedId] = useState<string | null>(null);
-  const visibleItems = useMemo(
-    () => platform === "all" ? items : items.filter((item) => item.platform === platform),
-    [items, platform],
+  const [status, setStatus] = useState<"all" | SocialContentItem["status"]>("all");
+  const [viewMode, setViewMode] = useState<"grid" | "calendar">("grid");
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  const jobsByContent = useMemo(
+    () => new Map(publishJobs.map((job) => [job.content_id, job])),
+    [publishJobs],
   );
-  const totals = useMemo(() => items.reduce((result, item) => ({
-    views: result.views + Number(item.views || 0),
-    engagement: result.engagement + Number(item.likes || 0) + Number(item.comments || 0) + Number(item.shares || 0) + Number(item.saves || 0),
-  }), { views: 0, engagement: 0 }), [items]);
+
+  const visibleItems = useMemo(() => {
+    return items.filter((item) => {
+      if (platform !== "all" && item.platform !== platform) return false;
+      if (status !== "all" && item.status !== status) return false;
+      return true;
+    });
+  }, [items, platform, status]);
+
+  const calendarGroups = useMemo(() => {
+    const groups = new Map<string, SocialContentItem[]>();
+    for (const item of visibleItems) {
+      const key = item.scheduled_for
+        ? formatNyDayKey(item.scheduled_for)
+        : "Unscheduled";
+      const list = groups.get(key) || [];
+      list.push(item);
+      groups.set(key, list);
+    }
+    return Array.from(groups.entries()).sort(([a], [b]) => {
+      if (a === "Unscheduled") return 1;
+      if (b === "Unscheduled") return -1;
+      return a.localeCompare(b);
+    });
+  }, [visibleItems]);
+
+  const totals = useMemo(
+    () =>
+      items.reduce(
+        (result, item) => ({
+          views: result.views + Number(item.views || 0),
+          engagement:
+            result.engagement +
+            Number(item.likes || 0) +
+            Number(item.comments || 0) +
+            Number(item.shares || 0) +
+            Number(item.saves || 0),
+        }),
+        { views: 0, engagement: 0 },
+      ),
+    [items],
+  );
   const published = items.filter((item) => item.status === "published").length;
   const scheduled = items.filter((item) => item.status === "scheduled").length;
-  const engagementRate = totals.views > 0 ? `${((totals.engagement / totals.views) * 100).toFixed(1)}%` : "0%";
-  const instagramConnection = connections.find((connection) => connection.platform === "instagram" && connection.status === "connected");
-  const jobsByContent = useMemo(() => new Map(publishJobs.map((job) => [job.content_id, job])), [publishJobs]);
+  const engagementRate =
+    totals.views > 0
+      ? `${((totals.engagement / totals.views) * 100).toFixed(1)}%`
+      : "0%";
+  const instagramConnection = connections.find(
+    (connection) =>
+      connection.platform === "instagram" && connection.status === "connected",
+  );
 
-  const openNew = () => {
-    setEditingId("new");
-    setDraft(emptyDraft());
-  };
-  const openEdit = (item: SocialContentItem) => {
-    setEditingId(item.id);
-    setDraft(fromItem(item));
-  };
-  const update = <K extends keyof Draft>(key: K, value: Draft[K]) => setDraft((current) => ({ ...current, [key]: value }));
-  const copyTikTokPacket = async (item: SocialContentItem) => {
-    const packet = [item.hook, item.caption, item.call_to_action].filter(Boolean).join("\n\n");
-    await navigator.clipboard.writeText(packet);
-    setCopiedId(item.id);
-    window.setTimeout(() => setCopiedId((current) => current === item.id ? null : current), 1800);
-  };
+  const selectedItem =
+    selectedId === "new"
+      ? ("new" as const)
+      : items.find((item) => item.id === selectedId) || null;
 
-  const save = async (event: FormEvent) => {
-    event.preventDefault();
-    const count = (value: string) => Math.max(0, Number.parseInt(value || "0", 10) || 0);
-    const saved = await onAction({
-      action: "save_social_content",
-      targetId: editingId || "new",
-      socialContent: {
-        platform: draft.platform,
-        title: draft.title,
-        contentType: draft.contentType,
-        status: draft.status,
-        goal: draft.goal,
-        hook: draft.hook,
-        caption: draft.caption,
-        callToAction: draft.callToAction,
-        ownerName: draft.ownerName,
-        scheduledFor: draft.scheduledFor || null,
-        publishedAt: draft.publishedAt || null,
-        postUrl: draft.postUrl || null,
-        driveAssetUrl: draft.driveAssetUrl || null,
-        views: count(draft.views),
-        likes: count(draft.likes),
-        comments: count(draft.comments),
-        shares: count(draft.shares),
-        saves: count(draft.saves),
-        follows: count(draft.follows),
-        linkClicks: count(draft.linkClicks),
+  const saveDetail = async (targetId: string, draft: SocialDetailDraft) => {
+    const existing =
+      targetId === "new" ? null : items.find((item) => item.id === targetId);
+    const saved = await onAction(
+      {
+        action: "save_social_content",
+        targetId,
+        socialContent: {
+          platform: draft.platform,
+          title: draft.title,
+          contentType: draft.contentType,
+          status: draft.status,
+          goal: draft.goal,
+          hook: draft.hook,
+          caption: draft.caption,
+          callToAction: draft.callToAction,
+          ownerName: draft.ownerName,
+          scheduledFor: draft.scheduledFor || null,
+          publishedAt: draft.publishedAt || null,
+          postUrl: draft.postUrl || null,
+          driveAssetUrl: draft.driveAssetUrl || null,
+          views: Number(existing?.views || 0),
+          likes: Number(existing?.likes || 0),
+          comments: Number(existing?.comments || 0),
+          shares: Number(existing?.shares || 0),
+          saves: Number(existing?.saves || 0),
+          follows: Number(existing?.follows || 0),
+          linkClicks: Number(existing?.link_clicks || 0),
+        },
       },
-    }, editingId === "new" ? "Content plan created." : "Content plan updated.");
-    if (saved) setEditingId(null);
+      targetId === "new" ? "Content plan created." : "Content plan updated.",
+    );
+    if (saved && targetId === "new") setSelectedId(null);
+    return saved;
   };
 
   return (
     <div className="portal-stack social-ops">
-      <section className={`social-connection-card ${instagramConnection ? "is-connected" : ""}`}>
-        <div><span className="portal-kicker">Publishing connection</span><h2>{instagramConnection ? `Instagram @${instagramConnection.username || "connected"}` : "Connect Instagram securely"}</h2><p>{instagramConnection ? "OAuth is active. Upload media, then post now or schedule it." : "Use Meta OAuth. BawoSocial never receives or stores your Instagram password."}</p></div>
-        <button className="portal-primary-button" type="button" disabled={busy} onClick={() => void onConnectInstagram()}><Link2 aria-hidden /> {instagramConnection ? "Reconnect" : "Connect Instagram"}</button>
+      <section
+        className={`social-connection-card ${instagramConnection ? "is-connected" : ""}`}
+      >
+        <div>
+          <span className="portal-kicker">Publishing connection</span>
+          <h2>
+            {instagramConnection
+              ? `Instagram @${instagramConnection.username || "connected"}`
+              : "Connect Instagram securely"}
+          </h2>
+          <p>
+            {instagramConnection
+              ? "OAuth is active. Upload media, then post now or schedule it."
+              : "Use Meta OAuth. BawoSocial never receives or stores your Instagram password."}
+          </p>
+        </div>
+        <button
+          className="portal-primary-button"
+          type="button"
+          disabled={busy}
+          onClick={() => void onConnectInstagram()}
+        >
+          <Link2 aria-hidden />{" "}
+          {instagramConnection ? "Reconnect" : "Connect Instagram"}
+        </button>
       </section>
+
       <section className="social-ops-hero">
-        <div><span className="portal-kicker">Growth studio</span><h2>Make the next post measurable</h2><p>TikTok leads the launch. Instagram follows with reusable cuts, carousels, and community proof.</p></div>
-        <div className="social-hero-actions"><a className="portal-secondary-link" href={driveLibraryUrl} target="_blank" rel="noreferrer"><FolderOpen aria-hidden /> Media library</a><button className="portal-primary-button" type="button" onClick={openNew}><Plus aria-hidden /> New content</button></div>
+        <div>
+          <span className="portal-kicker">Growth studio</span>
+          <h2>Schedule BawoSocial posts with platform accurate previews</h2>
+          <p>
+            Review Instagram and TikTok layouts before you queue. LinkedIn, X,
+            and Facebook previews help you check caption fit for future
+            crossposts.
+          </p>
+        </div>
+        <div className="social-hero-actions">
+          <a
+            className="portal-secondary-link"
+            href={driveLibraryUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FolderOpen aria-hidden /> Media library
+          </a>
+          <button
+            className="portal-primary-button"
+            type="button"
+            onClick={() => setSelectedId("new")}
+          >
+            <Plus aria-hidden /> New content
+          </button>
+        </div>
       </section>
 
       <section className="portal-metrics" aria-label="Social performance">
-        <MetricCard icon={Megaphone} label="Pipeline" value={items.length - published} detail="Ideas through scheduled posts" tone="accent" />
-        <MetricCard icon={CalendarClock} label="Scheduled" value={scheduled} detail="Posts with a publish time" tone={scheduled > 0 ? "success" : "warning"} />
-        <MetricCard icon={Eye} label="Total views" value={totals.views.toLocaleString()} detail={`${published} published posts`} />
-        <MetricCard icon={BarChart3} label="Engagement rate" value={engagementRate} detail="Likes, comments, shares, and saves" tone="success" />
+        <MetricCard
+          icon={Megaphone}
+          label="Pipeline"
+          value={items.length - published}
+          detail="Ideas through scheduled posts"
+          tone="accent"
+        />
+        <MetricCard
+          icon={CalendarClock}
+          label="Scheduled"
+          value={scheduled}
+          detail="Posts with a publish time"
+          tone={scheduled > 0 ? "success" : "warning"}
+        />
+        <MetricCard
+          icon={Eye}
+          label="Total views"
+          value={totals.views.toLocaleString()}
+          detail={`${published} published posts`}
+        />
+        <MetricCard
+          icon={BarChart3}
+          label="Engagement rate"
+          value={engagementRate}
+          detail="Likes, comments, shares, and saves"
+          tone="success"
+        />
       </section>
-
-      {editingId && (
-        <section className="portal-panel social-editor">
-          <div className="portal-panel-heading"><div><span className="portal-kicker">Content record</span><h2>{editingId === "new" ? "Plan a post" : "Update performance"}</h2></div></div>
-          <form className="portal-form" onSubmit={save}>
-            <div className="portal-form-grid social-form-grid-3">
-              <label>Platform<select value={draft.platform} onChange={(event) => update("platform", event.target.value as SocialPlatform)}><option value="tiktok">TikTok</option><option value="instagram">Instagram</option></select></label>
-              <label>Format<select value={draft.contentType} onChange={(event) => update("contentType", event.target.value as Draft["contentType"])}><option value="short_video">Short video</option><option value="carousel">Carousel</option><option value="story">Story</option><option value="static">Static</option><option value="live">Live</option></select></label>
-              <label>Status<select value={draft.status} onChange={(event) => update("status", event.target.value as Draft["status"])}><option value="idea">Idea</option><option value="scripted">Scripted</option><option value="ready">Ready</option><option value="scheduled">Scheduled</option><option value="published">Published</option></select></label>
-            </div>
-            <div className="portal-form-grid">
-              <label>Content title<input required minLength={2} maxLength={120} value={draft.title} onChange={(event) => update("title", event.target.value)} placeholder="Three NYC jollof spots" /></label>
-              <label>Growth goal<select value={draft.goal} onChange={(event) => update("goal", event.target.value as Draft["goal"])}><option value="awareness">Awareness</option><option value="engagement">Engagement</option><option value="downloads">App downloads</option><option value="leads">Leads</option><option value="vendors">Vendors</option><option value="events">Events</option></select></label>
-            </div>
-            <label>Opening hook<textarea rows={2} maxLength={500} value={draft.hook} onChange={(event) => update("hook", event.target.value)} placeholder="NYC, stop scrolling. Your next jollof spot is here." /></label>
-            <label>Caption / script<textarea rows={4} maxLength={2200} value={draft.caption} onChange={(event) => update("caption", event.target.value)} /></label>
-            <div className="portal-form-grid">
-              <label>Call to action<input maxLength={240} value={draft.callToAction} onChange={(event) => update("callToAction", event.target.value)} /></label>
-              <label>Owner<input maxLength={100} value={draft.ownerName} onChange={(event) => update("ownerName", event.target.value)} placeholder="Alexander" /></label>
-              <label>Scheduled for<input type="datetime-local" value={draft.scheduledFor} onChange={(event) => update("scheduledFor", event.target.value)} /></label>
-              <label>Published at<input type="datetime-local" value={draft.publishedAt} onChange={(event) => update("publishedAt", event.target.value)} /></label>
-            </div>
-            <label>Live post URL<input type="url" value={draft.postUrl} onChange={(event) => update("postUrl", event.target.value)} placeholder="https://www.tiktok.com/@bawo/..." /></label>
-            <label>Google Drive asset<input type="url" value={draft.driveAssetUrl} onChange={(event) => update("driveAssetUrl", event.target.value)} placeholder="https://drive.google.com/file/d/..." /></label>
-            <div className="social-metric-inputs">
-              {(["views", "likes", "comments", "shares", "saves", "follows", "linkClicks"] as const).map((key) => <label key={key}>{key.replace(/([A-Z])/g, " $1")}<input min="0" type="number" value={draft[key]} onChange={(event) => update(key, event.target.value)} /></label>)}
-            </div>
-            <div className="portal-row-actions social-editor-actions"><button type="button" onClick={() => setEditingId(null)}>Cancel</button><button className="is-primary" disabled={busy}><Send aria-hidden /> Save content</button></div>
-          </form>
-        </section>
-      )}
 
       <section className="portal-panel">
         <div className="portal-panel-heading social-pipeline-heading">
-          <div><span className="portal-kicker">Content pipeline</span><h2>What ships next</h2></div>
-          <div className="social-platform-filter" role="group" aria-label="Filter platform">
-            <button className={platform === "all" ? "is-active" : ""} onClick={() => setPlatform("all")}>All</button>
-            <button className={platform === "tiktok" ? "is-active" : ""} onClick={() => setPlatform("tiktok")}><Sparkles aria-hidden /> TikTok</button>
-            <button className={platform === "instagram" ? "is-active" : ""} onClick={() => setPlatform("instagram")}><Instagram aria-hidden /> Instagram</button>
+          <div>
+            <span className="portal-kicker">Upcoming posts</span>
+            <h2>Content calendar</h2>
+          </div>
+          <div className="social-toolbar">
+            <div className="social-platform-filter" role="group" aria-label="Filter platform">
+              <button
+                className={platform === "all" ? "is-active" : ""}
+                onClick={() => setPlatform("all")}
+              >
+                All
+              </button>
+              <button
+                className={platform === "instagram" ? "is-active" : ""}
+                onClick={() => setPlatform("instagram")}
+              >
+                Instagram
+              </button>
+              <button
+                className={platform === "tiktok" ? "is-active" : ""}
+                onClick={() => setPlatform("tiktok")}
+              >
+                TikTok
+              </button>
+            </div>
+            <label className="social-status-filter">
+              Status
+              <select
+                value={status}
+                onChange={(event) =>
+                  setStatus(event.target.value as typeof status)
+                }
+              >
+                <option value="all">All</option>
+                <option value="idea">Idea</option>
+                <option value="scripted">Scripted</option>
+                <option value="ready">Ready</option>
+                <option value="scheduled">Scheduled</option>
+                <option value="published">Published</option>
+              </select>
+            </label>
+            <div className="social-platform-filter" role="group" aria-label="View mode">
+              <button
+                className={viewMode === "grid" ? "is-active" : ""}
+                onClick={() => setViewMode("grid")}
+              >
+                Grid
+              </button>
+              <button
+                className={viewMode === "calendar" ? "is-active" : ""}
+                onClick={() => setViewMode("calendar")}
+              >
+                Calendar
+              </button>
+            </div>
           </div>
         </div>
-        <div className="social-content-grid">
-          {visibleItems.length === 0 && <EmptyState icon={Megaphone} title="No content tracked yet" body="Create the first TikTok idea, assign an owner, and move it through the publishing pipeline." />}
-          {visibleItems.map((item) => (
-            <article className="social-content-card" key={item.id}>
-              {(() => {
-                const job = jobsByContent.get(item.id);
-                return job ? <div className={`social-job-status is-${job.status}`}><strong>{job.status}</strong><span>{job.last_error || formatDate(job.scheduled_for)}</span>{job.status === "failed" && <button disabled={busy} onClick={() => void onAction({ action: "retry_social_publish", targetId: job.id }, "Publishing retry queued.")}><RotateCcw aria-hidden /> Retry</button>}</div> : null;
-              })()}
-              <div className="social-content-top"><span className={`social-platform is-${item.platform}`}>{item.platform === "tiktok" ? <Sparkles aria-hidden /> : <Instagram aria-hidden />}{item.platform}</span><span className={`portal-status is-${item.status === "published" ? "success" : item.status === "scheduled" ? "warning" : "muted"}`}>{item.status}</span></div>
-              <div><span className="social-goal">{item.goal}</span><h3>{item.title}</h3><p>{item.hook || "Add a hook that earns the first three seconds."}</p></div>
-              <div className="social-card-meta"><span><CalendarClock aria-hidden /> {formatDate(item.scheduled_for || item.published_at)}</span><span>{item.owner_name || "Unassigned"}</span></div>
-              {item.drive_asset_url && <a className="social-drive-link" href={item.drive_asset_url} target="_blank" rel="noreferrer"><FolderOpen aria-hidden /> Open source asset <ExternalLink aria-hidden /></a>}
-              <div className="social-card-stats"><span><Eye aria-hidden /> {Number(item.views).toLocaleString()}</span><span><Heart aria-hidden /> {Number(item.likes).toLocaleString()}</span><span><MessageCircle aria-hidden /> {Number(item.comments).toLocaleString()}</span><span><Share2 aria-hidden /> {Number(item.shares).toLocaleString()}</span></div>
-              {item.platform === "instagram" && (
-                <div className="social-publish-controls">
-                  <label className="social-upload-button"><Upload aria-hidden /> {item.media_path ? "Replace media" : "Upload media"}<input type="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/quicktime" disabled={busy} onChange={(event) => { const file = event.target.files?.[0]; if (file) void onUploadMedia(item.id, file); event.currentTarget.value = ""; }} /></label>
-                  <span className="social-media-state">{item.media_path ? `${item.media_type} ready` : "No media uploaded"}</span>
-                  {instagramConnection && item.media_path && !["queued", "publishing", "published"].includes(jobsByContent.get(item.id)?.status || "") && (
-                    <div className="social-schedule-row">
-                      <input aria-label="Publishing time" type="datetime-local" value={scheduleTimes[item.id] || toLocalDate(item.scheduled_for)} onChange={(event) => setScheduleTimes((current) => ({ ...current, [item.id]: event.target.value }))} />
-                      <button disabled={busy} onClick={() => void onQueuePublish(item.id, new Date().toISOString())}>Post now</button>
-                      <button disabled={busy || !(scheduleTimes[item.id] || item.scheduled_for)} onClick={() => { const value = scheduleTimes[item.id] || item.scheduled_for; if (value) void onQueuePublish(item.id, new Date(value).toISOString()); }}>Schedule</button>
-                    </div>
-                  )}
-                </div>
-              )}
-              {item.platform === "tiktok" && (
-                <div className="social-publish-controls social-tiktok-controls">
-                  <p>TikTok requires a human final review. Copy the posting packet, open the Drive asset, and publish in TikTok.</p>
-                  <div className="social-tiktok-actions">
-                    <button disabled={busy || (!item.caption && !item.hook)} onClick={() => void copyTikTokPacket(item)}><Clipboard aria-hidden /> {copiedId === item.id ? "Copied" : "Copy post packet"}</button>
-                    {item.drive_asset_url && <a href={item.drive_asset_url} target="_blank" rel="noreferrer"><FolderOpen aria-hidden /> Open media</a>}
+
+        {visibleItems.length === 0 && (
+          <EmptyState
+            icon={Megaphone}
+            title="No content tracked yet"
+            body="Create the first BawoSocial TikTok or Instagram idea, then open it to preview and schedule."
+          />
+        )}
+
+        {viewMode === "grid" && visibleItems.length > 0 && (
+          <div className="social-preview-grid">
+            {visibleItems.map((item) => {
+              const layout = previewForItem(item);
+              const thumb = socialItemMediaUrl(item);
+              return (
+                <button
+                  type="button"
+                  key={item.id}
+                  className="social-preview-card"
+                  onClick={() => setSelectedId(item.id)}
+                >
+                  <div className="social-preview-card-top">
+                    <PlatformBadge platform={item.platform} />
+                    <span
+                      className={`portal-status is-${item.status === "published" ? "success" : item.status === "scheduled" ? "warning" : "muted"}`}
+                    >
+                      {item.status}
+                    </span>
                   </div>
-                  <div className="social-schedule-row social-tiktok-schedule">
-                    <input aria-label="TikTok reminder time" type="datetime-local" value={scheduleTimes[item.id] || toLocalDate(item.scheduled_for)} onChange={(event) => setScheduleTimes((current) => ({ ...current, [item.id]: event.target.value }))} />
-                      <button disabled={busy || !(scheduleTimes[item.id] || item.scheduled_for)} onClick={() => { const value = scheduleTimes[item.id] || item.scheduled_for; if (value) void onScheduleTikTok(item.id, new Date(value).toISOString()); }}>Add to schedule</button>
+                  <div className="social-preview-thumb">
+                    {thumb ? (
+                      item.media_type === "video" ? (
+                        <video src={thumb} muted playsInline preload="metadata" />
+                      ) : (
+                        <img src={thumb} alt="" />
+                      )
+                    ) : (
+                      <span>No media</span>
+                    )}
                   </div>
+                  <div className="social-preview-card-body">
+                    <h3>{item.title}</h3>
+                    <p>{formatNyDateTime(item.scheduled_for)}</p>
+                  </div>
+                  <div className="social-preview-card-mock" aria-hidden>
+                    <PlatformPreview item={item} platform={layout} compact />
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        )}
+
+        {viewMode === "calendar" && visibleItems.length > 0 && (
+          <div className="social-calendar">
+            {calendarGroups.map(([day, dayItems]) => (
+              <section key={day} className="social-calendar-day">
+                <h3>{day === "Unscheduled" ? "Unscheduled" : day}</h3>
+                <div className="social-calendar-row">
+                  {dayItems.map((item) => (
+                    <button
+                      type="button"
+                      key={item.id}
+                      className="social-calendar-chip"
+                      onClick={() => setSelectedId(item.id)}
+                    >
+                      <PlatformBadge platform={item.platform} />
+                      <strong>{item.title}</strong>
+                      <span>{formatNyDateTime(item.scheduled_for)}</span>
+                    </button>
+                  ))}
                 </div>
-              )}
-              <div className="portal-row-actions"><button onClick={() => openEdit(item)}><Pencil aria-hidden /> Edit</button>{item.post_url && <a className="social-post-link" href={item.post_url} target="_blank" rel="noreferrer">View post</a>}<button className="is-danger" disabled={busy} onClick={() => { if (window.confirm(`Archive ${item.title}?`)) void onAction({ action: "archive_social_content", targetId: item.id }, "Content item archived."); }}><Archive aria-hidden /> Archive</button></div>
-            </article>
-          ))}
-        </div>
+              </section>
+            ))}
+          </div>
+        )}
       </section>
+
+      {selectedItem && (
+        <SocialPostDetail
+          item={selectedItem}
+          connections={connections}
+          publishJob={
+            selectedItem === "new"
+              ? undefined
+              : jobsByContent.get(selectedItem.id)
+          }
+          busy={busy}
+          onClose={() => setSelectedId(null)}
+          onSave={saveDetail}
+          onUploadMedia={onUploadMedia}
+          onQueuePublish={onQueuePublish}
+          onScheduleTikTok={onScheduleTikTok}
+        />
+      )}
     </div>
   );
 }
