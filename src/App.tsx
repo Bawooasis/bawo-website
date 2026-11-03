@@ -22,6 +22,7 @@ import SiteLogo from "./components/SiteLogo";
 import { TAILWIND_COLORS } from "./constants/colors";
 import { CONTENT } from "./constants/content";
 import { IMAGES } from "./constants/images";
+import { AFFILIATE_DISCLOSURE_LINE } from "./constants/legal";
 import { scrollToWaitlist } from "./utils/scrollToWaitlist";
 
 // Register ScrollTrigger plugin
@@ -542,9 +543,18 @@ function App() {
           className="relative bawo-scroll-anchor py-24 bg-transparent"
         >
           <div className="relative z-10 container mx-auto px-6">
-            <h2 className="text-center text-4xl sm:text-5xl md:text-6xl font-bold font-display text-[#F7F3FA] mb-12">
+            <h2 className="text-center text-4xl sm:text-5xl md:text-6xl font-bold font-display text-[#F7F3FA] mb-6">
               {CONTENT.events.title}
             </h2>
+            <p className="mx-auto mb-12 max-w-3xl text-center text-sm sm:text-base leading-relaxed text-[#F7E7C4]/85">
+              {AFFILIATE_DISCLOSURE_LINE}{" "}
+              <a
+                href="/affiliate-disclosure"
+                className="font-semibold text-[#D6B26A] underline-offset-2 hover:underline"
+              >
+                Affiliate disclosure
+              </a>
+            </p>
             <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {CONTENT.events.items.map((event) => {
                 const Icon =
@@ -744,6 +754,12 @@ function App() {
                     Privacy Policy
                   </button>
                   <a
+                    href="/affiliate-disclosure"
+                    className="flex min-h-10 items-center justify-center text-[#F7F3FA]/80 hover:text-[#D6B26A] text-sm font-medium md:justify-start"
+                  >
+                    Affiliate disclosure
+                  </a>
+                  <a
                     href="/admin"
                     className="flex min-h-10 items-center justify-center text-[#F7F3FA]/50 hover:text-[#D6B26A] text-xs font-medium md:justify-start"
                   >
@@ -754,7 +770,16 @@ function App() {
             </div>
 
             {/* Bottom Bar */}
-            <div className="border-t border-[#D6B26A]/15 pt-8 text-center">
+            <div className="border-t border-[#D6B26A]/15 pt-8 text-center space-y-3">
+              <p className="text-[#F7E7C4]/75 text-sm leading-relaxed max-w-3xl mx-auto">
+                {AFFILIATE_DISCLOSURE_LINE}{" "}
+                <a
+                  href="/affiliate-disclosure"
+                  className="font-semibold text-[#D6B26A] underline-offset-2 hover:underline"
+                >
+                  Learn more
+                </a>
+              </p>
               <p className="text-[#F7F3FA]/65 text-sm">
                 {CONTENT.footer.copyright}
               </p>
@@ -797,6 +822,27 @@ function App() {
                   website at joinbawo.com and use the BawoSocial mobile
                   application and services.
                 </p>
+
+                <section className="space-y-3">
+                  <h3 className="text-xl font-bold text-gray-900">
+                    Affiliate disclosure
+                  </h3>
+                  <p>{AFFILIATE_DISCLOSURE_LINE}</p>
+                  <p>
+                    Some ticket and event links on BawoSocial include tracking
+                    or promoter codes from third party platforms. If you
+                    complete a purchase through those links, BawoSocial may
+                    receive a commission. This does not change the ticket price
+                    set by the organizer or platform. Read the full{" "}
+                    <a
+                      href="/affiliate-disclosure"
+                      className="font-semibold text-[#A07636] underline-offset-2 hover:underline"
+                    >
+                      Affiliate disclosure
+                    </a>
+                    .
+                  </p>
+                </section>
               </div>
             </div>
           </div>

@@ -13,13 +13,26 @@ import {
   UsersRound,
   X,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 import GroupEditor, { type GroupEditorInput } from "./GroupEditor";
 import SocialMediaPanel from "./SocialMediaPanel";
 import CrmPanel from "./CrmPanel";
+import {
+  AFFILIATE_SOURCE_OPTIONS,
+  emptyAffiliateDraft,
+  eventHasAffiliateColumns,
+  isAffiliateSchemaPendingError,
+} from "./eventAffiliate";
 import type { PortalTab } from "./PortalLayout";
 import { EmptyState, MetricCard } from "./PortalUi";
-import type { AdminAction, AdminOverview, PlatformUser } from "./types";
+import type {
+  AdminAction,
+  AdminOverview,
+  EventAffiliateFields,
+  EventAffiliateSource,
+  EventSubmission,
+  PlatformUser,
+} from "./types";
 
 type AdminPortalProps = {
   data: AdminOverview;
@@ -61,6 +74,12 @@ export default function AdminPortal({
 }: AdminPortalProps) {
   const [query, setQuery] = useState("");
   const [editingGroupId, setEditingGroupId] = useState<string | null>(null);
+  const [editingEventId, setEditingEventId] = useState<string | null>(null);
+  const [affiliateDraft, setAffiliateDraft] = useState<EventAffiliateFields>(
+    emptyAffiliateDraft(),
+  );
+  const [affiliateNotice, setAffiliateNotice] = useState("");
+  const [affiliateSchemaPending, setAffiliateSchemaPending] = useState(false);
   const filteredUsers = useMemo(() => {
     const normalized = query.trim().toLowerCase();
     if (!normalized) return data.users;
@@ -345,6 +364,54 @@ export default function AdminPortal({
 
   if (activeTab === "events") {
     const submissions = data.eventSubmissions || [];
+    const showSchemaBanner =
+      affiliateSchemaPending ||
+      (submissions.length > 0 && !eventHasAffiliateColumns(submissions));
+
+    const openAffiliateEditor = (ev: EventSubmission) => {
+      setEditingEventId(ev.id);
+      setAffiliateDraft(emptyAffiliateDraft(ev));
+      setAffiliateNotice("");
+    };
+
+    const saveAffiliate = async (event: FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      if (!editingEventId) return;
+      setAffiliateNotice("");
+      const payload: EventAffiliateFields = {
+        promoter_ticket_url: affiliateDraft.promoter_ticket_url?.trim() || null,
+        promo_code: affiliateDraft.promo_code?.trim() || null,
+        promo_code_note: affiliateDraft.promo_code_note?.trim() || null,
+        affiliate_source:
+          (affiliateDraft.affiliate_source as EventAffiliateSource) || null,
+      };
+      try {
+        const saved = await onAction(
+          {
+            action: "save_event_affiliate",
+            targetId: editingEventId,
+            eventAffiliate: payload,
+          },
+          "Event affiliate details saved.",
+        );
+        if (saved) {
+          setEditingEventId(null);
+          setAffiliateNotice("");
+        }
+      } catch (saveError) {
+        const message =
+          saveError instanceof Error ? saveError.message : "Unable to save.";
+        if (isAffiliateSchemaPendingError(message)) {
+          setAffiliateSchemaPending(true);
+          setAffiliateNotice(
+            "Affiliate fields are ready in Control Center. They will save after the BawoSocial app database migration is deployed.",
+          );
+          return;
+        }
+        setAffiliateNotice(message);
+      }
+    };
+
     return (
       <section className="portal-panel">
         <div className="portal-panel-heading">
@@ -353,6 +420,18 @@ export default function AdminPortal({
             <h2>Submitted &amp; created events</h2>
           </div>
         </div>
+        {showSchemaBanner && (
+          <div className="portal-alert is-warning" role="status">
+            Affiliate ticket fields are available here. Saving will activate once
+            the BawoSocial app migration adds promoter_ticket_url, promo_code,
+            promo_code_note, and affiliate_source. Approve and reject still work.
+          </div>
+        )}
+        {affiliateNotice ? (
+          <div className="portal-alert is-warning" role="status">
+            {affiliateNotice}
+          </div>
+        ) : null}
         <div className="portal-list">
           {submissions.length === 0 && (
             <EmptyState
@@ -362,17 +441,40 @@ export default function AdminPortal({
             />
           )}
           {submissions.map((ev) => (
-            <article className="portal-list-row" key={ev.id}>
+            <article className="portal-list-row portal-event-row" key={ev.id}>
               <div className="portal-list-main">
                 <strong>{ev.title}</strong>
                 <span>
                   {(ev.provider === "bawosocial" ? "Created Event" : "Community Tip")} · {ev.venue_name || ev.location || ev.city || "NYC"} · {formatDate(ev.starts_at)}
                 </span>
+                {(ev.promo_code || ev.affiliate_source || ev.promoter_ticket_url) && (
+                  <span className="portal-event-affiliate-summary">
+                    {[
+                      ev.affiliate_source,
+                      ev.promo_code ? `Code ${ev.promo_code}` : null,
+                      ev.promoter_ticket_url ? "Promoter link set" : null,
+                    ]
+                      .filter(Boolean)
+                      .join(" · ")}
+                  </span>
+                )}
               </div>
               <span className={`portal-status ${ev.moderation_status === "approved" ? "is-success" : ev.moderation_status === "rejected" ? "is-danger" : "is-warning"}`}>
                 {ev.moderation_status}
               </span>
               <div className="portal-row-actions">
+                <button
+                  type="button"
+                  disabled={busy}
+                  onClick={() =>
+                    editingEventId === ev.id
+                      ? setEditingEventId(null)
+                      : openAffiliateEditor(ev)
+                  }
+                >
+                  <Pencil aria-hidden />{" "}
+                  {editingEventId === ev.id ? "Close" : "Affiliate"}
+                </button>
                 {ev.moderation_status !== "approved" && (
                   <button
                     disabled={busy}
@@ -403,6 +505,86 @@ export default function AdminPortal({
                   </button>
                 )}
               </div>
+              {editingEventId === ev.id && (
+                <form className="portal-event-affiliate-form" onSubmit={saveAffiliate}>
+                  <div className="portal-form-grid">
+                    <label>
+                      Promoter ticket URL
+                      <input
+                        type="url"
+                        value={affiliateDraft.promoter_ticket_url || ""}
+                        onChange={(change) =>
+                          setAffiliateDraft((current) => ({
+                            ...current,
+                            promoter_ticket_url: change.target.value,
+                          }))
+                        }
+                        placeholder="https://"
+                      />
+                    </label>
+                    <label>
+                      Affiliate source
+                      <select
+                        value={affiliateDraft.affiliate_source || ""}
+                        onChange={(change) =>
+                          setAffiliateDraft((current) => ({
+                            ...current,
+                            affiliate_source: change.target
+                              .value as EventAffiliateSource,
+                          }))
+                        }
+                      >
+                        {AFFILIATE_SOURCE_OPTIONS.map((option) => (
+                          <option key={option.value || "none"} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <label>
+                      Promo code
+                      <input
+                        value={affiliateDraft.promo_code || ""}
+                        onChange={(change) =>
+                          setAffiliateDraft((current) => ({
+                            ...current,
+                            promo_code: change.target.value,
+                          }))
+                        }
+                        placeholder="Optional code"
+                        maxLength={64}
+                      />
+                    </label>
+                    <label>
+                      Promo code note
+                      <input
+                        value={affiliateDraft.promo_code_note || ""}
+                        onChange={(change) =>
+                          setAffiliateDraft((current) => ({
+                            ...current,
+                            promo_code_note: change.target.value,
+                          }))
+                        }
+                        placeholder="Where to show this code"
+                        maxLength={240}
+                      />
+                    </label>
+                  </div>
+                  <div className="portal-row-actions">
+                    <button type="submit" disabled={busy}>
+                      Save affiliate fields
+                    </button>
+                    <button
+                      type="button"
+                      className="portal-ghost-button"
+                      disabled={busy}
+                      onClick={() => setEditingEventId(null)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              )}
             </article>
           ))}
         </div>
