@@ -23,7 +23,7 @@ export default function MobileAppDownloadRow({ className = "" }: MobileAppDownlo
         <Download className="h-5 w-5 shrink-0 text-white/90" strokeWidth={2} aria-hidden />
         <span className="flex min-w-0 flex-1 flex-col items-start text-left leading-tight">
           <span className="text-[14px] sm:text-[15px] tracking-wide">{downloadIos}</span>
-          <span className="text-[11px] sm:text-xs font-medium text-white/80">{downloadIosSub}</span>
+          <span className="text-sm font-medium text-white/80">{downloadIosSub}</span>
         </span>
         <ArrowUpRight
           className="h-4 w-4 shrink-0 text-white/70 transition-opacity group-hover:text-white"
@@ -32,12 +32,12 @@ export default function MobileAppDownloadRow({ className = "" }: MobileAppDownlo
         />
       </a>
       <div
-        className="inline-flex min-h-[44px] w-full flex-row items-center justify-between gap-3 rounded-full border border-white/10 bg-transparent px-5 py-2 text-left text-[13px] sm:text-sm text-white/40"
+        className="inline-flex min-h-[44px] w-full flex-row items-center justify-between gap-3 rounded-full border border-white/10 bg-transparent px-5 py-2 text-left text-sm text-white/40"
         role="status"
         aria-label={`${downloadAndroid}, ${downloadAndroidSoon}`}
       >
         <span className="font-medium text-white/50">{downloadAndroid}</span>
-        <span className="rounded-md bg-white/[0.07] px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-white/35">
+        <span className="rounded-md bg-white/[0.07] px-2 py-1 text-sm font-semibold uppercase tracking-wide text-white/35">
           {downloadAndroidSoon}
         </span>
       </div>

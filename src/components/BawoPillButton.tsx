@@ -21,7 +21,7 @@ const metrics = {
   sm: {
     h: "min-h-[44px]",
     px: "px-5",
-    text: "text-[13px]",
+    text: "text-sm",
     icon: 17,
   },
   md: {
