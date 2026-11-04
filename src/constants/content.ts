@@ -67,7 +67,7 @@ export const CONTENT = {
         badge: "140+ Verified NYC Spots",
         liveMetric: "Brooklyn · Harlem · Queens · Bronx · Staten Island",
         highlights: [
-          "Brooklyn Suya Spot (Nigerian · 4.3 · Directions · 3.3 mi), BUKA & Lagos TSQ",
+          "Brooklyn Suya Spot (Nigerian · 4.3 · Directions · 3.3 mi), BUKA",
           "Filter by Food, Shop, Resources & Services with golden NYC map pins",
           "Business owners can sign in to claim & verify their listing",
         ],
@@ -215,7 +215,7 @@ export const CONTENT = {
       name: "Manhattan & Harlem",
       tag: "Harlem · Midtown · Times Square · Lower East Side",
       spotsCount: "36+ Verified Spots",
-      highlight: "Lagos TSQ, Afrobeats lounges, founders mixers & dining",
+      highlight: "Afrobeats lounges, founders mixers & dining",
     },
     {
       name: "Queens",

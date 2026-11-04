@@ -812,7 +812,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
                         type="text"
                         value={businessName}
                         onChange={(e) => setBusinessName(e.target.value)}
-                        placeholder="e.g. BUKA, Lagos TSQ, Eko Market, Crown Braids"
+                        placeholder="e.g. BUKA, Eko Market, Crown Braids"
                         required
                       />
                     </label>
