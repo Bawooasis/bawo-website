@@ -1,4 +1,4 @@
-/* Typography: Cormorant Garamond display + system UI sans (wordmark/headings = Cormorant). */
+/* Typography: Outfit everywhere (headings, body, buttons, nav, wordmark). */
 
 @tailwind base;
 @tailwind components;
@@ -938,7 +938,7 @@ a.bawo-cta-quiet:active {
   text-align: center;
   font-size: 0.875remNone;
   font-weight: 500;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   color: rgba(255, 255, 255, 0.58);
   background: none;
   border: none;
@@ -1046,7 +1046,7 @@ a.bawo-cta-quiet:active {
 
 @layer base {
   html {
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    font-family: "Outfit", system-ui, sans-serif;
     font-size: 16px;
     line-height: 1.6;
     scroll-behavior: smooth;
@@ -1065,7 +1065,7 @@ a.bawo-cta-quiet:active {
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    font-family: "Outfit", system-ui, sans-serif;
     font-size: 1rem;
     line-height: 1.6;
     overflow-x: clip;
@@ -1082,7 +1082,7 @@ a.bawo-cta-quiet:active {
   h2,
   h3,
   .font-display {
-    font-family: "Cormorant Garamond", Georgia, serif;
+    font-family: "Outfit", system-ui, sans-serif;
     font-weight: 700;
     line-height: 1.2;
   }
@@ -1179,7 +1179,7 @@ a.bawo-cta-quiet:active {
   background: transparent;
   border: 0;
   cursor: pointer;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
 }
 
 @media (min-width: 768px) {
@@ -1190,7 +1190,7 @@ a.bawo-cta-quiet:active {
 
 .bawo-faq-panel__question {
   flex: 1 1 auto;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   font-weight: 500;
   font-size: 1rem;
   line-height: 1.45;
@@ -1269,7 +1269,7 @@ a.bawo-cta-quiet:active {
   margin: 0;
   padding: 0.9rem 1.25rem 1.2rem;
   padding-right: 2.75rem;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   font-weight: 500;
   font-size: 0.875rem;
   line-height: 1.65;
@@ -1294,7 +1294,7 @@ a.bawo-cta-quiet:active {
   box-sizing: border-box;
   padding: var(--bawo-space-md) var(--bawo-space-lg);
   min-height: 3.25rem;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   font-weight: var(--bawo-cta-font-weight, 600);
   font-size: var(--bawo-font-md, 1rem);
   line-height: 1.3;
@@ -1443,10 +1443,10 @@ a.bawo-cta-quiet:active {
   object-position: center;
 }
 
-/* Direction B — Cormorant Garamond SemiBold + app champagneGradient */
+/* BawoSocial wordmark — Outfit SemiBold + champagneGradient */
 .bawo-site-logo__wordmark {
   display: block;
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "Outfit", system-ui, sans-serif;
   font-weight: 600;
   font-size: 1.2rem;
   line-height: 1;
@@ -1578,7 +1578,7 @@ a.bawo-cta-quiet:active {
   padding: 0.4rem 0.75rem;
   font-size: 0.875remNone;
   font-weight: 500;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   color: rgba(255, 255, 255, 0.62);
   text-decoration: none;
   border-radius: 0.375rem;
@@ -1783,7 +1783,7 @@ a.bawo-cta-quiet:active {
   border-radius: 0.75rem;
   font-size: 0.875rem;
   font-weight: 500;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   transition: background-color 0.15s ease;
@@ -1904,7 +1904,7 @@ a.bawo-cta-quiet:active {
   max-width: 28rem;
   margin: 0;
   color: rgba(255, 255, 255, 0.82);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   font-size: 0.98rem;
   font-weight: 500;
   line-height: 1.55;
@@ -1923,7 +1923,7 @@ a.bawo-cta-quiet:active {
 
 .bawo-hero-cinematic__textlink {
   color: rgba(255, 255, 255, 0.88);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   font-size: 0.92rem;
   font-weight: 500;
   text-decoration: none;
@@ -1944,7 +1944,7 @@ a.bawo-cta-quiet:active {
   border: 1px solid rgba(255, 255, 255, 0.16);
   background: rgba(16, 8, 28, 0.72);
   color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   font-size: 0.92rem;
   font-weight: 500;
   text-decoration: none;
@@ -2244,7 +2244,7 @@ a.bawo-cta-quiet:active {
   align-items: center;
   min-height: 2.75rem;
   padding: 0.45rem 0.85rem;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   font-size: 0.875remNone;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.62);
@@ -2425,7 +2425,7 @@ a.bawo-cta-quiet:active {
   align-items: center;
   gap: 0.45rem;
   padding: 0.5rem 0.75rem;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   font-size: 0.875remNone;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -2447,7 +2447,7 @@ a.bawo-cta-quiet:active {
   gap: 0.4rem;
   padding: 0.45rem 0.7rem;
   border-color: rgba(255, 255, 255, 0.28);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   font-size: 0.875remNone;
   font-weight: 600;
   cursor: pointer;
@@ -2479,7 +2479,7 @@ a.bawo-cta-quiet:active {
 }
 
 .bawo-next-preview__placeholder-kicker {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   font-size: 0.875remNone;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -2488,7 +2488,7 @@ a.bawo-cta-quiet:active {
 }
 
 .bawo-next-preview__placeholder-title {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   font-size: 1.35rem;
   font-weight: 700;
   color: #fff;
@@ -2496,7 +2496,7 @@ a.bawo-cta-quiet:active {
 }
 
 .bawo-next-preview__placeholder-hint {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   font-size: 0.875remNone;
   color: rgba(255, 255, 255, 0.4);
 }
@@ -2540,14 +2540,14 @@ a.bawo-cta-quiet:active {
 }
 
 .bawo-next-preview__tab-title {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   font-size: 0.9375rem;
   font-weight: 600;
   line-height: 1.3;
 }
 
 .bawo-next-preview__tab-body {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   font-size: 0.875remNone;
   font-weight: 500;
   line-height: 1.55;
@@ -2775,7 +2775,7 @@ a.bawo-cta-quiet:active {
   width: 100%;
   min-height: 52px;
   padding: 0.55rem var(--bawo-space-lg);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   font-weight: 600;
   font-size: var(--bawo-font-sm, 0.875rem);
   line-height: 1.22;
@@ -3155,7 +3155,7 @@ a.bawo-cta-quiet:active {
   min-height: 2.15rem;
   padding: 0.35rem 0.8rem;
   border-radius: 9999px;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   font-size: 0.875remNone;
   font-weight: 700;
   letter-spacing: 0.015em;
@@ -3201,7 +3201,7 @@ a.bawo-cta-quiet:active {
 /* ============================================================================
  * BAWOSOCIAL $50,000 FLAGSHIP THEME OVERRIDES
  * Deep Eggplant (#07050B -> #0E0A14 -> #160F24) + Signature Warm Gold (#D6B26A)
- * + True Liquid Glass + Cormorant Garamond Bold Display + system UI sans
+ * + True Liquid Glass + Outfit (single brand typeface)
  * ============================================================================ */
 
 :root {
@@ -3228,7 +3228,7 @@ a.bawo-cta-quiet:active {
 
 html,
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   font-size: 1rem;
   line-height: 1.6;
   background-color: #0E0A14;
@@ -3243,7 +3243,7 @@ nav,
 .portal-shell,
 .portal-auth-shell,
 footer {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
 }
 
 .bawo-page-bg-base {
@@ -3271,7 +3271,7 @@ footer {
   pointer-events: none !important;
 }
 
-/* Cormorant Garamond Bold Editorial Display Typography */
+/* Outfit display / heading typography */
 h1,
 h2,
 h3.font-display,
@@ -3279,7 +3279,7 @@ h3.font-display,
 .bawo-hero-cinematic__title,
 .bawo-editorial-heading,
 .bawo-site-logo__wordmark {
-  font-family: "Cormorant Garamond", Georgia, serif !important;
+  font-family: "Outfit", system-ui, sans-serif !important;
   font-weight: 700 !important;
   letter-spacing: -0.02em;
 }
@@ -3310,7 +3310,7 @@ h3.font-display,
 .liquid-glass-cta {
   background: linear-gradient(135deg, #F7E7C4 0%, #D6B26A 55%, #A07636 100%) !important;
   color: #0E0A14 !important;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif !important;
+  font-family: "Outfit", system-ui, sans-serif !important;
   font-weight: 700 !important;
   border: 1px solid rgba(247, 231, 196, 0.55) !important;
   box-shadow:
@@ -3466,12 +3466,12 @@ h3.font-display,
 .bawo-site-header__mobile-link,
 .bawo-faq-panel__question,
 .bawo-faq-panel__answer {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif !important;
+  font-family: "Outfit", system-ui, sans-serif !important;
 }
 
 /* Prominent Gold Businesses Chip in Top Bar */
 .bawo-site-header__businesses-chip {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   background: linear-gradient(135deg, rgba(247, 231, 196, 0.2), rgba(214, 178, 106, 0.12));
   border: 1px solid rgba(214, 178, 106, 0.48);
   color: #F7E7C4;
@@ -3498,7 +3498,7 @@ h3.font-display,
 }
 
 .bawo-hero-cinematic__pill {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif !important;
+  font-family: "Outfit", system-ui, sans-serif !important;
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   background: rgba(24, 15, 38, 0.68) !important;

@@ -108,7 +108,7 @@ export const recipes = {
   },
   liquidGlassCTAText: {
     color: sem.text.onAction,
-    fontFamily: '"Plus Jakarta Sans", sans-serif',
+    fontFamily: '"Outfit", system-ui, sans-serif',
     fontWeight: 700,
     fontSize: fontSize.md,
     letterSpacing: "0.2px",

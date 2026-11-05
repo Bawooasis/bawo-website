@@ -1,31 +1,24 @@
 /** @type {import('tailwindcss').Config} */
-const systemSans = [
-  '-apple-system',
-  'BlinkMacSystemFont',
-  '"SF Pro Text"',
-  '"Segoe UI"',
-  'Roboto',
-  'sans-serif',
-];
+const outfit = ['"Outfit"', 'system-ui', 'sans-serif'];
 
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       fontFamily: {
-        sans: systemSans,
-        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-        // Legacy museo-* aliases: UI weights → system sans; bold display → Cormorant
-        museo: systemSans,
-        'museo-thin': systemSans,
-        'museo-light': systemSans,
-        'museo-regular': systemSans,
-        'museo-medium': systemSans,
-        'museo-semibold': systemSans,
-        'museo-bold': ['"Cormorant Garamond"', 'Georgia', 'serif'],
-        'museo-extrabold': ['"Cormorant Garamond"', 'Georgia', 'serif'],
-        'museo-black': ['"Cormorant Garamond"', 'Georgia', 'serif'],
-        wordmark: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        sans: outfit,
+        display: outfit,
+        // Legacy museo-* aliases all resolve to Outfit
+        museo: outfit,
+        'museo-thin': outfit,
+        'museo-light': outfit,
+        'museo-regular': outfit,
+        'museo-medium': outfit,
+        'museo-semibold': outfit,
+        'museo-bold': outfit,
+        'museo-extrabold': outfit,
+        'museo-black': outfit,
+        wordmark: outfit,
       },
       fontSize: {
         // Floor visible text at 14px; body stays 16px
