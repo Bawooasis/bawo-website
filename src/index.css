@@ -837,7 +837,7 @@ a.bawo-cta-quiet:active {
   display: inline-flex;
   align-items: center;
   gap: 0.2rem;
-  font-size: 0.875remNone;
+  font-size: 0.875rem;
   line-height: 1.25;
   font-weight: 500;
   text-align: center;
@@ -846,7 +846,7 @@ a.bawo-cta-quiet:active {
 
 @media (min-width: 640px) {
   .bawo-action-tile__label {
-    font-size: 0.875remNone;
+    font-size: 0.875rem;
   }
 
   .bawo-secondary-bar__row {
@@ -936,7 +936,7 @@ a.bawo-cta-quiet:active {
   width: 100%;
   padding: 0.625rem 0.5rem;
   text-align: center;
-  font-size: 0.875remNone;
+  font-size: 0.875rem;
   font-weight: 500;
   font-family: "Outfit", system-ui, sans-serif;
   color: rgba(255, 255, 255, 0.58);
@@ -1576,7 +1576,7 @@ a.bawo-cta-quiet:active {
 
 .bawo-site-header__nav-link {
   padding: 0.4rem 0.75rem;
-  font-size: 0.875remNone;
+  font-size: 0.875rem;
   font-weight: 500;
   font-family: "Outfit", system-ui, sans-serif;
   color: rgba(255, 255, 255, 0.62);
@@ -1668,7 +1668,7 @@ a.bawo-cta-quiet:active {
 }
 
 .bawo-site-header__founding-chip-label {
-  font-size: 0.875remNone;
+  font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -2245,7 +2245,7 @@ a.bawo-cta-quiet:active {
   min-height: 2.75rem;
   padding: 0.45rem 0.85rem;
   font-family: "Outfit", system-ui, sans-serif;
-  font-size: 0.875remNone;
+  font-size: 0.875rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.62);
   text-decoration: none;
@@ -2426,10 +2426,10 @@ a.bawo-cta-quiet:active {
   gap: 0.45rem;
   padding: 0.5rem 0.75rem;
   font-family: "Outfit", system-ui, sans-serif;
-  font-size: 0.875remNone;
+  font-size: 0.875rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-transform: none;
 }
 
 .bawo-next-preview__status > span {
@@ -2448,7 +2448,7 @@ a.bawo-cta-quiet:active {
   padding: 0.45rem 0.7rem;
   border-color: rgba(255, 255, 255, 0.28);
   font-family: "Outfit", system-ui, sans-serif;
-  font-size: 0.875remNone;
+  font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
   pointer-events: auto;
@@ -2480,10 +2480,10 @@ a.bawo-cta-quiet:active {
 
 .bawo-next-preview__placeholder-kicker {
   font-family: "Outfit", system-ui, sans-serif;
-  font-size: 0.875remNone;
+  font-size: 0.875rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-transform: none;
   color: var(--bawo-peach, #ff8c42);
 }
 
@@ -2497,7 +2497,7 @@ a.bawo-cta-quiet:active {
 
 .bawo-next-preview__placeholder-hint {
   font-family: "Outfit", system-ui, sans-serif;
-  font-size: 0.875remNone;
+  font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.4);
 }
 
@@ -2548,7 +2548,7 @@ a.bawo-cta-quiet:active {
 
 .bawo-next-preview__tab-body {
   font-family: "Outfit", system-ui, sans-serif;
-  font-size: 0.875remNone;
+  font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.55;
   color: rgba(255, 255, 255, 0.7);
@@ -3156,7 +3156,7 @@ a.bawo-cta-quiet:active {
   padding: 0.35rem 0.8rem;
   border-radius: 9999px;
   font-family: "Outfit", system-ui, sans-serif;
-  font-size: 0.875remNone;
+  font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.015em;
   color: #fff6ea;

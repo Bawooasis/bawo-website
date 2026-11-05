@@ -195,7 +195,7 @@ function App() {
 
           <div className="bawo-hero-cinematic__stage relative z-10 flex flex-col">
             <div className="bawo-hero-cinematic__main">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/40 bg-[#1C132B]/75 px-3.5 py-1.5 text-sm font-bold uppercase tracking-widest text-[#F7E7C4] backdrop-blur-xl mb-1">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/40 bg-[#1C132B]/75 px-3.5 py-1.5 text-sm font-bold tracking-wide text-[#F7E7C4] backdrop-blur-xl mb-1">
                 <Sparkles className="h-3.5 w-3.5 text-[#D6B26A]" aria-hidden />
                 <span>BawoSocial · The Culture Hub for Nigerians in NYC</span>
               </div>

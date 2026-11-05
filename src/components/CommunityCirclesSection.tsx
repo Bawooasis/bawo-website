@@ -13,7 +13,7 @@ export default function CommunityCirclesSection() {
     >
       <div className="relative z-10 container mx-auto px-5 sm:px-6 max-w-6xl">
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12 md:mb-16">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/35 bg-[#1C132B]/75 px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-[#D6B26A] backdrop-blur-xl">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/35 bg-[#1C132B]/75 px-4 py-1.5 text-sm font-bold tracking-wide text-[#D6B26A] backdrop-blur-xl">
             <Users className="w-3.5 h-3.5 shrink-0" aria-hidden />
             <span>{eyebrow}</span>
           </div>
@@ -38,7 +38,7 @@ export default function CommunityCirclesSection() {
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#0E0A14]">
                 <img
                   src={circle.image}
-                  alt={`${circle.title} — BawoSocial Nigerian Community Circle`}
+                  alt={`${circle.title}, BawoSocial Nigerian Community Circle`}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                   decoding="async"
@@ -112,7 +112,7 @@ export default function CommunityCirclesSection() {
         {/* Live Build 182 iOS App Screens Showcase (Explore Map, Community Spaces & Circle Daily Vibe) */}
         <div className="mb-12 md:mb-16">
           <div className="text-center max-w-2xl mx-auto space-y-2.5 mb-8">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/35 bg-[#1C132B]/75 px-3.5 py-1 text-sm font-bold uppercase tracking-wider text-[#D6B26A]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/35 bg-[#1C132B]/75 px-3.5 py-1 text-sm font-bold tracking-wide text-[#D6B26A]">
               <Sparkles className="w-3.5 h-3.5 shrink-0" aria-hidden />
               <span>Live on iOS TestFlight · Inside BawoSocial</span>
             </div>
