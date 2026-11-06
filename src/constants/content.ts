@@ -40,7 +40,7 @@ export const CONTENT = {
       highlight: "Feel at home.",
     },
     subtitle:
-      "The Culture Hub for Nigerians in the Diaspora, starting across all 5 boroughs of NYC. Discover verified Nigerian restaurants & businesses, active Community Circles, Afrobeats & Owambe events, and the BawoSocial Concierge.",
+      "The culture hub for Nigerians in the diaspora, starting across all 5 boroughs of NYC. Find verified restaurants and businesses, Community Circles, Afrobeats and Owambe events, and Ask AI.",
     ctaPrimary: "Join the Waitlist",
     ctaMicrocopy: "Free iOS TestFlight beta live in NYC · Android & new cities coming soon",
     ctaSecondary: "Join Waitlist",
@@ -130,8 +130,8 @@ export const CONTENT = {
         layout: "full-screen" as const,
       },
       {
-        kicker: "Live in BawoSocial · AI Concierge",
-        title: "Ask BawoSocial Concierge",
+        kicker: "Live in BawoSocial · Ask AI",
+        title: "Ask AI",
         badge: "24/7 Naija NYC Insider AI",
         liveMetric: "Instant Local Recommendations",
         highlights: [
@@ -140,10 +140,10 @@ export const CONTENT = {
           "\"Which Nigerian church, mosque, or networking mixer is near me?\"",
         ],
         description:
-          "Craving smoky party Jollof, pounded yam, efo riro, or suya? Looking for a Nigerian caterer, braiding salon, or church? Ask the AI BawoSocial Concierge for instant NYC answers.",
+          "Craving smoky party Jollof, pounded yam, efo riro, or suya? Looking for a Nigerian caterer, braiding salon, or church? Ask AI for instant NYC answers.",
         image: IMAGES.showcase.concierge,
         imageAlt:
-          "BawoSocial Concierge screen offering culturally relevant recommendations for Nigerians in NYC",
+          "BawoSocial Ask AI screen offering culturally relevant recommendations for Nigerians in NYC",
         layout: "full-screen" as const,
       },
     ],
@@ -246,7 +246,7 @@ export const CONTENT = {
       {
         title: "Test on iOS via TestFlight",
         description:
-          "Download the live BawoSocial beta through Apple TestFlight and explore the NYC Nigerian map, circles, events, and BawoSocial Concierge.",
+          "Download the live BawoSocial beta through Apple TestFlight and explore the NYC Nigerian map, circles, events, and Ask AI.",
       },
       {
         title: "Nigerian Businesses: Sign In & Claim Your Listing",
@@ -296,9 +296,9 @@ export const CONTENT = {
           "No algorithmic noise. Jump into dedicated circles like New to NYC, Safe Space for the Girls, Nigerian Food & Chop NYC, and Mental Wellness & Support with real feeds, voice notes, and daily gist.",
       },
       {
-        title: "Curated Events + BawoSocial Concierge",
+        title: "Curated Events + Ask AI",
         description:
-          "Discover Afrobeats nights, Owambe celebrations, supper clubs, and Nigerian professional mixers across NYC, or ask the AI BawoSocial Concierge for tailored local recommendations anytime.",
+          "Discover Afrobeats nights, Owambe celebrations, supper clubs, and Nigerian professional mixers across NYC, or Ask AI for tailored local recommendations anytime.",
       },
     ],
   },
@@ -370,7 +370,7 @@ export const CONTENT = {
 
   inAppFeatureCaptions: [
     "Explore Map: Verified Nigerian restaurants, bukas, suya spots, African markets, salons, and services in NYC.",
-    "BawoSocial Concierge: Instant AI recommendations for Nigerian dining, nightlife, groceries, and NYC intel.",
+    "Ask AI: Instant recommendations for Nigerian dining, nightlife, groceries, and NYC intel.",
     "Community Circles: New to NYC, Safe Space for the Girls, Nigerian Food & Chop NYC, and more.",
     "Curated Events: Afrobeats nights, Owambe parties, supper clubs, and Nigerian professional mixers.",
     "For Businesses: Claim your listing, update hours & photos, and reach the Nigerian community on BawoSocial.",
@@ -391,7 +391,7 @@ export const CONTENT = {
       {
         question: "What is BawoSocial?",
         answer:
-          "BawoSocial is the culture hub for Nigerians in the diaspora, starting across all five boroughs of New York City. BawoSocial brings together an interactive map of verified Nigerian restaurants and businesses, active Community Circles, curated Afrobeats and cultural events, and the AI-powered BawoSocial Concierge.",
+          "The culture hub for Nigerians in the diaspora, starting across all 5 boroughs of NYC. Find verified restaurants and businesses, Community Circles, Afrobeats and Owambe events, and Ask AI.",
       },
       {
         question: "Who is BawoSocial for?",
@@ -416,7 +416,7 @@ export const CONTENT = {
       {
         question: "How is BawoSocial different from generic social apps or WhatsApp groups?",
         answer:
-          "No algorithmic clutter and no lost recommendations buried in chat history. BawoSocial combines a permanent, searchable map of verified Nigerian businesses with curated events, dedicated topic-based Community Circles (with voice notes and daily gist prompts), and the AI BawoSocial Concierge.",
+          "No algorithmic clutter and no lost recommendations buried in chat history. BawoSocial combines a permanent, searchable map of verified Nigerian businesses with curated events, dedicated topic-based Community Circles (with voice notes and daily gist prompts), and Ask AI.",
       },
     ],
   },
