@@ -15,7 +15,6 @@ import HeroSecondaryBar from "./components/HeroSecondaryBar";
 import MailchimpSignupRow from "./components/MailchimpSignupRow";
 import MobileAppDownloadRow from "./components/MobileAppDownloadRow";
 import PartnerWithUsSection from "./components/PartnerWithUsSection";
-import SectionPillNav from "./components/SectionPillNav";
 import HeroParticleField from "./components/ui/HeroParticleField";
 import SiteHeader from "./components/SiteHeader";
 import SiteLogo from "./components/SiteLogo";
@@ -238,8 +237,6 @@ function App() {
               <div className="bawo-hero-cta-block">
                 <HeroActionStack onJoinClick={scrollToWaitlist} />
               </div>
-
-              <SectionPillNav />
 
               <HeroNextPreview />
 

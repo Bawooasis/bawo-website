@@ -1,18 +1,23 @@
-import { Building2, ChevronRight, Menu, X } from "lucide-react";
+import { Building2, Menu, X } from "lucide-react";
 import { memo, useEffect, useState, type MouseEvent } from "react";
 import BawoPillButton from "./BawoPillButton";
 import SiteLogo from "./SiteLogo";
 import { CONTENT } from "../constants/content";
 
-const NAV_LINKS = [
-  { label: "Businesses", href: "/businesses", isBusiness: true },
+/** Top-center pill destinations (replaces left sidebar + mid-page pill). */
+const PILL_LINKS = [
   { label: "Circles", href: "#community-circles" },
   { label: "Network", href: "#building-the-network" },
   { label: "About", href: "#about" },
   { label: "Features", href: "#features" },
   { label: "Events", href: "#events" },
-  { label: "Try the App", href: "#early-access" },
+  { label: "Businesses", href: "/businesses" },
   { label: "FAQ", href: "#faq" },
+] as const;
+
+const MOBILE_LINKS = [
+  ...PILL_LINKS,
+  { label: "Try the App", href: "#early-access" },
 ] as const;
 
 type SiteHeaderProps = {
@@ -43,29 +48,22 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
         <div className="bawo-site-header__bar">
           <div className="bawo-site-header__leading">
             <SiteLogo className="bawo-site-header__logo" onClick={scrollHome} />
-
-            <nav className="bawo-site-header__nav" aria-label="Main">
-              {NAV_LINKS.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className={
-                    "isBusiness" in link && link.isBusiness
-                      ? "bawo-site-header__nav-link bawo-site-header__nav-link--business"
-                      : "bawo-site-header__nav-link"
-                  }
-                >
-                  <span className="inline-flex items-center gap-1.5">
-                    {"isBusiness" in link && link.isBusiness ? (
-                      <Building2 className="h-3.5 w-3.5 text-[#D6B26A] shrink-0" aria-hidden />
-                    ) : null}
-                    <span>{link.label}</span>
-                  </span>
-                  <ChevronRight className="bawo-site-header__chevron" aria-hidden strokeWidth={1.75} />
-                </a>
-              ))}
-            </nav>
           </div>
+
+          <nav className="bawo-site-header__pill" aria-label="Main">
+            <div className="bawo-site-header__pill-track">
+              {PILL_LINKS.map((link, index) => (
+                <span key={link.href} className="bawo-site-header__pill-segment">
+                  {index > 0 ? (
+                    <span className="bawo-site-header__pill-divider" aria-hidden />
+                  ) : null}
+                  <a href={link.href} className="bawo-site-header__pill-item">
+                    {link.label}
+                  </a>
+                </span>
+              ))}
+            </div>
+          </nav>
 
           <div className="bawo-site-header__actions">
             <a
@@ -81,7 +79,7 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
               href={CONTENT.hero.testflightLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="bawo-site-header__founding-chip hidden md:inline-flex"
+              className="bawo-site-header__founding-chip hidden lg:inline-flex"
             >
               <span className="bawo-site-header__founding-chip-label">
                 {CONTENT.hero.ctaTestFlight}
@@ -94,13 +92,13 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
               appearance="outline"
               size="sm"
               polished
-              className="bawo-site-header__join-btn"
+              className="bawo-site-header__join-btn hidden sm:inline-flex"
               onClick={onJoinClick}
             />
 
             <button
               type="button"
-              className="bawo-site-header__menu-btn md:hidden"
+              className="bawo-site-header__menu-btn xl:hidden"
               onClick={() => setMobileOpen((open) => !open)}
               aria-expanded={mobileOpen}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -116,7 +114,7 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
       {mobileOpen && (
         <div className="bawo-site-header__mobile-panel">
           <nav className="container mx-auto px-4 py-4 flex flex-col gap-1" aria-label="Mobile">
-            {NAV_LINKS.map((link) => (
+            {MOBILE_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}

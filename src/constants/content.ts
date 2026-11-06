@@ -132,7 +132,7 @@ export const CONTENT = {
       {
         kicker: "Live in BawoSocial · Ask AI",
         title: "Ask AI",
-        badge: "24/7 Naija NYC Insider AI",
+        badge: "Ask AI",
         liveMetric: "Instant Local Recommendations",
         highlights: [
           "\"Where can I get proper smoky party Jollof & asun tonight?\"",

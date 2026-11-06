@@ -1,4 +1,4 @@
-import { CheckCircle2, Expand, MapPin, Sparkles, X } from "lucide-react";
+import { Expand, MapPin, Sparkles, X } from "lucide-react";
 import { memo, useRef, useState } from "react";
 import { CONTENT } from "../constants/content";
 
@@ -20,7 +20,7 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
       className={`bawo-next-preview ${className}`.trim()}
       aria-label="Interactive BawoSocial App Showcase"
     >
-      <div className="bawo-next-preview__header mb-2 flex flex-col items-center justify-between gap-3 sm:flex-row">
+      <div className="bawo-next-preview__header mb-3 flex flex-col items-center justify-between gap-3 sm:flex-row">
         <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/35 bg-[#1C132B]/75 px-3.5 py-1.5 text-sm font-bold uppercase tracking-wider text-[#D6B26A] backdrop-blur-xl">
           <Sparkles className="h-3.5 w-3.5 shrink-0" aria-hidden />
           <span>Interactive iPhone 17 Pro App Showcase · Live NYC Beta</span>
@@ -73,52 +73,43 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
         ) : null}
       </div>
 
-      <ul className="bawo-next-preview__list" role="tablist">
-        {items.map((item, index) => {
-          const isActive = index === active;
-          return (
-            <li key={item.title} className="bawo-next-preview__item">
-              <button
-                type="button"
-                role="tab"
-                id={`bawo-preview-tab-${index}`}
-                aria-controls={`bawo-preview-panel-${index}`}
-                aria-selected={isActive}
-                className={`bawo-next-preview__tab${isActive ? " is-active" : ""}`}
-                onClick={() => setActive(index)}
-                onMouseEnter={() => setActive(index)}
-              >
-                <div className="flex items-center justify-between gap-2 w-full">
-                  <span className="bawo-next-preview__tab-title font-display text-lg sm:text-xl font-bold">
-                    {item.title}
-                  </span>
-                  <span className="rounded-full border border-[#D6B26A]/30 bg-[#D6B26A]/12 px-2.5 py-0.5 text-sm font-bold uppercase tracking-wider text-[#F7E7C4]">
-                    {item.badge}
-                  </span>
-                </div>
-                {isActive ? (
-                  <div className="mt-2 space-y-2.5 text-left">
-                    <span className="bawo-next-preview__tab-body block text-sm text-[#F7F3FA]/85 leading-relaxed">
-                      {item.description}
-                    </span>
-                    <ul className="space-y-1.5 pt-1">
-                      {item.highlights.map((hl) => (
-                        <li
-                          key={hl}
-                          className="flex items-center gap-2 text-sm font-medium text-[#F7E7C4]"
-                        >
-                          <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-[#D6B26A]" aria-hidden />
-                          <span>{hl}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ) : null}
-              </button>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="bawo-next-preview__copy">
+        <div className="bawo-next-preview__active-card">
+          <div className="flex flex-wrap items-center gap-2">
+            <h3 className="bawo-next-preview__tab-title font-display text-xl sm:text-2xl font-bold text-white">
+              {current.title}
+            </h3>
+            <span className="rounded-full border border-[#D6B26A]/30 bg-[#D6B26A]/12 px-2.5 py-0.5 text-sm font-bold uppercase tracking-wider text-[#F7E7C4]">
+              {current.badge}
+            </span>
+          </div>
+          <p className="bawo-next-preview__tab-body mt-3 text-base text-[#F7F3FA]/85 leading-relaxed">
+            {current.description}
+          </p>
+        </div>
+
+        <ul className="bawo-next-preview__list" role="tablist">
+          {items.map((item, index) => {
+            const isActive = index === active;
+            return (
+              <li key={item.title} className="bawo-next-preview__item">
+                <button
+                  type="button"
+                  role="tab"
+                  id={`bawo-preview-tab-${index}`}
+                  aria-controls={`bawo-preview-panel-${index}`}
+                  aria-selected={isActive}
+                  className={`bawo-next-preview__tab${isActive ? " is-active" : ""}`}
+                  onClick={() => setActive(index)}
+                  onMouseEnter={() => setActive(index)}
+                >
+                  <span className="bawo-next-preview__tab-title">{item.title}</span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
 
       <dialog
         ref={dialogRef}
