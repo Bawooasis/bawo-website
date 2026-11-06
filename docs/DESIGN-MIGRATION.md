@@ -3,7 +3,8 @@
 **Purpose:** Mirror the website look & feel in the mobile app.  
 **Source of truth:** `src/assets/colors.js`, `src/assets/theme.js`, `src/index.css`  
 **Website:** [joinbawo.com](https://joinbawo.com)  
-**Last updated:** Oct 2026 — **build 165 brand pass** (pumpkin primary, Montserrat everywhere).  
+**Last updated:** Nov 2026 — **Outfit** is the only BawoSocial typeface (weights 400–700).  
+
 See also: [`docs/globe-animation.md`](./globe-animation.md) for the WebGL particle globe.
 
 ### Build 165 tokens (canonical)
@@ -17,7 +18,7 @@ See also: [`docs/globe-animation.md`](./globe-animation.md) for the WebGL partic
 | Background | `#08060C` (near-black) |
 | Card | `#221525` |
 | Text | `#F4F4F5` |
-| Font | Montserrat |
+| Font | Outfit |
 
 > Older sections below may still mention MuseoModerno / neon greens / `#06030C` — prefer the table above and the live token files.
 
@@ -226,8 +227,8 @@ glow:  0 0 14px rgba(255, 107, 0, 0.45)  // optional
 
 | Role | Font | Weight | Notes |
 |------|------|--------|-------|
-| Display / H1–H2 | **MuseoModerno** | Bold (700+) | Hero, section titles |
-| Body / UI / buttons | **Montserrat** | 400–700 | All interactive copy |
+| Display / H1–H2 | **Outfit** | 600–700 | Hero, section titles, wordmark |
+| Body / UI / buttons | **Outfit** | 400–700 | All interactive copy |
 
 ### Scale reference (web)
 - Hero H1: 4xl–7xl responsive

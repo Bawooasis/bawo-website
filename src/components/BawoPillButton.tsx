@@ -21,7 +21,7 @@ const metrics = {
   sm: {
     h: "min-h-[44px]",
     px: "px-5",
-    text: "text-[13px]",
+    text: "text-sm",
     icon: 17,
   },
   md: {
@@ -107,7 +107,7 @@ export default function BawoPillButton({
       } ${fullWidth ? "w-full" : "w-fit max-w-full"} ${className}`}
       style={{
         letterSpacing: isQuiet || isOutline ? "0.015em" : "0.02em",
-        fontFamily: '"Plus Jakarta Sans", system-ui, sans-serif',
+        fontFamily: '"Outfit", system-ui, sans-serif',
       }}
     >
       {Icon ? (

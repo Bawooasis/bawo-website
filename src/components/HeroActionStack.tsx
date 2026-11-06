@@ -28,7 +28,7 @@ export default function HeroActionStack({ onJoinClick }: HeroActionStackProps) {
           fullWidth
           onClick={onJoinClick}
         />
-        <p className="text-[11px] sm:text-xs text-white/45 font-museo-medium text-center leading-snug">
+        <p className="text-sm text-white/45 font-museo-medium text-center leading-snug">
           {ctaMicrocopy}
         </p>
       </div>

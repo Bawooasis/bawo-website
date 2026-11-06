@@ -343,7 +343,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
       setRecoveryCode("");
       setNotice(
         mode === "admin"
-          ? "Recovery verified. Set your new Control Center password — no localhost needed."
+          ? "Recovery verified. Set your new Control Center password. No localhost needed."
           : "Recovery verified. Set your new password.",
       );
     } catch (verifyError) {
@@ -642,7 +642,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
               setActiveTab(mode === "admin" ? "overview" : "dashboard");
             }}
           >
-            Skip for now — continue to{" "}
+            Skip for now. Continue to{" "}
             {mode === "admin" ? "Control Center" : "Business Portal"}
           </button>
         </form>
@@ -688,7 +688,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
               <p className="portal-business-lead">
                 From Nigerian restaurants, bukas, suya spots, and Afrobeats
                 lounges to African food markets, salons, churches, mosques, and
-                professional services across all five boroughs of NYC — sign in
+                professional services across all five boroughs of NYC. Sign in
                 or create a business account to claim and manage your official
                 listing on <strong>BawoSocial</strong>.
               </p>
@@ -812,7 +812,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
                         type="text"
                         value={businessName}
                         onChange={(e) => setBusinessName(e.target.value)}
-                        placeholder="e.g. BUKA, Lagos TSQ, Eko Market, Crown Braids"
+                        placeholder="e.g. BUKA, Eko Market, Crown Braids"
                         required
                       />
                     </label>
@@ -972,7 +972,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
                     <li>
                       In the email, <strong>right-click (or long-press) “Reset
                       Password” → Copy Link Address</strong> and paste it below
-                      — or if your browser opened{" "}
+                      . Or if your browser opened{" "}
                       <code>localhost:3000/#access_token=…</code>, copy that
                       full URL from the address bar and paste it here.
                     </li>
@@ -1062,7 +1062,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
           <h1>Control Center</h1>
           <p>
             {authSubMode === "reset"
-              ? `Enter your admin email or phone ${OWNER_ADMIN_PHONE_DISPLAY}. We send a free Supabase recovery email — no SMS fees.`
+              ? `Enter your admin email or phone ${OWNER_ADMIN_PHONE_DISPLAY}. We send a free Supabase recovery email. No SMS fees.`
               : `Sign in with your admin email or phone ${OWNER_ADMIN_PHONE_DISPLAY}, or continue with Google / Apple.`}
           </p>
 
@@ -1140,7 +1140,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
               <p className="portal-recovery-hint">
                 Your recovery email opens <code>joinbawo.com/admin</code>{" "}
                 directly (no localhost). You can also paste a link or enter the
-                6-digit code below — 100% free, no SMS.
+                6-digit code below. 100% free, no SMS.
               </p>
               <ol className="portal-recovery-steps">
                 <li>
@@ -1149,7 +1149,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
                 </li>
                 <li>
                   In the email, click{" "}
-                  <strong>Open Control Center &amp; Set Password</strong> — or
+                  <strong>Open Control Center &amp; Set Password</strong>, or
                   enter the <strong>6-digit recovery code</strong> below. If you
                   still have an old localhost link, paste that URL here too.
                 </li>

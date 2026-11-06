@@ -43,7 +43,7 @@ export default function LegalPageLayout({
       </header>
 
       <main className="container mx-auto max-w-3xl px-6 py-12 sm:py-16">
-        <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#D6B26A]">
+        <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#D6B26A]">
           {kicker}
         </p>
         <h1 className="mt-3 font-display text-4xl font-bold text-[#F7F3FA] sm:text-5xl">

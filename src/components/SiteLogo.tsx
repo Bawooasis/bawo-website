@@ -35,7 +35,7 @@ export default function SiteLogo({
           onError={() => setMarkOk(false)}
         />
       ) : null}
-      {/* Live Cormorant Garamond SemiBold wordmark — Direction B champagne gradient / deep solid */}
+      {/* Live Outfit SemiBold wordmark — champagne gradient / deep solid */}
       <span className="bawo-site-logo__wordmark" aria-hidden>
         BawoSocial
       </span>

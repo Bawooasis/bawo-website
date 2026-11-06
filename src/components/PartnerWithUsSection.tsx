@@ -5,7 +5,7 @@ const audiences = [
   { label: "Nigerian restaurants, bukas & suya lounges", Icon: Home },
   { label: "Braiding salons, barbers, gele & fashion", Icon: Store },
   { label: "Immigration, legal, tax & healthcare pros", Icon: Scale },
-  { label: "African food markets & Lagos/Abuja cargo", Icon: Package },
+  { label: "African food markets & Lagos cargo", Icon: Package },
 ] as const;
 
 export default function PartnerWithUsSection() {
@@ -22,7 +22,7 @@ export default function PartnerWithUsSection() {
       <div className="relative z-10 container mx-auto px-6 max-w-5xl">
         <div className="animate-on-scroll glass-card rounded-3xl p-7 sm:p-10">
           <div className="space-y-5 text-center sm:text-left">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/40 bg-[#D6B26A]/12 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#D6B26A]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/40 bg-[#D6B26A]/12 px-3.5 py-1.5 text-sm font-bold tracking-wide text-[#D6B26A]">
               <Handshake className="w-3.5 h-3.5" aria-hidden />
               BawoSocial for Nigerian Businesses in NYC
             </div>
@@ -40,7 +40,7 @@ export default function PartnerWithUsSection() {
               {audiences.map(({ label, Icon }) => (
                 <li
                   key={label}
-                  className="glass-pill inline-flex items-center gap-2 px-3.5 py-1.5 text-xs text-[#F7E7C4] font-semibold"
+                  className="glass-pill inline-flex items-center gap-2 px-3.5 py-1.5 text-sm text-[#F7E7C4] font-semibold"
                 >
                   <Icon className="w-3.5 h-3.5 text-[#D6B26A] shrink-0" aria-hidden />
                   {label}

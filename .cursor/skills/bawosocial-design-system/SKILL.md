@@ -14,7 +14,7 @@ Canonical tokens live in `src/assets/colors.js` (Tier-1 palette) and `src/assets
 | Card | `#221525` | Elevated / card surfaces |
 | Text | `#F4F4F5` | Primary text |
 
-**Font:** Montserrat everywhere (weights 400–700). Legacy `font-museo-*` / `font-display` Tailwind classes map to Montserrat.
+**Font:** Outfit everywhere (weights 400, 500, 600, 700). Legacy `font-museo-*` / `font-display` Tailwind classes map to Outfit.
 
 ## Stacked auth / hero pills
 
