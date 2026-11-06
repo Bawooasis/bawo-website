@@ -199,7 +199,7 @@ export default function CommunityCirclesSection() {
                   decoding="async"
                 />
                 <h3 className="text-3xl sm:text-4xl md:text-[2.65rem] font-bold font-display text-[#F7F3FA] leading-tight">
-                  From Lagos, Abuja & Enugu to All Five Boroughs of NYC
+                  From Lagos to All Five Boroughs of NYC
                 </h3>
               </div>
 

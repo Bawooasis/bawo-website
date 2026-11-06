@@ -272,7 +272,7 @@ export const CONTENT = {
       closing: " Exists",
     },
     paragraphs: [
-      "Whether you just landed from Lagos, Abuja, Port Harcourt, Enugu, or Ibadan, or you were raised right here in New York, Nigerians shape the energy, hustle, and culture of NYC. Yet finding our authentic restaurants, trusted services, weekend owambes, and our people is still scattered across noisy timelines and buried group chats.",
+      "Whether you just landed from Lagos, or you were raised right here in New York, Nigerians shape the energy, hustle, and culture of NYC. Yet finding our authentic restaurants, trusted services, weekend owambes, and our people is still scattered across noisy timelines and buried group chats.",
       {
         highlight: "BawoSocial",
         text: " brings the Nigerian community in the diaspora into one elevated, intentional home. Starting across all five boroughs of New York City, we make it effortless to discover verified Nigerian-owned businesses, join real Community Circles, pull up to cultural events, and feel at home.",

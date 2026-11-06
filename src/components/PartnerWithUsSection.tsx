@@ -5,7 +5,7 @@ const audiences = [
   { label: "Nigerian restaurants, bukas & suya lounges", Icon: Home },
   { label: "Braiding salons, barbers, gele & fashion", Icon: Store },
   { label: "Immigration, legal, tax & healthcare pros", Icon: Scale },
-  { label: "African food markets & Lagos/Abuja cargo", Icon: Package },
+  { label: "African food markets & Lagos cargo", Icon: Package },
 ] as const;
 
 export default function PartnerWithUsSection() {
