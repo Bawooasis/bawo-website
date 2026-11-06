@@ -76,7 +76,10 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
       <div className="bawo-next-preview__copy">
         <div className="bawo-next-preview__active-card">
           <div className="flex flex-wrap items-center gap-2">
-            <h3 className="bawo-next-preview__tab-title font-display text-xl sm:text-2xl font-bold text-white">
+            <h3
+              id={`bawo-preview-tab-${active}`}
+              className="bawo-next-preview__tab-title font-display text-xl sm:text-2xl font-bold text-white"
+            >
               {current.title}
             </h3>
             <span className="rounded-full border border-[#D6B26A]/30 bg-[#D6B26A]/12 px-2.5 py-0.5 text-sm font-bold uppercase tracking-wider text-[#F7E7C4]">
@@ -90,16 +93,15 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
 
         <ul className="bawo-next-preview__list" role="tablist">
           {items.map((item, index) => {
-            const isActive = index === active;
+            if (index === active) return null;
             return (
               <li key={item.title} className="bawo-next-preview__item">
                 <button
                   type="button"
                   role="tab"
-                  id={`bawo-preview-tab-${index}`}
                   aria-controls={`bawo-preview-panel-${index}`}
-                  aria-selected={isActive}
-                  className={`bawo-next-preview__tab${isActive ? " is-active" : ""}`}
+                  aria-selected={false}
+                  className="bawo-next-preview__tab"
                   onClick={() => setActive(index)}
                   onMouseEnter={() => setActive(index)}
                 >
