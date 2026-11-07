@@ -2399,25 +2399,27 @@ a.bawo-cta-quiet:active {
  * hairline black Ceramic Shield margin — NOT a thick chrome picture frame.
  */
 .bawo-next-preview__device-frame--iphone {
-  /* Body proportion 78.0 × 163.4 */
+  /* Body proportion 78.0 × 163.4 — Apple Newsroom silhouette */
   aspect-ratio: 78 / 163.4;
-  border-radius: clamp(1.85rem, 14%, 2.65rem);
-  /* Slim aluminum rail only (~1.5–2% of width) */
-  padding: 0.14rem;
+  border-radius: clamp(1.9rem, 15%, 2.75rem);
+  /*
+   * Slim Cosmic Orange aluminum rail only (~1.5–2 CSS px).
+   * No outer glow ring — that previously read as a thick picture-frame.
+   */
+  padding: 1.5px;
   background:
     linear-gradient(
-      160deg,
-      #ff9a4a 0%,
-      #e86a1c 22%,
-      #c24e0f 48%,
-      #8a3408 72%,
-      #f07a2e 100%
+      145deg,
+      #f4a05a 0%,
+      #d96a28 28%,
+      #b34a12 55%,
+      #7a3008 78%,
+      #e07832 100%
     );
   box-shadow:
-    0 26px 52px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(255, 150, 80, 0.28),
-    inset 0 1px 0 rgba(255, 220, 180, 0.55),
-    inset 0 -1px 0 rgba(80, 28, 0, 0.55);
+    0 22px 48px rgba(0, 0, 0, 0.5),
+    inset 0 0.5px 0 rgba(255, 210, 160, 0.45),
+    inset 0 -0.5px 0 rgba(60, 20, 0, 0.45);
 }
 
 .bawo-next-preview__device-frame--android {
@@ -2437,57 +2439,55 @@ a.bawo-cta-quiet:active {
 .bawo-next-preview__rail-btn {
   position: absolute;
   z-index: 5;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #f08a3a, #b34a12 55%, #7a3008);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 210, 160, 0.35),
-    0 0 0 0.5px rgba(60, 20, 0, 0.55);
+  border-radius: 1px;
+  background: linear-gradient(90deg, #e8883a, #9a4010 55%, #5c2406);
+  box-shadow: inset 0 0.5px 0 rgba(255, 200, 150, 0.3);
 }
 
 .bawo-next-preview__rail-btn--action {
-  left: -0.11rem;
+  left: -1.5px;
   top: 14.5%;
-  width: 0.13rem;
-  height: 3.2%;
+  width: 2px;
+  height: 3%;
 }
 
 .bawo-next-preview__rail-btn--vol-up {
-  left: -0.11rem;
+  left: -1.5px;
   top: 21.5%;
-  width: 0.13rem;
-  height: 5.4%;
+  width: 2px;
+  height: 5%;
 }
 
 .bawo-next-preview__rail-btn--vol-down {
-  left: -0.11rem;
-  top: 28.2%;
-  width: 0.13rem;
-  height: 5.4%;
+  left: -1.5px;
+  top: 28%;
+  width: 2px;
+  height: 5%;
 }
 
 .bawo-next-preview__rail-btn--side {
-  right: -0.11rem;
+  right: -1.5px;
   top: 22%;
-  width: 0.13rem;
-  height: 7.2%;
+  width: 2px;
+  height: 6.8%;
 }
 
 .bawo-next-preview__rail-btn--camera {
-  right: -0.11rem;
+  right: -1.5px;
   top: 38%;
-  width: 0.13rem;
-  height: 4.2%;
-  opacity: 0.92;
+  width: 2px;
+  height: 4%;
+  opacity: 0.85;
 }
 
 .bawo-next-preview__device-island {
   position: absolute;
   z-index: 4;
-  top: 1.15%;
+  top: 1.05%;
   left: 50%;
-  width: 28.5%;
-  height: 2.85%;
-  min-height: 0.72rem;
+  width: 26%;
+  height: 2.55%;
+  min-height: 0.65rem;
   max-height: 1.05rem;
   transform: translateX(-50%);
   border-radius: 999px;
@@ -2522,13 +2522,11 @@ a.bawo-cta-quiet:active {
   background: #000;
 }
 
-/* Hairline black Ceramic Shield margin + continuous corner curve */
+/* Hairline black Ceramic Shield margin — continuous with outer chassis curve */
 .bawo-next-preview__device-screen--iphone {
-  border-radius: clamp(1.7rem, 12.8%, 2.45rem);
-  border: 1.5px solid #050505;
-  box-shadow:
-    inset 0 0 0 0.5px rgba(255, 255, 255, 0.04),
-    0 0 0 0.5px rgba(0, 0, 0, 0.65);
+  border-radius: clamp(1.78rem, 14%, 2.55rem);
+  border: 1px solid #000;
+  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.03);
 }
 
 .bawo-next-preview__device-screen--android {
