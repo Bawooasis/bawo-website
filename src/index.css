@@ -113,8 +113,18 @@
   animation: bawoPillCtaShimmer 6.5s ease-in-out infinite;
 }
 
+/* Gold filled CTAs: dark crown. Outline/waitlist keeps cream/gold crown. */
 .bawo-pill-cta-surface svg {
-  color: rgba(255, 232, 200, 0.96);
+  color: #0E0A14 !important;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+
+.bawo-cta-outline svg,
+button.bawo-cta-outline svg,
+a.bawo-cta-outline svg,
+.bawo-cta-secondary svg,
+.bawo-cta-glass-secondary svg {
+  color: rgba(255, 232, 200, 0.96) !important;
   filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.35));
 }
 
@@ -1854,8 +1864,8 @@ a.bawo-cta-quiet:active {
   z-index: 1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 38% 18% at 50% 52%, rgba(8, 6, 12, 0.35) 0%, transparent 72%),
-    linear-gradient(to top, rgba(8, 6, 12, 0.62) 0%, transparent 28%);
+    radial-gradient(ellipse 48% 42% at 58% 48%, rgba(8, 6, 12, 0.18) 0%, transparent 70%),
+    linear-gradient(to top, rgba(8, 6, 12, 0.55) 0%, transparent 34%);
 }
 
 .bawo-hero-cinematic__top {
@@ -1868,15 +1878,25 @@ a.bawo-cta-quiet:active {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.85rem;
+  gap: 1.5rem;
   min-height: 0;
   width: 100%;
-  padding: 4.5rem 1.25rem 0.35rem;
+  padding: 4.5rem 1.25rem 1.5rem;
+}
+
+.bawo-hero-cinematic__copy-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.95rem;
+  max-width: min(36rem, 100%);
+  z-index: 2;
 }
 
 .bawo-hero-cinematic__phone {
-  width: min(34vw, 8.25rem);
+  width: min(42vw, 11.5rem);
   flex: 0 0 auto;
+  z-index: 2;
 }
 
 .bawo-hero-cinematic__title {
@@ -1900,21 +1920,20 @@ a.bawo-cta-quiet:active {
 }
 
 .bawo-hero-cinematic__footer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 0 1.25rem calc(var(--bawo-mobile-sticky-cta-height) + 3.25rem);
+  display: none;
 }
 
 .bawo-hero-cinematic__copy {
-  max-width: 28rem;
+  max-width: 34rem;
   margin: 0;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(247, 243, 250, 0.72);
   font-family: "Outfit", system-ui, sans-serif;
-  font-size: 0.98rem;
-  font-weight: 500;
-  line-height: 1.55;
+  font-size: clamp(0.875rem, 1.35vw, 0.95rem);
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  text-align: center;
+  text-wrap: pretty;
 }
 
 .bawo-hero-cinematic__footer-actions,
@@ -1981,10 +2000,18 @@ a.bawo-cta-quiet:active {
 @media (min-width: 900px) {
   .bawo-hero-cinematic__main {
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 2.75rem;
-    padding: 5.25rem 2.5rem 0.5rem;
+    gap: 2rem;
+    padding: 5.5rem 2.75rem 2.5rem;
+    max-width: 78rem;
+    margin-inline: auto;
+  }
+
+  .bawo-hero-cinematic__copy-col {
+    align-items: flex-start;
+    max-width: min(34rem, 46vw);
+    gap: 1.1rem;
   }
 
   .bawo-hero-cinematic__title {
@@ -1992,23 +2019,17 @@ a.bawo-cta-quiet:active {
     font-size: clamp(3rem, 4.4vw, 4.75rem);
   }
 
-  .bawo-hero-cinematic__phone {
-    width: min(15vw, 12.5rem);
-  }
-}
-
-@media (min-width: 768px) {
-  .bawo-hero-cinematic__footer {
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 2rem;
-    padding: 0 2.5rem 2.75rem;
+  .bawo-hero-cinematic__copy {
+    text-align: left;
+    max-width: 32rem;
   }
 
   .bawo-hero-cinematic__footer-actions {
-    justify-content: flex-end;
-    flex-shrink: 0;
+    justify-content: flex-start;
+  }
+
+  .bawo-hero-cinematic__phone {
+    width: min(22vw, 16.5rem);
   }
 }
 
@@ -3211,6 +3232,10 @@ h3.font-display,
   text-shadow: 0 12px 38px rgba(7, 5, 11, 0.72);
 }
 
+.bawo-hero-cinematic__copy {
+  font-family: "Outfit", system-ui, sans-serif !important;
+}
+
 .bawo-hero-neon,
 .bawo-text-cta-gradient {
   background: linear-gradient(135deg, #F7E7C4 0%, #D6B26A 52%, #A07636 100%);
@@ -3259,6 +3284,13 @@ h3.font-display,
   color: #0E0A14 !important;
   text-shadow: none !important;
   font-weight: 700 !important;
+}
+
+.bawo-cta-quiet svg,
+.bawo-cta-premium svg,
+.bawo-pill-cta-surface svg,
+.liquid-glass-cta svg {
+  color: #0E0A14 !important;
 }
 
 /* Secondary / Outline Liquid Glass Pill Buttons */
@@ -3422,11 +3454,11 @@ h3.font-display,
   color: #0E0A14 !important;
 }
 
-/* Hero Cinematic Stage — keep transparent so particle globe shines through */
+/* Hero Cinematic Stage — keep transparent so the Earth globe shines through */
 .bawo-hero-cinematic__shade {
   background:
-    radial-gradient(ellipse 42% 24% at 50% 50%, rgba(14, 10, 20, 0.28) 0%, transparent 74%),
-    linear-gradient(to top, rgba(14, 10, 20, 0.52) 0%, transparent 28%) !important;
+    radial-gradient(ellipse 52% 46% at 62% 48%, rgba(14, 10, 20, 0.14) 0%, transparent 72%),
+    linear-gradient(to top, rgba(14, 10, 20, 0.48) 0%, transparent 32%) !important;
 }
 
 .bawo-hero-cinematic__pill {

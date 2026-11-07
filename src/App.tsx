@@ -8,7 +8,6 @@ import CommunityCirclesSection from "./components/CommunityCirclesSection";
 import CommunityMissionSection from "./components/CommunityMissionSection";
 import FaqSection from "./components/FaqSection";
 import FoundingMemberButton from "./components/FoundingMemberButton";
-import HeroActionStack from "./components/HeroActionStack";
 import HeroAppPreview from "./components/HeroAppPreview";
 import HeroNextPreview from "./components/HeroNextPreview";
 import HeroSecondaryBar from "./components/HeroSecondaryBar";
@@ -194,34 +193,33 @@ function App() {
 
           <div className="bawo-hero-cinematic__stage relative z-10 flex flex-col">
             <div className="bawo-hero-cinematic__main">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/40 bg-[#1C132B]/75 px-3.5 py-1.5 text-sm font-bold tracking-wide text-[#F7E7C4] backdrop-blur-xl mb-1">
-                <Sparkles className="h-3.5 w-3.5 text-[#D6B26A]" aria-hidden />
-                <span>BawoSocial · The Culture Hub for Nigerians in NYC</span>
+              <div className="bawo-hero-cinematic__copy-col">
+                <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/40 bg-[#1C132B]/75 px-3.5 py-1.5 text-sm font-bold tracking-wide text-[#F7E7C4] backdrop-blur-xl mb-1">
+                  <Sparkles className="h-3.5 w-3.5 text-[#D6B26A]" aria-hidden />
+                  <span>BawoSocial · The Culture Hub for Nigerians in NYC</span>
+                </div>
+                <h1 ref={headlineRef} className="bawo-hero-cinematic__title font-display">
+                  {CONTENT.hero.title.lead}
+                  <span className="bawo-hero-neon">{CONTENT.hero.title.highlight}</span>
+                </h1>
+                <p ref={subheadlineRef} className="bawo-hero-cinematic__copy">
+                  {CONTENT.hero.subtitle}
+                </p>
+                <div ref={ctaRef} className="bawo-hero-cinematic__footer-actions">
+                  <a href="#community-circles" className="bawo-hero-cinematic__pill">
+                    Nigerian Circles
+                  </a>
+                  <a href="#events" className="bawo-hero-cinematic__pill">
+                    Afrobeats & Events
+                  </a>
+                  <a href="/businesses" className="bawo-hero-cinematic__pill bawo-hero-cinematic__pill--business">
+                    <Building2 className="h-3.5 w-3.5 text-[#D6B26A]" aria-hidden />
+                    <span>For Businesses</span>
+                  </a>
+                </div>
               </div>
-              <h1 ref={headlineRef} className="bawo-hero-cinematic__title font-display">
-                {CONTENT.hero.title.lead}
-                <span className="bawo-hero-neon">{CONTENT.hero.title.highlight}</span>
-              </h1>
               <div ref={mockupRef} className="bawo-hero-cinematic__phone">
                 <HeroAppPreview className="bawo-hero-mockup--compact" />
-              </div>
-            </div>
-
-            <div className="bawo-hero-cinematic__footer">
-              <p ref={subheadlineRef} className="bawo-hero-cinematic__copy">
-                {CONTENT.hero.subtitle}
-              </p>
-              <div ref={ctaRef} className="bawo-hero-cinematic__footer-actions">
-                <a href="#community-circles" className="bawo-hero-cinematic__pill">
-                  Nigerian Circles
-                </a>
-                <a href="#events" className="bawo-hero-cinematic__pill">
-                  Afrobeats & Events
-                </a>
-                <a href="/businesses" className="bawo-hero-cinematic__pill bawo-hero-cinematic__pill--business">
-                  <Building2 className="h-3.5 w-3.5 text-[#D6B26A]" aria-hidden />
-                  <span>For Businesses</span>
-                </a>
               </div>
             </div>
           </div>
@@ -229,15 +227,7 @@ function App() {
 
         <section className="relative bg-transparent py-16 md:py-24 overflow-x-clip">
           <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-2xl w-full">
-            <div className="flex flex-col items-center justify-center gap-3 w-full">
-              <MobileAppDownloadRow className="self-center" />
-            </div>
-
-            <div className="mt-10 w-full space-y-5 sm:space-y-6">
-              <div className="bawo-hero-cta-block">
-                <HeroActionStack onJoinClick={scrollToWaitlist} />
-              </div>
-
+            <div className="w-full space-y-5 sm:space-y-6">
               <HeroNextPreview />
 
               <div
