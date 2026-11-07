@@ -1651,16 +1651,7 @@ a.bawo-cta-quiet:active {
 }
 
 .bawo-site-header__divider {
-  height: 1px;
-  width: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.1) 12%,
-    rgba(255, 255, 255, 0.14) 50%,
-    rgba(255, 255, 255, 0.1) 88%,
-    transparent 100%
-  );
+  display: none;
 }
 
 .bawo-site-header__founding-chip {
@@ -3366,28 +3357,41 @@ h3.font-display,
   box-shadow: inset 0 1px 0 rgba(247, 231, 196, 0.22);
 }
 
-/* Floating Liquid Glass Top Navigation Header */
+/* Top nav blends into hero — no hairline, border, shadow, or hard fade edge */
 .bawo-site-header {
   background: linear-gradient(
     180deg,
-    rgba(14, 10, 20, 0.84) 0%,
-    rgba(22, 15, 36, 0.72) 100%
+    rgba(14, 10, 20, 0.72) 0%,
+    rgba(14, 10, 20, 0.22) 42%,
+    rgba(14, 10, 20, 0) 100%
   ) !important;
-  backdrop-filter: blur(28px) saturate(165%) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(165%) !important;
-  border-bottom: 1px solid rgba(214, 178, 106, 0.18) !important;
-  box-shadow: 0 12px 36px rgba(5, 2, 10, 0.45) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  /* Extend fade below the bar so the overlay does not end in a 1px seam */
+  padding-bottom: 1.5rem !important;
+  height: auto !important;
+  min-height: var(--bawo-header-height);
+  pointer-events: none;
+}
+
+.bawo-site-header .container,
+.bawo-site-header__bar,
+.bawo-site-header__leading,
+.bawo-site-header__pill,
+.bawo-site-header__actions,
+.bawo-site-header__mobile-panel {
+  pointer-events: auto;
 }
 
 .bawo-site-header__glow {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(214, 178, 106, 0.38) 22%,
-    rgba(247, 231, 196, 0.55) 50%,
-    rgba(214, 178, 106, 0.38) 78%,
-    transparent 100%
-  ) !important;
+  display: none !important;
+}
+
+.bawo-site-header__mobile-panel {
+  border-top: none !important;
 }
 
 .bawo-site-header__nav-link,
