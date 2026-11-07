@@ -2249,21 +2249,15 @@ a.bawo-cta-quiet:active {
   }
 }
 
+/* Right column = frosted glass twin of the left phone container */
 .bawo-next-preview__copy {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.15rem;
   min-width: 0;
-  justify-content: stretch;
+  justify-content: space-between;
   height: 100%;
-}
-
-.bawo-next-preview__active-card {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1.5rem 1.45rem 1.6rem;
+  padding: 1.5rem 1.45rem 1.35rem;
   border-radius: 1.75rem;
   border: 1px solid rgba(214, 178, 106, 0.28);
   background:
@@ -2278,13 +2272,22 @@ a.bawo-cta-quiet:active {
     inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
+.bawo-next-preview__active-card {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.15rem 0.1rem 0.35rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
 @media (min-width: 960px) {
   .bawo-next-preview__copy {
     min-height: min(72vh, 48rem);
-  }
-
-  .bawo-next-preview__active-card {
-    min-height: 0;
+    align-self: stretch;
   }
 }
 
