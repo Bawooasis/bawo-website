@@ -2258,11 +2258,11 @@ a.bawo-cta-quiet:active {
 .bawo-next-preview__copy {
   display: flex;
   flex-direction: column;
-  gap: 1.35rem;
+  gap: 1.15rem;
   min-width: 0;
   justify-content: flex-start;
   height: 100%;
-  padding: 1.35rem 1.4rem 1.25rem;
+  padding: 1.15rem 1.35rem 1.2rem;
   border-radius: 1.75rem;
   border: 1px solid rgba(214, 178, 106, 0.28);
   background:
@@ -2321,7 +2321,7 @@ a.bawo-cta-quiet:active {
   .bawo-next-preview__copy {
     min-height: min(72vh, 48rem);
     align-self: stretch;
-    padding-top: 1.5rem;
+    padding-top: 1.2rem;
   }
 }
 
@@ -2362,15 +2362,15 @@ a.bawo-cta-quiet:active {
   position: relative;
   width: 100%;
   aspect-ratio: 393 / 852;
-  border-radius: 3.15rem;
-  padding: 0.55rem;
+  border-radius: 3.35rem;
+  padding: 0.72rem;
   background:
-    linear-gradient(145deg, #3a3a3e 0%, #1a1a1d 28%, #0b0b0d 62%, #2c2c30 100%);
+    linear-gradient(150deg, #8a8680 0%, #4c4a46 18%, #1c1b1a 46%, #0a0a0b 72%, #5a5752 100%);
   box-shadow:
-    0 28px 60px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(255, 255, 255, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.55);
+    0 32px 64px rgba(0, 0, 0, 0.62),
+    0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.38),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.65);
 }
 
 .bawo-next-preview__device-side {
@@ -2417,17 +2417,17 @@ a.bawo-cta-quiet:active {
 .bawo-next-preview__device-island {
   position: absolute;
   z-index: 4;
-  top: 1.05rem;
+  top: 1.2rem;
   left: 50%;
-  width: 28%;
-  height: 3.1%;
-  min-height: 1.05rem;
+  width: 30%;
+  height: 3.35%;
+  min-height: 1.15rem;
   transform: translateX(-50%);
   border-radius: 999px;
-  background: #050507;
+  background: #000;
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
-    0 0 0 1px rgba(0, 0, 0, 0.55);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 0 0 1.5px rgba(0, 0, 0, 0.75);
 }
 
 .bawo-next-preview__device-screen {
@@ -2436,20 +2436,22 @@ a.bawo-cta-quiet:active {
   overflow: hidden;
   width: 100%;
   height: 100%;
-  border-radius: 2.6rem;
+  border-radius: 2.7rem;
   background: #050507;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
 }
 
 .bawo-next-preview__device-home {
   position: absolute;
   z-index: 4;
   left: 50%;
-  bottom: 0.85rem;
-  width: 32%;
-  height: 0.28rem;
+  bottom: 0.95rem;
+  width: 34%;
+  height: 0.32rem;
   transform: translateX(-50%);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
 }
 
 .bawo-next-preview__image {
