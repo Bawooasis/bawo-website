@@ -2213,8 +2213,8 @@ a.bawo-cta-quiet:active {
 
 @media (min-width: 960px) {
   .bawo-next-preview {
-    grid-template-columns: minmax(0, 1.35fr) minmax(16rem, 0.75fr);
-    gap: 2.75rem;
+    grid-template-columns: minmax(0, 1.55fr) minmax(15rem, 0.7fr);
+    gap: 2.5rem;
     align-items: stretch;
     padding: 1.5rem 0.75rem 0.75rem;
     min-height: min(78vh, 52rem);
@@ -2231,7 +2231,7 @@ a.bawo-cta-quiet:active {
   align-items: center;
   justify-content: center;
   min-height: 38rem;
-  padding: 3.75rem 1.25rem 1.5rem;
+  padding: 3.85rem 1rem 1.75rem;
   border-radius: 1.75rem;
   overflow: hidden;
   border: 1px solid rgba(214, 178, 106, 0.28);
@@ -2250,7 +2250,7 @@ a.bawo-cta-quiet:active {
 @media (min-width: 960px) {
   .bawo-next-preview__visual {
     min-height: min(72vh, 48rem);
-    padding: 3.85rem 1.75rem 1.75rem;
+    padding: 3.9rem 1.35rem 1.85rem;
   }
 }
 
@@ -2347,42 +2347,88 @@ a.bawo-cta-quiet:active {
     linear-gradient(0deg, rgba(5, 2, 9, 0.28), transparent 28%);
 }
 
-/* iPhone 17 Pro–style device frame */
-.bawo-next-preview__device {
+/* Two-device cluster: latest iPhone + Android flagship */
+.bawo-next-preview__devices {
   position: relative;
   z-index: 2;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  width: min(100%, 22rem);
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  width: 100%;
+  max-width: 42rem;
+}
+
+.bawo-next-preview__device {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
   max-height: 100%;
+}
+
+.bawo-next-preview__device--iphone {
+  width: min(46%, 17.5rem);
+  z-index: 2;
+}
+
+.bawo-next-preview__device--android {
+  width: min(42%, 15.75rem);
+  z-index: 1;
+  transform: translateY(0.35rem);
+}
+
+.bawo-next-preview__device-label {
+  font-family: "Outfit", system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(247, 231, 196, 0.72);
 }
 
 .bawo-next-preview__device-frame {
   position: relative;
   width: 100%;
+}
+
+.bawo-next-preview__device-frame--iphone {
   aspect-ratio: 393 / 852;
-  border-radius: 3.35rem;
-  padding: 0.72rem;
+  border-radius: 3.1rem;
+  padding: 0.68rem;
   background:
     linear-gradient(150deg, #8a8680 0%, #4c4a46 18%, #1c1b1a 46%, #0a0a0b 72%, #5a5752 100%);
   box-shadow:
-    0 32px 64px rgba(0, 0, 0, 0.62),
+    0 28px 56px rgba(0, 0, 0, 0.58),
     0 0 0 1px rgba(255, 255, 255, 0.16),
     inset 0 1px 0 rgba(255, 255, 255, 0.38),
     inset 0 -2px 0 rgba(0, 0, 0, 0.65);
 }
 
+.bawo-next-preview__device-frame--android {
+  aspect-ratio: 412 / 915;
+  border-radius: 2.35rem;
+  padding: 0.42rem;
+  background:
+    linear-gradient(155deg, #2f3238 0%, #15171b 40%, #0a0b0d 70%, #3a3e46 100%);
+  box-shadow:
+    0 26px 52px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.7);
+}
+
 .bawo-next-preview__device-side {
   position: absolute;
-  width: 0.18rem;
+  width: 0.16rem;
   border-radius: 999px;
   background: linear-gradient(180deg, #4a4a4e, #1c1c1f 40%, #3a3a3e);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
 .bawo-next-preview__device-side--left {
-  left: -0.14rem;
+  left: -0.13rem;
   top: 18%;
   height: 12%;
 }
@@ -2409,7 +2455,7 @@ a.bawo-cta-quiet:active {
 }
 
 .bawo-next-preview__device-side--right {
-  right: -0.14rem;
+  right: -0.13rem;
   top: 26%;
   height: 18%;
 }
@@ -2417,11 +2463,11 @@ a.bawo-cta-quiet:active {
 .bawo-next-preview__device-island {
   position: absolute;
   z-index: 4;
-  top: 1.2rem;
+  top: 1.05rem;
   left: 50%;
   width: 30%;
   height: 3.35%;
-  min-height: 1.15rem;
+  min-height: 1.05rem;
   transform: translateX(-50%);
   border-radius: 999px;
   background: #000;
@@ -2430,28 +2476,60 @@ a.bawo-cta-quiet:active {
     0 0 0 1.5px rgba(0, 0, 0, 0.75);
 }
 
+.bawo-next-preview__device-punch {
+  position: absolute;
+  z-index: 4;
+  top: 0.72rem;
+  left: 50%;
+  width: 0.72rem;
+  height: 0.72rem;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 35%, #2a3140 0%, #0a0c10 55%, #000 100%);
+  box-shadow:
+    0 0 0 1.5px rgba(20, 22, 28, 0.95),
+    inset 0 0 0 1px rgba(120, 140, 180, 0.25);
+}
+
 .bawo-next-preview__device-screen {
   position: relative;
   z-index: 2;
   overflow: hidden;
   width: 100%;
   height: 100%;
-  border-radius: 2.7rem;
+  border-radius: 2.5rem;
   background: #050507;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.bawo-next-preview__device-screen--android {
+  border-radius: 2rem;
 }
 
 .bawo-next-preview__device-home {
   position: absolute;
   z-index: 4;
   left: 50%;
-  bottom: 0.95rem;
+  bottom: 0.85rem;
   width: 34%;
-  height: 0.32rem;
+  height: 0.3rem;
   transform: translateX(-50%);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.55);
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
+.bawo-next-preview__device-gesture {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: 0.55rem;
+  width: 28%;
+  height: 0.22rem;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .bawo-next-preview__image {
@@ -2464,8 +2542,31 @@ a.bawo-cta-quiet:active {
 }
 
 @media (min-width: 960px) {
-  .bawo-next-preview__device {
-    width: min(100%, 24.5rem);
+  .bawo-next-preview__devices {
+    max-width: 46rem;
+    gap: 1.35rem;
+  }
+
+  .bawo-next-preview__device--iphone {
+    width: min(48%, 18.75rem);
+  }
+
+  .bawo-next-preview__device--android {
+    width: min(43%, 16.75rem);
+  }
+}
+
+@media (max-width: 639px) {
+  .bawo-next-preview__devices {
+    gap: 0.55rem;
+  }
+
+  .bawo-next-preview__device--iphone {
+    width: min(48%, 11.5rem);
+  }
+
+  .bawo-next-preview__device--android {
+    width: min(44%, 10.25rem);
   }
 }
 
@@ -2651,7 +2752,7 @@ a.bawo-cta-quiet:active {
 }
 
 .bawo-next-preview__dialog {
-  width: min(92vw, 28rem);
+  width: min(96vw, 46rem);
   height: min(92vh, 58rem);
   margin: auto;
   padding: 1.25rem;
@@ -2667,18 +2768,22 @@ a.bawo-cta-quiet:active {
   backdrop-filter: blur(12px);
 }
 
-.bawo-next-preview__dialog-device {
+.bawo-next-preview__dialog-devices {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  gap: 1.25rem;
   width: 100%;
   height: 100%;
-  padding: 2.5rem 0.5rem 0.75rem;
+  padding: 2.75rem 0.5rem 0.75rem;
 }
 
-.bawo-next-preview__dialog-device .bawo-next-preview__device-frame {
-  width: min(100%, 22rem);
-  max-height: 100%;
+.bawo-next-preview__dialog-devices .bawo-next-preview__device-frame--iphone {
+  width: min(42%, 18rem);
+}
+
+.bawo-next-preview__dialog-devices .bawo-next-preview__device-frame--android {
+  width: min(38%, 16rem);
 }
 
 .bawo-next-preview__dialog .bawo-next-preview__device-screen img {
