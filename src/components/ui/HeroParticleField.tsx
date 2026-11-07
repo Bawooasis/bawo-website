@@ -60,10 +60,10 @@ varying vec3 vNormal;
 varying vec3 vWorldPosition;
 void main() {
   vec3 viewDir = normalize(cameraPosition - vWorldPosition);
-  float fresnel = pow(1.0 - abs(dot(viewDir, normalize(vNormal))), 2.35);
-  float rim = smoothstep(0.08, 0.95, fresnel);
-  vec3 col = mix(uGlowColor, uGreenColor, 0.28) * (0.55 + rim * 1.35);
-  float alpha = clamp(rim * 0.72, 0.0, 0.85);
+  float fresnel = pow(1.0 - abs(dot(viewDir, normalize(vNormal))), 1.85);
+  float rim = smoothstep(0.02, 0.92, fresnel);
+  vec3 col = mix(uGlowColor, uGreenColor, 0.42) * (0.7 + rim * 1.65);
+  float alpha = clamp(rim * 0.92, 0.0, 0.95);
   gl_FragColor = vec4(col, alpha);
 }
 `;
@@ -80,7 +80,7 @@ void main() {
   gl_Position = projectionMatrix * mvPosition;
   float breathe = 0.85 + 0.25 * sin(uTime * 1.6 + aPulse * 6.28);
   float sizeAtten = 280.0 / max(1.2, -mvPosition.z);
-  gl_PointSize = clamp(aSize * breathe * uPixelRatio * sizeAtten * 0.02, 2.5, 18.0);
+  gl_PointSize = clamp(aSize * breathe * uPixelRatio * sizeAtten * 0.028, 3.0, 24.0);
 }
 `;
 
@@ -127,8 +127,9 @@ export default function HeroParticleField({ className }: HeroParticleFieldProps)
     const scene = new THREE.Scene();
     scene.background = null;
 
-    const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 80);
-    camera.position.set(0, 0.12, 4.05);
+    // Slightly wider FOV + pulled-back camera so the circular limb reads as a globe
+    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 80);
+    camera.position.set(0, 0.08, 4.55);
 
     let renderer: THREE.WebGLRenderer;
     try {
@@ -148,34 +149,39 @@ export default function HeroParticleField({ className }: HeroParticleFieldProps)
     container.appendChild(renderer.domElement);
 
     const root = new THREE.Group();
-    // Slightly right/low so headline stays readable over the left-center of the sphere
-    root.position.set(0.28, -0.08, 0);
+    // Offset right so headline stays readable; keep enough of the limb in-frame for roundness
+    root.position.set(0.42, -0.06, 0);
     scene.add(root);
 
-    const ambient = new THREE.AmbientLight(0x3a2a48, 0.55);
+    const ambient = new THREE.AmbientLight(0x2a1c38, 0.38);
     scene.add(ambient);
-    const key = new THREE.DirectionalLight(0xffe2b8, 1.35);
-    key.position.set(4.2, 2.4, 3.6);
+    const key = new THREE.DirectionalLight(0xffe7c2, 1.55);
+    key.position.set(5.2, 2.8, 3.2);
     scene.add(key);
-    const fill = new THREE.DirectionalLight(0x1faa6a, 0.35);
-    fill.position.set(-3.2, -0.6, 2.2);
+    const fill = new THREE.DirectionalLight(0x1faa6a, 0.42);
+    fill.position.set(-3.6, -0.4, 2.4);
     scene.add(fill);
-    const rim = new THREE.DirectionalLight(0x66ffaa, 0.28);
-    rim.position.set(-2.5, 1.8, -3.5);
+    const rim = new THREE.DirectionalLight(0x66ffaa, 0.45);
+    rim.position.set(-2.8, 2.0, -3.8);
     scene.add(rim);
+    // Soft back-light to carve the sphere silhouette
+    const back = new THREE.DirectionalLight(0x88ffcc, 0.22);
+    back.position.set(0.4, 0.2, -4.5);
+    scene.add(back);
 
-    const globeRadius = 1.72;
+    const globeRadius = 1.58;
     const segments = coarse ? 64 : 96;
     const earthGeo = new THREE.SphereGeometry(globeRadius, segments, segments);
     const earthMat = new THREE.MeshStandardMaterial({
       color: 0xffffff,
-      roughness: 0.78,
-      metalness: 0.08,
-      emissive: new THREE.Color(0x061810),
-      emissiveIntensity: 0.18,
+      roughness: 0.72,
+      metalness: 0.06,
+      emissive: new THREE.Color(0x04140e),
+      emissiveIntensity: 0.14,
     });
     const earth = new THREE.Mesh(earthGeo, earthMat);
-    earth.rotation.y = -0.55;
+    // Start facing Africa / Atlantic so continents + diaspora arcs read clearly
+    earth.rotation.y = 0.35;
     root.add(earth);
 
     const loader = new THREE.TextureLoader();
@@ -198,7 +204,7 @@ export default function HeroParticleField({ className }: HeroParticleFieldProps)
       }
     );
 
-    const atmosphereGeo = new THREE.SphereGeometry(globeRadius * 1.045, segments, segments);
+    const atmosphereGeo = new THREE.SphereGeometry(globeRadius * 1.06, segments, segments);
     const atmosphereMat = new THREE.ShaderMaterial({
       vertexShader: ATMOSPHERE_VERT,
       fragmentShader: ATMOSPHERE_FRAG,
@@ -253,7 +259,7 @@ export default function HeroParticleField({ className }: HeroParticleFieldProps)
       cityPos[i * 3] = v.x;
       cityPos[i * 3 + 1] = v.y;
       cityPos[i * 3 + 2] = v.z;
-      citySizes[i] = 2.2 * (city.weight ?? 1);
+      citySizes[i] = 3.1 * (city.weight ?? 1);
       cityPulse[i] = (i * 0.17) % 1;
     });
     const cityGeo = new THREE.BufferGeometry();
@@ -263,7 +269,7 @@ export default function HeroParticleField({ className }: HeroParticleFieldProps)
     const cityUniforms = {
       uTime: { value: 0 },
       uPixelRatio: { value: dpr },
-      uColor: { value: new THREE.Color(0x2dff8a) },
+      uColor: { value: new THREE.Color(0x3dff96) },
     };
     const cityMat = new THREE.ShaderMaterial({
       vertexShader: CITY_VERT,
@@ -278,7 +284,7 @@ export default function HeroParticleField({ className }: HeroParticleFieldProps)
     earth.add(cities);
 
     // Extra green spark layer just above the surface for glow density
-    const sparkCount = coarse ? 48 : 72;
+    const sparkCount = coarse ? 64 : 96;
     const sparkPos = new Float32Array(sparkCount * 3);
     const sparkSizes = new Float32Array(sparkCount);
     const sparkPulse = new Float32Array(sparkCount);
@@ -290,7 +296,7 @@ export default function HeroParticleField({ className }: HeroParticleFieldProps)
       sparkPos[i * 3] = v.x;
       sparkPos[i * 3 + 1] = v.y;
       sparkPos[i * 3 + 2] = v.z;
-      sparkSizes[i] = 1.1 + Math.random() * 1.6;
+      sparkSizes[i] = 1.6 + Math.random() * 2.1;
       sparkPulse[i] = Math.random();
     }
     const sparkGeo = new THREE.BufferGeometry();
@@ -300,7 +306,7 @@ export default function HeroParticleField({ className }: HeroParticleFieldProps)
     const sparkUniforms = {
       uTime: { value: 0 },
       uPixelRatio: { value: dpr },
-      uColor: { value: new THREE.Color(0x7dffb2) },
+      uColor: { value: new THREE.Color(0x8dffc0) },
     };
     const sparkMat = new THREE.ShaderMaterial({
       vertexShader: CITY_VERT,
@@ -318,11 +324,11 @@ export default function HeroParticleField({ className }: HeroParticleFieldProps)
       const h = Math.max(1, container.clientHeight || window.innerHeight);
       camera.aspect = w / h;
       const narrow = w < 640;
-      // Pull camera in so the globe fills more of the hero
-      camera.position.z = narrow ? 3.55 : w < 1024 ? 3.35 : 3.15;
-      root.position.x = narrow ? 0.05 : 0.32;
-      root.position.y = narrow ? 0.02 : -0.12;
-      root.scale.setScalar(narrow ? 1.08 : 1.22);
+      // Keep enough camera distance that the circular limb stays readable
+      camera.position.z = narrow ? 4.35 : w < 1024 ? 4.15 : 3.95;
+      root.position.x = narrow ? 0.08 : 0.48;
+      root.position.y = narrow ? 0.04 : -0.08;
+      root.scale.setScalar(narrow ? 1.12 : 1.28);
       camera.updateProjectionMatrix();
       renderer.setSize(w, h, false);
     };
@@ -373,9 +379,9 @@ export default function HeroParticleField({ className }: HeroParticleFieldProps)
       curRotX += (targetRotX - curRotX) * 0.045;
       curRotY += (targetRotY - curRotY) * 0.045;
 
-      const idleSpin = simTime * 0.045;
+      const idleSpin = simTime * 0.055;
       const scrollSpin = scrollProgress * 0.85;
-      earth.rotation.y = -0.55 + idleSpin + scrollSpin + curRotY * 0.35;
+      earth.rotation.y = 0.35 + idleSpin + scrollSpin + curRotY * 0.35;
       earth.rotation.x = curRotX + Math.sin(simTime * 0.12) * 0.03;
       atmosphere.rotation.copy(earth.rotation);
       haze.rotation.y = earth.rotation.y * 0.35;
