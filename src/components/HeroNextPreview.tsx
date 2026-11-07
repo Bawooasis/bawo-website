@@ -23,7 +23,7 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
       <div className="bawo-next-preview__header mb-3 flex flex-col items-center justify-between gap-3 sm:flex-row">
         <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/35 bg-[#1C132B]/75 px-3.5 py-1.5 text-sm font-bold uppercase tracking-wider text-[#D6B26A] backdrop-blur-xl">
           <Sparkles className="h-3.5 w-3.5 shrink-0" aria-hidden />
-          <span>Interactive App Showcase · iPhone 17 Pro + Android · Live NYC Beta</span>
+          <span>Interactive App Showcase · iPhone 17 Pro Max + Android · Live NYC Beta</span>
         </div>
         <div className="inline-flex items-center gap-2 text-sm font-medium text-[#F7F3FA]/70">
           <MapPin className="h-3.5 w-3.5 text-[#D6B26A]" aria-hidden />
@@ -48,25 +48,28 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
             />
 
             <div className="bawo-next-preview__devices" aria-label="iPhone and Android app simulators">
-              {/* Latest iPhone */}
+              {/* iPhone 17 Pro Max — hairline bezel + Cosmic Orange aluminum rail */}
               <div className="bawo-next-preview__device bawo-next-preview__device--iphone">
                 <div className="bawo-next-preview__device-frame bawo-next-preview__device-frame--iphone">
-                  <div className="bawo-next-preview__device-side bawo-next-preview__device-side--left" aria-hidden />
-                  <div className="bawo-next-preview__device-side bawo-next-preview__device-side--right" aria-hidden />
-                  <div className="bawo-next-preview__device-island" aria-hidden />
-                  <div className="bawo-next-preview__device-screen">
+                  <span className="bawo-next-preview__rail-btn bawo-next-preview__rail-btn--action" aria-hidden />
+                  <span className="bawo-next-preview__rail-btn bawo-next-preview__rail-btn--vol-up" aria-hidden />
+                  <span className="bawo-next-preview__rail-btn bawo-next-preview__rail-btn--vol-down" aria-hidden />
+                  <span className="bawo-next-preview__rail-btn bawo-next-preview__rail-btn--side" aria-hidden />
+                  <span className="bawo-next-preview__rail-btn bawo-next-preview__rail-btn--camera" aria-hidden />
+                  <div className="bawo-next-preview__device-screen bawo-next-preview__device-screen--iphone">
+                    <div className="bawo-next-preview__device-island" aria-hidden />
                     <img
                       key={`ios-${current.title}`}
                       src={current.image}
-                      alt={`${current.imageAlt} on iPhone`}
+                      alt={`${current.imageAlt} on iPhone 17 Pro Max`}
                       className="bawo-next-preview__image"
                       loading="lazy"
                       decoding="async"
                     />
+                    <div className="bawo-next-preview__device-home" aria-hidden />
                   </div>
-                  <div className="bawo-next-preview__device-home" aria-hidden />
                 </div>
-                <span className="bawo-next-preview__device-label">iPhone 17 Pro</span>
+                <span className="bawo-next-preview__device-label">iPhone 17 Pro Max</span>
               </div>
 
               {/* Android flagship / Pixel-style */}
@@ -160,11 +163,11 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
         </button>
         <div className="bawo-next-preview__dialog-devices">
           <div className="bawo-next-preview__device-frame bawo-next-preview__device-frame--iphone">
-            <div className="bawo-next-preview__device-island" aria-hidden />
-            <div className="bawo-next-preview__device-screen">
-              <img src={current.image} alt={`${current.imageAlt} on iPhone`} />
+            <div className="bawo-next-preview__device-screen bawo-next-preview__device-screen--iphone">
+              <div className="bawo-next-preview__device-island" aria-hidden />
+              <img src={current.image} alt={`${current.imageAlt} on iPhone 17 Pro Max`} />
+              <div className="bawo-next-preview__device-home" aria-hidden />
             </div>
-            <div className="bawo-next-preview__device-home" aria-hidden />
           </div>
           <div className="bawo-next-preview__device-frame bawo-next-preview__device-frame--android">
             <div className="bawo-next-preview__device-punch" aria-hidden />
