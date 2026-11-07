@@ -42,8 +42,6 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
 
   return (
     <header className="bawo-site-header fixed inset-x-0 top-0 z-50">
-      <div className="bawo-site-header__glow" aria-hidden />
-
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bawo-site-header__bar">
           <div className="bawo-site-header__leading">
@@ -108,8 +106,6 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
           </div>
         </div>
       </div>
-
-      <div className="bawo-site-header__divider" aria-hidden />
 
       {mobileOpen && (
         <div className="bawo-site-header__mobile-panel">
