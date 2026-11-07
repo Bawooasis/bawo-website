@@ -46,14 +46,24 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
               className="bawo-next-preview__backdrop"
               aria-hidden="true"
             />
-            <img
-              key={current.title}
-              src={current.image}
-              alt={current.imageAlt}
-              className="bawo-next-preview__image"
-              loading="lazy"
-              decoding="async"
-            />
+            <div className="bawo-next-preview__device">
+              <div className="bawo-next-preview__device-frame">
+                <div className="bawo-next-preview__device-side bawo-next-preview__device-side--left" aria-hidden />
+                <div className="bawo-next-preview__device-side bawo-next-preview__device-side--right" aria-hidden />
+                <div className="bawo-next-preview__device-island" aria-hidden />
+                <div className="bawo-next-preview__device-screen">
+                  <img
+                    key={current.title}
+                    src={current.image}
+                    alt={current.imageAlt}
+                    className="bawo-next-preview__image"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div className="bawo-next-preview__device-home" aria-hidden />
+              </div>
+            </div>
             <div className="bawo-next-preview__chrome">
               <span className="bawo-next-preview__status">
                 <span aria-hidden="true" />
@@ -75,20 +85,14 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
 
       <div className="bawo-next-preview__copy">
         <div className="bawo-next-preview__active-card">
-          <div className="flex flex-wrap items-center gap-2">
-            <h3
-              id={`bawo-preview-tab-${active}`}
-              className="bawo-next-preview__tab-title font-display text-xl sm:text-2xl font-bold text-white"
-            >
-              {current.title}
-            </h3>
-            <span className="rounded-full border border-[#D6B26A]/30 bg-[#D6B26A]/12 px-2.5 py-0.5 text-sm font-bold uppercase tracking-wider text-[#F7E7C4]">
-              {current.badge}
-            </span>
-          </div>
-          <p className="bawo-next-preview__tab-body mt-3 text-base text-[#F7F3FA]/85 leading-relaxed">
-            {current.description}
-          </p>
+          <h3
+            id={`bawo-preview-tab-${active}`}
+            className="bawo-next-preview__heading font-display"
+          >
+            {current.title}
+          </h3>
+          <span className="bawo-next-preview__badge">{current.badge}</span>
+          <p className="bawo-next-preview__tab-body">{current.description}</p>
         </div>
 
         <ul className="bawo-next-preview__list" role="tablist">
@@ -129,7 +133,15 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
         >
           <X size={22} aria-hidden="true" />
         </button>
-        <img src={current.image} alt={current.imageAlt} />
+        <div className="bawo-next-preview__dialog-device">
+          <div className="bawo-next-preview__device-frame">
+            <div className="bawo-next-preview__device-island" aria-hidden />
+            <div className="bawo-next-preview__device-screen">
+              <img src={current.image} alt={current.imageAlt} />
+            </div>
+            <div className="bawo-next-preview__device-home" aria-hidden />
+          </div>
+        </div>
       </dialog>
     </div>
   );

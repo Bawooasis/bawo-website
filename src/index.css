@@ -2227,7 +2227,11 @@ a.bawo-cta-quiet:active {
 
 .bawo-next-preview__visual {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-height: 38rem;
+  padding: 3.75rem 1.25rem 1.5rem;
   border-radius: 1.75rem;
   overflow: hidden;
   border: 1px solid rgba(214, 178, 106, 0.28);
@@ -2246,6 +2250,7 @@ a.bawo-cta-quiet:active {
 @media (min-width: 960px) {
   .bawo-next-preview__visual {
     min-height: min(72vh, 48rem);
+    padding: 3.85rem 1.75rem 1.75rem;
   }
 }
 
@@ -2253,11 +2258,11 @@ a.bawo-cta-quiet:active {
 .bawo-next-preview__copy {
   display: flex;
   flex-direction: column;
-  gap: 1.15rem;
+  gap: 1.35rem;
   min-width: 0;
-  justify-content: space-between;
+  justify-content: flex-start;
   height: 100%;
-  padding: 1.5rem 1.45rem 1.35rem;
+  padding: 1.35rem 1.4rem 1.25rem;
   border-radius: 1.75rem;
   border: 1px solid rgba(214, 178, 106, 0.28);
   background:
@@ -2273,31 +2278,51 @@ a.bawo-cta-quiet:active {
 }
 
 .bawo-next-preview__active-card {
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 0.15rem 0.1rem 0.35rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0.7rem;
+  padding: 0;
   border: 0;
   border-radius: 0;
   background: transparent;
   box-shadow: none;
 }
 
+.bawo-next-preview__heading {
+  margin: 0;
+  color: #fff;
+  font-family: "Outfit", system-ui, sans-serif;
+  font-size: clamp(1.35rem, 1.6vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.bawo-next-preview__badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(214, 178, 106, 0.34);
+  background: rgba(214, 178, 106, 0.12);
+  padding: 0.28rem 0.7rem;
+  color: #f7e7c4;
+  font-family: "Outfit", system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 @media (min-width: 960px) {
   .bawo-next-preview__copy {
     min-height: min(72vh, 48rem);
     align-self: stretch;
+    padding-top: 1.5rem;
   }
-}
-
-.bawo-next-preview__visual[data-layout="full-screen"] .bawo-next-preview__image {
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  padding: 3.5rem 1rem 1rem;
-  object-fit: contain;
-  filter: drop-shadow(0 20px 44px rgba(0, 0, 0, 0.72));
 }
 
 .bawo-next-preview__backdrop {
@@ -2306,7 +2331,7 @@ a.bawo-cta-quiet:active {
   width: calc(100% + 4rem);
   height: calc(100% + 4rem);
   object-fit: cover;
-  opacity: 0.32;
+  opacity: 0.28;
   filter: blur(24px) saturate(1.2);
   transform: scale(1.08);
 }
@@ -2319,37 +2344,127 @@ a.bawo-cta-quiet:active {
   pointer-events: none;
   background:
     linear-gradient(180deg, rgba(5, 2, 9, 0.35), transparent 32%),
-    linear-gradient(0deg, rgba(5, 2, 9, 0.42), transparent 34%);
+    linear-gradient(0deg, rgba(5, 2, 9, 0.28), transparent 28%);
+}
+
+/* iPhone 17 Pro–style device frame */
+.bawo-next-preview__device {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 22rem);
+  max-height: 100%;
+}
+
+.bawo-next-preview__device-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 393 / 852;
+  border-radius: 3.15rem;
+  padding: 0.55rem;
+  background:
+    linear-gradient(145deg, #3a3a3e 0%, #1a1a1d 28%, #0b0b0d 62%, #2c2c30 100%);
+  box-shadow:
+    0 28px 60px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.55);
+}
+
+.bawo-next-preview__device-side {
+  position: absolute;
+  width: 0.18rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #4a4a4e, #1c1c1f 40%, #3a3a3e);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.bawo-next-preview__device-side--left {
+  left: -0.14rem;
+  top: 18%;
+  height: 12%;
+}
+
+.bawo-next-preview__device-side--left::before,
+.bawo-next-preview__device-side--left::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  border-radius: inherit;
+  background: inherit;
+  box-shadow: inherit;
+}
+
+.bawo-next-preview__device-side--left::before {
+  top: 145%;
+  height: 58%;
+}
+
+.bawo-next-preview__device-side--left::after {
+  top: 235%;
+  height: 58%;
+}
+
+.bawo-next-preview__device-side--right {
+  right: -0.14rem;
+  top: 26%;
+  height: 18%;
+}
+
+.bawo-next-preview__device-island {
+  position: absolute;
+  z-index: 4;
+  top: 1.05rem;
+  left: 50%;
+  width: 28%;
+  height: 3.1%;
+  min-height: 1.05rem;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #050507;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 0 0 1px rgba(0, 0, 0, 0.55);
+}
+
+.bawo-next-preview__device-screen {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border-radius: 2.6rem;
+  background: #050507;
+}
+
+.bawo-next-preview__device-home {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: 0.85rem;
+  width: 32%;
+  height: 0.28rem;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.42);
 }
 
 .bawo-next-preview__image {
-  position: absolute;
-  z-index: 1;
-  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
-  padding: 0.6rem;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: top center;
   animation: bawo-preview-in 260ms ease-out both;
 }
 
-.bawo-next-preview__visual[data-layout="map-crop"] .bawo-next-preview__image {
-  inset: -2.5% auto auto -8%;
-  width: 116%;
-  height: auto;
-  max-width: none;
-  padding: 0;
-  object-fit: unset;
-}
-
-.bawo-next-preview__visual[data-layout="screen-crop"] .bawo-next-preview__image {
-  inset: 0 auto auto 0;
-  width: 100%;
-  height: auto;
-  max-width: none;
-  padding: 0;
-  object-fit: unset;
+@media (min-width: 960px) {
+  .bawo-next-preview__device {
+    width: min(100%, 24.5rem);
+  }
 }
 
 @keyframes bawo-preview-in {
@@ -2468,12 +2583,13 @@ a.bawo-cta-quiet:active {
 
 .bawo-next-preview__list {
   list-style: none;
-  margin: 0;
-  padding: 0;
+  margin: 0.15rem 0 0;
+  padding: 0.55rem 0 0;
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  gap: 0.1rem;
   border: none;
+  border-top: 1px solid rgba(247, 231, 196, 0.12);
   box-shadow: none;
 }
 
@@ -2488,12 +2604,12 @@ a.bawo-cta-quiet:active {
   align-items: center;
   gap: 0.4rem;
   width: 100%;
-  padding: 0.65rem 0.35rem;
+  padding: 0.58rem 0.4rem;
   margin: 0;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0.55rem;
   background: none;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(247, 231, 196, 0.72);
   text-align: left;
   cursor: pointer;
   font: inherit;
@@ -2503,18 +2619,21 @@ a.bawo-cta-quiet:active {
 
 .bawo-next-preview__tab-title {
   font-family: "Outfit", system-ui, sans-serif;
-  font-size: 0.9375rem;
+  font-size: 0.9rem;
   font-weight: 600;
   line-height: 1.3;
 }
 
 .bawo-next-preview__tab-body {
+  margin: 0;
   font-family: "Outfit", system-ui, sans-serif;
-  font-size: 0.95rem;
-  font-weight: 500;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.78);
-  max-width: 36rem;
+  font-size: 0.92rem;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+  color: rgba(247, 243, 250, 0.78);
+  max-width: 34rem;
+  text-wrap: pretty;
 }
 
 @media (hover: hover) {
@@ -2530,10 +2649,10 @@ a.bawo-cta-quiet:active {
 }
 
 .bawo-next-preview__dialog {
-  width: min(92vw, 58rem);
-  height: min(90vh, 54rem);
+  width: min(92vw, 28rem);
+  height: min(92vh, 58rem);
   margin: auto;
-  padding: 1rem;
+  padding: 1.25rem;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 1.5rem;
@@ -2546,11 +2665,26 @@ a.bawo-cta-quiet:active {
   backdrop-filter: blur(12px);
 }
 
-.bawo-next-preview__dialog img {
+.bawo-next-preview__dialog-device {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 2.5rem 0.5rem 0.75rem;
+}
+
+.bawo-next-preview__dialog-device .bawo-next-preview__device-frame {
+  width: min(100%, 22rem);
+  max-height: 100%;
+}
+
+.bawo-next-preview__dialog .bawo-next-preview__device-screen img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: top center;
 }
 
 .bawo-next-preview__dialog-close {
