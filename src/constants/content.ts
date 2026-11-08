@@ -154,7 +154,7 @@ export const CONTENT = {
     eyebrow: "Live Inside BawoSocial",
     title: "Community Circles That Feel Like Home",
     subtitle:
-      "Real sub-communities rooted in Nigerian culture, open to the Afro community in NYC, featuring active feeds, voice notes, daily gist prompts, and real-world linkups across all five boroughs.",
+      "Real sub-communities rooted in Nigerian culture, open to the Afro community in NYC — with feeds, voice notes, daily gist, and linkups across all five boroughs.",
     items: [
       {
         id: "new-to-nyc",
@@ -164,40 +164,40 @@ export const CONTENT = {
         voiceNoteLabel: "0:42 Voice Note · Best boroughs & subway commutes",
         prompt: "Today's Gist: What surprised you most your first month in NYC?",
         description:
-          "Just landed from Lagos, Japa, or new in town? Your unofficial Naija NYC survival guide for apartments, credit/SSN tips, transit, and weekend linkups.",
+          "Just landed from Lagos or new in town? Naija NYC tips for apartments, credit/SSN, transit, and weekend linkups.",
         image: IMAGES.groups.newToNyc,
       },
       {
         id: "safe-space-girls",
         badge: "Nigerian Women's Circle",
         title: "Safe Space for the Girlies",
-        members: "Women-Only · Sisterhood & Soft Life",
+        members: "Women-Only · Soft Life",
         voiceNoteLabel: "1:08 Voice Note · Silk press & knotless plugs in BK",
         prompt: "Today's Gist: Drop a career win or boundary you're proud of this week ✨",
         description:
-          "A welcoming women-only circle for sisterhood, soft life, rooftop brunches, beauty & geles, career wins, and real talk — rooted in Nigerian culture, open to women across NYC's Afro community.",
+          "Women-only sisterhood for soft life, brunches, beauty & geles, and real talk — rooted in Nigerian culture, open to women across NYC's Afro community.",
         image: IMAGES.groups.safeSpaceSisterhood,
       },
       {
         id: "afro-food-chop",
         badge: "Naija Kitchens & Spots",
         title: "Nigerian Food & Chop NYC",
-        members: "Jollof · Swallow · Suya · Groceries",
+        members: "Jollof · Suya · Groceries",
         voiceNoteLabel: "0:54 Voice Note · Where to buy fresh ugwu & Agege bread",
         prompt: "Today's Debate: Pounded yam + egusi vs. Amala + gbegiri & ewedu?",
         description:
-          "From smoky Lagos owambe Jollof, suya, and pepper soup to efo riro, pounded yam, and African grocery plugs worth crossing boroughs for.",
+          "Lagos owambe Jollof, suya, pepper soup, efo riro, pounded yam, and African grocery plugs across the boroughs.",
         image: IMAGES.groups.afroFoodChop,
       },
       {
         id: "wellness-reflection",
         badge: "Wellness & Faith",
         title: "Mental Wellness, Faith & Reflection",
-        members: "Daily Prompts · Grounded Support",
+        members: "Daily Prompts · Support",
         voiceNoteLabel: "1:15 Voice Note · Navigating family expectations & peace",
         prompt: "Daily Check-In: How are you protecting your peace in the city this week?",
         description:
-          "A warm, judgment-free space for navigating diaspora life, first-gen pressures, faith reflections, devotionals, and genuine support — rooted in Nigerian culture, open to the Afro community.",
+          "Judgment-free space for diaspora life, first-gen pressures, faith, and support — rooted in Nigerian culture, open to the Afro community.",
         image: IMAGES.groups.wellnessGoldenHour,
       },
     ],

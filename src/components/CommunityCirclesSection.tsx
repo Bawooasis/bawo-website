@@ -11,8 +11,8 @@ export default function CommunityCirclesSection() {
       className="relative bawo-scroll-anchor py-16 md:py-24 bg-transparent section-contain"
       aria-labelledby="community-circles-heading"
     >
-      <div className="relative z-10 container mx-auto px-5 sm:px-6 max-w-7xl">
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-12 md:mb-16">
+      <div className="relative z-10 container mx-auto px-5 sm:px-6 lg:px-8 max-w-[96rem]">
+        <div className="text-center max-w-3xl mx-auto space-y-3 mb-10 md:mb-14">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/35 bg-[#1C132B]/75 px-4 py-1.5 text-sm font-bold tracking-wide text-[#D6B26A] backdrop-blur-xl">
             <Users className="w-3.5 h-3.5 shrink-0" aria-hidden />
             <span>{eyebrow}</span>
@@ -23,19 +23,19 @@ export default function CommunityCirclesSection() {
           >
             {title}
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-[#F7F3FA]/80 leading-relaxed">
+          <p className="text-base sm:text-lg text-[#F7F3FA]/80 leading-relaxed">
             {subtitle}
           </p>
         </div>
 
-        {/* 4 Community Circles Grid with Voice Note Waveforms & Daily Gist Prompts */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-12 mb-12 md:mb-16">
+        {/* 4 Community Circles — wider cards, shorter copy, no truncation */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-7 md:gap-8 xl:gap-9 mb-12 md:mb-16">
           {items.map((circle) => (
             <article
               key={circle.id}
-              className="glass-card group overflow-hidden rounded-2xl flex flex-col transition-all duration-300 hover:-translate-y-1.5"
+              className="glass-card group overflow-hidden rounded-2xl flex flex-col transition-all duration-300 hover:-translate-y-1.5 min-w-0"
             >
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#0E0A14]">
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#0E0A14]">
                 <img
                   src={circle.image}
                   alt={`${circle.title}, BawoSocial Nigerian Community Circle`}
@@ -50,29 +50,29 @@ export default function CommunityCirclesSection() {
                 </span>
               </div>
 
-              <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-5">
+              <div className="p-6 sm:p-7 flex-1 flex flex-col gap-5">
                 <div className="space-y-3">
-                  <h3 className="text-2xl font-bold font-display text-[#F7F3FA] leading-snug">
+                  <h3 className="text-xl sm:text-[1.35rem] font-bold font-display text-[#F7F3FA] leading-snug">
                     {circle.title}
                   </h3>
-                  <p className="text-sm font-bold uppercase tracking-wider text-[#F7E7C4] flex items-start gap-1.5 leading-snug">
+                  <p className="text-xs font-bold uppercase tracking-wider text-[#F7E7C4] flex items-start gap-1.5 leading-snug">
                     <MessageCircle className="w-3.5 h-3.5 shrink-0 text-[#D6B26A] mt-0.5" aria-hidden />
                     <span className="whitespace-normal">{circle.members}</span>
                   </p>
-                  <p className="text-sm text-[#F7F3FA]/80 leading-relaxed">
+                  <p className="text-sm text-[#F7F3FA]/78 leading-relaxed">
                     {circle.description}
                   </p>
                 </div>
 
-                <div className="space-y-3 pt-1">
+                <div className="mt-auto space-y-3.5">
                   {/* Live Voice Note Preview Pill — wrap fully; never ellipsize */}
-                  <div className="rounded-xl border border-[#D6B26A]/25 bg-[#0E0A14]/65 px-3.5 py-2.5 flex items-start gap-2.5">
+                  <div className="rounded-xl border border-[#D6B26A]/25 bg-[#0E0A14]/65 px-3.5 py-3 flex items-start gap-2.5">
                     <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#D6B26A] text-[#0E0A14] mt-0.5">
                       <Mic className="h-3.5 w-3.5" aria-hidden />
                     </span>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-0.5 mb-1.5" aria-hidden>
-                        {[45, 85, 60, 100, 70, 40, 90, 65, 50, 80, 55, 75].map((h, i) => (
+                        {[45, 85, 60, 100, 70, 40, 90, 65, 50, 80].map((h, i) => (
                           <span
                             key={i}
                             className="inline-block w-1 rounded-full bg-[#D6B26A]/80"
@@ -87,22 +87,20 @@ export default function CommunityCirclesSection() {
                   </div>
 
                   {/* Daily Gist Prompt */}
-                  <div className="rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-2.5">
+                  <div className="rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-3">
                     <p className="text-sm font-medium text-[#F7F3FA]/75 leading-snug whitespace-normal">
                       {circle.prompt}
                     </p>
                   </div>
 
-                  <div className="pt-1">
-                    <a
-                      href={CONTENT.hero.testflightLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-sm font-bold text-[#D6B26A] hover:text-[#F7E7C4] transition-colors"
-                    >
-                      <span>Join circle in BawoSocial app →</span>
-                    </a>
-                  </div>
+                  <a
+                    href={CONTENT.hero.testflightLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm font-bold text-[#D6B26A] hover:text-[#F7E7C4] transition-colors"
+                  >
+                    <span>Join in the app →</span>
+                  </a>
                 </div>
               </div>
             </article>
