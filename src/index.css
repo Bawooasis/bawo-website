@@ -1656,13 +1656,13 @@ a.bawo-cta-quiet:active {
 
 @media (min-width: 640px) {
   .bawo-site-header__actions {
-    gap: 0.7rem;
+    gap: 0.8rem;
   }
 }
 
 @media (min-width: 1024px) {
   .bawo-site-header__actions {
-    gap: 0.85rem;
+    gap: 1rem;
   }
 }
 
@@ -1674,11 +1674,11 @@ a.bawo-cta-quiet:active {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  /* Extra internal padding so cream type is not tight to the pill edge */
-  padding: 0.7rem 1.2rem;
-  min-height: 3.15rem;
-  min-width: 9.75rem;
-  border-radius: 0.75rem;
+  /* Generous internal padding so cream type is not tight to the pill edge */
+  padding: 0.85rem 1.35rem;
+  min-height: 3.5rem;
+  min-width: 10.25rem;
+  border-radius: 0.85rem;
   border: 1px solid rgba(58, 29, 72, 0.65);
   background: rgba(42, 20, 56, 0.45);
   text-decoration: none;
@@ -1688,9 +1688,9 @@ a.bawo-cta-quiet:active {
 @media (min-width: 1024px) {
   .bawo-site-header__founding-chip {
     display: inline-flex;
-    padding: 0.75rem 1.3rem;
-    min-height: 3.35rem;
-    min-width: 10.5rem;
+    padding: 0.95rem 1.45rem;
+    min-height: 3.75rem;
+    min-width: 11rem;
   }
 }
 
@@ -1707,7 +1707,7 @@ a.bawo-cta-quiet:active {
   align-items: center;
   justify-content: center;
   /* Clear breath between DOWNLOAD VIA and TESTFLIGHT */
-  gap: 0.38rem;
+  gap: 0.5rem;
   font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -1720,7 +1720,7 @@ a.bawo-cta-quiet:active {
 .bawo-site-header__founding-chip-line {
   display: block;
   white-space: nowrap;
-  line-height: 1.25;
+  line-height: 1.3;
 }
 
 .bawo-site-header__join-btn {
