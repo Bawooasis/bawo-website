@@ -175,7 +175,7 @@ export const CONTENT = {
         voiceNoteLabel: "1:08 Voice Note · Silk press & knotless plugs in BK",
         prompt: "Today's Gist: Drop a career win or boundary you're proud of this week ✨",
         description:
-          "Women-only sisterhood for soft life, brunches, beauty & geles, and real talk — rooted in Nigerian culture, open to women across NYC's Afro community.",
+          "Women-only soft life, brunches, beauty & geles, and real talk — rooted in Nigerian culture, open to women across NYC's Afro community.",
         image: IMAGES.groups.safeSpaceSisterhood,
       },
       {
@@ -186,7 +186,7 @@ export const CONTENT = {
         voiceNoteLabel: "0:54 Voice Note · Where to buy fresh ugwu & Agege bread",
         prompt: "Today's Debate: Pounded yam + egusi vs. Amala + gbegiri & ewedu?",
         description:
-          "Lagos owambe Jollof, suya, pepper soup, efo riro, pounded yam, and African grocery plugs across the boroughs.",
+          "Lagos owambe Jollof, suya, pepper soup, pounded yam, and African grocery plugs across the boroughs.",
         image: IMAGES.groups.afroFoodChop,
       },
       {
@@ -197,7 +197,7 @@ export const CONTENT = {
         voiceNoteLabel: "1:15 Voice Note · Navigating family expectations & peace",
         prompt: "Daily Check-In: How are you protecting your peace in the city this week?",
         description:
-          "Judgment-free space for diaspora life, first-gen pressures, faith, and support — rooted in Nigerian culture, open to the Afro community.",
+          "Judgment-free support for diaspora life, first-gen pressures, and faith — rooted in Nigerian culture, open to the Afro community.",
         image: IMAGES.groups.wellnessGoldenHour,
       },
     ],

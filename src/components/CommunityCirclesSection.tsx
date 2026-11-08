@@ -28,14 +28,14 @@ export default function CommunityCirclesSection() {
           </p>
         </div>
 
-        {/* 4 Community Circles — wider cards, shorter copy, no truncation */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-7 md:gap-8 xl:gap-9 mb-12 md:mb-16">
+        {/* 2×2 on desktop so cards stay wide; never squeeze four skinny columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 mb-12 md:mb-16">
           {items.map((circle) => (
             <article
               key={circle.id}
-              className="glass-card group overflow-hidden rounded-2xl flex flex-col transition-all duration-300 hover:-translate-y-1.5 min-w-0"
+              className="glass-card group overflow-hidden rounded-2xl flex flex-col sm:flex-row transition-all duration-300 hover:-translate-y-1.5 min-w-0"
             >
-              <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#0E0A14]">
+              <div className="relative aspect-[16/10] sm:aspect-auto sm:w-[42%] sm:min-h-[15.5rem] sm:self-stretch overflow-hidden bg-[#0E0A14] shrink-0">
                 <img
                   src={circle.image}
                   alt={`${circle.title}, BawoSocial Nigerian Community Circle`}
@@ -50,9 +50,9 @@ export default function CommunityCirclesSection() {
                 </span>
               </div>
 
-              <div className="p-6 sm:p-7 flex-1 flex flex-col gap-5">
-                <div className="space-y-3">
-                  <h3 className="text-xl sm:text-[1.35rem] font-bold font-display text-[#F7F3FA] leading-snug">
+              <div className="p-6 sm:p-7 flex-1 flex flex-col gap-4 min-w-0">
+                <div className="space-y-2.5">
+                  <h3 className="text-xl sm:text-2xl font-bold font-display text-[#F7F3FA] leading-snug">
                     {circle.title}
                   </h3>
                   <p className="text-xs font-bold uppercase tracking-wider text-[#F7E7C4] flex items-start gap-1.5 leading-snug">
@@ -64,14 +64,14 @@ export default function CommunityCirclesSection() {
                   </p>
                 </div>
 
-                <div className="mt-auto space-y-3.5">
+                <div className="mt-auto space-y-3">
                   {/* Live Voice Note Preview Pill — wrap fully; never ellipsize */}
-                  <div className="rounded-xl border border-[#D6B26A]/25 bg-[#0E0A14]/65 px-3.5 py-3 flex items-start gap-2.5">
+                  <div className="rounded-xl border border-[#D6B26A]/25 bg-[#0E0A14]/65 px-3.5 py-2.5 flex items-start gap-2.5">
                     <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#D6B26A] text-[#0E0A14] mt-0.5">
                       <Mic className="h-3.5 w-3.5" aria-hidden />
                     </span>
                     <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-0.5 mb-1.5" aria-hidden>
+                      <div className="flex items-center gap-0.5 mb-1" aria-hidden>
                         {[45, 85, 60, 100, 70, 40, 90, 65, 50, 80].map((h, i) => (
                           <span
                             key={i}
@@ -87,7 +87,7 @@ export default function CommunityCirclesSection() {
                   </div>
 
                   {/* Daily Gist Prompt */}
-                  <div className="rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-3">
+                  <div className="rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-2.5">
                     <p className="text-sm font-medium text-[#F7F3FA]/75 leading-snug whitespace-normal">
                       {circle.prompt}
                     </p>
