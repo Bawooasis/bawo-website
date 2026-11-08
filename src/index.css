@@ -1670,54 +1670,95 @@ a.bawo-cta-quiet:active {
   display: none;
 }
 
-.bawo-site-header__founding-chip {
+/*
+ * Fixed bottom-right TestFlight CTA (moved out of the header).
+ * Same two-line cream-on-dark treatment; stays visible while scrolling.
+ */
+.bawo-sticky-testflight {
+  position: fixed;
+  z-index: 45;
+  right: max(1rem, env(safe-area-inset-right, 0px));
+  bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+  display: inline-flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  /* Generous internal padding so cream type is not tight to the pill edge */
   padding: 0.85rem 1.35rem;
   min-height: 3.5rem;
   min-width: 10.25rem;
   border-radius: 0.85rem;
-  border: 1px solid rgba(58, 29, 72, 0.65);
-  background: rgba(42, 20, 56, 0.45);
+  border: 1px solid rgba(58, 29, 72, 0.72);
+  background: rgba(42, 20, 56, 0.88);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(247, 231, 196, 0.12);
   text-decoration: none;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-@media (min-width: 1024px) {
-  .bawo-site-header__founding-chip {
-    display: inline-flex;
+@media (max-width: 767px) {
+  .bawo-sticky-testflight {
+    right: max(0.85rem, env(safe-area-inset-right, 0px));
+    padding: 0.78rem 1.2rem;
+    min-height: 3.25rem;
+    min-width: 9.75rem;
+  }
+
+  /* Sit above the mobile bottom bar when it is present (homepage) */
+  body:has(.mobile-sticky-cta) .bawo-sticky-testflight {
+    bottom: calc(
+      var(--bawo-mobile-sticky-cta-height, 4.5rem) + 0.75rem + env(safe-area-inset-bottom, 0px)
+    );
+  }
+}
+
+@media (min-width: 768px) {
+  .bawo-sticky-testflight {
     padding: 0.95rem 1.45rem;
     min-height: 3.75rem;
     min-width: 11rem;
+    right: max(1.25rem, env(safe-area-inset-right, 0px));
+    bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
   }
 }
 
 @media (hover: hover) {
-  .bawo-site-header__founding-chip:hover {
-    background: rgba(58, 29, 72, 0.55);
+  .bawo-sticky-testflight:hover {
+    background: rgba(58, 29, 72, 0.94);
     border-color: rgba(255, 140, 66, 0.45);
+    transform: translateY(-1px);
   }
 }
 
-.bawo-site-header__founding-chip-label {
+.bawo-sticky-testflight:focus-visible {
+  outline: 2px solid rgba(214, 178, 106, 0.85);
+  outline-offset: 3px;
+}
+
+.bawo-sticky-testflight:active {
+  transform: translateY(0);
+}
+
+.bawo-sticky-testflight__label {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* Clear breath between DOWNLOAD VIA and TESTFLIGHT */
   gap: 0.5rem;
+  font-family: "Outfit", system-ui, sans-serif;
   font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--bawo-peach);
+  color: var(--bawo-peach, #f7e7c4);
   text-align: center;
   line-height: 1.2;
 }
 
-.bawo-site-header__founding-chip-line {
+.bawo-sticky-testflight__line {
   display: block;
   white-space: nowrap;
   line-height: 1.3;

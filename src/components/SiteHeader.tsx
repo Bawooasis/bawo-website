@@ -73,18 +73,6 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
               <span className="bawo-site-header__businesses-chip-label">Businesses</span>
             </a>
 
-            <a
-              href={CONTENT.hero.testflightLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bawo-site-header__founding-chip hidden lg:inline-flex"
-            >
-              <span className="bawo-site-header__founding-chip-label">
-                <span className="bawo-site-header__founding-chip-line">Download via</span>
-                <span className="bawo-site-header__founding-chip-line">TestFlight</span>
-              </span>
-            </a>
-
             <BawoPillButton
               label={CONTENT.hero.ctaSecondary}
               variant="primary"
@@ -132,17 +120,6 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
                 onClick={() => {
                   setMobileOpen(false);
                   window.location.assign("/businesses");
-                }}
-              />
-              <BawoPillButton
-                label={CONTENT.hero.ctaTestFlight}
-                variant="primary"
-                size="md"
-                polished
-                fullWidth
-                onClick={() => {
-                  setMobileOpen(false);
-                  window.open(CONTENT.hero.testflightLink, "_blank", "noopener,noreferrer");
                 }}
               />
               <BawoPillButton

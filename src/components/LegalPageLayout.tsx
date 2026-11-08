@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import SiteLogo from "./SiteLogo";
+import StickyTestFlightCta from "./StickyTestFlightCta";
 import { AFFILIATE_DISCLOSURE_LINE } from "../constants/legal";
 
 type LegalPageLayoutProps = {
@@ -17,6 +18,7 @@ export default function LegalPageLayout({
 }: LegalPageLayoutProps) {
   return (
     <div className="min-h-screen bg-[#0E0A14] text-[#F7F3FA]">
+      <StickyTestFlightCta />
       <header className="border-b border-[#D6B26A]/20">
         <div className="container mx-auto flex items-center justify-between gap-4 px-6 py-5">
           <SiteLogo
