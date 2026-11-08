@@ -80,7 +80,8 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
               className="bawo-site-header__founding-chip hidden lg:inline-flex"
             >
               <span className="bawo-site-header__founding-chip-label">
-                {CONTENT.hero.ctaTestFlight}
+                <span className="bawo-site-header__founding-chip-line">Download via</span>
+                <span className="bawo-site-header__founding-chip-line">TestFlight</span>
               </span>
             </a>
 
