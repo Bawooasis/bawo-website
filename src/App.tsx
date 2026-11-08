@@ -153,7 +153,7 @@ function App() {
       <SiteHeader onJoinClick={scrollToWaitlist} />
       <StickyTestFlightCta />
 
-      <div className="bawo-page-shell relative z-10 bg-transparent min-h-screen overflow-x-clip pb-[var(--bawo-mobile-sticky-cta-height)] md:pb-0">
+      <div className="bawo-page-shell relative z-10 bg-transparent min-h-screen overflow-x-clip">
         {/* Hero — cinematic particle field */}
         <section
           ref={heroRef}
@@ -213,10 +213,6 @@ function App() {
                   </a>
                   <a href="#events" className="bawo-hero-cinematic__pill">
                     Afrobeats & Events
-                  </a>
-                  <a href="/businesses" className="bawo-hero-cinematic__pill bawo-hero-cinematic__pill--business">
-                    <Building2 className="h-3.5 w-3.5 text-[#D6B26A]" aria-hidden />
-                    <span>For Businesses</span>
                   </a>
                 </div>
               </div>
@@ -633,29 +629,6 @@ function App() {
 
         {/* Footer */}
         <footer className="py-12 bg-transparent">
-          {/* Mobile Sticky CTA — Businesses only; TestFlight is the fixed bottom-right FAB */}
-          <div className="md:hidden mobile-sticky-cta bg-[#0E0A14]/92 backdrop-blur-xl border-t border-[#D6B26A]/25">
-            <div className="px-4 py-3 flex items-center justify-between gap-3">
-              <div className="flex flex-col min-w-0 gap-0.5">
-                <span className="text-[#F7F3FA] font-bold text-sm">BawoSocial NYC</span>
-                <span className="text-[#F7E7C4]/75 font-medium text-sm uppercase tracking-wider">
-                  Businesses
-                </span>
-              </div>
-              <div className="flex shrink-0 items-center gap-2">
-                <FoundingMemberButton
-                  label="Businesses"
-                  variant="primary"
-                  appearance="outline"
-                  size="sm"
-                  className="max-w-[7.5rem]"
-                  onClick={() => {
-                    window.location.assign("/businesses");
-                  }}
-                />
-              </div>
-            </div>
-          </div>
           <div className="container mx-auto px-6">
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
               {/* Company Info */}

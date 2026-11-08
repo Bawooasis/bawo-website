@@ -1702,16 +1702,10 @@ a.bawo-cta-quiet:active {
 @media (max-width: 767px) {
   .bawo-sticky-testflight {
     right: max(0.85rem, env(safe-area-inset-right, 0px));
+    bottom: max(1rem, env(safe-area-inset-bottom, 0px));
     padding: 0.78rem 1.2rem;
     min-height: 3.25rem;
     min-width: 9.75rem;
-  }
-
-  /* Sit above the mobile bottom bar when it is present (homepage) */
-  body:has(.mobile-sticky-cta) .bawo-sticky-testflight {
-    bottom: calc(
-      var(--bawo-mobile-sticky-cta-height, 4.5rem) + 0.75rem + env(safe-area-inset-bottom, 0px)
-    );
   }
 }
 
@@ -1961,9 +1955,12 @@ a.bawo-cta-quiet:active {
 }
 
 .bawo-hero-cinematic__phone {
-  width: min(42vw, 11.5rem);
+  /* Prominent hero device — larger than the previous compact tile */
+  width: min(58vw, 15.5rem);
   flex: 0 0 auto;
   z-index: 2;
+  /* Keep clear of sticky TestFlight FAB bottom-right */
+  margin-bottom: 0.5rem;
 }
 
 .bawo-hero-cinematic__title {
@@ -2077,7 +2074,7 @@ a.bawo-cta-quiet:active {
 
   .bawo-hero-cinematic__copy-col {
     align-items: flex-start;
-    max-width: min(34rem, 46vw);
+    max-width: min(32rem, 42vw);
     gap: 1.35rem;
   }
 
@@ -2096,11 +2093,18 @@ a.bawo-cta-quiet:active {
   }
 
   .bawo-hero-cinematic__phone {
-    width: min(22vw, 16.5rem);
+    width: min(30vw, 22rem);
+    margin-bottom: 0;
+    /* Room so the larger phone doesn't crowd sticky TestFlight */
+    margin-right: 0.5rem;
   }
 }
 
 @media (min-width: 1280px) {
+  .bawo-hero-cinematic__phone {
+    width: min(28vw, 24rem);
+  }
+
   .bawo-site-header__menu-btn {
     display: none;
   }
