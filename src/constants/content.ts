@@ -11,9 +11,9 @@ export const CONTENT = {
   },
 
   communityMission: {
-    title: "More than an app. A home for Nigerians in the diaspora.",
+    title: "More than an app. A Nigerian culture hub for the Afro community.",
     subtitle:
-      "BawoSocial exists so Nigerians in the diaspora, starting across all five boroughs of New York City, can celebrate our culture, support Nigerian-owned businesses, and find community that truly feels like home.",
+      "BawoSocial exists so Nigerian culture can bring the Afro community together, starting across all five boroughs of New York City — to celebrate the culture, support Nigerian-owned businesses, and find community that truly feels like home.",
     pillars: [
       {
         title: "Explore Verified Nigerian Spots",
@@ -23,12 +23,12 @@ export const CONTENT = {
       {
         title: "Curated Nigerian Events & Owambe",
         description:
-          "From Afrobeats nights, Owambe parties, and Nigerian Independence Day celebrations to supper clubs, rooftop linkups, and Nigerian founders mixers across all five boroughs.",
+          "From Afrobeats nights, Owambe parties, and Nigerian Independence Day celebrations to supper clubs, rooftop linkups, and Nigerian founders mixers across all five boroughs — for anyone pulling up for the culture.",
       },
       {
         title: "Community Circles & Safe Spaces",
         description:
-          "Join active circles like New to NYC, Safe Space for the Girls, Nigerian Food & Chop NYC, Mental Wellness & Support, and Faith & Reflection with real feeds, voice notes, and daily gist.",
+          "Join active circles like New to NYC, Safe Space for the Girlies, Nigerian Food & Chop NYC, Mental Wellness & Support, and Faith & Reflection with real feeds, voice notes, and daily gist.",
       },
     ],
   },
@@ -40,7 +40,7 @@ export const CONTENT = {
       highlight: "Feel at home.",
     },
     subtitle:
-      "The culture hub for Nigerians in the diaspora, starting across all 5 boroughs of NYC. Find verified restaurants and businesses, Community Circles, Afrobeats and Owambe events, and Ask AI.",
+      "The Nigerian culture hub bringing the Afro community together, starting across all 5 boroughs of NYC. Find verified restaurants and businesses, Community Circles, Afrobeats and Owambe events, and Ask AI.",
     ctaPrimary: "Join the Waitlist",
     ctaMicrocopy: "Free iOS TestFlight beta live in NYC · Android & new cities coming soon",
     ctaSecondary: "Join Waitlist",
@@ -51,10 +51,10 @@ export const CONTENT = {
     downloadAndroid: "Android",
     downloadAndroidSoon: "Coming soon",
     shareWhatsApp:
-      "Check out BawoSocial, the Culture Hub for Nigerians in the diaspora, starting in NYC: https://www.joinbawo.com?utm_source=whatsapp",
+      "Check out BawoSocial, the Nigerian culture hub for the Afro community, starting in NYC: https://www.joinbawo.com?utm_source=whatsapp",
     shareLink: "https://www.joinbawo.com?utm_source=share",
     shareTweet:
-      "BawoSocial, the Culture Hub for Nigerians in the diaspora, starting in NYC. Try the iOS beta or join the waitlist.",
+      "BawoSocial, the Nigerian culture hub for the Afro community, starting in NYC. Try the iOS beta or join the waitlist.",
     shareCopy: "Copy link",
     shareCopied: "Copied!",
     knowWhenLaunch: "Know when we launch",
@@ -84,15 +84,15 @@ export const CONTENT = {
         badge: "My Spaces · Discover · Trending",
         liveMetric: "Active Spaces Across All 5 Boroughs",
         highlights: [
-          "Safe Space for the Girls, sisterhood, soft life and real talk",
+          "Safe Space for the Girlies, sisterhood, soft life and real talk",
           "Gen Z NYC, Queer & Proud NYC, and New to NYC newcomer hub",
           "Browse My Spaces, Discover & Trending circles in one tap",
         ],
         description:
-          "Find your people in curated Nigerian diaspora spaces, from Safe Space for the Girls and New to NYC to Gen Z NYC, Nigerian Food & Chop NYC, and Faith & Reflection.",
+          "Find your people in curated spaces rooted in Nigerian culture, from Safe Space for the Girlies and New to NYC to Gen Z NYC, Nigerian Food & Chop NYC, and Faith & Reflection.",
         image: IMAGES.showcase.community,
         imageAlt:
-          "BawoSocial Community Spaces screen showing Good evening, Teg with Safe Space for the Girls, Gen Z NYC, Queer & Proud NYC, and New to NYC",
+          "BawoSocial Community Spaces screen showing Good evening, Teg with Safe Space for the Girlies, Gen Z NYC, Queer & Proud NYC, and New to NYC",
         layout: "full-screen" as const,
       },
       {
@@ -123,7 +123,7 @@ export const CONTENT = {
           "See who from your circle is pulling up before you go",
         ],
         description:
-          "Afrobeats nights, Owambe celebrations, Nigerian supper clubs, rooftop linkups, and professional mixers curated for Nigerians across all five boroughs.",
+          "Afrobeats nights, Owambe celebrations, Nigerian supper clubs, rooftop linkups, and professional mixers curated across all five boroughs — for the Afro community pulling up for Naija culture.",
         image: IMAGES.showcase.events,
         imageAlt:
           "BawoSocial Events screen showing Nigerian nightlife and cultural gatherings in New York City",
@@ -143,7 +143,7 @@ export const CONTENT = {
           "Craving smoky party Jollof, pounded yam, efo riro, or suya? Looking for a Nigerian caterer, braiding salon, or church? Ask AI for instant NYC answers.",
         image: IMAGES.showcase.concierge,
         imageAlt:
-          "BawoSocial Ask AI screen offering culturally relevant recommendations for Nigerians in NYC",
+          "BawoSocial Ask AI screen offering culturally relevant Nigerian recommendations for the Afro community in NYC",
         layout: "full-screen" as const,
       },
     ],
@@ -152,9 +152,9 @@ export const CONTENT = {
   // Trending Community Circles Showcase (with the 4 new cover artworks + new splash art)
   communityCircles: {
     eyebrow: "Live Inside BawoSocial",
-    title: "Nigerian Community Circles That Feel Like Home",
+    title: "Community Circles That Feel Like Home",
     subtitle:
-      "Real sub-communities for Nigerians in NYC, featuring active feeds, voice notes, daily gist prompts, and real-world linkups across all five boroughs.",
+      "Real sub-communities rooted in Nigerian culture, open to the Afro community in NYC, featuring active feeds, voice notes, daily gist prompts, and real-world linkups across all five boroughs.",
     items: [
       {
         id: "new-to-nyc",
@@ -164,18 +164,18 @@ export const CONTENT = {
         voiceNoteLabel: "0:42 Voice Note · Best boroughs & subway commutes",
         prompt: "Today's Gist: What surprised you most your first month in NYC?",
         description:
-          "Just landed, Japa, or new in town? Your unofficial Naija NYC survival guide for apartments, credit/SSN tips, transit, and weekend linkups.",
+          "Just landed from Lagos, Japa, or new in town? Your unofficial Naija NYC survival guide for apartments, credit/SSN tips, transit, and weekend linkups.",
         image: IMAGES.groups.newToNyc,
       },
       {
         id: "safe-space-girls",
         badge: "Nigerian Women's Circle",
-        title: "Safe Space for the Girls",
+        title: "Safe Space for the Girlies",
         members: "Women-Only · Sisterhood & Soft Life",
         voiceNoteLabel: "1:08 Voice Note · Silk press & knotless plugs in BK",
         prompt: "Today's Gist: Drop a career win or boundary you're proud of this week ✨",
         description:
-          "A welcoming women-only circle for sisterhood, soft life, rooftop brunches, beauty & geles, career wins, and real talk for Nigerian women across NYC.",
+          "A welcoming women-only circle for sisterhood, soft life, rooftop brunches, beauty & geles, career wins, and real talk — rooted in Nigerian culture, open to women across NYC's Afro community.",
         image: IMAGES.groups.safeSpaceSisterhood,
       },
       {
@@ -197,7 +197,7 @@ export const CONTENT = {
         voiceNoteLabel: "1:15 Voice Note · Navigating family expectations & peace",
         prompt: "Daily Check-In: How are you protecting your peace in the city this week?",
         description:
-          "A warm, judgment-free space for Nigerians navigating diaspora life, first-gen pressures, faith reflections, devotionals, and genuine support.",
+          "A warm, judgment-free space for navigating diaspora life, first-gen pressures, faith reflections, devotionals, and genuine support — rooted in Nigerian culture, open to the Afro community.",
         image: IMAGES.groups.wellnessGoldenHour,
       },
     ],
@@ -240,7 +240,7 @@ export const CONTENT = {
   // Early access  -  TestFlight + waitlist + Businesses
   earlyAccess: {
     title: "Try BawoSocial.",
-    titleHighlight: "Built for Naija in NYC.",
+    titleHighlight: "Built around Naija culture in NYC.",
     subtitle: "iOS beta live on TestFlight · Nigerian Business Portal live · Expanding next",
     benefits: [
       {
@@ -261,7 +261,7 @@ export const CONTENT = {
     ],
     cta: "Join the Waitlist",
     missionText:
-      "Built for Nigerians in the diaspora, starting with deep roots across all five boroughs of New York City.",
+      "A Nigerian culture hub bringing the Afro community together, starting with deep roots across all five boroughs of New York City.",
   },
 
   // Origin Story Section
@@ -275,7 +275,7 @@ export const CONTENT = {
       "Whether you just landed from Lagos, or you were raised right here in New York, Nigerians shape the energy, hustle, and culture of NYC. Yet finding our authentic restaurants, trusted services, weekend owambes, and our people is still scattered across noisy timelines and buried group chats.",
       {
         highlight: "BawoSocial",
-        text: " brings the Nigerian community in the diaspora into one elevated, intentional home. Starting across all five boroughs of New York City, we make it effortless to discover verified Nigerian-owned businesses, join real Community Circles, pull up to cultural events, and feel at home.",
+        text: " brings Nigerian culture into one elevated, intentional home. Starting across all five boroughs of New York City, we make it effortless to discover verified Nigerian-owned businesses, join real Community Circles, pull up to cultural events, and feel at home — whether you grew up in the culture or you're part of the wider Afro community gathering here.",
       },
     ],
     visionText: "",
@@ -293,12 +293,12 @@ export const CONTENT = {
       {
         title: "Community Circles & Voice Notes",
         description:
-          "No algorithmic noise. Jump into dedicated circles like New to NYC, Safe Space for the Girls, Nigerian Food & Chop NYC, and Mental Wellness & Support with real feeds, voice notes, and daily gist.",
+          "No algorithmic noise. Jump into dedicated circles like New to NYC, Safe Space for the Girlies, Nigerian Food & Chop NYC, and Mental Wellness & Support with real feeds, voice notes, and daily gist.",
       },
       {
         title: "Curated Events + Ask AI",
         description:
-          "Discover Afrobeats nights, Owambe celebrations, supper clubs, and Nigerian professional mixers across NYC, or Ask AI for tailored local recommendations anytime.",
+          "Discover Afrobeats nights, Owambe celebrations, supper clubs, and Nigerian professional mixers across NYC — open to the Afro community pulling up — or Ask AI for tailored local recommendations anytime.",
       },
     ],
   },
@@ -306,7 +306,7 @@ export const CONTENT = {
   // Testimonials Section
   testimonials: {
     title: "What We're Building For",
-    subtitle: "Voices from Nigerians across New York City",
+    subtitle: "Voices from the Afro community across New York City",
     reviews: [
       {
         name: "Adaora O.",
@@ -332,7 +332,7 @@ export const CONTENT = {
   // Global Reach Section
   globalReach: {
     title: "Deep Nigerian Roots Across All 5 Boroughs.",
-    subtitle: "Connecting Nigerians across New York City, borough by borough.",
+    subtitle: "Connecting the Afro community to Nigerian culture across New York City, borough by borough.",
     description:
       "Starting with high-density Nigerian restaurants, bukas, grocery markets, events, and community circles across Brooklyn, Harlem, Queens, The Bronx, and Staten Island.",
     cities: [
@@ -363,7 +363,7 @@ export const CONTENT = {
         icon: "star" as const,
         title: "Naija Founders Mixers, Tech/Finance & Circle Meetups",
         description:
-          "Turn digital circles into real-life friendships through New to NYC linkups, Safe Space sisterhood brunches, and Nigerian professional networking.",
+          "Turn digital circles into real-life friendships through New to NYC linkups, Safe Space for the Girlies sisterhood brunches, and Nigerian professional networking.",
       },
     ],
   },
@@ -371,7 +371,7 @@ export const CONTENT = {
   inAppFeatureCaptions: [
     "Explore Map: Verified Nigerian restaurants, bukas, suya spots, African markets, salons, and services in NYC.",
     "Ask AI: Instant recommendations for Nigerian dining, nightlife, groceries, and NYC intel.",
-    "Community Circles: New to NYC, Safe Space for the Girls, Nigerian Food & Chop NYC, and more.",
+    "Community Circles: New to NYC, Safe Space for the Girlies, Nigerian Food & Chop NYC, and more.",
     "Curated Events: Afrobeats nights, Owambe parties, supper clubs, and Nigerian professional mixers.",
     "For Businesses: Claim your listing, update hours & photos, and reach the Nigerian community on BawoSocial.",
   ],
@@ -391,12 +391,12 @@ export const CONTENT = {
       {
         question: "What is BawoSocial?",
         answer:
-          "The culture hub for Nigerians in the diaspora, starting across all 5 boroughs of NYC. Find verified restaurants and businesses, Community Circles, Afrobeats and Owambe events, and Ask AI.",
+          "The Nigerian culture hub bringing the Afro community together, starting across all 5 boroughs of NYC. Find verified restaurants and businesses, Community Circles, Afrobeats and Owambe events, and Ask AI.",
       },
       {
         question: "Who is BawoSocial for?",
         answer:
-          "BawoSocial is built for Nigerians in the diaspora (starting in NYC across Brooklyn, Manhattan/Harlem, Queens, The Bronx, and Staten Island) and anyone who loves Nigerian food, music, and culture. And if you own a Nigerian restaurant, lounge, salon, African market, or service, BawoSocial helps the community discover and support you.",
+          "BawoSocial is the Nigerian culture hub that brings the Afro community together, starting across all five boroughs of NYC. If you are Nigerian in the diaspora, just landed from Lagos, or you love Nigerian food, music, and culture, you belong here. And if you own a Nigerian restaurant, lounge, salon, African market, or service, BawoSocial helps the community discover and support you.",
       },
       {
         question: "How do businesses sign in or claim their listing on BawoSocial?",
@@ -425,7 +425,7 @@ export const CONTENT = {
   footer: {
     brand: "BawoSocial",
     tagline:
-      "Connecting Nigerians in the diaspora, starting in New York City, through culture, Community Circles, curated events, and verified Nigerian-owned businesses.",
+      "A Nigerian culture hub bringing the Afro community together, starting with deep roots across all five boroughs of New York City.",
     sections: {
       quickLinks: {
         title: "Quick Links",
@@ -450,7 +450,7 @@ export const CONTENT = {
         ],
       },
     },
-    copyright: "2026 BawoSocial. Built for Nigerians in the Diaspora · Starting in NYC.",
+    copyright: "2026 BawoSocial. A Nigerian culture hub for the Afro community · Starting in NYC.",
   },
 
   // Email Signup

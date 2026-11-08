@@ -198,7 +198,7 @@ function App() {
               <div className="bawo-hero-cinematic__copy-col">
                 <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/40 bg-[#1C132B]/75 px-3.5 py-1.5 text-sm font-bold tracking-wide text-[#F7E7C4] backdrop-blur-xl mb-1">
                   <Sparkles className="h-3.5 w-3.5 text-[#D6B26A]" aria-hidden />
-                  <span>BawoSocial · The Culture Hub for Nigerians in NYC</span>
+                  <span>BawoSocial · Nigerian culture · Afro community · NYC</span>
                 </div>
                 <h1 ref={headlineRef} className="bawo-hero-cinematic__title font-display">
                   {CONTENT.hero.title.lead}
@@ -209,7 +209,7 @@ function App() {
                 </p>
                 <div ref={ctaRef} className="bawo-hero-cinematic__footer-actions">
                   <a href="#community-circles" className="bawo-hero-cinematic__pill">
-                    Nigerian Circles
+                    Community Circles
                   </a>
                   <a href="#events" className="bawo-hero-cinematic__pill">
                     Afrobeats & Events

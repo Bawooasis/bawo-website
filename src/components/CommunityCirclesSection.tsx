@@ -138,7 +138,7 @@ export default function CommunityCirclesSection() {
                 badge: "Community Spaces · Trending",
                 title: "Safe Space, Gen Z & New to NYC",
                 caption:
-                  "Switch between My Spaces, Discover, and Trending to join Safe Space for the Girls, Gen Z NYC, Queer & Proud NYC, and New to NYC.",
+                  "Switch between My Spaces, Discover, and Trending to join Safe Space for the Girlies, Gen Z NYC, Queer & Proud NYC, and New to NYC.",
                 image: IMAGES.showcase.community,
                 alt: "BawoSocial Community Spaces screen showing Good evening, Teg and NYC community cards",
               },
@@ -186,7 +186,7 @@ export default function CommunityCirclesSection() {
             <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
               <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/40 bg-[#D6B26A]/12 px-3.5 py-1.5 text-sm font-bold uppercase tracking-wider text-[#F7E7C4]">
                 <Compass className="w-3.5 h-3.5 shrink-0" aria-hidden />
-                <span>Nigerians in the Diaspora · Starting in NYC</span>
+                <span>Nigerian culture · Afro community · Starting in NYC</span>
               </div>
 
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5">
