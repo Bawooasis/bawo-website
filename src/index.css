@@ -2094,16 +2094,17 @@ a.bawo-cta-quiet:active {
   }
 
   .bawo-hero-cinematic__phone {
-    width: min(34vw, 24rem);
+    width: min(32vw, 23.5rem);
     margin-bottom: 0.75rem;
-    /* Keep the frame clear of sticky TestFlight on the right */
-    margin-right: 1.25rem;
+    /* Clear sticky TestFlight FAB (~11rem wide) on the right */
+    margin-right: 7.5rem;
   }
 }
 
 @media (min-width: 1280px) {
   .bawo-hero-cinematic__phone {
-    width: min(32vw, 27rem);
+    width: min(30vw, 25rem);
+    margin-right: 8rem;
   }
 
   .bawo-site-header__menu-btn {
