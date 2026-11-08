@@ -29,7 +29,7 @@ export default function CommunityCirclesSection() {
         </div>
 
         {/* 4 Community Circles Grid with Voice Note Waveforms & Daily Gist Prompts */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 mb-12 md:mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-12 mb-12 md:mb-16">
           {items.map((circle) => (
             <article
               key={circle.id}
@@ -124,7 +124,7 @@ export default function CommunityCirclesSection() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 lg:gap-16">
             {[
               {
                 badge: "Explore Map · Verified NYC Spots",
