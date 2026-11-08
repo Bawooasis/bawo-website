@@ -16,6 +16,7 @@ import MobileAppDownloadRow from "./components/MobileAppDownloadRow";
 import PartnerWithUsSection from "./components/PartnerWithUsSection";
 import HeroParticleField from "./components/ui/HeroParticleField";
 import SiteHeader from "./components/SiteHeader";
+import StickyTestFlightCta from "./components/StickyTestFlightCta";
 import SiteLogo from "./components/SiteLogo";
 import { TAILWIND_COLORS } from "./constants/colors";
 import { CONTENT } from "./constants/content";
@@ -150,8 +151,9 @@ function App() {
       <HeroParticleField className="bawo-particle-field--site" />
 
       <SiteHeader onJoinClick={scrollToWaitlist} />
+      <StickyTestFlightCta />
 
-      <div className="bawo-page-shell relative z-10 bg-transparent min-h-screen overflow-x-clip pb-[var(--bawo-mobile-sticky-cta-height)] md:pb-0">
+      <div className="bawo-page-shell relative z-10 bg-transparent min-h-screen overflow-x-clip">
         {/* Hero — cinematic particle field */}
         <section
           ref={heroRef}
@@ -196,7 +198,7 @@ function App() {
               <div className="bawo-hero-cinematic__copy-col">
                 <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/40 bg-[#1C132B]/75 px-3.5 py-1.5 text-sm font-bold tracking-wide text-[#F7E7C4] backdrop-blur-xl mb-1">
                   <Sparkles className="h-3.5 w-3.5 text-[#D6B26A]" aria-hidden />
-                  <span>BawoSocial · The Culture Hub for Nigerians in NYC</span>
+                  <span>BawoSocial · Nigerian culture · Afro community · NYC</span>
                 </div>
                 <h1 ref={headlineRef} className="bawo-hero-cinematic__title font-display">
                   {CONTENT.hero.title.lead}
@@ -207,14 +209,10 @@ function App() {
                 </p>
                 <div ref={ctaRef} className="bawo-hero-cinematic__footer-actions">
                   <a href="#community-circles" className="bawo-hero-cinematic__pill">
-                    Nigerian Circles
+                    Community Circles
                   </a>
                   <a href="#events" className="bawo-hero-cinematic__pill">
                     Afrobeats & Events
-                  </a>
-                  <a href="/businesses" className="bawo-hero-cinematic__pill bawo-hero-cinematic__pill--business">
-                    <Building2 className="h-3.5 w-3.5 text-[#D6B26A]" aria-hidden />
-                    <span>For Businesses</span>
                   </a>
                 </div>
               </div>
@@ -631,42 +629,6 @@ function App() {
 
         {/* Footer */}
         <footer className="py-12 bg-transparent">
-          {/* Mobile Sticky CTA */}
-          <div className="md:hidden mobile-sticky-cta bg-[#0E0A14]/92 backdrop-blur-xl border-t border-[#D6B26A]/25">
-            <div className="px-4 py-3 flex items-center justify-between gap-3">
-              <div className="flex flex-col min-w-0 gap-0.5">
-                <span className="text-[#F7F3FA] font-bold text-sm">BawoSocial NYC</span>
-                <span className="text-[#F7E7C4]/75 font-medium text-sm uppercase tracking-wider">
-                  TestFlight · Businesses
-                </span>
-              </div>
-              <div className="flex shrink-0 items-center gap-2">
-                <FoundingMemberButton
-                  label="TestFlight"
-                  variant="primary"
-                  size="sm"
-                  className="max-w-[7.5rem]"
-                  onClick={() => {
-                    window.open(
-                      CONTENT.hero.testflightLink,
-                      "_blank",
-                      "noopener,noreferrer",
-                    );
-                  }}
-                />
-                <FoundingMemberButton
-                  label="Businesses"
-                  variant="primary"
-                  appearance="outline"
-                  size="sm"
-                  className="max-w-[7.5rem]"
-                  onClick={() => {
-                    window.location.assign("/businesses");
-                  }}
-                />
-              </div>
-            </div>
-          </div>
           <div className="container mx-auto px-6">
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
               {/* Company Info */}

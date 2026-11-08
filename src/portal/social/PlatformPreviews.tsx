@@ -166,7 +166,7 @@ export function PlatformPreview({
           <span className="social-preview-avatar is-square" aria-hidden />
           <div>
             <strong>BawoSocial</strong>
-            <small>Culture hub for Nigerians in the diaspora · LinkedIn</small>
+            <small>Nigerian culture hub for the Afro community · LinkedIn</small>
           </div>
         </header>
         <CaptionBlock text={caption} platform={platform} full={fullCaption} />

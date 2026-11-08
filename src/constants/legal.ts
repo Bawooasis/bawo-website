@@ -45,7 +45,7 @@ export const PRIVACY_PAGE = {
     {
       heading: "Who we are",
       paragraphs: [
-        "BawoSocial is a culture hub for Nigerians in the diaspora, starting across New York City. Our website and app help people discover Nigerian owned businesses, Community Circles, events, and community resources.",
+        "BawoSocial is a Nigerian culture hub for the Afro community, starting across New York City. Our website and app help people discover Nigerian owned businesses, Community Circles, events, and community resources.",
         `Questions about privacy: ${SUPPORT_EMAIL}.`,
       ],
     },
@@ -133,7 +133,7 @@ export const TERMS_PAGE = {
     {
       heading: "The service",
       paragraphs: [
-        "BawoSocial helps Nigerians in the diaspora discover businesses, Community Circles, events, and culture, starting in New York City. Features may change as we improve the product.",
+        "BawoSocial helps the Afro community discover Nigerian-owned businesses, Community Circles, events, and culture, starting in New York City. Features may change as we improve the product.",
       ],
     },
     {
