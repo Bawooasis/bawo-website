@@ -69,68 +69,119 @@ void main() {
 `;
 
 /**
- * Soft circular star-dots with bloom/halo.
- * Replaces hard WebGL point squares (default PointsMaterial) so the hero
- * sky reads as glowey night-sky stars — pinpricks plus a few brighter gems.
+ * Soft circular star-dots via camera-facing instanced quads + radial sprite.
+ * Avoids WebGL Points (gl_PointSize / gl_PointCoord), which render as hard
+ * squares on software GL and still read blocky at tiny point sizes.
  */
 const STAR_VERT = /* glsl */ `
 attribute float aSize;
 attribute float aPulse;
 attribute float aBright;
 varying float vBright;
+varying vec2 vUv;
 uniform float uTime;
-uniform float uPixelRatio;
-uniform float uSizeScale;
+uniform float uBaseScale;
 uniform float uTwinkle;
 void main() {
+  vUv = uv;
   vBright = aBright;
-  vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+  float twinkle = 1.0 - uTwinkle + uTwinkle * (0.78 + 0.22 * sin(uTime * (0.85 + aPulse * 1.6) + aPulse * 12.566));
+  float scale = max(0.012, aSize * uBaseScale * twinkle);
+
+  // Billboard in view space from instance translation
+  vec4 world = modelMatrix * instanceMatrix * vec4(0.0, 0.0, 0.0, 1.0);
+  vec4 mvPosition = viewMatrix * world;
+  mvPosition.xy += position.xy * scale;
   gl_Position = projectionMatrix * mvPosition;
-  // Calm twinkle — elegant shimmer, not disco
-  float twinkle = 1.0 - uTwinkle + uTwinkle * (0.72 + 0.28 * sin(uTime * (0.9 + aPulse * 1.8) + aPulse * 12.566));
-  float sizeAtten = 260.0 / max(1.2, -mvPosition.z);
-  gl_PointSize = clamp(aSize * twinkle * uPixelRatio * sizeAtten * uSizeScale, 1.5, 22.0);
 }
 `;
 
 const STAR_FRAG = /* glsl */ `
 uniform vec3 uColor;
+uniform sampler2D uMap;
 varying float vBright;
+varying vec2 vUv;
 void main() {
-  // Circular falloff — never a hard rectangle
-  vec2 c = gl_PointCoord - vec2(0.5);
-  float d = length(c) * 2.0;
-  if (d > 1.0) discard;
-
-  // Bright pinprick core + soft bloom halo (real-star silhouette)
-  float core = exp(-d * d * 7.5);
-  float mid = exp(-d * d * 2.8) * 0.55;
-  float halo = exp(-d * d * 1.05) * 0.32;
-  float glow = (core * 1.35 + mid + halo) * vBright;
-  float alpha = clamp(glow, 0.0, 1.0);
-  vec3 col = uColor * (0.75 + core * 1.45 + mid * 0.35);
-  gl_FragColor = vec4(col, alpha);
+  float sprite = texture2D(uMap, vUv).a;
+  if (sprite < 0.012) discard;
+  float glow = sprite * vBright;
+  float coreBoost = sprite * sprite;
+  vec3 col = uColor * (0.7 + coreBoost * 1.45);
+  gl_FragColor = vec4(col, clamp(glow, 0.0, 1.0));
 }
 `;
 
+/** Soft radial sprite atlas used by every star layer. */
+function createStarSpriteTexture(): THREE.CanvasTexture {
+  const size = 128;
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    return new THREE.CanvasTexture(canvas);
+  }
+  const cx = size / 2;
+  const cy = size / 2;
+  const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, cx);
+  // Pinprick core → soft bloom halo (night-sky star)
+  grad.addColorStop(0, "rgba(255,255,255,1)");
+  grad.addColorStop(0.1, "rgba(255,255,255,0.96)");
+  grad.addColorStop(0.28, "rgba(255,255,255,0.5)");
+  grad.addColorStop(0.55, "rgba(255,255,255,0.16)");
+  grad.addColorStop(1, "rgba(255,255,255,0)");
+  ctx.clearRect(0, 0, size, size);
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, size, size);
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.needsUpdate = true;
+  tex.colorSpace = THREE.NoColorSpace;
+  return tex;
+}
+
 function makeStarMaterial(
   color: THREE.ColorRepresentation,
-  opts: { sizeScale: number; twinkle: number; pixelRatio: number }
+  opts: { baseScale: number; twinkle: number; map: THREE.Texture }
 ) {
   return new THREE.ShaderMaterial({
     vertexShader: STAR_VERT,
     fragmentShader: STAR_FRAG,
     uniforms: {
       uTime: { value: 0 },
-      uPixelRatio: { value: opts.pixelRatio },
       uColor: { value: new THREE.Color(color) },
-      uSizeScale: { value: opts.sizeScale },
+      uBaseScale: { value: opts.baseScale },
       uTwinkle: { value: opts.twinkle },
+      uMap: { value: opts.map },
     },
     transparent: true,
     depthWrite: false,
     blending: THREE.AdditiveBlending,
+    side: THREE.DoubleSide,
   });
+}
+
+function makeStarField(
+  count: number,
+  positions: Float32Array,
+  sizes: Float32Array,
+  pulses: Float32Array,
+  brights: Float32Array,
+  material: THREE.ShaderMaterial
+) {
+  const geo = new THREE.PlaneGeometry(1, 1);
+  geo.setAttribute("aSize", new THREE.InstancedBufferAttribute(sizes, 1));
+  geo.setAttribute("aPulse", new THREE.InstancedBufferAttribute(pulses, 1));
+  geo.setAttribute("aBright", new THREE.InstancedBufferAttribute(brights, 1));
+  const mesh = new THREE.InstancedMesh(geo, material, count);
+  mesh.frustumCulled = false;
+  const dummy = new THREE.Object3D();
+  for (let i = 0; i < count; i++) {
+    dummy.position.set(positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2]);
+    dummy.updateMatrix();
+    mesh.setMatrixAt(i, dummy.matrix);
+  }
+  mesh.instanceMatrix.needsUpdate = true;
+  return mesh;
 }
 
 type HeroParticleFieldProps = {
@@ -253,37 +304,34 @@ export default function HeroParticleField({ className }: HeroParticleFieldProps)
     const atmosphere = new THREE.Mesh(atmosphereGeo, atmosphereMat);
     root.add(atmosphere);
 
-    // Gold starfield haze — circular glowey dots (was hard PointsMaterial squares)
-    const hazeCount = coarse ? 900 : 1600;
+    const starMap = createStarSpriteTexture();
+
+    // Gold starfield haze — soft glowey dots (was hard PointsMaterial squares)
+    const hazeCount = coarse ? 520 : 900;
     const hazePos = new Float32Array(hazeCount * 3);
     const hazeSizes = new Float32Array(hazeCount);
     const hazePulse = new Float32Array(hazeCount);
     const hazeBright = new Float32Array(hazeCount);
     for (let i = 0; i < hazeCount; i++) {
-      const r = globeRadius * (1.08 + Math.random() * 0.55);
+      const r = globeRadius * (1.1 + Math.random() * 0.7);
       const y = 1 - (i / Math.max(1, hazeCount - 1)) * 2;
       const ring = Math.sqrt(Math.max(0, 1 - y * y));
       const theta = Math.PI * (3 - Math.sqrt(5)) * i + Math.random() * 0.2;
       hazePos[i * 3] = Math.cos(theta) * ring * r;
       hazePos[i * 3 + 1] = y * r * 0.92;
       hazePos[i * 3 + 2] = Math.sin(theta) * ring * r;
-      // Mostly tiny pinpricks; a few slightly brighter stars
-      const gem = Math.random() > 0.94;
-      hazeSizes[i] = gem ? 1.6 + Math.random() * 1.1 : 0.45 + Math.random() * 0.95;
+      // Mostly faint pinpricks; a few slightly brighter gems
+      const gem = Math.random() > 0.93;
+      hazeSizes[i] = gem ? 1.35 + Math.random() * 0.9 : 0.55 + Math.random() * 0.75;
       hazePulse[i] = Math.random();
-      hazeBright[i] = gem ? 1.15 + Math.random() * 0.35 : 0.35 + Math.random() * 0.55;
+      hazeBright[i] = gem ? 0.95 + Math.random() * 0.35 : 0.22 + Math.random() * 0.4;
     }
-    const hazeGeo = new THREE.BufferGeometry();
-    hazeGeo.setAttribute("position", new THREE.BufferAttribute(hazePos, 3));
-    hazeGeo.setAttribute("aSize", new THREE.BufferAttribute(hazeSizes, 1));
-    hazeGeo.setAttribute("aPulse", new THREE.BufferAttribute(hazePulse, 1));
-    hazeGeo.setAttribute("aBright", new THREE.BufferAttribute(hazeBright, 1));
     const hazeMat = makeStarMaterial(HERO_PARTICLE_HEX.gold, {
-      sizeScale: 0.016,
-      twinkle: 0.35,
-      pixelRatio: dpr,
+      baseScale: 0.038,
+      twinkle: 0.32,
+      map: starMap,
     });
-    const haze = new THREE.Points(hazeGeo, hazeMat);
+    const haze = makeStarField(hazeCount, hazePos, hazeSizes, hazePulse, hazeBright, hazeMat);
     root.add(haze);
 
     // Green city / culture nodes — same soft star treatment, existing teal/mint family
@@ -297,25 +345,20 @@ export default function HeroParticleField({ className }: HeroParticleFieldProps)
       cityPos[i * 3] = v.x;
       cityPos[i * 3 + 1] = v.y;
       cityPos[i * 3 + 2] = v.z;
-      citySizes[i] = 2.4 * (city.weight ?? 1);
+      citySizes[i] = 2.1 * (city.weight ?? 1);
       cityPulse[i] = (i * 0.17) % 1;
-      cityBright[i] = 0.95 + (city.weight ?? 1) * 0.2;
+      cityBright[i] = 0.85 + (city.weight ?? 1) * 0.18;
     });
-    const cityGeo = new THREE.BufferGeometry();
-    cityGeo.setAttribute("position", new THREE.BufferAttribute(cityPos, 3));
-    cityGeo.setAttribute("aSize", new THREE.BufferAttribute(citySizes, 1));
-    cityGeo.setAttribute("aPulse", new THREE.BufferAttribute(cityPulse, 1));
-    cityGeo.setAttribute("aBright", new THREE.BufferAttribute(cityBright, 1));
     const cityMat = makeStarMaterial(0x3dff96, {
-      sizeScale: 0.024,
-      twinkle: 0.28,
-      pixelRatio: dpr,
+      baseScale: 0.055,
+      twinkle: 0.26,
+      map: starMap,
     });
-    const cities = new THREE.Points(cityGeo, cityMat);
+    const cities = makeStarField(cityCount, cityPos, citySizes, cityPulse, cityBright, cityMat);
     earth.add(cities);
 
-    // Extra green spark layer — smaller star-dots for glow density around the rim
-    const sparkCount = coarse ? 64 : 96;
+    // Extra green spark layer — soft star-dots for glow density around the rim
+    const sparkCount = coarse ? 48 : 72;
     const sparkPos = new Float32Array(sparkCount * 3);
     const sparkSizes = new Float32Array(sparkCount);
     const sparkPulse = new Float32Array(sparkCount);
@@ -328,22 +371,17 @@ export default function HeroParticleField({ className }: HeroParticleFieldProps)
       sparkPos[i * 3] = v.x;
       sparkPos[i * 3 + 1] = v.y;
       sparkPos[i * 3 + 2] = v.z;
-      const gem = Math.random() > 0.88;
-      sparkSizes[i] = gem ? 1.8 + Math.random() * 1.4 : 0.7 + Math.random() * 1.2;
+      const gem = Math.random() > 0.86;
+      sparkSizes[i] = gem ? 1.5 + Math.random() * 1.1 : 0.65 + Math.random() * 0.95;
       sparkPulse[i] = Math.random();
-      sparkBright[i] = gem ? 1.1 + Math.random() * 0.35 : 0.45 + Math.random() * 0.5;
+      sparkBright[i] = gem ? 0.95 + Math.random() * 0.3 : 0.35 + Math.random() * 0.4;
     }
-    const sparkGeo = new THREE.BufferGeometry();
-    sparkGeo.setAttribute("position", new THREE.BufferAttribute(sparkPos, 3));
-    sparkGeo.setAttribute("aSize", new THREE.BufferAttribute(sparkSizes, 1));
-    sparkGeo.setAttribute("aPulse", new THREE.BufferAttribute(sparkPulse, 1));
-    sparkGeo.setAttribute("aBright", new THREE.BufferAttribute(sparkBright, 1));
     const sparkMat = makeStarMaterial(0x8dffc0, {
-      sizeScale: 0.018,
-      twinkle: 0.4,
-      pixelRatio: dpr,
+      baseScale: 0.042,
+      twinkle: 0.38,
+      map: starMap,
     });
-    const sparks = new THREE.Points(sparkGeo, sparkMat);
+    const sparks = makeStarField(sparkCount, sparkPos, sparkSizes, sparkPulse, sparkBright, sparkMat);
     earth.add(sparks);
 
     const setSize = () => {
@@ -464,14 +502,15 @@ export default function HeroParticleField({ className }: HeroParticleFieldProps)
       ro.disconnect();
       earthGeo.dispose();
       atmosphereGeo.dispose();
-      hazeGeo.dispose();
-      cityGeo.dispose();
-      sparkGeo.dispose();
+      haze.geometry.dispose();
+      cities.geometry.dispose();
+      sparks.geometry.dispose();
       earthMat.dispose();
       atmosphereMat.dispose();
       hazeMat.dispose();
       cityMat.dispose();
       sparkMat.dispose();
+      starMap.dispose();
       earthTex?.dispose();
       renderer.dispose();
       if (renderer.domElement.parentNode === container) {
