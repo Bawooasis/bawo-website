@@ -11,7 +11,7 @@ export default function CommunityCirclesSection() {
       className="relative bawo-scroll-anchor py-16 md:py-24 bg-transparent section-contain"
       aria-labelledby="community-circles-heading"
     >
-      <div className="relative z-10 container mx-auto px-5 sm:px-6 max-w-6xl">
+      <div className="relative z-10 container mx-auto px-5 sm:px-6 max-w-7xl">
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12 md:mb-16">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/35 bg-[#1C132B]/75 px-4 py-1.5 text-sm font-bold tracking-wide text-[#D6B26A] backdrop-blur-xl">
             <Users className="w-3.5 h-3.5 shrink-0" aria-hidden />
@@ -29,7 +29,7 @@ export default function CommunityCirclesSection() {
         </div>
 
         {/* 4 Community Circles Grid with Voice Note Waveforms & Daily Gist Prompts */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 md:mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 mb-12 md:mb-16">
           {items.map((circle) => (
             <article
               key={circle.id}
@@ -44,34 +44,34 @@ export default function CommunityCirclesSection() {
                   decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0E0A14] via-[#0E0A14]/25 to-transparent" />
-                <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-[#0E0A14]/80 backdrop-blur-md border border-[#D6B26A]/35 px-3 py-1 text-sm font-bold text-[#D6B26A]">
+                <span className="absolute top-3 left-3 inline-flex max-w-[calc(100%-1.5rem)] items-center gap-1.5 rounded-full bg-[#0E0A14]/80 backdrop-blur-md border border-[#D6B26A]/35 px-3 py-1 text-sm font-bold text-[#D6B26A]">
                   <Sparkles className="w-3 h-3 shrink-0" aria-hidden />
-                  {circle.badge}
+                  <span className="whitespace-normal leading-snug">{circle.badge}</span>
                 </span>
               </div>
 
-              <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                <div className="space-y-2.5">
+              <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-5">
+                <div className="space-y-3">
                   <h3 className="text-2xl font-bold font-display text-[#F7F3FA] leading-snug">
                     {circle.title}
                   </h3>
-                  <p className="text-sm font-bold uppercase tracking-wider text-[#F7E7C4] flex items-center gap-1.5">
-                    <MessageCircle className="w-3.5 h-3.5 shrink-0 text-[#D6B26A]" aria-hidden />
-                    {circle.members}
+                  <p className="text-sm font-bold uppercase tracking-wider text-[#F7E7C4] flex items-start gap-1.5 leading-snug">
+                    <MessageCircle className="w-3.5 h-3.5 shrink-0 text-[#D6B26A] mt-0.5" aria-hidden />
+                    <span className="whitespace-normal">{circle.members}</span>
                   </p>
                   <p className="text-sm text-[#F7F3FA]/80 leading-relaxed">
                     {circle.description}
                   </p>
                 </div>
 
-                <div className="space-y-2.5 pt-2">
-                  {/* Live Voice Note Preview Pill */}
-                  <div className="rounded-xl border border-[#D6B26A]/25 bg-[#0E0A14]/65 px-3 py-2 flex items-center gap-2">
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#D6B26A] text-[#0E0A14]">
+                <div className="space-y-3 pt-1">
+                  {/* Live Voice Note Preview Pill — wrap fully; never ellipsize */}
+                  <div className="rounded-xl border border-[#D6B26A]/25 bg-[#0E0A14]/65 px-3.5 py-2.5 flex items-start gap-2.5">
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#D6B26A] text-[#0E0A14] mt-0.5">
                       <Mic className="h-3.5 w-3.5" aria-hidden />
                     </span>
                     <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-0.5 mb-1" aria-hidden>
+                      <div className="flex items-center gap-0.5 mb-1.5" aria-hidden>
                         {[45, 85, 60, 100, 70, 40, 90, 65, 50, 80, 55, 75].map((h, i) => (
                           <span
                             key={i}
@@ -80,15 +80,15 @@ export default function CommunityCirclesSection() {
                           />
                         ))}
                       </div>
-                      <p className="truncate text-sm font-semibold text-[#F7E7C4]">
+                      <p className="text-sm font-semibold text-[#F7E7C4] leading-snug whitespace-normal break-words">
                         {circle.voiceNoteLabel}
                       </p>
                     </div>
                   </div>
 
                   {/* Daily Gist Prompt */}
-                  <div className="rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2">
-                    <p className="text-sm font-medium text-[#F7F3FA]/75 leading-snug">
+                  <div className="rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-2.5">
+                    <p className="text-sm font-medium text-[#F7F3FA]/75 leading-snug whitespace-normal">
                       {circle.prompt}
                     </p>
                   </div>
@@ -124,7 +124,7 @@ export default function CommunityCirclesSection() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
             {[
               {
                 badge: "Explore Map · Verified NYC Spots",
@@ -153,7 +153,7 @@ export default function CommunityCirclesSection() {
             ].map((screen) => (
               <figure
                 key={screen.title}
-                className="glass-card rounded-3xl p-4 sm:p-5 flex flex-col justify-between border border-[#D6B26A]/25 transition-all duration-300 hover:-translate-y-1.5"
+                className="glass-card rounded-3xl p-5 sm:p-6 flex flex-col justify-between border border-[#D6B26A]/25 transition-all duration-300 hover:-translate-y-1.5"
               >
                 <div className="relative mx-auto w-full max-w-[17.5rem] overflow-hidden rounded-[1.75rem] border border-white/15 bg-[#0A0710] shadow-[0_20px_50px_rgba(0,0,0,0.65)]">
                   <img
@@ -164,14 +164,14 @@ export default function CommunityCirclesSection() {
                     decoding="async"
                   />
                 </div>
-                <figcaption className="pt-4 space-y-1.5 text-center sm:text-left">
-                  <span className="inline-block rounded-full border border-[#D6B26A]/30 bg-[#D6B26A]/10 px-2.5 py-0.5 text-sm font-bold uppercase tracking-wider text-[#F7E7C4]">
+                <figcaption className="pt-5 space-y-2 text-center sm:text-left">
+                  <span className="inline-block rounded-full border border-[#D6B26A]/30 bg-[#D6B26A]/10 px-2.5 py-0.5 text-sm font-bold uppercase tracking-wider text-[#F7E7C4] whitespace-normal leading-snug">
                     {screen.badge}
                   </span>
-                  <h4 className="text-xl font-bold font-display text-[#F7F3FA]">
+                  <h4 className="text-xl font-bold font-display text-[#F7F3FA] leading-snug whitespace-normal">
                     {screen.title}
                   </h4>
-                  <p className="text-sm text-[#F7F3FA]/75 leading-relaxed">
+                  <p className="text-sm text-[#F7F3FA]/75 leading-relaxed whitespace-normal">
                     {screen.caption}
                   </p>
                 </figcaption>
