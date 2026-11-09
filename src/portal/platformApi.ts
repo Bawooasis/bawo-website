@@ -1,7 +1,13 @@
+import type {
+  CmsMediaAsset,
+  MediaDirectoryResource,
+  MediaRestaurant,
+} from "./mediaTypes";
 import type { PortalSession } from "./types";
 
 const SESSION_KEY = "bawo-platform-session";
 const GROUP_IMAGE_BUCKET = "group-images";
+const RESOURCE_IMAGE_BUCKET = "resource-images";
 const GROUP_IMAGE_TYPES = new Set([
   "image/jpeg",
   "image/png",
@@ -9,6 +15,8 @@ const GROUP_IMAGE_TYPES = new Set([
   "image/webp",
 ]);
 const MAX_GROUP_IMAGE_BYTES = 5 * 1024 * 1024;
+const CMS_MEDIA_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
+const MAX_CMS_MEDIA_BYTES = 5 * 1024 * 1024;
 const SOCIAL_MEDIA_TYPES = new Set([
   "image/jpeg",
   "image/png",
@@ -298,16 +306,54 @@ function extractFallbackToken(rawInput: string): string | null {
 }
 
 async function parseResponse<T>(response: Response): Promise<T> {
-  const body = (await response.json().catch(() => ({}))) as ApiEnvelope<T>;
-  if (!response.ok || body.success === false) {
+  const text = await response.text();
+  return parseResponseFromText<T>(text, response.ok, response.status);
+}
+
+function parseResponseFromText<T>(
+  text: string,
+  ok: boolean,
+  status: number,
+): T {
+  let body: ApiEnvelope<T> | T = {} as T;
+  if (text) {
+    try {
+      body = JSON.parse(text) as ApiEnvelope<T>;
+    } catch {
+      if (!ok) throw new Error(`Request failed (${status})`);
+      throw new Error("Unexpected response from BawoSocial.");
+    }
+  }
+  const envelope = body as ApiEnvelope<T>;
+  if (
+    !ok ||
+    (envelope &&
+      typeof envelope === "object" &&
+      "success" in envelope &&
+      envelope.success === false)
+  ) {
     throw new Error(
-      body.error_description ||
-        body.msg ||
-        body.error ||
-        `Request failed (${response.status})`,
+      envelope.error_description ||
+        envelope.msg ||
+        envelope.error ||
+        (typeof envelope === "object" &&
+        envelope &&
+        "message" in envelope &&
+        typeof (envelope as { message?: string }).message === "string"
+          ? (envelope as { message: string }).message
+          : null) ||
+        `Request failed (${status})`,
     );
   }
-  return (body.data ?? body) as T;
+  if (
+    envelope &&
+    typeof envelope === "object" &&
+    "data" in envelope &&
+    envelope.data !== undefined
+  ) {
+    return envelope.data as T;
+  }
+  return body as T;
 }
 
 export class PlatformApi {
@@ -817,6 +863,229 @@ export class PlatformApi {
       body: file,
     });
     if (!response.ok) throw new Error("Media upload failed. Try again.");
+  }
+
+  /** Public-read CMS media registry (RLS allows anon SELECT for active rows). */
+  async listCmsMediaAssets(activeOnly = true): Promise<CmsMediaAsset[]> {
+    const filter = activeOnly ? "&is_active=eq.true" : "";
+    return this.restGet<CmsMediaAsset[]>(
+      `/rest/v1/cms_media_assets?select=*${filter}&order=updated_at.desc`,
+      false,
+    );
+  }
+
+  async listMediaRestaurants(): Promise<MediaRestaurant[]> {
+    return this.restGet<MediaRestaurant[]>(
+      "/rest/v1/nigerian_restaurants?select=id,name,image_url,photo_urls,listing_kind,map_pin_enabled,is_active&order=name.asc",
+      false,
+    );
+  }
+
+  async listMediaDirectoryResources(): Promise<MediaDirectoryResource[]> {
+    return this.restGet<MediaDirectoryResource[]>(
+      "/rest/v1/community_resources?select=id,name,image_url,metadata&order=name.asc&limit=200",
+      false,
+    );
+  }
+
+  /**
+   * Upload (upsert) a Media CMS image into the public group-images or
+   * resource-images bucket. Requires an admin session (storage write RLS).
+   */
+  async uploadCmsMediaObject(
+    bucketId: "group-images" | "resource-images",
+    objectPath: string,
+    file: File,
+    retry = true,
+  ): Promise<string> {
+    if (!CMS_MEDIA_TYPES.has(file.type)) {
+      throw new Error("Choose a JPEG, PNG, or WebP image.");
+    }
+    if (file.size > MAX_CMS_MEDIA_BYTES) {
+      throw new Error("Media uploads must be 5 MB or smaller after compression.");
+    }
+    if (
+      bucketId !== GROUP_IMAGE_BUCKET &&
+      bucketId !== RESOURCE_IMAGE_BUCKET
+    ) {
+      throw new Error("Unsupported media bucket.");
+    }
+
+    const session = await this.activeSession();
+    const encodedPath = objectPath
+      .split("/")
+      .map((segment) => encodeURIComponent(segment))
+      .join("/");
+    const response = await fetch(
+      `${this.config.supabaseUrl}/storage/v1/object/${bucketId}/${encodedPath}`,
+      {
+        method: "POST",
+        headers: {
+          apikey: this.config.publishableKey,
+          Authorization: `Bearer ${session.access_token}`,
+          "Content-Type": file.type,
+          "Cache-Control": "3600",
+          "x-upsert": "true",
+        },
+        body: file,
+      },
+    );
+    if (response.status === 401 && retry) {
+      await this.refreshSession();
+      return this.uploadCmsMediaObject(bucketId, objectPath, file, false);
+    }
+    await parseResponse<Record<string, string>>(response);
+    const bust = `v=${Date.now()}`;
+    return `${this.config.supabaseUrl}/storage/v1/object/public/${bucketId}/${encodedPath}?${bust}`;
+  }
+
+  async upsertCmsMediaAsset(input: {
+    entityType: CmsMediaAsset["entity_type"];
+    entityId: string;
+    bucketId: string;
+    objectPath: string;
+    publicUrl: string;
+    sourceAttribution?: string | null;
+    licenseNote?: string | null;
+  }): Promise<CmsMediaAsset> {
+    const cleanUrl = input.publicUrl.split("?")[0];
+    const payload = {
+      entity_type: input.entityType,
+      entity_id: input.entityId,
+      bucket_id: input.bucketId,
+      object_path: input.objectPath,
+      public_url: cleanUrl,
+      source_attribution: input.sourceAttribution ?? null,
+      license_note: input.licenseNote ?? null,
+      is_active: true,
+      updated_at: new Date().toISOString(),
+    };
+    const rows = await this.restMutate<CmsMediaAsset[]>(
+      "/rest/v1/cms_media_assets?on_conflict=entity_type,entity_id",
+      "POST",
+      payload,
+      {
+        Prefer: "resolution=merge-duplicates,return=representation",
+      },
+    );
+    if (!rows[0]) throw new Error("Could not save the BawoSocial media registry row.");
+    return rows[0];
+  }
+
+  async deactivateCmsMediaAsset(assetId: string): Promise<void> {
+    await this.restMutate(
+      `/rest/v1/cms_media_assets?id=eq.${encodeURIComponent(assetId)}`,
+      "PATCH",
+      { is_active: false, updated_at: new Date().toISOString() },
+      { Prefer: "return=minimal" },
+    );
+  }
+
+  async updateRestaurantHero(
+    restaurantId: string,
+    imageUrl: string | null,
+    previousPhotoUrls: string[] | null,
+  ): Promise<void> {
+    const prior = Array.isArray(previousPhotoUrls) ? previousPhotoUrls : [];
+    const photoUrls = imageUrl
+      ? [imageUrl, ...prior.filter((url) => url !== imageUrl)].slice(0, 12)
+      : prior;
+    await this.restMutate(
+      `/rest/v1/nigerian_restaurants?id=eq.${encodeURIComponent(restaurantId)}`,
+      "PATCH",
+      {
+        image_url: imageUrl,
+        photo_urls: photoUrls,
+      },
+      { Prefer: "return=minimal" },
+    );
+  }
+
+  async updateDirectoryResourceImage(
+    resourceId: string,
+    imageUrl: string | null,
+  ): Promise<void> {
+    await this.restMutate(
+      `/rest/v1/community_resources?id=eq.${encodeURIComponent(resourceId)}`,
+      "PATCH",
+      { image_url: imageUrl },
+      { Prefer: "return=minimal" },
+    );
+  }
+
+  /**
+   * Best-effort live mirror for circle covers. Some entity ids are slugs
+   * (e.g. secure_the_bag) rather than UUIDs; ignore missing rows.
+   */
+  async updateGroupChatCover(
+    entityId: string,
+    imageUrl: string | null,
+  ): Promise<void> {
+    try {
+      await this.restMutate(
+        `/rest/v1/group_chats?id=eq.${encodeURIComponent(entityId)}`,
+        "PATCH",
+        {
+          image_url: imageUrl,
+          cover_image_url: imageUrl,
+        },
+        { Prefer: "return=minimal" },
+      );
+    } catch {
+      /* Group may only exist as a mobile bundled id; storage + cms still win. */
+    }
+  }
+
+  private async restGet<T>(path: string, requireAuth: boolean): Promise<T> {
+    const headers: Record<string, string> = {
+      apikey: this.config.publishableKey,
+      Authorization: `Bearer ${this.config.publishableKey}`,
+    };
+    if (requireAuth) {
+      const session = await this.activeSession();
+      headers.Authorization = `Bearer ${session.access_token}`;
+    } else {
+      try {
+        const session = this.getSession();
+        if (session?.access_token) {
+          headers.Authorization = `Bearer ${session.access_token}`;
+        }
+      } catch {
+        /* anon is fine for public-read tables */
+      }
+    }
+    const response = await fetch(`${this.config.supabaseUrl}${path}`, {
+      headers,
+    });
+    return parseResponse<T>(response);
+  }
+
+  private async restMutate<T = unknown>(
+    path: string,
+    method: "POST" | "PATCH" | "DELETE",
+    body: unknown,
+    extraHeaders: Record<string, string> = {},
+    retry = true,
+  ): Promise<T> {
+    const session = await this.activeSession();
+    const response = await fetch(`${this.config.supabaseUrl}${path}`, {
+      method,
+      headers: {
+        apikey: this.config.publishableKey,
+        Authorization: `Bearer ${session.access_token}`,
+        "Content-Type": "application/json",
+        ...extraHeaders,
+      },
+      body: body === undefined ? undefined : JSON.stringify(body),
+    });
+    if (response.status === 401 && retry) {
+      await this.refreshSession();
+      return this.restMutate<T>(path, method, body, extraHeaders, false);
+    }
+    if (response.status === 204) return undefined as T;
+    const text = await response.text();
+    if (!text) return undefined as T;
+    return parseResponseFromText<T>(text, response.ok, response.status);
   }
 
   signOut(): void {

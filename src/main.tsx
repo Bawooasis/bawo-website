@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import PortalApp from './portal/PortalApp.tsx';
+import MediaCmsLab from './portal/MediaCmsLab.tsx';
 import SocialSchedulerLab from './portal/social/SocialSchedulerLab.tsx';
 import AffiliateDisclosurePage from './pages/AffiliateDisclosurePage.tsx';
 import PrivacyPage from './pages/PrivacyPage.tsx';
@@ -17,6 +18,7 @@ if (path === '/contact' || path.startsWith('/contact/')) {
 }
 
 const isSocialLab = path === '/admin/social-lab';
+const isMediaLab = path === '/admin/media-lab';
 const isBusinessPath =
   path === '/business' ||
   path.startsWith('/business/') ||
@@ -26,6 +28,7 @@ const isBusinessPath =
   hostname.startsWith('businesses.');
 const portalMode =
   !isSocialLab &&
+  !isMediaLab &&
   (path === '/admin' || path.startsWith('/admin/') || hostname.startsWith('admin.'))
     ? 'admin'
     : isBusinessPath
@@ -45,7 +48,9 @@ const staticPage =
             ? 'contact'
             : null;
 
-const page = isSocialLab ? (
+const page = isMediaLab ? (
+  <MediaCmsLab />
+) : isSocialLab ? (
   <SocialSchedulerLab />
 ) : portalMode ? (
   <PortalApp mode={portalMode} />

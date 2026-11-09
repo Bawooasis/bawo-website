@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { FormEvent, useMemo, useState } from "react";
 import GroupEditor, { type GroupEditorInput } from "./GroupEditor";
+import MediaPanel from "./MediaPanel";
 import SocialMediaPanel from "./SocialMediaPanel";
 import CrmPanel from "./CrmPanel";
 import {
@@ -23,6 +24,7 @@ import {
   eventHasAffiliateColumns,
   isAffiliateSchemaPendingError,
 } from "./eventAffiliate";
+import type { PlatformApi } from "./platformApi";
 import type { PortalTab } from "./PortalLayout";
 import { EmptyState, MetricCard } from "./PortalUi";
 import type {
@@ -35,6 +37,7 @@ import type {
 } from "./types";
 
 type AdminPortalProps = {
+  api: PlatformApi;
   data: AdminOverview;
   activeTab: PortalTab;
   busy: boolean;
@@ -62,6 +65,7 @@ const userName = (user: PlatformUser) =>
   "Unnamed member";
 
 export default function AdminPortal({
+  api,
   data,
   activeTab,
   busy,
@@ -616,6 +620,26 @@ export default function AdminPortal({
           ))}
         </div>
       </section>
+    );
+  }
+
+  if (activeTab === "media") {
+    return (
+      <MediaPanel
+        api={api}
+        groups={data.groups}
+        busy={busy}
+        onGroupCoverSaved={async (groupUuid, imageUrl) => {
+          await onAction(
+            {
+              action: "set_group_state",
+              targetId: groupUuid,
+              groupState: { imageUrl },
+            },
+            "Circle cover updated for BawoSocial.",
+          );
+        }}
+      />
     );
   }
 

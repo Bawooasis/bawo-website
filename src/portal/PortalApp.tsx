@@ -51,6 +51,7 @@ const titles: Record<PortalTab, string> = {
   events: "Event submissions",
   groups: "Community groups",
   businesses: "Business approvals",
+  media: "Media library",
   social: "Social media growth",
   crm: "Outreach and revenue pipeline",
   access: "Access and audit",
@@ -66,6 +67,8 @@ const descriptions: Record<PortalTab, string> = {
     "Review community-submitted and organizer-created events before they appear in the NYC Culture Hub feed.",
   groups: "Shape community spaces, review requests, and keep group presentation current.",
   businesses: "Review submitted businesses before they appear in the community directory.",
+  media:
+    "View and replace BawoSocial circle covers and place photos without an app rebuild.",
   social:
     "Plan, publish, and measure TikTok and Instagram content from one accountable pipeline.",
   crm: "Track potential customers from research through outreach, replies, proposals, and verified partnerships.",
@@ -1226,6 +1229,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
       )}
       {mode === "admin" && adminData && (
         <AdminPortal
+          api={api}
           data={adminData}
           activeTab={activeTab}
           busy={busy}
