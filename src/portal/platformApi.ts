@@ -1,4 +1,10 @@
 import type {
+  ClientDirectoryResource,
+  ClientJobPartner,
+  ClientRestaurant,
+  CmsListingRelationship,
+} from "./clientTypes";
+import type {
   CmsMediaAsset,
   MediaDirectoryResource,
   MediaRestaurant,
@@ -886,6 +892,46 @@ export class PlatformApi {
       "/rest/v1/community_resources?select=id,name,image_url,metadata&order=name.asc&limit=200",
       false,
     );
+  }
+
+  async listClientRestaurants(): Promise<ClientRestaurant[]> {
+    return this.restGet<ClientRestaurant[]>(
+      "/rest/v1/nigerian_restaurants?select=id,name,category,cuisine_type,borough,address,phone,website,image_url,photo_urls,listing_kind,map_pin_enabled,is_active,owner_user_id,description&order=name.asc",
+      false,
+    );
+  }
+
+  async listClientDirectoryResources(): Promise<ClientDirectoryResource[]> {
+    return this.restGet<ClientDirectoryResource[]>(
+      "/rest/v1/community_resources?select=id,name,category,borough,address,phone,website,image_url,function,is_verified,owner_user_id,metadata&order=name.asc&limit=300",
+      false,
+    );
+  }
+
+  async listClientJobPartners(): Promise<ClientJobPartner[]> {
+    return this.restGet<ClientJobPartner[]>(
+      "/rest/v1/nyc_job_partners?select=id,name,organization,category,boroughs,summary,website,enroll_url,careers_url,address,phone,is_partner,partner_status,verified_at&order=name.asc",
+      false,
+    );
+  }
+
+  /**
+   * Optional relationship table. Returns available=false when the migration
+   * has not been applied yet so the UI can use derived status.
+   */
+  async listCmsListingRelationships(): Promise<{
+    available: boolean;
+    rows: CmsListingRelationship[];
+  }> {
+    try {
+      const rows = await this.restGet<CmsListingRelationship[]>(
+        "/rest/v1/cms_listing_relationships?select=*&order=updated_at.desc",
+        false,
+      );
+      return { available: true, rows: Array.isArray(rows) ? rows : [] };
+    } catch {
+      return { available: false, rows: [] };
+    }
   }
 
   /**

@@ -51,6 +51,7 @@ const titles: Record<PortalTab, string> = {
   events: "Event submissions",
   groups: "Community groups",
   businesses: "Business approvals",
+  clients: "Clients and prospects",
   media: "Media library",
   social: "Social media growth",
   crm: "Outreach and revenue pipeline",
@@ -67,6 +68,8 @@ const descriptions: Record<PortalTab, string> = {
     "Review community-submitted and organizer-created events before they appear in the NYC Culture Hub feed.",
   groups: "Shape community spaces, review requests, and keep group presentation current.",
   businesses: "Review submitted businesses before they appear in the community directory.",
+  clients:
+    "Review every BawoSocial place and partner, filter by relationship status, and manage photos per record.",
   media:
     "View and replace BawoSocial circle covers and place photos without an app rebuild.",
   social:

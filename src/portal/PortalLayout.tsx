@@ -1,4 +1,5 @@
 import {
+  Briefcase,
   Building2,
   Calendar,
   Images,
@@ -22,6 +23,7 @@ export type PortalTab =
   | "groups"
   | "events"
   | "businesses"
+  | "clients"
   | "media"
   | "social"
   | "crm"
@@ -51,6 +53,7 @@ const icons = {
   groups: UsersRound,
   events: Calendar,
   businesses: Building2,
+  clients: Briefcase,
   media: Images,
   social: Megaphone,
   crm: Target,
@@ -82,6 +85,7 @@ export default function PortalLayout({
           { id: "events", label: "Events" },
           { id: "groups", label: "Groups" },
           { id: "businesses", label: "Businesses" },
+          { id: "clients", label: "Clients & Prospects" },
           { id: "media", label: "Media" },
           { id: "social", label: "Social Media" },
           { id: "crm", label: "Outreach CRM" },

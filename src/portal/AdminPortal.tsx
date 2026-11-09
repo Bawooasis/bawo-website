@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { FormEvent, useMemo, useState } from "react";
 import GroupEditor, { type GroupEditorInput } from "./GroupEditor";
+import ClientsProspectsPanel from "./ClientsProspectsPanel";
 import MediaPanel from "./MediaPanel";
 import SocialMediaPanel from "./SocialMediaPanel";
 import CrmPanel from "./CrmPanel";
@@ -621,6 +622,10 @@ export default function AdminPortal({
         </div>
       </section>
     );
+  }
+
+  if (activeTab === "clients") {
+    return <ClientsProspectsPanel api={api} busy={busy} />;
   }
 
   if (activeTab === "media") {
