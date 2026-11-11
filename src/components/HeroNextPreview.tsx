@@ -1,16 +1,23 @@
 import { Expand, MapPin, Sparkles, X } from "lucide-react";
 import { memo, useRef, useState } from "react";
+import AppScreenshotPicture from "./AppScreenshotPicture";
 import { CONTENT } from "../constants/content";
+import type { AppScreenshotSources } from "../constants/images";
 
 type HeroNextPreviewProps = {
   className?: string;
 };
 
+type PreviewItem = (typeof CONTENT.hero.nextPreview)[number] & {
+  imageShot?: AppScreenshotSources;
+};
+
 function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
-  const items = CONTENT.hero.nextPreview;
+  const items = CONTENT.hero.nextPreview as PreviewItem[];
   const [active, setActive] = useState(0);
   const current = items[active] ?? items[0];
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const shot = current.imageShot;
 
   const openPreview = () => dialogRef.current?.showModal();
   const closePreview = () => dialogRef.current?.close();
@@ -46,14 +53,32 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
               className="bawo-next-preview__backdrop"
               aria-hidden="true"
             />
-            <img
-              key={current.title}
-              src={current.image}
-              alt={current.imageAlt}
-              className="bawo-next-preview__image"
-              loading="lazy"
-              decoding="async"
-            />
+            {shot ? (
+              <AppScreenshotPicture
+                key={current.title}
+                jpg={shot.jpg}
+                webp={shot.webp}
+                avif={shot.avif}
+                jpgSrcSet={shot.jpgSrcSet}
+                webpSrcSet={shot.webpSrcSet}
+                avifSrcSet={shot.avifSrcSet}
+                sizes={shot.sizes}
+                alt={current.imageAlt}
+                width={shot.width}
+                height={shot.height}
+                className="bawo-next-preview__image"
+                loading="lazy"
+              />
+            ) : (
+              <img
+                key={current.title}
+                src={current.image}
+                alt={current.imageAlt}
+                className="bawo-next-preview__image"
+                loading="lazy"
+                decoding="async"
+              />
+            )}
             <div className="bawo-next-preview__chrome">
               <span className="bawo-next-preview__status">
                 <span aria-hidden="true" />
@@ -129,7 +154,23 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
         >
           <X size={22} aria-hidden="true" />
         </button>
-        <img src={current.image} alt={current.imageAlt} />
+        {shot ? (
+          <AppScreenshotPicture
+            jpg={shot.jpg}
+            webp={shot.webp}
+            avif={shot.avif}
+            jpgSrcSet={shot.jpgSrcSet}
+            webpSrcSet={shot.webpSrcSet}
+            avifSrcSet={shot.avifSrcSet}
+            sizes="(max-width: 768px) 90vw, 420px"
+            alt={current.imageAlt}
+            width={shot.width}
+            height={shot.height}
+            loading="eager"
+          />
+        ) : (
+          <img src={current.image} alt={current.imageAlt} />
+        )}
       </dialog>
     </div>
   );

@@ -2299,6 +2299,11 @@ a.bawo-cta-quiet:active {
     linear-gradient(0deg, rgba(5, 2, 9, 0.42), transparent 34%);
 }
 
+/* Keep <picture> transparent so absolute img positioning matches prior single-<img> layout */
+.bawo-next-preview__visual > picture {
+  display: contents;
+}
+
 .bawo-next-preview__image {
   position: absolute;
   z-index: 1;

@@ -1,4 +1,5 @@
 import { Building2, Compass, MessageCircle, Mic, Sparkles, Users } from "lucide-react";
+import AppScreenshotPicture from "./AppScreenshotPicture";
 import { CONTENT } from "../constants/content";
 import { IMAGES } from "../constants/images";
 
@@ -120,7 +121,7 @@ export default function CommunityCirclesSection() {
               Explore Spots, Join Spaces & Drop Your Take Live
             </h3>
             <p className="text-sm sm:text-base text-[#F7F3FA]/75">
-              From verified Nigerian kitchens like Brooklyn Suya Spot to Trending NYC Spaces and live Daily Vibe rooms inside Men&apos;s Accountability Circle NYC.
+              From Harlem spots like Malcolm Shabazz Harlem Market to Trending NYC Spaces and live Daily Vibe rooms inside Men&apos;s Accountability Circle NYC.
             </p>
           </div>
 
@@ -128,11 +129,12 @@ export default function CommunityCirclesSection() {
             {[
               {
                 badge: "Explore Map · Verified NYC Spots",
-                title: "Brooklyn Suya Spot & 140+ Spots",
+                title: "Malcolm Shabazz Harlem Market",
                 caption:
-                  "Filter by Food, Shop, Resources & Services across NYC with golden photo pins, ratings, and one-tap directions.",
+                  "Browse Harlem and all five boroughs with golden photo pins, Food · Shop · Salons · Resources filters, and one-tap directions.",
                 image: IMAGES.showcase.explore,
-                alt: "BawoSocial Explore Map screen showing Brooklyn Suya Spot and NYC map pins",
+                imageShot: IMAGES.showcase.exploreShot,
+                alt: "BawoSocial Explore Map in Harlem showing Malcolm Shabazz Harlem Market place card, search bar, and map pins",
               },
               {
                 badge: "Community Spaces · Trending",
@@ -140,6 +142,7 @@ export default function CommunityCirclesSection() {
                 caption:
                   "Switch between My Spaces, Discover, and Trending to join Safe Space for the Girls, Gen Z NYC, Queer & Proud NYC, and New to NYC.",
                 image: IMAGES.showcase.community,
+                imageShot: null as null,
                 alt: "BawoSocial Community Spaces screen showing Good evening, Teg and NYC community cards",
               },
               {
@@ -148,6 +151,7 @@ export default function CommunityCirclesSection() {
                 caption:
                   "Jump into live Daily Vibe prompts on Year 1 of Japa finance (12 in the room right now), Friday Wins & Check-In posts, or Go Live.",
                 image: IMAGES.showcase.circleFeed,
+                imageShot: null as null,
                 alt: "BawoSocial Men's Accountability Circle NYC screen with Daily Vibe live prompt and feed",
               },
             ].map((screen) => (
@@ -156,13 +160,30 @@ export default function CommunityCirclesSection() {
                 className="glass-card rounded-3xl p-4 sm:p-5 flex flex-col justify-between border border-[#D6B26A]/25 transition-all duration-300 hover:-translate-y-1.5"
               >
                 <div className="relative mx-auto w-full max-w-[17.5rem] overflow-hidden rounded-[1.75rem] border border-white/15 bg-[#0A0710] shadow-[0_20px_50px_rgba(0,0,0,0.65)]">
-                  <img
-                    src={screen.image}
-                    alt={screen.alt}
-                    className="w-full h-auto block object-contain"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  {screen.imageShot ? (
+                    <AppScreenshotPicture
+                      jpg={screen.imageShot.jpg}
+                      webp={screen.imageShot.webp}
+                      avif={screen.imageShot.avif}
+                      jpgSrcSet={screen.imageShot.jpgSrcSet}
+                      webpSrcSet={screen.imageShot.webpSrcSet}
+                      avifSrcSet={screen.imageShot.avifSrcSet}
+                      sizes={screen.imageShot.sizes}
+                      alt={screen.alt}
+                      width={screen.imageShot.width}
+                      height={screen.imageShot.height}
+                      className="w-full h-auto block object-contain"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <img
+                      src={screen.image}
+                      alt={screen.alt}
+                      className="w-full h-auto block object-contain"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
                 </div>
                 <figcaption className="pt-4 space-y-1.5 text-center sm:text-left">
                   <span className="inline-block rounded-full border border-[#D6B26A]/30 bg-[#D6B26A]/10 px-2.5 py-0.5 text-sm font-bold uppercase tracking-wider text-[#F7E7C4]">

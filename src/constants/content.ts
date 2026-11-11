@@ -67,15 +67,16 @@ export const CONTENT = {
         badge: "140+ Verified NYC Spots",
         liveMetric: "Brooklyn · Harlem · Queens · Bronx · Staten Island",
         highlights: [
-          "Brooklyn Suya Spot (Nigerian · 4.3 · Directions · 3.3 mi), BUKA",
-          "Filter by Food, Shop, Resources & Services with golden NYC map pins",
-          "Business owners can sign in to claim & verify their listing",
+          "Malcolm Shabazz Harlem Market on the live Harlem map with Directions",
+          "Filter by Food, Shop, Salons & Resources with golden NYC map pins",
+          "Business owners can sign in at joinbawo.com/businesses to claim a listing",
         ],
         description:
-          "Search food, events, faith, and culture across an interactive NYC map of verified Nigerian restaurants, bukas, suya spots, African food markets, salons, and community services, or sign in to claim your business listing.",
+          "Search food, events, faith, and culture across an interactive NYC map of verified Nigerian restaurants, bukas, suya spots, African markets, salons, and community services, or sign in at joinbawo.com/businesses to claim your listing.",
         image: IMAGES.showcase.explore,
+        imageShot: IMAGES.showcase.exploreShot,
         imageAlt:
-          "BawoSocial Explore Map screen showing verified Nigerian spots across NYC with Brooklyn Suya Spot venue card",
+          "BawoSocial Explore Map in Harlem showing Malcolm Shabazz Harlem Market place card, search bar, and map pins",
         layout: "full-screen" as const,
       },
       {
