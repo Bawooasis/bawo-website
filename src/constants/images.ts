@@ -66,7 +66,42 @@ import showcaseCommunity from "../assets/images/showcase-community.jpg";
 import showcaseConcierge from "../assets/images/showcase-concierge.jpg";
 import showcaseEvents from "../assets/images/showcase-events.jpg";
 import showcaseCircleFeed from "../assets/images/showcase-circle-feed.jpg";
-import showcaseExplore from "../assets/images/showcase-explore.jpg";
+import showcaseExploreJpg from "../assets/images/showcase-explore.jpg";
+import showcaseExploreJpg860 from "../assets/images/showcase-explore-860.jpg";
+import showcaseExploreJpg645 from "../assets/images/showcase-explore-645.jpg";
+import showcaseExploreWebp from "../assets/images/showcase-explore.webp";
+import showcaseExploreWebp860 from "../assets/images/showcase-explore-860.webp";
+import showcaseExploreWebp645 from "../assets/images/showcase-explore-645.webp";
+import showcaseExploreAvif from "../assets/images/showcase-explore.avif";
+import showcaseExploreAvif860 from "../assets/images/showcase-explore-860.avif";
+import showcaseExploreAvif645 from "../assets/images/showcase-explore-645.avif";
+
+/** Responsive Explore/map iPhone screenshot (Harlem · Malcolm Shabazz Harlem Market). */
+export type AppScreenshotSources = {
+  /** JPG fallback URL (also used where a plain string src is required). */
+  jpg: string;
+  webp: string;
+  avif: string;
+  jpgSrcSet: string;
+  webpSrcSet: string;
+  avifSrcSet: string;
+  width: number;
+  height: number;
+  /** Phone-frame friendly sizes hint for below-the-fold showcase cards. */
+  sizes: string;
+};
+
+const showcaseExploreShot: AppScreenshotSources = {
+  jpg: showcaseExploreJpg,
+  webp: showcaseExploreWebp,
+  avif: showcaseExploreAvif,
+  jpgSrcSet: `${showcaseExploreJpg645} 645w, ${showcaseExploreJpg860} 860w, ${showcaseExploreJpg} 1290w`,
+  webpSrcSet: `${showcaseExploreWebp645} 645w, ${showcaseExploreWebp860} 860w, ${showcaseExploreWebp} 1290w`,
+  avifSrcSet: `${showcaseExploreAvif645} 645w, ${showcaseExploreAvif860} 860w, ${showcaseExploreAvif} 1290w`,
+  width: 1290,
+  height: 2796,
+  sizes: "(max-width: 640px) 280px, (max-width: 1024px) 360px, 420px",
+};
 
 /** Lower “In-App Preview” grid — individual screens. */
 const appFeatureScreens = [
@@ -105,7 +140,9 @@ export const IMAGES = {
   },
 
   showcase: {
-    explore: showcaseExplore,
+    /** Prefer `exploreShot` for AVIF/WebP; `explore` remains the JPG URL for simple img srcs. */
+    explore: showcaseExploreShot.jpg,
+    exploreShot: showcaseExploreShot,
     community: showcaseCommunity,
     circleFeed: showcaseCircleFeed,
     events: showcaseEvents,
