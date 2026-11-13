@@ -76,7 +76,7 @@ export const CONTENT = {
         image: IMAGES.showcase.explore,
         imageShot: IMAGES.showcase.exploreShot,
         imageAlt:
-          "BawoSocial Explore Map screen with NYC map pins and BUKA place card showing Directions 2.6 mi",
+          "BawoSocial Explore Map screen with NYC map pins and BUKA place card showing Directions 5.5 mi",
         layout: "full-screen" as const,
       },
       {

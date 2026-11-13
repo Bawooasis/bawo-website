@@ -135,7 +135,7 @@ export default function CommunityCirclesSection() {
                   "Filter by Food, Shop, Resources & Services across NYC with golden photo pins, ratings, and one-tap directions.",
                 image: IMAGES.showcase.explore,
                 imageShot: IMAGES.showcase.exploreShot,
-                alt: "BawoSocial Explore Map with BUKA place card and Directions 2.6 mi",
+                alt: "BawoSocial Explore Map with BUKA place card and Directions 5.5 mi",
               },
               {
                 badge: "Community Spaces · Discover",
