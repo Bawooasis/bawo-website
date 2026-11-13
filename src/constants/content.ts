@@ -74,8 +74,9 @@ export const CONTENT = {
         description:
           "Search food, events, faith, and culture across an interactive NYC map of verified Nigerian restaurants, bukas, suya spots, African food markets, salons, and community services, or sign in to claim your business listing.",
         image: IMAGES.showcase.explore,
+        imageShot: IMAGES.showcase.exploreShot,
         imageAlt:
-          "BawoSocial Explore Map screen showing verified Nigerian spots across NYC with Brooklyn Suya Spot venue card",
+          "BawoSocial Explore Map screen with NYC map pins and BUKA place card showing Directions 5.5 mi",
         layout: "full-screen" as const,
       },
       {
@@ -90,9 +91,10 @@ export const CONTENT = {
         ],
         description:
           "Find your people in curated Nigerian diaspora spaces, from Safe Space for the Girls and New to NYC to Gen Z NYC, Nigerian Food & Chop NYC, and Faith & Reflection.",
-        image: IMAGES.showcase.community,
+        image: IMAGES.showcase.startCircle,
+        imageShot: IMAGES.showcase.startCircleShot,
         imageAlt:
-          "BawoSocial Community Spaces screen showing Good evening, Teg with Safe Space for the Girls, Gen Z NYC, Queer & Proud NYC, and New to NYC",
+          "BawoSocial Start a Circle screen with Open a room and bring your people in and Start a circle button",
         layout: "full-screen" as const,
       },
       {
@@ -108,8 +110,9 @@ export const CONTENT = {
         description:
           "Step inside active circles like Men's Accountability Circle NYC to jump into Live Daily Vibe rooms, drop your take on Japa & diaspora finance, celebrate Friday Wins, or Go Live.",
         image: IMAGES.showcase.circleFeed,
+        imageShot: IMAGES.showcase.jobsShot,
         imageAlt:
-          "BawoSocial Men's Accountability Circle NYC screen showing Live Daily Vibe prompt on Year 1 of Japa finance, Friday Wins post, and Go Live / Post actions",
+          "BawoSocial Community Circles screen featuring NYC Jobs & Career Network with Join",
         layout: "full-screen" as const,
       },
       {
@@ -125,8 +128,9 @@ export const CONTENT = {
         description:
           "Afrobeats nights, Owambe celebrations, Nigerian supper clubs, rooftop linkups, and professional mixers curated for Nigerians across all five boroughs.",
         image: IMAGES.showcase.events,
+        imageShot: IMAGES.showcase.eventsShot,
         imageAlt:
-          "BawoSocial Events screen showing Nigerian nightlife and cultural gatherings in New York City",
+          "BawoSocial Events screen featuring Afrobeats & Amapiano Fridays with Share, Get Tickets, and Save",
         layout: "full-screen" as const,
       },
       {
@@ -142,8 +146,9 @@ export const CONTENT = {
         description:
           "Craving smoky party Jollof, pounded yam, efo riro, or suya? Looking for a Nigerian caterer, braiding salon, or church? Ask AI for instant NYC answers.",
         image: IMAGES.showcase.concierge,
+        imageShot: IMAGES.showcase.askAiShot,
         imageAlt:
-          "BawoSocial Ask AI screen offering culturally relevant recommendations for Nigerians in NYC",
+          "BawoSocial Ask AI screen with suggestion cards for jollof, suya, groceries, and Nigerian churches in NYC",
         layout: "full-screen" as const,
       },
     ],

@@ -55,23 +55,243 @@ import si03 from "../assets/images/staten/si-03.png";
 import si04 from "../assets/images/staten/si-04.png";
 import si05 from "../assets/images/staten/si-05.png";
 
-// Inside the App Images - screenshots
-import appCommunityAltScreen from "../assets/images/app-community-alt.png";
-import appCommunityScreen from "../assets/images/app-community-screen.png";
-import appConciergeScreen from "../assets/images/app-concierge.png";
-import appEventsScreen from "../assets/images/app-events-screen.png";
-import appResourcesScreen from "../assets/images/app-resources-full.png";
-import heroAppCommunityMockup from "../assets/images/hero-app-community-mockup.webp";
-import showcaseCommunity from "../assets/images/showcase-community.jpg";
-import showcaseConcierge from "../assets/images/showcase-concierge.jpg";
-import showcaseEvents from "../assets/images/showcase-events.jpg";
-import showcaseCircleFeed from "../assets/images/showcase-circle-feed.jpg";
-import showcaseExplore from "../assets/images/showcase-explore.jpg";
+// Inside the App Images — Alexander approved framed phones (webshots Nov 2026)
+// Device chrome baked in via webshots/render.py (status patch + App Store frame).
+import appCommunityAltScreen from "../assets/images/app-community-alt.jpg";
+import appCommunityScreen from "../assets/images/app-community-screen.jpg";
+import appAskAiScreen from "../assets/images/app-concierge.jpg";
+import appEventsScreen from "../assets/images/app-events-screen.jpg";
+import appExploreScreen from "../assets/images/app-resources-full.jpg";
+
+import heroAppCommunityJpg from "../assets/images/hero-app-community-mockup.jpg";
+import heroAppCommunityWebp from "../assets/images/hero-app-community-mockup.webp";
+import heroAppCommunityAvif from "../assets/images/hero-app-community-mockup.avif";
+import heroAppCommunityJpg860 from "../assets/images/hero-app-community-mockup-860.jpg";
+import heroAppCommunityWebp860 from "../assets/images/hero-app-community-mockup-860.webp";
+import heroAppCommunityAvif860 from "../assets/images/hero-app-community-mockup-860.avif";
+
+import phoneCommunityJpg from "../assets/images/phone-community.jpg";
+import phoneCommunityJpg860 from "../assets/images/phone-community-860.jpg";
+import phoneCommunityJpg645 from "../assets/images/phone-community-645.jpg";
+import phoneCommunityJpg430 from "../assets/images/phone-community-430.jpg";
+import phoneCommunityWebp from "../assets/images/phone-community.webp";
+import phoneCommunityWebp860 from "../assets/images/phone-community-860.webp";
+import phoneCommunityWebp645 from "../assets/images/phone-community-645.webp";
+import phoneCommunityWebp430 from "../assets/images/phone-community-430.webp";
+import phoneCommunityAvif from "../assets/images/phone-community.avif";
+import phoneCommunityAvif860 from "../assets/images/phone-community-860.avif";
+import phoneCommunityAvif645 from "../assets/images/phone-community-645.avif";
+import phoneCommunityAvif430 from "../assets/images/phone-community-430.avif";
+
+import phoneEventsJpg from "../assets/images/phone-events.jpg";
+import phoneEventsJpg860 from "../assets/images/phone-events-860.jpg";
+import phoneEventsJpg645 from "../assets/images/phone-events-645.jpg";
+import phoneEventsJpg430 from "../assets/images/phone-events-430.jpg";
+import phoneEventsWebp from "../assets/images/phone-events.webp";
+import phoneEventsWebp860 from "../assets/images/phone-events-860.webp";
+import phoneEventsWebp645 from "../assets/images/phone-events-645.webp";
+import phoneEventsWebp430 from "../assets/images/phone-events-430.webp";
+import phoneEventsAvif from "../assets/images/phone-events.avif";
+import phoneEventsAvif860 from "../assets/images/phone-events-860.avif";
+import phoneEventsAvif645 from "../assets/images/phone-events-645.avif";
+import phoneEventsAvif430 from "../assets/images/phone-events-430.avif";
+
+import phoneExploreJpg from "../assets/images/phone-explore.jpg";
+import phoneExploreJpg860 from "../assets/images/phone-explore-860.jpg";
+import phoneExploreJpg645 from "../assets/images/phone-explore-645.jpg";
+import phoneExploreJpg430 from "../assets/images/phone-explore-430.jpg";
+import phoneExploreWebp from "../assets/images/phone-explore.webp";
+import phoneExploreWebp860 from "../assets/images/phone-explore-860.webp";
+import phoneExploreWebp645 from "../assets/images/phone-explore-645.webp";
+import phoneExploreWebp430 from "../assets/images/phone-explore-430.webp";
+import phoneExploreAvif from "../assets/images/phone-explore.avif";
+import phoneExploreAvif860 from "../assets/images/phone-explore-860.avif";
+import phoneExploreAvif645 from "../assets/images/phone-explore-645.avif";
+import phoneExploreAvif430 from "../assets/images/phone-explore-430.avif";
+
+import phoneJobsJpg from "../assets/images/phone-jobs.jpg";
+import phoneJobsJpg860 from "../assets/images/phone-jobs-860.jpg";
+import phoneJobsJpg645 from "../assets/images/phone-jobs-645.jpg";
+import phoneJobsJpg430 from "../assets/images/phone-jobs-430.jpg";
+import phoneJobsWebp from "../assets/images/phone-jobs.webp";
+import phoneJobsWebp860 from "../assets/images/phone-jobs-860.webp";
+import phoneJobsWebp645 from "../assets/images/phone-jobs-645.webp";
+import phoneJobsWebp430 from "../assets/images/phone-jobs-430.webp";
+import phoneJobsAvif from "../assets/images/phone-jobs.avif";
+import phoneJobsAvif860 from "../assets/images/phone-jobs-860.avif";
+import phoneJobsAvif645 from "../assets/images/phone-jobs-645.avif";
+import phoneJobsAvif430 from "../assets/images/phone-jobs-430.avif";
+
+import phoneAskAiJpg from "../assets/images/phone-ask-ai.jpg";
+import phoneAskAiJpg860 from "../assets/images/phone-ask-ai-860.jpg";
+import phoneAskAiJpg645 from "../assets/images/phone-ask-ai-645.jpg";
+import phoneAskAiJpg430 from "../assets/images/phone-ask-ai-430.jpg";
+import phoneAskAiWebp from "../assets/images/phone-ask-ai.webp";
+import phoneAskAiWebp860 from "../assets/images/phone-ask-ai-860.webp";
+import phoneAskAiWebp645 from "../assets/images/phone-ask-ai-645.webp";
+import phoneAskAiWebp430 from "../assets/images/phone-ask-ai-430.webp";
+import phoneAskAiAvif from "../assets/images/phone-ask-ai.avif";
+import phoneAskAiAvif860 from "../assets/images/phone-ask-ai-860.avif";
+import phoneAskAiAvif645 from "../assets/images/phone-ask-ai-645.avif";
+import phoneAskAiAvif430 from "../assets/images/phone-ask-ai-430.avif";
+
+import phoneStartJpg from "../assets/images/phone-start-circle.jpg";
+import phoneStartJpg860 from "../assets/images/phone-start-circle-860.jpg";
+import phoneStartJpg645 from "../assets/images/phone-start-circle-645.jpg";
+import phoneStartJpg430 from "../assets/images/phone-start-circle-430.jpg";
+import phoneStartWebp from "../assets/images/phone-start-circle.webp";
+import phoneStartWebp860 from "../assets/images/phone-start-circle-860.webp";
+import phoneStartWebp645 from "../assets/images/phone-start-circle-645.webp";
+import phoneStartWebp430 from "../assets/images/phone-start-circle-430.webp";
+import phoneStartAvif from "../assets/images/phone-start-circle.avif";
+import phoneStartAvif860 from "../assets/images/phone-start-circle-860.avif";
+import phoneStartAvif645 from "../assets/images/phone-start-circle-645.avif";
+import phoneStartAvif430 from "../assets/images/phone-start-circle-430.avif";
+
+/** App Store–framed phone renders (1070×2242 @ screen_w=1000). */
+export type AppScreenshotSources = {
+  jpg: string;
+  webp: string;
+  avif: string;
+  jpgSrcSet: string;
+  webpSrcSet: string;
+  avifSrcSet: string;
+  width: number;
+  height: number;
+  sizes: string;
+};
+
+const PHONE_SIZES =
+  "(max-width: 640px) 280px, (max-width: 1024px) 360px, 420px";
+
+function shot(
+  jpg: string,
+  jpg860: string,
+  jpg645: string,
+  jpg430: string,
+  webp: string,
+  webp860: string,
+  webp645: string,
+  webp430: string,
+  avif: string,
+  avif860: string,
+  avif645: string,
+  avif430: string,
+): AppScreenshotSources {
+  return {
+    jpg,
+    webp,
+    avif,
+    jpgSrcSet: `${jpg430} 430w, ${jpg645} 645w, ${jpg860} 860w, ${jpg} 1070w`,
+    webpSrcSet: `${webp430} 430w, ${webp645} 645w, ${webp860} 860w, ${webp} 1070w`,
+    avifSrcSet: `${avif430} 430w, ${avif645} 645w, ${avif860} 860w, ${avif} 1070w`,
+    width: 1070,
+    height: 2242,
+    sizes: PHONE_SIZES,
+  };
+}
+
+const communityShot = shot(
+  phoneCommunityJpg,
+  phoneCommunityJpg860,
+  phoneCommunityJpg645,
+  phoneCommunityJpg430,
+  phoneCommunityWebp,
+  phoneCommunityWebp860,
+  phoneCommunityWebp645,
+  phoneCommunityWebp430,
+  phoneCommunityAvif,
+  phoneCommunityAvif860,
+  phoneCommunityAvif645,
+  phoneCommunityAvif430,
+);
+const eventsShot = shot(
+  phoneEventsJpg,
+  phoneEventsJpg860,
+  phoneEventsJpg645,
+  phoneEventsJpg430,
+  phoneEventsWebp,
+  phoneEventsWebp860,
+  phoneEventsWebp645,
+  phoneEventsWebp430,
+  phoneEventsAvif,
+  phoneEventsAvif860,
+  phoneEventsAvif645,
+  phoneEventsAvif430,
+);
+const exploreShot = shot(
+  phoneExploreJpg,
+  phoneExploreJpg860,
+  phoneExploreJpg645,
+  phoneExploreJpg430,
+  phoneExploreWebp,
+  phoneExploreWebp860,
+  phoneExploreWebp645,
+  phoneExploreWebp430,
+  phoneExploreAvif,
+  phoneExploreAvif860,
+  phoneExploreAvif645,
+  phoneExploreAvif430,
+);
+const jobsShot = shot(
+  phoneJobsJpg,
+  phoneJobsJpg860,
+  phoneJobsJpg645,
+  phoneJobsJpg430,
+  phoneJobsWebp,
+  phoneJobsWebp860,
+  phoneJobsWebp645,
+  phoneJobsWebp430,
+  phoneJobsAvif,
+  phoneJobsAvif860,
+  phoneJobsAvif645,
+  phoneJobsAvif430,
+);
+const askAiShot = shot(
+  phoneAskAiJpg,
+  phoneAskAiJpg860,
+  phoneAskAiJpg645,
+  phoneAskAiJpg430,
+  phoneAskAiWebp,
+  phoneAskAiWebp860,
+  phoneAskAiWebp645,
+  phoneAskAiWebp430,
+  phoneAskAiAvif,
+  phoneAskAiAvif860,
+  phoneAskAiAvif645,
+  phoneAskAiAvif430,
+);
+const startCircleShot = shot(
+  phoneStartJpg,
+  phoneStartJpg860,
+  phoneStartJpg645,
+  phoneStartJpg430,
+  phoneStartWebp,
+  phoneStartWebp860,
+  phoneStartWebp645,
+  phoneStartWebp430,
+  phoneStartAvif,
+  phoneStartAvif860,
+  phoneStartAvif645,
+  phoneStartAvif430,
+);
+
+const heroShot: AppScreenshotSources = {
+  jpg: heroAppCommunityJpg,
+  webp: heroAppCommunityWebp,
+  avif: heroAppCommunityAvif,
+  jpgSrcSet: `${heroAppCommunityJpg860} 860w, ${heroAppCommunityJpg} 1070w`,
+  webpSrcSet: `${heroAppCommunityWebp860} 860w, ${heroAppCommunityWebp} 1070w`,
+  avifSrcSet: `${heroAppCommunityAvif860} 860w, ${heroAppCommunityAvif} 1070w`,
+  width: 1070,
+  height: 2242,
+  sizes: "(max-width: 1024px) 55vw, 420px",
+};
 
 /** Lower “In-App Preview” grid — individual screens. */
 const appFeatureScreens = [
-  appResourcesScreen,
-  appConciergeScreen,
+  appExploreScreen,
+  appAskAiScreen,
   appCommunityScreen,
   appEventsScreen,
   appCommunityAltScreen,
@@ -100,16 +320,30 @@ export const IMAGES = {
 
   // App Preview/Demo Images
   previews: {
-    main: heroAppCommunityMockup,
+    /** NYC Community Lounge — hero phone (eager LCP). */
+    main: heroShot.jpg,
+    mainShot: heroShot,
     splash: newSplashScreen,
   },
 
   showcase: {
-    explore: showcaseExplore,
-    community: showcaseCommunity,
-    circleFeed: showcaseCircleFeed,
-    events: showcaseEvents,
-    concierge: showcaseConcierge,
+    /** JPG URLs for simple img srcs; prefer *Shot for <picture>. */
+    explore: exploreShot.jpg,
+    exploreShot,
+    community: communityShot.jpg,
+    communityShot,
+    /** Jobs & Career Network circle (replaces old Go Live / Daily Vibe feed shot). */
+    circleFeed: jobsShot.jpg,
+    circleFeedShot: jobsShot,
+    jobsShot,
+    events: eventsShot.jpg,
+    eventsShot,
+    /** Ask AI suggestion cards (filename legacy: concierge). */
+    concierge: askAiShot.jpg,
+    conciergeShot: askAiShot,
+    askAiShot,
+    startCircle: startCircleShot.jpg,
+    startCircleShot,
   },
 
   // Testimonial Avatar Images
@@ -121,8 +355,10 @@ export const IMAGES = {
 
   // In-App Feature Screenshots
   inApp: {
-    resources: appResourcesScreen,
-    concierge: appConciergeScreen,
+    resources: appExploreScreen,
+    explore: appExploreScreen,
+    concierge: appAskAiScreen,
+    askAi: appAskAiScreen,
     community: appCommunityScreen,
     communityAlt: appCommunityAltScreen,
     events: appEventsScreen,

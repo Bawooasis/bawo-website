@@ -1,4 +1,6 @@
 import { Building2, Compass, MessageCircle, Mic, Sparkles, Users } from "lucide-react";
+import AppScreenShot from "./AppScreenShot";
+import AppScreenshotPicture from "./AppScreenshotPicture";
 import { CONTENT } from "../constants/content";
 import { IMAGES } from "../constants/images";
 
@@ -128,41 +130,63 @@ export default function CommunityCirclesSection() {
             {[
               {
                 badge: "Explore Map · Verified NYC Spots",
-                title: "Brooklyn Suya Spot & 140+ Spots",
+                title: "BUKA & verified NYC spots",
                 caption:
                   "Filter by Food, Shop, Resources & Services across NYC with golden photo pins, ratings, and one-tap directions.",
                 image: IMAGES.showcase.explore,
-                alt: "BawoSocial Explore Map screen showing Brooklyn Suya Spot and NYC map pins",
+                imageShot: IMAGES.showcase.exploreShot,
+                alt: "BawoSocial Explore Map with BUKA place card and Directions 5.5 mi",
               },
               {
-                badge: "Community Spaces · Trending",
-                title: "Safe Space, Gen Z & New to NYC",
+                badge: "Community Spaces · Discover",
+                title: "NYC Community Lounge",
                 caption:
-                  "Switch between My Spaces, Discover, and Trending to join Safe Space for the Girls, Gen Z NYC, Queer & Proud NYC, and New to NYC.",
+                  "Find your people in Discover with spaces like NYC Community Lounge — gist, laughs, and absolutely no pressure.",
                 image: IMAGES.showcase.community,
-                alt: "BawoSocial Community Spaces screen showing Good evening, Teg and NYC community cards",
+                imageShot: IMAGES.showcase.communityShot,
+                alt: "BawoSocial Community screen showing NYC Community Lounge with Join",
               },
               {
-                badge: "Circle Hub · Daily Vibe Live",
-                title: "Men's Accountability Circle NYC",
+                badge: "Community Circles · Careers",
+                title: "NYC Jobs & Career Network",
                 caption:
-                  "Jump into live Daily Vibe prompts on Year 1 of Japa finance (12 in the room right now), Friday Wins & Check-In posts, or Go Live.",
+                  "Join career and culture circles for Nigerians in NYC — jobs, hiring, and growth with your people.",
                 image: IMAGES.showcase.circleFeed,
-                alt: "BawoSocial Men's Accountability Circle NYC screen with Daily Vibe live prompt and feed",
+                imageShot: IMAGES.showcase.jobsShot,
+                alt: "BawoSocial Community Circles screen featuring NYC Jobs & Career Network",
               },
             ].map((screen) => (
               <figure
                 key={screen.title}
                 className="glass-card rounded-3xl p-4 sm:p-5 flex flex-col justify-between border border-[#D6B26A]/25 transition-all duration-300 hover:-translate-y-1.5"
               >
-                <div className="relative mx-auto w-full max-w-[17.5rem] overflow-hidden rounded-[1.75rem] border border-white/15 bg-[#0A0710] shadow-[0_20px_50px_rgba(0,0,0,0.65)]">
-                  <img
-                    src={screen.image}
-                    alt={screen.alt}
-                    className="w-full h-auto block object-contain"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                <div className="relative mx-auto w-full max-w-[17.5rem]">
+                  <AppScreenShot label={screen.alt}>
+                    {screen.imageShot ? (
+                      <AppScreenshotPicture
+                        jpg={screen.imageShot.jpg}
+                        webp={screen.imageShot.webp}
+                        avif={screen.imageShot.avif}
+                        jpgSrcSet={screen.imageShot.jpgSrcSet}
+                        webpSrcSet={screen.imageShot.webpSrcSet}
+                        avifSrcSet={screen.imageShot.avifSrcSet}
+                        sizes={screen.imageShot.sizes}
+                        alt={screen.alt}
+                        width={screen.imageShot.width}
+                        height={screen.imageShot.height}
+                        className="bawo-app-screen__img"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <img
+                        src={screen.image}
+                        alt={screen.alt}
+                        className="bawo-app-screen__img"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    )}
+                  </AppScreenShot>
                 </div>
                 <figcaption className="pt-4 space-y-1.5 text-center sm:text-left">
                   <span className="inline-block rounded-full border border-[#D6B26A]/30 bg-[#D6B26A]/10 px-2.5 py-0.5 text-sm font-bold uppercase tracking-wider text-[#F7E7C4]">

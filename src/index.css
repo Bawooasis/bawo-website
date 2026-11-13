@@ -2046,7 +2046,45 @@ a.bawo-cta-quiet:active {
   padding-bottom: 0.625rem;
 }
 
-/* Hero proof-of-concept — device cutouts; size asset to 2× native for Retina (no giant upscale). */
+/*
+ * Real iPhone 17 Pro Max simulator captures (1320×2868).
+ * ~55px screen radius at full size → 4.167% / 1.918% (scales with element).
+ * Soft shadow only — no fake bezel / notch / Island overlay.
+ */
+/*
+ * Pre-framed App Store phone renders (transparent PNG/WebP from
+ * webshots/render.py). Soft shadow only — device chrome is in the image.
+ */
+.bawo-app-screen {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  margin: 0;
+  aspect-ratio: 1070 / 2242;
+  overflow: visible;
+  background: transparent;
+  filter: drop-shadow(0 28px 48px rgba(0, 0, 0, 0.55))
+    drop-shadow(0 10px 18px rgba(0, 0, 0, 0.35));
+}
+
+.bawo-app-screen > picture {
+  display: contents;
+}
+
+.bawo-app-screen__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+  aspect-ratio: 1070 / 2242;
+  object-fit: contain;
+  object-position: center top;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Hero — size the screen by viewport height. */
 .bawo-hero-mockup {
   position: relative;
   isolation: isolate;
@@ -2061,28 +2099,20 @@ a.bawo-cta-quiet:active {
 .bawo-hero-mockup__stage {
   position: relative;
   z-index: 1;
-  /* Native 2572×5284 Figma export — fill column, scale by viewport height. */
-  width: min(100%, 96vw, calc(52dvh * 2572 / 5284));
-  aspect-ratio: 2572 / 5284;
+  width: min(100%, 96vw, calc(52dvh * 1070 / 2242));
 }
 
 .bawo-hero-mockup.bawo-hero-mockup--compact .bawo-hero-mockup__stage {
   width: 100%;
 }
 
-.bawo-hero-mockup__image {
-  display: block;
+.bawo-hero-mockup__device {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  /* Exact bitmap — no CSS filter on the visible frame (keeps UI text crisp). */
-  transform: translateZ(0);
-  backface-visibility: hidden;
 }
 
 @media (min-width: 640px) {
   .bawo-hero-mockup__stage {
-    width: min(100%, 94vw, calc(58dvh * 2572 / 5284));
+    width: min(100%, 94vw, calc(58dvh * 1070 / 2242));
   }
 }
 
@@ -2092,19 +2122,19 @@ a.bawo-cta-quiet:active {
   }
 
   .bawo-hero-mockup__stage {
-    width: min(100%, 62vw, calc(72dvh * 2572 / 5284));
+    width: min(100%, 62vw, calc(72dvh * 1070 / 2242));
   }
 }
 
 @media (min-width: 1280px) {
   .bawo-hero-mockup__stage {
-    width: min(100%, 58vw, calc(78dvh * 2572 / 5284));
+    width: min(100%, 58vw, calc(78dvh * 1070 / 2242));
   }
 }
 
 @media (min-width: 1536px) {
   .bawo-hero-mockup__stage {
-    width: min(100%, 56vw, calc(82dvh * 2572 / 5284));
+    width: min(100%, 56vw, calc(82dvh * 1070 / 2242));
   }
 }
 
@@ -2268,25 +2298,33 @@ a.bawo-cta-quiet:active {
     inset 0 1px 0 rgba(247, 231, 196, 0.14);
 }
 
-.bawo-next-preview__visual[data-layout="full-screen"] .bawo-next-preview__image {
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  padding: 3.5rem 1rem 1rem;
-  object-fit: contain;
-  filter: drop-shadow(0 20px 44px rgba(0, 0, 0, 0.72));
+.bawo-next-preview__device-wrap {
+  position: absolute;
+  z-index: 2;
+  inset: 3.5rem 0.85rem 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  animation: bawo-preview-in 260ms ease-out both;
 }
 
-.bawo-next-preview__backdrop {
-  position: absolute;
-  inset: -2rem;
-  width: calc(100% + 4rem);
-  height: calc(100% + 4rem);
-  object-fit: cover;
-  opacity: 0.32;
-  filter: blur(24px) saturate(1.2);
-  transform: scale(1.08);
+.bawo-next-preview__device {
+  height: 100%;
+  width: auto;
+  max-width: min(22rem, 100%);
+  aspect-ratio: 1070 / 2242;
+  pointer-events: auto;
 }
+
+@media (min-width: 960px) {
+  .bawo-next-preview__device {
+    max-width: min(24rem, 100%);
+  }
+}
+
+/* Backdrop screenshot removed — real simulator captures should read cleanly
+   without ghosted app UI behind the rounded screen. */
 
 .bawo-next-preview__visual::after {
   content: "";
@@ -2295,38 +2333,13 @@ a.bawo-cta-quiet:active {
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(5, 2, 9, 0.35), transparent 32%),
-    linear-gradient(0deg, rgba(5, 2, 9, 0.42), transparent 34%);
+    linear-gradient(180deg, rgba(5, 2, 9, 0.22), transparent 28%),
+    linear-gradient(0deg, rgba(5, 2, 9, 0.28), transparent 30%);
 }
 
-.bawo-next-preview__image {
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  padding: 0.6rem;
-  object-fit: contain;
-  animation: bawo-preview-in 260ms ease-out both;
-}
-
-.bawo-next-preview__visual[data-layout="map-crop"] .bawo-next-preview__image {
-  inset: -2.5% auto auto -8%;
-  width: 116%;
-  height: auto;
-  max-width: none;
-  padding: 0;
-  object-fit: unset;
-}
-
-.bawo-next-preview__visual[data-layout="screen-crop"] .bawo-next-preview__image {
-  inset: 0 auto auto 0;
-  width: 100%;
-  height: auto;
-  max-width: none;
-  padding: 0;
-  object-fit: unset;
+.bawo-next-preview__dialog-device {
+  width: min(92vw, 26rem);
+  margin: 0 auto;
 }
 
 @keyframes bawo-preview-in {
@@ -2507,11 +2520,11 @@ a.bawo-cta-quiet:active {
 }
 
 .bawo-next-preview__dialog {
-  width: min(92vw, 58rem);
-  height: min(90vh, 54rem);
+  width: min(92vw, 34rem);
+  max-height: min(92vh, 58rem);
   margin: auto;
-  padding: 1rem;
-  overflow: hidden;
+  padding: 2.75rem 1rem 1.25rem;
+  overflow: auto;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 1.5rem;
   background: rgba(8, 4, 13, 0.96);
@@ -2523,11 +2536,9 @@ a.bawo-cta-quiet:active {
   backdrop-filter: blur(12px);
 }
 
-.bawo-next-preview__dialog img {
-  display: block;
-  width: 100%;
-  height: 100%;
+.bawo-next-preview__dialog .bawo-app-screen__img {
   object-fit: contain;
+  object-position: center top;
 }
 
 .bawo-next-preview__dialog-close {
@@ -2547,7 +2558,7 @@ a.bawo-cta-quiet:active {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bawo-next-preview__image {
+  .bawo-next-preview__device-wrap {
     animation: none;
   }
 }

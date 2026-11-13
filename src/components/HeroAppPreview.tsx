@@ -1,32 +1,42 @@
+import AppScreenShot from "./AppScreenShot";
+import AppScreenshotPicture from "./AppScreenshotPicture";
 import { IMAGES } from "../constants/images";
 
 type HeroAppPreviewProps = {
   className?: string;
 };
 
-const HERO_MOCKUP_WIDTH = 2572;
-const HERO_MOCKUP_HEIGHT = 5284;
+const HERO_WIDTH = IMAGES.previews.mainShot.width;
+const HERO_HEIGHT = IMAGES.previews.mainShot.height;
 
 export default function HeroAppPreview({
   className = "",
 }: HeroAppPreviewProps) {
+  const shot = IMAGES.previews.mainShot;
   return (
-    <figure
-      className={`bawo-hero-mockup ${className}`.trim()}
-      aria-label="BawoSocial app preview"
-    >
+    <div className={`bawo-hero-mockup ${className}`.trim()}>
       <div className="bawo-hero-mockup__stage">
-        <img
-          src={IMAGES.previews.main}
-          alt="BawoSocial Community Spaces screen on iPhone showing Good evening, Teg, Safe Space for the Girls, Gen Z NYC, Queer & Proud NYC, and New to NYC"
-          className="bawo-hero-mockup__image animate-subtle-float is-active"
-          width={HERO_MOCKUP_WIDTH}
-          height={HERO_MOCKUP_HEIGHT}
-          loading="eager"
-          decoding="async"
-          fetchPriority="high"
-        />
+        <AppScreenShot
+          className="bawo-hero-mockup__device animate-subtle-float is-active"
+          label="BawoSocial app preview"
+        >
+          <AppScreenshotPicture
+            jpg={shot.jpg}
+            webp={shot.webp}
+            avif={shot.avif}
+            jpgSrcSet={shot.jpgSrcSet}
+            webpSrcSet={shot.webpSrcSet}
+            avifSrcSet={shot.avifSrcSet}
+            sizes={shot.sizes}
+            alt="BawoSocial Community screen showing NYC Community Lounge with Join on iPhone"
+            width={HERO_WIDTH}
+            height={HERO_HEIGHT}
+            className="bawo-app-screen__img"
+            loading="eager"
+            fetchPriority="high"
+          />
+        </AppScreenShot>
       </div>
-    </figure>
+    </div>
   );
 }
