@@ -64,71 +64,89 @@ import appExploreScreen from "../assets/images/app-resources-full.jpg";
 import heroAppCommunityJpg from "../assets/images/hero-app-community-mockup.jpg";
 import heroAppCommunityWebp from "../assets/images/hero-app-community-mockup.webp";
 import heroAppCommunityAvif from "../assets/images/hero-app-community-mockup.avif";
-import heroAppCommunityJpg1290 from "../assets/images/hero-app-community-mockup-1290.jpg";
-import heroAppCommunityWebp1290 from "../assets/images/hero-app-community-mockup-1290.webp";
-import heroAppCommunityAvif1290 from "../assets/images/hero-app-community-mockup-1290.avif";
+import heroAppCommunityJpg860 from "../assets/images/hero-app-community-mockup-860.jpg";
+import heroAppCommunityWebp860 from "../assets/images/hero-app-community-mockup-860.webp";
+import heroAppCommunityAvif860 from "../assets/images/hero-app-community-mockup-860.avif";
 
 import showcaseCommunityJpg from "../assets/images/showcase-community.jpg";
 import showcaseCommunityJpg860 from "../assets/images/showcase-community-860.jpg";
 import showcaseCommunityJpg645 from "../assets/images/showcase-community-645.jpg";
+import showcaseCommunityJpg430 from "../assets/images/showcase-community-430.jpg";
 import showcaseCommunityWebp from "../assets/images/showcase-community.webp";
 import showcaseCommunityWebp860 from "../assets/images/showcase-community-860.webp";
 import showcaseCommunityWebp645 from "../assets/images/showcase-community-645.webp";
+import showcaseCommunityWebp430 from "../assets/images/showcase-community-430.webp";
 import showcaseCommunityAvif from "../assets/images/showcase-community.avif";
 import showcaseCommunityAvif860 from "../assets/images/showcase-community-860.avif";
 import showcaseCommunityAvif645 from "../assets/images/showcase-community-645.avif";
+import showcaseCommunityAvif430 from "../assets/images/showcase-community-430.avif";
 
 import showcaseEventsJpg from "../assets/images/showcase-events.jpg";
 import showcaseEventsJpg860 from "../assets/images/showcase-events-860.jpg";
 import showcaseEventsJpg645 from "../assets/images/showcase-events-645.jpg";
+import showcaseEventsJpg430 from "../assets/images/showcase-events-430.jpg";
 import showcaseEventsWebp from "../assets/images/showcase-events.webp";
 import showcaseEventsWebp860 from "../assets/images/showcase-events-860.webp";
 import showcaseEventsWebp645 from "../assets/images/showcase-events-645.webp";
+import showcaseEventsWebp430 from "../assets/images/showcase-events-430.webp";
 import showcaseEventsAvif from "../assets/images/showcase-events.avif";
 import showcaseEventsAvif860 from "../assets/images/showcase-events-860.avif";
 import showcaseEventsAvif645 from "../assets/images/showcase-events-645.avif";
+import showcaseEventsAvif430 from "../assets/images/showcase-events-430.avif";
 
 import showcaseExploreJpg from "../assets/images/showcase-explore.jpg";
 import showcaseExploreJpg860 from "../assets/images/showcase-explore-860.jpg";
 import showcaseExploreJpg645 from "../assets/images/showcase-explore-645.jpg";
+import showcaseExploreJpg430 from "../assets/images/showcase-explore-430.jpg";
 import showcaseExploreWebp from "../assets/images/showcase-explore.webp";
 import showcaseExploreWebp860 from "../assets/images/showcase-explore-860.webp";
 import showcaseExploreWebp645 from "../assets/images/showcase-explore-645.webp";
+import showcaseExploreWebp430 from "../assets/images/showcase-explore-430.webp";
 import showcaseExploreAvif from "../assets/images/showcase-explore.avif";
 import showcaseExploreAvif860 from "../assets/images/showcase-explore-860.avif";
 import showcaseExploreAvif645 from "../assets/images/showcase-explore-645.avif";
+import showcaseExploreAvif430 from "../assets/images/showcase-explore-430.avif";
 
 import showcaseJobsJpg from "../assets/images/showcase-circle-feed.jpg";
 import showcaseJobsJpg860 from "../assets/images/showcase-circle-feed-860.jpg";
 import showcaseJobsJpg645 from "../assets/images/showcase-circle-feed-645.jpg";
+import showcaseJobsJpg430 from "../assets/images/showcase-circle-feed-430.jpg";
 import showcaseJobsWebp from "../assets/images/showcase-circle-feed.webp";
 import showcaseJobsWebp860 from "../assets/images/showcase-circle-feed-860.webp";
 import showcaseJobsWebp645 from "../assets/images/showcase-circle-feed-645.webp";
+import showcaseJobsWebp430 from "../assets/images/showcase-circle-feed-430.webp";
 import showcaseJobsAvif from "../assets/images/showcase-circle-feed.avif";
 import showcaseJobsAvif860 from "../assets/images/showcase-circle-feed-860.avif";
 import showcaseJobsAvif645 from "../assets/images/showcase-circle-feed-645.avif";
+import showcaseJobsAvif430 from "../assets/images/showcase-circle-feed-430.avif";
 
 import showcaseAskAiJpg from "../assets/images/showcase-concierge.jpg";
 import showcaseAskAiJpg860 from "../assets/images/showcase-concierge-860.jpg";
 import showcaseAskAiJpg645 from "../assets/images/showcase-concierge-645.jpg";
+import showcaseAskAiJpg430 from "../assets/images/showcase-concierge-430.jpg";
 import showcaseAskAiWebp from "../assets/images/showcase-concierge.webp";
 import showcaseAskAiWebp860 from "../assets/images/showcase-concierge-860.webp";
 import showcaseAskAiWebp645 from "../assets/images/showcase-concierge-645.webp";
+import showcaseAskAiWebp430 from "../assets/images/showcase-concierge-430.webp";
 import showcaseAskAiAvif from "../assets/images/showcase-concierge.avif";
 import showcaseAskAiAvif860 from "../assets/images/showcase-concierge-860.avif";
 import showcaseAskAiAvif645 from "../assets/images/showcase-concierge-645.avif";
+import showcaseAskAiAvif430 from "../assets/images/showcase-concierge-430.avif";
 
 import showcaseStartJpg from "../assets/images/showcase-start-circle.jpg";
 import showcaseStartJpg860 from "../assets/images/showcase-start-circle-860.jpg";
 import showcaseStartJpg645 from "../assets/images/showcase-start-circle-645.jpg";
+import showcaseStartJpg430 from "../assets/images/showcase-start-circle-430.jpg";
 import showcaseStartWebp from "../assets/images/showcase-start-circle.webp";
 import showcaseStartWebp860 from "../assets/images/showcase-start-circle-860.webp";
 import showcaseStartWebp645 from "../assets/images/showcase-start-circle-645.webp";
+import showcaseStartWebp430 from "../assets/images/showcase-start-circle-430.webp";
 import showcaseStartAvif from "../assets/images/showcase-start-circle.avif";
 import showcaseStartAvif860 from "../assets/images/showcase-start-circle-860.avif";
 import showcaseStartAvif645 from "../assets/images/showcase-start-circle-645.avif";
+import showcaseStartAvif430 from "../assets/images/showcase-start-circle-430.avif";
 
-/** Responsive in-phone app screenshot sources (1290×2796 native). */
+/** Real iPhone 17 Pro Max simulator captures (1320×2868 @3×). */
 export type AppScreenshotSources = {
   jpg: string;
   webp: string;
@@ -148,22 +166,25 @@ function shot(
   jpg: string,
   jpg860: string,
   jpg645: string,
+  jpg430: string,
   webp: string,
   webp860: string,
   webp645: string,
+  webp430: string,
   avif: string,
   avif860: string,
   avif645: string,
+  avif430: string,
 ): AppScreenshotSources {
   return {
     jpg,
     webp,
     avif,
-    jpgSrcSet: `${jpg645} 645w, ${jpg860} 860w, ${jpg} 1290w`,
-    webpSrcSet: `${webp645} 645w, ${webp860} 860w, ${webp} 1290w`,
-    avifSrcSet: `${avif645} 645w, ${avif860} 860w, ${avif} 1290w`,
-    width: 1290,
-    height: 2796,
+    jpgSrcSet: `${jpg430} 430w, ${jpg645} 645w, ${jpg860} 860w, ${jpg} 1320w`,
+    webpSrcSet: `${webp430} 430w, ${webp645} 645w, ${webp860} 860w, ${webp} 1320w`,
+    avifSrcSet: `${avif430} 430w, ${avif645} 645w, ${avif860} 860w, ${avif} 1320w`,
+    width: 1320,
+    height: 2868,
     sizes: PHONE_SIZES,
   };
 }
@@ -172,78 +193,96 @@ const communityShot = shot(
   showcaseCommunityJpg,
   showcaseCommunityJpg860,
   showcaseCommunityJpg645,
+  showcaseCommunityJpg430,
   showcaseCommunityWebp,
   showcaseCommunityWebp860,
   showcaseCommunityWebp645,
+  showcaseCommunityWebp430,
   showcaseCommunityAvif,
   showcaseCommunityAvif860,
   showcaseCommunityAvif645,
+  showcaseCommunityAvif430,
 );
 const eventsShot = shot(
   showcaseEventsJpg,
   showcaseEventsJpg860,
   showcaseEventsJpg645,
+  showcaseEventsJpg430,
   showcaseEventsWebp,
   showcaseEventsWebp860,
   showcaseEventsWebp645,
+  showcaseEventsWebp430,
   showcaseEventsAvif,
   showcaseEventsAvif860,
   showcaseEventsAvif645,
+  showcaseEventsAvif430,
 );
 const exploreShot = shot(
   showcaseExploreJpg,
   showcaseExploreJpg860,
   showcaseExploreJpg645,
+  showcaseExploreJpg430,
   showcaseExploreWebp,
   showcaseExploreWebp860,
   showcaseExploreWebp645,
+  showcaseExploreWebp430,
   showcaseExploreAvif,
   showcaseExploreAvif860,
   showcaseExploreAvif645,
+  showcaseExploreAvif430,
 );
 const jobsShot = shot(
   showcaseJobsJpg,
   showcaseJobsJpg860,
   showcaseJobsJpg645,
+  showcaseJobsJpg430,
   showcaseJobsWebp,
   showcaseJobsWebp860,
   showcaseJobsWebp645,
+  showcaseJobsWebp430,
   showcaseJobsAvif,
   showcaseJobsAvif860,
   showcaseJobsAvif645,
+  showcaseJobsAvif430,
 );
 const askAiShot = shot(
   showcaseAskAiJpg,
   showcaseAskAiJpg860,
   showcaseAskAiJpg645,
+  showcaseAskAiJpg430,
   showcaseAskAiWebp,
   showcaseAskAiWebp860,
   showcaseAskAiWebp645,
+  showcaseAskAiWebp430,
   showcaseAskAiAvif,
   showcaseAskAiAvif860,
   showcaseAskAiAvif645,
+  showcaseAskAiAvif430,
 );
 const startCircleShot = shot(
   showcaseStartJpg,
   showcaseStartJpg860,
   showcaseStartJpg645,
+  showcaseStartJpg430,
   showcaseStartWebp,
   showcaseStartWebp860,
   showcaseStartWebp645,
+  showcaseStartWebp430,
   showcaseStartAvif,
   showcaseStartAvif860,
   showcaseStartAvif645,
+  showcaseStartAvif430,
 );
 
 const heroShot: AppScreenshotSources = {
   jpg: heroAppCommunityJpg,
   webp: heroAppCommunityWebp,
   avif: heroAppCommunityAvif,
-  jpgSrcSet: `${heroAppCommunityJpg1290} 1290w, ${heroAppCommunityJpg} 2580w`,
-  webpSrcSet: `${heroAppCommunityWebp1290} 1290w, ${heroAppCommunityWebp} 2580w`,
-  avifSrcSet: `${heroAppCommunityAvif1290} 1290w, ${heroAppCommunityAvif} 2580w`,
-  width: 2580,
-  height: 5592,
+  jpgSrcSet: `${heroAppCommunityJpg860} 860w, ${heroAppCommunityJpg} 1320w`,
+  webpSrcSet: `${heroAppCommunityWebp860} 860w, ${heroAppCommunityWebp} 1320w`,
+  avifSrcSet: `${heroAppCommunityAvif860} 860w, ${heroAppCommunityAvif} 1320w`,
+  width: 1320,
+  height: 2868,
   sizes: "(max-width: 1024px) 55vw, 420px",
 };
 

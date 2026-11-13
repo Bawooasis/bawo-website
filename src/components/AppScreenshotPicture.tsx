@@ -16,7 +16,7 @@ type AppScreenshotPictureProps = {
   ariaHidden?: boolean;
 };
 
-/** Responsive app screenshot with AVIF → WebP → JPG. Inside IphoneDeviceFrame, use class bawo-iphone__shot (cover + top). */
+/** Responsive app screenshot with AVIF → WebP → JPG. Pair with AppScreenShot (bawo-app-screen__img). */
 export default function AppScreenshotPicture({
   jpg,
   webp,
