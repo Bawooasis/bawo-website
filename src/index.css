@@ -2046,7 +2046,157 @@ a.bawo-cta-quiet:active {
   padding-bottom: 0.625rem;
 }
 
-/* Hero proof-of-concept — device cutouts; size asset to 2× native for Retina (no giant upscale). */
+/*
+ * iPhone 17 Pro Max–style device chrome (pure CSS).
+ * Viewport reference: 440×956 CSS px, screen radius ~62pt, Dynamic Island ~125×37pt.
+ * Original CSS approximation — not Apple marketing artwork.
+ */
+.bawo-iphone {
+  /* Natural titanium — cool silver with warm edge highlights */
+  --bawo-iphone-titanium: linear-gradient(
+    160deg,
+    #f2efe9 0%,
+    #c5bfb6 14%,
+    #ebe6df 28%,
+    #9a948c 46%,
+    #ddd7cf 62%,
+    #7a756e 78%,
+    #e8e3dc 100%
+  );
+  /* Thin black glass bezel (~real Pro Max); screen fills almost flush. */
+  --bawo-iphone-bezel: 0.85%;
+  --bawo-iphone-screen-radius: 11.8%;
+  --bawo-iphone-shell-radius: 13.9%;
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  margin: 0;
+  /* Outer chassis incl. side buttons clearance (≈480×996 vs 440×956 screen). */
+  aspect-ratio: 480 / 996;
+  filter: drop-shadow(0 22px 40px rgba(0, 0, 0, 0.55));
+}
+
+.bawo-iphone__shell {
+  position: absolute;
+  inset: 0.55% 2.2%;
+  border-radius: var(--bawo-iphone-shell-radius);
+  background: var(--bawo-iphone-titanium);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0 rgba(40, 36, 32, 0.45),
+    inset 0 0 0 1.5px rgba(60, 55, 50, 0.4),
+    0 0 0 0.5px rgba(255, 255, 255, 0.2);
+}
+
+.bawo-iphone__bezel {
+  position: absolute;
+  inset: var(--bawo-iphone-bezel);
+  border-radius: calc(var(--bawo-iphone-shell-radius) - 0.55%);
+  background: #050505;
+  overflow: hidden;
+}
+
+.bawo-iphone__screen {
+  /* Flush to inner bezel — no extra gutter (avoids letterbox ring). */
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  background: #000;
+  isolation: isolate;
+}
+
+.bawo-iphone__screen > picture {
+  display: contents;
+}
+
+.bawo-iphone__shot {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: top center;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Hardware Dynamic Island — sits over the screenshot status bar (no second status UI). */
+.bawo-iphone__island {
+  position: absolute;
+  z-index: 3;
+  top: 1.55%;
+  left: 50%;
+  width: 28.5%;
+  height: 3.85%;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #050505;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+
+.bawo-iphone__island-camera {
+  position: absolute;
+  top: 50%;
+  right: 14%;
+  width: 22%;
+  aspect-ratio: 1;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 30%, #3a4a6a 0%, #152033 45%, #05070c 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.bawo-iphone__btn {
+  position: absolute;
+  z-index: 2;
+  background: linear-gradient(90deg, #9a9590, #d4cfc8 40%, #7e7973);
+  border-radius: 1px;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.25);
+}
+
+.bawo-iphone__btn--action {
+  left: 0.15%;
+  top: 14.5%;
+  width: 2.1%;
+  height: 3.2%;
+  border-radius: 2px 0 0 2px;
+}
+
+.bawo-iphone__btn--vol-up {
+  left: 0.15%;
+  top: 20.2%;
+  width: 2.1%;
+  height: 5.4%;
+  border-radius: 2px 0 0 2px;
+}
+
+.bawo-iphone__btn--vol-down {
+  left: 0.15%;
+  top: 26.5%;
+  width: 2.1%;
+  height: 5.4%;
+  border-radius: 2px 0 0 2px;
+}
+
+.bawo-iphone__btn--power {
+  right: 0.15%;
+  top: 22.5%;
+  width: 2.1%;
+  height: 8.2%;
+  border-radius: 0 2px 2px 0;
+  background: linear-gradient(270deg, #9a9590, #d4cfc8 40%, #7e7973);
+}
+
+/* Hero — size the device frame by viewport height. */
 .bawo-hero-mockup {
   position: relative;
   isolation: isolate;
@@ -2061,32 +2211,20 @@ a.bawo-cta-quiet:active {
 .bawo-hero-mockup__stage {
   position: relative;
   z-index: 1;
-  /* Native 1290×2796 app screen (2× hero asset 2580×5592) — fill column by viewport height. */
-  width: min(100%, 96vw, calc(52dvh * 1290 / 2796));
-  aspect-ratio: 1290 / 2796;
-}
-
-.bawo-hero-mockup__stage > picture {
-  display: contents;
+  width: min(100%, 96vw, calc(52dvh * 480 / 996));
 }
 
 .bawo-hero-mockup.bawo-hero-mockup--compact .bawo-hero-mockup__stage {
   width: 100%;
 }
 
-.bawo-hero-mockup__image {
-  display: block;
+.bawo-hero-mockup__device {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  /* Exact bitmap — no CSS filter on the visible frame (keeps UI text crisp). */
-  transform: translateZ(0);
-  backface-visibility: hidden;
 }
 
 @media (min-width: 640px) {
   .bawo-hero-mockup__stage {
-    width: min(100%, 94vw, calc(58dvh * 1290 / 2796));
+    width: min(100%, 94vw, calc(58dvh * 480 / 996));
   }
 }
 
@@ -2096,19 +2234,19 @@ a.bawo-cta-quiet:active {
   }
 
   .bawo-hero-mockup__stage {
-    width: min(100%, 62vw, calc(72dvh * 1290 / 2796));
+    width: min(100%, 62vw, calc(72dvh * 480 / 996));
   }
 }
 
 @media (min-width: 1280px) {
   .bawo-hero-mockup__stage {
-    width: min(100%, 58vw, calc(78dvh * 1290 / 2796));
+    width: min(100%, 58vw, calc(78dvh * 480 / 996));
   }
 }
 
 @media (min-width: 1536px) {
   .bawo-hero-mockup__stage {
-    width: min(100%, 56vw, calc(82dvh * 1290 / 2796));
+    width: min(100%, 56vw, calc(82dvh * 480 / 996));
   }
 }
 
@@ -2272,13 +2410,30 @@ a.bawo-cta-quiet:active {
     inset 0 1px 0 rgba(247, 231, 196, 0.14);
 }
 
-.bawo-next-preview__visual[data-layout="full-screen"] .bawo-next-preview__image {
-  inset: 0;
-  width: 100%;
+.bawo-next-preview__device-wrap {
+  position: absolute;
+  z-index: 2;
+  inset: 3.25rem 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  animation: bawo-preview-in 260ms ease-out both;
+}
+
+.bawo-next-preview__device {
+  /* Fill available height; width follows chassis aspect-ratio. */
   height: 100%;
-  padding: 3.5rem 1rem 1rem;
-  object-fit: contain;
-  filter: drop-shadow(0 20px 44px rgba(0, 0, 0, 0.72));
+  width: auto;
+  max-width: min(22rem, 100%);
+  aspect-ratio: 480 / 996;
+  pointer-events: auto;
+}
+
+@media (min-width: 960px) {
+  .bawo-next-preview__device {
+    max-width: min(24rem, 100%);
+  }
 }
 
 .bawo-next-preview__backdrop {
@@ -2303,38 +2458,9 @@ a.bawo-cta-quiet:active {
     linear-gradient(0deg, rgba(5, 2, 9, 0.42), transparent 34%);
 }
 
-.bawo-next-preview__visual > picture {
-  display: contents;
-}
-
-.bawo-next-preview__image {
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  padding: 0.6rem;
-  object-fit: contain;
-  animation: bawo-preview-in 260ms ease-out both;
-}
-
-.bawo-next-preview__visual[data-layout="map-crop"] .bawo-next-preview__image {
-  inset: -2.5% auto auto -8%;
-  width: 116%;
-  height: auto;
-  max-width: none;
-  padding: 0;
-  object-fit: unset;
-}
-
-.bawo-next-preview__visual[data-layout="screen-crop"] .bawo-next-preview__image {
-  inset: 0 auto auto 0;
-  width: 100%;
-  height: auto;
-  max-width: none;
-  padding: 0;
-  object-fit: unset;
+.bawo-next-preview__dialog-device {
+  width: min(92vw, 26rem);
+  margin: 0 auto;
 }
 
 @keyframes bawo-preview-in {
@@ -2515,11 +2641,11 @@ a.bawo-cta-quiet:active {
 }
 
 .bawo-next-preview__dialog {
-  width: min(92vw, 58rem);
-  height: min(90vh, 54rem);
+  width: min(92vw, 34rem);
+  max-height: min(92vh, 58rem);
   margin: auto;
-  padding: 1rem;
-  overflow: hidden;
+  padding: 2.75rem 1rem 1.25rem;
+  overflow: auto;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 1.5rem;
   background: rgba(8, 4, 13, 0.96);
@@ -2531,11 +2657,9 @@ a.bawo-cta-quiet:active {
   backdrop-filter: blur(12px);
 }
 
-.bawo-next-preview__dialog img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+.bawo-next-preview__dialog .bawo-iphone__shot {
+  object-fit: cover;
+  object-position: top center;
 }
 
 .bawo-next-preview__dialog-close {
@@ -2555,7 +2679,7 @@ a.bawo-cta-quiet:active {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bawo-next-preview__image {
+  .bawo-next-preview__device-wrap {
     animation: none;
   }
 }

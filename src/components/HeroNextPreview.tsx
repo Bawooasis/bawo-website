@@ -1,6 +1,7 @@
 import { Expand, MapPin, Sparkles, X } from "lucide-react";
 import { memo, useRef, useState } from "react";
 import AppScreenshotPicture from "./AppScreenshotPicture";
+import IphoneDeviceFrame from "./IphoneDeviceFrame";
 import { CONTENT } from "../constants/content";
 import type { AppScreenshotSources } from "../constants/images";
 
@@ -30,7 +31,7 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
       <div className="bawo-next-preview__header mb-3 flex flex-col items-center justify-between gap-3 sm:flex-row">
         <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/35 bg-[#1C132B]/75 px-3.5 py-1.5 text-sm font-bold uppercase tracking-wider text-[#D6B26A] backdrop-blur-xl">
           <Sparkles className="h-3.5 w-3.5 shrink-0" aria-hidden />
-          <span>Interactive iPhone 17 Pro App Showcase · Live NYC Beta</span>
+          <span>Interactive iPhone 17 Pro Max App Showcase · Live NYC Beta</span>
         </div>
         <div className="inline-flex items-center gap-2 text-sm font-medium text-[#F7F3FA]/70">
           <MapPin className="h-3.5 w-3.5 text-[#D6B26A]" aria-hidden />
@@ -53,32 +54,38 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
               className="bawo-next-preview__backdrop"
               aria-hidden="true"
             />
-            {shot ? (
-              <AppScreenshotPicture
+            <div className="bawo-next-preview__device-wrap">
+              <IphoneDeviceFrame
                 key={current.title}
-                jpg={shot.jpg}
-                webp={shot.webp}
-                avif={shot.avif}
-                jpgSrcSet={shot.jpgSrcSet}
-                webpSrcSet={shot.webpSrcSet}
-                avifSrcSet={shot.avifSrcSet}
-                sizes={shot.sizes}
-                alt={current.imageAlt}
-                width={shot.width}
-                height={shot.height}
-                className="bawo-next-preview__image"
-                loading="lazy"
-              />
-            ) : (
-              <img
-                key={current.title}
-                src={current.image}
-                alt={current.imageAlt}
-                className="bawo-next-preview__image"
-                loading="lazy"
-                decoding="async"
-              />
-            )}
+                className="bawo-next-preview__device"
+                label={`${current.title} on iPhone`}
+              >
+                {shot ? (
+                  <AppScreenshotPicture
+                    jpg={shot.jpg}
+                    webp={shot.webp}
+                    avif={shot.avif}
+                    jpgSrcSet={shot.jpgSrcSet}
+                    webpSrcSet={shot.webpSrcSet}
+                    avifSrcSet={shot.avifSrcSet}
+                    sizes={shot.sizes}
+                    alt={current.imageAlt}
+                    width={shot.width}
+                    height={shot.height}
+                    className="bawo-iphone__shot"
+                    loading="lazy"
+                  />
+                ) : (
+                  <img
+                    src={current.image}
+                    alt={current.imageAlt}
+                    className="bawo-iphone__shot"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
+              </IphoneDeviceFrame>
+            </div>
             <div className="bawo-next-preview__chrome">
               <span className="bawo-next-preview__status">
                 <span aria-hidden="true" />
@@ -154,23 +161,33 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
         >
           <X size={22} aria-hidden="true" />
         </button>
-        {shot ? (
-          <AppScreenshotPicture
-            jpg={shot.jpg}
-            webp={shot.webp}
-            avif={shot.avif}
-            jpgSrcSet={shot.jpgSrcSet}
-            webpSrcSet={shot.webpSrcSet}
-            avifSrcSet={shot.avifSrcSet}
-            sizes="(max-width: 768px) 90vw, 420px"
-            alt={current.imageAlt}
-            width={shot.width}
-            height={shot.height}
-            loading="eager"
-          />
-        ) : (
-          <img src={current.image} alt={current.imageAlt} />
-        )}
+        <IphoneDeviceFrame
+          className="bawo-next-preview__dialog-device"
+          label={`${current.title} on iPhone`}
+        >
+          {shot ? (
+            <AppScreenshotPicture
+              jpg={shot.jpg}
+              webp={shot.webp}
+              avif={shot.avif}
+              jpgSrcSet={shot.jpgSrcSet}
+              webpSrcSet={shot.webpSrcSet}
+              avifSrcSet={shot.avifSrcSet}
+              sizes="(max-width: 768px) 90vw, 420px"
+              alt={current.imageAlt}
+              width={shot.width}
+              height={shot.height}
+              className="bawo-iphone__shot"
+              loading="eager"
+            />
+          ) : (
+            <img
+              src={current.image}
+              alt={current.imageAlt}
+              className="bawo-iphone__shot"
+            />
+          )}
+        </IphoneDeviceFrame>
       </dialog>
     </div>
   );

@@ -1,5 +1,6 @@
 import { Building2, Compass, MessageCircle, Mic, Sparkles, Users } from "lucide-react";
 import AppScreenshotPicture from "./AppScreenshotPicture";
+import IphoneDeviceFrame from "./IphoneDeviceFrame";
 import { CONTENT } from "../constants/content";
 import { IMAGES } from "../constants/images";
 
@@ -159,31 +160,33 @@ export default function CommunityCirclesSection() {
                 key={screen.title}
                 className="glass-card rounded-3xl p-4 sm:p-5 flex flex-col justify-between border border-[#D6B26A]/25 transition-all duration-300 hover:-translate-y-1.5"
               >
-                <div className="relative mx-auto w-full max-w-[17.5rem] overflow-hidden rounded-[1.75rem] border border-white/15 bg-[#0A0710] shadow-[0_20px_50px_rgba(0,0,0,0.65)]">
-                  {screen.imageShot ? (
-                    <AppScreenshotPicture
-                      jpg={screen.imageShot.jpg}
-                      webp={screen.imageShot.webp}
-                      avif={screen.imageShot.avif}
-                      jpgSrcSet={screen.imageShot.jpgSrcSet}
-                      webpSrcSet={screen.imageShot.webpSrcSet}
-                      avifSrcSet={screen.imageShot.avifSrcSet}
-                      sizes={screen.imageShot.sizes}
-                      alt={screen.alt}
-                      width={screen.imageShot.width}
-                      height={screen.imageShot.height}
-                      className="w-full h-auto block object-contain"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <img
-                      src={screen.image}
-                      alt={screen.alt}
-                      className="w-full h-auto block object-contain"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  )}
+                <div className="relative mx-auto w-full max-w-[17.5rem]">
+                  <IphoneDeviceFrame label={screen.alt}>
+                    {screen.imageShot ? (
+                      <AppScreenshotPicture
+                        jpg={screen.imageShot.jpg}
+                        webp={screen.imageShot.webp}
+                        avif={screen.imageShot.avif}
+                        jpgSrcSet={screen.imageShot.jpgSrcSet}
+                        webpSrcSet={screen.imageShot.webpSrcSet}
+                        avifSrcSet={screen.imageShot.avifSrcSet}
+                        sizes={screen.imageShot.sizes}
+                        alt={screen.alt}
+                        width={screen.imageShot.width}
+                        height={screen.imageShot.height}
+                        className="bawo-iphone__shot"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <img
+                        src={screen.image}
+                        alt={screen.alt}
+                        className="bawo-iphone__shot"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    )}
+                  </IphoneDeviceFrame>
                 </div>
                 <figcaption className="pt-4 space-y-1.5 text-center sm:text-left">
                   <span className="inline-block rounded-full border border-[#D6B26A]/30 bg-[#D6B26A]/10 px-2.5 py-0.5 text-sm font-bold uppercase tracking-wider text-[#F7E7C4]">

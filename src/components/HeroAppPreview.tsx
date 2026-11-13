@@ -1,4 +1,5 @@
 import AppScreenshotPicture from "./AppScreenshotPicture";
+import IphoneDeviceFrame from "./IphoneDeviceFrame";
 import { IMAGES } from "../constants/images";
 
 type HeroAppPreviewProps = {
@@ -13,27 +14,29 @@ export default function HeroAppPreview({
 }: HeroAppPreviewProps) {
   const shot = IMAGES.previews.mainShot;
   return (
-    <figure
-      className={`bawo-hero-mockup ${className}`.trim()}
-      aria-label="BawoSocial app preview"
-    >
+    <div className={`bawo-hero-mockup ${className}`.trim()}>
       <div className="bawo-hero-mockup__stage">
-        <AppScreenshotPicture
-          jpg={shot.jpg}
-          webp={shot.webp}
-          avif={shot.avif}
-          jpgSrcSet={shot.jpgSrcSet}
-          webpSrcSet={shot.webpSrcSet}
-          avifSrcSet={shot.avifSrcSet}
-          sizes={shot.sizes}
-          alt="BawoSocial Community screen on iPhone showing NYC Community Lounge with Join"
-          width={HERO_WIDTH}
-          height={HERO_HEIGHT}
-          className="bawo-hero-mockup__image animate-subtle-float is-active"
-          loading="eager"
-          fetchPriority="high"
-        />
+        <IphoneDeviceFrame
+          className="bawo-hero-mockup__device animate-subtle-float is-active"
+          label="BawoSocial app preview on iPhone"
+        >
+          <AppScreenshotPicture
+            jpg={shot.jpg}
+            webp={shot.webp}
+            avif={shot.avif}
+            jpgSrcSet={shot.jpgSrcSet}
+            webpSrcSet={shot.webpSrcSet}
+            avifSrcSet={shot.avifSrcSet}
+            sizes={shot.sizes}
+            alt="BawoSocial Community screen on iPhone showing NYC Community Lounge with Join"
+            width={HERO_WIDTH}
+            height={HERO_HEIGHT}
+            className="bawo-iphone__shot"
+            loading="eager"
+            fetchPriority="high"
+          />
+        </IphoneDeviceFrame>
       </div>
-    </figure>
+    </div>
   );
 }
