@@ -2,18 +2,25 @@
 
 ## Approach
 
-Every marketing app screenshot is wrapped by `AppScreenShot` — an **original** App Store–style iPhone 17 Pro Max chrome (black titanium bezel, side buttons, hardware Dynamic Island, soft shadow).
+App screens on the marketing site are **pre-framed** App Store–style phone renders:
 
-Screen content is Alexander’s **real** 1320×2868 simulator captures (status bar **9:41** already in-shot). The frame does **not** draw a fake status bar. The hardware Dynamic Island sits over the black island already present in each capture.
+1. Alexander’s approved raw captures in `webshots/` (status patched to clean **9:41**)
+2. Device chrome from `webshots/render.py` `phone()` — purple-black titanium edge, rounded screen mask, Dynamic Island
+3. Output: transparent PNG/WebP/AVIF (+ JPG on near-black) at `src/assets/images/phone-*.{png,webp,avif,jpg}`
 
-## Source & license
+`AppScreenShot` only applies a soft drop-shadow. **No CSS bezel.**
 
-Pure CSS in `src/components/AppScreenShot.tsx` + `.bawo-app-screen*` in `src/index.css`.
+## Mapping
 
-**Not** Apple Design Resources artwork (Apple’s license does not allow redistribution). Proportions follow publicly documented iPhone display metrics (CSS viewport ~440×956, screen corner radius ~55–62pt, Dynamic Island ~126×37pt).
+| Source | Asset | Placement |
+|--------|-------|-----------|
+| 01-community-lounge.png | phone-community | Hero + Circles gallery |
+| 02-events-approved.jpg | phone-events | Showcase Afrobeats/Events |
+| 03-explore.png | phone-explore | Showcase Explore + gallery |
+| 04-jobs.png | phone-jobs | Showcase Daily Vibe + gallery |
+| 05-start-a-circle.png | phone-start-circle | Showcase Discover Spaces |
+| 06-ask-ai.png | phone-ask-ai | Showcase Ask AI |
 
-**License for this chrome:** same as the repository (site code). Free for commercial use on joinbawo.com as original work.
+## License
 
-## Fit
-
-Screens fill the inner viewport with `object-fit: cover` + `object-position: top`, clipped to the screen radius. No letterbox gaps between bezel and image.
+Frame proportions follow `webshots/render.py` (original CSS/Pillow chrome, not Apple Design Resources artwork).

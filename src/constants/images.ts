@@ -55,12 +55,14 @@ import si03 from "../assets/images/staten/si-03.png";
 import si04 from "../assets/images/staten/si-04.png";
 import si05 from "../assets/images/staten/si-05.png";
 
-// Inside the App Images — Alexander final app screens (Nov 2026)
+// Inside the App Images — Alexander approved framed phones (webshots Nov 2026)
+// Device chrome baked in via webshots/render.py (status patch + App Store frame).
 import appCommunityAltScreen from "../assets/images/app-community-alt.jpg";
 import appCommunityScreen from "../assets/images/app-community-screen.jpg";
 import appAskAiScreen from "../assets/images/app-concierge.jpg";
 import appEventsScreen from "../assets/images/app-events-screen.jpg";
 import appExploreScreen from "../assets/images/app-resources-full.jpg";
+
 import heroAppCommunityJpg from "../assets/images/hero-app-community-mockup.jpg";
 import heroAppCommunityWebp from "../assets/images/hero-app-community-mockup.webp";
 import heroAppCommunityAvif from "../assets/images/hero-app-community-mockup.avif";
@@ -68,85 +70,85 @@ import heroAppCommunityJpg860 from "../assets/images/hero-app-community-mockup-8
 import heroAppCommunityWebp860 from "../assets/images/hero-app-community-mockup-860.webp";
 import heroAppCommunityAvif860 from "../assets/images/hero-app-community-mockup-860.avif";
 
-import showcaseCommunityJpg from "../assets/images/showcase-community.jpg";
-import showcaseCommunityJpg860 from "../assets/images/showcase-community-860.jpg";
-import showcaseCommunityJpg645 from "../assets/images/showcase-community-645.jpg";
-import showcaseCommunityJpg430 from "../assets/images/showcase-community-430.jpg";
-import showcaseCommunityWebp from "../assets/images/showcase-community.webp";
-import showcaseCommunityWebp860 from "../assets/images/showcase-community-860.webp";
-import showcaseCommunityWebp645 from "../assets/images/showcase-community-645.webp";
-import showcaseCommunityWebp430 from "../assets/images/showcase-community-430.webp";
-import showcaseCommunityAvif from "../assets/images/showcase-community.avif";
-import showcaseCommunityAvif860 from "../assets/images/showcase-community-860.avif";
-import showcaseCommunityAvif645 from "../assets/images/showcase-community-645.avif";
-import showcaseCommunityAvif430 from "../assets/images/showcase-community-430.avif";
+import phoneCommunityJpg from "../assets/images/phone-community.jpg";
+import phoneCommunityJpg860 from "../assets/images/phone-community-860.jpg";
+import phoneCommunityJpg645 from "../assets/images/phone-community-645.jpg";
+import phoneCommunityJpg430 from "../assets/images/phone-community-430.jpg";
+import phoneCommunityWebp from "../assets/images/phone-community.webp";
+import phoneCommunityWebp860 from "../assets/images/phone-community-860.webp";
+import phoneCommunityWebp645 from "../assets/images/phone-community-645.webp";
+import phoneCommunityWebp430 from "../assets/images/phone-community-430.webp";
+import phoneCommunityAvif from "../assets/images/phone-community.avif";
+import phoneCommunityAvif860 from "../assets/images/phone-community-860.avif";
+import phoneCommunityAvif645 from "../assets/images/phone-community-645.avif";
+import phoneCommunityAvif430 from "../assets/images/phone-community-430.avif";
 
-import showcaseEventsJpg from "../assets/images/showcase-events.jpg";
-import showcaseEventsJpg860 from "../assets/images/showcase-events-860.jpg";
-import showcaseEventsJpg645 from "../assets/images/showcase-events-645.jpg";
-import showcaseEventsJpg430 from "../assets/images/showcase-events-430.jpg";
-import showcaseEventsWebp from "../assets/images/showcase-events.webp";
-import showcaseEventsWebp860 from "../assets/images/showcase-events-860.webp";
-import showcaseEventsWebp645 from "../assets/images/showcase-events-645.webp";
-import showcaseEventsWebp430 from "../assets/images/showcase-events-430.webp";
-import showcaseEventsAvif from "../assets/images/showcase-events.avif";
-import showcaseEventsAvif860 from "../assets/images/showcase-events-860.avif";
-import showcaseEventsAvif645 from "../assets/images/showcase-events-645.avif";
-import showcaseEventsAvif430 from "../assets/images/showcase-events-430.avif";
+import phoneEventsJpg from "../assets/images/phone-events.jpg";
+import phoneEventsJpg860 from "../assets/images/phone-events-860.jpg";
+import phoneEventsJpg645 from "../assets/images/phone-events-645.jpg";
+import phoneEventsJpg430 from "../assets/images/phone-events-430.jpg";
+import phoneEventsWebp from "../assets/images/phone-events.webp";
+import phoneEventsWebp860 from "../assets/images/phone-events-860.webp";
+import phoneEventsWebp645 from "../assets/images/phone-events-645.webp";
+import phoneEventsWebp430 from "../assets/images/phone-events-430.webp";
+import phoneEventsAvif from "../assets/images/phone-events.avif";
+import phoneEventsAvif860 from "../assets/images/phone-events-860.avif";
+import phoneEventsAvif645 from "../assets/images/phone-events-645.avif";
+import phoneEventsAvif430 from "../assets/images/phone-events-430.avif";
 
-import showcaseExploreJpg from "../assets/images/showcase-explore.jpg";
-import showcaseExploreJpg860 from "../assets/images/showcase-explore-860.jpg";
-import showcaseExploreJpg645 from "../assets/images/showcase-explore-645.jpg";
-import showcaseExploreJpg430 from "../assets/images/showcase-explore-430.jpg";
-import showcaseExploreWebp from "../assets/images/showcase-explore.webp";
-import showcaseExploreWebp860 from "../assets/images/showcase-explore-860.webp";
-import showcaseExploreWebp645 from "../assets/images/showcase-explore-645.webp";
-import showcaseExploreWebp430 from "../assets/images/showcase-explore-430.webp";
-import showcaseExploreAvif from "../assets/images/showcase-explore.avif";
-import showcaseExploreAvif860 from "../assets/images/showcase-explore-860.avif";
-import showcaseExploreAvif645 from "../assets/images/showcase-explore-645.avif";
-import showcaseExploreAvif430 from "../assets/images/showcase-explore-430.avif";
+import phoneExploreJpg from "../assets/images/phone-explore.jpg";
+import phoneExploreJpg860 from "../assets/images/phone-explore-860.jpg";
+import phoneExploreJpg645 from "../assets/images/phone-explore-645.jpg";
+import phoneExploreJpg430 from "../assets/images/phone-explore-430.jpg";
+import phoneExploreWebp from "../assets/images/phone-explore.webp";
+import phoneExploreWebp860 from "../assets/images/phone-explore-860.webp";
+import phoneExploreWebp645 from "../assets/images/phone-explore-645.webp";
+import phoneExploreWebp430 from "../assets/images/phone-explore-430.webp";
+import phoneExploreAvif from "../assets/images/phone-explore.avif";
+import phoneExploreAvif860 from "../assets/images/phone-explore-860.avif";
+import phoneExploreAvif645 from "../assets/images/phone-explore-645.avif";
+import phoneExploreAvif430 from "../assets/images/phone-explore-430.avif";
 
-import showcaseJobsJpg from "../assets/images/showcase-circle-feed.jpg";
-import showcaseJobsJpg860 from "../assets/images/showcase-circle-feed-860.jpg";
-import showcaseJobsJpg645 from "../assets/images/showcase-circle-feed-645.jpg";
-import showcaseJobsJpg430 from "../assets/images/showcase-circle-feed-430.jpg";
-import showcaseJobsWebp from "../assets/images/showcase-circle-feed.webp";
-import showcaseJobsWebp860 from "../assets/images/showcase-circle-feed-860.webp";
-import showcaseJobsWebp645 from "../assets/images/showcase-circle-feed-645.webp";
-import showcaseJobsWebp430 from "../assets/images/showcase-circle-feed-430.webp";
-import showcaseJobsAvif from "../assets/images/showcase-circle-feed.avif";
-import showcaseJobsAvif860 from "../assets/images/showcase-circle-feed-860.avif";
-import showcaseJobsAvif645 from "../assets/images/showcase-circle-feed-645.avif";
-import showcaseJobsAvif430 from "../assets/images/showcase-circle-feed-430.avif";
+import phoneJobsJpg from "../assets/images/phone-jobs.jpg";
+import phoneJobsJpg860 from "../assets/images/phone-jobs-860.jpg";
+import phoneJobsJpg645 from "../assets/images/phone-jobs-645.jpg";
+import phoneJobsJpg430 from "../assets/images/phone-jobs-430.jpg";
+import phoneJobsWebp from "../assets/images/phone-jobs.webp";
+import phoneJobsWebp860 from "../assets/images/phone-jobs-860.webp";
+import phoneJobsWebp645 from "../assets/images/phone-jobs-645.webp";
+import phoneJobsWebp430 from "../assets/images/phone-jobs-430.webp";
+import phoneJobsAvif from "../assets/images/phone-jobs.avif";
+import phoneJobsAvif860 from "../assets/images/phone-jobs-860.avif";
+import phoneJobsAvif645 from "../assets/images/phone-jobs-645.avif";
+import phoneJobsAvif430 from "../assets/images/phone-jobs-430.avif";
 
-import showcaseAskAiJpg from "../assets/images/showcase-concierge.jpg";
-import showcaseAskAiJpg860 from "../assets/images/showcase-concierge-860.jpg";
-import showcaseAskAiJpg645 from "../assets/images/showcase-concierge-645.jpg";
-import showcaseAskAiJpg430 from "../assets/images/showcase-concierge-430.jpg";
-import showcaseAskAiWebp from "../assets/images/showcase-concierge.webp";
-import showcaseAskAiWebp860 from "../assets/images/showcase-concierge-860.webp";
-import showcaseAskAiWebp645 from "../assets/images/showcase-concierge-645.webp";
-import showcaseAskAiWebp430 from "../assets/images/showcase-concierge-430.webp";
-import showcaseAskAiAvif from "../assets/images/showcase-concierge.avif";
-import showcaseAskAiAvif860 from "../assets/images/showcase-concierge-860.avif";
-import showcaseAskAiAvif645 from "../assets/images/showcase-concierge-645.avif";
-import showcaseAskAiAvif430 from "../assets/images/showcase-concierge-430.avif";
+import phoneAskAiJpg from "../assets/images/phone-ask-ai.jpg";
+import phoneAskAiJpg860 from "../assets/images/phone-ask-ai-860.jpg";
+import phoneAskAiJpg645 from "../assets/images/phone-ask-ai-645.jpg";
+import phoneAskAiJpg430 from "../assets/images/phone-ask-ai-430.jpg";
+import phoneAskAiWebp from "../assets/images/phone-ask-ai.webp";
+import phoneAskAiWebp860 from "../assets/images/phone-ask-ai-860.webp";
+import phoneAskAiWebp645 from "../assets/images/phone-ask-ai-645.webp";
+import phoneAskAiWebp430 from "../assets/images/phone-ask-ai-430.webp";
+import phoneAskAiAvif from "../assets/images/phone-ask-ai.avif";
+import phoneAskAiAvif860 from "../assets/images/phone-ask-ai-860.avif";
+import phoneAskAiAvif645 from "../assets/images/phone-ask-ai-645.avif";
+import phoneAskAiAvif430 from "../assets/images/phone-ask-ai-430.avif";
 
-import showcaseStartJpg from "../assets/images/showcase-start-circle.jpg";
-import showcaseStartJpg860 from "../assets/images/showcase-start-circle-860.jpg";
-import showcaseStartJpg645 from "../assets/images/showcase-start-circle-645.jpg";
-import showcaseStartJpg430 from "../assets/images/showcase-start-circle-430.jpg";
-import showcaseStartWebp from "../assets/images/showcase-start-circle.webp";
-import showcaseStartWebp860 from "../assets/images/showcase-start-circle-860.webp";
-import showcaseStartWebp645 from "../assets/images/showcase-start-circle-645.webp";
-import showcaseStartWebp430 from "../assets/images/showcase-start-circle-430.webp";
-import showcaseStartAvif from "../assets/images/showcase-start-circle.avif";
-import showcaseStartAvif860 from "../assets/images/showcase-start-circle-860.avif";
-import showcaseStartAvif645 from "../assets/images/showcase-start-circle-645.avif";
-import showcaseStartAvif430 from "../assets/images/showcase-start-circle-430.avif";
+import phoneStartJpg from "../assets/images/phone-start-circle.jpg";
+import phoneStartJpg860 from "../assets/images/phone-start-circle-860.jpg";
+import phoneStartJpg645 from "../assets/images/phone-start-circle-645.jpg";
+import phoneStartJpg430 from "../assets/images/phone-start-circle-430.jpg";
+import phoneStartWebp from "../assets/images/phone-start-circle.webp";
+import phoneStartWebp860 from "../assets/images/phone-start-circle-860.webp";
+import phoneStartWebp645 from "../assets/images/phone-start-circle-645.webp";
+import phoneStartWebp430 from "../assets/images/phone-start-circle-430.webp";
+import phoneStartAvif from "../assets/images/phone-start-circle.avif";
+import phoneStartAvif860 from "../assets/images/phone-start-circle-860.avif";
+import phoneStartAvif645 from "../assets/images/phone-start-circle-645.avif";
+import phoneStartAvif430 from "../assets/images/phone-start-circle-430.avif";
 
-/** Real iPhone 17 Pro Max simulator captures (1320×2868 @3×). */
+/** App Store–framed phone renders (1070×2242 @ screen_w=1000). */
 export type AppScreenshotSources = {
   jpg: string;
   webp: string;
@@ -180,109 +182,109 @@ function shot(
     jpg,
     webp,
     avif,
-    jpgSrcSet: `${jpg430} 430w, ${jpg645} 645w, ${jpg860} 860w, ${jpg} 1320w`,
-    webpSrcSet: `${webp430} 430w, ${webp645} 645w, ${webp860} 860w, ${webp} 1320w`,
-    avifSrcSet: `${avif430} 430w, ${avif645} 645w, ${avif860} 860w, ${avif} 1320w`,
-    width: 1320,
-    height: 2868,
+    jpgSrcSet: `${jpg430} 430w, ${jpg645} 645w, ${jpg860} 860w, ${jpg} 1070w`,
+    webpSrcSet: `${webp430} 430w, ${webp645} 645w, ${webp860} 860w, ${webp} 1070w`,
+    avifSrcSet: `${avif430} 430w, ${avif645} 645w, ${avif860} 860w, ${avif} 1070w`,
+    width: 1070,
+    height: 2242,
     sizes: PHONE_SIZES,
   };
 }
 
 const communityShot = shot(
-  showcaseCommunityJpg,
-  showcaseCommunityJpg860,
-  showcaseCommunityJpg645,
-  showcaseCommunityJpg430,
-  showcaseCommunityWebp,
-  showcaseCommunityWebp860,
-  showcaseCommunityWebp645,
-  showcaseCommunityWebp430,
-  showcaseCommunityAvif,
-  showcaseCommunityAvif860,
-  showcaseCommunityAvif645,
-  showcaseCommunityAvif430,
+  phoneCommunityJpg,
+  phoneCommunityJpg860,
+  phoneCommunityJpg645,
+  phoneCommunityJpg430,
+  phoneCommunityWebp,
+  phoneCommunityWebp860,
+  phoneCommunityWebp645,
+  phoneCommunityWebp430,
+  phoneCommunityAvif,
+  phoneCommunityAvif860,
+  phoneCommunityAvif645,
+  phoneCommunityAvif430,
 );
 const eventsShot = shot(
-  showcaseEventsJpg,
-  showcaseEventsJpg860,
-  showcaseEventsJpg645,
-  showcaseEventsJpg430,
-  showcaseEventsWebp,
-  showcaseEventsWebp860,
-  showcaseEventsWebp645,
-  showcaseEventsWebp430,
-  showcaseEventsAvif,
-  showcaseEventsAvif860,
-  showcaseEventsAvif645,
-  showcaseEventsAvif430,
+  phoneEventsJpg,
+  phoneEventsJpg860,
+  phoneEventsJpg645,
+  phoneEventsJpg430,
+  phoneEventsWebp,
+  phoneEventsWebp860,
+  phoneEventsWebp645,
+  phoneEventsWebp430,
+  phoneEventsAvif,
+  phoneEventsAvif860,
+  phoneEventsAvif645,
+  phoneEventsAvif430,
 );
 const exploreShot = shot(
-  showcaseExploreJpg,
-  showcaseExploreJpg860,
-  showcaseExploreJpg645,
-  showcaseExploreJpg430,
-  showcaseExploreWebp,
-  showcaseExploreWebp860,
-  showcaseExploreWebp645,
-  showcaseExploreWebp430,
-  showcaseExploreAvif,
-  showcaseExploreAvif860,
-  showcaseExploreAvif645,
-  showcaseExploreAvif430,
+  phoneExploreJpg,
+  phoneExploreJpg860,
+  phoneExploreJpg645,
+  phoneExploreJpg430,
+  phoneExploreWebp,
+  phoneExploreWebp860,
+  phoneExploreWebp645,
+  phoneExploreWebp430,
+  phoneExploreAvif,
+  phoneExploreAvif860,
+  phoneExploreAvif645,
+  phoneExploreAvif430,
 );
 const jobsShot = shot(
-  showcaseJobsJpg,
-  showcaseJobsJpg860,
-  showcaseJobsJpg645,
-  showcaseJobsJpg430,
-  showcaseJobsWebp,
-  showcaseJobsWebp860,
-  showcaseJobsWebp645,
-  showcaseJobsWebp430,
-  showcaseJobsAvif,
-  showcaseJobsAvif860,
-  showcaseJobsAvif645,
-  showcaseJobsAvif430,
+  phoneJobsJpg,
+  phoneJobsJpg860,
+  phoneJobsJpg645,
+  phoneJobsJpg430,
+  phoneJobsWebp,
+  phoneJobsWebp860,
+  phoneJobsWebp645,
+  phoneJobsWebp430,
+  phoneJobsAvif,
+  phoneJobsAvif860,
+  phoneJobsAvif645,
+  phoneJobsAvif430,
 );
 const askAiShot = shot(
-  showcaseAskAiJpg,
-  showcaseAskAiJpg860,
-  showcaseAskAiJpg645,
-  showcaseAskAiJpg430,
-  showcaseAskAiWebp,
-  showcaseAskAiWebp860,
-  showcaseAskAiWebp645,
-  showcaseAskAiWebp430,
-  showcaseAskAiAvif,
-  showcaseAskAiAvif860,
-  showcaseAskAiAvif645,
-  showcaseAskAiAvif430,
+  phoneAskAiJpg,
+  phoneAskAiJpg860,
+  phoneAskAiJpg645,
+  phoneAskAiJpg430,
+  phoneAskAiWebp,
+  phoneAskAiWebp860,
+  phoneAskAiWebp645,
+  phoneAskAiWebp430,
+  phoneAskAiAvif,
+  phoneAskAiAvif860,
+  phoneAskAiAvif645,
+  phoneAskAiAvif430,
 );
 const startCircleShot = shot(
-  showcaseStartJpg,
-  showcaseStartJpg860,
-  showcaseStartJpg645,
-  showcaseStartJpg430,
-  showcaseStartWebp,
-  showcaseStartWebp860,
-  showcaseStartWebp645,
-  showcaseStartWebp430,
-  showcaseStartAvif,
-  showcaseStartAvif860,
-  showcaseStartAvif645,
-  showcaseStartAvif430,
+  phoneStartJpg,
+  phoneStartJpg860,
+  phoneStartJpg645,
+  phoneStartJpg430,
+  phoneStartWebp,
+  phoneStartWebp860,
+  phoneStartWebp645,
+  phoneStartWebp430,
+  phoneStartAvif,
+  phoneStartAvif860,
+  phoneStartAvif645,
+  phoneStartAvif430,
 );
 
 const heroShot: AppScreenshotSources = {
   jpg: heroAppCommunityJpg,
   webp: heroAppCommunityWebp,
   avif: heroAppCommunityAvif,
-  jpgSrcSet: `${heroAppCommunityJpg860} 860w, ${heroAppCommunityJpg} 1320w`,
-  webpSrcSet: `${heroAppCommunityWebp860} 860w, ${heroAppCommunityWebp} 1320w`,
-  avifSrcSet: `${heroAppCommunityAvif860} 860w, ${heroAppCommunityAvif} 1320w`,
-  width: 1320,
-  height: 2868,
+  jpgSrcSet: `${heroAppCommunityJpg860} 860w, ${heroAppCommunityJpg} 1070w`,
+  webpSrcSet: `${heroAppCommunityWebp860} 860w, ${heroAppCommunityWebp} 1070w`,
+  avifSrcSet: `${heroAppCommunityAvif860} 860w, ${heroAppCommunityAvif} 1070w`,
+  width: 1070,
+  height: 2242,
   sizes: "(max-width: 1024px) 55vw, 420px",
 };
 
