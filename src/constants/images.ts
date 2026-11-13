@@ -55,23 +55,202 @@ import si03 from "../assets/images/staten/si-03.png";
 import si04 from "../assets/images/staten/si-04.png";
 import si05 from "../assets/images/staten/si-05.png";
 
-// Inside the App Images - screenshots
-import appCommunityAltScreen from "../assets/images/app-community-alt.png";
-import appCommunityScreen from "../assets/images/app-community-screen.png";
-import appConciergeScreen from "../assets/images/app-concierge.png";
-import appEventsScreen from "../assets/images/app-events-screen.png";
-import appResourcesScreen from "../assets/images/app-resources-full.png";
-import heroAppCommunityMockup from "../assets/images/hero-app-community-mockup.webp";
-import showcaseCommunity from "../assets/images/showcase-community.jpg";
-import showcaseConcierge from "../assets/images/showcase-concierge.jpg";
-import showcaseEvents from "../assets/images/showcase-events.jpg";
-import showcaseCircleFeed from "../assets/images/showcase-circle-feed.jpg";
-import showcaseExplore from "../assets/images/showcase-explore.jpg";
+// Inside the App Images — Alexander final app screens (Nov 2026)
+import appCommunityAltScreen from "../assets/images/app-community-alt.jpg";
+import appCommunityScreen from "../assets/images/app-community-screen.jpg";
+import appAskAiScreen from "../assets/images/app-concierge.jpg";
+import appEventsScreen from "../assets/images/app-events-screen.jpg";
+import appExploreScreen from "../assets/images/app-resources-full.jpg";
+import heroAppCommunityJpg from "../assets/images/hero-app-community-mockup.jpg";
+import heroAppCommunityWebp from "../assets/images/hero-app-community-mockup.webp";
+import heroAppCommunityAvif from "../assets/images/hero-app-community-mockup.avif";
+import heroAppCommunityJpg1290 from "../assets/images/hero-app-community-mockup-1290.jpg";
+import heroAppCommunityWebp1290 from "../assets/images/hero-app-community-mockup-1290.webp";
+import heroAppCommunityAvif1290 from "../assets/images/hero-app-community-mockup-1290.avif";
+
+import showcaseCommunityJpg from "../assets/images/showcase-community.jpg";
+import showcaseCommunityJpg860 from "../assets/images/showcase-community-860.jpg";
+import showcaseCommunityJpg645 from "../assets/images/showcase-community-645.jpg";
+import showcaseCommunityWebp from "../assets/images/showcase-community.webp";
+import showcaseCommunityWebp860 from "../assets/images/showcase-community-860.webp";
+import showcaseCommunityWebp645 from "../assets/images/showcase-community-645.webp";
+import showcaseCommunityAvif from "../assets/images/showcase-community.avif";
+import showcaseCommunityAvif860 from "../assets/images/showcase-community-860.avif";
+import showcaseCommunityAvif645 from "../assets/images/showcase-community-645.avif";
+
+import showcaseEventsJpg from "../assets/images/showcase-events.jpg";
+import showcaseEventsJpg860 from "../assets/images/showcase-events-860.jpg";
+import showcaseEventsJpg645 from "../assets/images/showcase-events-645.jpg";
+import showcaseEventsWebp from "../assets/images/showcase-events.webp";
+import showcaseEventsWebp860 from "../assets/images/showcase-events-860.webp";
+import showcaseEventsWebp645 from "../assets/images/showcase-events-645.webp";
+import showcaseEventsAvif from "../assets/images/showcase-events.avif";
+import showcaseEventsAvif860 from "../assets/images/showcase-events-860.avif";
+import showcaseEventsAvif645 from "../assets/images/showcase-events-645.avif";
+
+import showcaseExploreJpg from "../assets/images/showcase-explore.jpg";
+import showcaseExploreJpg860 from "../assets/images/showcase-explore-860.jpg";
+import showcaseExploreJpg645 from "../assets/images/showcase-explore-645.jpg";
+import showcaseExploreWebp from "../assets/images/showcase-explore.webp";
+import showcaseExploreWebp860 from "../assets/images/showcase-explore-860.webp";
+import showcaseExploreWebp645 from "../assets/images/showcase-explore-645.webp";
+import showcaseExploreAvif from "../assets/images/showcase-explore.avif";
+import showcaseExploreAvif860 from "../assets/images/showcase-explore-860.avif";
+import showcaseExploreAvif645 from "../assets/images/showcase-explore-645.avif";
+
+import showcaseJobsJpg from "../assets/images/showcase-circle-feed.jpg";
+import showcaseJobsJpg860 from "../assets/images/showcase-circle-feed-860.jpg";
+import showcaseJobsJpg645 from "../assets/images/showcase-circle-feed-645.jpg";
+import showcaseJobsWebp from "../assets/images/showcase-circle-feed.webp";
+import showcaseJobsWebp860 from "../assets/images/showcase-circle-feed-860.webp";
+import showcaseJobsWebp645 from "../assets/images/showcase-circle-feed-645.webp";
+import showcaseJobsAvif from "../assets/images/showcase-circle-feed.avif";
+import showcaseJobsAvif860 from "../assets/images/showcase-circle-feed-860.avif";
+import showcaseJobsAvif645 from "../assets/images/showcase-circle-feed-645.avif";
+
+import showcaseAskAiJpg from "../assets/images/showcase-concierge.jpg";
+import showcaseAskAiJpg860 from "../assets/images/showcase-concierge-860.jpg";
+import showcaseAskAiJpg645 from "../assets/images/showcase-concierge-645.jpg";
+import showcaseAskAiWebp from "../assets/images/showcase-concierge.webp";
+import showcaseAskAiWebp860 from "../assets/images/showcase-concierge-860.webp";
+import showcaseAskAiWebp645 from "../assets/images/showcase-concierge-645.webp";
+import showcaseAskAiAvif from "../assets/images/showcase-concierge.avif";
+import showcaseAskAiAvif860 from "../assets/images/showcase-concierge-860.avif";
+import showcaseAskAiAvif645 from "../assets/images/showcase-concierge-645.avif";
+
+import showcaseStartJpg from "../assets/images/showcase-start-circle.jpg";
+import showcaseStartJpg860 from "../assets/images/showcase-start-circle-860.jpg";
+import showcaseStartJpg645 from "../assets/images/showcase-start-circle-645.jpg";
+import showcaseStartWebp from "../assets/images/showcase-start-circle.webp";
+import showcaseStartWebp860 from "../assets/images/showcase-start-circle-860.webp";
+import showcaseStartWebp645 from "../assets/images/showcase-start-circle-645.webp";
+import showcaseStartAvif from "../assets/images/showcase-start-circle.avif";
+import showcaseStartAvif860 from "../assets/images/showcase-start-circle-860.avif";
+import showcaseStartAvif645 from "../assets/images/showcase-start-circle-645.avif";
+
+/** Responsive in-phone app screenshot sources (1290×2796 native). */
+export type AppScreenshotSources = {
+  jpg: string;
+  webp: string;
+  avif: string;
+  jpgSrcSet: string;
+  webpSrcSet: string;
+  avifSrcSet: string;
+  width: number;
+  height: number;
+  sizes: string;
+};
+
+const PHONE_SIZES =
+  "(max-width: 640px) 280px, (max-width: 1024px) 360px, 420px";
+
+function shot(
+  jpg: string,
+  jpg860: string,
+  jpg645: string,
+  webp: string,
+  webp860: string,
+  webp645: string,
+  avif: string,
+  avif860: string,
+  avif645: string,
+): AppScreenshotSources {
+  return {
+    jpg,
+    webp,
+    avif,
+    jpgSrcSet: `${jpg645} 645w, ${jpg860} 860w, ${jpg} 1290w`,
+    webpSrcSet: `${webp645} 645w, ${webp860} 860w, ${webp} 1290w`,
+    avifSrcSet: `${avif645} 645w, ${avif860} 860w, ${avif} 1290w`,
+    width: 1290,
+    height: 2796,
+    sizes: PHONE_SIZES,
+  };
+}
+
+const communityShot = shot(
+  showcaseCommunityJpg,
+  showcaseCommunityJpg860,
+  showcaseCommunityJpg645,
+  showcaseCommunityWebp,
+  showcaseCommunityWebp860,
+  showcaseCommunityWebp645,
+  showcaseCommunityAvif,
+  showcaseCommunityAvif860,
+  showcaseCommunityAvif645,
+);
+const eventsShot = shot(
+  showcaseEventsJpg,
+  showcaseEventsJpg860,
+  showcaseEventsJpg645,
+  showcaseEventsWebp,
+  showcaseEventsWebp860,
+  showcaseEventsWebp645,
+  showcaseEventsAvif,
+  showcaseEventsAvif860,
+  showcaseEventsAvif645,
+);
+const exploreShot = shot(
+  showcaseExploreJpg,
+  showcaseExploreJpg860,
+  showcaseExploreJpg645,
+  showcaseExploreWebp,
+  showcaseExploreWebp860,
+  showcaseExploreWebp645,
+  showcaseExploreAvif,
+  showcaseExploreAvif860,
+  showcaseExploreAvif645,
+);
+const jobsShot = shot(
+  showcaseJobsJpg,
+  showcaseJobsJpg860,
+  showcaseJobsJpg645,
+  showcaseJobsWebp,
+  showcaseJobsWebp860,
+  showcaseJobsWebp645,
+  showcaseJobsAvif,
+  showcaseJobsAvif860,
+  showcaseJobsAvif645,
+);
+const askAiShot = shot(
+  showcaseAskAiJpg,
+  showcaseAskAiJpg860,
+  showcaseAskAiJpg645,
+  showcaseAskAiWebp,
+  showcaseAskAiWebp860,
+  showcaseAskAiWebp645,
+  showcaseAskAiAvif,
+  showcaseAskAiAvif860,
+  showcaseAskAiAvif645,
+);
+const startCircleShot = shot(
+  showcaseStartJpg,
+  showcaseStartJpg860,
+  showcaseStartJpg645,
+  showcaseStartWebp,
+  showcaseStartWebp860,
+  showcaseStartWebp645,
+  showcaseStartAvif,
+  showcaseStartAvif860,
+  showcaseStartAvif645,
+);
+
+const heroShot: AppScreenshotSources = {
+  jpg: heroAppCommunityJpg,
+  webp: heroAppCommunityWebp,
+  avif: heroAppCommunityAvif,
+  jpgSrcSet: `${heroAppCommunityJpg1290} 1290w, ${heroAppCommunityJpg} 2580w`,
+  webpSrcSet: `${heroAppCommunityWebp1290} 1290w, ${heroAppCommunityWebp} 2580w`,
+  avifSrcSet: `${heroAppCommunityAvif1290} 1290w, ${heroAppCommunityAvif} 2580w`,
+  width: 2580,
+  height: 5592,
+  sizes: "(max-width: 1024px) 55vw, 420px",
+};
 
 /** Lower “In-App Preview” grid — individual screens. */
 const appFeatureScreens = [
-  appResourcesScreen,
-  appConciergeScreen,
+  appExploreScreen,
+  appAskAiScreen,
   appCommunityScreen,
   appEventsScreen,
   appCommunityAltScreen,
@@ -100,16 +279,30 @@ export const IMAGES = {
 
   // App Preview/Demo Images
   previews: {
-    main: heroAppCommunityMockup,
+    /** NYC Community Lounge — hero phone (eager LCP). */
+    main: heroShot.jpg,
+    mainShot: heroShot,
     splash: newSplashScreen,
   },
 
   showcase: {
-    explore: showcaseExplore,
-    community: showcaseCommunity,
-    circleFeed: showcaseCircleFeed,
-    events: showcaseEvents,
-    concierge: showcaseConcierge,
+    /** JPG URLs for simple img srcs; prefer *Shot for <picture>. */
+    explore: exploreShot.jpg,
+    exploreShot,
+    community: communityShot.jpg,
+    communityShot,
+    /** Jobs & Career Network circle (replaces old Go Live / Daily Vibe feed shot). */
+    circleFeed: jobsShot.jpg,
+    circleFeedShot: jobsShot,
+    jobsShot,
+    events: eventsShot.jpg,
+    eventsShot,
+    /** Ask AI suggestion cards (filename legacy: concierge). */
+    concierge: askAiShot.jpg,
+    conciergeShot: askAiShot,
+    askAiShot,
+    startCircle: startCircleShot.jpg,
+    startCircleShot,
   },
 
   // Testimonial Avatar Images
@@ -121,8 +314,10 @@ export const IMAGES = {
 
   // In-App Feature Screenshots
   inApp: {
-    resources: appResourcesScreen,
-    concierge: appConciergeScreen,
+    resources: appExploreScreen,
+    explore: appExploreScreen,
+    concierge: appAskAiScreen,
+    askAi: appAskAiScreen,
     community: appCommunityScreen,
     communityAlt: appCommunityAltScreen,
     events: appEventsScreen,

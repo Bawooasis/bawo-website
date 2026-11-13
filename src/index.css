@@ -2061,9 +2061,13 @@ a.bawo-cta-quiet:active {
 .bawo-hero-mockup__stage {
   position: relative;
   z-index: 1;
-  /* Native 2572×5284 Figma export — fill column, scale by viewport height. */
-  width: min(100%, 96vw, calc(52dvh * 2572 / 5284));
-  aspect-ratio: 2572 / 5284;
+  /* Native 1290×2796 app screen (2× hero asset 2580×5592) — fill column by viewport height. */
+  width: min(100%, 96vw, calc(52dvh * 1290 / 2796));
+  aspect-ratio: 1290 / 2796;
+}
+
+.bawo-hero-mockup__stage > picture {
+  display: contents;
 }
 
 .bawo-hero-mockup.bawo-hero-mockup--compact .bawo-hero-mockup__stage {
@@ -2082,7 +2086,7 @@ a.bawo-cta-quiet:active {
 
 @media (min-width: 640px) {
   .bawo-hero-mockup__stage {
-    width: min(100%, 94vw, calc(58dvh * 2572 / 5284));
+    width: min(100%, 94vw, calc(58dvh * 1290 / 2796));
   }
 }
 
@@ -2092,19 +2096,19 @@ a.bawo-cta-quiet:active {
   }
 
   .bawo-hero-mockup__stage {
-    width: min(100%, 62vw, calc(72dvh * 2572 / 5284));
+    width: min(100%, 62vw, calc(72dvh * 1290 / 2796));
   }
 }
 
 @media (min-width: 1280px) {
   .bawo-hero-mockup__stage {
-    width: min(100%, 58vw, calc(78dvh * 2572 / 5284));
+    width: min(100%, 58vw, calc(78dvh * 1290 / 2796));
   }
 }
 
 @media (min-width: 1536px) {
   .bawo-hero-mockup__stage {
-    width: min(100%, 56vw, calc(82dvh * 2572 / 5284));
+    width: min(100%, 56vw, calc(82dvh * 1290 / 2796));
   }
 }
 
@@ -2297,6 +2301,10 @@ a.bawo-cta-quiet:active {
   background:
     linear-gradient(180deg, rgba(5, 2, 9, 0.35), transparent 32%),
     linear-gradient(0deg, rgba(5, 2, 9, 0.42), transparent 34%);
+}
+
+.bawo-next-preview__visual > picture {
+  display: contents;
 }
 
 .bawo-next-preview__image {
