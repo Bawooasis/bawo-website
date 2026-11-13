@@ -2308,7 +2308,7 @@ a.bawo-cta-quiet:active {
 .bawo-next-preview__device-wrap {
   position: absolute;
   z-index: 2;
-  inset: 3.25rem 0.75rem 1rem;
+  inset: 3.5rem 0.85rem 1.15rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2330,16 +2330,8 @@ a.bawo-cta-quiet:active {
   }
 }
 
-.bawo-next-preview__backdrop {
-  position: absolute;
-  inset: -2rem;
-  width: calc(100% + 4rem);
-  height: calc(100% + 4rem);
-  object-fit: cover;
-  opacity: 0.32;
-  filter: blur(24px) saturate(1.2);
-  transform: scale(1.08);
-}
+/* Backdrop screenshot removed — real simulator captures should read cleanly
+   without ghosted app UI behind the rounded screen. */
 
 .bawo-next-preview__visual::after {
   content: "";
@@ -2348,8 +2340,8 @@ a.bawo-cta-quiet:active {
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(5, 2, 9, 0.35), transparent 32%),
-    linear-gradient(0deg, rgba(5, 2, 9, 0.42), transparent 34%);
+    linear-gradient(180deg, rgba(5, 2, 9, 0.22), transparent 28%),
+    linear-gradient(0deg, rgba(5, 2, 9, 0.28), transparent 30%);
 }
 
 .bawo-next-preview__dialog-device {

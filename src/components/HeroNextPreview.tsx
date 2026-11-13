@@ -48,12 +48,6 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
       >
         {current.image ? (
           <>
-            <img
-              src={current.image}
-              alt=""
-              className="bawo-next-preview__backdrop"
-              aria-hidden="true"
-            />
             <div className="bawo-next-preview__device-wrap">
               <AppScreenShot
                 key={current.title}
