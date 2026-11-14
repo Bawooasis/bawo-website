@@ -31,7 +31,7 @@ export const COLORS = {
     overlay: {
       light: "rgba(214, 178, 106, 0.08)",
       medium: "rgba(214, 178, 106, 0.14)",
-      subtle: "rgba(168, 42, 136, 0.08)",
+      subtle: "rgba(214, 178, 106, 0.06)",
     },
   },
   text: {
@@ -56,7 +56,7 @@ export const COLORS = {
     background: {
       from: "#07050B",
       via: "#0E0A14",
-      to: "#160F24",
+      to: "#0E0A14",
       end: "#0E0A14",
     },
     subtle: {
@@ -105,7 +105,7 @@ export const TAILWIND_COLORS = {
     primary: "bg-gradient-to-r from-[#F7E7C4] via-[#D6B26A] to-[#A07636]",
     primaryHover: "hover:from-[#F7E7C4] hover:to-[#D6B26A]",
     background:
-      "bg-gradient-to-b from-[#07050B] via-[#0E0A14] to-[#160F24]",
+      "bg-gradient-to-b from-[#07050B] via-[#0E0A14] to-[#0E0A14]",
     subtle: "bg-gradient-to-b from-[#0E0A14] to-[#1C132B]",
   },
   text: {

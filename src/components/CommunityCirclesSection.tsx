@@ -158,7 +158,7 @@ export default function CommunityCirclesSection() {
             ].map((screen) => (
               <figure
                 key={screen.title}
-                className="glass-card rounded-3xl p-4 sm:p-5 flex flex-col justify-between border border-[#D6B26A]/25 transition-all duration-300 hover:-translate-y-1.5"
+                className="flex flex-col justify-between"
               >
                 <div className="relative mx-auto w-full max-w-[17.5rem]">
                   <AppScreenShot label={screen.alt}>

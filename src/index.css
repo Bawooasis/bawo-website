@@ -687,7 +687,7 @@ a.bawo-cta-quiet:active {
 
 /** Solid canvas under the particle field. */
 .bawo-page-bg-base {
-  background-color: var(--bawo-canvas, #08060C);
+  background-color: var(--bawo-canvas, #0E0A14);
 }
 
 /** Hero CTA cluster — quiet secondary links */
@@ -1081,7 +1081,7 @@ a.bawo-cta-quiet:active {
     overflow-x: clip;
     overflow-y: auto;
     min-height: 100%;
-    background-color: var(--bawo-canvas, #08060C);
+    background-color: var(--bawo-canvas, #0E0A14);
     color: var(--bawo-text-primary, #F4F4F5);
     touch-action: pan-y;
     overscroll-behavior-y: auto;
@@ -3197,20 +3197,20 @@ footer {
   font-family: "Outfit", system-ui, sans-serif;
 }
 
+/* Solid Deep Eggplant canvas — no magenta/purple wash on first paint. */
 .bawo-page-bg-base {
-  background:
-    radial-gradient(ellipse 65% 45% at 18% 12%, rgba(168, 42, 136, 0.16) 0%, transparent 68%),
-    radial-gradient(ellipse 55% 40% at 84% 24%, rgba(214, 178, 106, 0.13) 0%, transparent 65%),
-    radial-gradient(ellipse 70% 50% at 50% 62%, rgba(114, 34, 130, 0.14) 0%, transparent 72%),
-    linear-gradient(180deg, #07050B 0%, #0E0A14 48%, #160F24 100%);
+  background-color: #0E0A14;
+  background-image:
+    radial-gradient(ellipse 55% 40% at 84% 24%, rgba(214, 178, 106, 0.1) 0%, transparent 65%),
+    linear-gradient(180deg, #07050B 0%, #0E0A14 55%, #0E0A14 100%);
 }
 
 /* Keep the full-page WebGL particle canvas fixed across the entire viewport */
 .bawo-particle-field {
-  background:
-    radial-gradient(ellipse 68% 48% at 50% 42%, rgba(168, 42, 136, 0.15) 0%, transparent 72%),
-    radial-gradient(ellipse 52% 38% at 76% 18%, rgba(214, 178, 106, 0.12) 0%, transparent 68%),
-    linear-gradient(180deg, #07050B 0%, #0E0A14 50%, #160F24 100%) !important;
+  background-color: #0E0A14 !important;
+  background-image:
+    radial-gradient(ellipse 52% 38% at 76% 18%, rgba(214, 178, 106, 0.1) 0%, transparent 68%),
+    linear-gradient(180deg, #07050B 0%, #0E0A14 55%, #0E0A14 100%) !important;
 }
 
 .bawo-particle-field--site {

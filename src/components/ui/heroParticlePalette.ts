@@ -10,7 +10,8 @@ export const HERO_PARTICLE_HEX = {
   peach: "#F7E7C4",
   gold: "#E9CF94",
   copper: "#A07636",
-  plum: "#A82A88",
+  /* Soft deep eggplant accent — avoid magenta splash against canvas */
+  plum: "#2A193D",
   emerald: "#10B981",
   pearl: "#F7F3FA",
 } as const;
