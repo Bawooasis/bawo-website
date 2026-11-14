@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npx playwright install chromium && vite build && node scripts/prerender.mjs",
+    "build": "vite build && node scripts/prerender.mjs",
     "build:vite": "vite build",
     "prerender": "node scripts/prerender.mjs",
     "lint": "eslint .",

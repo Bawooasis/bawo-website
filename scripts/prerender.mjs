@@ -3,10 +3,14 @@
  * Serves dist/, loads `/` in Chromium, waits for hero copy, then writes the
  * rendered DOM back into dist/index.html so first paint shows real content
  * before the JS bundle executes.
+ *
+ * If Chromium is unavailable (common on some CI hosts), exits 0 and keeps the
+ * static landing shell already present in dist/index.html from Vite.
  */
 import { createServer } from "node:http";
-import { readFile, writeFile, access } from "node:fs/promises";
+import { writeFile, access } from "node:fs/promises";
 import { createReadStream, existsSync } from "node:fs";
+import { execSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
@@ -36,6 +40,23 @@ function contentType(filePath) {
   return MIME[path.extname(filePath).toLowerCase()] || "application/octet-stream";
 }
 
+function ensureChromium() {
+  try {
+    execSync("npx playwright install chromium", {
+      stdio: "inherit",
+      cwd: root,
+      env: process.env,
+    });
+    return true;
+  } catch (err) {
+    console.warn(
+      "[prerender] Chromium install failed; keeping Vite static landing shell.",
+      err instanceof Error ? err.message : err,
+    );
+    return false;
+  }
+}
+
 async function startStaticServer() {
   const server = createServer((req, res) => {
     try {
@@ -44,7 +65,6 @@ async function startStaticServer() {
       if (pathname.endsWith("/")) pathname += "index.html";
       const filePath = path.join(dist, pathname);
       if (!filePath.startsWith(dist) || !existsSync(filePath)) {
-        // SPA fallback for client routes during prerender
         const fallback = createReadStream(indexPath);
         res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
         fallback.pipe(res);
@@ -64,15 +84,28 @@ async function startStaticServer() {
 }
 
 async function prerender() {
+  if (process.env.SKIP_PRERENDER === "1") {
+    console.warn("[prerender] SKIP_PRERENDER=1 — using static landing shell.");
+    return;
+  }
+
   await access(indexPath);
 
-  const { server, port } = await startStaticServer();
-  const browser = await chromium.launch({
-    headless: true,
-    args: ["--no-sandbox", "--disable-dev-shm-usage"],
-  });
+  if (!ensureChromium()) {
+    return;
+  }
 
+  let server;
+  let browser;
   try {
+    ({ server } = await startStaticServer());
+    const { port } = server.address();
+
+    browser = await chromium.launch({
+      headless: true,
+      args: ["--no-sandbox", "--disable-dev-shm-usage"],
+    });
+
     const page = await browser.newPage({
       viewport: { width: 1440, height: 900 },
       deviceScaleFactor: 1,
@@ -94,7 +127,7 @@ async function prerender() {
       { timeout: 60_000 },
     );
 
-    // Let layout settle; force hero content visible even if GSAP mid-tween.
+    // Keep hero visible even if GSAP mid-tween during capture.
     await page.evaluate(() => {
       document
         .querySelectorAll(
@@ -110,10 +143,8 @@ async function prerender() {
     await page.waitForTimeout(250);
 
     const html = await page.content();
-    // Drop the Playwright-injected base/scripts noise; keep a clean document.
     const cleaned = html
       .replace(/\s*data-prerendered="landing"/g, ' data-prerendered="landing"')
-      // Ensure no module of the live page is blocked; playwright content() is full DOM.
       .trim();
 
     const rootText = await page.locator("#root").innerText();
@@ -127,13 +158,19 @@ async function prerender() {
     await writeFile(indexPath, `${cleaned}\n`, "utf8");
     const bytes = Buffer.byteLength(cleaned, "utf8");
     console.log(`[prerender] Wrote landing HTML to dist/index.html (${bytes} bytes)`);
+  } catch (err) {
+    console.warn(
+      "[prerender] Skipped after error; static landing shell remains in dist/index.html.",
+      err instanceof Error ? err.message : err,
+    );
   } finally {
-    await browser.close();
-    await new Promise((resolve) => server.close(resolve));
+    if (browser) await browser.close().catch(() => {});
+    if (server) await new Promise((resolve) => server.close(resolve));
   }
 }
 
 prerender().catch((err) => {
-  console.error("[prerender] Failed:", err);
-  process.exit(1);
+  // Never fail the marketing build — the static shell already ships real content.
+  console.warn("[prerender] Non-fatal failure:", err instanceof Error ? err.message : err);
+  process.exit(0);
 });
