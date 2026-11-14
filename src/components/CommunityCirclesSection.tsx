@@ -30,8 +30,8 @@ export default function CommunityCirclesSection() {
           </p>
         </div>
 
-        {/* 4 Community Circles Grid with Voice Note Waveforms & Daily Gist Prompts */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 md:mb-16">
+        {/* Community Circles Grid with Voice Note Waveforms & Daily Gist Prompts */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-12 md:mb-16">
           {items.map((circle) => (
             <article
               key={circle.id}
@@ -122,7 +122,7 @@ export default function CommunityCirclesSection() {
               Explore Spots, Join Spaces & Drop Your Take Live
             </h3>
             <p className="text-sm sm:text-base text-[#F7F3FA]/75">
-              From verified Nigerian kitchens like Brooklyn Suya Spot to Trending NYC Spaces and live Daily Vibe rooms inside Men&apos;s Accountability Circle NYC.
+              From verified Nigerian kitchens like Brooklyn Suya Spot to Trending NYC Spaces and live Daily Vibe rooms inside Brotherhood NYC.
             </p>
           </div>
 
