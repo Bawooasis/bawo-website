@@ -1,4 +1,5 @@
 [build]
+  # `npm run build` installs Chromium then prerenders the landing route into dist/index.html.
   command = "npm run build"
   publish = "dist"
 

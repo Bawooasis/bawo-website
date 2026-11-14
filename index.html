@@ -28,23 +28,7 @@
       rel="stylesheet"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Match first paint to Deep Eggplant canvas — no purple splash before CSS/JS. -->
     <meta name="theme-color" content="#0E0A14" />
-    <meta name="msapplication-navbutton-color" content="#0E0A14" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <style>
-      html {
-        background-color: #0E0A14;
-        color-scheme: dark;
-      }
-      body,
-      #root {
-        margin: 0;
-        min-height: 100%;
-        background-color: #0E0A14;
-        color: #F7F3FA;
-      }
-    </style>
     <meta name="impact-site-verification" value="e9f38c2d-cfd5-4c2a-95cc-e5c9182a2186" />
 
     <title>BawoSocial | The Home for Nigerians in the Diaspora | NYC</title>
@@ -110,7 +94,86 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <!--
+      Static first-viewport shell: visible with HTML+CSS before the JS bundle.
+      React replaces #root on boot. Post-build prerender upgrades this to a full snapshot.
+      No full-screen solid-color splash — content is present on first paint.
+    -->
+    <div id="root">
+      <div class="min-h-screen relative" data-landing-shell="true">
+        <div class="fixed inset-0 z-0 bawo-page-bg-base" aria-hidden="true"></div>
+        <header class="bawo-site-header fixed inset-x-0 top-0 z-50">
+          <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bawo-site-header__bar">
+              <div class="bawo-site-header__leading">
+                <a href="/" class="bawo-site-logo bawo-site-header__logo" aria-label="BawoSocial home">
+                  <img
+                    src="/bawo-logo.png?v=13"
+                    alt=""
+                    class="bawo-site-logo__mark"
+                    width="256"
+                    height="256"
+                    decoding="async"
+                    fetchpriority="high"
+                    aria-hidden="true"
+                  />
+                  <span class="bawo-site-logo__wordmark" aria-hidden="true">BawoSocial</span>
+                </a>
+              </div>
+              <nav class="bawo-site-header__pill" aria-label="Main">
+                <div class="bawo-site-header__pill-track">
+                  <span class="bawo-site-header__pill-segment"><a href="#community-circles" class="bawo-site-header__pill-item">Circles</a></span>
+                  <span class="bawo-site-header__pill-segment"><span class="bawo-site-header__pill-divider" aria-hidden="true"></span><a href="#building-the-network" class="bawo-site-header__pill-item">Network</a></span>
+                  <span class="bawo-site-header__pill-segment"><span class="bawo-site-header__pill-divider" aria-hidden="true"></span><a href="#about" class="bawo-site-header__pill-item">About</a></span>
+                  <span class="bawo-site-header__pill-segment"><span class="bawo-site-header__pill-divider" aria-hidden="true"></span><a href="#features" class="bawo-site-header__pill-item">Features</a></span>
+                  <span class="bawo-site-header__pill-segment"><span class="bawo-site-header__pill-divider" aria-hidden="true"></span><a href="#events" class="bawo-site-header__pill-item">Events</a></span>
+                  <span class="bawo-site-header__pill-segment"><span class="bawo-site-header__pill-divider" aria-hidden="true"></span><a href="/businesses" class="bawo-site-header__pill-item">Businesses</a></span>
+                  <span class="bawo-site-header__pill-segment"><span class="bawo-site-header__pill-divider" aria-hidden="true"></span><a href="#faq" class="bawo-site-header__pill-item">FAQ</a></span>
+                </div>
+              </nav>
+              <div class="bawo-site-header__actions">
+                <a href="/businesses" class="bawo-site-header__businesses-chip" aria-label="Businesses Log In and Sign In">
+                  <span class="bawo-site-header__businesses-chip-label">Businesses</span>
+                </a>
+                <a
+                  href="https://testflight.apple.com/join/RU883akC"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="bawo-site-header__founding-chip hidden lg:inline-flex"
+                >
+                  <span class="bawo-site-header__founding-chip-label">Download via TestFlight</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="bawo-page-shell relative z-10 bg-transparent min-h-screen overflow-x-clip">
+          <section class="bawo-hero-section bawo-hero-cinematic relative flex min-h-[100dvh] flex-col overflow-hidden">
+            <div class="bawo-hero-cinematic__shade" aria-hidden="true"></div>
+            <div class="bawo-hero-cinematic__stage relative z-10 flex flex-col">
+              <div class="bawo-hero-cinematic__main">
+                <div class="bawo-hero-cinematic__copy-col">
+                  <div class="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/40 bg-[#1C132B]/75 px-3.5 py-1.5 text-sm font-bold tracking-wide text-[#F7E7C4] backdrop-blur-xl mb-1">
+                    <span>BawoSocial · The Culture Hub for Nigerians in NYC</span>
+                  </div>
+                  <h1 class="bawo-hero-cinematic__title font-display">
+                    Find your people. <span class="bawo-hero-neon">Feel at home.</span>
+                  </h1>
+                  <p class="bawo-hero-cinematic__copy">
+                    The culture hub for Nigerians in the diaspora, starting across all 5 boroughs of NYC. Find verified restaurants and businesses, Community Circles, Afrobeats and Owambe events, and Ask AI.
+                  </p>
+                  <div class="bawo-hero-cinematic__footer-actions">
+                    <a href="#community-circles" class="bawo-hero-cinematic__pill">Nigerian Circles</a>
+                    <a href="#events" class="bawo-hero-cinematic__pill">Afrobeats &amp; Events</a>
+                    <a href="/businesses" class="bawo-hero-cinematic__pill bawo-hero-cinematic__pill--business">For Businesses</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

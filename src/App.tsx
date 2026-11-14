@@ -54,28 +54,43 @@ function App() {
         defaults: { ease: "power2.out", force3D: true },
       });
 
+      // Transform-only entrance — keep opacity at 1 so first paint / hydration
+      // never blanks the hero behind a solid canvas flash.
       heroTimeline
-        .fromTo(
-          headlineRef.current,
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.9, clearProps: "transform" },
-        )
-        .fromTo(
+        .from(headlineRef.current, {
+          y: 16,
+          duration: 0.9,
+          clearProps: "transform",
+          immediateRender: false,
+        })
+        .from(
           subheadlineRef.current,
-          { y: 12, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.75, clearProps: "transform" },
+          {
+            y: 10,
+            duration: 0.75,
+            clearProps: "transform",
+            immediateRender: false,
+          },
           "-=0.55",
         )
-        .fromTo(
+        .from(
           mockupRef.current,
-          { x: 28, opacity: 0 },
-          { x: 0, opacity: 1, duration: 0.95, clearProps: "transform" },
+          {
+            x: 20,
+            duration: 0.95,
+            clearProps: "transform",
+            immediateRender: false,
+          },
           "-=0.65",
         )
-        .fromTo(
+        .from(
           ctaRef.current,
-          { y: 12, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.7, clearProps: "transform" },
+          {
+            y: 10,
+            duration: 0.7,
+            clearProps: "transform",
+            immediateRender: false,
+          },
           "-=0.35",
         );
 

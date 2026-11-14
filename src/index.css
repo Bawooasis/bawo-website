@@ -1100,7 +1100,6 @@ a.bawo-cta-quiet:active {
   /* Don't use transform on #root: it would make fixed elements stick to #root and scroll away. */
   #root {
     min-height: 100vh;
-    background-color: var(--bawo-canvas, #0E0A14);
   }
 
   /* Performance optimizations for all elements */
