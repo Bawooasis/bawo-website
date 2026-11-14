@@ -28,7 +28,7 @@ export const CONTENT = {
       {
         title: "Community Circles & Safe Spaces",
         description:
-          "Join active circles like New to NYC, Safe Space for the Girls, Nigerian Food & Chop NYC, Mental Wellness & Support, and Faith & Reflection with real feeds, voice notes, and daily gist.",
+          "Join active circles like New to NYC, Safe Space for the Girls, Brotherhood NYC, Nigerian Food & Chop NYC, Mental Wellness & Support, and Faith & Reflection with real feeds, voice notes, and daily gist.",
       },
     ],
   },
@@ -90,7 +90,7 @@ export const CONTENT = {
           "Browse My Spaces, Discover & Trending circles in one tap",
         ],
         description:
-          "Find your people in curated Nigerian diaspora spaces, from Safe Space for the Girls and New to NYC to Gen Z NYC, Nigerian Food & Chop NYC, and Faith & Reflection.",
+          "Find your people in curated Nigerian diaspora spaces, from Safe Space for the Girls and New to NYC to Brotherhood NYC, Gen Z NYC, Nigerian Food & Chop NYC, and Faith & Reflection.",
         image: IMAGES.showcase.startCircle,
         imageShot: IMAGES.showcase.startCircleShot,
         imageAlt:
@@ -103,12 +103,12 @@ export const CONTENT = {
         badge: "Live Audio · Feed · Chats · Events",
         liveMetric: "12 in the Room Right Now · Drop Your Take",
         highlights: [
-          "Men's Accountability Circle NYC. Feed, Chats, Events and Media",
+          "Brotherhood NYC. Feed, Chats, Events and Media",
           "Daily Vibe Live Prompt: 'Year 1 of Japa financial mistakes' (Drop Your Take)",
           "Friday Wins & Check-In posts with Discuss, Share, Endorse & Go Live",
         ],
         description:
-          "Step inside active circles like Men's Accountability Circle NYC to jump into Live Daily Vibe rooms, drop your take on Japa & diaspora finance, celebrate Friday Wins, or Go Live.",
+          "Step inside active circles like Brotherhood NYC to jump into Live Daily Vibe rooms, drop your take on Japa & diaspora finance, celebrate Friday Wins, or Go Live.",
         image: IMAGES.showcase.circleFeed,
         imageShot: IMAGES.showcase.jobsShot,
         imageAlt:
@@ -205,6 +205,16 @@ export const CONTENT = {
           "A warm, judgment-free space for Nigerians navigating diaspora life, first-gen pressures, faith reflections, devotionals, and genuine support.",
         image: IMAGES.groups.wellnessGoldenHour,
       },
+      {
+        id: "brotherhood-nyc",
+        badge: "Nigerian Men's Circle",
+        title: "Brotherhood NYC",
+        members: "Brothers · Goals · Real Talk",
+        voiceNoteLabel: "1:02 Voice Note · Keeping each other accountable in the city",
+        prompt: "Today's Check-In: What's one goal you're locking in with the brothers this week?",
+        description: "Real talk, goals, and brothers who show up.",
+        image: IMAGES.inApp.communityAlt,
+      },
     ],
   },
 
@@ -298,7 +308,7 @@ export const CONTENT = {
       {
         title: "Community Circles & Voice Notes",
         description:
-          "No algorithmic noise. Jump into dedicated circles like New to NYC, Safe Space for the Girls, Nigerian Food & Chop NYC, and Mental Wellness & Support with real feeds, voice notes, and daily gist.",
+          "No algorithmic noise. Jump into dedicated circles like New to NYC, Safe Space for the Girls, Brotherhood NYC, Nigerian Food & Chop NYC, and Mental Wellness & Support with real feeds, voice notes, and daily gist.",
       },
       {
         title: "Curated Events + Ask AI",
@@ -376,7 +386,7 @@ export const CONTENT = {
   inAppFeatureCaptions: [
     "Explore Map: Verified Nigerian restaurants, bukas, suya spots, African markets, salons, and services in NYC.",
     "Ask AI: Instant recommendations for Nigerian dining, nightlife, groceries, and NYC intel.",
-    "Community Circles: New to NYC, Safe Space for the Girls, Nigerian Food & Chop NYC, and more.",
+    "Community Circles: New to NYC, Safe Space for the Girls, Brotherhood NYC, Nigerian Food & Chop NYC, and more.",
     "Curated Events: Afrobeats nights, Owambe parties, supper clubs, and Nigerian professional mixers.",
     "For Businesses: Claim your listing, update hours & photos, and reach the Nigerian community on BawoSocial.",
   ],
