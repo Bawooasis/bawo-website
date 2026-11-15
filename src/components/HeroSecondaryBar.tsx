@@ -1,6 +1,6 @@
 import { useCallback, useState, type ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
-import { AppleIcon, BellIcon, LinkIcon, WhatsAppIcon, XIcon } from "./icons/BrandIcons";
+import { BellIcon, LinkIcon, WhatsAppIcon, XIcon } from "./icons/BrandIcons";
 import { CONTENT } from "../constants/content";
 
 type HeroSecondaryBarProps = {
@@ -82,7 +82,6 @@ export default function HeroSecondaryBar({
     shareTweet,
     shareCopy,
     shareCopied,
-    testflightLink,
     knowWhenLaunch,
     knowWhenLaunchShort,
   } = CONTENT.hero;
@@ -126,20 +125,12 @@ export default function HeroSecondaryBar({
       external: true,
     },
     {
-      key: "ios",
-      label: "iOS beta",
-      icon: <AppleIcon className="w-[18px] h-[18px]" />,
-      iconTone: "apple" as const,
-      href: testflightLink,
-      external: true,
-    },
-    {
-      key: "launch",
+      key: "join",
       label: knowWhenLaunch,
       shortLabel: knowWhenLaunchShort,
       icon: <BellIcon className="w-[17px] h-[17px]" />,
       iconTone: "accent" as const,
-      href: "#email-section",
+      href: "#join",
     },
   ];
 
@@ -149,7 +140,7 @@ export default function HeroSecondaryBar({
         className={`bawo-secondary-bar bawo-secondary-bar--strip ${className}`.trim()}
         aria-label="Share and explore"
       >
-        <div className="bawo-secondary-bar__row bawo-secondary-bar__row--five">
+        <div className="bawo-secondary-bar__row bawo-secondary-bar__row--four">
           {actionTiles.map((tile) => (
             <ActionTile
               key={tile.key}

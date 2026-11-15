@@ -97,12 +97,10 @@ export default function CommunityCirclesSection() {
 
                   <div className="pt-1">
                     <a
-                      href={CONTENT.hero.testflightLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href={CONTENT.hero.joinHref}
                       className="inline-flex items-center gap-1.5 text-sm font-bold text-[#D6B26A] hover:text-[#F7E7C4] transition-colors"
                     >
-                      <span>Join circle in BawoSocial app →</span>
+                      <span>Join BawoSocial →</span>
                     </a>
                   </div>
                 </div>
@@ -116,7 +114,7 @@ export default function CommunityCirclesSection() {
           <div className="text-center max-w-2xl mx-auto space-y-2.5 mb-8">
             <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/35 bg-[#1C132B]/75 px-3.5 py-1 text-sm font-bold tracking-wide text-[#D6B26A]">
               <Sparkles className="w-3.5 h-3.5 shrink-0" aria-hidden />
-              <span>Live on iOS TestFlight · Inside BawoSocial</span>
+              <span>Inside BawoSocial</span>
             </div>
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-[#F7F3FA]">
               Explore Spots, Join Spaces & Drop Your Take Live
@@ -259,15 +257,13 @@ export default function CommunityCirclesSection() {
                   className="bawo-cta-premium inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full min-h-12 px-7 text-sm font-bold no-underline transition-transform hover:-translate-y-0.5"
                 >
                   <Building2 className="w-4 h-4 shrink-0 text-[#0E0A14]" aria-hidden />
-                  <span>Businesses: Log In / Claim Listing</span>
+                  <span>Partner with us</span>
                 </a>
                 <a
-                  href={CONTENT.hero.testflightLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={CONTENT.hero.joinHref}
                   className="bawo-cta-outline inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full min-h-12 px-7 text-sm font-bold text-[#F7F3FA] no-underline transition-transform hover:-translate-y-0.5"
                 >
-                  <span>Download BawoSocial on iOS</span>
+                  <span>Join BawoSocial</span>
                 </a>
               </div>
             </div>

@@ -293,7 +293,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
           setPassword("");
           setActiveTab("listings");
           setNotice(
-            "Welcome to BawoSocial for Businesses! Submit or claim your listing below.",
+            "Welcome — Partner with BawoSocial! Submit or claim your listing below.",
           );
         } else {
           setNotice(
@@ -663,7 +663,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
               <img src="/bawo-logo.png?v=13" alt="" width={512} height={512} decoding="async" />
               <div>
                 <strong>BawoSocial</strong>
-                <span>For Nigerian Businesses</span>
+                <span>Partner with BawoSocial</span>
               </div>
             </a>
             <div className="portal-business-auth-header-actions">
@@ -677,7 +677,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
           <div className="portal-business-auth-grid">
             <section
               className="portal-business-showcase"
-              aria-label="BawoSocial for Businesses"
+              aria-label="Partner with BawoSocial"
             >
               <div className="portal-business-badge-row">
                 <span className="portal-kicker">
@@ -712,8 +712,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
 
               <div className="portal-business-categories">
                 <span className="portal-business-categories-label">
-                  <Sparkles size={14} /> Who BawoSocial for Businesses is built
-                  for:
+                  <Sparkles size={14} /> Who we partner with on BawoSocial:
                 </span>
                 <div className="portal-business-category-pills">
                   {BUSINESS_CATEGORIES.map((category) => (
@@ -786,7 +785,7 @@ export default function PortalApp({ mode }: PortalAppProps) {
                 </span>
                 <h2>
                   {authSubMode === "signin"
-                    ? "Sign in to BawoSocial Businesses"
+                    ? "Sign in to Partner with BawoSocial"
                     : authSubMode === "signup"
                       ? "Create your BawoSocial Business Account"
                       : "Reset your BawoSocial password"}

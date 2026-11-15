@@ -2,9 +2,9 @@ import { IMAGES } from "./images";
 
 export const CONTENT = {
   partnerWithUs: {
-    headline: "Own a Nigerian restaurant, lounge, salon, market, or business in NYC? Claim your listing on BawoSocial.",
-    body: "Whether you run a Nigerian restaurant or buka, suya spot, lounge, salon, African food market, shipping & cargo service, or professional practice serving the Nigerian community in NYC, sign in to the BawoSocial Business Portal to claim your verified listing, update your storefront, and connect with members who show up for the culture.",
-    ctaLabel: "Businesses Log In / Sign In",
+    headline: "Own a Nigerian restaurant, lounge, salon, market, or business in NYC? Partner with BawoSocial.",
+    body: "Whether you run a Nigerian restaurant or buka, suya spot, lounge, salon, African food market, shipping & cargo service, or professional practice serving the Nigerian community in NYC, sign in to Partner with BawoSocial to claim your verified listing, update your storefront, and connect with members who show up for the culture.",
+    ctaLabel: "Partner with us",
     inquiryEmail:
       import.meta.env.VITE_B2B_CONTACT_EMAIL || "Axadegbenro@gmail.com",
     emailSubject: "BawoSocial Nigerian Business & Community Partner",
@@ -41,24 +41,21 @@ export const CONTENT = {
     },
     subtitle:
       "The culture hub for Nigerians in the diaspora, starting across all 5 boroughs of NYC. Find verified restaurants and businesses, Community Circles, Afrobeats and Owambe events, and Ask AI.",
-    ctaPrimary: "Join the Waitlist",
-    ctaMicrocopy: "Free iOS TestFlight beta live in NYC · Android & new cities coming soon",
-    ctaSecondary: "Join Waitlist",
-    testflightLink: "https://testflight.apple.com/join/RU883akC",
-    ctaTestFlight: "Download via TestFlight",
-    downloadIos: "Download for iOS",
-    downloadIosSub: "Live TestFlight Beta",
-    downloadAndroid: "Android",
-    downloadAndroidSoon: "Coming soon",
+    ctaPrimary: "Join BawoSocial",
+    ctaMicrocopy: "Stay connected with Nigerian culture, circles, and verified spots across NYC.",
+    ctaSecondary: "Join BawoSocial",
+    joinHref: "#join",
+    partnerHref: "/businesses",
+    partnerCta: "Partner with us",
     shareWhatsApp:
       "Check out BawoSocial, the Culture Hub for Nigerians in the diaspora, starting in NYC: https://www.joinbawo.com?utm_source=whatsapp",
     shareLink: "https://www.joinbawo.com?utm_source=share",
     shareTweet:
-      "BawoSocial, the Culture Hub for Nigerians in the diaspora, starting in NYC. Try the iOS beta or join the waitlist.",
+      "BawoSocial, the Culture Hub for Nigerians in the diaspora, starting in NYC. Find your people at joinbawo.com.",
     shareCopy: "Copy link",
     shareCopied: "Copied!",
-    knowWhenLaunch: "Know when we launch",
-    knowWhenLaunchShort: "Launch updates",
+    knowWhenLaunch: "Join BawoSocial",
+    knowWhenLaunchShort: "Join",
     /** Interactive iPhone 17 Pro App Showcase  -  real mobile product screens + live NYC metadata. */
     nextPreview: [
       {
@@ -252,29 +249,29 @@ export const CONTENT = {
     },
   ],
 
-  // Early access  -  TestFlight + waitlist + Businesses
+  // Join BawoSocial — stay on joinbawo.com
   earlyAccess: {
-    title: "Try BawoSocial.",
+    title: "Join BawoSocial.",
     titleHighlight: "Built for Naija in NYC.",
-    subtitle: "iOS beta live on TestFlight · Nigerian Business Portal live · Expanding next",
+    subtitle: "Culture hub · Community Circles · Partner with us",
     benefits: [
       {
-        title: "Test on iOS via TestFlight",
+        title: "Explore Nigerian culture across NYC",
         description:
-          "Download the live BawoSocial beta through Apple TestFlight and explore the NYC Nigerian map, circles, events, and Ask AI.",
+          "Discover verified Nigerian spots, Community Circles, Afrobeats and Owambe events, and Ask AI — all in one home on BawoSocial.",
       },
       {
-        title: "Nigerian Businesses: Sign In & Claim Your Listing",
+        title: "Partner with BawoSocial",
         description:
-          "Own a Nigerian restaurant, buka, lounge, salon, African market, or service? Click 'Businesses' at the top of the page to sign in and manage your verified profile.",
+          "Own a Nigerian restaurant, buka, lounge, salon, African market, or service? Use Partner with us to sign in and manage your verified profile.",
       },
       {
-        title: "Join the BawoSocial Waitlist",
+        title: "Stay close to your people",
         description:
-          "On Android or outside NYC (Houston, Atlanta, DMV, London, Toronto)? Leave your email for launch updates as BawoSocial expands.",
+          "Leave your email to join BawoSocial updates as we grow with Nigerians across NYC and the diaspora.",
       },
     ],
-    cta: "Join the Waitlist",
+    cta: "Join BawoSocial",
     missionText:
       "Built for Nigerians in the diaspora, starting with deep roots across all five boroughs of New York City.",
   },
@@ -388,16 +385,16 @@ export const CONTENT = {
     "Ask AI: Instant recommendations for Nigerian dining, nightlife, groceries, and NYC intel.",
     "Community Circles: New to NYC, Safe Space for the Girls, Brotherhood NYC, Nigerian Food & Chop NYC, and more.",
     "Curated Events: Afrobeats nights, Owambe parties, supper clubs, and Nigerian professional mixers.",
-    "For Businesses: Claim your listing, update hours & photos, and reach the Nigerian community on BawoSocial.",
+    "Partner with us: Claim your listing, update hours & photos, and reach the Nigerian community on BawoSocial.",
   ],
 
   // Final CTA Section
   finalCta: {
-    title: "Download BawoSocial or Claim Your Nigerian Business.",
+    title: "Join BawoSocial or Partner with us.",
     subtitle:
-      "Try the live iOS beta on TestFlight, sign in via Businesses to manage your listing, or join the waitlist as we grow across NYC and beyond.",
-    cta: "Download via TestFlight",
-    ctaSecondary: "Join Waitlist",
+      "Stay with the culture hub for Nigerians in NYC, or Partner with BawoSocial to manage your verified listing.",
+    cta: "Join BawoSocial",
+    ctaSecondary: "Join BawoSocial",
   },
 
   faq: {
@@ -414,14 +411,14 @@ export const CONTENT = {
           "BawoSocial is built for Nigerians in the diaspora (starting in NYC across Brooklyn, Manhattan/Harlem, Queens, The Bronx, and Staten Island) and anyone who loves Nigerian food, music, and culture. And if you own a Nigerian restaurant, lounge, salon, African market, or service, BawoSocial helps the community discover and support you.",
       },
       {
-        question: "How do businesses sign in or claim their listing on BawoSocial?",
+        question: "How do businesses partner with BawoSocial or claim their listing?",
         answer:
-          "Click 'Businesses' in the top navigation bar (or visit /businesses) to open the BawoSocial Business Portal. You can log in with your existing BawoSocial account or create a new business account, search the Explore directory for your business, submit an ownership claim, and update your profile details.",
+          "Click 'Partner with us' in the top navigation bar (or visit /businesses) to open Partner with BawoSocial. You can log in with your existing BawoSocial account or create a new business account, search the Explore directory for your business, submit an ownership claim, and update your profile details.",
       },
       {
-        question: "How do I try the BawoSocial mobile app?",
+        question: "How do I join BawoSocial?",
         answer:
-          "The iOS public beta is live on Apple TestFlight. Tap 'Download for iOS' or 'Download via TestFlight' anywhere on this page. On Android or outside NYC, join the email waitlist and we will notify you as we expand.",
+          "Use Join BawoSocial anywhere on this page to stay on joinbawo.com and leave your email. You will hear from us as BawoSocial grows with Nigerians across NYC and the diaspora.",
       },
       {
         question: "What businesses are on the BawoSocial Explore Map?",
@@ -445,13 +442,13 @@ export const CONTENT = {
       quickLinks: {
         title: "Quick Links",
         links: [
-          { label: "Businesses Sign In", href: "/businesses" },
+          { label: "Partner with us", href: "/businesses" },
           { label: "Community Circles", href: "#community-circles" },
           { label: "NYC Network", href: "#building-the-network" },
           { label: "About BawoSocial", href: "#about" },
           { label: "Features", href: "#features" },
           { label: "Events", href: "#events" },
-          { label: "Try the App", href: "#early-access" },
+          { label: "Join BawoSocial", href: "#join" },
           { label: "FAQ", href: "#faq" },
         ],
       },
@@ -470,19 +467,19 @@ export const CONTENT = {
 
   // Email Signup
   emailSignup: {
-    title: "Be First to Know",
-    subtitle: "Get early access as BawoSocial grows across NYC and expands to more Nigerian diaspora hubs",
+    title: "Join BawoSocial",
+    subtitle: "Stay connected as BawoSocial grows with Nigerians across NYC and the diaspora",
     placeholder: "Enter your email address",
-    cta: "Join the Waitlist",
+    cta: "Join BawoSocial",
     success: "Thanks! You're on the BawoSocial list.",
     error: "Please enter a valid email address.",
   },
 
-  // Waitlist Form
+  // Join form (email signup on joinbawo.com)
   waitlist: {
-    title: "Join the BawoSocial Waitlist",
-    subtitle: "Be first to know as BawoSocial launches new features and expands beyond NYC",
-    button: "Join the Waitlist",
+    title: "Join BawoSocial",
+    subtitle: "Stay connected as BawoSocial grows with Nigerians across NYC and the diaspora",
+    button: "Join BawoSocial",
     success: "Thanks! You're on the BawoSocial list.",
     error: "Please enter a valid email address.",
     helperText: "We'll never spam you. Unsubscribe anytime.",
