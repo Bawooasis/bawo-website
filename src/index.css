@@ -1156,6 +1156,99 @@ a.bawo-cta-quiet:active {
   border-radius: 999px;
 }
 
+/* Community Circles — wider cards, generous gutters, aligned baselines */
+.bawo-circles-rail {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  align-items: stretch;
+}
+
+.bawo-circle-card {
+  min-width: 0;
+  height: 100%;
+}
+
+.bawo-circle-card__media {
+  height: 14rem;
+}
+
+.bawo-circle-card__title {
+  height: 3.6rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bawo-circle-card__desc {
+  height: 4.65rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bawo-circle-card__gist {
+  height: 4.5rem;
+}
+
+.bawo-circle-card__gist p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bawo-circle-card__badge {
+  width: fit-content;
+  max-width: calc(100% - 1.25rem);
+}
+
+@media (min-width: 640px) {
+  .bawo-circles-rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+  }
+
+  .bawo-circle-card__media {
+    height: 15rem;
+  }
+}
+
+/* Desktop: ~3 wide cards visible, scroll for the rest */
+@media (min-width: 1024px) {
+  .bawo-circles-rail {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(24rem, 26rem);
+    grid-template-columns: none;
+    gap: 2.25rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 0.5rem;
+    padding-bottom: 0.85rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-color: rgba(214, 178, 106, 0.45) transparent;
+  }
+
+  .bawo-circle-card {
+    scroll-snap-align: start;
+  }
+
+  .bawo-circle-card__media {
+    height: 15.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .bawo-circles-rail {
+    grid-auto-columns: minmax(25rem, 27rem);
+    gap: 2.5rem;
+  }
+}
+
 /**
  * FAQ panels — calm frosted card (NOT liquid-glass).
  * Solid-ish #221525 at ~75% opacity, 1px warm border, soft inner highlight,

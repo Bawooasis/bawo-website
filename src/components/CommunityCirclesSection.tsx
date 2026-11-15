@@ -13,7 +13,7 @@ export default function CommunityCirclesSection() {
       className="relative bawo-scroll-anchor py-16 md:py-24 bg-transparent section-contain"
       aria-labelledby="community-circles-heading"
     >
-      <div className="relative z-10 container mx-auto px-5 sm:px-6 max-w-6xl">
+      <div className="relative z-10 container mx-auto px-5 sm:px-6 max-w-7xl">
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12 md:mb-16">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/35 bg-[#1C132B]/75 px-4 py-1.5 text-sm font-bold tracking-wide text-[#D6B26A] backdrop-blur-xl">
             <Users className="w-3.5 h-3.5 shrink-0" aria-hidden />
@@ -21,7 +21,7 @@ export default function CommunityCirclesSection() {
           </div>
           <h2
             id="community-circles-heading"
-            className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#F7F3FA] font-display leading-tight tracking-tight"
+            className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#F7F3FA] font-display leading-[1.1] tracking-tight"
           >
             {title}
           </h2>
@@ -30,50 +30,50 @@ export default function CommunityCirclesSection() {
           </p>
         </div>
 
-        {/* Community Circles Grid with Voice Note Waveforms & Daily Gist Prompts */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-12 md:mb-16">
+        {/* Wider circle cards: rail on desktop, stacked/2-up on smaller screens */}
+        <div className="bawo-circles-rail mb-12 md:mb-16" role="list">
           {items.map((circle) => (
             <article
               key={circle.id}
-              className="glass-card group overflow-hidden rounded-2xl flex flex-col transition-all duration-300 hover:-translate-y-1.5"
+              role="listitem"
+              className="bawo-circle-card glass-card group overflow-hidden rounded-2xl flex flex-col transition-all duration-300 hover:-translate-y-1.5"
             >
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#0E0A14]">
+              <div className="relative bawo-circle-card__media w-full overflow-hidden bg-[#0E0A14]">
                 <img
                   src={circle.image}
                   alt={`${circle.title}, BawoSocial Nigerian Community Circle`}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 ${circle.imagePosition}`}
                   loading="lazy"
                   decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0E0A14] via-[#0E0A14]/25 to-transparent" />
-                <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-[#0E0A14]/80 backdrop-blur-md border border-[#D6B26A]/35 px-3 py-1 text-sm font-bold text-[#D6B26A]">
-                  <Sparkles className="w-3 h-3 shrink-0" aria-hidden />
-                  {circle.badge}
+                <span className="bawo-circle-card__badge absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-[#0E0A14]/85 backdrop-blur-md border border-[#D6B26A]/35 px-3 py-1.5 text-xs sm:text-sm font-bold text-[#D6B26A] whitespace-nowrap">
+                  <Sparkles className="w-3.5 h-3.5 shrink-0" aria-hidden />
+                  <span>{circle.badge}</span>
                 </span>
               </div>
 
-              <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                <div className="space-y-2.5">
-                  <h3 className="text-2xl font-bold font-display text-[#F7F3FA] leading-snug">
+              <div className="bawo-circle-card__body p-6 sm:p-7 flex-1 flex flex-col">
+                <div className="bawo-circle-card__copy space-y-3">
+                  <h3 className="bawo-circle-card__title text-[1.4rem] sm:text-[1.55rem] font-bold font-display text-[#F7F3FA] leading-[1.2]">
                     {circle.title}
                   </h3>
-                  <p className="text-sm font-bold uppercase tracking-wider text-[#F7E7C4] flex items-center gap-1.5">
+                  <p className="bawo-circle-card__tag text-xs font-bold uppercase tracking-wider text-[#F7E7C4] flex items-center gap-1.5 h-5">
                     <MessageCircle className="w-3.5 h-3.5 shrink-0 text-[#D6B26A]" aria-hidden />
-                    {circle.members}
+                    <span className="truncate">{circle.members}</span>
                   </p>
-                  <p className="text-sm text-[#F7F3FA]/80 leading-relaxed">
+                  <p className="bawo-circle-card__desc text-sm text-[#F7F3FA]/80 leading-[1.55]">
                     {circle.description}
                   </p>
                 </div>
 
-                <div className="space-y-2.5 pt-2">
-                  {/* Live Voice Note Preview Pill */}
-                  <div className="rounded-xl border border-[#D6B26A]/25 bg-[#0E0A14]/65 px-3 py-2 flex items-center gap-2">
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#D6B26A] text-[#0E0A14]">
+                <div className="bawo-circle-card__footer mt-auto space-y-3 pt-5">
+                  <div className="bawo-circle-card__voice rounded-xl border border-[#D6B26A]/25 bg-[#0E0A14]/65 px-3.5 py-2.5 flex items-start gap-2.5 min-h-[4.75rem]">
+                    <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#D6B26A] text-[#0E0A14]">
                       <Mic className="h-3.5 w-3.5" aria-hidden />
                     </span>
                     <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-0.5 mb-1" aria-hidden>
+                      <div className="flex items-center gap-0.5 mb-1.5" aria-hidden>
                         {[45, 85, 60, 100, 70, 40, 90, 65, 50, 80, 55, 75].map((h, i) => (
                           <span
                             key={i}
@@ -82,27 +82,27 @@ export default function CommunityCirclesSection() {
                           />
                         ))}
                       </div>
-                      <p className="truncate text-sm font-semibold text-[#F7E7C4]">
-                        {circle.voiceNoteLabel}
+                      <p className="text-sm font-semibold text-[#F7E7C4] leading-snug whitespace-nowrap">
+                        {circle.voiceNoteDuration} Voice Note
+                      </p>
+                      <p className="text-xs text-[#F7F3FA]/70 leading-snug mt-0.5 line-clamp-2">
+                        {circle.voiceNoteTopic}
                       </p>
                     </div>
                   </div>
 
-                  {/* Daily Gist Prompt */}
-                  <div className="rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2">
+                  <div className="bawo-circle-card__gist rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-3">
                     <p className="text-sm font-medium text-[#F7F3FA]/75 leading-snug">
                       {circle.prompt}
                     </p>
                   </div>
 
-                  <div className="pt-1">
-                    <a
-                      href={CONTENT.hero.joinHref}
-                      className="inline-flex items-center gap-1.5 text-sm font-bold text-[#D6B26A] hover:text-[#F7E7C4] transition-colors"
-                    >
-                      <span>Join BawoSocial →</span>
-                    </a>
-                  </div>
+                  <a
+                    href={CONTENT.hero.joinHref}
+                    className="inline-flex items-center gap-1.5 h-5 text-sm font-bold text-[#D6B26A] hover:text-[#F7E7C4] transition-colors"
+                  >
+                    <span>Join BawoSocial →</span>
+                  </a>
                 </div>
               </div>
             </article>

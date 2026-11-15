@@ -13,6 +13,7 @@ import groupWellnessGoldenHour from "../assets/images/groups/wellness-golden-hou
 import groupNewToNyc from "../assets/images/groups/new-to-nyc.jpg";
 import groupSafeSpaceSisterhood from "../assets/images/groups/safe-space-sisterhood.jpg";
 import groupAfroFoodChop from "../assets/images/groups/afro-food-chop.jpg";
+import groupBrotherhoodNyc from "../assets/images/groups/brotherhood-nyc.jpg";
 
 // Borough images - NYC specific
 import bx01 from "../assets/images/bronx/bx-01.png";
@@ -305,6 +306,7 @@ export const IMAGES = {
     safeSpaceSisterhood: groupSafeSpaceSisterhood,
     afroFoodChop: groupAfroFoodChop,
     wellnessGoldenHour: groupWellnessGoldenHour,
+    brotherhoodNyc: groupBrotherhoodNyc,
   },
 
   // Local Assets
