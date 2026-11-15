@@ -1083,9 +1083,17 @@ a.bawo-cta-quiet:active {
     height: 100%;
   }
 
+  /* Premium section rhythm — proximity snap (never traps scroll) */
+  @media (min-width: 1024px) {
+    html {
+      scroll-snap-type: y proximity;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
+      scroll-snap-type: none;
     }
   }
 
@@ -2696,6 +2704,39 @@ a.bawo-cta-quiet:active {
 
 .bawo-scroll-anchor {
   scroll-margin-top: var(--bawo-header-offset);
+}
+
+/* Full-viewport marketing scenes */
+.bawo-scene {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1024px) {
+  .bawo-scene--network,
+  .bawo-scene--phones,
+  .bawo-scene--mission {
+    min-height: calc(100dvh - var(--bawo-header-offset));
+    min-height: calc(100vh - var(--bawo-header-offset));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bawo-scene {
+    scroll-snap-align: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  html {
+    scroll-snap-type: none;
+  }
+
+  .bawo-scene {
+    scroll-snap-align: none;
+    min-height: 0;
+  }
 }
 
 /** Top promo — deprecated; kept for reference if re-enabled */
