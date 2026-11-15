@@ -1,7 +1,14 @@
+/** Scroll to the on-site Join BawoSocial email signup. */
 export function scrollToWaitlist(): void {
-  const section = document.getElementById("email-section");
-  section?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const target =
+    document.getElementById("join") ||
+    document.getElementById("early-access") ||
+    document.getElementById("email-section");
+  target?.scrollIntoView({ behavior: "smooth", block: "start" });
   window.setTimeout(() => {
-    document.getElementById("waitlist-email-input")?.focus({ preventScroll: true });
+    (
+      document.getElementById("join-email-input") ||
+      document.getElementById("waitlist-email-input")
+    )?.focus({ preventScroll: true });
   }, 450);
 }

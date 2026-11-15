@@ -180,29 +180,14 @@ function App() {
               className="bawo-hero-cinematic__pill bawo-hero-cinematic__pill--business"
             >
               <Building2 className="h-3.5 w-3.5 text-[#D6B26A] shrink-0" aria-hidden />
-              <span>Businesses</span>
+              <span>Partner with us</span>
             </a>
-            <a
-              href={CONTENT.hero.testflightLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bawo-hero-cinematic__textlink"
-            >
-              Get the app
-            </a>
-            <button
-              type="button"
-              className="bawo-hero-cinematic__pill"
-              onClick={scrollToWaitlist}
-            >
-              Join the waitlist
-            </button>
             <button
               type="button"
               className="bawo-hero-cinematic__pill bawo-hero-cinematic__pill--solid"
               onClick={scrollToWaitlist}
             >
-              Get started
+              Join BawoSocial
             </button>
           </div>
 
@@ -229,7 +214,7 @@ function App() {
                   </a>
                   <a href="/businesses" className="bawo-hero-cinematic__pill bawo-hero-cinematic__pill--business">
                     <Building2 className="h-3.5 w-3.5 text-[#D6B26A]" aria-hidden />
-                    <span>For Businesses</span>
+                    <span>Partner with us</span>
                   </a>
                 </div>
               </div>
@@ -449,10 +434,10 @@ function App() {
           </div>
         </section>
 
-        {/* Early Access — TestFlight + waitlist */}
+        {/* Join BawoSocial — on-site signup */}
         <section
           ref={earlyAccessRef}
-          id="early-access"
+          id="join"
           className="relative bawo-scroll-anchor bg-transparent py-20 md:py-28"
         >
           <div className="relative z-10 container mx-auto px-6 py-12 md:py-16 max-w-2xl">
@@ -622,14 +607,14 @@ function App() {
                   className="bawo-cta-premium inline-flex min-h-[48px] w-full max-w-[19.5rem] sm:w-auto items-center justify-center gap-2 rounded-full px-7 text-sm font-bold no-underline transition-transform hover:-translate-y-0.5"
                 >
                   <Building2 className="h-4 w-4 shrink-0 text-[#0E0A14]" aria-hidden />
-                  <span>Businesses Sign In</span>
+                  <span>Partner with us</span>
                 </a>
               </div>
 
               <div className="flex items-center gap-4 max-w-2xl mx-auto w-full">
                 <span className="flex-1 h-px bg-[#D6B26A]/25" aria-hidden />
                 <span className="text-[#F7E7C4]/75 font-bold text-sm uppercase tracking-wider px-2">
-                  Or join the waitlist
+                  Or leave your email
                 </span>
                 <span className="flex-1 h-px bg-[#D6B26A]/25" aria-hidden />
               </div>
@@ -652,25 +637,19 @@ function App() {
               <div className="flex flex-col min-w-0 gap-0.5">
                 <span className="text-[#F7F3FA] font-bold text-sm">BawoSocial NYC</span>
                 <span className="text-[#F7E7C4]/75 font-medium text-sm uppercase tracking-wider">
-                  TestFlight · Businesses
+                  Join · Partner with us
                 </span>
               </div>
               <div className="flex shrink-0 items-center gap-2">
                 <FoundingMemberButton
-                  label="TestFlight"
+                  label="Join"
                   variant="primary"
                   size="sm"
                   className="max-w-[7.5rem]"
-                  onClick={() => {
-                    window.open(
-                      CONTENT.hero.testflightLink,
-                      "_blank",
-                      "noopener,noreferrer",
-                    );
-                  }}
+                  onClick={scrollToWaitlist}
                 />
                 <FoundingMemberButton
-                  label="Businesses"
+                  label="Partner"
                   variant="primary"
                   appearance="outline"
                   size="sm"

@@ -31,7 +31,7 @@ function HeroNextPreview({ className = "" }: HeroNextPreviewProps) {
       <div className="bawo-next-preview__header mb-3 flex flex-col items-center justify-between gap-3 sm:flex-row">
         <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/35 bg-[#1C132B]/75 px-3.5 py-1.5 text-sm font-bold uppercase tracking-wider text-[#D6B26A] backdrop-blur-xl">
           <Sparkles className="h-3.5 w-3.5 shrink-0" aria-hidden />
-          <span>Interactive App Showcase · Live NYC Beta</span>
+          <span>Interactive App Showcase · Inside BawoSocial</span>
         </div>
         <div className="inline-flex items-center gap-2 text-sm font-medium text-[#F7F3FA]/70">
           <MapPin className="h-3.5 w-3.5 text-[#D6B26A]" aria-hidden />

@@ -4,13 +4,13 @@ type MailchimpSignupRowProps = {
   className?: string;
   buttonLabel?: string;
   compact?: boolean;
-  /** Outline — secondary to TestFlight; solid border for waitlist submit. */
+  /** Outline — solid border for Join BawoSocial email submit. */
   variant?: "default" | "ghost";
 };
 
 export default function MailchimpSignupRow({
   className = "",
-  buttonLabel = "Join Waitlist",
+  buttonLabel = "Join BawoSocial",
   compact = false,
   variant = "default",
 }: MailchimpSignupRowProps) {
@@ -67,7 +67,7 @@ export default function MailchimpSignupRow({
     >
       <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 sm:items-end">
         <input
-          id="waitlist-email-input"
+          id="join-email-input"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}

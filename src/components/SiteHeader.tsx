@@ -11,13 +11,13 @@ const PILL_LINKS = [
   { label: "About", href: "#about" },
   { label: "Features", href: "#features" },
   { label: "Events", href: "#events" },
-  { label: "Businesses", href: "/businesses" },
+  { label: "Partner with us", href: "/businesses" },
   { label: "FAQ", href: "#faq" },
 ] as const;
 
 const MOBILE_LINKS = [
   ...PILL_LINKS,
-  { label: "Try the App", href: "#early-access" },
+  { label: "Join BawoSocial", href: "#join" },
 ] as const;
 
 type SiteHeaderProps = {
@@ -67,21 +67,10 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
             <a
               href="/businesses"
               className="bawo-site-header__businesses-chip"
-              aria-label="Businesses Log In and Sign In"
+              aria-label="Partner with us"
             >
               <Building2 className="h-3.5 w-3.5 text-[#D6B26A] shrink-0" aria-hidden />
-              <span className="bawo-site-header__businesses-chip-label">Businesses</span>
-            </a>
-
-            <a
-              href={CONTENT.hero.testflightLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bawo-site-header__founding-chip hidden lg:inline-flex"
-            >
-              <span className="bawo-site-header__founding-chip-label">
-                {CONTENT.hero.ctaTestFlight}
-              </span>
+              <span className="bawo-site-header__businesses-chip-label">Partner with us</span>
             </a>
 
             <BawoPillButton
@@ -122,7 +111,7 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
             ))}
             <div className="px-2 pt-3 flex flex-col gap-2">
               <BawoPillButton
-                label="Businesses Log In / Sign In"
+                label="Partner with us"
                 variant="primary"
                 appearance="outline"
                 size="md"
@@ -134,20 +123,8 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
                 }}
               />
               <BawoPillButton
-                label={CONTENT.hero.ctaTestFlight}
-                variant="primary"
-                size="md"
-                polished
-                fullWidth
-                onClick={() => {
-                  setMobileOpen(false);
-                  window.open(CONTENT.hero.testflightLink, "_blank", "noopener,noreferrer");
-                }}
-              />
-              <BawoPillButton
                 label={CONTENT.hero.ctaSecondary}
                 variant="primary"
-                appearance="outline"
                 size="md"
                 polished
                 fullWidth
