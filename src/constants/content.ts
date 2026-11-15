@@ -363,30 +363,7 @@ export const CONTENT = {
       { name: "Queens", country: "🇺🇸" },
       { name: "The Bronx", country: "🇺🇸" },
       { name: "Staten Island", country: "🇺🇸" },
-    ],
-  },
-
-  events: {
-    title: "Curated Nigerian Events, Owambe & Nightlife",
-    items: [
-      {
-        icon: "calendar" as const,
-        title: "Afrobeats Nights, Alte & Owambe Celebrations",
-        description:
-          "From Brooklyn rooftop day parties and Independence Day celebrations to Manhattan late-night lounges, curated Nigerian music and culture across NYC.",
-      },
-      {
-        icon: "headphones" as const,
-        title: "Nigerian Supper Clubs, Suya Pop-Ups & Food Crawls",
-        description:
-          "Taste home across NYC with Lagos-style suya nights, smoky party Jollof linkups, chef tastings, and neighborhood restaurant crawls.",
-      },
-      {
-        icon: "star" as const,
-        title: "Naija Founders Mixers, Tech/Finance & Circle Meetups",
-        description:
-          "Turn digital circles into real-life friendships through New to NYC linkups, Safe Space sisterhood brunches, and Nigerian professional networking.",
-      },
+      { name: "New Jersey", country: "🇺🇸" },
     ],
   },
 
@@ -457,7 +434,7 @@ export const CONTENT = {
           { label: "NYC Network", href: "#building-the-network" },
           { label: "About BawoSocial", href: "#about" },
           { label: "Features", href: "#features" },
-          { label: "Events", href: "#events" },
+          { label: "Events", href: "#community-circles" },
           { label: "Join BawoSocial", href: "#join" },
           { label: "FAQ", href: "#faq" },
         ],
