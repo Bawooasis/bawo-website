@@ -13,48 +13,15 @@ import groupWellnessGoldenHour from "../assets/images/groups/wellness-golden-hou
 import groupNewToNyc from "../assets/images/groups/new-to-nyc.jpg";
 import groupSafeSpaceSisterhood from "../assets/images/groups/safe-space-sisterhood.jpg";
 import groupAfroFoodChop from "../assets/images/groups/afro-food-chop.jpg";
+import groupBrotherhoodNyc from "../assets/images/groups/brotherhood-nyc.jpg";
 
-// Borough images - NYC specific
-import bx01 from "../assets/images/bronx/bx-01.png";
-import bx02 from "../assets/images/bronx/bx-02.png";
-import bx03 from "../assets/images/bronx/bx-03.png";
-import bx04 from "../assets/images/bronx/bx-04.png";
-import bx05 from "../assets/images/bronx/bx-05.png";
+// Borough images — pinned covers from Circles/network polish (#23)
 import bx06 from "../assets/images/bronx/bx-06.png";
-import bx07 from "../assets/images/bronx/bx-07.png";
-import bx08 from "../assets/images/bronx/bx-08.png";
-import bx09 from "../assets/images/bronx/bx-09.png";
-import bkBrooklyn01 from "../assets/images/brooklyn/bk-01.png";
 import bkBrooklyn02 from "../assets/images/brooklyn/bk-02.png";
-import bkBrooklyn03 from "../assets/images/brooklyn/bk-03.png";
-import bkBrooklyn04 from "../assets/images/brooklyn/bk-04.png";
-import bkBrooklyn05 from "../assets/images/brooklyn/bk-05.png";
-import hm01 from "../assets/images/harlem/hm-01.png";
-import hm02 from "../assets/images/harlem/hm-02.png";
-import hm03 from "../assets/images/harlem/hm-03.png";
-import hm04 from "../assets/images/harlem/hm-04.png";
-import hm05 from "../assets/images/harlem/hm-05.png";
 import hm06 from "../assets/images/harlem/hm-06.png";
-import hm07 from "../assets/images/harlem/hm-07.png";
-import hm08 from "../assets/images/harlem/hm-08.png";
-import hm09 from "../assets/images/harlem/hm-09.png";
-import hm10 from "../assets/images/harlem/hm-10.png";
-import hm11 from "../assets/images/harlem/hm-11.png";
-import hm12 from "../assets/images/harlem/hm-12.png";
-import hm13 from "../assets/images/harlem/hm-13.png";
-import qn01 from "../assets/images/queens/qn-01.png";
-import qn02 from "../assets/images/queens/qn-02.png";
-import qn03 from "../assets/images/queens/qn-03.png";
-import qn04 from "../assets/images/queens/qn-04.png";
-import qn05 from "../assets/images/queens/qn-05.png";
 import qn06 from "../assets/images/queens/qn-06.png";
-import qn07 from "../assets/images/queens/qn-07.png";
 import si01 from "../assets/images/staten/si-01.png";
-import si02 from "../assets/images/staten/si-02.png";
-import si03 from "../assets/images/staten/si-03.png";
-import si04 from "../assets/images/staten/si-04.png";
-import si05 from "../assets/images/staten/si-05.png";
-
+import nj01 from "../assets/images/newjersey/nj-01.jpg";
 // Inside the App Images — Alexander approved framed phones (webshots Nov 2026)
 // Device chrome baked in via webshots/render.py (status patch + App Store frame).
 import appCommunityAltScreen from "../assets/images/app-community-alt.jpg";
@@ -305,6 +272,7 @@ export const IMAGES = {
     safeSpaceSisterhood: groupSafeSpaceSisterhood,
     afroFoodChop: groupAfroFoodChop,
     wellnessGoldenHour: groupWellnessGoldenHour,
+    brotherhoodNyc: groupBrotherhoodNyc,
   },
 
   // Local Assets
@@ -375,50 +343,30 @@ export const IMAGES = {
     ],
   },
 
-  // Global Reach/City Images - NYC Boroughs
+  // Global Reach/City Images - NYC Boroughs + NJ
+  // Pinned covers match Alexander's approved target set (no rotating gele/jacket variants).
   globalReach: {
-    brooklynGallery: [
-      bkBrooklyn01,
-      bkBrooklyn02,
-      bkBrooklyn03,
-      bkBrooklyn04,
-      bkBrooklyn05,
-    ] as const,
-    queensGallery: [qn01, qn02, qn03, qn04, qn05, qn06, qn07] as const,
-    bronxGallery: [
-      bx01,
-      bx02,
-      bx03,
-      bx04,
-      bx05,
-      bx06,
-      bx07,
-      bx08,
-      bx09,
-    ] as const,
-    harlemGallery: [
-      hm01,
-      hm02,
-      hm03,
-      hm04,
-      hm05,
-      hm06,
-      hm07,
-      hm08,
-      hm09,
-      hm10,
-      hm11,
-      hm12,
-      hm13,
-    ] as const,
-    statenIslandGallery: [si01, si02, si03, si04, si05] as const,
-    cities: [bkBrooklyn01, hm01, qn01, bx01, si01],
+    brooklyn: bkBrooklyn02,
+    harlem: hm06,
+    queens: qn06,
+    bronx: bx06,
+    statenIsland: si01,
+    newJersey: nj01,
+    /** @deprecated galleries kept for asset bundling; hero nodes use pinned covers above */
+    brooklynGallery: [bkBrooklyn02] as const,
+    queensGallery: [qn06] as const,
+    bronxGallery: [bx06] as const,
+    harlemGallery: [hm06] as const,
+    statenIslandGallery: [si01] as const,
+    newJerseyGallery: [nj01] as const,
+    cities: [bkBrooklyn02, hm06, qn06, bx06, si01, nj01],
     cityMeta: [
-      { name: "Brooklyn", image: bkBrooklyn01 },
-      { name: "Harlem", image: hm01 },
-      { name: "Queens", image: qn01 },
-      { name: "The Bronx", image: bx01 },
+      { name: "Brooklyn", image: bkBrooklyn02 },
+      { name: "Harlem", image: hm06 },
+      { name: "Queens", image: qn06 },
+      { name: "The Bronx", image: bx06 },
       { name: "Staten Island", image: si01 },
+      { name: "New Jersey", image: nj01 },
     ],
   },
 

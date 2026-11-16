@@ -1,6 +1,6 @@
 /**
- * Proportional mesh behind the 3+2 borough grid (viewBox matches % layout).
- * Spokes tie each borough to a central hub; chains link neighbors.
+ * Proportional mesh behind the 3+3 borough/NJ grid (viewBox matches % layout).
+ * Spokes tie each hub to a central node; chains link neighbors.
  * Colors: build 165 gold / pumpkin / eggplant (no neon green).
  */
 export default function BoroughNetworkGraphic({
@@ -8,6 +8,19 @@ export default function BoroughNetworkGraphic({
 }: {
   className?: string;
 }) {
+  // 3 top + 3 bottom node centers in viewBox units
+  const top = [
+    [17, 24],
+    [50, 24],
+    [83, 24],
+  ] as const;
+  const bottom = [
+    [17, 76],
+    [50, 76],
+    [83, 76],
+  ] as const;
+  const hubs = [...top, ...bottom];
+
   return (
     <svg
       className={className}
@@ -40,12 +53,11 @@ export default function BoroughNetworkGraphic({
         </filter>
       </defs>
 
-      {/* Outer faint rings */}
       <ellipse
         cx="50"
-        cy="48"
-        rx="36"
-        ry="30"
+        cy="50"
+        rx="38"
+        ry="32"
         fill="none"
         stroke="url(#bawo-net-stroke-soft)"
         strokeWidth="0.12"
@@ -53,9 +65,9 @@ export default function BoroughNetworkGraphic({
       />
       <ellipse
         cx="50"
-        cy="48"
+        cy="50"
         rx="28"
-        ry="23"
+        ry="24"
         fill="none"
         stroke="url(#bawo-net-stroke-soft)"
         strokeWidth="0.1"
@@ -63,73 +75,67 @@ export default function BoroughNetworkGraphic({
         className="bawo-net-ring bawo-net-ring--delay"
       />
 
-      {/* Borough-to-borough chains */}
+      {/* Row chains */}
       <path
-        d="M 17 22 L 50 22 L 83 22"
+        d="M 17 24 L 50 24 L 83 24"
         fill="none"
         stroke="url(#bawo-net-stroke)"
         strokeWidth="0.28"
         strokeLinecap="round"
         strokeLinejoin="round"
+        strokeDasharray="1.1 1.35"
         className="bawo-net-path bawo-net-path--mesh"
       />
       <path
-        d="M 38 78 L 62 78"
+        d="M 17 76 L 50 76 L 83 76"
         fill="none"
         stroke="url(#bawo-net-stroke)"
         strokeWidth="0.24"
         strokeLinecap="round"
+        strokeDasharray="1.1 1.35"
         className="bawo-net-path bawo-net-path--mesh"
         opacity="0.85"
       />
-      {/* Cross-links (diaspora bridges) */}
+
+      {/* Soft cross-links */}
       <path
-        d="M 83 22 Q 62 48 38 78"
+        d="M 83 24 Q 62 50 17 76"
         fill="none"
         stroke="url(#bawo-net-stroke-soft)"
         strokeWidth="0.18"
         strokeLinecap="round"
+        strokeDasharray="0.9 1.4"
         className="bawo-net-path bawo-net-path--cross"
       />
       <path
-        d="M 17 22 Q 48 50 62 78"
+        d="M 17 24 Q 38 50 83 76"
         fill="none"
         stroke="url(#bawo-net-stroke-soft)"
         strokeWidth="0.16"
         strokeLinecap="round"
-        className="bawo-net-path bawo-net-path--cross"
-      />
-      <path
-        d="M 50 22 L 50 48 L 50 78"
-        fill="none"
-        stroke="url(#bawo-net-stroke-soft)"
-        strokeWidth="0.14"
-        strokeLinecap="round"
-        opacity="0.65"
+        strokeDasharray="0.9 1.4"
         className="bawo-net-path bawo-net-path--cross"
       />
 
-      {/* Hub ↔ each borough */}
+      {/* Hub ↔ each borough / NJ */}
       <g
         fill="none"
         stroke="url(#bawo-net-stroke)"
         strokeWidth="0.32"
         strokeLinecap="round"
+        strokeDasharray="1.15 1.4"
         filter="url(#bawo-net-glow)"
         className="bawo-net-spokes"
       >
-        <path d="M 50 48 L 17 22" />
-        <path d="M 50 48 L 50 22" />
-        <path d="M 50 48 L 83 22" />
-        <path d="M 50 48 L 38 78" />
-        <path d="M 50 48 L 62 78" />
+        {hubs.map(([x, y]) => (
+          <path key={`${x}-${y}`} d={`M 50 50 L ${x} ${y}`} />
+        ))}
       </g>
 
-      {/* Hub */}
-      <circle cx="50" cy="48" r="5.2" fill="url(#bawo-net-hub-glow)" className="bawo-net-hub-aura" />
+      <circle cx="50" cy="50" r="5.2" fill="url(#bawo-net-hub-glow)" className="bawo-net-hub-aura" />
       <circle
         cx="50"
-        cy="48"
+        cy="50"
         r="1.35"
         fill="#D6B26A"
         stroke="rgba(255,248,235,0.45)"

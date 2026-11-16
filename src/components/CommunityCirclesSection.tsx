@@ -1,6 +1,4 @@
 import { Building2, Compass, MessageCircle, Mic, Sparkles, Users } from "lucide-react";
-import AppScreenShot from "./AppScreenShot";
-import AppScreenshotPicture from "./AppScreenshotPicture";
 import { CONTENT } from "../constants/content";
 import { IMAGES } from "../constants/images";
 
@@ -10,10 +8,10 @@ export default function CommunityCirclesSection() {
   return (
     <section
       id="community-circles"
-      className="relative bawo-scroll-anchor py-16 md:py-24 bg-transparent section-contain"
+      className="relative bawo-scroll-anchor bawo-scene bawo-scene--circles py-10 md:py-14 bg-transparent section-contain"
       aria-labelledby="community-circles-heading"
     >
-      <div className="relative z-10 container mx-auto px-5 sm:px-6 max-w-6xl">
+      <div className="relative z-10 container mx-auto px-5 sm:px-6 max-w-7xl">
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12 md:mb-16">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/35 bg-[#1C132B]/75 px-4 py-1.5 text-sm font-bold tracking-wide text-[#D6B26A] backdrop-blur-xl">
             <Users className="w-3.5 h-3.5 shrink-0" aria-hidden />
@@ -21,7 +19,7 @@ export default function CommunityCirclesSection() {
           </div>
           <h2
             id="community-circles-heading"
-            className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#F7F3FA] font-display leading-tight tracking-tight"
+            className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#F7F3FA] font-display leading-[1.1] tracking-tight"
           >
             {title}
           </h2>
@@ -30,50 +28,50 @@ export default function CommunityCirclesSection() {
           </p>
         </div>
 
-        {/* Community Circles Grid with Voice Note Waveforms & Daily Gist Prompts */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-12 md:mb-16">
+        {/* Wider circle cards: rail on desktop, stacked/2-up on smaller screens */}
+        <div className="bawo-circles-rail mb-12 md:mb-16" role="list">
           {items.map((circle) => (
             <article
               key={circle.id}
-              className="glass-card group overflow-hidden rounded-2xl flex flex-col transition-all duration-300 hover:-translate-y-1.5"
+              role="listitem"
+              className="bawo-circle-card glass-card group overflow-hidden rounded-2xl flex flex-col transition-all duration-300 hover:-translate-y-1.5"
             >
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#0E0A14]">
+              <div className="relative bawo-circle-card__media w-full overflow-hidden bg-[#0E0A14]">
                 <img
                   src={circle.image}
                   alt={`${circle.title}, BawoSocial Nigerian Community Circle`}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 ${circle.imagePosition}`}
                   loading="lazy"
                   decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0E0A14] via-[#0E0A14]/25 to-transparent" />
-                <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-[#0E0A14]/80 backdrop-blur-md border border-[#D6B26A]/35 px-3 py-1 text-sm font-bold text-[#D6B26A]">
-                  <Sparkles className="w-3 h-3 shrink-0" aria-hidden />
-                  {circle.badge}
+                <span className="bawo-circle-card__badge absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-[#0E0A14]/85 backdrop-blur-md border border-[#D6B26A]/35 px-3 py-1.5 text-xs sm:text-sm font-bold text-[#D6B26A] whitespace-nowrap">
+                  <Sparkles className="w-3.5 h-3.5 shrink-0" aria-hidden />
+                  <span>{circle.badge}</span>
                 </span>
               </div>
 
-              <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                <div className="space-y-2.5">
-                  <h3 className="text-2xl font-bold font-display text-[#F7F3FA] leading-snug">
+              <div className="bawo-circle-card__body p-6 sm:p-7 flex-1 flex flex-col">
+                <div className="bawo-circle-card__copy space-y-3">
+                  <h3 className="bawo-circle-card__title text-[1.4rem] sm:text-[1.55rem] font-bold font-display text-[#F7F3FA] leading-[1.2]">
                     {circle.title}
                   </h3>
-                  <p className="text-sm font-bold uppercase tracking-wider text-[#F7E7C4] flex items-center gap-1.5">
+                  <p className="bawo-circle-card__tag text-xs font-bold uppercase tracking-wider text-[#F7E7C4] flex items-center gap-1.5 h-5">
                     <MessageCircle className="w-3.5 h-3.5 shrink-0 text-[#D6B26A]" aria-hidden />
-                    {circle.members}
+                    <span className="truncate">{circle.members}</span>
                   </p>
-                  <p className="text-sm text-[#F7F3FA]/80 leading-relaxed">
+                  <p className="bawo-circle-card__desc text-sm text-[#F7F3FA]/80 leading-[1.55]">
                     {circle.description}
                   </p>
                 </div>
 
-                <div className="space-y-2.5 pt-2">
-                  {/* Live Voice Note Preview Pill */}
-                  <div className="rounded-xl border border-[#D6B26A]/25 bg-[#0E0A14]/65 px-3 py-2 flex items-center gap-2">
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#D6B26A] text-[#0E0A14]">
+                <div className="bawo-circle-card__footer mt-auto space-y-3 pt-5">
+                  <div className="bawo-circle-card__voice rounded-xl border border-[#D6B26A]/25 bg-[#0E0A14]/65 px-3.5 py-2.5 flex items-start gap-2.5 min-h-[4.75rem]">
+                    <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#D6B26A] text-[#0E0A14]">
                       <Mic className="h-3.5 w-3.5" aria-hidden />
                     </span>
                     <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-0.5 mb-1" aria-hidden>
+                      <div className="flex items-center gap-0.5 mb-1.5" aria-hidden>
                         {[45, 85, 60, 100, 70, 40, 90, 65, 50, 80, 55, 75].map((h, i) => (
                           <span
                             key={i}
@@ -82,124 +80,31 @@ export default function CommunityCirclesSection() {
                           />
                         ))}
                       </div>
-                      <p className="truncate text-sm font-semibold text-[#F7E7C4]">
-                        {circle.voiceNoteLabel}
+                      <p className="text-sm font-semibold text-[#F7E7C4] leading-snug whitespace-nowrap">
+                        {circle.voiceNoteDuration} Voice Note
+                      </p>
+                      <p className="text-xs text-[#F7F3FA]/70 leading-snug mt-0.5 line-clamp-2">
+                        {circle.voiceNoteTopic}
                       </p>
                     </div>
                   </div>
 
-                  {/* Daily Gist Prompt */}
-                  <div className="rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2">
+                  <div className="bawo-circle-card__gist rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-3">
                     <p className="text-sm font-medium text-[#F7F3FA]/75 leading-snug">
                       {circle.prompt}
                     </p>
                   </div>
 
-                  <div className="pt-1">
-                    <a
-                      href={CONTENT.hero.joinHref}
-                      className="inline-flex items-center gap-1.5 text-sm font-bold text-[#D6B26A] hover:text-[#F7E7C4] transition-colors"
-                    >
-                      <span>Join BawoSocial →</span>
-                    </a>
-                  </div>
+                  <a
+                    href={CONTENT.hero.joinHref}
+                    className="inline-flex items-center gap-1.5 h-5 text-sm font-bold text-[#D6B26A] hover:text-[#F7E7C4] transition-colors"
+                  >
+                    <span>Join BawoSocial →</span>
+                  </a>
                 </div>
               </div>
             </article>
           ))}
-        </div>
-
-        {/* Live Build 182 iOS App Screens Showcase (Explore Map, Community Spaces & Circle Daily Vibe) */}
-        <div className="mb-12 md:mb-16">
-          <div className="text-center max-w-2xl mx-auto space-y-2.5 mb-8">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/35 bg-[#1C132B]/75 px-3.5 py-1 text-sm font-bold tracking-wide text-[#D6B26A]">
-              <Sparkles className="w-3.5 h-3.5 shrink-0" aria-hidden />
-              <span>Inside BawoSocial</span>
-            </div>
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-[#F7F3FA]">
-              Explore Spots, Join Spaces & Drop Your Take Live
-            </h3>
-            <p className="text-sm sm:text-base text-[#F7F3FA]/75">
-              From verified Nigerian kitchens like Brooklyn Suya Spot to Trending NYC Spaces and live Daily Vibe rooms inside Brotherhood NYC.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-            {[
-              {
-                badge: "Explore Map · Verified NYC Spots",
-                title: "BUKA & verified NYC spots",
-                caption:
-                  "Filter by Food, Shop, Resources & Services across NYC with golden photo pins, ratings, and one-tap directions.",
-                image: IMAGES.showcase.explore,
-                imageShot: IMAGES.showcase.exploreShot,
-                alt: "BawoSocial Explore Map with BUKA place card and Directions 5.5 mi",
-              },
-              {
-                badge: "Community Spaces · Discover",
-                title: "NYC Community Lounge",
-                caption:
-                  "Find your people in Discover with spaces like NYC Community Lounge — gist, laughs, and absolutely no pressure.",
-                image: IMAGES.showcase.community,
-                imageShot: IMAGES.showcase.communityShot,
-                alt: "BawoSocial Community screen showing NYC Community Lounge with Join",
-              },
-              {
-                badge: "Community Circles · Careers",
-                title: "NYC Jobs & Career Network",
-                caption:
-                  "Join career and culture circles for Nigerians in NYC — jobs, hiring, and growth with your people.",
-                image: IMAGES.showcase.circleFeed,
-                imageShot: IMAGES.showcase.jobsShot,
-                alt: "BawoSocial Community Circles screen featuring NYC Jobs & Career Network",
-              },
-            ].map((screen) => (
-              <figure
-                key={screen.title}
-                className="flex flex-col justify-between"
-              >
-                <div className="relative mx-auto w-full max-w-[17.5rem]">
-                  <AppScreenShot label={screen.alt}>
-                    {screen.imageShot ? (
-                      <AppScreenshotPicture
-                        jpg={screen.imageShot.jpg}
-                        webp={screen.imageShot.webp}
-                        avif={screen.imageShot.avif}
-                        jpgSrcSet={screen.imageShot.jpgSrcSet}
-                        webpSrcSet={screen.imageShot.webpSrcSet}
-                        avifSrcSet={screen.imageShot.avifSrcSet}
-                        sizes={screen.imageShot.sizes}
-                        alt={screen.alt}
-                        width={screen.imageShot.width}
-                        height={screen.imageShot.height}
-                        className="bawo-app-screen__img"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <img
-                        src={screen.image}
-                        alt={screen.alt}
-                        className="bawo-app-screen__img"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    )}
-                  </AppScreenShot>
-                </div>
-                <figcaption className="pt-4 space-y-1.5 text-center sm:text-left">
-                  <span className="inline-block rounded-full border border-[#D6B26A]/30 bg-[#D6B26A]/10 px-2.5 py-0.5 text-sm font-bold uppercase tracking-wider text-[#F7E7C4]">
-                    {screen.badge}
-                  </span>
-                  <h4 className="text-xl font-bold font-display text-[#F7F3FA]">
-                    {screen.title}
-                  </h4>
-                  <p className="text-sm text-[#F7F3FA]/75 leading-relaxed">
-                    {screen.caption}
-                  </p>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
         </div>
 
         {/* Nigerian Diaspora × NYC Brand Showcase Card with New Splash Artwork */}
