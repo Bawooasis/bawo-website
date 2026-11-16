@@ -1,3 +1,7 @@
+# API (above SPA fallback — never serve index.html for /api/*)
+/api/subscribe /.netlify/functions/subscribe 200!
+/api/* /.netlify/functions/api-not-found 200!
+
 # Contact aliases to Support
 /contact /support 301
 /contact/* /support 301

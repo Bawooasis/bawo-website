@@ -1,7 +1,28 @@
 [build]
-  # `npm run build` installs Chromium then prerenders the landing route into dist/index.html.
-  command = "npm run build"
+  # Install Chromium before Vite+prerender so scripts/prerender.mjs can write
+  # the hydrated landing HTML into dist/index.html on Netlify build images.
+  # If Chromium install/launch fails, prerender.mjs soft-skips (exit 0) and the
+  # Vite shell remains — see docs/netlify-prerender.md.
+  command = "npx playwright install chromium && npm run build"
   publish = "dist"
+  functions = "netlify/functions"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# API routes MUST sit above the /* SPA fallback so /api never serves index.html.
+[[redirects]]
+  from = "/api/subscribe"
+  to = "/.netlify/functions/subscribe"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api-not-found"
+  status = 200
+  force = true
 
 [[redirects]]
   from = "/contact"
