@@ -439,8 +439,19 @@
 
 .dir-qr {
   display: inline-flex;
-  padding: 0.75rem;
-  border-radius: 16px;
+  padding: 1rem;
+  border-radius: 12px;
+  background: #fff;
+  /* Never clip finder patterns / quiet zone */
+  overflow: visible;
+}
+
+.dir-qr img {
+  display: block;
+  width: 280px;
+  height: 280px;
+  border-radius: 0;
+  image-rendering: pixelated;
   background: #fff;
 }
 

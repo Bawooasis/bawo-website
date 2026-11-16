@@ -1,41 +1,41 @@
-import QRCode from "qrcode";
 import { Download, Link2, QrCode } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import {
+  partnerQrPngDataUrl,
+  partnerQrSvg,
+  partnerRefUrl,
+} from "../directory/qr";
 import { EmptyState } from "./PortalUi";
 
 /**
  * Partner link workspace. Shows empty state until partner attribution tables
  * exist (see supabase/migrations/*_partner_growth.sql). Demo kit uses a
- * placeholder code so operators can preview QR downloads.
+ * real QR for the placeholder ref so operators can verify downloads scan.
  */
 export default function PartnerLinkPanel() {
   const [tablesReady] = useState(false);
   const demoCode = "BAWO-PENDING";
-  const demoLink = useMemo(
-    () => `https://www.joinbawo.com/nyc?ref=${demoCode}`,
-    [demoCode],
-  );
+  const demoLink = useMemo(() => partnerRefUrl(demoCode), [demoCode]);
   const [pngUrl, setPngUrl] = useState("");
   const [svgMarkup, setSvgMarkup] = useState("");
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const [png, svg] = await Promise.all([
-        QRCode.toDataURL(demoLink, {
-          width: 512,
-          margin: 1,
-          color: { dark: "#0E0A14", light: "#FFFFFF" },
-        }),
-        QRCode.toString(demoLink, {
-          type: "svg",
-          margin: 1,
-          color: { dark: "#0E0A14", light: "#FFFFFF" },
-        }),
-      ]);
-      if (cancelled) return;
-      setPngUrl(png);
-      setSvgMarkup(svg);
+      try {
+        const [png, svg] = await Promise.all([
+          partnerQrPngDataUrl(demoLink, 512),
+          partnerQrSvg(demoLink, 512),
+        ]);
+        if (cancelled) return;
+        setPngUrl(png);
+        setSvgMarkup(svg);
+      } catch {
+        if (!cancelled) {
+          setPngUrl("");
+          setSvgMarkup("");
+        }
+      }
     })();
     return () => {
       cancelled = true;
@@ -52,7 +52,7 @@ export default function PartnerLinkPanel() {
 
   const downloadSvg = () => {
     if (!svgMarkup) return;
-    const blob = new Blob([svgMarkup], { type: "image/svg+xml" });
+    const blob = new Blob([svgMarkup], { type: "image/svg+xml;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -75,7 +75,7 @@ export default function PartnerLinkPanel() {
           <EmptyState
             icon={QrCode}
             title="Partner analytics unlock after approval"
-            body="Once partner tables are migrated and Alexander activates your code, this tab will show live clicks, sign-ups, saves, activation, a weekly chart, and your events. Preview QR downloads use a placeholder for now."
+            body="Once partner tables are migrated and Alexander activates your code, this tab will show live clicks, sign-ups, saves, activation, a weekly chart, and your events. Preview QR downloads below encode the exact placeholder URL."
           />
           <div className="portal-feature-row" style={{ marginTop: "1.25rem" }}>
             <span>Clicks</span>
@@ -89,27 +89,43 @@ export default function PartnerLinkPanel() {
           <div className="portal-panel-heading">
             <div>
               <span className="portal-kicker">Preview</span>
-              <h2>Placeholder QR</h2>
+              <h2>Partner QR</h2>
             </div>
           </div>
           <p className="portal-muted" style={{ marginBottom: "1rem" }}>
             {demoLink}
           </p>
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", alignItems: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              gap: "1rem",
+              flexWrap: "wrap",
+              alignItems: "center",
+            }}
+          >
             {pngUrl ? (
               <img
                 src={pngUrl}
-                alt="Placeholder partner QR"
-                width={160}
-                height={160}
-                style={{ borderRadius: 12, background: "#fff", padding: 8 }}
+                alt={`QR code for ${demoLink}`}
+                width={200}
+                height={200}
+                style={{
+                  borderRadius: 0,
+                  background: "#fff",
+                  padding: 12,
+                  imageRendering: "pixelated",
+                }}
               />
             ) : null}
             <div style={{ display: "grid", gap: "0.5rem" }}>
               <button type="button" className="portal-btn" onClick={downloadPng}>
                 <Download aria-hidden /> Download PNG
               </button>
-              <button type="button" className="portal-btn portal-btn-ghost" onClick={downloadSvg}>
+              <button
+                type="button"
+                className="portal-btn portal-btn-ghost"
+                onClick={downloadSvg}
+              >
                 <Download aria-hidden /> Download SVG
               </button>
             </div>

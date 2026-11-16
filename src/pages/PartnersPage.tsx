@@ -1,6 +1,6 @@
-import QRCode from "qrcode";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import DirectoryShell from "../directory/DirectoryShell";
+import { partnerQrDataUrl, partnerRefUrl } from "../directory/qr";
 import type { PartnerApplicantType } from "../directory/types";
 
 type PartnerTab = {
@@ -111,19 +111,19 @@ export default function PartnersPage() {
   });
 
   const sampleLink = useMemo(
-    () => `https://www.joinbawo.com/nyc?ref=${encodeURIComponent(active.placeholderCode)}`,
+    () => partnerRefUrl(active.placeholderCode),
     [active.placeholderCode],
   );
 
   useEffect(() => {
     let cancelled = false;
-    QRCode.toDataURL(sampleLink, {
-      width: 180,
-      margin: 1,
-      color: { dark: "#0E0A14", light: "#FFFFFF" },
-    }).then((url) => {
-      if (!cancelled) setQrDataUrl(url);
-    });
+    partnerQrDataUrl(sampleLink, 280)
+      .then((url) => {
+        if (!cancelled) setQrDataUrl(url);
+      })
+      .catch(() => {
+        if (!cancelled) setQrDataUrl("");
+      });
     return () => {
       cancelled = true;
     };
@@ -245,13 +245,20 @@ export default function PartnersPage() {
               <p className="mt-2 break-all text-sm text-[#F7E7C4]/85">{sampleLink}</p>
               <div className="mt-4 dir-qr">
                 {qrDataUrl ? (
-                  <img src={qrDataUrl} alt="Sample partner QR code" width={180} height={180} />
+                  <img
+                    src={qrDataUrl}
+                    alt={`QR code for ${sampleLink}`}
+                    width={280}
+                    height={280}
+                    decoding="async"
+                  />
                 ) : (
-                  <div className="dir-skel h-[180px] w-[180px]" />
+                  <div className="dir-skel h-[280px] w-[280px]" />
                 )}
               </div>
               <p className="mt-3 text-xs text-[#F7F2EA]/55">
-                Placeholder code {active.placeholderCode} — replaced after approval.
+                Scans to the URL above · code {active.placeholderCode} (replaced after
+                approval)
               </p>
             </div>
 
