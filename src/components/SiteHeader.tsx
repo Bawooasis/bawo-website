@@ -10,7 +10,7 @@ const PILL_LINKS = [
   { label: "Network", href: "#building-the-network" },
   { label: "About", href: "#about" },
   { label: "Features", href: "#features" },
-  { label: "Events", href: "#events" },
+  { label: "Events", href: "#community-circles" },
   { label: "Partner with us", href: "/businesses" },
   { label: "FAQ", href: "#faq" },
 ] as const;

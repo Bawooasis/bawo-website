@@ -1,11 +1,11 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { BadgeCheck, Building2, Calendar, Headphones, MapPin, Sparkles, Star } from "lucide-react";
+import { BadgeCheck, Building2, MapPin, Sparkles } from "lucide-react";
 import { useEffect, useRef } from "react";
 import BoroughNetworkGraphic from "./components/BoroughNetworkGraphic";
-import BoroughSquareCarousel from "./components/BoroughSquareCarousel";
 import CommunityCirclesSection from "./components/CommunityCirclesSection";
 import CommunityMissionSection from "./components/CommunityMissionSection";
+import ExplorePhonesSection from "./components/ExplorePhonesSection";
 import FaqSection from "./components/FaqSection";
 import FoundingMemberButton from "./components/FoundingMemberButton";
 import HeroAppPreview from "./components/HeroAppPreview";
@@ -22,6 +22,15 @@ import { CONTENT } from "./constants/content";
 import { IMAGES } from "./constants/images";
 import { AFFILIATE_DISCLOSURE_LINE } from "./constants/legal";
 import { scrollToWaitlist } from "./utils/scrollToWaitlist";
+
+const BOROUGH_NODE_IMAGES = [
+  IMAGES.globalReach.brooklyn,
+  IMAGES.globalReach.harlem,
+  IMAGES.globalReach.queens,
+  IMAGES.globalReach.bronx,
+  IMAGES.globalReach.statenIsland,
+  IMAGES.globalReach.newJersey,
+] as const;
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -209,7 +218,7 @@ function App() {
                   <a href="#community-circles" className="bawo-hero-cinematic__pill">
                     Nigerian Circles
                   </a>
-                  <a href="#events" className="bawo-hero-cinematic__pill">
+                  <a href="#community-circles" className="bawo-hero-cinematic__pill">
                     Afrobeats & Events
                   </a>
                   <a href="/businesses" className="bawo-hero-cinematic__pill bawo-hero-cinematic__pill--business">
@@ -242,152 +251,73 @@ function App() {
 
         <CommunityCirclesSection />
 
-        {/* Building the Network — section 2 (borough hubs + Live NYC Borough Pulse) */}
+        <ExplorePhonesSection />
+
+        {/* Building the Network — compact full-viewport borough map (6 hubs) */}
         <section
           ref={globalReachRef}
           id="building-the-network"
-          className="relative bawo-scroll-anchor bg-transparent py-20 md:py-[5rem] overflow-x-hidden section-contain"
+          className="relative bawo-scroll-anchor bawo-scene bawo-scene--network bg-transparent overflow-x-hidden section-contain"
         >
-          <div className="relative z-10 container mx-auto px-5 sm:px-6 py-12 md:py-14">
-            <div className="text-center space-y-8 md:space-y-12 max-w-[1400px] mx-auto">
-              <div className="space-y-5 md:space-y-7">
+          <div className="relative z-10 container mx-auto px-5 sm:px-6 h-full flex flex-col justify-center py-6 md:py-8">
+            <div className="text-center space-y-4 md:space-y-5 max-w-[1400px] mx-auto w-full">
+              <div className="space-y-3 md:space-y-4">
                 <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/35 bg-[#1C132B]/75 px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-[#D6B26A] backdrop-blur-xl">
                   <MapPin className="w-3.5 h-3.5 shrink-0" aria-hidden />
                   <span>Live NYC Borough Pulse · 5 Boroughs + NJ Corridor</span>
                 </div>
-                <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-[#F7F3FA] font-display leading-[1.04] tracking-tight">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#F7F3FA] font-display leading-[1.05] tracking-tight">
                   {CONTENT.globalReach.title}
                 </h2>
-                <p className="text-xl sm:text-2xl md:text-3xl font-medium text-[#F7F3FA]/85 max-w-4xl mx-auto leading-snug">
+                <p className="text-lg sm:text-xl md:text-2xl font-medium text-[#F7F3FA]/85 max-w-3xl mx-auto leading-snug">
                   {CONTENT.globalReach.subtitle}
                 </p>
-                <p className="text-base sm:text-lg md:text-xl font-medium text-[#F7E7C4] max-w-3xl mx-auto leading-relaxed">
+                <p className="text-sm sm:text-base md:text-lg font-medium text-[#F7E7C4] max-w-3xl mx-auto leading-relaxed">
                   {CONTENT.globalReach.description}
                 </p>
               </div>
 
-              <div className="relative mx-auto w-full max-w-[1100px] min-h-[360px] sm:min-h-[420px] md:min-h-[520px] lg:min-h-[580px] mt-8 md:mt-12">
+              <div className="relative mx-auto w-full max-w-[980px] mt-3 md:mt-4">
                 <BoroughNetworkGraphic className="pointer-events-none absolute inset-0 z-0 hidden h-full w-full opacity-[0.94] md:block [mask-image:radial-gradient(ellipse_88%_78%_at_50%_48%,#000_32%,transparent_72%)]" />
-                <div className="relative z-[1] flex flex-col items-stretch gap-10 sm:gap-12 md:gap-16 lg:gap-20 pt-2 pb-4 md:pt-4 md:pb-8">
-                  <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8 lg:gap-10 justify-items-center w-full">
-                    {CONTENT.globalReach.cities
-                      .slice(0, 3)
-                      .map((city, index) => {
-                        const rotatingGallery =
-                          city.name === "Brooklyn"
-                            ? IMAGES.globalReach.brooklynGallery
-                            : city.name === "Harlem"
-                              ? IMAGES.globalReach.harlemGallery
-                              : city.name === "Queens"
-                                ? IMAGES.globalReach.queensGallery
-                                : null;
+                <div className="relative z-[1] flex flex-col items-stretch gap-5 sm:gap-6 md:gap-8 pt-1 pb-2">
+                  {[0, 3].map((start) => (
+                    <div
+                      key={start}
+                      className="grid grid-cols-3 gap-3 sm:gap-5 md:gap-8 justify-items-center w-full"
+                    >
+                      {CONTENT.globalReach.cities.slice(start, start + 3).map((city, offset) => {
+                        const index = start + offset;
                         return (
                           <div
                             key={city.name}
-                            className="city-stat text-center space-y-3 md:space-y-4 w-full max-w-[12rem] mx-auto"
+                            className="city-stat animate-on-scroll text-center space-y-2 w-full max-w-[10.5rem] sm:max-w-[11.5rem] mx-auto"
                           >
-                            {rotatingGallery ? (
-                              <div className="bawo-hub-ring relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto overflow-hidden rounded-full shadow-[0_20px_48px_rgba(0,0,0,0.65)] ring-1 ring-[#D6B26A]/35 transition-transform duration-300 hover:scale-[1.04] hover:ring-[#D6B26A]/75">
-                                <BoroughSquareCarousel
-                                  images={rotatingGallery}
-                                  alt={`${city.name} Nigerian community hub, BawoSocial NYC`}
-                                  rotationStaggerMs={index * 700}
-                                />
-                              </div>
-                            ) : (
-                              <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto bg-gradient-to-br from-[#F7E7C4] to-[#A07636] rounded-full flex items-center justify-center shadow-[0_20px_48px_rgba(0,0,0,0.65)] overflow-hidden hover:scale-[1.04] transition-transform duration-300">
-                                <img
-                                  src={IMAGES.globalReach.cities[index]}
-                                  alt={city.name}
-                                  className="w-full h-full object-cover"
-                                />
-                              </div>
-                            )}
-                            <div className="mt-1">
-                              <h3 className="font-bold text-[#F7F3FA] text-sm sm:text-base md:text-lg lg:text-xl tracking-[0.12em] drop-shadow-[0_2px_16px_rgba(0,0,0,0.65)]">
-                                {city.name.toUpperCase()}
-                              </h3>
-                            </div>
-                          </div>
-                        );
-                      })}
-                  </div>
-                  <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:mx-auto sm:max-w-xl md:max-w-3xl md:grid-cols-2 md:gap-10 lg:gap-12 justify-items-center w-full px-2 sm:px-4">
-                    {CONTENT.globalReach.cities.slice(3).map((city, index) => {
-                      const i = index + 3;
-                      const rotatingGallery =
-                        city.name === "The Bronx"
-                          ? IMAGES.globalReach.bronxGallery
-                          : city.name === "Staten Island"
-                            ? IMAGES.globalReach.statenIslandGallery
-                            : null;
-                      return (
-                        <div
-                          key={city.name}
-                          className="city-stat text-center space-y-3 md:space-y-4 w-full max-w-[12rem] mx-auto"
-                        >
-                          {rotatingGallery ? (
-                            <div className="bawo-hub-ring relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto overflow-hidden rounded-full shadow-[0_20px_48px_rgba(0,0,0,0.65)] ring-1 ring-[#D6B26A]/35 transition-transform duration-300 hover:scale-[1.04] hover:ring-[#D6B26A]/75">
-                              <BoroughSquareCarousel
-                                images={rotatingGallery}
-                                alt={`${city.name} Nigerian community hub, BawoSocial NYC`}
-                                rotationStaggerMs={i * 700}
-                              />
-                            </div>
-                          ) : (
-                            <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 mx-auto bg-gradient-to-br from-[#F7E7C4] to-[#A07636] rounded-full flex items-center justify-center shadow-[0_20px_48px_rgba(0,0,0,0.65)] overflow-hidden hover:scale-[1.04] transition-transform duration-300">
+                            <div className="bawo-hub-ring relative w-[4.75rem] h-[4.75rem] sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 mx-auto overflow-hidden rounded-full shadow-[0_16px_40px_rgba(0,0,0,0.65)] ring-1 ring-[#D6B26A]/35 transition-transform duration-300 hover:scale-[1.04] hover:ring-[#D6B26A]/75">
                               <img
-                                src={IMAGES.globalReach.cities[i]}
-                                alt={city.name}
-                                className="w-full h-full object-cover"
+                                src={BOROUGH_NODE_IMAGES[index]}
+                                alt={`${city.name} hub, BawoSocial NYC`}
+                                className="h-full w-full object-cover"
+                                loading={index < 3 ? "eager" : "lazy"}
+                                decoding="async"
                               />
                             </div>
-                          )}
-                          <div className="mt-1">
-                            <h3 className="font-bold text-[#F7F3FA] text-sm sm:text-base md:text-lg lg:text-xl tracking-[0.12em] drop-shadow-[0_2px_16px_rgba(0,0,0,0.65)]">
+                            <h3 className="font-bold text-[#F7F3FA] text-[0.7rem] sm:text-sm md:text-base tracking-[0.1em] drop-shadow-[0_2px_16px_rgba(0,0,0,0.65)]">
                               {city.name.toUpperCase()}
                             </h3>
                           </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-
-              {/* Live NYC Borough Pulse Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 pt-6 text-left max-w-6xl mx-auto">
-                {CONTENT.boroughPulse.map((b) => (
-                  <div
-                    key={b.name}
-                    className="glass-card rounded-2xl p-5 flex flex-col justify-between space-y-3 transition-transform duration-300 hover:-translate-y-1"
-                  >
-                    <div className="space-y-1.5">
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="inline-flex items-center gap-1.5 text-sm font-bold uppercase tracking-wider text-[#D6B26A]">
-                          <span className="h-2 w-2 rounded-full bg-[#10B981] animate-pulse" aria-hidden />
-                          {b.spotsCount}
-                        </span>
-                      </div>
-                      <h3 className="text-xl font-bold font-display text-[#F7F3FA]">
-                        {b.name}
-                      </h3>
-                      <p className="text-sm font-semibold text-[#F7E7C4]/90">
-                        {b.tag}
-                      </p>
+                        );
+                      })}
                     </div>
-                    <p className="text-sm text-[#F7F3FA]/75 leading-relaxed">
-                      {b.highlight}
-                    </p>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <div className="relative bg-transparent space-y-16 md:space-y-20 pt-12 md:pt-16 pb-6 md:pb-10 section-contain">
-          <CommunityMissionSection />
+        <CommunityMissionSection />
+
+        <div className="relative bg-transparent pt-6 md:pt-8 pb-6 md:pb-10 section-contain">
           <div className="relative z-10">
             <PartnerWithUsSection />
           </div>
@@ -519,55 +449,6 @@ function App() {
                   </p>
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Event Highlights Section */}
-        <section
-          id="events"
-          className="relative bawo-scroll-anchor py-24 bg-transparent"
-        >
-          <div className="relative z-10 container mx-auto px-6">
-            <h2 className="text-center text-4xl sm:text-5xl md:text-6xl font-bold font-display text-[#F7F3FA] mb-6">
-              {CONTENT.events.title}
-            </h2>
-            <p className="mx-auto mb-12 max-w-3xl text-center text-sm sm:text-base leading-relaxed text-[#F7E7C4]/85">
-              {AFFILIATE_DISCLOSURE_LINE}{" "}
-              <a
-                href="/affiliate-disclosure"
-                className="font-semibold text-[#D6B26A] underline-offset-2 hover:underline"
-              >
-                Affiliate disclosure
-              </a>
-            </p>
-            <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-              {CONTENT.events.items.map((event) => {
-                const Icon =
-                  event.icon === "calendar"
-                    ? Calendar
-                    : event.icon === "headphones"
-                      ? Headphones
-                      : Star;
-                return (
-                  <div
-                    key={event.title}
-                    className="glass-card p-7 text-[#F7F3FA] space-y-3"
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#D6B26A]/35 bg-[#D6B26A]/15 text-[#D6B26A]">
-                        <Icon className="w-5 h-5" />
-                      </span>
-                      <h3 className="font-display text-2xl font-bold text-[#F7F3FA] leading-snug">
-                        {event.title}
-                      </h3>
-                    </div>
-                    <p className="text-[#F7F3FA]/80 text-sm sm:text-base leading-relaxed">
-                      {event.description}
-                    </p>
-                  </div>
-                );
-              })}
             </div>
           </div>
         </section>
@@ -753,13 +634,13 @@ function App() {
 
             {/* Bottom Bar */}
             <div className="border-t border-[#D6B26A]/15 pt-8 text-center space-y-3">
-              <p className="text-[#F7E7C4]/75 text-sm leading-relaxed max-w-3xl mx-auto">
+              <p className="text-[#F7E7C4]/70 text-xs sm:text-sm leading-relaxed max-w-3xl mx-auto">
                 {AFFILIATE_DISCLOSURE_LINE}{" "}
                 <a
                   href="/affiliate-disclosure"
                   className="font-semibold text-[#D6B26A] underline-offset-2 hover:underline"
                 >
-                  Learn more
+                  Affiliate disclosure
                 </a>
               </p>
               <p className="text-[#F7F3FA]/65 text-sm">
