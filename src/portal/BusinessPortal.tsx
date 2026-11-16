@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import type { PortalTab } from "./PortalLayout";
+import PartnerLinkPanel from "./PartnerLinkPanel";
 import { EmptyState, MetricCard } from "./PortalUi";
 import type { VendorClaimInput, VendorOverview } from "./types";
 
@@ -48,6 +49,10 @@ export default function BusinessPortal({ data, activeTab, busy, onSubmit }: Busi
         </section>
       </>
     );
+  }
+
+  if (activeTab === "partner") {
+    return <PartnerLinkPanel />;
   }
 
   if (activeTab === "growth") {

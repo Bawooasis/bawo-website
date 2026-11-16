@@ -8,8 +8,8 @@
  * static landing shell already present in dist/index.html from Vite.
  */
 import { createServer } from "node:http";
-import { writeFile, access } from "node:fs/promises";
-import { createReadStream, existsSync } from "node:fs";
+import { writeFile, access, mkdir } from "node:fs/promises";
+import { createReadStream, existsSync, statSync } from "node:fs";
 import { execSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -63,8 +63,11 @@ async function startStaticServer() {
       const url = new URL(req.url || "/", "http://127.0.0.1");
       let pathname = decodeURIComponent(url.pathname);
       if (pathname.endsWith("/")) pathname += "index.html";
-      const filePath = path.join(dist, pathname);
-      if (!filePath.startsWith(dist) || !existsSync(filePath)) {
+      let filePath = path.join(dist, pathname);
+      if (filePath.startsWith(dist) && existsSync(filePath) && statSync(filePath).isDirectory()) {
+        filePath = path.join(filePath, "index.html");
+      }
+      if (!filePath.startsWith(dist) || !existsSync(filePath) || statSync(filePath).isDirectory()) {
         const fallback = createReadStream(indexPath);
         res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
         fallback.pipe(res);
@@ -158,6 +161,33 @@ async function prerender() {
     await writeFile(indexPath, `${cleaned}\n`, "utf8");
     const bytes = Buffer.byteLength(cleaned, "utf8");
     console.log(`[prerender] Wrote landing HTML to dist/index.html (${bytes} bytes)`);
+
+    // Best-effort SPA capture for /nyc directory (SEO shell already written by seo-static).
+    try {
+      const nycPage = await browser.newPage({
+        viewport: { width: 1440, height: 900 },
+        colorScheme: "dark",
+      });
+      await nycPage.goto(`http://127.0.0.1:${port}/nyc`, {
+        waitUntil: "networkidle",
+        timeout: 90_000,
+      });
+      await nycPage.waitForFunction(
+        () => (document.querySelector("h1")?.textContent || "").includes("Nigerian"),
+        { timeout: 45_000 },
+      );
+      const nycHtml = await nycPage.content();
+      const nycDir = path.join(dist, "nyc");
+      await mkdir(nycDir, { recursive: true });
+      await writeFile(path.join(nycDir, "index.html"), `${nycHtml}\n`, "utf8");
+      console.log("[prerender] Wrote directory HTML to dist/nyc/index.html");
+      await nycPage.close();
+    } catch (nycErr) {
+      console.warn(
+        "[prerender] /nyc capture skipped:",
+        nycErr instanceof Error ? nycErr.message : nycErr,
+      );
+    }
   } catch (err) {
     console.warn(
       "[prerender] Skipped after error; static landing shell remains in dist/index.html.",

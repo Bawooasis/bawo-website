@@ -54,9 +54,10 @@ const titles: Record<PortalTab, string> = {
   social: "Social media growth",
   crm: "Outreach and revenue pipeline",
   access: "Access and audit",
+  growth: "Growth",
   dashboard: "Business dashboard",
   listings: "Listings and claims",
-  growth: "Growth and billing",
+  partner: "Partner link",
 };
 
 const descriptions: Record<PortalTab, string> = {
@@ -70,9 +71,11 @@ const descriptions: Record<PortalTab, string> = {
     "Plan, publish, and measure TikTok and Instagram content from one accountable pipeline.",
   crm: "Track potential customers from research through outreach, replies, proposals, and verified partnerships.",
   access: "Manage privileged access and review the record of administrative actions.",
+  growth:
+    "Track launch supply, sign-ups, and (for businesses) the path to measurable outcomes.",
   dashboard: "See your BawoSocial presence and the systems being prepared for growth.",
   listings: "Review owned listings and submit new businesses for administrator approval.",
-  growth: "Follow the path from verified presence to measurable customer outcomes.",
+  partner: "Share your partner link, download QR kits, and track activation once tables are live.",
 };
 
 const BUSINESS_HIGHLIGHTS = [
