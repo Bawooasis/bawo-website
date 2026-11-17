@@ -89,9 +89,18 @@ async function prerender() {
     return;
   }
 
+  if (process.env.NETLIFY === "true") {
+    console.log(
+      "[prerender] Running on Netlify build image — Chromium install was requested in netlify.toml.",
+    );
+  }
+
   await access(indexPath);
 
   if (!ensureChromium()) {
+    console.warn(
+      "[prerender] Soft-skip on this host. See docs/netlify-prerender.md — build continues with Vite shell.",
+    );
     return;
   }
 
