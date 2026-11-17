@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import DirectoryShell from "../directory/DirectoryShell";
 import { partnerQrDataUrl, partnerRefUrl } from "../directory/qr";
 import type { PartnerApplicantType } from "../directory/types";
@@ -101,6 +101,8 @@ export default function PartnersPage() {
   const [submitting, setSubmitting] = useState(false);
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
+  const [copied, setCopied] = useState(false);
+  const kitRef = useRef<HTMLDivElement | null>(null);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -128,6 +130,33 @@ export default function PartnersPage() {
       cancelled = true;
     };
   }, [sampleLink]);
+
+  // Hide fixed bottom chrome while the Kit preview QR is in the viewport so
+  // share / X controls never cover the scannable area (desktop + mobile).
+  useEffect(() => {
+    const page = document.querySelector(".dir-page");
+    const target = kitRef.current;
+    if (!page || !target || typeof IntersectionObserver === "undefined") {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        page.classList.toggle("dir-page--kit-in-view", entry.isIntersecting);
+      },
+      {
+        root: null,
+        // Count as "in view" while any part of the QR card is near the bottom dock
+        threshold: 0.15,
+        rootMargin: "0px 0px -12% 0px",
+      },
+    );
+    observer.observe(target);
+    return () => {
+      observer.disconnect();
+      page.classList.remove("dir-page--kit-in-view");
+    };
+  }, [activeId]);
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -238,7 +267,7 @@ export default function PartnersPage() {
           </div>
 
           <div className="space-y-6">
-            <div className="dir-card p-6">
+            <div className="dir-card dir-kit-preview p-6" ref={kitRef} id="partners-kit-preview">
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#D6B26A]">
                 Kit preview
               </p>
@@ -340,6 +369,41 @@ export default function PartnersPage() {
           </div>
         </div>
       </section>
+
+      <div
+        className="dir-partners-share"
+        data-sticky-bottom="partners-share"
+        aria-label="Share partner kit"
+      >
+        <a
+          href={`https://wa.me/?text=${encodeURIComponent(`Partner with BawoSocial: ${sampleLink}`)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Share
+        </a>
+        <button
+          type="button"
+          onClick={async () => {
+            try {
+              await navigator.clipboard.writeText(sampleLink);
+              setCopied(true);
+              window.setTimeout(() => setCopied(false), 1800);
+            } catch {
+              window.prompt("Copy this partner link:", sampleLink);
+            }
+          }}
+        >
+          {copied ? "Copied" : "Copy"}
+        </button>
+        <a
+          href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("Partner with BawoSocial NYC")}&url=${encodeURIComponent(sampleLink)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Post on X
+        </a>
+      </div>
     </DirectoryShell>
   );
 }

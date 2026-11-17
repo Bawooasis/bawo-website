@@ -90,6 +90,19 @@ function injectHead(html, { title, description, url, image, jsonLd }) {
   return next;
 }
 
+/**
+ * Directory / partners shells must not embed the prerendered homepage body
+ * (share strip + mobile sticky CTA), which can flash fixed bottom chrome over
+ * Kit preview QR codes before React mounts PartnersPage / directory routes.
+ */
+function withEmptyRoot(html, placeholderText) {
+  const safe = escapeHtml(placeholderText);
+  return html.replace(
+    /<div id="root">[\s\S]*?<\/div>\s*(?=<script)/i,
+    `<div id="root"><div class="dir-page" style="min-height:100vh;padding:2rem 1.25rem;color:#F7F2EA;background:#0E0A14;font-family:Outfit,system-ui,sans-serif"><p>${safe}</p></div></div>\n    `,
+  );
+}
+
 async function writeRoute(routePath, html) {
   const filePath = path.join(dist, routePath, "index.html");
   await mkdir(path.dirname(filePath), { recursive: true });
@@ -108,34 +121,40 @@ async function main() {
     { loc: `${SITE}/affiliate-disclosure`, priority: "0.3" },
   ];
 
-  const nycHtml = injectHead(indexHtml, {
-    title: "Nigerian & Afro NYC Directory | BawoSocial",
-    description:
-      "Discover Nigerian and Afro events, restaurants, markets, and community services across NYC boroughs and New Jersey.",
-    url: `${SITE}/nyc`,
-    image: `${SITE}/og-image.png`,
-    jsonLd: {
-      "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      name: "Nigerian & Afro NYC Directory",
+  const nycHtml = withEmptyRoot(
+    injectHead(indexHtml, {
+      title: "Nigerian & Afro NYC Directory | BawoSocial",
+      description:
+        "Discover Nigerian and Afro events, restaurants, markets, and community services across NYC boroughs and New Jersey.",
       url: `${SITE}/nyc`,
-      isPartOf: { "@type": "WebSite", name: "BawoSocial", url: SITE },
-    },
-  });
+      image: `${SITE}/og-image.png`,
+      jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        name: "Nigerian & Afro NYC Directory",
+        url: `${SITE}/nyc`,
+        isPartOf: { "@type": "WebSite", name: "BawoSocial", url: SITE },
+      },
+    }),
+    "Loading NYC directory…",
+  );
   await writeRoute("nyc", nycHtml);
 
-  const partnersHtml = injectHead(indexHtml, {
-    title: "Partner with BawoSocial | NYC promoters, venues & societies",
-    description:
-      "Partner kits for promoters, restaurants, salons, stores, and student societies across Nigerian & Afro NYC.",
-    url: `${SITE}/partners`,
-    jsonLd: {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      name: "Partner with BawoSocial",
+  const partnersHtml = withEmptyRoot(
+    injectHead(indexHtml, {
+      title: "Partner with BawoSocial | NYC promoters, venues & societies",
+      description:
+        "Partner kits for promoters, restaurants, salons, stores, and student societies across Nigerian & Afro NYC.",
       url: `${SITE}/partners`,
-    },
-  });
+      jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: "Partner with BawoSocial",
+        url: `${SITE}/partners`,
+      },
+    }),
+    "Loading partner kits…",
+  );
   await writeRoute("partners", partnersHtml);
 
   let places = [];
@@ -185,31 +204,34 @@ async function main() {
     const description =
       place.description ||
       `${place.name} — ${place.category || place.cuisine_type || "Nigerian & Afro"} in ${place.neighborhood || place.borough || "NYC"}.`;
-    const html = injectHead(indexHtml, {
-      title,
-      description,
-      url,
-      image: place.image_url || undefined,
-      jsonLd: {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        name: place.name,
-        image: place.image_url || undefined,
-        telephone: place.phone || undefined,
+    const html = withEmptyRoot(
+      injectHead(indexHtml, {
+        title,
+        description,
         url,
-        address: place.address
-          ? { "@type": "PostalAddress", streetAddress: place.address }
-          : undefined,
-        aggregateRating:
-          place.rating != null
-            ? {
-                "@type": "AggregateRating",
-                ratingValue: Number(place.rating),
-                ratingCount: 1,
-              }
+        image: place.image_url || undefined,
+        jsonLd: {
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: place.name,
+          image: place.image_url || undefined,
+          telephone: place.phone || undefined,
+          url,
+          address: place.address
+            ? { "@type": "PostalAddress", streetAddress: place.address }
             : undefined,
-      },
-    });
+          aggregateRating:
+            place.rating != null
+              ? {
+                  "@type": "AggregateRating",
+                  ratingValue: Number(place.rating),
+                  ratingCount: 1,
+                }
+              : undefined,
+        },
+      }),
+      place.name || "Loading place…",
+    );
     await writeRoute(path.join("places", place.slug), html);
     urls.push({ loc: url, priority: "0.7" });
   }
@@ -220,29 +242,32 @@ async function main() {
     const description =
       event.description ||
       `${event.title} at ${event.venue_name || event.city || "NYC"}.`;
-    const html = injectHead(indexHtml, {
-      title,
-      description,
-      url,
-      image: event.image_url || undefined,
-      jsonLd: {
-        "@context": "https://schema.org",
-        "@type": "Event",
-        name: event.title,
-        startDate: event.starts_at,
-        endDate: event.ends_at || undefined,
-        image: event.image_url || undefined,
+    const html = withEmptyRoot(
+      injectHead(indexHtml, {
+        title,
+        description,
         url,
-        location: {
-          "@type": "Place",
-          name: event.venue_name || event.city || "NYC",
-          address: event.location || event.city || "New York, NY",
+        image: event.image_url || undefined,
+        jsonLd: {
+          "@context": "https://schema.org",
+          "@type": "Event",
+          name: event.title,
+          startDate: event.starts_at,
+          endDate: event.ends_at || undefined,
+          image: event.image_url || undefined,
+          url,
+          location: {
+            "@type": "Place",
+            name: event.venue_name || event.city || "NYC",
+            address: event.location || event.city || "New York, NY",
+          },
+          offers: event.url
+            ? { "@type": "Offer", url: event.promoter_ticket_url || event.url }
+            : undefined,
         },
-        offers: event.url
-          ? { "@type": "Offer", url: event.promoter_ticket_url || event.url }
-          : undefined,
-      },
-    });
+      }),
+      event.title || "Loading event…",
+    );
     await writeRoute(path.join("e", event.slug), html);
     urls.push({ loc: url, priority: "0.75" });
   }

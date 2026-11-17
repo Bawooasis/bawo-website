@@ -12,12 +12,32 @@
   --dir-mut: rgba(247, 242, 234, 0.62);
   --dir-line: rgba(214, 178, 106, 0.18);
   --dir-glass: rgba(28, 19, 43, 0.72);
+  /* Keep kit QR / sticky CTAs from colliding with fixed bottom chrome */
+  --dir-fixed-bottom-clearance: calc(5.75rem + env(safe-area-inset-bottom, 0px));
   min-height: 100vh;
   color: var(--dir-txt);
   background:
     radial-gradient(1200px 600px at 80% -10%, #2a193d, transparent 60%),
     linear-gradient(180deg, #07050b, #0e0a14 40%, #0e0a14);
   font-family: Outfit, system-ui, sans-serif;
+  padding-bottom: var(--dir-fixed-bottom-clearance);
+}
+
+/* Homepage share strip / mobile CTA must never paint over directory kits */
+.dir-page .mobile-sticky-cta,
+.dir-page .bawo-hero-share-strip,
+.dir-page .bawo-secondary-bar,
+.dir-page .bawo-secondary-bar--strip {
+  display: none !important;
+}
+
+/* While the kit QR is on screen, suppress any fixed bottom chrome on this page */
+.dir-page--kit-in-view .dir-sticky-save,
+.dir-page--kit-in-view [data-sticky-bottom] {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(110%);
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .dir-gold-text {
@@ -437,6 +457,10 @@
   }
 }
 
+.dir-kit-preview {
+  scroll-margin-bottom: var(--dir-fixed-bottom-clearance);
+}
+
 .dir-qr {
   display: inline-flex;
   padding: 1rem;
@@ -444,6 +468,7 @@
   background: #fff;
   /* Never clip finder patterns / quiet zone */
   overflow: visible;
+  scroll-margin-bottom: var(--dir-fixed-bottom-clearance);
 }
 
 .dir-qr img {
@@ -453,6 +478,45 @@
   border-radius: 0;
   image-rendering: pixelated;
   background: #fff;
+}
+
+.dir-partners-share {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 42;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.7rem 1rem calc(0.7rem + env(safe-area-inset-bottom, 0px));
+  background: rgba(14, 10, 20, 0.94);
+  border-top: 1px solid var(--dir-line);
+  backdrop-filter: blur(14px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.dir-partners-share a,
+.dir-partners-share button {
+  flex: 1;
+  min-height: 2.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--dir-line);
+  background: var(--dir-glass);
+  color: var(--dir-gold-l);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.dir-partners-share a:hover,
+.dir-partners-share button:hover {
+  border-color: rgba(214, 178, 106, 0.45);
+  color: #fff;
+}
+
+.dir-page--kit-in-view .dir-partners-share {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(110%);
 }
 
 .dir-badge {
