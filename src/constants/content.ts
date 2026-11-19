@@ -434,7 +434,7 @@ export const CONTENT = {
           { label: "NYC Network", href: "#building-the-network" },
           { label: "About BawoSocial", href: "#about" },
           { label: "Features", href: "#features" },
-          { label: "Events", href: "#community-circles" },
+          { label: "Events", href: "/nyc#events" },
           { label: "Join BawoSocial", href: "#join" },
           { label: "FAQ", href: "#faq" },
         ],

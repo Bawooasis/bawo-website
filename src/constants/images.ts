@@ -15,48 +15,13 @@ import groupSafeSpaceSisterhood from "../assets/images/groups/safe-space-sisterh
 import groupAfroFoodChop from "../assets/images/groups/afro-food-chop.jpg";
 import groupBrotherhoodNyc from "../assets/images/groups/brotherhood-nyc.jpg";
 
-// Borough images - NYC specific
-import bx01 from "../assets/images/bronx/bx-01.png";
-import bx02 from "../assets/images/bronx/bx-02.png";
-import bx03 from "../assets/images/bronx/bx-03.png";
-import bx04 from "../assets/images/bronx/bx-04.png";
-import bx05 from "../assets/images/bronx/bx-05.png";
+// Borough images — pinned covers from Circles/network polish (#23)
 import bx06 from "../assets/images/bronx/bx-06.png";
-import bx07 from "../assets/images/bronx/bx-07.png";
-import bx08 from "../assets/images/bronx/bx-08.png";
-import bx09 from "../assets/images/bronx/bx-09.png";
-import bkBrooklyn01 from "../assets/images/brooklyn/bk-01.png";
 import bkBrooklyn02 from "../assets/images/brooklyn/bk-02.png";
-import bkBrooklyn03 from "../assets/images/brooklyn/bk-03.png";
-import bkBrooklyn04 from "../assets/images/brooklyn/bk-04.png";
-import bkBrooklyn05 from "../assets/images/brooklyn/bk-05.png";
-import hm01 from "../assets/images/harlem/hm-01.png";
-import hm02 from "../assets/images/harlem/hm-02.png";
-import hm03 from "../assets/images/harlem/hm-03.png";
-import hm04 from "../assets/images/harlem/hm-04.png";
-import hm05 from "../assets/images/harlem/hm-05.png";
 import hm06 from "../assets/images/harlem/hm-06.png";
-import hm07 from "../assets/images/harlem/hm-07.png";
-import hm08 from "../assets/images/harlem/hm-08.png";
-import hm09 from "../assets/images/harlem/hm-09.png";
-import hm10 from "../assets/images/harlem/hm-10.png";
-import hm11 from "../assets/images/harlem/hm-11.png";
-import hm12 from "../assets/images/harlem/hm-12.png";
-import hm13 from "../assets/images/harlem/hm-13.png";
-import qn01 from "../assets/images/queens/qn-01.png";
-import qn02 from "../assets/images/queens/qn-02.png";
-import qn03 from "../assets/images/queens/qn-03.png";
-import qn04 from "../assets/images/queens/qn-04.png";
-import qn05 from "../assets/images/queens/qn-05.png";
 import qn06 from "../assets/images/queens/qn-06.png";
-import qn07 from "../assets/images/queens/qn-07.png";
 import si01 from "../assets/images/staten/si-01.png";
-import si02 from "../assets/images/staten/si-02.png";
-import si03 from "../assets/images/staten/si-03.png";
-import si04 from "../assets/images/staten/si-04.png";
-import si05 from "../assets/images/staten/si-05.png";
 import nj01 from "../assets/images/newjersey/nj-01.jpg";
-
 // Inside the App Images — Alexander approved framed phones (webshots Nov 2026)
 // Device chrome baked in via webshots/render.py (status patch + App Store frame).
 import appCommunityAltScreen from "../assets/images/app-community-alt.jpg";

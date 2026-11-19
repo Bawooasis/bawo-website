@@ -18,6 +18,13 @@
     { "source": "/support", "destination": "/index.html" },
     { "source": "/support/:path*", "destination": "/index.html" },
     { "source": "/affiliate-disclosure", "destination": "/index.html" },
-    { "source": "/affiliate-disclosure/:path*", "destination": "/index.html" }
+    { "source": "/affiliate-disclosure/:path*", "destination": "/index.html" },
+    { "source": "/nyc", "destination": "/index.html" },
+    { "source": "/nyc/:path*", "destination": "/index.html" },
+    { "source": "/partners", "destination": "/index.html" },
+    { "source": "/partners/:path*", "destination": "/index.html" },
+    { "source": "/places/:slug", "destination": "/index.html" },
+    { "source": "/e/:slug", "destination": "/index.html" },
+    { "source": "/__preview/:path*", "destination": "/index.html" }
   ]
 }

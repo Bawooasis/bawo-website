@@ -17,4 +17,11 @@
 /business/* /index.html 200
 /businesses /index.html 200
 /businesses/* /index.html 200
+/nyc /index.html 200
+/nyc/* /index.html 200
+/partners /index.html 200
+/partners/* /index.html 200
+/places/* /index.html 200
+/e/* /index.html 200
+/__preview/* /index.html 200
 /* /index.html 200

@@ -23,6 +23,7 @@ import {
   eventHasAffiliateColumns,
   isAffiliateSchemaPendingError,
 } from "./eventAffiliate";
+import GrowthPanel from "./GrowthPanel";
 import type { PortalTab } from "./PortalLayout";
 import { EmptyState, MetricCard } from "./PortalUi";
 import type {
@@ -115,6 +116,16 @@ export default function AdminPortal({
       "Group name and picture updated.",
     );
   };
+
+  if (activeTab === "growth") {
+    return (
+      <GrowthPanel
+        fallbackUsers={data.metrics.users}
+        fallbackListings={data.businessClaims.length}
+        fallbackEvents={data.eventSubmissions?.length ?? data.metrics.pendingEvents ?? 0}
+      />
+    );
+  }
 
   if (activeTab === "overview") {
     const metrics = [
