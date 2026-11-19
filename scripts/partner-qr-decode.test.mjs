@@ -1,9 +1,9 @@
 /**
  * Generates partner-kit QR PNGs with the same settings as src/directory/qr.ts
- * and asserts jsQR decodes each back to the exact displayed URL.
+ * and asserts jsQR decodes each back to the exact displayed URL (house codes).
  */
 import assert from "node:assert/strict";
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
@@ -24,35 +24,115 @@ const PARTNER_QR_OPTIONS = {
   color: { dark: "#000000", light: "#FFFFFF" },
 };
 
-function partnerRefUrl(code) {
-  return `https://www.joinbawo.com/nyc?ref=${code}`;
+const UTM_CAMPAIGN = {
+  promoter: "partner_promoter",
+  venue: "partner_venue",
+  student_society: "partner_student",
+};
+
+function partnerRefUrl(code, partnerType = "promoter") {
+  const params = new URLSearchParams({
+    utm_source: "partner",
+    utm_medium: "qr",
+    utm_campaign: UTM_CAMPAIGN[partnerType],
+    ref: code,
+  });
+  return `https://www.joinbawo.com/nyc?${params.toString()}`;
 }
+
+/** Read house codes from the single config source. */
+function loadHouseCodes() {
+  const source = readFileSync(
+    join(root, "src/directory/partnerCodes.ts"),
+    "utf8",
+  );
+  const codes = {};
+  const block = source.match(
+    /HOUSE_PARTNER_CODES[\s\S]*?=\s*\{([\s\S]*?)\n\};/,
+  );
+  assert.ok(block, "HOUSE_PARTNER_CODES missing from partnerCodes.ts");
+  for (const type of ["promoter", "venue", "student_society"]) {
+    const section = block[1].match(
+      new RegExp(`${type}:\\s*\\{([\\s\\S]*?)\\},`),
+    );
+    assert.ok(section, `missing ${type} house code`);
+    const code = section[1].match(/code:\s*"([^"]+)"/);
+    assert.ok(code, `missing code for ${type}`);
+    codes[type] = code[1];
+  }
+  return codes;
+}
+
+const house = loadHouseCodes();
 
 /** URLs shown under QR in /partners tabs + Business Portal Partner link. */
 const CASES = [
-  { label: "partners-promoters", code: "BAWO-PROMO-DEMO", width: 280 },
-  { label: "partners-venues", code: "BAWO-VENUE-DEMO", width: 280 },
-  { label: "partners-campus", code: "BAWO-CAMPUS-DEMO", width: 280 },
-  { label: "portal-partner-link-png", code: "BAWO-PENDING", width: 512 },
-  { label: "portal-partner-link-svg-matrix", code: "BAWO-PENDING", width: 512 },
+  {
+    label: "partners-promoters",
+    code: house.promoter,
+    partnerType: "promoter",
+    width: 280,
+  },
+  {
+    label: "partners-venues",
+    code: house.venue,
+    partnerType: "venue",
+    width: 280,
+  },
+  {
+    label: "partners-campus",
+    code: house.student_society,
+    partnerType: "student_society",
+    width: 280,
+  },
+  {
+    label: "portal-partner-link-png",
+    code: house.promoter,
+    partnerType: "promoter",
+    width: 512,
+  },
+  {
+    label: "portal-partner-link-svg-matrix",
+    code: house.promoter,
+    partnerType: "promoter",
+    width: 512,
+  },
 ];
 
 async function decodePngBuffer(buffer, label) {
   const png = PNG.sync.read(buffer);
   const result = jsQR(
-    new Uint8ClampedArray(png.data.buffer, png.data.byteOffset, png.data.byteLength),
+    new Uint8ClampedArray(
+      png.data.buffer,
+      png.data.byteOffset,
+      png.data.byteLength,
+    ),
     png.width,
     png.height,
     { inversionAttempts: "dontInvert" },
   );
-  assert.ok(result, `${label}: jsQR could not decode PNG (${png.width}x${png.height})`);
+  assert.ok(
+    result,
+    `${label}: jsQR could not decode PNG (${png.width}x${png.height})`,
+  );
   return result.data;
 }
 
 const report = [];
 
 for (const testCase of CASES) {
-  const expected = partnerRefUrl(testCase.code);
+  assert.match(
+    testCase.code,
+    /^(PRM|VEN|STU)-[0-9A-HJKMNP-TV-Z]{8}$/,
+    `${testCase.label}: code ${testCase.code} is not a real house code`,
+  );
+  assert.doesNotMatch(
+    testCase.code,
+    /DEMO|PENDING|BAWO-/,
+    `${testCase.label}: demo/placeholder code leaked`,
+  );
+
+  const expected = partnerRefUrl(testCase.code, testCase.partnerType);
 
   const pngBuffer = await QRCode.toBuffer(expected, {
     ...PARTNER_QR_OPTIONS,
@@ -70,7 +150,6 @@ for (const testCase of CASES) {
     `${testCase.label}: decoded "${decoded}" !== expected "${expected}"`,
   );
 
-  // SVG download uses the same payload + ECC/margin; assert generation + PNG twin.
   if (testCase.label.includes("svg")) {
     const svg = await QRCode.toString(expected, {
       ...PARTNER_QR_OPTIONS,
@@ -78,11 +157,14 @@ for (const testCase of CASES) {
       width: testCase.width,
     });
     assert.match(svg, /^<svg[\s\S]*<\/svg>\s*$/);
-    assert.ok(svg.includes('viewBox') || svg.includes("<path") || svg.includes("<rect"));
+    assert.ok(
+      svg.includes("viewBox") || svg.includes("<path") || svg.includes("<rect"),
+    );
     const svgPath = join(outDir, `${testCase.label}.svg`);
     writeFileSync(svgPath, svg);
     report.push({
       label: testCase.label,
+      code: testCase.code,
       expected,
       decoded,
       width: testCase.width,
@@ -95,6 +177,7 @@ for (const testCase of CASES) {
   } else {
     report.push({
       label: testCase.label,
+      code: testCase.code,
       expected,
       decoded,
       width: testCase.width,
@@ -106,6 +189,7 @@ for (const testCase of CASES) {
   }
 
   console.log(`PASS ${testCase.label}`);
+  console.log(`  code:     ${testCase.code}`);
   console.log(`  expected: ${expected}`);
   console.log(`  decoded:  ${decoded}`);
 }

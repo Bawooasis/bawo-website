@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import DirectoryShell from "../directory/DirectoryShell";
+import { houseCodeFor } from "../directory/partnerCodes";
 import { partnerQrDataUrl, partnerRefUrl } from "../directory/qr";
 import type { PartnerApplicantType } from "../directory/types";
 
@@ -10,7 +11,6 @@ type PartnerTab = {
   benefits: string[];
   steps: string[];
   faq: Array<{ q: string; a: string }>;
-  placeholderCode: string;
 };
 
 const TABS: PartnerTab[] = [
@@ -38,7 +38,6 @@ const TABS: PartnerTab[] = [
         a: "Applications are reviewed manually. You will hear back by email after review.",
       },
     ],
-    placeholderCode: "BAWO-PROMO-DEMO",
   },
   {
     id: "venue",
@@ -64,7 +63,6 @@ const TABS: PartnerTab[] = [
         a: "Yes — after approval, manage details in the Business Portal at /businesses.",
       },
     ],
-    placeholderCode: "BAWO-VENUE-DEMO",
   },
   {
     id: "student_society",
@@ -90,7 +88,6 @@ const TABS: PartnerTab[] = [
         a: "Yes. One approved partner code can be shared across your exec board.",
       },
     ],
-    placeholderCode: "BAWO-CAMPUS-DEMO",
   },
 ];
 
@@ -112,9 +109,10 @@ export default function PartnersPage() {
     message: "",
   });
 
+  const house = useMemo(() => houseCodeFor(active.id), [active.id]);
   const sampleLink = useMemo(
-    () => partnerRefUrl(active.placeholderCode),
-    [active.placeholderCode],
+    () => partnerRefUrl(house.code, house.partnerType),
+    [house.code, house.partnerType],
   );
 
   useEffect(() => {
@@ -170,7 +168,7 @@ export default function PartnersPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: form.email,
-          name: `${form.name} · ${active.label} · ${form.organization}`.slice(
+          name: `${form.name} · ${active.label} · ${form.organization} · ${house.code}`.slice(
             0,
             100,
           ),
@@ -286,8 +284,7 @@ export default function PartnersPage() {
                 )}
               </div>
               <p className="mt-3 text-xs text-[#F7F2EA]/55">
-                Scans to the URL above · code {active.placeholderCode} (replaced after
-                approval)
+                Scans to the URL above · house code {house.code}
               </p>
             </div>
 

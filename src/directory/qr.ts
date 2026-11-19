@@ -1,4 +1,5 @@
 import QRCode from "qrcode";
+import type { PartnerApplicantType } from "./types";
 
 /** Shared partner-kit QR settings: scannable quiet zone + error correction ≥ M. */
 export const PARTNER_QR_OPTIONS = {
@@ -11,9 +12,27 @@ export const PARTNER_QR_OPTIONS = {
   },
 };
 
-export function partnerRefUrl(code: string): string {
-  // Keep display URL and encoded payload identical (no extra encoding churn).
-  return `https://www.joinbawo.com/nyc?ref=${code}`;
+const UTM_CAMPAIGN: Record<PartnerApplicantType, string> = {
+  promoter: "partner_promoter",
+  venue: "partner_venue",
+  student_society: "partner_student",
+};
+
+/**
+ * Canonical partner kit URL: UTM tracking + ?ref=<code>.
+ * Displayed text and QR payload must stay identical.
+ */
+export function partnerRefUrl(
+  code: string,
+  partnerType: PartnerApplicantType = "promoter",
+): string {
+  const params = new URLSearchParams({
+    utm_source: "partner",
+    utm_medium: "qr",
+    utm_campaign: UTM_CAMPAIGN[partnerType],
+    ref: code,
+  });
+  return `https://www.joinbawo.com/nyc?${params.toString()}`;
 }
 
 export async function partnerQrDataUrl(

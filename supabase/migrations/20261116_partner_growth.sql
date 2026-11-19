@@ -1,5 +1,8 @@
 -- Partner attribution + growth tracking (FILE ONLY — do not apply from this website repo).
 -- Apply from the BawoSocial app/backend migration workflow after Alexander reviews.
+-- Follow-ups (also file-only until go-ahead):
+--   20261119_partner_rls.sql          — RLS, public view, attribution guards
+--   20261119_partner_house_codes_seed.sql — BawoSocial house kit codes
 -- Public pages continue to use Mailchimp /api/subscribe as the partner application fallback.
 
 create table if not exists public.partner_profiles (

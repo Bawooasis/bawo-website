@@ -1,5 +1,6 @@
 import { Download, Link2, QrCode } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import { houseCodeFor } from "../directory/partnerCodes";
 import {
   partnerQrPngDataUrl,
   partnerQrSvg,
@@ -9,13 +10,16 @@ import { EmptyState } from "./PortalUi";
 
 /**
  * Partner link workspace. Shows empty state until partner attribution tables
- * exist (see supabase/migrations/*_partner_growth.sql). Demo kit uses a
- * real QR for the placeholder ref so operators can verify downloads scan.
+ * exist (see supabase/migrations/*_partner_*.sql). Preview QR uses the
+ * BawoSocial house promoter code from src/directory/partnerCodes.ts.
  */
 export default function PartnerLinkPanel() {
   const [tablesReady] = useState(false);
-  const demoCode = "BAWO-PENDING";
-  const demoLink = useMemo(() => partnerRefUrl(demoCode), [demoCode]);
+  const house = houseCodeFor("promoter");
+  const sampleLink = useMemo(
+    () => partnerRefUrl(house.code, house.partnerType),
+    [house.code, house.partnerType],
+  );
   const [pngUrl, setPngUrl] = useState("");
   const [svgMarkup, setSvgMarkup] = useState("");
 
@@ -24,8 +28,8 @@ export default function PartnerLinkPanel() {
     (async () => {
       try {
         const [png, svg] = await Promise.all([
-          partnerQrPngDataUrl(demoLink, 512),
-          partnerQrSvg(demoLink, 512),
+          partnerQrPngDataUrl(sampleLink, 512),
+          partnerQrSvg(sampleLink, 512),
         ]);
         if (cancelled) return;
         setPngUrl(png);
@@ -40,13 +44,13 @@ export default function PartnerLinkPanel() {
     return () => {
       cancelled = true;
     };
-  }, [demoLink]);
+  }, [sampleLink]);
 
   const downloadPng = () => {
     if (!pngUrl) return;
     const a = document.createElement("a");
     a.href = pngUrl;
-    a.download = "bawosocial-partner-qr.png";
+    a.download = `bawosocial-partner-qr-${house.code}.png`;
     a.click();
   };
 
@@ -56,7 +60,7 @@ export default function PartnerLinkPanel() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "bawosocial-partner-qr.svg";
+    a.download = `bawosocial-partner-qr-${house.code}.svg`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -75,7 +79,7 @@ export default function PartnerLinkPanel() {
           <EmptyState
             icon={QrCode}
             title="Partner analytics unlock after approval"
-            body="Once partner tables are migrated and Alexander activates your code, this tab will show live clicks, sign-ups, saves, activation, a weekly chart, and your events. Preview QR downloads below encode the exact placeholder URL."
+            body="Once partner tables are migrated and Alexander activates your code, this tab will show live clicks, sign-ups, saves, activation, a weekly chart, and your events. Preview QR downloads below encode the BawoSocial house promoter URL."
           />
           <div className="portal-feature-row" style={{ marginTop: "1.25rem" }}>
             <span>Clicks</span>
@@ -89,11 +93,11 @@ export default function PartnerLinkPanel() {
           <div className="portal-panel-heading">
             <div>
               <span className="portal-kicker">Preview</span>
-              <h2>Partner QR</h2>
+              <h2>Partner QR · {house.code}</h2>
             </div>
           </div>
           <p className="portal-muted" style={{ marginBottom: "1rem" }}>
-            {demoLink}
+            {sampleLink}
           </p>
           <div
             style={{
@@ -106,7 +110,7 @@ export default function PartnerLinkPanel() {
             {pngUrl ? (
               <img
                 src={pngUrl}
-                alt={`QR code for ${demoLink}`}
+                alt={`QR code for ${sampleLink}`}
                 width={200}
                 height={200}
                 style={{
