@@ -218,7 +218,7 @@ function App() {
                   <a href="#community-circles" className="bawo-hero-cinematic__pill">
                     Nigerian Circles
                   </a>
-                  <a href="#community-circles" className="bawo-hero-cinematic__pill">
+                  <a href="/nyc#events" className="bawo-hero-cinematic__pill">
                     Afrobeats & Events
                   </a>
                   <a href="/businesses" className="bawo-hero-cinematic__pill bawo-hero-cinematic__pill--business">

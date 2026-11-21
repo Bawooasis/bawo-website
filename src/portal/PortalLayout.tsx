@@ -8,6 +8,7 @@ import {
   RefreshCw,
   ShieldCheck,
   TrendingUp,
+  Link2,
   Target,
   UserRound,
   UsersRound,
@@ -24,9 +25,10 @@ export type PortalTab =
   | "social"
   | "crm"
   | "access"
+  | "growth"
   | "dashboard"
   | "listings"
-  | "growth";
+  | "partner";
 
 type PortalLayoutProps = {
   mode: PortalMode;
@@ -55,6 +57,7 @@ const icons = {
   dashboard: LayoutDashboard,
   listings: Building2,
   growth: TrendingUp,
+  partner: Link2,
 };
 
 export default function PortalLayout({
@@ -79,6 +82,7 @@ export default function PortalLayout({
           { id: "events", label: "Events" },
           { id: "groups", label: "Groups" },
           { id: "businesses", label: "Businesses" },
+          { id: "growth", label: "Growth" },
           { id: "social", label: "Social Media" },
           { id: "crm", label: "Outreach CRM" },
           { id: "access", label: "Access & Audit" },
@@ -86,6 +90,7 @@ export default function PortalLayout({
       : [
           { id: "dashboard", label: "Dashboard" },
           { id: "listings", label: "Listings & Claims" },
+          { id: "partner", label: "Partner link" },
           { id: "growth", label: "Growth" },
         ];
 

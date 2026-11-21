@@ -84,6 +84,41 @@
   status = 200
 
 [[redirects]]
+  from = "/nyc"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/nyc/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/partners"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/partners/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/places/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/e/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/__preview/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
