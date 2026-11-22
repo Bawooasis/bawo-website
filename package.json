@@ -11,7 +11,9 @@
     "prerender": "node scripts/prerender.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "node scripts/portal-auth-recovery.test.mjs && node scripts/social-platform-copy.test.mjs && node scripts/partner-qr-decode.test.mjs && node scripts/check-partner-rls.mjs"
+    "test": "node scripts/portal-auth-recovery.test.mjs && node scripts/social-platform-copy.test.mjs && node scripts/partner-qr-decode.test.mjs && node scripts/check-partner-rls.mjs",
+    "test:header-layout": "node scripts/header-tablet-layout.test.mjs",
+    "typecheck": "tsc -p tsconfig.app.json --noEmit"
   },
   "dependencies": {
     "gsap": "^3.13.0",
