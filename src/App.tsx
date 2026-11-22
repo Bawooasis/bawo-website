@@ -175,7 +175,7 @@ function App() {
 
       <SiteHeader onJoinClick={scrollToWaitlist} />
 
-      <div className="bawo-page-shell relative z-10 bg-transparent min-h-screen overflow-x-clip pb-[var(--bawo-mobile-sticky-cta-height)] md:pb-0">
+      <div className="bawo-page-shell relative z-10 bg-transparent min-h-screen overflow-x-clip pb-[var(--bawo-mobile-sticky-cta-height)] sm:pb-0">
         {/* Hero — cinematic particle field */}
         <section
           ref={heroRef}
@@ -512,32 +512,25 @@ function App() {
 
         {/* Footer */}
         <footer className="py-12 bg-transparent">
-          {/* Mobile Sticky CTA */}
-          <div className="md:hidden mobile-sticky-cta bg-[#0E0A14]/92 backdrop-blur-xl border-t border-[#D6B26A]/25">
+          {/* Phone sticky CTA — only below sm, where header Join is hidden */}
+          <div
+            className="sm:hidden mobile-sticky-cta bg-[#0E0A14]/92 backdrop-blur-xl border-t border-[#D6B26A]/25"
+            data-bawo-mobile-sticky
+          >
             <div className="px-4 py-3 flex items-center justify-between gap-3">
               <div className="flex flex-col min-w-0 gap-0.5">
                 <span className="text-[#F7F3FA] font-bold text-sm">BawoSocial NYC</span>
-                <span className="text-[#F7E7C4]/75 font-medium text-sm uppercase tracking-wider">
-                  Join · Partner with us
+                <span className="text-[#F7E7C4]/75 font-medium text-sm tracking-wide">
+                  Community across NYC
                 </span>
               </div>
               <div className="flex shrink-0 items-center gap-2">
                 <FoundingMemberButton
-                  label="Join"
+                  label="Join BawoSocial"
                   variant="primary"
                   size="sm"
-                  className="max-w-[7.5rem]"
+                  className="max-w-[11rem]"
                   onClick={scrollToWaitlist}
-                />
-                <FoundingMemberButton
-                  label="Partner"
-                  variant="primary"
-                  appearance="outline"
-                  size="sm"
-                  className="max-w-[7.5rem]"
-                  onClick={() => {
-                    window.location.assign("/businesses");
-                  }}
                 />
               </div>
             </div>
