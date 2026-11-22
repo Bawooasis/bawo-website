@@ -24,10 +24,8 @@ const PILL_LINKS = [
   { label: "FAQ", href: "#faq" },
 ] as const;
 
-const MOBILE_LINKS = [
-  ...PILL_LINKS,
-  { label: "Join BawoSocial", href: "#join" },
-] as const;
+/** Menu panel links — Partner / Join stay in the header (or one phone CTA), not repeated here. */
+const MENU_LINKS = PILL_LINKS.filter((link) => link.href !== "/businesses");
 
 /** Full pill nav + no hamburger at this width and above (Tailwind `xl`). */
 export const HEADER_DESKTOP_MIN_WIDTH = 1280;
@@ -38,12 +36,14 @@ type SiteHeaderProps = {
 
 function SiteHeader({ onJoinClick }: SiteHeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const menuBtnRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const panelId = useId();
 
   const closeMobile = useCallback(() => {
     setMobileOpen(false);
+    menuBtnRef.current?.focus();
   }, []);
 
   useEffect(() => {
@@ -52,6 +52,15 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
       document.body.style.overflow = "";
     };
   }, [mobileOpen]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -71,7 +80,7 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
   useEffect(() => {
     if (!mobileOpen) return;
     const firstLink = panelRef.current?.querySelector<HTMLElement>(
-      "a, button:not([disabled])",
+      "a[href], button:not([disabled])",
     );
     firstLink?.focus();
   }, [mobileOpen]);
@@ -82,19 +91,29 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const onPanelKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>) => {
-    if (event.key !== "Tab" || !panelRef.current) return;
+  const getFocusable = () => {
+    const panelItems = panelRef.current
+      ? Array.from(
+          panelRef.current.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          ),
+        )
+      : [];
+    const menuBtn = menuBtnRef.current;
+    return menuBtn ? [menuBtn, ...panelItems] : panelItems;
+  };
 
-    const focusable = panelRef.current.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
-    );
+  const onPanelKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== "Tab") return;
+
+    const focusable = getFocusable();
     if (focusable.length === 0) return;
 
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
     const active = document.activeElement as HTMLElement | null;
 
-    if (event.shiftKey && active === first) {
+    if (event.shiftKey && (active === first || active === menuBtnRef.current)) {
       event.preventDefault();
       last.focus();
     } else if (!event.shiftKey && active === last) {
@@ -103,9 +122,21 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
     }
   };
 
+  const headerClass = [
+    "bawo-site-header",
+    "fixed",
+    "inset-x-0",
+    "top-0",
+    "z-50",
+    scrolled ? "bawo-site-header--scrolled" : "",
+    mobileOpen ? "bawo-site-header--menu-open" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <header className="bawo-site-header fixed inset-x-0 top-0 z-50" data-bawo-header>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <header className={headerClass} data-bawo-header>
+      <div className="bawo-site-header__inner" data-bawo-header-inner>
         <div className="bawo-site-header__bar" data-bawo-header-bar>
           <div className="bawo-site-header__leading" data-bawo-header-leading>
             <SiteLogo className="bawo-site-header__logo" onClick={scrollHome} />
@@ -158,7 +189,11 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               data-bawo-header-menu
             >
-              {mobileOpen ? <X className="h-5 w-5" strokeWidth={2} /> : <Menu className="h-5 w-5" strokeWidth={2} />}
+              {mobileOpen ? (
+                <X className="bawo-site-header__menu-icon h-5 w-5" strokeWidth={2} aria-hidden />
+              ) : (
+                <Menu className="bawo-site-header__menu-icon h-5 w-5" strokeWidth={2} aria-hidden />
+              )}
             </button>
           </div>
         </div>
@@ -172,30 +207,24 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
           data-bawo-header-mobile-panel
           onKeyDown={onPanelKeyDown}
         >
-          <nav className="container mx-auto px-4 py-4 flex flex-col gap-1" aria-label="Mobile">
-            {MOBILE_LINKS.map((link) => (
+          <nav
+            className="bawo-site-header__mobile-nav"
+            aria-label="Mobile"
+            data-bawo-header-mobile-nav
+          >
+            {MENU_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 className="bawo-site-header__mobile-link"
                 onClick={closeMobile}
+                data-bawo-menu-link={link.label}
               >
                 {link.label}
               </a>
             ))}
-            <div className="px-2 pt-3 flex flex-col gap-2">
-              <BawoPillButton
-                label="Partner with us"
-                variant="primary"
-                appearance="outline"
-                size="md"
-                polished
-                fullWidth
-                onClick={() => {
-                  closeMobile();
-                  window.location.assign("/businesses");
-                }}
-              />
+            {/* Phone-only primary CTA — Join is already in the header from sm up */}
+            <div className="bawo-site-header__mobile-cta" data-bawo-header-mobile-cta>
               <BawoPillButton
                 label={CONTENT.hero.ctaSecondary}
                 variant="primary"
