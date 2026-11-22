@@ -13,19 +13,21 @@ import BawoPillButton from "./BawoPillButton";
 import SiteLogo from "./SiteLogo";
 import { CONTENT } from "../constants/content";
 
-/** Top-center pill destinations (replaces left sidebar + mid-page pill). */
+/**
+ * Desktop pill = section anchors only.
+ * Partner lives once as the gold header chip (not repeated in the pill).
+ */
 const PILL_LINKS = [
   { label: "Circles", href: "#community-circles" },
   { label: "Network", href: "#building-the-network" },
   { label: "About", href: "#about" },
   { label: "Features", href: "#features" },
   { label: "Events", href: "/nyc#events" },
-  { label: "Partner with us", href: "/businesses" },
   { label: "FAQ", href: "#faq" },
 ] as const;
 
 /** Menu panel links — Partner / Join stay in the header (or one phone CTA), not repeated here. */
-const MENU_LINKS = PILL_LINKS.filter((link) => link.href !== "/businesses");
+const MENU_LINKS = PILL_LINKS;
 
 /** Full pill nav + no hamburger at this width and above (Tailwind `xl`). */
 export const HEADER_DESKTOP_MIN_WIDTH = 1280;
@@ -48,8 +50,10 @@ function SiteHeader({ onJoinClick }: SiteHeaderProps) {
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
+    document.body.classList.toggle("bawo-menu-open", mobileOpen);
     return () => {
       document.body.style.overflow = "";
+      document.body.classList.remove("bawo-menu-open");
     };
   }, [mobileOpen]);
 

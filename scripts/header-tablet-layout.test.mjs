@@ -42,6 +42,77 @@ function near(actual, expected, slack, label) {
   );
 }
 
+async function countVisibleCtas(page) {
+  return page.evaluate(() => {
+    const visible = (el) => {
+      if (!el) return false;
+      const style = getComputedStyle(el);
+      if (
+        style.display === "none" ||
+        style.visibility === "hidden" ||
+        Number(style.opacity) === 0
+      ) {
+        return false;
+      }
+      let node = el.parentElement;
+      while (node && node !== document.body) {
+        const ps = getComputedStyle(node);
+        if (ps.display === "none" || ps.visibility === "hidden") return false;
+        node = node.parentElement;
+      }
+      const rect = el.getBoundingClientRect();
+      return rect.width > 0 && rect.height > 0;
+    };
+
+    // Header chrome only (header + sticky + open sheet) — not hero/page CTAs.
+    const roots = [
+      document.querySelector("[data-bawo-header]"),
+      document.querySelector("[data-bawo-mobile-sticky]"),
+    ].filter(Boolean);
+
+    const candidates = roots.flatMap((root) =>
+      Array.from(
+        root.querySelectorAll(
+          "a, button, [data-bawo-menu-link], [data-bawo-header-partner]",
+        ),
+      ),
+    );
+
+    const partnerEls = candidates.filter((el) => {
+      const t = (el.textContent || "").replace(/\s+/g, " ").trim();
+      const aria = el.getAttribute("aria-label") || "";
+      return /partner/i.test(t) || /partner/i.test(aria);
+    });
+    const joinEls = candidates.filter((el) => {
+      const t = (el.textContent || "").replace(/\s+/g, " ").trim();
+      return /join\s*bawosocial/i.test(t) || /^join$/i.test(t);
+    });
+
+    const visiblePartner = partnerEls.filter(visible);
+    const visibleJoin = joinEls.filter(visible);
+
+    const pillPartner = Array.from(
+      document.querySelectorAll(".bawo-site-header__pill-item"),
+    ).filter((el) => /partner/i.test(el.textContent || ""));
+
+    return {
+      partnerCount: visiblePartner.length,
+      joinCount: visibleJoin.length,
+      partnerLabels: visiblePartner.map((el) =>
+        (el.textContent || el.getAttribute("aria-label") || "")
+          .replace(/\s+/g, " ")
+          .trim(),
+      ),
+      joinLabels: visibleJoin.map((el) =>
+        (el.textContent || "").replace(/\s+/g, " ").trim(),
+      ),
+      pillPartnerVisible: pillPartner.some(visible),
+      stickyVisible: visible(document.querySelector("[data-bawo-mobile-sticky]")),
+      bodyMenuOpen: document.body.classList.contains("bawo-menu-open"),
+    };
+  });
+}
+
 async function measureHeader(page) {
   return page.evaluate(() => {
     const header = document.querySelector("[data-bawo-header]");
@@ -61,34 +132,30 @@ async function measureHeader(page) {
     }
 
     const vw = window.innerWidth;
+    const vh = window.innerHeight;
     const barRect = bar.getBoundingClientRect();
-    const innerRect = inner.getBoundingClientRect();
     const leadingRect = leading.getBoundingClientRect();
     const actionsRect = actions.getBoundingClientRect();
     const logoRect = logo.getBoundingClientRect();
     const menuRect = menu?.getBoundingClientRect() ?? null;
     const partnerRect = partner?.getBoundingClientRect() ?? null;
-    const joinRect = join?.getBoundingClientRect() ?? null;
     const stickyRect = sticky?.getBoundingClientRect() ?? null;
     const pillStyle = pill ? getComputedStyle(pill) : null;
     const menuStyle = menu ? getComputedStyle(menu) : null;
     const joinStyle = join ? getComputedStyle(join) : null;
     const stickyStyle = sticky ? getComputedStyle(sticky) : null;
-    const headerStyle = getComputedStyle(header);
 
     const overlaps = (a, b) =>
-      Boolean(a && b && !(a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom));
+      Boolean(
+        a &&
+          b &&
+          !(a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom),
+      );
 
     return {
       viewportWidth: vw,
-      headerHeight: parseFloat(headerStyle.minHeight) || barRect.height,
+      viewportHeight: vh,
       barHeight: barRect.height,
-      inner: {
-        left: innerRect.left,
-        right: innerRect.right,
-        width: innerRect.width,
-        padLeft: logoRect.left - 0, // measured vs viewport via logo
-      },
       bar: { left: barRect.left, right: barRect.right, width: barRect.width },
       leading: {
         left: leadingRect.left,
@@ -116,9 +183,6 @@ async function measureHeader(page) {
       join: join
         ? {
             display: joinStyle?.display ?? null,
-            left: joinRect?.left ?? null,
-            right: joinRect?.right ?? null,
-            height: joinRect?.height ?? null,
           }
         : null,
       sticky: sticky
@@ -139,56 +203,21 @@ async function measureHeader(page) {
   });
 }
 
-async function measureOpenMenuCtas(page) {
+async function measureOpenPanel(page) {
   return page.evaluate(() => {
     const panel = document.querySelector("[data-bawo-header-mobile-panel]");
     if (!panel) return { error: "panel missing" };
-
-    const isVisible = (el) => {
-      const style = getComputedStyle(el);
-      if (style.display === "none" || style.visibility === "hidden") return false;
-      // Ancestors with display:none (e.g. sm+ mobile CTA wrapper)
-      let node = el.parentElement;
-      while (node && node !== panel) {
-        if (getComputedStyle(node).display === "none") return false;
-        node = node.parentElement;
-      }
-      const rect = el.getBoundingClientRect();
-      return rect.width > 0 && rect.height > 0;
-    };
-
-    const texts = Array.from(
-      panel.querySelectorAll("a, button, [data-bawo-menu-link]"),
-    )
-      .filter(isVisible)
-      .map((el) => (el.textContent || "").replace(/\s+/g, " ").trim());
-
-    const partnerMatches = texts.filter((t) => /partner/i.test(t));
-    const joinMatches = texts.filter((t) =>
-      /join\s*bawosocial|^\s*join\s*$/i.test(t),
-    );
-
-    const headerJoin = document.querySelector(".bawo-site-header__join-btn");
-    const headerJoinVisible =
-      headerJoin && getComputedStyle(headerJoin).display !== "none";
-
-    const mobileCta = document.querySelector("[data-bawo-header-mobile-cta]");
-    const mobileCtaVisible =
-      mobileCta && getComputedStyle(mobileCta).display !== "none";
-
-    const menuLinks = Array.from(
-      panel.querySelectorAll("[data-bawo-menu-link]"),
-    ).map((el) => el.getAttribute("data-bawo-menu-link"));
-
+    const rect = panel.getBoundingClientRect();
+    const style = getComputedStyle(panel);
     return {
-      texts,
-      partnerCount: partnerMatches.length,
-      joinCount: joinMatches.length,
-      headerJoinVisible: Boolean(headerJoinVisible),
-      mobileCtaVisible: Boolean(mobileCtaVisible),
-      menuLinks,
-      hasPartnerLink: menuLinks.includes("Partner with us"),
-      hasJoinLink: menuLinks.some((l) => /join/i.test(l || "")),
+      top: rect.top,
+      bottom: rect.bottom,
+      height: rect.height,
+      width: rect.width,
+      display: style.display,
+      viewportHeight: window.innerHeight,
+      coversBottom: rect.bottom >= window.innerHeight - 2,
+      coversNearTop: rect.top <= 80,
     };
   });
 }
@@ -217,20 +246,28 @@ async function run() {
         const edgePad = expectedEdgePad(vp.width);
         const edgeSlack = 6;
 
-        // No logo/actions overlap.
         assert(!m.logoActionsOverlap, `${vp.label}: logo overlaps actions`);
 
-        // Comfortable separation.
         const minGap = isDesktop ? 24 : 40;
         assert(
           m.gapLeadingToActions >= minGap,
           `${vp.label}: leading/actions gap too small (${m.gapLeadingToActions}px)`,
         );
+        assert(m.barHeight >= 44, `${vp.label}: bar height ${m.barHeight}px < 44`);
 
-        // Consistent bar height (≥ 44px for tap rhythm).
+        // Closed-menu CTA uniqueness
+        const closedCtas = await countVisibleCtas(page);
         assert(
-          m.barHeight >= 44,
-          `${vp.label}: bar height ${m.barHeight}px < 44`,
+          !closedCtas.pillPartnerVisible,
+          `${vp.label}: Partner must not appear in the desktop pill`,
+        );
+        assert(
+          closedCtas.partnerCount === 1,
+          `${vp.label} closed: expected 1 Partner, got ${closedCtas.partnerCount} (${closedCtas.partnerLabels.join("|")})`,
+        );
+        assert(
+          closedCtas.joinCount === 1,
+          `${vp.label} closed: expected 1 Join, got ${closedCtas.joinCount} (${closedCtas.joinLabels.join("|")})`,
         );
 
         if (isDesktop) {
@@ -242,20 +279,13 @@ async function run() {
             !m.menu || m.menu.display === "none",
             `${vp.label}: hamburger should be hidden at ≥${DESKTOP_MIN}`,
           );
-          // Logo / actions sit on the max-width inner edges (not viewport when centered).
-          near(
-            m.logo.left - m.bar.left,
-            0,
-            edgeSlack + 2,
-            `${vp.label} desktop logo vs bar left`,
-          );
+          near(m.logo.left - m.bar.left, 0, edgeSlack + 2, `${vp.label} desktop logo vs bar left`);
           near(
             m.bar.right - m.actions.right,
             0,
             edgeSlack + 2,
             `${vp.label} desktop actions vs bar right`,
           );
-          // Inner uses max-width 80rem + 32px pad — actions inset from viewport ≥ pad.
           assert(
             m.viewportWidth - m.actions.right >= edgePad - 1,
             `${vp.label}: desktop actions inset too tight`,
@@ -275,23 +305,17 @@ async function run() {
             `${vp.label}: hamburger should be visible below ${DESKTOP_MIN}`,
           );
 
-          // Full-bleed: logo + hamburger within true edge padding of the viewport.
           near(m.logo.left, edgePad, edgeSlack + 4, `${vp.label} logo left inset`);
           const rightInset = m.viewportWidth - m.menu.right;
           near(rightInset, edgePad, edgeSlack, `${vp.label} hamburger right inset`);
-
-          // Must NOT sit ~100px+ inset like a centered 960/1024 container.
           assert(
             rightInset < 48,
             `${vp.label}: hamburger inset ${rightInset.toFixed(1)}px looks container-centered`,
           );
-
-          // 44px tap target.
           assert(
             m.menu.width >= 44 && m.menu.height >= 44,
             `${vp.label}: menu tap target ${m.menu.width}x${m.menu.height} < 44`,
           );
-
           assert(
             m.menu.left - m.logo.right >= minGap,
             `${vp.label}: hamburger too close to logo`,
@@ -303,15 +327,10 @@ async function run() {
           );
           assert(Boolean(m.menuAriaControls), `${vp.label}: missing aria-controls`);
 
-          // Sticky bar only below sm; must not cover header.
           if (vp.width < 640) {
             assert(
               m.sticky && m.sticky.display !== "none",
-              `${vp.label}: sticky CTA should show on phone`,
-            );
-            assert(
-              m.sticky.top >= m.barHeight,
-              `${vp.label}: sticky overlaps header (sticky.top=${m.sticky.top})`,
+              `${vp.label}: sticky CTA should show on phone when menu closed`,
             );
           } else if (m.sticky) {
             assert(
@@ -321,65 +340,63 @@ async function run() {
           }
         }
 
-        let ctaNote = "n/a";
+        let openNote = "n/a";
         if (!isDesktop && m.menu) {
           await page.click("[data-bawo-header-menu]");
           await page.waitForSelector("[data-bawo-header-mobile-panel]", {
             state: "visible",
             timeout: 5000,
           });
-          const expanded = await page.getAttribute(
-            "[data-bawo-header-menu]",
-            "aria-expanded",
-          );
-          assert(expanded === "true", `${vp.label}: aria-expanded not true when open`);
-
-          const ctas = await measureOpenMenuCtas(page);
-          if (ctas.error) throw new Error(ctas.error);
-
           assert(
-            !ctas.hasPartnerLink,
-            `${vp.label}: Partner must not appear as a menu link`,
+            (await page.getAttribute("[data-bawo-header-menu]", "aria-expanded")) === "true",
+            `${vp.label}: aria-expanded not true when open`,
           );
-          assert(!ctas.hasJoinLink, `${vp.label}: Join must not appear as a menu link`);
+
+          const panel = await measureOpenPanel(page);
+          if (panel.error) throw new Error(panel.error);
+
+          // Full-height sheet: reaches (near) the viewport bottom under the bar.
+          const bottomGap = panel.viewportHeight - panel.bottom;
           assert(
-            ctas.partnerCount === 0,
-            `${vp.label}: Partner repeated in open menu (${ctas.partnerCount})`,
+            bottomGap <= 8,
+            `${vp.label}: open menu does not cover viewport bottom (gap=${bottomGap.toFixed(1)}, bottom=${panel.bottom}, vh=${panel.viewportHeight})`,
+          );
+          assert(
+            panel.height >= panel.viewportHeight * 0.85,
+            `${vp.label}: open menu height ${panel.height.toFixed(0)} too short vs vh ${panel.viewportHeight}`,
+          );
+          assert(
+            panel.top <= m.barHeight + 8,
+            `${vp.label}: open menu top ${panel.top.toFixed(1)} should sit under the bar (barH=${m.barHeight})`,
           );
 
-          if (vp.width < 640) {
-            assert(
-              ctas.mobileCtaVisible,
-              `${vp.label}: phone menu should show one Join CTA block`,
-            );
-            assert(
-              ctas.joinCount === 1,
-              `${vp.label}: expected exactly one Join in open phone menu, got ${ctas.joinCount}`,
-            );
-          } else {
-            assert(
-              !ctas.mobileCtaVisible,
-              `${vp.label}: sm+ menu must not duplicate header Join CTA`,
-            );
-            assert(
-              ctas.joinCount === 0,
-              `${vp.label}: Join duplicated in open menu (${ctas.joinCount})`,
-            );
-          }
+          const openCtas = await countVisibleCtas(page);
+          assert(
+            openCtas.bodyMenuOpen,
+            `${vp.label}: body.bawo-menu-open missing while menu open`,
+          );
+          assert(
+            !openCtas.stickyVisible,
+            `${vp.label}: sticky bar must hide while menu is open`,
+          );
+          assert(
+            openCtas.partnerCount === 1,
+            `${vp.label} open: expected 1 Partner, got ${openCtas.partnerCount} (${openCtas.partnerLabels.join("|")})`,
+          );
+          assert(
+            openCtas.joinCount === 1,
+            `${vp.label} open: expected 1 Join, got ${openCtas.joinCount} (${openCtas.joinLabels.join("|")})`,
+          );
 
-          ctaNote = `partner=${ctas.partnerCount} join=${ctas.joinCount} mobileCta=${ctas.mobileCtaVisible}`;
+          openNote = `panelH=${panel.height.toFixed(0)}/${panel.viewportHeight} partner=${openCtas.partnerCount} join=${openCtas.joinCount} sticky=${openCtas.stickyVisible}`;
 
           await page.keyboard.press("Escape");
           await page.waitForSelector("[data-bawo-header-mobile-panel]", {
             state: "detached",
             timeout: 5000,
           });
-          const collapsed = await page.getAttribute(
-            "[data-bawo-header-menu]",
-            "aria-expanded",
-          );
           assert(
-            collapsed === "false",
+            (await page.getAttribute("[data-bawo-header-menu]", "aria-expanded")) === "false",
             `${vp.label}: aria-expanded not false after Esc`,
           );
         }
@@ -395,11 +412,13 @@ async function run() {
           gap: Number(m.gapLeadingToActions.toFixed(1)),
           barHeight: Number(m.barHeight.toFixed(1)),
           edgePad,
-          ctaNote,
+          closedPartner: closedCtas.partnerCount,
+          closedJoin: closedCtas.joinCount,
+          openNote,
         };
         report.push(line);
         console.log(
-          `ok  ${vp.label} (${vp.width}) logoL=${line.logoLeft} menuRInset=${line.menuRightInset} actionsRInset=${line.actionsRightInset} gap=${line.gap} barH=${line.barHeight} pad=${edgePad} [${ctaNote}]`,
+          `ok  ${vp.label} (${vp.width}) logoL=${line.logoLeft} menuRInset=${line.menuRightInset} P/J closed=${closedCtas.partnerCount}/${closedCtas.joinCount} [${openNote}]`,
         );
       } catch (err) {
         failures.push(`${vp.label}: ${err.message}`);

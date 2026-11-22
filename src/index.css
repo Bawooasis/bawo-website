@@ -1992,23 +1992,40 @@ a.bawo-cta-quiet:active {
   }
 }
 
+/* Full-height frosted sheet — covers hero + sticky bar on phone/tablet */
 .bawo-site-header__mobile-panel {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: var(--bawo-header-offset);
+  bottom: 0;
+  z-index: 55;
   border-top: 1px solid rgba(214, 178, 106, 0.16);
   background: linear-gradient(
     165deg,
-    rgba(28, 19, 43, 0.82) 0%,
-    rgba(14, 10, 22, 0.9) 100%
+    rgba(28, 19, 43, 0.92) 0%,
+    rgba(14, 10, 22, 0.96) 100%
   );
-  -webkit-backdrop-filter: blur(22px) saturate(160%);
-  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(165%);
+  backdrop-filter: blur(24px) saturate(165%);
   box-shadow:
     0 18px 40px rgba(5, 2, 10, 0.45),
     inset 0 1px 0 rgba(247, 231, 196, 0.12);
-  max-height: min(70vh, calc(100dvh - var(--bawo-header-offset)));
+  max-height: none;
+  height: calc(100dvh - var(--bawo-header-offset));
+  min-height: calc(100vh - var(--bawo-header-offset));
   overflow-y: auto;
   overscroll-behavior: contain;
   animation: bawo-header-menu-in 220ms ease-out both;
-  padding-bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
+  box-sizing: border-box;
+}
+
+/* Hide sticky Join while the sheet is open so only one Join is visible */
+body.bawo-menu-open .mobile-sticky-cta {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 .bawo-site-header__mobile-nav {
@@ -3768,6 +3785,14 @@ h3.font-display,
 
 .bawo-site-header__mobile-panel {
   border-top: 1px solid rgba(214, 178, 106, 0.14) !important;
+  /* Keep sheet opaque enough that hero copy never peeks/clips under the edge */
+  background: linear-gradient(
+    165deg,
+    rgba(28, 19, 43, 0.94) 0%,
+    rgba(14, 10, 22, 0.97) 100%
+  ) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(165%) !important;
+  backdrop-filter: blur(24px) saturate(165%) !important;
 }
 
 .bawo-site-header__nav-link,
