@@ -2,8 +2,8 @@ import { IMAGES } from "./images";
 
 export const CONTENT = {
   partnerWithUs: {
-    headline: "Own a Nigerian restaurant, lounge, salon, market, or business in NYC? Partner with BawoSocial.",
-    body: "Whether you run a Nigerian restaurant or buka, suya spot, lounge, salon, African food market, shipping & cargo service, or professional practice serving the Nigerian community in NYC, sign in to Partner with BawoSocial to claim your verified listing, update your storefront, and connect with members who show up for the culture.",
+    headline: "Already in Nigerians in New York or a campus group?",
+    body: "We’re built to work with you — list your events, get your members answers faster. Own a Nigerian restaurant, buka, salon, market, or business in NYC? Sign in to claim your listing and update your storefront.",
     ctaLabel: "Partner with us",
     inquiryEmail:
       import.meta.env.VITE_B2B_CONTACT_EMAIL || "Axadegbenro@gmail.com",
@@ -11,9 +11,9 @@ export const CONTENT = {
   },
 
   communityMission: {
-    title: "More than an app. A home for Nigerians in the diaspora.",
+    title: "Businesses, events and Circles in one place.",
     subtitle:
-      "BawoSocial exists so Nigerians in the diaspora, starting across all five boroughs of New York City, can celebrate our culture, support Nigerian-owned businesses, and find community that truly feels like home.",
+      "BawoSocial is the easiest place for Nigerians in NYC (and friends of the culture) to find verified Nigerian businesses, join specific Circles, and see this week’s Owambe & Afrobeats events — without scrolling through WhatsApp groups.",
     pillars: [
       {
         title: "Explore Verified Nigerian Spots",
@@ -36,13 +36,13 @@ export const CONTENT = {
   // Hero Section
   hero: {
     title: {
-      lead: "Find your people. ",
-      highlight: "Feel at home.",
+      lead: "Find Nigerian businesses, ",
+      highlight: "Circles & events in NYC",
     },
     subtitle:
-      "The culture hub for Nigerians in the diaspora, starting across all 5 boroughs of NYC. Find verified restaurants and businesses, Community Circles, Afrobeats and Owambe events, and Ask AI.",
+      "Verified spots, specific groups, and what’s happening this weekend — all in one place.",
     ctaPrimary: "Join BawoSocial",
-    ctaMicrocopy: "Stay connected with Nigerian culture, circles, and verified spots across NYC.",
+    ctaMicrocopy: "Verified spots, this week’s events, and Circles across NYC.",
     ctaSecondary: "Join BawoSocial",
     joinHref: "#join",
     partnerHref: "/businesses",
@@ -291,13 +291,13 @@ export const CONTENT = {
     title: {
       lead: "Why ",
       highlight: "BawoSocial",
-      closing: " Exists",
+      closing: "",
     },
     paragraphs: [
-      "Whether you just landed from Lagos, or you were raised right here in New York, Nigerians shape the energy, hustle, and culture of NYC. Yet finding our authentic restaurants, trusted services, weekend owambes, and our people is still scattered across noisy timelines and buried group chats.",
+      "Built for the people already in the groups. When someone asks ‘where’s good jollof near me?’ or ‘what’s on this weekend?’, BawoSocial is the answer.",
       {
         highlight: "BawoSocial",
-        text: " brings the Nigerian community in the diaspora into one elevated, intentional home. Starting across all five boroughs of New York City, we make it effortless to discover verified Nigerian-owned businesses, join real Community Circles, pull up to cultural events, and feel at home.",
+        text: " partners with existing communities instead of replacing them.",
       },
     ],
     visionText: "",
@@ -305,22 +305,23 @@ export const CONTENT = {
 
   // Features Section
   features: {
-    title: "Your Culture. Your Map. Your Circles.",
+    title: "Businesses. Events. Circles.",
     items: [
       {
-        title: "Explore Map & Nigerian Business Directory",
-        description:
-          "Find verified Nigerian restaurants, bukas, suya spots, lounges, African grocery markets, salons, churches, mosques, and shipping/legal services on an interactive map, and business owners can sign in to claim and update their listing.",
+        title: "Verified Nigerian Businesses",
+        description: "Save and find restaurants, services, and shops near you.",
       },
       {
-        title: "Community Circles & Voice Notes",
-        description:
-          "No algorithmic noise. Jump into dedicated circles like New to NYC, Safe Space for the Girls, Brotherhood NYC, Nigerian Food & Chop NYC, and Mental Wellness & Support with real feeds, voice notes, and daily gist.",
+        title: "Owambe & Events",
+        description: "See this week’s events and RSVP without missing the chat.",
       },
       {
-        title: "Curated Events + Ask AI",
-        description:
-          "Discover Afrobeats nights, Owambe celebrations, supper clubs, and Nigerian professional mixers across NYC, or Ask AI for tailored local recommendations anytime.",
+        title: "Community Circles",
+        description: "Join or start topic- or neighborhood-specific groups.",
+      },
+      {
+        title: "Ask AI",
+        description: "Quick answers about the community and local spots.",
       },
     ],
   },

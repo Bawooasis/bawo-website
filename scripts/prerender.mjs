@@ -125,7 +125,7 @@ async function prerender() {
       () => {
         const h1 = document.querySelector("h1");
         const text = h1?.textContent || "";
-        return text.includes("Find your people") && text.includes("Feel at home");
+        return text.includes("Find Nigerian businesses") && text.includes("Circles");
       },
       { timeout: 60_000 },
     );
@@ -151,7 +151,7 @@ async function prerender() {
       .trim();
 
     const rootText = await page.locator("#root").innerText();
-    if (!rootText.includes("Find your people") || !rootText.includes("Feel at home")) {
+    if (!rootText.includes("Find Nigerian businesses") || !rootText.includes("Circles")) {
       throw new Error("Prerender output missing hero copy in #root");
     }
     if (!cleaned.includes('id="root"') || !cleaned.includes("bawo-hero-cinematic__title")) {

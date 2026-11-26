@@ -205,7 +205,7 @@ function App() {
               <div className="bawo-hero-cinematic__copy-col">
                 <div className="inline-flex items-center gap-2 rounded-full border border-[#D6B26A]/40 bg-[#1C132B]/75 px-3.5 py-1.5 text-sm font-bold tracking-wide text-[#F7E7C4] backdrop-blur-xl mb-1">
                   <Sparkles className="h-3.5 w-3.5 text-[#D6B26A]" aria-hidden />
-                  <span>BawoSocial · The Culture Hub for Nigerians in NYC</span>
+                  <span>BawoSocial · Businesses, Events & Circles in NYC</span>
                 </div>
                 <h1 ref={headlineRef} className="bawo-hero-cinematic__title font-display">
                   {CONTENT.hero.title.lead}
@@ -215,11 +215,11 @@ function App() {
                   {CONTENT.hero.subtitle}
                 </p>
                 <div ref={ctaRef} className="bawo-hero-cinematic__footer-actions">
-                  <a href="#community-circles" className="bawo-hero-cinematic__pill">
-                    Nigerian Circles
+                  <a href="/nyc" className="bawo-hero-cinematic__pill">
+                    Browse businesses
                   </a>
                   <a href="/nyc#events" className="bawo-hero-cinematic__pill">
-                    Afrobeats & Events
+                    See events
                   </a>
                   <a href="/businesses" className="bawo-hero-cinematic__pill bawo-hero-cinematic__pill--business">
                     <Building2 className="h-3.5 w-3.5 text-[#D6B26A]" aria-hidden />
@@ -435,7 +435,7 @@ function App() {
             >
               {CONTENT.features.title}
             </h2>
-            <div className="grid md:grid-cols-3 gap-8 md:gap-10 max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8 md:gap-10 max-w-6xl mx-auto">
               {CONTENT.features.items.map((item) => (
                 <div
                   key={item.title}
